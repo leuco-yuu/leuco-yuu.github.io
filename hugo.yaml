@@ -2,8 +2,8 @@
 baseurl: https://leuco-yuu.github.io
 languageCode: zh_CN
 theme: hugo-theme-stack
-title: Example Site
-copyright: Example Person
+title:   Lecuo's Blog
+copyright: Leuco(leucoyuu@163.com)
 
 # Theme i18n support
 # Available values: ar, bn, ca, de, el, en, es, fr, hu, id, it, ja, ko, nl, pt-br, th, uk, zh-cn, zh-hk, zh-tw
@@ -16,18 +16,18 @@ hasCJKLanguage: true
 languages:
     zh-cn:
         languageName: 中文
-        title: 演示站点
-        weight: 2
-        params:
-            sidebar:
-                subtitle: 演示说明
-    en:
-        languageName: English
-        title: Example Site
+        title: Lecuo's Blog
         weight: 1
         params:
             sidebar:
-                subtitle: Example description
+                subtitle: ''
+    # en:
+    #     languageName: English
+    #     title: Example Site
+    #     weight: 2
+    #     params:
+    #         sidebar:
+    #             subtitle: Example description
     # zh-cn:
     #     languageName: 中文
     #     title: 演示站点
@@ -53,7 +53,7 @@ services:
         id:
 
 pagination:
-    pagerSize: 3
+    pagerSize: 8
 
 permalinks:
     post: /p/:slug/
@@ -67,27 +67,27 @@ params:
     favicon: # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
 
     footer:
-        since: 2020
-        customText:
+        since: 2025
+        customText: Embrace Bit Art
 
     dateFormat:
         published: Jan 02, 2006
         lastUpdated: Jan 02, 2006 15:04 MST
 
     sidebar:
-        emoji: 🍥
-        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        # emoji: 🍥
+        subtitle: Embrace Bit Art
         avatar:
             enabled: true
             local: true
             src: img/avatar.png
 
     article:
-        math: false
+        math: true
         toc: true
         readingTime: true
         license:
-            enabled: true
+            enabled: False
             default: Licensed under CC BY-NC-SA 4.0
 
     comments:
@@ -225,15 +225,15 @@ menu:
     social:
         - identifier: github
           name: GitHub
-          url: https://github.com/CaiJimmy/hugo-theme-stack
+          url: https://github.com/leuco-yuu/
           params:
               icon: brand-github
 
-        - identifier: twitter
-          name: Twitter
-          url: https://twitter.com
+        - identifier: qq
+          name: QQ
+          url: https://wpa.qq.com/msgrd?v=3&uin=1286938728&site=qq&menu=yes/
           params:
-              icon: brand-twitter
+              icon: brand-qq
 
 related:
     includeNewer: true
