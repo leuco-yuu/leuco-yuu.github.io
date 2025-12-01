@@ -1,5 +1,5 @@
-baseurl: http://localhost:1313
-# baseurl: https://leuco-yuu.github.io
+# baseurl: http://localhost:1313
+baseurl: https://leuco-yuu.github.io
 languageCode: zh_CN
 theme: hugo-theme-stack
 title: Example Site
@@ -7,20 +7,13 @@ copyright: Example Person
 
 # Theme i18n support
 # Available values: ar, bn, ca, de, el, en, es, fr, hu, id, it, ja, ko, nl, pt-br, th, uk, zh-cn, zh-hk, zh-tw
-DefaultContentLanguage: en
+DefaultContentLanguage: zh-cn
 
 # Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
 # This will make .Summary and .WordCount behave correctly for CJK languages.
-hasCJKLanguage: false
+hasCJKLanguage: true
 
 languages:
-    en:
-        languageName: English
-        title: Example Site
-        weight: 1
-        params:
-            sidebar:
-                subtitle: Example description
     zh-cn:
         languageName: 中文
         title: 演示站点
@@ -28,14 +21,28 @@ languages:
         params:
             sidebar:
                 subtitle: 演示说明
-    ar:
-        languageName: عربي
-        languagedirection: rtl
-        title: موقع تجريبي
-        weight: 3
+    en:
+        languageName: English
+        title: Example Site
+        weight: 1
         params:
             sidebar:
-                subtitle: وصف تجريبي
+                subtitle: Example description
+    # zh-cn:
+    #     languageName: 中文
+    #     title: 演示站点
+    #     weight: 2
+    #     params:
+    #         sidebar:
+    #             subtitle: 演示说明
+    # ar:
+    #     languageName: عربي
+    #     languagedirection: rtl
+    #     title: موقع تجريبي
+    #     weight: 3
+    #     params:
+    #         sidebar:
+    #             subtitle: وصف تجريبي
 
 services:
     # Change it to your Disqus shortname before using
