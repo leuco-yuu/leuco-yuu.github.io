@@ -1,5 +1,5 @@
-# baseurl: http://localhost:1313
-baseurl: https://leuco-yuu.github.io
+baseurl: http://localhost:1313
+# baseurl: https://leuco-yuu.github.io
 languageCode: zh_CN
 theme: hugo-theme-stack
 title:   Lecuo's Blog
@@ -92,7 +92,7 @@ params:
 
     comments:
         enabled: true
-        provider: disqus
+        provider: utterances
 
         disqusjs:
             shortname:
@@ -102,7 +102,7 @@ params:
             adminLabel:
 
         utterances:
-            repo:
+            repo: "leuco-yuu/blog-comments"
             issueTerm: pathname
             label:
 

@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Personages on Lecuo&#39;s Blog</title>
-        <link>http://localhost:57467/personage/</link>
+        <link>http://localhost:1313/personage/</link>
         <description>Recent content in Personages on Lecuo&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>Leuco(leucoyuu@163.com)</copyright><atom:link href="http://localhost:57467/personage/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>Leuco(leucoyuu@163.com)</copyright><atom:link href="http://localhost:1313/personage/index.xml" rel="self" type="application/rss+xml" /><item>
         <title></title>
-        <link>http://localhost:57467/personage/qq/</link>
+        <link>http://localhost:1313/personage/qq/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:57467/personage/qq/</guid>
+        <guid>http://localhost:1313/personage/qq/</guid>
         <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://wpa.qq.com/msgrd?v=3&amp;amp;uin=1286938728&amp;amp;site=qq&amp;amp;menu=yes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;img src=&#34;C:%5cUsers%5cleuco%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251201204128336.png&#34;
 	
