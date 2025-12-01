@@ -1,0 +1,4 @@
+baseURL = 'https://leuco-yuu.github.io/'
+languageCode = 'zh-CN'
+title = 'Welcome!'
+theme = 'hugo-theme-stack'
