@@ -85,7 +85,7 @@ params:
     article:
         math: true
         toc: true
-        readingTime: true
+        readingTime: false
         license:
             enabled: False
             default: Licensed under CC BY-NC-SA 4.0
@@ -229,11 +229,19 @@ menu:
           params:
               icon: brand-github
 
+        - identifier: email
+          name: Gmail
+          url: https://mail.google.com/mail/u/0/?tf=cm&to=leucoyuu@gmail.com&fs=1
+          params:
+              icon: brand-mail
+
+
         - identifier: qq
           name: QQ
           url: https://wpa.qq.com/msgrd?v=3&uin=1286938728&site=qq&menu=yes/
           params:
               icon: brand-qq
+
 
 related:
     includeNewer: true
@@ -246,32 +254,75 @@ related:
         - name: categories
           weight: 200
 
+# markup:
+#     goldmark:
+#         extensions:
+#             passthrough:
+#                 enable: true
+#                 delimiters:
+#                     block:
+#                         - - \[
+#                           - \]
+#                         - - $$
+#                           - $$
+#                     inline:
+#                         - - \(
+#                           - \)
+#         renderer:
+#             ## Set to true if you have HTML content inside Markdown
+#             unsafe: true
+#     tableOfContents:
+#         endLevel: 4
+#         ordered: true
+#         startLevel: 2
+#     highlight:
+#         noClasses: false
+#         codeFences: true
+#         guessSyntax: true
+#         lineNoStart: 1
+#         lineNos: true
+#         lineNumbersInTable: true
+#         tabWidth: 4
 markup:
-    goldmark:
-        extensions:
-            passthrough:
-                enable: true
-                delimiters:
-                    block:
-                        - - \[
-                          - \]
-                        - - $$
-                          - $$
-                    inline:
-                        - - \(
-                          - \)
-        renderer:
-            ## Set to true if you have HTML content inside Markdown
-            unsafe: true
-    tableOfContents:
-        endLevel: 4
-        ordered: true
-        startLevel: 2
-    highlight:
-        noClasses: false
-        codeFences: true
-        guessSyntax: true
-        lineNoStart: 1
-        lineNos: true
-        lineNumbersInTable: true
-        tabWidth: 4
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - - \[
+              - \]
+            - - $$
+              - $$
+          inline:
+            - - \(
+              - \)
+      typographer:
+        enable: false
+
+      definitionList: true
+      footnote: true
+      linkify: true
+      table: true
+      taskList: true
+    
+    renderer:
+      unsafe: true
+  
+  # 数学公式配置
+  math:
+    enable: true
+  
+  tableOfContents:
+    endLevel: 5
+    ordered: false
+    startLevel: 2
+  
+  highlight:
+    noClasses: false
+    codeFences: true
+    guessSyntax: true
+    lineNoStart: 1
+    lineNos: true
+    lineNumbersInTable: true
+    tabWidth: 4

@@ -1,1 +1,61 @@
 /* Place your custom SCSS in HUGO_SITE_FOLDER/assets/scss/custom.scss */
+
+// 为数学公式容器添加横向滚动，防止公式在小屏幕上溢出
+.MathJax, .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.5em;
+}
+
+// 可选：美化滚动条（仅在现代浏览器中生效）
+.MathJax {
+    &::-webkit-scrollbar {
+        height: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+
+/* 输出结果区块样式 - 使用类选择器 */
+pre.output,
+.highlight.output > pre {
+    /* 视觉基础 */
+    background-color: #f8f8f8;
+    border: 1px solid #d0d0d0;
+    border-left: 4px solid #888;
+    
+    /* 字体设置 */
+    font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+    font-size: 0.9em;
+    line-height: 1.4;
+    color: #444;
+    
+    /* 内边距 */
+    padding: 0.8em 1em;
+    
+    /* 其他 */
+    border-radius: 0 3px 3px 0;
+    margin: 0.5em 0 1em 0;
+}
+
+/* 为输出块添加提示性前缀 */
+pre.output::before,
+.highlight.output > pre::before {
+    content: "Out: ";
+    display: block;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 0.3em;
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 0.2em;
+}

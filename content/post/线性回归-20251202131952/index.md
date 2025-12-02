@@ -6,16 +6,12 @@ draft=false
 author= "leuco"
 description= "零基础 机器学习 第一部分"
 keywords= ["梯度下降", "SGD", "sk-learn", "归一化", "正则化", "多项式升维", "EDA"]
-categories= "机器学习"
+categories= ["机器学习","学习笔记"]
 tags= ["梯度下降", "SGD", "sk-learn", "归一化", "正则化", "多项式升维", "EDA"]
 series= "人工智能"
 math=true
 
 +++
-
- 
-
-[TOC]
 
 # 线性回归（Linear Regression）
 
@@ -25,8 +21,9 @@ math=true
   * 多元线性回归常用损失函数 —— MSE(均方误差，由似然函数推导而来): $\displaystyle{\operatorname{\mathit{J}(\theta)} = \frac{1}{2} \displaystyle \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 = \frac{1}{2}(X\theta - y)^T(X\theta - y) = \frac{1}{2}(\theta^TX^TX\theta - \theta^TX^Ty - y^TX\theta + y^Ty)},系数可为\displaystyle{\frac{1}{2}、\frac{1}{n}、\frac{1}{2n}}$
   * MSE对 $\theta$ 的梯度: $\displaystyle{\frac{\partial{J}(\theta)}{\partial\theta} = X^TX\theta - X^Ty = 0 \Rightarrow \theta = (X^TX)^{-1}X^Ty}$
 
-## 一、正规方程（Normal Equation）
+## 一、正规方程（Normal Equation） 
 
+{{<details "[展开]">}}
 - 参数解析解： $\hat{\theta} = (X^TX)^{-1}X^Ty$
 - 可能存在的问题：$(X^TX)^{-1}$的求解可能比较困难
 
@@ -101,6 +98,7 @@ print('Y_pre: ')
 print(y_pre)
 ```
 
+
     W_hat:
     [[5.02671056 3.98404888 4.00452019 4.9783491  1.02490084]]
     X_pre: 
@@ -111,6 +109,8 @@ print(y_pre)
     [[57.23707594]
      [68.2285754 ]
      [75.97196488]]
+
+
 
 ### 3、高维线性回归（sklearn库）
 
@@ -159,15 +159,15 @@ print(y_pre)
     [[57.23707594]
      [68.2285754 ]
      [75.97196488]]
-
+{{< /details >}}
 ## 二、梯度下降（Gradient Descent）
-
+{{<details "[展开]">}}
 - 梯度下降法迭代公式：$\hat\theta_{k+1} = \hat\theta_k - \alpha \nabla_{\theta}J(\hat\theta)$, $\alpha$为学习率
 - 学习率 $\alpha$ ：$\alpha$ 设置过大容易造成震荡，$\alpha$ 设置太小容易造成迭代次数增加，也可能落到局部最优解。一般设置为0.1、0.01、0.001、0.0001
 
 ### 1、批量梯度下降（GD）
 
-- $\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum^{m}_{i=1}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} =  X^T(X\theta-y)}$
+- $$\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum^{m}_{i=1}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} =  X^T(X\theta-y)}$$
 
 #### 代码实现
 
@@ -230,7 +230,9 @@ print(y_pre)
 
 ### 2、随机梯度下降（SGD）
 
-- $\displaystyle {\nabla_{\theta}J(\theta) = \frac{\partial}{\partial\theta}J(\theta) = (h_\theta(x^{(i)})-y^{(i)})x^{(i)} = ({x^{(i)}})^T(x^{(i)}\theta-y^{(i)}) ,   i \sim \text{Uniform}\bigl(\{1,2,\dots,m\}\bigr)}$
+- $$
+  \displaystyle {\nabla_{\theta}J(\theta) = \frac{\partial}{\partial\theta}J(\theta) = (h_\theta(x^{(i)})-y^{(i)})x^{(i)} = ({x^{(i)}})^T(x^{(i)}\theta-y^{(i)}) ,   i \sim \text{Uniform}\bigl(\{1,2,\dots,m\}\bigr)}
+  $$
 
 #### (1)、代码实现
 
@@ -362,8 +364,9 @@ print(y_pre)
 
 ### 3、小批量梯度下降（Mini-batch SGD）
 
-- $\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum_{i\in S}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = ({x^{(S)}})^T(x^{(S)}\theta-y^{(S)}) , |S|=\text{batch\_size}<m,\; S\subseteq \{1,2,\dots ,m\},\; S\text{ 均匀随机选取}}$
-
+- $$
+\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum_{i\in S}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = ({x^{(S)}})^T(x^{(S)}\theta-y^{(S)}) , |S|=\text{batch\_size} < m,\; S\subseteq \{1,2,\dots ,m\},\; S\text{均匀随机选取}}
+$$
 #### (1)、代码实现
 
 ```python
@@ -641,13 +644,16 @@ print(y_pre)
     [[57.36296538]
      [68.4494602 ]
      [76.21792798]]
-
+{{< /details >}}
 ## 三、坐标下降（Coordinate Descent）
-
+{{<details "[展开]">}}
 - 坐标下降：一次走一步，每次只动一个变量。将高维问题拆成一系列一维问题，逐个坐标迭代更新，直到收敛
 - 核心思想：固定其他所有变量，只沿第i个坐标方向做一维最优化，循环往复
 - 迭代公式：$\displaystyle{\theta_i^{(k+1)} = \arg\min_{\theta_i}Loss(\theta_1^{(k+1)}, \dots, \theta_{i-1}^{(k+1)}, \theta_i, \theta_{i+1}^{(k)}, \dots, \theta_n^{(k)})}$，其中 $Loss$ 为目标损失函数，$\theta^{(k)}$ 为第 $k$ 次迭代时的完整参数向量，$\theta^{(k)}_i$ 为第 $k$ 次迭代时向量 $\theta$ 的第 $i$ 个分量
-- 对于MES的参数迭代公式（由MSE推导而来）：$ \displaystyle{\theta_j = \frac{\displaystyle{ \sum^m_{i=1}x^{(i)}_j(y^{(i)}-\sum_{k\neq j}\theta_kx^{(i)}_k)}}{\displaystyle{\sum^m_{i=1}(x_j^{(i)})^2}}} $  $ \Rightarrow \theta^{(k+1)}_j = \theta^{(k)}_j - \displaystyle{\frac{1}{X_{·j}^TX_{·j}}X_{·j}^T(X\theta-y)}$，其中 $m$ 为样本数量，$\theta_j$ 为 $\theta$ 的第 $j$ 个分量，$x^{(i)}_j$ 为第 $i$ 条样本的第 $j$ 个分量
+- 对于MES的参数迭代公式（由MSE推导而来）：
+$$
+\displaystyle{\theta_j = \frac{\displaystyle{ \sum^m_{i=1}x^{(i)}_j(y^{(i)}-\sum_{k\neq j}\theta_kx^{(i)}_k)}}{\displaystyle{\sum^m_{i=1}(x_j^{(i)})^2}}}\Rightarrow \theta^{(k+1)}_j = \theta^{(k)}_j - \displaystyle{\frac{1}{X_{·j}^TX_{·j}}X_{·j}^T(X\theta-y)}
+$$，其中 $m$ 为样本数量，$\theta_j$ 为 $\theta$ 的第 $j$ 个分量，$x^{(i)}_j$ 为第 $i$ 条样本的第 $j$ 个分量
 
 ### 代码实现
 
@@ -709,17 +715,24 @@ print(y_pre)
     [[57.23707594]
      [68.2285754 ]
      [75.97196488]]
-
+{{< /details >}}
 ## 四、归一化（Normalization）
-
+{{<details "[展开]">}}
 - 归一化是将不同尺度、纲量和分布的数据缩放到同一标准区间的预处理技术
 - 核心目的：消除纲量影响、加速模型收敛、提升数值稳定性，同时保留原始信息的相对关系
 - 特征级归一化方法
   * 最大值最小值归一化（Min-Max）：受离心值影响较大
-    + 对第j个特征值做归一化：$\displaystyle{x^{*}_{i,j} = \frac{x_{i,j}-x_j^{min}}{x_j^{max}-x_j^{min}}}$
+    + 对第j个特征值做归一化：$$\displaystyle{x^{*}_{i,j} = \frac{x_{i,j}-x_j^{\text{min}}}{x_j^{\text{max}}-x_j^{\text{min}}}}$$
     + 对整个数据集做归一化：$\displaystyle{x^* = \frac{x-min(x)}{max(x)-min(x)}}$
   * 标准归一化（Z-score）：
-    + 对第j个特征值做归一化：$\displaystyle{x^*_{i,j} = \frac{x_{i,j} - \mu_j}{\sigma_j}}$，其中$\displaystyle{\mu_j=\frac{1}{n}\displaystyle \sum^n_{i=1} x_{i,j},\sigma_j=\sqrt{\frac{1}{n} \displaystyle \sum_{i=1}^n {(x_{i,j}-\mu_j)^2}}}$
+    + 对第j个特征值做归一化：
+    $$
+    \displaystyle{x^*_{i,j} = \frac{x_{i,j} - \mu_j}{\sigma_j}} 
+    $$
+    ，其中
+    $$
+    \displaystyle{\mu_j=\frac{1}{n}\sum_{i=1}^n x_{i,j},\quad \sigma_j=\sqrt{\frac{1}{n} \sum_{i=1}^n (x_{i,j}-\mu_j)^2}} 
+    $$
 
 ```python
 import numpy as np
@@ -760,9 +773,9 @@ plt.show()
     σ² = [3.86482916 7.93336293]
 
 ![png](output_34_1.png)
-
+{{< /details >}}
 ## 五、正则化（Regularization）
-
+{{<details "[展开]">}}
 - 过拟合与欠拟合
   * 欠拟合（underfit）：未拟合到位，训练集和测试集准确率未达到最高
   * 过拟合（overfit）：拟合过度，训练集准确率升高的同时，测试集的准确率反而降低
@@ -824,16 +837,18 @@ print('Y_pre: ')
 print(y_pre.reshape(-1,1))
 ```
 
-    W_hat:
-    [[5.0464025  3.97908982 3.99958499 4.97364032 1.01995191]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.18512159]
-     [68.14652889]
-     [75.88324745]]
+```output
+W_hat:
+[[5.0464025  3.97908982 3.99958499 4.97364032 1.01995191]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.18512159]
+ [68.14652889]
+ [75.88324745]]
+```
 
 ### 2、Ridge回归（sklearn库）
 
@@ -989,9 +1004,9 @@ print(y_pre.reshape(-1,1))
     [[56.80371943]
      [67.77050846]
      [75.42653888]]
-
+{{< /details >}}
 ## 六、升维方法 — 多项式回归（Polynomial Regression）
-
+{{<details "[展开]">}}
 - 目的：解决欠拟合问题
 - 常见手段：将已知维度进行相乘来构建新的维度，将非线性Data转换为线性Data
 - 以二阶多项式升维为例：$y=w_0+w_1x_1+w_2x_2 $$\Rightarrow y^*=w_0+w_1x_1+w_2x_2+w_3x_1^2+w_4x_2^2+w_5x_1x_2$
@@ -1070,9 +1085,9 @@ plt.legend(
     <matplotlib.legend.Legend at 0x1a768d8d150>
 
 ![png](output_45_1.png)
-
+{{< /details >}}
 ## 七、实践 — 保险花销预测
-
+{{<details "[展开]">}}
 - 数据集路径： ".\Dataset\1_Insurance_Expense_Forecast\insurance.csv"
 
 ### 1、数据提取
@@ -1980,3 +1995,4 @@ print(
     LinearRegression:  0.41171540130927264
     RidgeRegression:  0.4119283802418486
     GradientBoostingRegressor:  0.3163566171772987
+{{< /details >}}
