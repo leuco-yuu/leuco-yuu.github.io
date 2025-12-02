@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on Lecuo&#39;s Blog</title>
-        <link>http://localhost:51623/post/</link>
+        <link>http://localhost:1313/post/</link>
         <description>Recent content in Posts on Lecuo&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Leuco(leucoyuu@163.com)</copyright>
-        <lastBuildDate>Tue, 02 Dec 2025 20:51:17 +0800</lastBuildDate><atom:link href="http://localhost:51623/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 02 Dec 2025 20:51:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>机器学习-神经网络</title>
-        <link>http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</link>
+        <link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</link>
         <pubDate>Tue, 02 Dec 2025 20:51:17 +0800</pubDate>
         
-        <guid>http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</guid>
-        <description>&lt;img src="http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/60aa0004-c259-49eb-b742-6515691c6d92.png" alt="Featured image of post 机器学习-神经网络" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
+        <guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/60aa0004-c259-49eb-b742-6515691c6d92.png" alt="Featured image of post 机器学习-神经网络" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
   &lt;h3&gt;目录&lt;/h3&gt;
   &lt;nav id=&#34;TableOfContents&#34;&gt;
   &lt;ul&gt;
@@ -156,10 +156,10 @@
 &lt;li&gt;求导：$$\displaystyle{\frac{\partial Out(w)}{\partial w}=\frac{\partial Out(w)}{\partial In(w)}\frac{\partial In(w)}{\partial w} = \frac{d f(In)}{d In}\frac{\partial In(w)}{\partial w}}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;图示：&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/0039768b-8f5b-4368-8c7c-65a12aefee01.png&#34;
+&lt;li&gt;图示：&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/0039768b-8f5b-4368-8c7c-65a12aefee01.png&#34;
 	width=&#34;427&#34;
 	height=&#34;288&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/0039768b-8f5b-4368-8c7c-65a12aefee01_hu_112ff033a6ea3eb9.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/0039768b-8f5b-4368-8c7c-65a12aefee01_hu_7e0b106fc20c435.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/0039768b-8f5b-4368-8c7c-65a12aefee01_hu_112ff033a6ea3eb9.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/0039768b-8f5b-4368-8c7c-65a12aefee01_hu_7e0b106fc20c435.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -290,10 +290,10 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;反向传播：链式求导：Loss函数对所有参数求导&lt;/li&gt;
-&lt;li&gt;图示：（构建如下）&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/e7cc8128-0d86-4720-8d60-551ea29186a8.png&#34;
+&lt;li&gt;图示：（构建如下）&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/e7cc8128-0d86-4720-8d60-551ea29186a8.png&#34;
 	width=&#34;616&#34;
 	height=&#34;672&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/e7cc8128-0d86-4720-8d60-551ea29186a8_hu_657005faca9b5e21.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/e7cc8128-0d86-4720-8d60-551ea29186a8_hu_b4ea4b1406095ce2.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/e7cc8128-0d86-4720-8d60-551ea29186a8_hu_657005faca9b5e21.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/e7cc8128-0d86-4720-8d60-551ea29186a8_hu_b4ea4b1406095ce2.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -422,10 +422,10 @@ tensor([[ 0.4316, -0.1131, -0.4884, -0.1070],
 h2_out_linear.bias Parameter containing:
 tensor([0.3777, 0.2212, 0.3185], requires_grad=True)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/01100ff2-6efa-4602-ab43-809f23c7d51b.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/01100ff2-6efa-4602-ab43-809f23c7d51b.png&#34;
 	width=&#34;1152&#34;
 	height=&#34;80&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/01100ff2-6efa-4602-ab43-809f23c7d51b_hu_6bf95f0ef3fbeb43.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/01100ff2-6efa-4602-ab43-809f23c7d51b_hu_8c1e78e6009ed47a.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/01100ff2-6efa-4602-ab43-809f23c7d51b_hu_6bf95f0ef3fbeb43.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/01100ff2-6efa-4602-ab43-809f23c7d51b_hu_8c1e78e6009ed47a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -509,10 +509,10 @@ tensor([0.3777, 0.2212, 0.3185], requires_grad=True)
 &lt;li&gt;反向传播（链式求导）： $$\displaystyle{\frac{\partial \mathcal{Loss}}{\partial w_1} = \frac{\partial  \mathcal{Loss}}{\partial Out}·\frac{\partial Out}{\partial M_3}·\frac{\partial M_3}{\partial O_2}·\frac{\partial O_2}{\partial M_2}·\frac{\partial M_2}{\partial O_1}·\frac{\partial O_1}{\partial M_1}·\frac{\partial M_1}{\partial w_1}}$$ $$\Rightarrow\displaystyle{\nabla_{w_1} \mathcal{Loss} = { \mathcal{L}}&#39;_{\hat y}·h&#39;_{M_3}·w_3·g&#39;_{M_2}·w_2·f&#39;_{M_1}·x_1}$$&lt;/li&gt;
 &lt;li&gt;参数迭代（梯度下降）： $$\displaystyle{w_1^{new} = w_1^{old}-\eta·\nabla_{w_1} \mathcal{Loss}}$$&lt;/li&gt;
 &lt;li&gt;注意：全体参数同时更新，无先后顺序。因此在计算 $$\displaystyle{\nabla_{w_1} \mathcal{Loss}}$$ 时用到的 $w_3$ 和 $w_2$ ，为 $w_3^{old}$ 和 $w_2^{old}$
-&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/601b87f3-58a2-4951-9f80-e17a7a143379.png&#34;
+&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/601b87f3-58a2-4951-9f80-e17a7a143379.png&#34;
 	width=&#34;704&#34;
 	height=&#34;493&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/601b87f3-58a2-4951-9f80-e17a7a143379_hu_b86c00392cc89bd4.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/601b87f3-58a2-4951-9f80-e17a7a143379_hu_a2f438909501329e.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/601b87f3-58a2-4951-9f80-e17a7a143379_hu_b86c00392cc89bd4.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/601b87f3-58a2-4951-9f80-e17a7a143379_hu_a2f438909501329e.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -1546,10 +1546,10 @@ Epoch[80]:: | Acc on Train:98.125% | Acc on Test:98.250% | Loss: 0.13842 | total
 Epoch[90]:: | Acc on Train:98.250% | Acc on Test:98.000% | Loss: 0.12420 | total_time: 7.27s
 Epoch[100]:: | Acc on Train:98.062% | Acc on Test:98.750% | Loss: 0.14180 | total_time: 8.12s
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_43_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_43_1.png&#34;
 	width=&#34;1189&#34;
 	height=&#34;390&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_43_1_hu_dcd249ce0801556e.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_43_1_hu_a98bb964d846cbdf.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_43_1_hu_dcd249ce0801556e.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_43_1_hu_a98bb964d846cbdf.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -1571,10 +1571,10 @@ Epoch[100]:: | Acc on Train:98.062% | Acc on Test:98.750% | Loss: 0.14180 | tota
 &lt;li&gt;卷积层（Conv）：负责提取图像中的局部特征&lt;/li&gt;
 &lt;li&gt;池化层（Pool）：用来大幅降低参数数量级（降维）&lt;/li&gt;
 &lt;li&gt;全连接层（FC）：输出结果
-&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8aeabe06-5c3d-4d9a-9e51-28db07e817d8.png&#34;
+&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8aeabe06-5c3d-4d9a-9e51-28db07e817d8.png&#34;
 	width=&#34;1271&#34;
 	height=&#34;64&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8aeabe06-5c3d-4d9a-9e51-28db07e817d8_hu_20d791218b6b3829.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8aeabe06-5c3d-4d9a-9e51-28db07e817d8_hu_8e08628ba74269a7.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8aeabe06-5c3d-4d9a-9e51-28db07e817d8_hu_20d791218b6b3829.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8aeabe06-5c3d-4d9a-9e51-28db07e817d8_hu_8e08628ba74269a7.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -1596,10 +1596,10 @@ Epoch[100]:: | Acc on Train:98.062% | Acc on Test:98.750% | Loss: 0.14180 | tota
 &lt;li&gt;计算过程：将输入矩阵的子矩阵与卷积核进行逐元素相乘再相加，得到输出矩阵的对应元素&lt;/li&gt;
 &lt;li&gt;数学公式：$$\displaystyle{Output_{[i,j]} = \sum_{m=0}^{k-1}\sum_{n=0}^{k-1}Kernel_{[m,n]}·Input_{[i+m,j+n]}}$$&lt;/li&gt;
 &lt;li&gt;图示（分别为[Step=1,NoPadding]与[Step=2,Padding]，这里的$\times$为逐元素相乘）：
-&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/22d0dc01-97bb-4570-82a5-6f3d9d8d0775.png&#34;
+&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/22d0dc01-97bb-4570-82a5-6f3d9d8d0775.png&#34;
 	width=&#34;492&#34;
 	height=&#34;292&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/22d0dc01-97bb-4570-82a5-6f3d9d8d0775_hu_f303d53624a09eb0.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/22d0dc01-97bb-4570-82a5-6f3d9d8d0775_hu_ac6e24589d322d93.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/22d0dc01-97bb-4570-82a5-6f3d9d8d0775_hu_f303d53624a09eb0.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/22d0dc01-97bb-4570-82a5-6f3d9d8d0775_hu_ac6e24589d322d93.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -1609,10 +1609,10 @@ Epoch[100]:: | Acc on Train:98.062% | Acc on Test:98.750% | Loss: 0.14180 | tota
 		data-flex-grow=&#34;168&#34;
 		data-flex-basis=&#34;404px&#34;
 	
-&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/bd10bdc1-6512-4aa5-87b6-2aa0919e920e.png&#34;
+&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/bd10bdc1-6512-4aa5-87b6-2aa0919e920e.png&#34;
 	width=&#34;562&#34;
 	height=&#34;371&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/bd10bdc1-6512-4aa5-87b6-2aa0919e920e_hu_cc4be89eacda4faa.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/bd10bdc1-6512-4aa5-87b6-2aa0919e920e_hu_bc883067418508d7.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/bd10bdc1-6512-4aa5-87b6-2aa0919e920e_hu_cc4be89eacda4faa.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/bd10bdc1-6512-4aa5-87b6-2aa0919e920e_hu_bc883067418508d7.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -1629,10 +1629,10 @@ Epoch[100]:: | Acc on Train:98.062% | Acc on Test:98.750% | Loss: 0.14180 | tota
 &lt;ul&gt;
 &lt;li&gt;分别对每个通道进行卷积计算。获得一个三通道的中间计算结果&lt;/li&gt;
 &lt;li&gt;将三通道中间计算结果对应位置加和，得到单通道最终结果&lt;/li&gt;
-&lt;li&gt;图示（o11=or11+og11+ob11）：&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/60aa0004-c259-49eb-b742-6515691c6d92.png&#34;
+&lt;li&gt;图示（o11=or11+og11+ob11）：&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/60aa0004-c259-49eb-b742-6515691c6d92.png&#34;
 	width=&#34;762&#34;
 	height=&#34;242&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/60aa0004-c259-49eb-b742-6515691c6d92_hu_5052d875216b2e92.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/60aa0004-c259-49eb-b742-6515691c6d92_hu_fab7fc83ba1ca243.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/60aa0004-c259-49eb-b742-6515691c6d92_hu_5052d875216b2e92.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/60aa0004-c259-49eb-b742-6515691c6d92_hu_fab7fc83ba1ca243.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -1648,10 +1648,10 @@ Epoch[100]:: | Acc on Train:98.062% | Acc on Test:98.750% | Loss: 0.14180 | tota
 &lt;li&gt;多通道输入与多通道输出
 &lt;ul&gt;
 &lt;li&gt;多通道输出需多卷积核分别进行卷积计算后结果堆叠&lt;/li&gt;
-&lt;li&gt;图示：&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/93a570a5-1c08-4bbc-b98f-a2d25b252208.png&#34;
+&lt;li&gt;图示：&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/93a570a5-1c08-4bbc-b98f-a2d25b252208.png&#34;
 	width=&#34;742&#34;
 	height=&#34;397&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/93a570a5-1c08-4bbc-b98f-a2d25b252208_hu_3466c33481c01d7.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/93a570a5-1c08-4bbc-b98f-a2d25b252208_hu_9e8e03c65a76833e.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/93a570a5-1c08-4bbc-b98f-a2d25b252208_hu_3466c33481c01d7.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/93a570a5-1c08-4bbc-b98f-a2d25b252208_hu_9e8e03c65a76833e.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -1750,10 +1750,10 @@ Epoch[100]:: | Acc on Train:98.062% | Acc on Test:98.750% | Loss: 0.14180 | tota
 &lt;/div&gt;
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;numpy.ndarray&#39;&amp;gt; (380, 380, 3)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_48_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_48_1.png&#34;
 	width=&#34;515&#34;
 	height=&#34;245&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_48_1_hu_8bd44268c6487826.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_48_1_hu_6a3fc6083618d830.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_48_1_hu_8bd44268c6487826.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_48_1_hu_6a3fc6083618d830.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -1769,10 +1769,10 @@ Epoch[100]:: | Acc on Train:98.062% | Acc on Test:98.750% | Loss: 0.14180 | tota
 &lt;li&gt;池化处理输入矩阵的思想与卷积相似，但是不设置卷积核。而是在输入矩阵自身进行数据处理&lt;/li&gt;
 &lt;li&gt;池化层的目的是降低特征图维度，减少计算量。同时保证平移不变性。防止过拟合&lt;/li&gt;
 &lt;li&gt;池化层不会改变输入的通道数&lt;/li&gt;
-&lt;li&gt;图示（池化窗口大小为3，步长为1）：&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/3bbc113c-e0db-4925-9ef2-161cc59edf1e.png&#34;
+&lt;li&gt;图示（池化窗口大小为3，步长为1）：&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/3bbc113c-e0db-4925-9ef2-161cc59edf1e.png&#34;
 	width=&#34;588&#34;
 	height=&#34;298&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/3bbc113c-e0db-4925-9ef2-161cc59edf1e_hu_2554c4aa86c1fbfa.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/3bbc113c-e0db-4925-9ef2-161cc59edf1e_hu_fbeb940717cc1969.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/3bbc113c-e0db-4925-9ef2-161cc59edf1e_hu_2554c4aa86c1fbfa.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/3bbc113c-e0db-4925-9ef2-161cc59edf1e_hu_fbeb940717cc1969.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -1861,10 +1861,10 @@ Epoch[100]:: | Acc on Train:98.062% | Acc on Test:98.750% | Loss: 0.14180 | tota
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;numpy.ndarray&#39;&amp;gt; (380, 380, 3)
 torch.Size([1, 3, 380, 380])
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_50_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_50_1.png&#34;
 	width=&#34;515&#34;
 	height=&#34;165&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_50_1_hu_86db31f5e3a2c233.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_50_1_hu_24a81e243e782159.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_50_1_hu_86db31f5e3a2c233.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_50_1_hu_24a81e243e782159.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -1886,10 +1886,10 @@ torch.Size([1, 3, 380, 380])
 &lt;li&gt;划分：50,000张训练集 + 10,000张测试集&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;模型结构（原始）：&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/dd2566e8-6e7e-47f1-8eb0-182175408950.png&#34;
+&lt;li&gt;模型结构（原始）：&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/dd2566e8-6e7e-47f1-8eb0-182175408950.png&#34;
 	width=&#34;524&#34;
 	height=&#34;839&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/dd2566e8-6e7e-47f1-8eb0-182175408950_hu_5c34cbf2f58e4f3b.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/dd2566e8-6e7e-47f1-8eb0-182175408950_hu_5ec0d3a64272df10.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/dd2566e8-6e7e-47f1-8eb0-182175408950_hu_5c34cbf2f58e4f3b.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/dd2566e8-6e7e-47f1-8eb0-182175408950_hu_5ec0d3a64272df10.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -2342,10 +2342,10 @@ Estimated Total Size (MB): 30.83
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;​ &lt;br&gt;
-&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_65_0.png&#34;
+&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_65_0.png&#34;
 	width=&#34;1189&#34;
 	height=&#34;395&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_65_0_hu_889b57a617917b9b.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_65_0_hu_c7f461a4094f5110.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_65_0_hu_889b57a617917b9b.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_65_0_hu_c7f461a4094f5110.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -2501,10 +2501,10 @@ model saved
 &lt;/div&gt;
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;ACC: 86.00%
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_68_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_68_1.png&#34;
 	width=&#34;1181&#34;
 	height=&#34;590&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_68_1_hu_321f0f14df337d10.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_68_1_hu_67b716044f64068d.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_68_1_hu_321f0f14df337d10.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/output_68_1_hu_67b716044f64068d.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -2673,10 +2673,10 @@ UESTC  -&amp;gt; [-0.4736874997615814, 1.355381965637207, -0.00493775587528944, 
 &lt;h3 id=&#34;rnn&#34;&gt;RNN
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;用于处理有序列特性的数据：语言、语音、天气等&lt;/li&gt;
-&lt;li&gt;图示：&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8b5b6139-0e33-48a2-8be8-de0c6cf9588c.png&#34;
+&lt;li&gt;图示：&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8b5b6139-0e33-48a2-8be8-de0c6cf9588c.png&#34;
 	width=&#34;798&#34;
 	height=&#34;1151&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8b5b6139-0e33-48a2-8be8-de0c6cf9588c_hu_e53b6529fca37336.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8b5b6139-0e33-48a2-8be8-de0c6cf9588c_hu_ff534b5693ece670.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8b5b6139-0e33-48a2-8be8-de0c6cf9588c_hu_e53b6529fca37336.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/8b5b6139-0e33-48a2-8be8-de0c6cf9588c_hu_ff534b5693ece670.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image.png&#34;
@@ -3052,11 +3052,11 @@ Epoch[10] : Loss = 0.33738
         </item>
         <item>
         <title>机器学习-集成学习</title>
-        <link>http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 02 Dec 2025 20:30:43 +0800</pubDate>
         
-        <guid>http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.png" alt="Featured image of post 机器学习-集成学习" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
+        <guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.png" alt="Featured image of post 机器学习-集成学习" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
   &lt;h3&gt;目录&lt;/h3&gt;
   &lt;nav id=&#34;TableOfContents&#34;&gt;
   &lt;ul&gt;
@@ -3309,10 +3309,10 @@ $$
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;​ &lt;br&gt;
-&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0.png&#34;
+&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0.png&#34;
 	width=&#34;1189&#34;
 	height=&#34;689&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0_hu_892aad4067364684.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0_hu_f67fb326619163b9.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0_hu_892aad4067364684.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0_hu_f67fb326619163b9.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -3329,10 +3329,10 @@ feature importances: [0.03334028 0.         0.88947325 0.07718647]
 Accuracy of the test set (two features): 1.0
 {&#39;1&#39;: 0.6333333333333333, &#39;2&#39;: 0.9666666666666667, &#39;3&#39;: 1.0, &#39;4&#39;: 1.0, &#39;5&#39;: 1.0, &#39;6&#39;: 1.0, &#39;7&#39;: 1.0, &#39;8&#39;: 1.0, &#39;9&#39;: 1.0, &#39;10&#39;: 1.0, &#39;11&#39;: 1.0, &#39;12&#39;: 1.0, &#39;13&#39;: 1.0, &#39;14&#39;: 1.0}
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e.png&#34;
 	width=&#34;884&#34;
 	height=&#34;1135&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e_hu_1aaed07c82852f48.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e_hu_a5cedf7af55ea54a.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e_hu_1aaed07c82852f48.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e_hu_a5cedf7af55ea54a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;four_feature.png&#34;
@@ -3343,10 +3343,10 @@ Accuracy of the test set (two features): 1.0
 		data-flex-basis=&#34;186px&#34;
 	
 &gt;
-&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587.png&#34;
+&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587.png&#34;
 	width=&#34;884&#34;
 	height=&#34;1135&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587_hu_f0ad5320c811b6b6.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587_hu_8e001cae38735f5a.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587_hu_f0ad5320c811b6b6.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587_hu_8e001cae38735f5a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;two_feature.png&#34;
@@ -3467,10 +3467,10 @@ Accuracy of the test set (two features): 1.0
 {&#39;3&#39;: 0.6082955315717642, &#39;4&#39;: 0.7350159653921886, &#39;5&#39;: 0.8994966783739446, &#39;6&#39;: 0.9402911147144416, &#39;7&#39;: 0.9630064233693199, &#39;8&#39;: 0.969353657452782, &#39;9&#39;: 0.9713638580425933, &#39;10&#39;: 0.9699000308717682, &#39;11&#39;: 0.9676749619741486, &#39;12&#39;: 0.9648717916673495, &#39;13&#39;: 0.963189780460903, &#39;14&#39;: 0.9609148583309566}
 9 0.9713638580425933
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.png&#34;
 	width=&#34;559&#34;
 	height=&#34;413&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1_hu_334df7bfa543b7.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1_hu_2cebc004e3f10dc1.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1_hu_334df7bfa543b7.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1_hu_2cebc004e3f10dc1.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -4030,11 +4030,11 @@ $$
         </item>
         <item>
         <title>机器学习-无监督学习</title>
-        <link>http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 02 Dec 2025 19:45:17 +0800</pubDate>
         
-        <guid>http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/cover.png" alt="Featured image of post 机器学习-无监督学习" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
+        <guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/cover.png" alt="Featured image of post 机器学习-无监督学习" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
   &lt;h3&gt;目录&lt;/h3&gt;
   &lt;nav id=&#34;TableOfContents&#34;&gt;
   &lt;ul&gt;
@@ -4523,10 +4523,10 @@ K-Means(Canopy) | ARI=0.823 | Sil=0.687 | Time=0.013s
 Hierarchical    | ARI=1.000 | Sil=0.801 | Time=0.068s
 DBSCAN          | ARI=0.999 | Sil=0.769 | Time=0.025s
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_4_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_4_1.png&#34;
 	width=&#34;1990&#34;
 	height=&#34;1190&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_4_1_hu_64cf0fcfad215d99.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_4_1_hu_a4a12261c177df10.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_4_1_hu_64cf0fcfad215d99.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_4_1_hu_a4a12261c177df10.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -4690,10 +4690,10 @@ DBSCAN          | ARI=0.999 | Sil=0.769 | Time=0.025s
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;2
 ARI: 1.000   AMI: 1.000   Silhouette: 0.801
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_6_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_6_1.png&#34;
 	width=&#34;546&#34;
 	height=&#34;413&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_6_1_hu_213c4afaa41ff813.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_6_1_hu_4b83085a97fca68d.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_6_1_hu_213c4afaa41ff813.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/output_6_1_hu_4b83085a97fca68d.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -4797,11 +4797,11 @@ $$
         </item>
         <item>
         <title>机器学习-线性分类</title>
-        <link>http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/</link>
+        <link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/</link>
         <pubDate>Tue, 02 Dec 2025 18:51:05 +0800</pubDate>
         
-        <guid>http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/</guid>
-        <description>&lt;img src="http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/SVM.jpg" alt="Featured image of post 机器学习-线性分类" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
+        <guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/SVM.jpg" alt="Featured image of post 机器学习-线性分类" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
   &lt;h3&gt;目录&lt;/h3&gt;
   &lt;nav id=&#34;TableOfContents&#34;&gt;
   &lt;ul&gt;
@@ -4909,7 +4909,7 @@ $$&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;​ &lt;br&gt;
-&lt;img src=&#34;http://localhost:51623/output_2_0.png&#34;
+&lt;img src=&#34;http://localhost:1313/output_2_0.png&#34;
 	
 	
 	
@@ -5416,7 +5416,7 @@ $$，其中 $N$ 是样本数， $k$ 是分类数， $y_i^{(n)}$ 是真实标签�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;​ &lt;br&gt;
-&lt;img src=&#34;http://localhost:51623/output_11_0.png&#34;
+&lt;img src=&#34;http://localhost:1313/output_11_0.png&#34;
 	
 	
 	
@@ -5427,7 +5427,7 @@ $$，其中 $N$ 是样本数， $k$ 是分类数， $y_i^{(n)}$ 是真实标签�
 	
 &gt;
 ​&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/output_11_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/output_11_1.png&#34;
 	
 	
 	
@@ -5437,7 +5437,7 @@ $$，其中 $N$ 是样本数， $k$ 是分类数， $y_i^{(n)}$ 是真实标签�
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/output_11_2.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/output_11_2.png&#34;
 	
 	
 	
@@ -6082,11 +6082,11 @@ Tony Blair       0.91      0.83      0.87        36&lt;/p&gt;
         </item>
         <item>
         <title>机器学习-线性回归</title>
-        <link>http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
+        <link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
         <pubDate>Tue, 02 Dec 2025 13:16:53 +0800</pubDate>
         
-        <guid>http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
-        <description>&lt;img src="http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.jpg" alt="Featured image of post 机器学习-线性回归" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
+        <guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.jpg" alt="Featured image of post 机器学习-线性回归" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
   &lt;h3&gt;目录&lt;/h3&gt;
   &lt;nav id=&#34;TableOfContents&#34;&gt;
   &lt;ul&gt;
@@ -6236,10 +6236,10 @@ $$&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0.png&#34;
 	width=&#34;550&#34;
 	height=&#34;413&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_f8da8d7f1abeca57.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_b02eb907fa49b87d.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_f8da8d7f1abeca57.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_b02eb907fa49b87d.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -7148,10 +7148,10 @@ Y_pre:
 &lt;/div&gt;
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;[&amp;lt;matplotlib.lines.Line2D at 0x1a768afe390&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1.png&#34;
 	width=&#34;583&#34;
 	height=&#34;413&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_c0e8219bab56abc5.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_68cf1c8707aab9d7.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_c0e8219bab56abc5.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_68cf1c8707aab9d7.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -7480,10 +7480,10 @@ $$
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;μ = [1.07725633 2.44897092]
 σ² = [3.86482916 7.93336293]
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1.png&#34;
 	width=&#34;546&#34;
 	height=&#34;413&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_ecc0325949a87b79.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_2b8e9680da3f1bed.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_ecc0325949a87b79.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_2b8e9680da3f1bed.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -8089,10 +8089,10 @@ $$&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.legend.Legend at 0x1a768d8d150&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.png&#34;
 	width=&#34;993&#34;
 	height=&#34;418&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_6158c7ba51946e0f.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_b2879fb357e3dfa4.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_6158c7ba51946e0f.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_b2879fb357e3dfa4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -8368,10 +8368,10 @@ max      64.000000    53.130000     5.000000  63770.428010
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0.png&#34;
 	width=&#34;990&#34;
 	height=&#34;790&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_731b240234b22934.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_dbbf73824ec82fec.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_731b240234b22934.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_dbbf73824ec82fec.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -8436,10 +8436,10 @@ max      64.000000    53.130000     5.000000  63770.428010
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0.png&#34;
 	width=&#34;546&#34;
 	height=&#34;431&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_2b402f6d6b3dd287.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_facb1b1f2f768337.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_2b402f6d6b3dd287.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_facb1b1f2f768337.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -9327,10 +9327,10 @@ min      18.000000    15.960000     0.000000     7.023647
 75%      51.000000    34.693750     2.000000     9.719618
 max      64.000000    53.130000     5.000000    11.063061
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1.png&#34;
 	width=&#34;630&#34;
 	height=&#34;469&#34;
-	srcset=&#34;http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_15ddab4c1f41b39c.png 480w, http://localhost:51623/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_b4d2b579c830e634.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_15ddab4c1f41b39c.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_b4d2b579c830e634.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
