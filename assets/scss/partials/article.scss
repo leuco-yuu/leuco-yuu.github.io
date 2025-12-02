@@ -1,465 +1,124 @@
-/* Default article style */
-.article-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--section-separation);
-
-    article {
-        display: flex;
-        flex-direction: column;
-        background-color: var(--card-background);
-        box-shadow: var(--shadow-l1);
-        border-radius: var(--card-border-radius);
-        overflow: hidden;
-
-        transition: box-shadow 0.3s ease;
-
-        &:hover {
-            box-shadow: var(--shadow-l2);
-        }
-
-        .article-image {
-            img {
-                width: 100%;
-                height: 150px;
-                object-fit: cover;
-
-                @include respond(md) {
-                    height: 200px;
-                }
-
-                @include respond(xl) {
-                    height: 250px;
-                }
-            }
-        }
-
-        @for $i from 1 through length($defaultTagBackgrounds) {
-            &:nth-child(#{length($defaultTagBackgrounds)}n + #{$i}) {
-                .article-category a {
-                    background: nth($defaultTagBackgrounds, $i);
-                    color: nth($defaultTagColors, $i);
-                }
-            }
-        }
-    }
-}
-
-.article-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: var(--card-padding);
-    gap: 15px;
-}
-
-.article-title {
-    font-family: var(--article-font-family);
-    font-weight: 600;
-    margin: 0;
-    color: var(--card-text-color-main);
-    font-size: 2.2rem;
-
-    @include respond(xl) {
-        font-size: 2.4rem;
-    }
-
-    a {
-        color: var(--card-text-color-main);
-
-        &:hover {
-            color: var(--card-text-color-main);
-        }
-    }
-}
-
-.article-subtitle {
-    font-weight: normal;
-    color: var(--card-text-color-secondary);
-    line-height: 1.5;
-    margin: 0;
-    font-size: 1.75rem;
-    @include respond(xl) {
-        font-size: 2rem;
-    }
-}
-
-.article-title-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.article-time,
-.article-translations {
-    display: flex;
-    color: var(--card-text-color-tertiary);
-    gap: 15px;
-
-    svg {
-        vertical-align: middle;
-        width: 20px;
-        height: 20px;
-        stroke-width: 1.33;
-        flex-shrink: 0;
-    }
-
-    time,
-    a {
-        font-size: 1.4rem;
-        color: var(--card-text-color-tertiary);
-    }
-
-    & > div {
-        display: inline-flex;
-        align-items: center;
-        gap: 15px;
-    }
-}
-
-.article-time {
-    flex-wrap: wrap;
-}
-
-.article-translations {
-    & > div {
-        flex-wrap: wrap;
-    }
-}
-
-.article-category,
-.article-tags {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-
-    a {
-        color: var(--accent-color-text);
-        background-color: var(--accent-color);
-        padding: 8px 16px;
-        border-radius: var(--tag-border-radius);
-        display: inline-block;
-        font-size: 1.4rem;
-        transition: background-color 0.5s ease;
-
-        &:hover {
-            color: var(--accent-color-text);
-            background-color: var(--accent-color-darker);
-        }
-    }
-}
-
-/* Compact style article list */
-.article-list--compact {
+/* ========== TOC样式 ========== */
+/* 移动端TOC - 默认显示，但在桌面端隐藏 */
+.widget.archives.mobile-toc {
+    display: block; /* 移动端默认显示 */
+    background-color: var(--card-background);
     border-radius: var(--card-border-radius);
     box-shadow: var(--shadow-l1);
-    background-color: var(--card-background);
-    --image-size: 50px;
-
-    @include respond(md) {
-        --image-size: 60px;
-    }
-
-    article {
-        & > a {
-            display: flex;
-            align-items: center;
-            padding: var(--small-card-padding);
-            gap: 15px;
-        }
-
-        &:not(:last-of-type) {
-            border-bottom: 1.5px solid var(--card-separator-color);
-        }
-
-        .article-details {
-            flex-grow: 1;
-            padding: 0;
-            min-height: var(--image-size);
-            gap: 10px;
-        }
-
-        .article-title {
-            margin: 0;
-            font-size: 1.6rem;
-
-            @include respond(md) {
-                font-size: 1.8rem;
-            }
-        }
-
-        .article-image {
-            img {
-                width: var(--image-size);
-                height: var(--image-size);
-                object-fit: cover;
-            }
-        }
-
-        .article-time {
-            font-size: 1.4rem;
-        }
-
-        .article-preview {
-            font-size: 1.4rem;
-            color: var(--card-text-color-tertiary);
-            margin-top: 10px;
-            line-height: 1.5;
-        }
-    }
-}
-
-/* Tile style article list */
-.article-list--tile {
-    article {
-        border-radius: var(--card-border-radius);
-        overflow: hidden;
-        position: relative;
-        height: 350px;
-        width: 250px;
-        box-shadow: var(--shadow-l1);
-        transition: box-shadow 0.3s ease;
-        background-color: var(--card-background);
-
-        &:hover {
-            box-shadow: var(--shadow-l2);
-        }
-
-        &.has-image {
-            .article-details {
-                background-color: rgba(#000, 0.25);
-            }
-
-            .article-title {
-                color: #fff;
-            }
-        }
-
-        .article-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-
-        .article-details {
-            border-radius: var(--card-border-radius);
-            position: relative;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            z-index: 2;
-            padding: 15px;
-
-            @include respond(sm) {
-                padding: 20px;
-            }
-        }
-
-        .article-title {
-            font-size: 2rem;
-            font-weight: 500;
-            color: var(--card-text-color-main);
-
-            @include respond(sm) {
-                font-size: 2.2rem;
-            }
-        }
-    }
-}
-
-/* 移动端目录容器 */
-.mobile-toc-wrapper {
-    display: none; /* 默认隐藏 */
+    padding: var(--card-padding);
+    margin-bottom: 30px;
     
-    @media (max-width: 768px) {
-        display: block;
-        margin-bottom: 30px;
+    .widget-icon {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
         
-        .mobile-toc-container {
-            display: block;
+        svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 1.33;
+            color: var(--card-text-color-main);
+        }
+    }
+    
+    .widget-title {
+        font-size: 1.8rem;
+        margin: 0 0 15px 0;
+        color: var(--card-text-color-main);
+        font-weight: 600;
+    }
+    
+    .widget--toc {
+        max-height: 300px;
+        overflow-y: auto;
+        padding-right: 10px;
+        
+        #TableOfContents {
+            font-size: 1.4rem;
             
-            .widget.archives {
-                background-color: var(--card-background);
-                border-radius: var(--card-border-radius);
-                box-shadow: var(--shadow-l1);
-                padding: var(--card-padding);
-                margin-bottom: 0;
+            ul, ol {
+                padding-left: 15px;
+                margin: 0;
+            }
+            
+            li {
+                margin: 8px 0;
+                line-height: 1.4;
                 
-                .widget-icon {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    margin-bottom: 15px;
+                a {
+                    color: var(--card-text-color-secondary);
+                    text-decoration: none;
+                    transition: color 0.2s ease;
                     
-                    svg {
-                        width: 20px;
-                        height: 20px;
-                        stroke-width: 1.33;
-                        color: var(--card-text-color-main);
+                    &:hover {
+                        color: var(--accent-color);
                     }
                 }
                 
-                .widget-title {
-                    font-size: 1.8rem;
-                    margin: 0 0 15px 0;
-                    color: var(--card-text-color-main);
-                    font-weight: 600;
-                }
-                
-                .widget--toc {
-                    max-height: 300px;
-                    overflow-y: auto;
-                    padding-right: 10px;
-                    
-                    /* 移动端滚动条样式 */
-                    &::-webkit-scrollbar {
-                        width: 6px;
-                    }
-                    
-                    &::-webkit-scrollbar-thumb {
-                        background-color: var(--scrollbar-thumb);
-                        border-radius: 3px;
-                    }
-                    
-                    /* 目录内容样式 */
-                    #TableOfContents {
-                        font-size: 1.4rem;
-                        
-                        ul, ol {
-                            padding-left: 15px;
-                            margin: 0;
-                        }
-                        
-                        li {
-                            margin: 8px 0;
-                            line-height: 1.4;
-                            
-                            a {
-                                color: var(--card-text-color-secondary);
-                                text-decoration: none;
-                                transition: color 0.2s ease;
-                                
-                                &:hover {
-                                    color: var(--accent-color);
-                                }
-                            }
-                            
-                            &.active-class > a {
-                                color: var(--accent-color);
-                                font-weight: bold;
-                            }
-                        }
-                        
-                        /* 不同层级缩进 */
-                        & > ul > li > ul {
-                            margin-left: 10px;
-                        }
-                        
-                        & > ul > li > ul > li > ul {
-                            margin-left: 10px;
-                        }
-                    }
+                &.active-class > a {
+                    color: var(--accent-color);
+                    font-weight: bold;
                 }
             }
         }
+    }
+    
+    /* 在桌面端隐藏移动端TOC */
+    @media (min-width: 769px) {
+        display: none;
+    }
+}
+
+/* 桌面端TOC - 默认隐藏，但在桌面端显示 */
+.widget.archives.desktop-toc {
+    display: none; /* 移动端隐藏 */
+    
+    /* 在桌面端显示 */
+    @media (min-width: 769px) {
+        display: block;
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
         
-        /* 隐藏桌面端目录容器 */
-        .desktop-toc {
+        .widget--toc {
+            #TableOfContents {
+                li.active-class > a {
+                    border-left: var(--heading-border-size) solid var(--accent-color);
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+/* 确保右侧边栏中只显示桌面端TOC */
+.right-sidebar {
+    .mobile-toc {
+        display: none !important;
+    }
+    
+    .desktop-toc {
+        display: block;
+        
+        @media (max-width: 768px) {
             display: none;
         }
     }
 }
 
-/* ========== 桌面端样式 ========== */
-@media (min-width: 769px) {
-    /* 隐藏移动端目录 */
-    .mobile-toc-wrapper {
-        display: none;
-    }
-    
-    /* 显示右侧边栏的目录 */
-    .desktop-toc {
+/* 在文章主体中，只显示移动端TOC */
+.article-content {
+    .mobile-toc {
         display: block;
         
-        .widget.archives {
-            /* 保持原有桌面端样式 */
-            .widget--toc {
-                #TableOfContents {
-                    li.active-class > a {
-                        border-left: var(--heading-border-size) solid var(--accent-color);
-                        font-weight: bold;
-                    }
-                }
-            }
+        @media (min-width: 769px) {
+            display: none;
         }
-    }
-}
-
-/* ========== 右侧边栏中的目录隐藏移动端版本 ========== */
-.right-sidebar {
-    .mobile-toc-container {
-        display: none;
     }
     
     .desktop-toc {
-        display: block;
+        display: none;
     }
-}
-
-/* ========== 移动端目录折叠/展开效果（可选） ========== */
-@media (max-width: 768px) {
-    .mobile-toc-wrapper {
-        .mobile-toc-container {
-            .widget.archives {
-                /* 添加折叠按钮（可选功能） */
-                .toc-toggle {
-                    display: none; /* 默认隐藏，需要时启用 */
-                }
-                
-                /* 折叠状态 */
-                &.collapsed {
-                    .widget--toc {
-                        max-height: 0;
-                        overflow: hidden;
-                        padding: 0;
-                    }
-                    
-                    .toc-toggle::after {
-                        content: "▶";
-                    }
-                }
-                
-                /* 展开状态 */
-                &:not(.collapsed) {
-                    .toc-toggle::after {
-                        content: "▼";
-                    }
-                }
-            }
-        }
-    }
-}
-
-/* 移动端目录标题 - 深灰色 */
-.mobile-toc-wrapper .mobile-toc .toc-header .section-title {
-    font-size: 2.0rem;
-    font-weight: 600;
-    color: #606060; /* 或 #2c3e50 等深色 */
-}
-
-/* 桌面端目录标题 - 蓝色 */
-.right-sidebar .desktop-toc .toc-header .section-title {
-    font-size: 3rem;
-    font-weight: 600;
-    color: #606060; /* 或你的主题色 */
 }
