@@ -294,13 +294,66 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#一正规方程normal-equation">一、正规方程（Normal Equation）</a></li>
-    <li><a href="#二梯度下降gradient-descent">二、梯度下降（Gradient Descent）</a></li>
-    <li><a href="#三坐标下降coordinate-descent">三、坐标下降（Coordinate Descent）</a></li>
+    <li><a href="#一正规方程normal-equation">一、正规方程（Normal Equation）</a>
+      <ul>
+        <li><a href="#1一维线性回归代码实现">1、一维线性回归（代码实现）</a></li>
+        <li><a href="#2高维线性回归代码实现">2、高维线性回归（代码实现）</a></li>
+        <li><a href="#3高维线性回归sklearn库">3、高维线性回归（sklearn库）</a></li>
+      </ul>
+    </li>
+    <li><a href="#二梯度下降gradient-descent">二、梯度下降（Gradient Descent）</a>
+      <ul>
+        <li><a href="#1批量梯度下降gd">1、批量梯度下降（GD）</a>
+          <ul>
+            <li><a href="#代码实现">代码实现</a></li>
+          </ul>
+        </li>
+        <li><a href="#2随机梯度下降sgd">2、随机梯度下降（SGD）</a>
+          <ul>
+            <li><a href="#1代码实现">(1)、代码实现</a></li>
+            <li><a href="#2小幅优化打乱数据索引顺序选取向量">(2)、小幅优化：打乱数据索引，顺序选取向量</a></li>
+          </ul>
+        </li>
+        <li><a href="#3小批量梯度下降mini-batch-sgd">3、小批量梯度下降（Mini-batch SGD）</a>
+          <ul>
+            <li><a href="#1代码实现-1">(1)、代码实现</a></li>
+            <li><a href="#2小幅优化打乱数据索引顺序批量选取向量">(2)、小幅优化：打乱数据索引，顺序批量选取向量</a></li>
+          </ul>
+        </li>
+        <li><a href="#4sgd的sklearn库实现">4、SGD的sklearn库实现</a></li>
+        <li><a href="#5梯度下降法的问题与解决思路">5、梯度下降法的问题与解决思路</a>
+          <ul>
+            <li><a href="#1确定速率调整函数">（1）、确定速率调整函数</a></li>
+            <li><a href="#2更改学习速率">（2）、更改学习速率</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#三坐标下降coordinate-descent">三、坐标下降（Coordinate Descent）</a>
+      <ul>
+        <li><a href="#代码实现-1">代码实现</a></li>
+      </ul>
+    </li>
     <li><a href="#四归一化normalization">四、归一化（Normalization）</a></li>
-    <li><a href="#五正则化regularization">五、正则化（Regularization）</a></li>
+    <li><a href="#五正则化regularization">五、正则化（Regularization）</a>
+      <ul>
+        <li><a href="#1lasso回归sklearn库">1、Lasso回归（sklearn库）</a></li>
+        <li><a href="#2ridge回归sklearn库">2、Ridge回归（sklearn库）</a></li>
+        <li><a href="#3elasticnet回归sklearn库">3、ElasticNet回归（sklearn库）</a></li>
+        <li><a href="#4随机梯度下降实现elasticnet正则化sklearn库">4、随机梯度下降实现elasticnet正则化（sklearn库）</a></li>
+      </ul>
+    </li>
     <li><a href="#六升维方法--多项式回归polynomial-regression">六、升维方法 — 多项式回归（Polynomial Regression）</a></li>
-    <li><a href="#七实践--保险花销预测">七、实践 — 保险花销预测</a></li>
+    <li><a href="#七实践--保险花销预测">七、实践 — 保险花销预测</a>
+      <ul>
+        <li><a href="#1数据提取">1、数据提取</a></li>
+        <li><a href="#2edaexploratory-data-analysis探索性数据分析">2、EDA（Exploratory Data Analysis，探索性数据分析）</a></li>
+        <li><a href="#3特征工程">3、特征工程</a></li>
+        <li><a href="#4模型训练">4、模型训练</a></li>
+        <li><a href="#5模型评估">5、模型评估</a></li>
+        <li><a href="#6进阶">6、进阶</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
         </div>
@@ -386,9 +439,7 @@
 </li>
 </ul>
 <h2 id="一正规方程normal-equation">一、正规方程（Normal Equation）
-</h2><details>
-  <summary>[展开]</summary>
-  <ul>
+</h2><ul>
 <li>参数解析解： $\hat{\theta} = (X^TX)^{-1}X^Ty$</li>
 <li>可能存在的问题：$(X^TX)^{-1}$的求解可能比较困难</li>
 </ul>
@@ -453,14 +504,18 @@
 </span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/output_3_0.png"
-	
-	
-	
+</div><p><img src="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0.png"
+	width="550"
+	height="413"
+	srcset="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_f8da8d7f1abeca57.png 480w, /p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_b02eb907fa49b87d.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="133"
+		data-flex-basis="319px"
 	
 ></p>
 <h3 id="2高维线性回归代码实现">2、高维线性回归（代码实现）
@@ -627,11 +682,8 @@ Y_pre:
  [68.2285754 ]
  [75.97196488]]
 </code></pre>
-</details>
 <h2 id="二梯度下降gradient-descent">二、梯度下降（Gradient Descent）
-</h2><details>
-  <summary>[展开]</summary>
-  <ul>
+</h2><ul>
 <li>梯度下降法迭代公式：$\hat\theta_{k+1} = \hat\theta_k - \alpha \nabla_{\theta}J(\hat\theta)$, $\alpha$为学习率</li>
 <li>学习率 $\alpha$ ：$\alpha$ 设置过大容易造成震荡，$\alpha$ 设置太小容易造成迭代次数增加，也可能落到局部最优解。一般设置为0.1、0.01、0.001、0.0001</li>
 </ul>
@@ -1364,14 +1416,18 @@ Y_pre:
 </div>
 </div><pre><code>[&lt;matplotlib.lines.Line2D at 0x1a768afe390&gt;]
 </code></pre>
-<p><img src="/output_26_1.png"
-	
-	
-	
+<p><img src="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1.png"
+	width="583"
+	height="413"
+	srcset="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_c0e8219bab56abc5.png 480w, /p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_68cf1c8707aab9d7.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="141"
+		data-flex-basis="338px"
 	
 ></p>
 <h4 id="2更改学习速率">（2）、更改学习速率
@@ -1478,11 +1534,8 @@ Y_pre:
  [68.4494602 ]
  [76.21792798]]
 </code></pre>
-</details>
 <h2 id="三坐标下降coordinate-descent">三、坐标下降（Coordinate Descent）
-</h2><details>
-  <summary>[展开]</summary>
-  <ul>
+</h2><ul>
 <li>坐标下降：一次走一步，每次只动一个变量。将高维问题拆成一系列一维问题，逐个坐标迭代更新，直到收敛</li>
 <li>核心思想：固定其他所有变量，只沿第i个坐标方向做一维最优化，循环往复</li>
 <li>迭代公式：$\displaystyle{\theta_i^{(k+1)} = \arg\min_{\theta_i}Loss(\theta_1^{(k+1)}, \dots, \theta_{i-1}^{(k+1)}, \theta_i, \theta_{i+1}^{(k)}, \dots, \theta_n^{(k)})}$，其中 $Loss$ 为目标损失函数，$\theta^{(k)}$ 为第 $k$ 次迭代时的完整参数向量，$\theta^{(k)}_i$ 为第 $k$ 次迭代时向量 $\theta$ 的第 $i$ 个分量</li>
@@ -1491,7 +1544,7 @@ $$
 \displaystyle{\theta_j = \frac{\displaystyle{ \sum^m_{i=1}x^{(i)}_j(y^{(i)}-\sum_{k\neq j}\theta_kx^{(i)}_k)}}{\displaystyle{\sum^m_{i=1}(x_j^{(i)})^2}}}\Rightarrow \theta^{(k+1)}_j = \theta^{(k)}_j - \displaystyle{\frac{1}{X_{·j}^TX_{·j}}X_{·j}^T(X\theta-y)}
 $$，其中 $m$ 为样本数量，$\theta_j$ 为 $\theta$ 的第 $j$ 个分量，$x^{(i)}_j$ 为第 $i$ 条样本的第 $j$ 个分量</li>
 </ul>
-<h3 id="代码实现">代码实现
+<h3 id="代码实现-1">代码实现
 </h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1595,12 +1648,8 @@ Y_pre:
  [68.2285754 ]
  [75.97196488]]
 </code></pre>
-
-</details>
 <h2 id="四归一化normalization">四、归一化（Normalization）
-</h2><details>
-  <summary>[展开]</summary>
-  <ul>
+</h2><ul>
 <li>归一化是将不同尺度、纲量和分布的数据缩放到同一标准区间的预处理技术</li>
 <li>核心目的：消除纲量影响、加速模型收敛、提升数值稳定性，同时保留原始信息的相对关系</li>
 <li>特征级归一化方法
@@ -1699,21 +1748,22 @@ $$
 </div><pre><code>μ = [1.07725633 2.44897092]
 σ² = [3.86482916 7.93336293]
 </code></pre>
-<p><img src="/output_34_1.png"
-	
-	
-	
+<p><img src="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1.png"
+	width="546"
+	height="413"
+	srcset="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_ecc0325949a87b79.png 480w, /p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_2b8e9680da3f1bed.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
 	
+		class="gallery-image" 
+		data-flex-grow="132"
+		data-flex-basis="317px"
+	
 ></p>
-</details>
 <h2 id="五正则化regularization">五、正则化（Regularization）
-</h2><details>
-  <summary>[展开]</summary>
-  <ul>
+</h2><ul>
 <li>过拟合与欠拟合
 <ul>
 <li>欠拟合（underfit）：未拟合到位，训练集和测试集准确率未达到最高</li>
@@ -2126,12 +2176,8 @@ Y_pre:
  [67.77050846]
  [75.42653888]]
 </code></pre>
-
-</details>
 <h2 id="六升维方法--多项式回归polynomial-regression">六、升维方法 — 多项式回归（Polynomial Regression）
-</h2><details>
-  <summary>[展开]</summary>
-  <ul>
+</h2><ul>
 <li>目的：解决欠拟合问题</li>
 <li>常见手段：将已知维度进行相乘来构建新的维度，将非线性Data转换为线性Data</li>
 <li>以二阶多项式升维为例：$y=w_0+w_1x_1+w_2x_2 $$\Rightarrow y^*=w_0+w_1x_1+w_2x_2+w_3x_1^2+w_4x_2^2+w_5x_1x_2$</li>
@@ -2279,21 +2325,22 @@ Y_pre:
 </div>
 </div><pre><code>&lt;matplotlib.legend.Legend at 0x1a768d8d150&gt;
 </code></pre>
-<p><img src="/output_45_1.png"
-	
-	
-	
+<p><img src="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.png"
+	width="993"
+	height="418"
+	srcset="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_6158c7ba51946e0f.png 480w, /p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_b2879fb357e3dfa4.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
 	
+		class="gallery-image" 
+		data-flex-grow="237"
+		data-flex-basis="570px"
+	
 ></p>
-</details>
 <h2 id="七实践--保险花销预测">七、实践 — 保险花销预测
-</h2><details>
-  <summary>[展开]</summary>
-  <ul>
+</h2><ul>
 <li>数据集路径： &ldquo;.\Dataset\1_Insurance_Expense_Forecast\insurance.csv&rdquo;</li>
 </ul>
 <h3 id="1数据提取">1、数据提取
@@ -2557,14 +2604,18 @@ max      64.000000    53.130000     5.000000  63770.428010
 </span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/output_51_0.png"
-	
-	
-	
+</div><p><img src="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0.png"
+	width="990"
+	height="790"
+	srcset="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_731b240234b22934.png 480w, /p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_dbbf73824ec82fec.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="125"
+		data-flex-basis="300px"
 	
 ></p>
 <div class="highlight"><div class="chroma">
@@ -2621,14 +2672,18 @@ max      64.000000    53.130000     5.000000  63770.428010
 </span></span><span class="line"><span class="cl"><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/output_52_0.png"
-	
-	
-	
+</div><p><img src="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0.png"
+	width="546"
+	height="431"
+	srcset="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_2b402f6d6b3dd287.png 480w, /p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_facb1b1f2f768337.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="126"
+		data-flex-basis="304px"
 	
 ></p>
 <div>
@@ -3508,14 +3563,18 @@ min      18.000000    15.960000     0.000000     7.023647
 75%      51.000000    34.693750     2.000000     9.719618
 max      64.000000    53.130000     5.000000    11.063061
 </code></pre>
-<p><img src="/output_64_1.png"
-	
-	
-	
+<p><img src="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1.png"
+	width="630"
+	height="469"
+	srcset="/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_15ddab4c1f41b39c.png 480w, /p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_b4d2b579c830e634.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="134"
+		data-flex-basis="322px"
 	
 ></p>
 <pre><code>   age    bmi children smoker   charges
@@ -3553,8 +3612,6 @@ LinearRegression:  0.41171540130927264
 RidgeRegression:  0.4119283802418486
 GradientBoostingRegressor:  0.3163566171772987
 </code></pre>
-
-</details>
 
 </section>
 

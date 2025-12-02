@@ -21,9 +21,8 @@ math=true
   * 多元线性回归常用损失函数 —— MSE(均方误差，由似然函数推导而来): $\displaystyle{\operatorname{\mathit{J}(\theta)} = \frac{1}{2} \displaystyle \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 = \frac{1}{2}(X\theta - y)^T(X\theta - y) = \frac{1}{2}(\theta^TX^TX\theta - \theta^TX^Ty - y^TX\theta + y^Ty)},系数可为\displaystyle{\frac{1}{2}、\frac{1}{n}、\frac{1}{2n}}$
   * MSE对 $\theta$ 的梯度: $\displaystyle{\frac{\partial{J}(\theta)}{\partial\theta} = X^TX\theta - X^Ty = 0 \Rightarrow \theta = (X^TX)^{-1}X^Ty}$
 
-## 一、正规方程（Normal Equation） 
+## 一、正规方程（Normal Equation）
 
-{{<details "[展开]">}}
 - 参数解析解： $\hat{\theta} = (X^TX)^{-1}X^Ty$
 - 可能存在的问题：$(X^TX)^{-1}$的求解可能比较困难
 
@@ -159,9 +158,9 @@ print(y_pre)
     [[57.23707594]
      [68.2285754 ]
      [75.97196488]]
-{{< /details >}}
+
 ## 二、梯度下降（Gradient Descent）
-{{<details "[展开]">}}
+
 - 梯度下降法迭代公式：$\hat\theta_{k+1} = \hat\theta_k - \alpha \nabla_{\theta}J(\hat\theta)$, $\alpha$为学习率
 - 学习率 $\alpha$ ：$\alpha$ 设置过大容易造成震荡，$\alpha$ 设置太小容易造成迭代次数增加，也可能落到局部最优解。一般设置为0.1、0.01、0.001、0.0001
 
@@ -644,9 +643,9 @@ print(y_pre)
     [[57.36296538]
      [68.4494602 ]
      [76.21792798]]
-{{< /details >}}
+
 ## 三、坐标下降（Coordinate Descent）
-{{<details "[展开]">}}
+
 - 坐标下降：一次走一步，每次只动一个变量。将高维问题拆成一系列一维问题，逐个坐标迭代更新，直到收敛
 - 核心思想：固定其他所有变量，只沿第i个坐标方向做一维最优化，循环往复
 - 迭代公式：$\displaystyle{\theta_i^{(k+1)} = \arg\min_{\theta_i}Loss(\theta_1^{(k+1)}, \dots, \theta_{i-1}^{(k+1)}, \theta_i, \theta_{i+1}^{(k)}, \dots, \theta_n^{(k)})}$，其中 $Loss$ 为目标损失函数，$\theta^{(k)}$ 为第 $k$ 次迭代时的完整参数向量，$\theta^{(k)}_i$ 为第 $k$ 次迭代时向量 $\theta$ 的第 $i$ 个分量
@@ -715,9 +714,9 @@ print(y_pre)
     [[57.23707594]
      [68.2285754 ]
      [75.97196488]]
-{{< /details >}}
+
 ## 四、归一化（Normalization）
-{{<details "[展开]">}}
+
 - 归一化是将不同尺度、纲量和分布的数据缩放到同一标准区间的预处理技术
 - 核心目的：消除纲量影响、加速模型收敛、提升数值稳定性，同时保留原始信息的相对关系
 - 特征级归一化方法
@@ -773,9 +772,9 @@ plt.show()
     σ² = [3.86482916 7.93336293]
 
 ![png](output_34_1.png)
-{{< /details >}}
+
 ## 五、正则化（Regularization）
-{{<details "[展开]">}}
+
 - 过拟合与欠拟合
   * 欠拟合（underfit）：未拟合到位，训练集和测试集准确率未达到最高
   * 过拟合（overfit）：拟合过度，训练集准确率升高的同时，测试集的准确率反而降低
@@ -1004,9 +1003,9 @@ print(y_pre.reshape(-1,1))
     [[56.80371943]
      [67.77050846]
      [75.42653888]]
-{{< /details >}}
+
 ## 六、升维方法 — 多项式回归（Polynomial Regression）
-{{<details "[展开]">}}
+
 - 目的：解决欠拟合问题
 - 常见手段：将已知维度进行相乘来构建新的维度，将非线性Data转换为线性Data
 - 以二阶多项式升维为例：$y=w_0+w_1x_1+w_2x_2 $$\Rightarrow y^*=w_0+w_1x_1+w_2x_2+w_3x_1^2+w_4x_2^2+w_5x_1x_2$
@@ -1085,9 +1084,9 @@ plt.legend(
     <matplotlib.legend.Legend at 0x1a768d8d150>
 
 ![png](output_45_1.png)
-{{< /details >}}
+
 ## 七、实践 — 保险花销预测
-{{<details "[展开]">}}
+
 - 数据集路径： ".\Dataset\1_Insurance_Expense_Forecast\insurance.csv"
 
 ### 1、数据提取
@@ -1995,4 +1994,3 @@ print(
     LinearRegression:  0.41171540130927264
     RidgeRegression:  0.4119283802418486
     GradientBoostingRegressor:  0.3163566171772987
-{{< /details >}}
