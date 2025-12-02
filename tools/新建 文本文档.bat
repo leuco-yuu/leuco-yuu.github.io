@@ -119,4 +119,5 @@ echo 提交信息: %COMMIT_MSG%
 echo 时间: %date% %time%
 echo ========================================
 echo.
-pause
+echo 按任意键退出...
+pause >nul
