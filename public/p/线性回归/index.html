@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/'>
 
-<link rel="stylesheet" href="/scss/style.min.9aeb1462d844b8b35ded7082d6c9ac0170ed436cc06600522c08093a7eb57963.css"><meta property='og:title' content="线性回归">
+<link rel="stylesheet" href="/scss/style.min.48321f1c1310fddf7115ba35078fc867b508c753568b537cb5d17dd1a1f9e531.css"><meta property='og:title' content="线性回归">
 <meta property='og:description' content="零基础 机器学习 第一部分">
 <meta property='og:url' content='http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/'>
 <meta property='og:site_name' content='Lecuo&#39;s Blog'>
@@ -276,9 +276,12 @@
         
             
                 
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+    <div class="mobile-toc-container">
+        <section class="widget archives mobile-toc">
+            <div class="toc-header">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -288,8 +291,96 @@
 
 
 
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+            </div>
+            
+            <div class="widget--toc">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一正规方程normal-equation">一、正规方程（Normal Equation）</a>
+      <ul>
+        <li><a href="#1一维线性回归代码实现">1、一维线性回归（代码实现）</a></li>
+        <li><a href="#2高维线性回归代码实现">2、高维线性回归（代码实现）</a></li>
+        <li><a href="#3高维线性回归sklearn库">3、高维线性回归（sklearn库）</a></li>
+      </ul>
+    </li>
+    <li><a href="#二梯度下降gradient-descent">二、梯度下降（Gradient Descent）</a>
+      <ul>
+        <li><a href="#1批量梯度下降gd">1、批量梯度下降（GD）</a>
+          <ul>
+            <li><a href="#代码实现">代码实现</a></li>
+          </ul>
+        </li>
+        <li><a href="#2随机梯度下降sgd">2、随机梯度下降（SGD）</a>
+          <ul>
+            <li><a href="#1代码实现">(1)、代码实现</a></li>
+            <li><a href="#2小幅优化打乱数据索引顺序选取向量">(2)、小幅优化：打乱数据索引，顺序选取向量</a></li>
+          </ul>
+        </li>
+        <li><a href="#3小批量梯度下降mini-batch-sgd">3、小批量梯度下降（Mini-batch SGD）</a>
+          <ul>
+            <li><a href="#1代码实现-1">(1)、代码实现</a></li>
+            <li><a href="#2小幅优化打乱数据索引顺序批量选取向量">(2)、小幅优化：打乱数据索引，顺序批量选取向量</a></li>
+          </ul>
+        </li>
+        <li><a href="#4sgd的sklearn库实现">4、SGD的sklearn库实现</a></li>
+        <li><a href="#5梯度下降法的问题与解决思路">5、梯度下降法的问题与解决思路</a>
+          <ul>
+            <li><a href="#1确定速率调整函数">（1）、确定速率调整函数</a></li>
+            <li><a href="#2更改学习速率">（2）、更改学习速率</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#三坐标下降coordinate-descent">三、坐标下降（Coordinate Descent）</a>
+      <ul>
+        <li><a href="#代码实现-1">代码实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#四归一化normalization">四、归一化（Normalization）</a></li>
+    <li><a href="#五正则化regularization">五、正则化（Regularization）</a>
+      <ul>
+        <li><a href="#1lasso回归sklearn库">1、Lasso回归（sklearn库）</a></li>
+        <li><a href="#2ridge回归sklearn库">2、Ridge回归（sklearn库）</a></li>
+        <li><a href="#3elasticnet回归sklearn库">3、ElasticNet回归（sklearn库）</a></li>
+        <li><a href="#4随机梯度下降实现elasticnet正则化sklearn库">4、随机梯度下降实现elasticnet正则化（sklearn库）</a></li>
+      </ul>
+    </li>
+    <li><a href="#六升维方法--多项式回归polynomial-regression">六、升维方法 — 多项式回归（Polynomial Regression）</a></li>
+    <li><a href="#七实践--保险花销预测">七、实践 — 保险花销预测</a>
+      <ul>
+        <li><a href="#1数据提取">1、数据提取</a></li>
+        <li><a href="#2edaexploratory-data-analysis探索性数据分析">2、EDA（Exploratory Data Analysis，探索性数据分析）</a></li>
+        <li><a href="#3特征工程">3、特征工程</a></li>
+        <li><a href="#4模型训练">4、模型训练</a></li>
+        <li><a href="#5模型评估">5、模型评估</a></li>
+        <li><a href="#6进阶">6、进阶</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </section>
+    </div>
+
+    
+    <section class="widget archives desktop-toc">
+        <div class="toc-header">
+            <div class="widget-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+            </div>
+            <h2 class="widget-title section-title">目录</h2>
         </div>
-        <h2 class="widget-title section-title">目录</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
@@ -359,6 +450,7 @@
         </div>
     </section>
 
+
             
         
     </aside>
@@ -366,6 +458,186 @@
 
             <main class="main full-width">
     <article class="main-article">
+    
+    <div class="mobile-toc-wrapper">
+        
+    
+    <div class="mobile-toc-container">
+        <section class="widget archives mobile-toc">
+            <div class="toc-header">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+            </div>
+            
+            <div class="widget--toc">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一正规方程normal-equation">一、正规方程（Normal Equation）</a>
+      <ul>
+        <li><a href="#1一维线性回归代码实现">1、一维线性回归（代码实现）</a></li>
+        <li><a href="#2高维线性回归代码实现">2、高维线性回归（代码实现）</a></li>
+        <li><a href="#3高维线性回归sklearn库">3、高维线性回归（sklearn库）</a></li>
+      </ul>
+    </li>
+    <li><a href="#二梯度下降gradient-descent">二、梯度下降（Gradient Descent）</a>
+      <ul>
+        <li><a href="#1批量梯度下降gd">1、批量梯度下降（GD）</a>
+          <ul>
+            <li><a href="#代码实现">代码实现</a></li>
+          </ul>
+        </li>
+        <li><a href="#2随机梯度下降sgd">2、随机梯度下降（SGD）</a>
+          <ul>
+            <li><a href="#1代码实现">(1)、代码实现</a></li>
+            <li><a href="#2小幅优化打乱数据索引顺序选取向量">(2)、小幅优化：打乱数据索引，顺序选取向量</a></li>
+          </ul>
+        </li>
+        <li><a href="#3小批量梯度下降mini-batch-sgd">3、小批量梯度下降（Mini-batch SGD）</a>
+          <ul>
+            <li><a href="#1代码实现-1">(1)、代码实现</a></li>
+            <li><a href="#2小幅优化打乱数据索引顺序批量选取向量">(2)、小幅优化：打乱数据索引，顺序批量选取向量</a></li>
+          </ul>
+        </li>
+        <li><a href="#4sgd的sklearn库实现">4、SGD的sklearn库实现</a></li>
+        <li><a href="#5梯度下降法的问题与解决思路">5、梯度下降法的问题与解决思路</a>
+          <ul>
+            <li><a href="#1确定速率调整函数">（1）、确定速率调整函数</a></li>
+            <li><a href="#2更改学习速率">（2）、更改学习速率</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#三坐标下降coordinate-descent">三、坐标下降（Coordinate Descent）</a>
+      <ul>
+        <li><a href="#代码实现-1">代码实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#四归一化normalization">四、归一化（Normalization）</a></li>
+    <li><a href="#五正则化regularization">五、正则化（Regularization）</a>
+      <ul>
+        <li><a href="#1lasso回归sklearn库">1、Lasso回归（sklearn库）</a></li>
+        <li><a href="#2ridge回归sklearn库">2、Ridge回归（sklearn库）</a></li>
+        <li><a href="#3elasticnet回归sklearn库">3、ElasticNet回归（sklearn库）</a></li>
+        <li><a href="#4随机梯度下降实现elasticnet正则化sklearn库">4、随机梯度下降实现elasticnet正则化（sklearn库）</a></li>
+      </ul>
+    </li>
+    <li><a href="#六升维方法--多项式回归polynomial-regression">六、升维方法 — 多项式回归（Polynomial Regression）</a></li>
+    <li><a href="#七实践--保险花销预测">七、实践 — 保险花销预测</a>
+      <ul>
+        <li><a href="#1数据提取">1、数据提取</a></li>
+        <li><a href="#2edaexploratory-data-analysis探索性数据分析">2、EDA（Exploratory Data Analysis，探索性数据分析）</a></li>
+        <li><a href="#3特征工程">3、特征工程</a></li>
+        <li><a href="#4模型训练">4、模型训练</a></li>
+        <li><a href="#5模型评估">5、模型评估</a></li>
+        <li><a href="#6进阶">6、进阶</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </section>
+    </div>
+
+    
+    <section class="widget archives desktop-toc">
+        <div class="toc-header">
+            <div class="widget-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+            </div>
+            <h2 class="widget-title section-title">目录</h2>
+        </div>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一正规方程normal-equation">一、正规方程（Normal Equation）</a>
+      <ul>
+        <li><a href="#1一维线性回归代码实现">1、一维线性回归（代码实现）</a></li>
+        <li><a href="#2高维线性回归代码实现">2、高维线性回归（代码实现）</a></li>
+        <li><a href="#3高维线性回归sklearn库">3、高维线性回归（sklearn库）</a></li>
+      </ul>
+    </li>
+    <li><a href="#二梯度下降gradient-descent">二、梯度下降（Gradient Descent）</a>
+      <ul>
+        <li><a href="#1批量梯度下降gd">1、批量梯度下降（GD）</a>
+          <ul>
+            <li><a href="#代码实现">代码实现</a></li>
+          </ul>
+        </li>
+        <li><a href="#2随机梯度下降sgd">2、随机梯度下降（SGD）</a>
+          <ul>
+            <li><a href="#1代码实现">(1)、代码实现</a></li>
+            <li><a href="#2小幅优化打乱数据索引顺序选取向量">(2)、小幅优化：打乱数据索引，顺序选取向量</a></li>
+          </ul>
+        </li>
+        <li><a href="#3小批量梯度下降mini-batch-sgd">3、小批量梯度下降（Mini-batch SGD）</a>
+          <ul>
+            <li><a href="#1代码实现-1">(1)、代码实现</a></li>
+            <li><a href="#2小幅优化打乱数据索引顺序批量选取向量">(2)、小幅优化：打乱数据索引，顺序批量选取向量</a></li>
+          </ul>
+        </li>
+        <li><a href="#4sgd的sklearn库实现">4、SGD的sklearn库实现</a></li>
+        <li><a href="#5梯度下降法的问题与解决思路">5、梯度下降法的问题与解决思路</a>
+          <ul>
+            <li><a href="#1确定速率调整函数">（1）、确定速率调整函数</a></li>
+            <li><a href="#2更改学习速率">（2）、更改学习速率</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#三坐标下降coordinate-descent">三、坐标下降（Coordinate Descent）</a>
+      <ul>
+        <li><a href="#代码实现-1">代码实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#四归一化normalization">四、归一化（Normalization）</a></li>
+    <li><a href="#五正则化regularization">五、正则化（Regularization）</a>
+      <ul>
+        <li><a href="#1lasso回归sklearn库">1、Lasso回归（sklearn库）</a></li>
+        <li><a href="#2ridge回归sklearn库">2、Ridge回归（sklearn库）</a></li>
+        <li><a href="#3elasticnet回归sklearn库">3、ElasticNet回归（sklearn库）</a></li>
+        <li><a href="#4随机梯度下降实现elasticnet正则化sklearn库">4、随机梯度下降实现elasticnet正则化（sklearn库）</a></li>
+      </ul>
+    </li>
+    <li><a href="#六升维方法--多项式回归polynomial-regression">六、升维方法 — 多项式回归（Polynomial Regression）</a></li>
+    <li><a href="#七实践--保险花销预测">七、实践 — 保险花销预测</a>
+      <ul>
+        <li><a href="#1数据提取">1、数据提取</a></li>
+        <li><a href="#2edaexploratory-data-analysis探索性数据分析">2、EDA（Exploratory Data Analysis，探索性数据分析）</a></li>
+        <li><a href="#3特征工程">3、特征工程</a></li>
+        <li><a href="#4模型训练">4、模型训练</a></li>
+        <li><a href="#5模型评估">5、模型评估</a></li>
+        <li><a href="#6进阶">6、进阶</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+
+    </div>
+
     <header class="article-header">
 
     <div class="article-details">
@@ -3687,6 +3959,7 @@ GradientBoostingRegressor:  0.3163566171772987
     
 </article>
 
+
     
 
     
@@ -3842,7 +4115,7 @@ GradientBoostingRegressor:  0.3163566171772987
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.b16babfe7a81fa5d8b0e47a889572ea679b2198a964f8787701685412c0e090c.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.3ea8e328b858fdafc7589bad120919d23cdc1acf03beee24ec769782e499a93e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

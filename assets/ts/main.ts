@@ -107,6 +107,16 @@ declare global {
         Stack: any
     }
 }
+document.addEventListener('DOMContentLoaded', function() {
+    const tocToggles = document.querySelectorAll('.toc-toggle');
+    
+    tocToggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const tocWidget = this.closest('.widget.archives');
+            tocWidget.classList.toggle('collapsed');
+        });
+    });
+});
 
 window.Stack = Stack;
 window.createElement = createElement;

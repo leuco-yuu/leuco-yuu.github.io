@@ -276,3 +276,190 @@
         }
     }
 }
+
+/* 移动端目录容器 */
+.mobile-toc-wrapper {
+    display: none; /* 默认隐藏 */
+    
+    @media (max-width: 768px) {
+        display: block;
+        margin-bottom: 30px;
+        
+        .mobile-toc-container {
+            display: block;
+            
+            .widget.archives {
+                background-color: var(--card-background);
+                border-radius: var(--card-border-radius);
+                box-shadow: var(--shadow-l1);
+                padding: var(--card-padding);
+                margin-bottom: 0;
+                
+                .widget-icon {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    margin-bottom: 15px;
+                    
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                        stroke-width: 1.33;
+                        color: var(--card-text-color-main);
+                    }
+                }
+                
+                .widget-title {
+                    font-size: 1.8rem;
+                    margin: 0 0 15px 0;
+                    color: var(--card-text-color-main);
+                    font-weight: 600;
+                }
+                
+                .widget--toc {
+                    max-height: 300px;
+                    overflow-y: auto;
+                    padding-right: 10px;
+                    
+                    /* 移动端滚动条样式 */
+                    &::-webkit-scrollbar {
+                        width: 6px;
+                    }
+                    
+                    &::-webkit-scrollbar-thumb {
+                        background-color: var(--scrollbar-thumb);
+                        border-radius: 3px;
+                    }
+                    
+                    /* 目录内容样式 */
+                    #TableOfContents {
+                        font-size: 1.4rem;
+                        
+                        ul, ol {
+                            padding-left: 15px;
+                            margin: 0;
+                        }
+                        
+                        li {
+                            margin: 8px 0;
+                            line-height: 1.4;
+                            
+                            a {
+                                color: var(--card-text-color-secondary);
+                                text-decoration: none;
+                                transition: color 0.2s ease;
+                                
+                                &:hover {
+                                    color: var(--accent-color);
+                                }
+                            }
+                            
+                            &.active-class > a {
+                                color: var(--accent-color);
+                                font-weight: bold;
+                            }
+                        }
+                        
+                        /* 不同层级缩进 */
+                        & > ul > li > ul {
+                            margin-left: 10px;
+                        }
+                        
+                        & > ul > li > ul > li > ul {
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* 隐藏桌面端目录容器 */
+        .desktop-toc {
+            display: none;
+        }
+    }
+}
+
+/* ========== 桌面端样式 ========== */
+@media (min-width: 769px) {
+    /* 隐藏移动端目录 */
+    .mobile-toc-wrapper {
+        display: none;
+    }
+    
+    /* 显示右侧边栏的目录 */
+    .desktop-toc {
+        display: block;
+        
+        .widget.archives {
+            /* 保持原有桌面端样式 */
+            .widget--toc {
+                #TableOfContents {
+                    li.active-class > a {
+                        border-left: var(--heading-border-size) solid var(--accent-color);
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* ========== 右侧边栏中的目录隐藏移动端版本 ========== */
+.right-sidebar {
+    .mobile-toc-container {
+        display: none;
+    }
+    
+    .desktop-toc {
+        display: block;
+    }
+}
+
+/* ========== 移动端目录折叠/展开效果（可选） ========== */
+@media (max-width: 768px) {
+    .mobile-toc-wrapper {
+        .mobile-toc-container {
+            .widget.archives {
+                /* 添加折叠按钮（可选功能） */
+                .toc-toggle {
+                    display: none; /* 默认隐藏，需要时启用 */
+                }
+                
+                /* 折叠状态 */
+                &.collapsed {
+                    .widget--toc {
+                        max-height: 0;
+                        overflow: hidden;
+                        padding: 0;
+                    }
+                    
+                    .toc-toggle::after {
+                        content: "▶";
+                    }
+                }
+                
+                /* 展开状态 */
+                &:not(.collapsed) {
+                    .toc-toggle::after {
+                        content: "▼";
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 移动端目录标题 - 深灰色 */
+.mobile-toc-wrapper .mobile-toc .toc-header .section-title {
+    font-size: 2.0rem;
+    font-weight: 600;
+    color: #606060; /* 或 #2c3e50 等深色 */
+}
+
+/* 桌面端目录标题 - 蓝色 */
+.right-sidebar .desktop-toc .toc-header .section-title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #606060; /* 或你的主题色 */
+}

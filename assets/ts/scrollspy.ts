@@ -34,7 +34,7 @@ function buildIdToNavigationElementMap(navigation: NodeListOf<Element>): IdToEle
         const link = navigationElement.querySelector("a");
         if (link) {
             const href = link.getAttribute("href");
-            if (href.startsWith("#")) {
+            if (href && href.startsWith("#")) {
                 sectionLinkRef[href.slice(1)] = navigationElement;
             }
         }
@@ -45,26 +45,49 @@ function buildIdToNavigationElementMap(navigation: NodeListOf<Element>): IdToEle
 
 function computeOffsets(headers: NodeListOf<Element>) {
     let sectionsOffsets = [];
-    headers.forEach((header: HTMLElement) => { sectionsOffsets.push({ id: header.id, offset: header.offsetTop }) });
+    headers.forEach((header: HTMLElement) => { 
+        if (header.id) {
+            sectionsOffsets.push({ id: header.id, offset: header.offsetTop }) 
+        }
+    });
     sectionsOffsets.sort((a, b) => a.offset - b.offset);
     return sectionsOffsets;
 }
 
 function setupScrollspy() {
     let headers = document.querySelectorAll(headersQuery);
-    if (!headers) {
-        console.warn("No header matched query", headers);
+    if (!headers || headers.length === 0) {
+        console.warn("No header matched query", headersQuery);
         return;
     }
 
-    let scrollableNavigation = document.querySelector(tocQuery) as HTMLElement | undefined;
+    // 查找所有包含目录的元素（移动端和桌面端）
+    let tocContainers = document.querySelectorAll('.widget--toc');
+    if (!tocContainers || tocContainers.length === 0) {
+        console.warn("No toc container found");
+        return;
+    }
+
+    // 找到当前可见的目录容器
+    let scrollableNavigation: HTMLElement | null = null;
+    for (let i = 0; i < tocContainers.length; i++) {
+        const container = tocContainers[i] as HTMLElement;
+        // 检查元素是否可见（不在隐藏的元素内）
+        if (container.offsetParent !== null && 
+            container.getBoundingClientRect().width > 0 && 
+            container.getBoundingClientRect().height > 0) {
+            scrollableNavigation = container;
+            break;
+        }
+    }
+    
+    // 如果没找到可见的，使用第一个
     if (!scrollableNavigation) {
-        console.warn("No toc matched query", tocQuery);
-        return;
+        scrollableNavigation = tocContainers[0] as HTMLElement;
     }
 
-    let navigation = document.querySelectorAll(navigationQuery);
-    if (!navigation) {
+    let navigation = scrollableNavigation.querySelectorAll(navigationQuery);
+    if (!navigation || navigation.length === 0) {
         console.warn("No navigation matched query", navigationQuery);
         return;
     }
@@ -82,6 +105,31 @@ function setupScrollspy() {
     let idToNavigationElement: IdToElementMap = buildIdToNavigationElementMap(navigation);
 
     function scrollHandler() {
+        // 重新检查当前可见的目录容器（处理响应式切换）
+        let visibleToc: HTMLElement | null = null;
+        for (let i = 0; i < tocContainers.length; i++) {
+            const container = tocContainers[i] as HTMLElement;
+            if (container.offsetParent !== null && 
+                container.getBoundingClientRect().width > 0 && 
+                container.getBoundingClientRect().height > 0) {
+                visibleToc = container;
+                break;
+            }
+        }
+        
+        // 如果可见的目录发生变化，更新相关变量
+        if (visibleToc && visibleToc !== scrollableNavigation) {
+            scrollableNavigation = visibleToc;
+            navigation = scrollableNavigation.querySelectorAll(navigationQuery);
+            idToNavigationElement = buildIdToNavigationElementMap(navigation);
+            
+            // 重置活动状态
+            if (activeSectionLink) {
+                activeSectionLink.classList.remove(activeClass);
+                activeSectionLink = null;
+            }
+        }
+
         let scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
 
         let newActiveSection: HTMLElement | undefined;
@@ -110,7 +158,7 @@ function setupScrollspy() {
                 activeSectionLink.classList.remove(activeClass);
             if (newActiveSectionLink) {
                 newActiveSectionLink.classList.add(activeClass);
-                if (!tocHovered) {
+                if (!tocHovered && scrollableNavigation) {
                     // Scroll so that newActiveSectionLink is in the middle of scrollableNavigation, except when it's from a manual click (hence the tocHovered check)
                     scrollToTocElement(newActiveSectionLink, scrollableNavigation);
                 }
@@ -124,6 +172,31 @@ function setupScrollspy() {
     // Resizing may cause the offset values to change: recompute them.
     function resizeHandler() {
         sectionsOffsets = computeOffsets(headers);
+        
+        // 窗口大小变化时，重新检查可见的目录容器
+        let visibleToc: HTMLElement | null = null;
+        for (let i = 0; i < tocContainers.length; i++) {
+            const container = tocContainers[i] as HTMLElement;
+            if (container.offsetParent !== null && 
+                container.getBoundingClientRect().width > 0 && 
+                container.getBoundingClientRect().height > 0) {
+                visibleToc = container;
+                break;
+            }
+        }
+        
+        if (visibleToc && visibleToc !== scrollableNavigation) {
+            scrollableNavigation = visibleToc;
+            navigation = scrollableNavigation.querySelectorAll(navigationQuery);
+            idToNavigationElement = buildIdToNavigationElementMap(navigation);
+            
+            // 重置活动状态
+            if (activeSectionLink) {
+                activeSectionLink.classList.remove(activeClass);
+                activeSectionLink = null;
+            }
+        }
+        
         scrollHandler();
     }
 
@@ -135,6 +208,9 @@ function setupScrollspy() {
     }
 
     window.addEventListener("resize", debounced(resizeHandler));
+    
+    // 初始调用一次，设置初始状态
+    setTimeout(scrollHandler, 100);
 }
 
 export { setupScrollspy };
