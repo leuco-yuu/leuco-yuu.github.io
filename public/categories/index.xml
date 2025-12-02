@@ -7,37 +7,21 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Leuco(leucoyuu@163.com)</copyright>
-        <lastBuildDate>Tue, 02 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>1</title>
-        <link>http://localhost:1313/categories/1/</link>
-        <pubDate>Tue, 02 Dec 2025 13:38:14 +0800</pubDate>
-        
-        <guid>http://localhost:1313/categories/1/</guid>
-        <description></description>
-        </item>
-        <item>
+        <lastBuildDate>Tue, 02 Dec 2025 20:51:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>机器学习</title>
         <link>http://localhost:1313/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
-        <pubDate>Tue, 02 Dec 2025 13:16:53 +0800</pubDate>
+        <pubDate>Tue, 02 Dec 2025 20:51:17 +0800</pubDate>
         
         <guid>http://localhost:1313/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</guid>
-        <description></description>
+        <description>&lt;img src="http://localhost:1313/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/OIP.jpg" alt="Featured image of post 机器学习" /&gt;</description>
         </item>
         <item>
         <title>学习笔记</title>
         <link>http://localhost:1313/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
-        <pubDate>Tue, 02 Dec 2025 13:16:53 +0800</pubDate>
+        <pubDate>Tue, 02 Dec 2025 20:51:17 +0800</pubDate>
         
         <guid>http://localhost:1313/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Test00</title>
-        <link>http://localhost:1313/categories/test/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/categories/test/</guid>
-        <description>&lt;img src="http://localhost:1313/categories/test/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Test00" /&gt;</description>
+        <description>&lt;img src="http://localhost:1313/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/v2-56505248faf6c46225e31f5f9f8c9046_r.jpg" alt="Featured image of post 学习笔记" /&gt;</description>
         </item>
         
     </channel>

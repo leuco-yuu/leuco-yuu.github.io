@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Leuco(leucoyuu@163.com)</copyright>
-        <lastBuildDate>Tue, 02 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/sgd/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>线性回归</title>
-        <link>http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
+        <lastBuildDate>Tue, 02 Dec 2025 18:49:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/sgd/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>机器学习-线性回归</title>
+        <link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
         <pubDate>Tue, 02 Dec 2025 13:16:53 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
-        <description>&lt;div class=&#34;custom-toc&#34;&gt;
+        <guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.jpg" alt="Featured image of post 机器学习-线性回归" /&gt;&lt;div class=&#34;custom-toc&#34;&gt;
   &lt;h3&gt;目录&lt;/h3&gt;
   &lt;nav id=&#34;TableOfContents&#34;&gt;
   &lt;ul&gt;
@@ -86,8 +86,14 @@
 &lt;li&gt;定义：拟合因变量(向量) &lt;strong&gt;y&lt;/strong&gt; 与 &lt;strong&gt;x&lt;/strong&gt; 之间呈线性关系，即 $\mathbf{y} = \mathbf{w}^T\mathbf{x} + \mathbf{b}$，其中 $\mathbf{x,y,w,b \in \mathbb{R}^n}$&lt;/li&gt;
 &lt;li&gt;目标：寻找参数最优解使得$\operatorname{Loss}$函数最小。$(\hat{\mathbf{w}}, \hat{\mathbf{b}}) = \operatorname{Loss}(\mathbf{y}, \hat{\mathbf{y}}) \Leftrightarrow\operatorname{Argmin}(\operatorname{Loss}(\mathbf{w}, \mathbf{b}))$
 &lt;ul&gt;
-&lt;li&gt;多元线性回归常用损失函数 —— MSE(均方误差，由似然函数推导而来): $\displaystyle{\operatorname{\mathit{J}(\theta)} = \frac{1}{2} \displaystyle \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 = \frac{1}{2}(X\theta - y)^T(X\theta - y) = \frac{1}{2}(\theta^TX^TX\theta - \theta^TX^Ty - y^TX\theta + y^Ty)},系数可为\displaystyle{\frac{1}{2}、\frac{1}{n}、\frac{1}{2n}}$&lt;/li&gt;
-&lt;li&gt;MSE对 $\theta$ 的梯度: $\displaystyle{\frac{\partial{J}(\theta)}{\partial\theta} = X^TX\theta - X^Ty = 0 \Rightarrow \theta = (X^TX)^{-1}X^Ty}$&lt;/li&gt;
+&lt;li&gt;多元线性回归常用损失函数 —— MSE(均方误差，由似然函数推导而来):
+$$
+\displaystyle{\operatorname{\mathit{J}(\theta)} = \frac{1}{2} \displaystyle \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 = \frac{1}{2}(X\theta - y)^T(X\theta - y) = \frac{1}{2}(\theta^TX^TX\theta - \theta^TX^Ty - y^TX\theta + y^Ty)},系数可为\displaystyle{\frac{1}{2}、\frac{1}{n}、\frac{1}{2n}}
+$$&lt;/li&gt;
+&lt;li&gt;MSE对 $\theta$ 的梯度:
+$$
+\displaystyle{\frac{\partial{J}(\theta)}{\partial\theta} = X^TX\theta - X^Ty = 0 \Rightarrow \theta = (X^TX)^{-1}X^Ty}
+$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -157,10 +163,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0.png&#34;
 	width=&#34;550&#34;
 	height=&#34;413&#34;
-	srcset=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_f8da8d7f1abeca57.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_b02eb907fa49b87d.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_f8da8d7f1abeca57.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_b02eb907fa49b87d.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -1069,10 +1075,10 @@ Y_pre:
 &lt;/div&gt;
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;[&amp;lt;matplotlib.lines.Line2D at 0x1a768afe390&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1.png&#34;
 	width=&#34;583&#34;
 	height=&#34;413&#34;
-	srcset=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_c0e8219bab56abc5.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_68cf1c8707aab9d7.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_c0e8219bab56abc5.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_68cf1c8707aab9d7.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -1401,10 +1407,10 @@ $$
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;μ = [1.07725633 2.44897092]
 σ² = [3.86482916 7.93336293]
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1.png&#34;
 	width=&#34;546&#34;
 	height=&#34;413&#34;
-	srcset=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_ecc0325949a87b79.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_2b8e9680da3f1bed.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_ecc0325949a87b79.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_2b8e9680da3f1bed.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -1432,28 +1438,57 @@ $$
 &lt;/li&gt;
 &lt;li&gt;惩罚项（正则项）：
 &lt;ul&gt;
-&lt;li&gt;L1 正则项：$\displaystyle{L_1(w) = \sum^m_{i=0}|w_i|}$（曼哈顿距离），$\displaystyle{\frac{\partial}{\partial w_i}L_1(w_i) = sign(w_i) = \pm 1}$&lt;/li&gt;
-&lt;li&gt;L2 正则项：$\displaystyle{L_2(w) = \sum^m_{i=0}|w_i|^2}$（欧式距离的平方），$\displaystyle{\frac{\partial}{\partial w_i}L_2(w_i) = 2w_i}$&lt;/li&gt;
+&lt;li&gt;L1 正则项：
+$$
+\displaystyle{L_1(w) = \sum^m_{i=0}|w_i|}
+$$（曼哈顿距离），
+$$
+\displaystyle{\frac{\partial}{\partial w_i}L_1(w_i) = sign(w_i) = \pm 1}
+$$&lt;/li&gt;
+&lt;li&gt;L2 正则项：
+$$
+\displaystyle{L_2(w) = \sum^m_{i=0}|w_i|^2}
+$$（欧式距离的平方），
+$$
+\displaystyle{\frac{\partial}{\partial w_i}L_2(w_i) = 2w_i}
+$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;正则化后的多元线性回归的损失函数
 &lt;ul&gt;
 &lt;li&gt;Lasso 回归（套索回归，稀疏性）：
 &lt;ul&gt;
-&lt;li&gt;损失函数 $J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)$&lt;/li&gt;
-&lt;li&gt;梯度 $\displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)=X^T(X\theta-y)+\lambda sign(\theta)}$&lt;/li&gt;
+&lt;li&gt;损失函数
+$$
+    J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)
+    $$&lt;/li&gt;
+&lt;li&gt;梯度
+$$
+    \displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)=X^T(X\theta-y)+\lambda sign(\theta)}
+    $$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Ridge 回归（岭回归，平滑性）：
 &lt;ul&gt;
-&lt;li&gt;损失函数 $J_{ridge}(\theta)=MSE(\theta)+L_2(\theta)$&lt;/li&gt;
-&lt;li&gt;梯度 $\displaystyle{\nabla_{\theta}J_{Ridge}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+2\lambda \theta}$&lt;/li&gt;
+&lt;li&gt;损失函数
+$$
+    J_{ridge}(\theta)=MSE(\theta)+L_2(\theta)
+    $$&lt;/li&gt;
+&lt;li&gt;梯度
+$$
+    \displaystyle{\nabla_{\theta}J_{Ridge}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+2\lambda \theta}
+    $$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;ElasticNet回归（弹性网络回归）：
 &lt;ul&gt;
-&lt;li&gt;损失函数 $J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)+L_2(\theta)$&lt;/li&gt;
-&lt;li&gt;梯度 $\displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+\lambda[(1-r)sign(\theta)+2r\theta)]}$&lt;/li&gt;
+&lt;li&gt;损失函数
+$$
+    J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)+L_2(\theta)
+    $$&lt;/li&gt;
+&lt;li&gt;梯度
+$$\displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+\lambda[(1-r)sign(\theta)+2r\theta)]}
+    $$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1833,7 +1868,10 @@ Y_pre:
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;目的：解决欠拟合问题&lt;/li&gt;
 &lt;li&gt;常见手段：将已知维度进行相乘来构建新的维度，将非线性Data转换为线性Data&lt;/li&gt;
-&lt;li&gt;以二阶多项式升维为例：$y=w_0+w_1x_1+w_2x_2 $$\Rightarrow y^*=w_0+w_1x_1+w_2x_2+w_3x_1^2+w_4x_2^2+w_5x_1x_2$&lt;/li&gt;
+&lt;li&gt;以二阶多项式升维为例：
+$$
+y=w_0+w_1x_1+w_2x_2\Rightarrow y^*=w_0+w_1x_1+w_2x_2+w_3x_1^2+w_4x_2^2+w_5x_1x_2
+$$&lt;/li&gt;
 &lt;li&gt;以下面拟合过程为例：$D_3$ 达到最佳拟合。随着维度的增加，$D_3$ 以下训练集和测试集误差均减小，属于欠拟合；$D_3$ 以上训练集误差减小，测试集误差增大，属于过拟合&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1978,10 +2016,10 @@ Y_pre:
 &lt;/div&gt;
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.legend.Legend at 0x1a768d8d150&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.png&#34;
 	width=&#34;993&#34;
 	height=&#34;418&#34;
-	srcset=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_6158c7ba51946e0f.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_b2879fb357e3dfa4.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_6158c7ba51946e0f.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_b2879fb357e3dfa4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -2257,10 +2295,10 @@ max      64.000000    53.130000     5.000000  63770.428010
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0.png&#34;
 	width=&#34;990&#34;
 	height=&#34;790&#34;
-	srcset=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_731b240234b22934.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_dbbf73824ec82fec.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_731b240234b22934.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_dbbf73824ec82fec.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -2325,10 +2363,10 @@ max      64.000000    53.130000     5.000000  63770.428010
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0.png&#34;
 	width=&#34;546&#34;
 	height=&#34;431&#34;
-	srcset=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_2b402f6d6b3dd287.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_facb1b1f2f768337.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_2b402f6d6b3dd287.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_facb1b1f2f768337.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
@@ -3216,10 +3254,10 @@ min      18.000000    15.960000     0.000000     7.023647
 75%      51.000000    34.693750     2.000000     9.719618
 max      64.000000    53.130000     5.000000    11.063061
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1.png&#34;
 	width=&#34;630&#34;
 	height=&#34;469&#34;
-	srcset=&#34;http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_15ddab4c1f41b39c.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_b4d2b579c830e634.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_15ddab4c1f41b39c.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_b4d2b579c830e634.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;png&#34;
