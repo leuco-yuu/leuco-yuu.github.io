@@ -281,7 +281,7 @@
 .mobile-toc-wrapper {
     display: none; /* 默认隐藏 */
     
-    @media (max-width: 1024px) {
+    @media (max-width: 768px) {
         display: block;
         margin-bottom: 30px;
         
@@ -381,7 +381,7 @@
 }
 
 /* ========== 桌面端样式 ========== */
-@media (min-width: 1024px) {
+@media (min-width: 769px) {
     /* 隐藏移动端目录 */
     .mobile-toc-wrapper {
         display: none;
@@ -417,7 +417,7 @@
 }
 
 /* ========== 移动端目录折叠/展开效果（可选） ========== */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .mobile-toc-wrapper {
         .mobile-toc-container {
             .widget.archives {
@@ -464,4 +464,35 @@
     color: #606060; /* 或你的主题色 */
 }
 
+/* 强制移动端显示TOC */
+@media (max-width: 1024px) {
+    .mobile-toc,
+    .mobile-toc-container,
+    .mobile-toc-wrapper,
+    section.widget.archives:first-child {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        max-height: none !important;
+    }
+    
+    /* 隐藏桌面端TOC */
+    .desktop-toc {
+        display: none !important;
+    }
+}
 
+/* 桌面端反之 */
+@media (min-width: 800px) {
+    .mobile-toc,
+    .mobile-toc-container,
+    .mobile-toc-wrapper,
+    section.widget.archives:first-child {
+        display: none !important;
+    }
+    
+    .desktop-toc {
+        display: block !important;
+    }
+}
