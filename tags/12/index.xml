@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>12 on Lecuo's Blog</title><link>http://localhost:1313/tags/12/</link><description>Recent content in 12 on Lecuo's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Tue, 02 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/12/index.xml" rel="self" type="application/rss+xml"/><item><title>test</title><link>http://localhost:1313/p/test/</link><pubDate>Tue, 02 Dec 2025 13:38:14 +0800</pubDate><guid>http://localhost:1313/p/test/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>12 on Lecuo&#39;s Blog</title>
+        <link>http://localhost:1313/tags/12/</link>
+        <description>Recent content in 12 on Lecuo&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Leuco(leucoyuu@163.com)</copyright>
+        <lastBuildDate>Tue, 02 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/12/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>test</title>
+        <link>http://localhost:1313/p/test/</link>
+        <pubDate>Tue, 02 Dec 2025 13:38:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/test/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
