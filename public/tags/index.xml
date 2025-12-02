@@ -7,116 +7,76 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Leuco(leucoyuu@163.com)</copyright>
-        <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>标签 With Whitespace</title>
-        <link>http://localhost:1313/tags/%E6%A0%87%E7%AD%BE-with-whitespace/</link>
-        <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+        <lastBuildDate>Tue, 02 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Web</title>
+        <link>http://localhost:1313/tags/web/</link>
+        <pubDate>Tue, 02 Dec 2025 10:14:43 +0800</pubDate>
         
-        <guid>http://localhost:1313/tags/%E6%A0%87%E7%AD%BE-with-whitespace/</guid>
+        <guid>http://localhost:1313/tags/web/</guid>
         <description></description>
         </item>
         <item>
-        <title>标签1</title>
-        <link>http://localhost:1313/tags/%E6%A0%87%E7%AD%BE1/</link>
-        <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+        <title>安全</title>
+        <link>http://localhost:1313/tags/%E5%AE%89%E5%85%A8/</link>
+        <pubDate>Tue, 02 Dec 2025 10:14:43 +0800</pubDate>
         
-        <guid>http://localhost:1313/tags/%E6%A0%87%E7%AD%BE1/</guid>
+        <guid>http://localhost:1313/tags/%E5%AE%89%E5%85%A8/</guid>
         <description></description>
         </item>
         <item>
-        <title>标签2</title>
-        <link>http://localhost:1313/tags/%E6%A0%87%E7%AD%BE2/</link>
-        <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+        <title>密码学</title>
+        <link>http://localhost:1313/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/</link>
+        <pubDate>Tue, 02 Dec 2025 10:14:43 +0800</pubDate>
         
-        <guid>http://localhost:1313/tags/%E6%A0%87%E7%AD%BE2/</guid>
+        <guid>http://localhost:1313/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/</guid>
         <description></description>
         </item>
         <item>
-        <title>Markdown</title>
-        <link>http://localhost:1313/tags/markdown/</link>
-        <pubDate>Sun, 01 Jan 2023 10:00:00 +0800</pubDate>
+        <title>入侵</title>
+        <link>http://localhost:1313/tags/%E5%85%A5%E4%BE%B5/</link>
+        <pubDate>Tue, 02 Dec 2025 10:14:43 +0800</pubDate>
         
-        <guid>http://localhost:1313/tags/markdown/</guid>
+        <guid>http://localhost:1313/tags/%E5%85%A5%E4%BE%B5/</guid>
         <description></description>
         </item>
         <item>
-        <title>博客</title>
-        <link>http://localhost:1313/tags/%E5%8D%9A%E5%AE%A2/</link>
-        <pubDate>Sun, 01 Jan 2023 10:00:00 +0800</pubDate>
+        <title>归一化</title>
+        <link>http://localhost:1313/tags/%E5%BD%92%E4%B8%80%E5%8C%96/</link>
+        <pubDate>Tue, 02 Dec 2025 10:07:26 +0800</pubDate>
         
-        <guid>http://localhost:1313/tags/%E5%8D%9A%E5%AE%A2/</guid>
+        <guid>http://localhost:1313/tags/%E5%BD%92%E4%B8%80%E5%8C%96/</guid>
         <description></description>
         </item>
         <item>
-        <title>写作</title>
-        <link>http://localhost:1313/tags/%E5%86%99%E4%BD%9C/</link>
-        <pubDate>Sun, 01 Jan 2023 10:00:00 +0800</pubDate>
+        <title>升维</title>
+        <link>http://localhost:1313/tags/%E5%8D%87%E7%BB%B4/</link>
+        <pubDate>Tue, 02 Dec 2025 10:07:26 +0800</pubDate>
         
-        <guid>http://localhost:1313/tags/%E5%86%99%E4%BD%9C/</guid>
+        <guid>http://localhost:1313/tags/%E5%8D%87%E7%BB%B4/</guid>
         <description></description>
         </item>
         <item>
-        <title>Css</title>
-        <link>http://localhost:1313/tags/css/</link>
-        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+        <title>梯度下降</title>
+        <link>http://localhost:1313/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/</link>
+        <pubDate>Tue, 02 Dec 2025 10:07:26 +0800</pubDate>
         
-        <guid>http://localhost:1313/tags/css/</guid>
+        <guid>http://localhost:1313/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/</guid>
         <description></description>
         </item>
         <item>
-        <title>Html</title>
-        <link>http://localhost:1313/tags/html/</link>
-        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+        <title>线性回归</title>
+        <link>http://localhost:1313/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
+        <pubDate>Tue, 02 Dec 2025 10:07:26 +0800</pubDate>
         
-        <guid>http://localhost:1313/tags/html/</guid>
+        <guid>http://localhost:1313/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
         <description></description>
         </item>
         <item>
-        <title>Themes</title>
-        <link>http://localhost:1313/tags/themes/</link>
-        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+        <title>正则化</title>
+        <link>http://localhost:1313/tags/%E6%AD%A3%E5%88%99%E5%8C%96/</link>
+        <pubDate>Tue, 02 Dec 2025 10:07:26 +0800</pubDate>
         
-        <guid>http://localhost:1313/tags/themes/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Privacy</title>
-        <link>http://localhost:1313/tags/privacy/</link>
-        <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/tags/privacy/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Shortcodes</title>
-        <link>http://localhost:1313/tags/shortcodes/</link>
-        <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/tags/shortcodes/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Tag With Whitespaces</title>
-        <link>http://localhost:1313/tags/tag-with-whitespaces/</link>
-        <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/tags/tag-with-whitespaces/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Text</title>
-        <link>http://localhost:1313/tags/text/</link>
-        <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/tags/text/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Emoji</title>
-        <link>http://localhost:1313/tags/emoji/</link>
-        <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/tags/emoji/</guid>
+        <guid>http://localhost:1313/tags/%E6%AD%A3%E5%88%99%E5%8C%96/</guid>
         <description></description>
         </item>
         
