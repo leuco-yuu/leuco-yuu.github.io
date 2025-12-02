@@ -68,7 +68,7 @@ class BlogPostCreator:
         # 设置当前时间
         current_time = datetime.now()
         date_str = current_time.strftime("%Y-%m-%dT%H:%M:%S+08:00")
-        lastmod_str = current_time.strftime("%Y-%m-%d")
+        lastmod_str = current_time.strftime("%Y-%m-%dT%H:%M:%S+08:00")
 
         row_index = 0
         for i, field in enumerate(self.fields):

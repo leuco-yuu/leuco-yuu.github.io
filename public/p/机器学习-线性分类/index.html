@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="机器学习 第二部分 通过线性模型实现有监督的分类任务">
+<meta name="keywords" content="sk-learn, 逻辑回归, Logistic, Softmax, SVM, SMO, 感知机, 支持向量机"><title>机器学习-线性分类</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/'>
+
+<link rel="stylesheet" href="/scss/style.min.a789b4442413c03f3990877c4888f817feddf33f6118e8ef8263c6436c7b25c8.css"><meta property='og:title' content="机器学习-线性分类">
+<meta property='og:description' content="机器学习 第二部分 通过线性模型实现有监督的分类任务">
+<meta property='og:url' content='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/'>
+<meta property='og:site_name' content='Lecuo&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='sk-learn' /><meta property='article:tag' content='逻辑回归' /><meta property='article:tag' content='Logistic' /><meta property='article:tag' content='Softmax' /><meta property='article:tag' content='SVM' /><meta property='article:tag' content='SMO' /><meta property='article:tag' content='感知机' /><meta property='article:tag' content='支持向量机' /><meta property='article:published_time' content='2025-12-02T18:51:05&#43;08:00'/><meta property='article:modified_time' content='2025-12-02T18:51:05&#43;08:00'/>
+<meta name="twitter:title" content="机器学习-线性分类">
+<meta name="twitter:description" content="机器学习 第二部分 通过线性模型实现有监督的分类任务">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f6aa26e80a833272.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Lecuo&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/leuco-yuu/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://mail.google.com/mail/u/0/?tf=cm&amp;to=leucoyuu@gmail.com&amp;fs=1'
+                        target="_blank"
+                        title="Gmail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <!-- 信封外框 -->
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+  
+  <!-- 信封内部线条（模拟折叠效果） -->
+  <polyline points="3,5 12,14 21,5" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://wpa.qq.com/msgrd?v=3&amp;uin=1286938728&amp;site=qq&amp;menu=yes/'
+                        target="_blank"
+                        title="QQ"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="m15.9998867 0-.3175962.00373031c-6.8340705.16105657-10.59798873 5.52198001-10.62328209 13.09956699l.00099159.2727027-.86256398 2.1053645c-.34339269.8459887-.59479858 1.4918602-.8236549 2.1249911-.16246446.4494579-.31092035.8862129-.4515632 1.3302912-1.41043336 4.4529342-1.46997142 7.7313526 1.14979123 8.0424546l.19586827.0182568c.69853306.0462522 1.18775172-.1357889 1.69345756-.5695745l.04666502-.0427837.10703497.1859114.16295747.2641667.09000756.1369219-.10203891.0725127c-1.18457469.8599516-1.78515849 2.0422997-.8749963 3.5478041.72014893 1.1919865 1.68579016 1.3851809 4.67654251 1.4059241h1.2781117l.7210113-.0101194c1.4578857-.0287327 2.9764342-.1065736 3.9343697-.2001215l.2555297.0243167c1.1291243.09698 2.8606159.1735357 4.3993902.1859242h1.2781118c2.9907546-.0207471 3.95642-.2139816 4.6768437-1.4064227l.0983227-.1723424c.764361-1.4241985.1648309-2.548721-.9747412-3.3755348l-.1034569-.072941.0912293-.1362605.1629318-.2641511.1068389-.1855884.0466679.0427821c.5516504.4732059 1.0836451.6468525 1.8890001.5513616 2.6200145-.3116105 2.5604594-3.5895097 1.1502083-8.0424822-.136678-.4315245-.2810058-.8567817-.4385987-1.2939849l-.1781698-.4846461c-.0923296-.2464665-.1903348-.5013359-.2976536-.7744519l-.3954267-.9868956-.8290275-2.020683.0009399-.279262c-.038761-7.60576089-3.8169423-12.93053326-10.6187985-13.09291824zm.0001023 2c6.339972.00032813 9.0947051 5.25726658 8.9334981 11.7557738l.8516442 2.0748544c.5606846 1.3708665.9939584 2.4718584 1.3860782 3.7098724 1.2134003 3.8314013.8203049 5.4169539.5209683 5.4525554-.6424867.0761796-2.5006035-2.8842697-2.5006035-2.8842697 0 1.7141775-.8994592 3.9510027-2.8457046 5.5664147l.3377045.1073023c1.0249215.341207 2.6653848 1.0302704 2.2154641 1.7750936-.4078113.675007-6.9962271.4309917-8.8982689.2207732l-.4753503.0452169c-2.33636.195172-8.04423656.3608021-8.42291849-.2659901-.50418989-.8339832 1.61195836-1.5976385 2.55205373-1.8820678-1.94652419-1.615412-2.84615056-3.852456-2.84615056-5.5667428l-.32111727.4924567c-.56063792.838483-1.70355568 2.4482423-2.17943051 2.391813-.29933663-.0355468-.69254342-1.6211541.52102408-5.4525554l.21887662-.6654718c.52220361-1.5311231 1.13363576-2.9515889 2.01884579-5.1193097-.17029299-6.39290578 2.5220086-11.75539097 8.93338651-11.7557191z" fill="currentColor" fill-rule="nonzero"/></g></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8D%9A%E4%B8%BB/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>博主</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>博文</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#logistic回归逻辑回归--二分类">Logistic回归（逻辑回归） —— 二分类</a>
+      <ul>
+        <li><a href="#将多分类问题转化为双分类问题">将多分类问题转化为双分类问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#softmax回归归一化函数回归--多分类">Softmax回归（归一化函数回归） —— 多分类</a></li>
+    <li><a href="#实践音乐分类器">实践——音乐分类器</a>
+      <ul>
+        <li><a href="#0初始化">0、初始化</a></li>
+        <li><a href="#1数据处理与特征存储">1、数据处理与特征存储</a></li>
+        <li><a href="#2模型训练与存储">2、模型训练与存储</a></li>
+        <li><a href="#3测试与评估">3、测试与评估</a></li>
+      </ul>
+    </li>
+    <li><a href="#支持向量机svmsupport-vector-machine与感知机perceptron">支持向量机（SVM，Support Vector Machine）与感知机（Perceptron）</a></li>
+    <li><a href="#smo算法">SMO算法</a></li>
+    <li><a href="#svm概率化输出">SVM概率化输出</a></li>
+    <li><a href="#svm合页损失">SVM合页损失</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" >
+                机器学习
+            </a>
+        
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" >
+                学习笔记
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/">机器学习-线性分类</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            机器学习 第二部分 通过线性模型实现有监督的分类任务
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-12-02T18:51:05&#43;08:00'>Dec 02, 2025</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div class="custom-toc">
+  <h3>目录</h3>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#logistic回归逻辑回归--二分类">Logistic回归（逻辑回归） —— 二分类</a>
+      <ul>
+        <li><a href="#将多分类问题转化为双分类问题">将多分类问题转化为双分类问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#softmax回归归一化函数回归--多分类">Softmax回归（归一化函数回归） —— 多分类</a></li>
+    <li><a href="#实践音乐分类器">实践——音乐分类器</a>
+      <ul>
+        <li><a href="#0初始化">0、初始化</a></li>
+        <li><a href="#1数据处理与特征存储">1、数据处理与特征存储</a></li>
+        <li><a href="#2模型训练与存储">2、模型训练与存储</a></li>
+        <li><a href="#3测试与评估">3、测试与评估</a></li>
+      </ul>
+    </li>
+    <li><a href="#支持向量机svmsupport-vector-machine与感知机perceptron">支持向量机（SVM，Support Vector Machine）与感知机（Perceptron）</a></li>
+    <li><a href="#smo算法">SMO算法</a></li>
+    <li><a href="#svm概率化输出">SVM概率化输出</a></li>
+    <li><a href="#svm合页损失">SVM合页损失</a></li>
+  </ul>
+</nav>
+</div>
+<h1 id="线性分类linear-classification">线性分类（Linear Classification）
+</h1><ul>
+<li>逻辑回归算法：在多元线性回归算法的基础上把结果缩放到0-1之间</li>
+<li>线性分类器（GLM与分布的连接器，可以通过内部核函数升维变成非线性算法）：$\eta = \theta^Tx = \theta_0+\theta_1x_1+……+\theta_nx_n$</li>
+<li>广义线性模型（GLM）：$\displaystyle{p(y;\eta)=b(y)e^{(\eta^TT(y)-a(\eta))}}$，其中$\eta$是自然参数，$T(y)$是充分统计量，$a(\eta)$是对数部分函数
+<ul>
+<li>Logistic回归（逻辑回归）：伯努利-GLM</li>
+<li>Softmax回归（归一化函数回归）：多项式分布-GLM</li>
+</ul>
+</li>
+</ul>
+<h2 id="logistic回归逻辑回归--二分类">Logistic回归（逻辑回归） —— 二分类
+</h2><ul>
+<li>伯努利分布：
+$$
+\displaystyle{P(y;p) = p^y (1-p)^{1-y}, \quad y=0,1 \Rightarrow P(y;p)=e^{(ln(\frac{p}{1-p})y+ln(1-p))}}\displaystyle{\Rightarrow \eta=ln(\frac{p}{1-p})\Rightarrow p=\frac{1}{1+e^{-\eta}}\Rightarrow p(x)=\frac{1}{1+e^{-\theta^Tx}} }
+$$</li>
+<li>逻辑回归函数（Sigmoid）：
+$$
+\displaystyle{\hat y = h_\theta(x)=g(\theta^Tx)=\frac{1}{1+e^{-\theta^Tx}}} \Rightarrow 分界:\theta^Tx=0
+$$。当 $\hat y&gt;0.5$ 时，$y$ 取1；当 $\hat y&lt;0.5$ 时，$y$ 取0</li>
+<li>损失函数（由极大似然推导而来）：
+$$
+\displaystyle{J(\theta)=-[\sum^m_{i=1}y^{(i)}lnh(x^{(i)})+(1-y^{(i)})ln(1-h(x^{(i)})]}
+$$
+<ul>
+<li>梯度下降：
+$$
+  \displaystyle{\theta_j^{(k+1)} = \theta_j^{(k)}-\alpha\frac{\partial}{\partial_{\theta_j^{(k)}}}J(\theta^{(k)})}
+  $$</li>
+<li></li>
+</ul>
+$$
+  \displaystyle{\frac{\partial}{\partial_{\theta_j^{(k)}}}J(\theta^{(k)}) = \frac{1}{n}\sum^n_{i=1}(h_\theta(x_i)-y_i)x^{(j)}_i} \Rightarrow \nabla_{\theta^{(k+1)}}J(\theta^{(k+1)}) = \frac{1}{n}X^T(X\theta^{(k)}-y)
+  $$</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Sigmoid Function</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">math</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sigmoid_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">sigmoid_function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">sigmoid_function</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span><span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="n">sigmoid_function</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span><span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">sigmoid_function</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.001</span><span class="p">,</span> <span class="s1">&#39;(0 , 0.5)&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​ <br>
+<img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_2_0.png"
+	width="563"
+	height="418"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_2_0_hu_c817842e4d94702.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_2_0_hu_3933db8e1ee9996d.png 1024w"
+	loading="lazy"
+	
+		alt="png"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="134"
+		data-flex-basis="323px"
+	
+>
+​</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 二分类实例：乳腺癌</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 载入参数</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 划分测试集与训练集</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_state</span><span class="o">=</span><span class="mi">20230428</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># # 标准归一化</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># scaler = StandardScaler()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># X_train_scaled = scaler.fit_transform(X_train)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># X_test_scaled = scaler.fit_transform(X_test)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># # 模型训练</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># lg_reg = LogisticRegression()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># lg_reg.fit(X_train_scaled,y_train)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># # 预测</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># y_train_pre = lg_reg.predict(X_train_scaled)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># y_test_pre = lg_reg.predict(X_test_scaled)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># # 评估</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># print(&#34;Train:&#34;, accuracy_score(y_train,y_train_pre)*100,&#34;%&#34;)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># print(&#34;Test:&#34;,accuracy_score(y_test,y_test_pre)*100,&#34;%&#34;)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 归一化 —— 评估可用Pipeline实现</span>
+</span></span><span class="line"><span class="cl"><span class="n">log_reg</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span><span class="n">StandardScaler</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span><span class="n">LogisticRegression</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">log_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Test:&#34;</span><span class="p">,</span><span class="n">log_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="s2">&#34;%&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Train:&#34;</span><span class="p">,</span><span class="n">log_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="s2">&#34;%&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Test: 99.49748743718592 %
+Train: 96.49122807017544 %
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 二分类实例：鸢尾花三分类 =&gt; 二分类</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0:&#39;setosa&#39;, 1:&#39;versicolor&#39;, 2:&#39;virginica&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># 二分化</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                <span class="n">random_state</span><span class="o">=</span><span class="mi">200304</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">log_reg</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span><span class="n">StandardScaler</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span><span class="n">LogisticRegression</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">log_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train accuracy: </span><span class="si">{:.2f}</span><span class="s1"> %&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">log_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test  accuracy: </span><span class="si">{:.2f}</span><span class="s1"> %&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">log_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Train accuracy: 97.14 %
+Test  accuracy: 93.33 %
+</code></pre>
+<h3 id="将多分类问题转化为双分类问题">将多分类问题转化为双分类问题
+</h3><ul>
+<li>One-vs-all（One-vs-rest）：以鸢尾花分类问题为例。将三分类问题转换为三个二分类问题（分别为是否为&rsquo;setosa&rsquo;，是否为&rsquo;versicolor&rsquo;以及是否为&rsquo;virginica&rsquo;）。得到三个预测值，取最大</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># OneVsRestClassifier</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.multiclass</span> <span class="kn">import</span> <span class="n">OneVsRestClassifier</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0:&#39;setosa&#39;, 1:&#39;versicolor&#39;, 2:&#39;virginica&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                <span class="n">random_state</span><span class="o">=</span><span class="mi">200304</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">log_reg</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># (&#39;scaler&#39;,StandardScaler()),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s1">&#39;ovr&#39;</span><span class="p">,</span><span class="n">OneVsRestClassifier</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LogisticRegression</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">log_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train accuracy: </span><span class="si">{:.2f}</span><span class="s1"> %&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">log_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test  accuracy: </span><span class="si">{:.2f}</span><span class="s1"> %&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">log_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Train accuracy: 93.33 %
+Test  accuracy: 97.78 %
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 转化为三个二分类问题</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0:&#39;setosa&#39;, 1:&#39;versicolor&#39;, 2:&#39;virginica&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train_init</span><span class="p">,</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                     <span class="n">random_state</span><span class="o">=</span><span class="mi">200304</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train_init</span><span class="o">==</span><span class="n">category</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">log_reg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">log_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">log_reg</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y_test_pre</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_test_pre</span><span class="o">==</span><span class="n">y_test</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test  accuracy: </span><span class="si">{:.2f}</span><span class="s1"> %&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span> <span class="p">(</span><span class="n">acc</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">acc</span><span class="p">))</span><span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Test  accuracy: 97.78 %
+</code></pre>
+<h2 id="softmax回归归一化函数回归--多分类">Softmax回归（归一化函数回归） —— 多分类
+</h2><ul>
+<li>多项式分布：
+$$\displaystyle{P(X_1=x_1,\dots,X_k=x_k;p_1,p_2,\dots,p_k) = \frac{n!}{x_1! \cdots x_k!} p_1^{x_1} \cdots p_k^{x_k}, \quad \sum_{i=1}^k x_i = n}\displaystyle{\Rightarrow P(y;\varphi)=e^{\displaystyle{\sum^{k-1}_{i=1}T(y)_iln(\frac{\varphi_i}{\varphi_k})+ln\varphi_k}} = e^{\displaystyle{\eta^TT(y)-a(\eta)}}}\Rightarrow\displaystyle{P_i = P({y^{(i)};\Theta})=P_k e^{\displaystyle{\Theta^{(i)}x}}},\displaystyle{P_k=\frac{1}{{\displaystyle{\sum^{k}_{j=1}e^{\displaystyle{\Theta^{(j)}x}}}}}}$$， $\displaystyle{\Theta^{(i)}}$ 为 $\Theta$ 的第 $i$ 行</li>
+<li>Softmax回归函数：$$
+\displaystyle{P(y^{(i)}=k|x^{(i)};\theta) = \frac{\displaystyle{e^{\theta_k^Tx^{(i)}}}}{\displaystyle{\sum^k_{j=1}e^{\theta_j^Tx^{(i)}}}}}
+$$，此时 $\theta$ 是一个矩阵</li>
+<li>损失函数——交叉熵损失函数（Cross-Entropy Loss，负对数似然损失）：$$
+\displaystyle{J(\theta)=-\frac{1}{N}\sum^{N}_{n=1}\sum^{k}_{i=1}y_i^{(n)}ln(\hat y_i^{(n)})}
+$$，其中 $N$ 是样本数， $k$ 是分类数， $y_i^{(n)}$ 是真实标签，服从one-hot编码， $\hat y_i^{(n)}$ 是预测概率，取值为 $(0,1) $</li>
+<li>当y的分类数为2时，Softmax回归退化为Logistc回归</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_state</span><span class="o">=</span><span class="mi">200304</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span><span class="n">StandardScaler</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="c1"># 默认Softmax</span>
+</span></span><span class="line"><span class="cl">        <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;sag&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>0.9777777777777777
+</code></pre>
+<h2 id="实践音乐分类器">实践——音乐分类器
+</h2><ul>
+<li>数据集路径： &ldquo;.\Dataset\2_Music_Classifier&rdquo;</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span><span class="n">fftfreq</span> <span class="c1"># 快速傅里叶转换</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">wavfile</span> <span class="c1"># 读取wav文件格式</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">specgram</span> <span class="k">as</span> <span class="n">spg</span> <span class="c1"># 绘制频谱图</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">path</span> <span class="o">=</span> <span class="s2">&#34;./Dataset/2_Music_Classifier/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># wavfile返回样本率（每秒采样个数，单通道采样总数）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># sample_rate,X = wavfile.read(&#34;./Dataset/2_Music_Classifier/blues/converted/blues.00000.au.wav&#34;)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 绘图查看</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">frequence_time</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span><span class="n">mserial</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sample_rate</span><span class="p">,</span><span class="n">X</span> <span class="o">=</span> <span class="n">wavfile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">mtype</span><span class="o">+</span><span class="s2">&#34;/converted/&#34;</span><span class="o">+</span><span class="n">mtype</span><span class="o">+</span><span class="s2">&#34;.&#34;</span><span class="o">+</span><span class="n">mserial</span><span class="o">+</span><span class="s2">&#34;.au.wav&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">specgram</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Fs</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">,</span><span class="n">xextent</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># plt.plot(fft(X,sample_rate))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;frequence_time:&#34;</span><span class="o">+</span> <span class="n">mtype</span> <span class="o">+</span> <span class="s2">&#34;-&#34;</span> <span class="o">+</span> <span class="n">mserial</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;frequence&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">magnitude_time</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span><span class="n">mserial</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sample_rate</span><span class="p">,</span><span class="n">X</span> <span class="o">=</span> <span class="n">wavfile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">mtype</span><span class="o">+</span><span class="s2">&#34;/converted/&#34;</span><span class="o">+</span><span class="n">mtype</span><span class="o">+</span><span class="s2">&#34;.&#34;</span><span class="o">+</span><span class="n">mserial</span><span class="o">+</span><span class="s2">&#34;.au.wav&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;magnitude_time:&#34;</span><span class="o">+</span> <span class="n">mtype</span> <span class="o">+</span> <span class="s2">&#34;-&#34;</span> <span class="o">+</span> <span class="n">mserial</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;magnitude&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">magnitude_frequence</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span><span class="n">mserial</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sample_rate</span><span class="p">,</span><span class="n">X</span> <span class="o">=</span> <span class="n">wavfile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">mtype</span><span class="o">+</span><span class="s2">&#34;/converted/&#34;</span><span class="o">+</span><span class="n">mtype</span><span class="o">+</span><span class="s2">&#34;.&#34;</span><span class="o">+</span><span class="n">mserial</span><span class="o">+</span><span class="s2">&#34;.au.wav&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">freqs</span> <span class="o">=</span> <span class="n">fftfreq</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">sample_rate</span><span class="p">)[:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft</span><span class="p">(</span><span class="n">X</span><span class="p">))[:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freqs</span><span class="p">,</span><span class="n">mag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;magnitude_frequence:&#34;</span><span class="o">+</span> <span class="n">mtype</span> <span class="o">+</span> <span class="s2">&#34;-&#34;</span> <span class="o">+</span> <span class="n">mserial</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;magnitude&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;frequence&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blues&#39;</span><span class="p">,</span><span class="s1">&#39;classical&#39;</span><span class="p">,</span><span class="s1">&#39;country&#39;</span><span class="p">,</span><span class="s1">&#39;disco&#39;</span><span class="p">,</span><span class="s1">&#39;hiphop&#39;</span><span class="p">,</span><span class="s1">&#39;jazz&#39;</span><span class="p">,</span><span class="s1">&#39;metal&#39;</span><span class="p">,</span><span class="s1">&#39;pop&#39;</span><span class="p">,</span><span class="s1">&#39;reggae&#39;</span><span class="p">,</span><span class="s1">&#39;rock&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">serials</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;00000&#39;</span><span class="p">,</span><span class="s1">&#39;00001&#39;</span><span class="p">,</span><span class="s1">&#39;00002&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">types</span> <span class="o">=</span> <span class="n">types</span><span class="p">[:]</span>
+</span></span><span class="line"><span class="cl"><span class="n">serials</span> <span class="o">=</span> <span class="n">serials</span><span class="p">[:]</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">serials</span><span class="p">),</span><span class="mi">5</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">index</span><span class="p">,(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">types</span><span class="p">,</span><span class="n">serials</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">serials</span><span class="p">),</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">frequence_time</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">serials</span><span class="p">),</span><span class="mi">5</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">index</span><span class="p">,(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">types</span><span class="p">,</span><span class="n">serials</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">serials</span><span class="p">),</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">magnitude_time</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># plt.figure(num=None,figsize=(8*len(serials),5*len(types)),dpi=80)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># for index,(t,s) in enumerate(product(types,serials)):</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#     plt.subplot(len(types),len(serials),index+1)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#     magnitude_frequence(t,s)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)),</span><span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">serials</span> <span class="o">=</span> <span class="n">serials</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">),</span><span class="mi">5</span><span class="o">*</span><span class="mi">3</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">index</span><span class="p">,(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">types</span><span class="p">,</span><span class="n">serials</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">),</span><span class="mi">0</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)</span><span class="o">+</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="n">frequence_time</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">),</span><span class="mi">1</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)</span><span class="o">+</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="n">magnitude_time</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">),</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)</span><span class="o">+</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="n">magnitude_frequence</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​ <br>
+<img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_0.png"
+	width="1568"
+	height="3145"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_0_hu_d163d3b79a4c2872.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_0_hu_956419ab666dd284.png 1024w"
+	loading="lazy"
+	
+		alt="png"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="49"
+		data-flex-basis="119px"
+	
+>
+​</p>
+<p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_1.png"
+	width="1571"
+	height="3145"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_1_hu_d791012947a734bd.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_1_hu_b0ef152b0bf40912.png 1024w"
+	loading="lazy"
+	
+		alt="png"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="49"
+		data-flex-basis="119px"
+	
+></p>
+<p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_2.png"
+	width="2570"
+	height="989"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_2_hu_68b825f37c9f2d59.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_2_hu_6325f90d8fdb2483.png 1024w"
+	loading="lazy"
+	
+		alt="png"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="259"
+		data-flex-basis="623px"
+	
+></p>
+<h3 id="0初始化">0、初始化
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span> <span class="c1"># 快速傅里叶转换</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">wavfile</span> <span class="c1"># 读取wav文件格式</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">specgram</span> <span class="k">as</span> <span class="n">spg</span> <span class="c1"># 绘制频谱图</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">path</span> <span class="o">=</span> <span class="s2">&#34;./Dataset/2_Music_Classifier/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">model_path</span> <span class="o">=</span> <span class="s2">&#34;D:/MLab/project/StuML/ML/Model/2_Music_Classifier/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">max_len</span> <span class="o">=</span> <span class="mi">660000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">labels</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">label_name</span><span class="p">,</span><span class="n">label_num</span><span class="p">)</span> <span class="k">for</span> <span class="n">label_num</span><span class="p">,</span><span class="n">label_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">))])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="1数据处理与特征存储">1、数据处理与特征存储
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="p">[];</span><span class="n">X</span><span class="o">=</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">label_name</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sub_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">+</span><span class="n">label_name</span><span class="o">+</span><span class="s2">&#34;/converted/&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">wave_file_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">sub_path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">label_name</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">abs</span><span class="p">(</span> <span class="c1"># 取幅值（实部和虚部的平方和开根号）</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fft</span><span class="p">(</span> <span class="c1"># 傅里叶变换</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">wavfile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span> <span class="c1"># 读取</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">sub_path</span><span class="o">+</span><span class="n">wave_file_name</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">)[</span><span class="mi">1</span><span class="p">][:</span><span class="n">max_len</span><span class="p">]</span> <span class="c1"># 切片</span>
+</span></span><span class="line"><span class="cl">                <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_state</span><span class="o">=</span><span class="mi">200304</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stratify</span><span class="o">=</span><span class="n">y</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 特征存储</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_path</span><span class="o">+</span><span class="s2">&#34;train_feature&#34;</span><span class="p">,</span><span class="n">X_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_path</span><span class="o">+</span><span class="s2">&#34;train_label&#34;</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_path</span><span class="o">+</span><span class="s2">&#34;test_feature&#34;</span><span class="p">,</span><span class="n">X_test</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_path</span><span class="o">+</span><span class="s2">&#34;test_label&#34;</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2模型训练与存储">2、模型训练与存储
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="o">+</span><span class="s2">&#34;train_feature.npy&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="o">+</span><span class="s2">&#34;train_label.npy&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">log_reg</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span><span class="n">StandardScaler</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span><span class="n">LogisticRegression</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># solver=&#39;sag&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">log_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">model_path</span><span class="o">+</span><span class="s2">&#34;model_object&#34;</span><span class="p">,</span><span class="s2">&#34;wb&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">log_reg</span><span class="p">,</span><span class="n">file</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3测试与评估">3、测试与评估
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="o">+</span><span class="s2">&#34;test_feature.npy&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="o">+</span><span class="s2">&#34;test_label.npy&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">model_path</span><span class="o">+</span><span class="s2">&#34;model_object&#34;</span><span class="p">,</span><span class="s2">&#34;rb&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">log_reg</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">log_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># log_reg.score(X_train,y_train)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>0.6
+</code></pre>
+<h2 id="支持向量机svmsupport-vector-machine与感知机perceptron">支持向量机（SVM，Support Vector Machine）与感知机（Perceptron）
+</h2><ul>
+<li>SVM是一种二分类算法，是对Perceptron模型的扩展,具有更强的泛化能力</li>
+<li>SVM/Perceptron模型：
+$$
+  y=\operatorname{sign}(\theta x)=
+  \begin{cases}  
+   +1, & \theta x>0 \\
+   -1, & \ \theta x<0 
+  \end{cases}
+  $$</li>
+<li>间隔：样本到超平面的距离
+<ul>
+<li>几何距离：$\displaystyle{\gamma = \frac{|w^tx_0+b|}{||w||}}$，其中超平面为 $\displaystyle{w^tx+b=0}$
+<ul>
+<li>对于正确分类的样本点，有 $$\displaystyle{\gamma = \frac{y_0(w^tx_0+b)}{\sqrt{w^tw}} = \frac{y_0(\hat y_0+b)}{\sqrt{w^tw}}}$$</li>
+</ul>
+</li>
+<li>函数距离：$\displaystyle{\delta=|w^tx_0+b|}$
+<ul>
+<li>对于正确分类的样本点，有 $$\displaystyle{\delta=|w^tx_0+b|=y_0(w^tx_0+b)}$$</li>
+</ul>
+</li>
+<li>硬间隔：要求所有样本都必须正确分类，不允许任何错误</li>
+<li>软间隔：允许部分样本分类错误，容忍一定程度的误差，以获得更好的泛化能力</li>
+</ul>
+</li>
+<li>支持向量：离分割超平面最近的那些样本点</li>
+<li>Perceptron思想：期望使分类错误的所有样本（m条）到超平面的距离之和最小
+<ul>
+<li>$$\displaystyle{J(\theta)=\sum_{i\in M_\theta}\frac{-y^i(\theta^T x^i+b)}{||\theta||}}\Rightarrow \displaystyle{J(\theta)=-\sum_{i\in M_\theta}{y^i(\theta^T x^i+b)}}$$，其中 $M_\theta$ 为分类错误集</li>
+<li>优化：随机梯度下降法（SGD）或小批量梯度下降法（MBGD）
+<ul>
+<li>$$\displaystyle{\nabla_\theta J(\theta) = -\sum_{i\in M_\theta}y^{(i)}x^{(i)}}$$$，注意，这里的梯度函数表达式内部虽然与 $\theta$ 无关，但错误集 $M_\theta$ 却与 $\theta$ 相关</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SVM思想：期望使离超平面比较近的点尽可能地远离超平面 —— 二次优化
+<ul>
+<li>线性可分支持向量机：硬间隔最大化（完美分类正负例且距离超平面最近的点离超平面越远越好）
+<ul>
+<li>损失函数：求解（拉格朗日条件约束）：
+$$
+      \begin{aligned}
+      & \displaystyle{\max\limits_{w,b}\ \gamma_{min}=\frac{y_{min}(w^Tx_{min}+b)}{||w||}}\\
+      s.t. \quad &\displaystyle{{\gamma}_{i} = \frac{y_i(w^Tx_i+b)}{||w||}\ge \gamma_{min} ,i \in \{1,2,\ldots m\}} \\
+      \end{aligned} 
+      $$
+令 $y_{min}(wx_{min}+b) = 1$，则原式等价于 （损失函数）：
+$$
+      \begin{aligned}
+      & \displaystyle{\min\limits_{w,b}\ \frac{1}{2}{||w||^2}}\\
+      s.t. \quad &\displaystyle{y_i(w^Tx_i+b)\ge 1 ,i \in \{1,2,\ldots m\}} \\
+      \end{aligned} 
+      $$</li>
+<li>二次规划：
+<ul>
+<li>构建拉格朗日函数：
+$$\displaystyle{ L(w,b,\alpha)=\frac{1}{2}||w||^2-\sum^m_{i=1}\alpha_i[y_i(w^Tx_i+b)-1], \alpha_i \ge 0}$$</li>
+<li>求解
+$$\displaystyle{\min\limits_{w,b}\max\limits_{\alpha_i\ge 0}L(w,b,\alpha) \overset{\text{对偶函数}}{\Leftrightarrow} \max\limits_{\alpha_i\ge 0}\min\limits_{w,b}L(w,b,\alpha)}$$
+<ul>
+<li>原问题等价于（SMO算法推导）：
+$$
+          \begin{aligned}
+          & \displaystyle{\min\limits_\alpha \frac{1}{2}\sum^m_{i=1}\sum^m_{j=1}\alpha_i\alpha_jy_iy_j(x_i·x_j)-\sum^m_{i=1}\alpha_i}\\
+          s.t. \quad &\displaystyle{\sum^m_{i=1}\alpha_iy_i=0}&,i\in \{1,2,\ldots m\} \\
+          &\displaystyle{ \alpha_i \ge 0} &,i\in \{1,2,\ldots m\}
+          \end{aligned} 
+          $$</li>
+</ul>
+</li>
+<li>求 $w^* \text{与} b^*$ ：
+$$
+        \begin{cases}
+        \displaystyle{w^* = \sum^m_{i=1}{\alpha^*}_iy_ix_i}\\
+        \displaystyle{y_s({w^*}^Tx_s+b^*)=1,\quad x_s为任意支持向量}\\
+        \displaystyle{\alpha^*(y_s({w^*}^Tx_s+b^*)-1)=0,\quad 可获得支持向量}
+        \end{cases}
+        $$</li>
+<li>预测函数：$$\hat y = ({w^*}^T x+b^*)$$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线性支持向量机（线性不可分）：软间隔最大化（在硬间隔的基础上引入松弛变量 $\xi_i \ge 0$ ）
+<ul>
+<li>损失函数：求解（拉格朗日条件约束）：
+$$
+      \begin{aligned}
+      & \displaystyle{\min\limits_{w,b} \frac{1}{2}{||w||^2} + C{\sum^m_{i=1}\xi_i}}\\
+      s.t. \quad &\displaystyle{y_i(w^Tx_i+b)\ge 1-\xi_i} &, i \in \{1,2,\ldots m\} \\
+      &\displaystyle{ \xi_i \ge 0}&, i \in \{1,2,\ldots m\}
+      \end{aligned} 
+      $$</li>
+<li>二次规划：
+<ul>
+<li>构建拉格朗日函数：
+$$
+        \displaystyle{ L(w,b,\xi,\alpha,\mu)=\frac{1}{2}||w||^2+C\sum^m_{i=1}\xi_i-\sum^m_{i=1}\alpha_i[y_i(w^Tx_i+b)-1+\xi_i]-\sum^m_i\mu_i\xi_i, \alpha_i,\xi_i \ge 0}
+        $$</li>
+<li>求解
+$\displaystyle{\min\limits_{w,b,\xi}\max\limits_{\alpha_i\ge 0,\xi_i\ge 0}L(w,b,\xi,\alpha,\mu) \overset{\text{对偶函数}}{\Leftrightarrow} \max\limits_{\alpha_i\ge 0,\xi_i\ge 0}\min\limits_{w,b,\xi}L(w,b,\xi,\alpha,\mu)}$
+<ul>
+<li>原问题等价于（SMO算法推导）：
+$$
+          \begin{aligned}
+          & \displaystyle{\min\limits_\alpha \frac{1}{2}\sum^m_{i=1}\sum^m_{j=1}\alpha_i\alpha_jy_iy_j(x_i·x_j)-\sum^m_{i=1}\alpha_i}\\
+          s.t. \quad &\displaystyle{\sum^m_{i=1}\alpha_iy_i=0}&,i\in \{1,2,\ldots m\}\\
+          & 0 \le \alpha_i \le C & , i\in \{1,2,\ldots m\}\\
+          % & \xi_i \ge 0 & , i\in \{1,2,\ldots m\}
+          \end{aligned} 
+          $$</li>
+</ul>
+</li>
+<li>对于支持样本 $x_i$:
+<ul>
+<li>$\alpha_i = 0$ : $x_i$ 被正确分类</li>
+<li>$0 &lt; \alpha_i &lt; C$ : $x_i$ 在软边界上</li>
+<li>$\alpha_i = C$ : $x_i$ 嵌入软边界内
+<ul>
+<li>$\xi &lt; 1$ : $x_i$ 被正确分类</li>
+<li>$\xi = 1$ : $x_i$ 在超平面上</li>
+<li>$\xi &gt; 0$ : $x_i$ 被错误分类</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>求 $w^* \text{与}b^*$ ：
+$$
+        \begin{cases}
+        \displaystyle{w^* = \sum^m_{i=1}{\alpha}_i^*y_ix_i}\\
+        \displaystyle{y_s({w^*}^Tx_s+b^*)=1,\quad x_s为任意支持向量}\\
+        \displaystyle{\alpha^*(y_s({w^*}^Tx_s+b^*)-1)=0,\quad 可获得支持向量}
+        \end{cases}
+        $$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非线性支持向量机：升维（核函数Kernel）
+<ul>
+<li>定义Kernel函数：$K(x,z) = \phi(x)\phi(z)$</li>
+<li>此时对偶处理后的目标函数为：
+$$
+      \begin{aligned}
+          & \displaystyle{\min\limits_\alpha \frac{1}{2}\sum^m_{i=1}\sum^m_{j=1}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum^m_{i=1}\alpha_i}\\
+          s.t. \quad &\displaystyle{\sum^m_{i=1}\alpha_iy_i=0}&,i\in \{1,2,\ldots m\}\\
+          & 0 \le \alpha_i \le C & , i\in \{1,2,\ldots m\}\\
+          % & \xi_i \ge 0 & , i\in \{1,2,\ldots m\}
+          \end{aligned} 
+      $$</li>
+<li>常用Kernel函数：
+<ul>
+<li>线性Kernel函数：    $K(x,z)=x \cdot z$</li>
+<li>多项式Kernel函数：  $K(x,z)=(\gamma x \cdot z + r)$</li>
+<li>高斯Kernel函数：    $K(x,z)=\exp(-\gamma||x-z||^2)$</li>
+<li>Sigmoid Kernel函数：$K(x,z)=\tanh(\gamma x \cdot z + r)$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="smo算法">SMO算法
+</h2><ul>
+<li>SVM算法关键步骤：
+<ul>
+<li>支持向量机算法最优化问题（指定惩罚系数C）：
+$$
+   \begin{aligned}
+   & \displaystyle{J(\alpha)=\min\limits_\alpha \frac{1}{2}\sum^m_{i=1}\sum^m_{j=1}\alpha_i\alpha_jy_iy_j(x_i·x_j)-\sum^m_{i=1}\alpha_i}\\
+   s.t. \quad &\displaystyle{\sum^m_{i=1}\alpha_iy_i=0}&,i\in \{1,2,\ldots m\}\\
+   & 0 \le \alpha_i \le C & , i\in \{1,2,\ldots m\}\\
+   % & \xi_i \ge 0 & , i\in \{1,2,\ldots m\}
+   \end{aligned} 
+  $$</li>
+<li>等价于求解 ：
+$$
+    \begin{cases}
+    \displaystyle{w^* = \sum^m_{i=1}{\alpha}_i^*y_ix_i}\\
+    \displaystyle{y_s({w^*}^Tx_s+b^*)=1,\quad x_s为任意支持向量}\\
+    \displaystyle{\alpha^*(y_s({w^*}^Tx_s+b^*)-1)=0,\quad 可获得支持向量}
+    \end{cases}
+  $$</li>
+<li>预测函数： $\displaystyle{f(x)=sign(\sum^m_{i=1}\alpha_i^<em>y_iK(x,x_i)+b^</em>)}$</li>
+</ul>
+</li>
+<li>SMO算法求解最优化问题
+<ul>
+<li>求解 $\alpha_i, i\in {1,2,\dots m}$</li>
+<li>算法思想：
+<ul>
+<li>由于 $\displaystyle{\sum^m_{i=1}\alpha_iy_i=0}$ ，故不能只固定一个参数</li>
+<li>将原始求解m个参数二次规划问题分解成多个子二次规划问题分别求解，每个子问题只求解2个参数</li>
+<li>采用启发式方法选择需要更新的两个参数 $\alpha_i $ 和 $\alpha_j$
+<ul>
+<li>例如，选择 $\alpha_1$ 和 $\alpha_2$</li>
+</ul>
+</li>
+<li>优化 $\alpha_i $ 和 $\alpha_j$ 使目标函数最大程度接近全局最优解（$\nabla_{\alpha_i,\alpha_j}J(\alpha)=0$），其余参数不变
+<ul>
+<li>$$\displaystyle{\min\limits_{\alpha_1,\alpha_2}J(\alpha_1,\alpha_2)=\min\limits_{\alpha_1,\alpha_2}\frac{1}{2}K_{11}\alpha_1^2+\frac{1}{2}K_{22}\alpha_2^2+y_1y_2K_{12}\alpha_1\alpha_2-(\alpha_1+\alpha_2)+y_1v_1\alpha_1+y_2v_2\alpha_2+Constant}$$ ，其中 $$v_i = \displaystyle{\sum^m_{j=3}\alpha_jy_jK(x_i,x_j), i = 1,2}$$</li>
+</ul>
+</li>
+<li>将二元函数视为一元函数
+<ul>
+<li>另 $$\alpha_1 = (\zeta-y_2\alpha_2)y_1$$ ，带回上式</li>
+<li>$$\displaystyle{\min\limits_{\alpha_2}J(\alpha_2)=\min\limits_{\alpha_2}\frac{1}{2}K_{11}(\zeta-y_2\alpha_2)y_1^2+\frac{1}{2}K_{22}\alpha_2^2+y_1y_2K_{12}(\zeta-y_2\alpha_2)y_1\alpha_2-((\zeta-y_2\alpha_2)y_1+\alpha_2)+y_1v_1(\zeta-y_2\alpha_2)y_1+y_2v_2\alpha_2+Constant}$$</li>
+</ul>
+</li>
+<li>对 $J(\alpha_2)$ 求导，导数为0
+<ul>
+<li>$$
+        \begin{aligned}
+        \displaystyle{v_1 = f(x_1)-\sum^2_{j=1}y_j\alpha_jK_{1j}-b} \\
+        \displaystyle{v_2 = f(x_2)-\sum^2_{j=1}y_j\alpha_jK_{2j}-b}
+        \end{aligned}
+        $$</li>
+<li>$$\displaystyle{\alpha^{new,unclipped}_2 = \alpha^{old}_2 + \frac{y_2(E_1-E_2)}{\eta}}$$，其中 $$\alpha_2^{new,unclipped}$$ 为未考虑约束的新值， $$E_i = f(x_i)-y_i, \ \eta = K_{11}+K_{22}-2K_{12}$$</li>
+</ul>
+</li>
+<li>对新值进行约束修建
+<ul>
+<li>$$
+        \begin{aligned}
+        & 0 \le \alpha_1,\alpha_2 \le C \\
+        & \alpha_1 + \alpha_2 = \zeta
+        \end{aligned}
+        $$</li>
+<li>
+<ul>
+<li>当 $y_1 \neq y_2$ 时，
+$$
+      L=\max(0,\alpha^{old}_2-\alpha^{old}_1),H=\min(C,C+\alpha^{old}_2-\alpha^{old}_1)
+      $$</li>
+<li>当 $y_1 \neq y_2$ 时，$$L=\max(0,\alpha_1^{old}+\alpha_2^{old}-C);H=\min(C,\alpha_2^{old}+\alpha_1^{old})$$</li>
+</ul>
+</li>
+<li>$$
+\alpha_2^{\text{new}} = 
+\begin{cases}
+H &, \alpha_2^{\text{new,unclipped}} > H \\
+\alpha_2^{\text{new,unclipped}} &, L \le \alpha_2^{\text{new,unclipped}} \le H \\
+L &, \alpha_2^{\text{new,unclipped}} < L
+\end{cases}
+$$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>启发式选择变量
+<ul>
+<li>第一个变量的选择称为外循环，首先遍历整个样本集，选择违反KKT条件的 $\alpha_i$ 作为第一个变量。依据相关规则选择第二个变量，对这两个变量采用上述方法进行优化。直到遍历整个样本集后，没有违反KKT条件 $\alpha_i$ ，然后退出
+<ul>
+<li>KKT条件：
+$$
+        \begin{aligned}
+        & \alpha_i = 0 & \Rightarrow & \qquad y^{(i)}(w^Tx^{(i)}+b) \ge 1 \\
+        & \alpha_i = C & \Rightarrow & \qquad y^{(i)}(w^Tx^{(i)}+b) \le 1 \\
+        & 0 < \alpha_i < C & \Rightarrow & \qquad y^{(i)}(w^Tx^{(i)}+b) = 1 \\
+        \end{aligned}
+        $$</li>
+</ul>
+</li>
+<li>第二个变量的选择成为内循环，假设在外循环中找到第一个变量记为 $\alpha_1$ ，第二个变量的选择希望能使 $\alpha_2$ 有较大变化。由于 $\alpha_2$ 是依赖于 $|E_1-E_2|$ ，当 $E_1$ 为正时，那么选择最小的 $E_i$ 作为 $E_2$ ；如果 $E_1$ 为负时，选择最大的 $E_i$ 作为 $E_2$ ，通常为每个样本的 $E_i$ 保存在一个列表中，选择最大的 $|E_1-E_2|$ 来近似最大化步长。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="svm概率化输出">SVM概率化输出
+</h2><ul>
+<li>目的：将决策值映射为概率（如 $P(y=1∣x)\in[0,1]$），使用户能判断样本属于某类的可能性大小</li>
+<li>标准的SVM的无阈值输出为：$f(x)=h(x)+b$ ，其中 $h(x)=\displaystyle{\sum_iy_i\alpha_iK(x_i,x)}$</li>
+<li>Platt利用 sigmoid-fitting 方法，将标准的SVM的输出结果进行后处理，转换为后验概率
+$P(y=1|f)=\displaystyle{\frac{1}{1+\exp(Af+B)}}$ ，其中 $A$ 和 $B$ 为待拟合参数，$f$ 为样本 $x$ 的无阈值输出。</li>
+</ul>
+<h2 id="svm合页损失">SVM合页损失
+</h2><ul>
+<li>0-1损失是二分类问题的真正损失函数，合页损失与logistic损失是对0-1损失函数的近似</li>
+<li>合页损失函数(Hinge Loss Function)：$L(y(wx+b))=[1-y(wx+b)]<em>+$ ， $[]</em>+$ 表示：
+$$
+  [z]_+ = 
+  \begin{cases}
+  z&,z>0 \\
+  0&,z\le 0
+  \end{cases}
+  $$
+也就是说，数据点如果被正确分类，损失为0，如果没有被正确分类，损失为z</li>
+<li>SVM的损失函数就是合页损失函数+正则化项:
+<ul>
+<li>$$\displaystyle{\min\limits_{w,b}\sum^m_{i=1}L(y^{(i)}(w^Tx^{(i)}+b)) + \lambda ||w||^2}$$</li>
+<li>上述目标函数中，当 $\displaystyle{\lambda = \frac{1}{2C}}$ 时。等价于原目标函数 $$\displaystyle{\frac{1}{2}||w||^2+C\sum^m_{i=1}\xi_i}$$</li>
+</ul>
+</li>
+</ul>
+<h1 id="实践-人脸分类器">实践-人脸分类器
+</h1><ul>
+<li>基于 sklearn 内置 LFW 数据集 + SVM</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_lfw_people</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span><span class="n">accuracy_score</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 1、加载人脸数据</span>
+</span></span><span class="line"><span class="cl"><span class="n">lfw_people</span> <span class="o">=</span> <span class="n">fetch_lfw_people</span><span class="p">(</span><span class="n">min_faces_per_person</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span><span class="n">resize</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="n">lfw_people</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">lfw_people</span><span class="o">.</span><span class="n">target</span><span class="p">,</span><span class="n">lfw_people</span><span class="o">.</span><span class="n">target_names</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">n_classes</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;数据集规模：&#34;</span><span class="p">,</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;类别数：&#34;</span><span class="p">,</span><span class="n">n_classes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;类别名：&#34;</span><span class="p">,</span><span class="n">names</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2、划分数据集与训练集</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">428</span><span class="p">,</span><span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3、构建机器学习通道</span>
+</span></span><span class="line"><span class="cl"><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span> <span class="c1"># 先降维，再归一，再SVM</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;pca&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">PCA</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">n_components</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="c1"># 只保留150个主成分（把原始11750维降到150维）</span>
+</span></span><span class="line"><span class="cl">            <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># 白化：150维特征缩放到同尺度，去相关</span>
+</span></span><span class="line"><span class="cl">            <span class="n">random_state</span><span class="o">=</span><span class="mi">428</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;scaler&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StandardScaler</span><span class="p">()</span> <span class="c1"># 对PCA后的150维特征进行归一化</span>
+</span></span><span class="line"><span class="cl">    <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;svm&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SVC</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="c1"># 使用高斯核函数进行非线性升维</span>
+</span></span><span class="line"><span class="cl">            <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span> <span class="c1"># 自动根据各类样本量给出权重，防止某些人照片多导致偏向性</span>
+</span></span><span class="line"><span class="cl">            <span class="n">C</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="c1"># 正则强度，C越大越不允许误分，可能导致过拟合；C约小margin越大可能导致欠拟合</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gamma</span><span class="o">=</span><span class="s1">&#39;scale&#39;</span> <span class="c1"># 高斯核宽度gamma的取值策略</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 4、训练模型</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;开始训练 SVM ...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;训练完成&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 5、评估模型</span>
+</span></span><span class="line"><span class="cl"><span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">测试集整体准确率：</span><span class="si">{</span><span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">详细分类报告：&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">names</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>数据集规模： (1288, 1850)
+类别数： 7
+类别名： ['Ariel Sharon' 'Colin Powell' 'Donald Rumsfeld' 'George W Bush'
+ 'Gerhard Schroeder' 'Hugo Chavez' 'Tony Blair']
+
+开始训练 SVM ...
+训练完成
+</code></pre>
+<p>​ <br>
+测试集整体准确率：0.851</p>
+<pre><code>详细分类报告：
+                   precision    recall  f1-score   support
+
+     Ariel Sharon       1.00      0.47      0.64        19
+     Colin Powell       0.84      0.90      0.87        59
+  Donald Rumsfeld       0.95      0.70      0.81        30
+    George W Bush       0.80      0.98      0.88       133
+Gerhard Schroeder       0.95      0.78      0.86        27
+      Hugo Chavez       1.00      0.56      0.71        18
+       Tony Blair       0.91      0.83      0.87        36
+
+         accuracy                           0.85       322
+        macro avg       0.92      0.75      0.81       322
+     weighted avg       0.87      0.85      0.84       322
+</code></pre>
+<p>​</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/sk-learn/">Sk-Learn</a>
+        
+            <a href="/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/">逻辑回归</a>
+        
+            <a href="/tags/logistic/">Logistic</a>
+        
+            <a href="/tags/softmax/">Softmax</a>
+        
+            <a href="/tags/svm/">SVM</a>
+        
+            <a href="/tags/smo/">SMO</a>
+        
+            <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/">感知机</a>
+        
+            <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">支持向量机</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">机器学习-线性回归</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="leuco-yuu/blog-comments"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Leuco(leucoyuu@163.com)
+    </section>
+    
+    <section class="powerby">
+        
+            Embrace Bit Art <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.3ea8e328b858fdafc7589bad120919d23cdc1acf03beee24ec769782e499a93e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
