@@ -4,12 +4,13 @@ date= "2025-12-02T13:16:53+08:00"
 lastmod= "2025-12-02T18:49:50+08:00"
 draft=false
 author= "leuco"
-description= "零基础 机器学习 第一部分"
+description= "【1】机器学习 第一部分 线性回归"
 keywords= ["梯度下降", "SGD", "sk-learn", "归一化", "正则化", "多项式升维", "EDA"]
 categories= ["机器学习","学习笔记"]
 tags= ["梯度下降", "SGD", "sk-learn", "归一化", "正则化", "多项式升维", "EDA"]
 series= "人工智能"
 math=true
+image="output_45_1.jpg"
 +++
 {{<toc>}}
 # 线性回归（Linear Regression）

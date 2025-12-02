@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="零基础 机器学习 第一部分">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="【1】机器学习 第一部分 线性回归">
 <meta name="keywords" content="梯度下降, SGD, sk-learn, 归一化, 正则化, 多项式升维, EDA"><title>机器学习-线性回归</title>
 
 <link rel='canonical' href='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/'>
 
 <link rel="stylesheet" href="/scss/style.min.a789b4442413c03f3990877c4888f817feddf33f6118e8ef8263c6436c7b25c8.css"><meta property='og:title' content="机器学习-线性回归">
-<meta property='og:description' content="零基础 机器学习 第一部分">
+<meta property='og:description' content="【1】机器学习 第一部分 线性回归">
 <meta property='og:url' content='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/'>
 <meta property='og:site_name' content='Lecuo&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='梯度下降' /><meta property='article:tag' content='SGD' /><meta property='article:tag' content='sk-learn' /><meta property='article:tag' content='归一化' /><meta property='article:tag' content='正则化' /><meta property='article:tag' content='多项式升维' /><meta property='article:tag' content='EDA' /><meta property='article:published_time' content='2025-12-02T13:16:53&#43;08:00'/><meta property='article:modified_time' content='2025-12-02T18:49:50&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='梯度下降' /><meta property='article:tag' content='SGD' /><meta property='article:tag' content='sk-learn' /><meta property='article:tag' content='归一化' /><meta property='article:tag' content='正则化' /><meta property='article:tag' content='多项式升维' /><meta property='article:tag' content='EDA' /><meta property='article:published_time' content='2025-12-02T13:16:53&#43;08:00'/><meta property='article:modified_time' content='2025-12-02T18:49:50&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.jpg' />
 <meta name="twitter:title" content="机器学习-线性回归">
-<meta name="twitter:description" content="零基础 机器学习 第一部分">
+<meta name="twitter:description" content="【1】机器学习 第一部分 线性回归"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.jpg' />
     </head>
     <body class="
     article-page
@@ -365,8 +366,20 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+                <img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_2fd781cf8479e69.jpg"
+                        srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_2fd781cf8479e69.jpg 800w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_bcfbf9baa81dd870.jpg 1600w"
+                        width="800" 
+                        height="337" 
+                        loading="lazy"
+                        alt="Featured image of post 机器学习-线性回归" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
@@ -390,7 +403,7 @@
     
         
         <h3 class="article-subtitle">
-            零基础 机器学习 第一部分
+            【1】机器学习 第一部分 线性回归
         </h3>
         
     </div>
@@ -577,14 +590,18 @@ $$</li>
 </span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/output_3_0.png"
-	
-	
-	
+</div><p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0.png"
+	width="550"
+	height="413"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_f8da8d7f1abeca57.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_b02eb907fa49b87d.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="133"
+		data-flex-basis="319px"
 	
 ></p>
 <h3 id="2高维线性回归代码实现">2、高维线性回归（代码实现）
@@ -1485,14 +1502,18 @@ Y_pre:
 </div>
 </div><pre><code>[&lt;matplotlib.lines.Line2D at 0x1a768afe390&gt;]
 </code></pre>
-<p><img src="/output_26_1.png"
-	
-	
-	
+<p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1.png"
+	width="583"
+	height="413"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_c0e8219bab56abc5.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_68cf1c8707aab9d7.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="141"
+		data-flex-basis="338px"
 	
 ></p>
 <h4 id="2更改学习速率">（2）、更改学习速率
@@ -1813,14 +1834,18 @@ $$
 </div><pre><code>μ = [1.07725633 2.44897092]
 σ² = [3.86482916 7.93336293]
 </code></pre>
-<p><img src="/output_34_1.png"
-	
-	
-	
+<p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1.png"
+	width="546"
+	height="413"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_ecc0325949a87b79.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_2b8e9680da3f1bed.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="132"
+		data-flex-basis="317px"
 	
 ></p>
 <h2 id="五正则化regularization">五、正则化（Regularization）
@@ -2418,14 +2443,18 @@ $$</li>
 </div>
 </div><pre><code>&lt;matplotlib.legend.Legend at 0x1a768d8d150&gt;
 </code></pre>
-<p><img src="/output_45_1.png"
-	
-	
-	
+<p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.png"
+	width="993"
+	height="418"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_6158c7ba51946e0f.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_b2879fb357e3dfa4.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="237"
+		data-flex-basis="570px"
 	
 ></p>
 <h2 id="七实践--保险花销预测">七、实践 — 保险花销预测
@@ -2693,14 +2722,18 @@ max      64.000000    53.130000     5.000000  63770.428010
 </span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/output_51_0.png"
-	
-	
-	
+</div><p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0.png"
+	width="990"
+	height="790"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_731b240234b22934.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_dbbf73824ec82fec.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="125"
+		data-flex-basis="300px"
 	
 ></p>
 <div class="highlight"><div class="chroma">
@@ -2757,14 +2790,18 @@ max      64.000000    53.130000     5.000000  63770.428010
 </span></span><span class="line"><span class="cl"><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/output_52_0.png"
-	
-	
-	
+</div><p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0.png"
+	width="546"
+	height="431"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_2b402f6d6b3dd287.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_facb1b1f2f768337.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="126"
+		data-flex-basis="304px"
 	
 ></p>
 <div>
@@ -3644,14 +3681,18 @@ min      18.000000    15.960000     0.000000     7.023647
 75%      51.000000    34.693750     2.000000     9.719618
 max      64.000000    53.130000     5.000000    11.063061
 </code></pre>
-<p><img src="/output_64_1.png"
-	
-	
-	
+<p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1.png"
+	width="630"
+	height="469"
+	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_15ddab4c1f41b39c.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_b4d2b579c830e634.png 1024w"
 	loading="lazy"
 	
 		alt="png"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="134"
+		data-flex-basis="322px"
 	
 ></p>
 <pre><code>   age    bmi children smoker   charges
@@ -3774,13 +3815,48 @@ GradientBoostingRegressor:  0.3163566171772987
         <div class="flex article-list--tile">
             
                 
-<article class="">
+<article class="has-image">
     <a href="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/">
         
+        
+            <div class="article-image">
+                <img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/SVM.b96e9ba18f9f55522ce3f1ae5994872a.b96e9ba18f9f55522ce3f1ae5994872a_hu_44707e4e44f0c3f4.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 机器学习-线性分类"
+                        
+                        data-hash="md5-uW6boY&#43;fVVIs4/GuWZSHKg==">
+                
+            </div>
         
 
         <div class="article-details">
             <h2 class="article-title">机器学习-线性分类</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/cover.2160315d961f55820735b9d476c635c6_hu_8fb1533feca001c7.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 机器学习-无监督学习"
+                        
+                        data-hash="md5-IWAxXZYfVYIHNbnUdsY1xg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">机器学习-无监督学习</h2>
         </div>
     </a>
 </article>

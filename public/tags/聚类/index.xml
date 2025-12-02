@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>聚类 on Lecuo&#39;s Blog</title>
+        <link>http://localhost:1313/tags/%E8%81%9A%E7%B1%BB/</link>
+        <description>Recent content in 聚类 on Lecuo&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Leuco(leucoyuu@163.com)</copyright>
+        <lastBuildDate>Tue, 02 Dec 2025 19:45:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%81%9A%E7%B1%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>机器学习-无监督学习</title>
+        <link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</link>
+        <pubDate>Tue, 02 Dec 2025 19:45:17 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/output_4_1.png" alt="Featured image of post 机器学习-无监督学习" /&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -4,18 +4,20 @@ date= "2025-12-02T18:51:05+08:00"
 lastmod= "2025-12-02T18:51:05+08:00"
 draft=false
 author= "leuco"
-description= "机器学习 第二部分 通过线性模型实现有监督的分类任务"
+description= "【2】机器学习 第二部分 通过线性模型实现有监督的分类任务"
 keywords= ["sk-learn", "逻辑回归", "Logistic", "Softmax", "SVM", "SMO", "感知机", "支持向量机"]
 categories= ["机器学习", "学习笔记"]
 tags= ["sk-learn", "逻辑回归", "Logistic", "Softmax", "SVM", "SMO", "感知机", "支持向量机"]
 math=true
+image="SVM.jpg"
+
 +++
 
 {{<toc>}}
 
 # 线性分类（Linear Classification）
 - 逻辑回归算法：在多元线性回归算法的基础上把结果缩放到0-1之间
-- 线性分类器（GLM与分布的连接器，可以通过内部核函数升维变成非线性算法）：$\eta = \theta^Tx = \theta_0+\theta_1x_1+……+\theta_nx_n$
+- 线性分类器（GLM与分布的连接器，可以通过内部核函数升维变成非线性算法）：$$\eta = \theta^Tx = \theta_0+\theta_1x_1+……+\theta_nx_n$$
 - 广义线性模型（GLM）：$\displaystyle{p(y;\eta)=b(y)e^{(\eta^TT(y)-a(\eta))}}$，其中$\eta$是自然参数，$T(y)$是充分统计量，$a(\eta)$是对数部分函数
   - Logistic回归（逻辑回归）：伯努利-GLM
   - Softmax回归（归一化函数回归）：多项式分布-GLM
@@ -34,15 +36,13 @@ $$
 \displaystyle{J(\theta)=-[\sum^m_{i=1}y^{(i)}lnh(x^{(i)})+(1-y^{(i)})ln(1-h(x^{(i)})]}
 $$
   - 梯度下降：
-  $$
+$$
   \displaystyle{\theta_j^{(k+1)} = \theta_j^{(k)}-\alpha\frac{\partial}{\partial_{\theta_j^{(k)}}}J(\theta^{(k)})}
-  $$
+$$
   - 
-  $$
+$$
   \displaystyle{\frac{\partial}{\partial_{\theta_j^{(k)}}}J(\theta^{(k)}) = \frac{1}{n}\sum^n_{i=1}(h_\theta(x_i)-y_i)x^{(j)}_i} \Rightarrow \nabla_{\theta^{(k+1)}}J(\theta^{(k+1)}) = \frac{1}{n}X^T(X\theta^{(k)}-y)
-  $$
-
-
+$$
 ```python
 # Sigmoid Function
 import numpy as np
@@ -471,13 +471,13 @@ log_reg.score(X_test,y_test)
 ## 支持向量机（SVM，Support Vector Machine）与感知机（Perceptron）
 - SVM是一种二分类算法，是对Perceptron模型的扩展,具有更强的泛化能力
 - SVM/Perceptron模型：
-  $$
+$$
   y=\operatorname{sign}(\theta x)=
   \begin{cases}  
    +1, & \theta x>0 \\
    -1, & \ \theta x<0 
   \end{cases}
-  $$
+$$
 - 间隔：样本到超平面的距离
   - 几何距离：$\displaystyle{\gamma = \frac{|w^tx_0+b|}{||w||}}$，其中超平面为 $\displaystyle{w^tx+b=0}$
     - 对于正确分类的样本点，有 $$\displaystyle{\gamma = \frac{y_0(w^tx_0+b)}{\sqrt{w^tw}} = \frac{y_0(\hat y_0+b)}{\sqrt{w^tw}}}$$
@@ -493,7 +493,7 @@ log_reg.score(X_test,y_test)
 - SVM思想：期望使离超平面比较近的点尽可能地远离超平面 —— 二次优化
   - 线性可分支持向量机：硬间隔最大化（完美分类正负例且距离超平面最近的点离超平面越远越好）
     - 损失函数：求解（拉格朗日条件约束）：
-      $$
+$$
       \begin{aligned}
       & \displaystyle{\max\limits_{w,b}\ \gamma_{min}=\frac{y_{min}(w^Tx_{min}+b)}{||w||}}\\
       s.t. \quad &\displaystyle{{\gamma}_{i} = \frac{y_i(w^Tx_i+b)}{||w||}\ge \gamma_{min} ,i \in \{1,2,\ldots m\}} \\
@@ -638,17 +638,17 @@ log_reg.score(X_test,y_test)
       $$
         - 当 $y_1 \neq y_2$ 时，$$L=\max(0,\alpha_1^{old}+\alpha_2^{old}-C);H=\min(C,\alpha_2^{old}+\alpha_1^{old})$$
       - $$
-\alpha_2^{\text{new}} = 
-\begin{cases}
-H &, \alpha_2^{\text{new,unclipped}} > H \\
-\alpha_2^{\text{new,unclipped}} &, L \le \alpha_2^{\text{new,unclipped}} \le H \\
-L &, \alpha_2^{\text{new,unclipped}} < L
-\end{cases}
+      \alpha_2^{\text{new}} = 
+      \begin{cases}
+      H &, \alpha_2^{\text{new,unclipped}} > H \\
+      \alpha_2^{\text{new,unclipped}} &, L \le \alpha_2^{\text{new,unclipped}} \le H \\
+      L &, \alpha_2^{\text{new,unclipped}} < L
+      \end{cases}
 $$
   - 启发式选择变量
     - 第一个变量的选择称为外循环，首先遍历整个样本集，选择违反KKT条件的 $\alpha_i$ 作为第一个变量。依据相关规则选择第二个变量，对这两个变量采用上述方法进行优化。直到遍历整个样本集后，没有违反KKT条件 $\alpha_i$ ，然后退出
       - KKT条件：
-        $$
+$$
         \begin{aligned}
         & \alpha_i = 0 & \Rightarrow & \qquad y^{(i)}(w^Tx^{(i)}+b) \ge 1 \\
         & \alpha_i = C & \Rightarrow & \qquad y^{(i)}(w^Tx^{(i)}+b) \le 1 \\
@@ -759,11 +759,11 @@ print(classification_report(y_test, y_pred, target_names=names))
 
 
 ​    
-    测试集整体准确率：0.851
-    
-    详细分类报告：
-                       precision    recall  f1-score   support
-    
+​    测试集整体准确率：0.851
+​    
+​    详细分类报告：
+​                       precision    recall  f1-score   support
+​    
          Ariel Sharon       1.00      0.47      0.64        19
          Colin Powell       0.84      0.90      0.87        59
       Donald Rumsfeld       0.95      0.70      0.81        30

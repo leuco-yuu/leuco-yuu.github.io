@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="机器学习 第二部分 通过线性模型实现有监督的分类任务">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="【2】机器学习 第二部分 通过线性模型实现有监督的分类任务">
 <meta name="keywords" content="sk-learn, 逻辑回归, Logistic, Softmax, SVM, SMO, 感知机, 支持向量机"><title>机器学习-线性分类</title>
 
 <link rel='canonical' href='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/'>
 
 <link rel="stylesheet" href="/scss/style.min.a789b4442413c03f3990877c4888f817feddf33f6118e8ef8263c6436c7b25c8.css"><meta property='og:title' content="机器学习-线性分类">
-<meta property='og:description' content="机器学习 第二部分 通过线性模型实现有监督的分类任务">
+<meta property='og:description' content="【2】机器学习 第二部分 通过线性模型实现有监督的分类任务">
 <meta property='og:url' content='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/'>
 <meta property='og:site_name' content='Lecuo&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='sk-learn' /><meta property='article:tag' content='逻辑回归' /><meta property='article:tag' content='Logistic' /><meta property='article:tag' content='Softmax' /><meta property='article:tag' content='SVM' /><meta property='article:tag' content='SMO' /><meta property='article:tag' content='感知机' /><meta property='article:tag' content='支持向量机' /><meta property='article:published_time' content='2025-12-02T18:51:05&#43;08:00'/><meta property='article:modified_time' content='2025-12-02T18:51:05&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='sk-learn' /><meta property='article:tag' content='逻辑回归' /><meta property='article:tag' content='Logistic' /><meta property='article:tag' content='Softmax' /><meta property='article:tag' content='SVM' /><meta property='article:tag' content='SMO' /><meta property='article:tag' content='感知机' /><meta property='article:tag' content='支持向量机' /><meta property='article:published_time' content='2025-12-02T18:51:05&#43;08:00'/><meta property='article:modified_time' content='2025-12-02T18:51:05&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/SVM.jpg' />
 <meta name="twitter:title" content="机器学习-线性分类">
-<meta name="twitter:description" content="机器学习 第二部分 通过线性模型实现有监督的分类任务">
+<meta name="twitter:description" content="【2】机器学习 第二部分 通过线性模型实现有监督的分类任务"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/SVM.jpg' />
     </head>
     <body class="
     article-page
@@ -323,8 +324,20 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/">
+                <img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/SVM_hu_8c12e53984e5b16c.jpg"
+                        srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/SVM_hu_8c12e53984e5b16c.jpg 800w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/SVM_hu_cf7712929c3b0dcc.jpg 1600w"
+                        width="800" 
+                        height="473" 
+                        loading="lazy"
+                        alt="Featured image of post 机器学习-线性分类" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
@@ -348,7 +361,7 @@
     
         
         <h3 class="article-subtitle">
-            机器学习 第二部分 通过线性模型实现有监督的分类任务
+            【2】机器学习 第二部分 通过线性模型实现有监督的分类任务
         </h3>
         
     </div>
@@ -413,7 +426,7 @@
 <h1 id="线性分类linear-classification">线性分类（Linear Classification）
 </h1><ul>
 <li>逻辑回归算法：在多元线性回归算法的基础上把结果缩放到0-1之间</li>
-<li>线性分类器（GLM与分布的连接器，可以通过内部核函数升维变成非线性算法）：$\eta = \theta^Tx = \theta_0+\theta_1x_1+……+\theta_nx_n$</li>
+<li>线性分类器（GLM与分布的连接器，可以通过内部核函数升维变成非线性算法）：$$\eta = \theta^Tx = \theta_0+\theta_1x_1+……+\theta_nx_n$$</li>
 <li>广义线性模型（GLM）：$\displaystyle{p(y;\eta)=b(y)e^{(\eta^TT(y)-a(\eta))}}$，其中$\eta$是自然参数，$T(y)$是充分统计量，$a(\eta)$是对数部分函数
 <ul>
 <li>Logistic回归（逻辑回归）：伯努利-GLM</li>
@@ -439,14 +452,14 @@ $$
 <li>梯度下降：
 $$
   \displaystyle{\theta_j^{(k+1)} = \theta_j^{(k)}-\alpha\frac{\partial}{\partial_{\theta_j^{(k)}}}J(\theta^{(k)})}
-  $$</li>
+$$</li>
 <li></li>
+</ul>
+</li>
 </ul>
 $$
   \displaystyle{\frac{\partial}{\partial_{\theta_j^{(k)}}}J(\theta^{(k)}) = \frac{1}{n}\sum^n_{i=1}(h_\theta(x_i)-y_i)x^{(j)}_i} \Rightarrow \nabla_{\theta^{(k+1)}}J(\theta^{(k+1)}) = \frac{1}{n}X^T(X\theta^{(k)}-y)
-  $$</li>
-</ul>
-<div class="highlight"><div class="chroma">
+$$<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -493,18 +506,14 @@ $$
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>​ <br>
-<img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_2_0.png"
-	width="563"
-	height="418"
-	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_2_0_hu_c817842e4d94702.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_2_0_hu_3933db8e1ee9996d.png 1024w"
+<img src="/output_2_0.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="png"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="134"
-		data-flex-basis="323px"
 	
 >
 ​</p>
@@ -1004,47 +1013,35 @@ $$，其中 $N$ 是样本数， $k$ 是分类数， $y_i^{(n)}$ 是真实标签�
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>​ <br>
-<img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_0.png"
-	width="1568"
-	height="3145"
-	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_0_hu_d163d3b79a4c2872.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_0_hu_956419ab666dd284.png 1024w"
+<img src="/output_11_0.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="png"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="49"
-		data-flex-basis="119px"
 	
 >
 ​</p>
-<p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_1.png"
-	width="1571"
-	height="3145"
-	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_1_hu_d791012947a734bd.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_1_hu_b0ef152b0bf40912.png 1024w"
+<p><img src="/output_11_1.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="png"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="49"
-		data-flex-basis="119px"
 	
 ></p>
-<p><img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_2.png"
-	width="2570"
-	height="989"
-	srcset="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_2_hu_68b825f37c9f2d59.png 480w, /p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_2_hu_6325f90d8fdb2483.png 1024w"
+<p><img src="/output_11_2.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="png"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="259"
-		data-flex-basis="623px"
 	
 ></p>
 <h3 id="0初始化">0、初始化
@@ -1227,7 +1224,7 @@ $$
    +1, & \theta x>0 \\
    -1, & \ \theta x<0 
   \end{cases}
-  $$</li>
+$$</li>
 <li>间隔：样本到超平面的距离
 <ul>
 <li>几何距离：$\displaystyle{\gamma = \frac{|w^tx_0+b|}{||w||}}$，其中超平面为 $\displaystyle{w^tx+b=0}$
@@ -1459,12 +1456,12 @@ $$
 </ul>
 </li>
 <li>$$
-\alpha_2^{\text{new}} = 
-\begin{cases}
-H &, \alpha_2^{\text{new,unclipped}} > H \\
-\alpha_2^{\text{new,unclipped}} &, L \le \alpha_2^{\text{new,unclipped}} \le H \\
-L &, \alpha_2^{\text{new,unclipped}} < L
-\end{cases}
+      \alpha_2^{\text{new}} = 
+      \begin{cases}
+      H &, \alpha_2^{\text{new,unclipped}} > H \\
+      \alpha_2^{\text{new,unclipped}} &, L \le \alpha_2^{\text{new,unclipped}} \le H \\
+      L &, \alpha_2^{\text{new,unclipped}} < L
+      \end{cases}
 $$</li>
 </ul>
 </li>
@@ -1661,19 +1658,19 @@ $$
 训练完成
 </code></pre>
 <p>​ <br>
-测试集整体准确率：0.851</p>
-<pre><code>详细分类报告：
-                   precision    recall  f1-score   support
-
-     Ariel Sharon       1.00      0.47      0.64        19
-     Colin Powell       0.84      0.90      0.87        59
-  Donald Rumsfeld       0.95      0.70      0.81        30
-    George W Bush       0.80      0.98      0.88       133
+​    测试集整体准确率：0.851
+​ <br>
+​    详细分类报告：
+​                       precision    recall  f1-score   support
+​ <br>
+Ariel Sharon       1.00      0.47      0.64        19
+Colin Powell       0.84      0.90      0.87        59
+Donald Rumsfeld       0.95      0.70      0.81        30
+George W Bush       0.80      0.98      0.88       133
 Gerhard Schroeder       0.95      0.78      0.86        27
-      Hugo Chavez       1.00      0.56      0.71        18
-       Tony Blair       0.91      0.83      0.87        36
-
-         accuracy                           0.85       322
+Hugo Chavez       1.00      0.56      0.71        18
+Tony Blair       0.91      0.83      0.87        36</p>
+<pre><code>         accuracy                           0.85       322
         macro avg       0.92      0.75      0.81       322
      weighted avg       0.87      0.85      0.84       322
 </code></pre>
@@ -1753,13 +1750,48 @@ Gerhard Schroeder       0.95      0.78      0.86        27
         <div class="flex article-list--tile">
             
                 
-<article class="">
+<article class="has-image">
     <a href="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
         
+        
+            <div class="article-image">
+                <img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.ac66b82ba1a91437f422db6d948e641f.ac66b82ba1a91437f422db6d948e641f_hu_53c0b8df678df0da.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 机器学习-线性回归"
+                        
+                        data-hash="md5-rGa4K6GpFDf0ItttlI5kHw==">
+                
+            </div>
         
 
         <div class="article-details">
             <h2 class="article-title">机器学习-线性回归</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/cover.2160315d961f55820735b9d476c635c6_hu_8fb1533feca001c7.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 机器学习-无监督学习"
+                        
+                        data-hash="md5-IWAxXZYfVYIHNbnUdsY1xg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">机器学习-无监督学习</h2>
         </div>
     </a>
 </article>
