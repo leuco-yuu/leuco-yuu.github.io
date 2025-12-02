@@ -1,0 +1,12 @@
+<!-- layouts/partials/back-to-top.html -->
+<button id="back-to-top" aria-label="返回顶部">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M18 15L12 9L6 15"/>
+    </svg>
+</button>
+
+{{ $style := resources.Get "css/back-to-top.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+{{ $script := resources.Get "js/back-to-top.js" | minify | fingerprint }}
+<script src="{{ $script.RelPermalink }}" defer></script>
