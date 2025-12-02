@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>机器学习 on Lecuo's Blog</title><link>http://localhost:1313/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link><description>Recent content in 机器学习 on Lecuo's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Tue, 02 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml"/><item><title>线性回归</title><link>http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link><pubDate>Tue, 02 Dec 2025 13:16:53 +0800</pubDate><guid>http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid><description>&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h1 id="线性回归linear-regression"&gt;线性回归（Linear Regression）
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>机器学习 on Lecuo's Blog</title><link>http://localhost:1313/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link><description>Recent content in 机器学习 on Lecuo's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Tue, 02 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml"/><item><title>线性回归</title><link>http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link><pubDate>Tue, 02 Dec 2025 13:16:53 +0800</pubDate><guid>http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid><description>&lt;h1 id="线性回归linear-regression"&gt;线性回归（Linear Regression）
 &lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;任务类型分类：有监督学习&lt;/li&gt;
 &lt;li&gt;定义：拟合因变量(向量) &lt;strong&gt;y&lt;/strong&gt; 与 &lt;strong&gt;x&lt;/strong&gt; 之间呈线性关系，即 $\mathbf{y} = \mathbf{w}^T\mathbf{x} + \mathbf{b}$，其中 $\mathbf{x,y,w,b \in \mathbb{R}^n}$&lt;/li&gt;
@@ -11,7 +10,9 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="一正规方程normal-equation"&gt;一、正规方程（Normal Equation）
-&lt;/h2&gt;&lt;ul&gt;
+&lt;/h2&gt;&lt;details&gt;
+&lt;summary&gt;[展开]&lt;/summary&gt;
+&lt;ul&gt;
 &lt;li&gt;参数解析解： $\hat{\theta} = (X^TX)^{-1}X^Ty$&lt;/li&gt;
 &lt;li&gt;可能存在的问题：$(X^TX)^{-1}$的求解可能比较困难&lt;/li&gt;
 &lt;/ul&gt;
@@ -76,15 +77,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0.png"
-width="550"
-height="413"
-srcset="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_f8da8d7f1abeca57.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_3_0_hu_b02eb907fa49b87d.png 1024w"
+&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/output_3_0.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="133"
-data-flex-basis="319px"
 &gt;&lt;/p&gt;
 &lt;h3 id="2高维线性回归代码实现"&gt;2、高维线性回归（代码实现）
 &lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -250,14 +245,17 @@ Y_pre:
 [68.2285754 ]
 [75.97196488]]
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/details&gt;
 &lt;h2 id="二梯度下降gradient-descent"&gt;二、梯度下降（Gradient Descent）
-&lt;/h2&gt;&lt;ul&gt;
+&lt;/h2&gt;&lt;details&gt;
+&lt;summary&gt;[展开]&lt;/summary&gt;
+&lt;ul&gt;
 &lt;li&gt;梯度下降法迭代公式：$\hat\theta_{k+1} = \hat\theta_k - \alpha \nabla_{\theta}J(\hat\theta)$, $\alpha$为学习率&lt;/li&gt;
 &lt;li&gt;学习率 $\alpha$ ：$\alpha$ 设置过大容易造成震荡，$\alpha$ 设置太小容易造成迭代次数增加，也可能落到局部最优解。一般设置为0.1、0.01、0.001、0.0001&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="1批量梯度下降gd"&gt;1、批量梯度下降（GD）
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum^{m}&lt;em&gt;{i=1}(h&lt;/em&gt;\theta(x^{(i)}) - y^{(i)})x^{(i)} = X^T(X\theta-y)}$&lt;/li&gt;
+&lt;li&gt;$$\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum^{m}_{i=1}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = X^T(X\theta-y)}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="代码实现"&gt;代码实现
 &lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -365,7 +363,9 @@ Y_pre:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="2随机梯度下降sgd"&gt;2、随机梯度下降（SGD）
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$\displaystyle {\nabla_{\theta}J(\theta) = \frac{\partial}{\partial\theta}J(\theta) = (h_\theta(x^{(i)})-y^{(i)})x^{(i)} = ({x^{(i)}})^T(x^{(i)}\theta-y^{(i)}) , i \sim \text{Uniform}\bigl({1,2,\dots,m}\bigr)}$&lt;/li&gt;
+&lt;li&gt;$$
+\displaystyle {\nabla_{\theta}J(\theta) = \frac{\partial}{\partial\theta}J(\theta) = (h_\theta(x^{(i)})-y^{(i)})x^{(i)} = ({x^{(i)}})^T(x^{(i)}\theta-y^{(i)}) , i \sim \text{Uniform}\bigl(\{1,2,\dots,m\}\bigr)}
+$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="1代码实现"&gt;(1)、代码实现
 &lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -597,7 +597,9 @@ Y_pre:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="3小批量梯度下降mini-batch-sgd"&gt;3、小批量梯度下降（Mini-batch SGD）
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum_{i\in S}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = ({x^{(S)}})^T(x^{(S)}\theta-y^{(S)}) , |S|=\text{batch_size}&amp;lt;m,; S\subseteq {1,2,\dots ,m},; S\text{ 均匀随机选取}}$&lt;/li&gt;
+&lt;li&gt;$$
+\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum_{i\in S}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = ({x^{(S)}})^T(x^{(S)}\theta-y^{(S)}) , |S|=\text{batch\_size} &lt; m,\; S\subseteq \{1,2,\dots ,m\},\; S\text{均匀随机选取}}
+$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="1代码实现-1"&gt;(1)、代码实现
 &lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -980,15 +982,9 @@ Y_pre:
 &lt;/div&gt;
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;[&amp;lt;matplotlib.lines.Line2D at 0x1a768afe390&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1.png"
-width="583"
-height="413"
-srcset="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_c0e8219bab56abc5.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_26_1_hu_68cf1c8707aab9d7.png 1024w"
+&lt;p&gt;&lt;img src="http://localhost:1313/output_26_1.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="141"
-data-flex-basis="338px"
 &gt;&lt;/p&gt;
 &lt;h4 id="2更改学习速率"&gt;（2）、更改学习速率
 &lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1094,14 +1090,20 @@ Y_pre:
 [68.4494602 ]
 [76.21792798]]
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/details&gt;
 &lt;h2 id="三坐标下降coordinate-descent"&gt;三、坐标下降（Coordinate Descent）
-&lt;/h2&gt;&lt;ul&gt;
+&lt;/h2&gt;&lt;details&gt;
+&lt;summary&gt;[展开]&lt;/summary&gt;
+&lt;ul&gt;
 &lt;li&gt;坐标下降：一次走一步，每次只动一个变量。将高维问题拆成一系列一维问题，逐个坐标迭代更新，直到收敛&lt;/li&gt;
 &lt;li&gt;核心思想：固定其他所有变量，只沿第i个坐标方向做一维最优化，循环往复&lt;/li&gt;
 &lt;li&gt;迭代公式：$\displaystyle{\theta_i^{(k+1)} = \arg\min_{\theta_i}Loss(\theta_1^{(k+1)}, \dots, \theta_{i-1}^{(k+1)}, \theta_i, \theta_{i+1}^{(k)}, \dots, \theta_n^{(k)})}$，其中 $Loss$ 为目标损失函数，$\theta^{(k)}$ 为第 $k$ 次迭代时的完整参数向量，$\theta^{(k)}_i$ 为第 $k$ 次迭代时向量 $\theta$ 的第 $i$ 个分量&lt;/li&gt;
-&lt;li&gt;对于MES的参数迭代公式（由MSE推导而来）：$ \displaystyle{\theta_j = \frac{\displaystyle{ \sum^m_{i=1}x^{(i)}&lt;em&gt;j(y^{(i)}-\sum&lt;/em&gt;{k\neq j}\theta_kx^{(i)}&lt;em&gt;k)}}{\displaystyle{\sum^m&lt;/em&gt;{i=1}(x_j^{(i)})^2}}} $ $ \Rightarrow \theta^{(k+1)}&lt;em&gt;j = \theta^{(k)}&lt;em&gt;j - \displaystyle{\frac{1}{X&lt;/em&gt;{·j}^TX&lt;/em&gt;{·j}}X_{·j}^T(X\theta-y)}$，其中 $m$ 为样本数量，$\theta_j$ 为 $\theta$ 的第 $j$ 个分量，$x^{(i)}_j$ 为第 $i$ 条样本的第 $j$ 个分量&lt;/li&gt;
+&lt;li&gt;对于MES的参数迭代公式（由MSE推导而来）：
+$$
+\displaystyle{\theta_j = \frac{\displaystyle{ \sum^m_{i=1}x^{(i)}_j(y^{(i)}-\sum_{k\neq j}\theta_kx^{(i)}_k)}}{\displaystyle{\sum^m_{i=1}(x_j^{(i)})^2}}}\Rightarrow \theta^{(k+1)}_j = \theta^{(k)}_j - \displaystyle{\frac{1}{X_{·j}^TX_{·j}}X_{·j}^T(X\theta-y)}
+$$，其中 $m$ 为样本数量，$\theta_j$ 为 $\theta$ 的第 $j$ 个分量，$x^{(i)}_j$ 为第 $i$ 条样本的第 $j$ 个分量&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="代码实现-1"&gt;代码实现
+&lt;h3 id="代码实现"&gt;代码实现
 &lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1205,21 +1207,31 @@ Y_pre:
 [68.2285754 ]
 [75.97196488]]
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/details&gt;
 &lt;h2 id="四归一化normalization"&gt;四、归一化（Normalization）
-&lt;/h2&gt;&lt;ul&gt;
+&lt;/h2&gt;&lt;details&gt;
+&lt;summary&gt;[展开]&lt;/summary&gt;
+&lt;ul&gt;
 &lt;li&gt;归一化是将不同尺度、纲量和分布的数据缩放到同一标准区间的预处理技术&lt;/li&gt;
 &lt;li&gt;核心目的：消除纲量影响、加速模型收敛、提升数值稳定性，同时保留原始信息的相对关系&lt;/li&gt;
 &lt;li&gt;特征级归一化方法
 &lt;ul&gt;
 &lt;li&gt;最大值最小值归一化（Min-Max）：受离心值影响较大
 &lt;ul&gt;
-&lt;li&gt;对第j个特征值做归一化：$\displaystyle{x^{*}&lt;em&gt;{i,j} = \frac{x&lt;/em&gt;{i,j}-x_j^{min}}{x_j^{max}-x_j^{min}}}$&lt;/li&gt;
+&lt;li&gt;对第j个特征值做归一化：$$\displaystyle{x^{*}_{i,j} = \frac{x_{i,j}-x_j^{\text{min}}}{x_j^{\text{max}}-x_j^{\text{min}}}}$$&lt;/li&gt;
 &lt;li&gt;对整个数据集做归一化：$\displaystyle{x^* = \frac{x-min(x)}{max(x)-min(x)}}$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;标准归一化（Z-score）：
 &lt;ul&gt;
-&lt;li&gt;对第j个特征值做归一化：$\displaystyle{x^*&lt;em&gt;{i,j} = \frac{x&lt;/em&gt;{i,j} - \mu_j}{\sigma_j}}$，其中$\displaystyle{\mu_j=\frac{1}{n}\displaystyle \sum^n_{i=1} x_{i,j},\sigma_j=\sqrt{\frac{1}{n} \displaystyle \sum_{i=1}^n {(x_{i,j}-\mu_j)^2}}}$&lt;/li&gt;
+&lt;li&gt;对第j个特征值做归一化：
+$$
+\displaystyle{x^*_{i,j} = \frac{x_{i,j} - \mu_j}{\sigma_j}}
+$$
+，其中
+$$
+\displaystyle{\mu_j=\frac{1}{n}\sum_{i=1}^n x_{i,j},\quad \sigma_j=\sqrt{\frac{1}{n} \sum_{i=1}^n (x_{i,j}-\mu_j)^2}}
+$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1298,18 +1310,15 @@ Y_pre:
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;μ = [1.07725633 2.44897092]
 σ² = [3.86482916 7.93336293]
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1.png"
-width="546"
-height="413"
-srcset="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_ecc0325949a87b79.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_34_1_hu_2b8e9680da3f1bed.png 1024w"
+&lt;p&gt;&lt;img src="http://localhost:1313/output_34_1.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="132"
-data-flex-basis="317px"
 &gt;&lt;/p&gt;
+&lt;/details&gt;
 &lt;h2 id="五正则化regularization"&gt;五、正则化（Regularization）
-&lt;/h2&gt;&lt;ul&gt;
+&lt;/h2&gt;&lt;details&gt;
+&lt;summary&gt;[展开]&lt;/summary&gt;
+&lt;ul&gt;
 &lt;li&gt;过拟合与欠拟合
 &lt;ul&gt;
 &lt;li&gt;欠拟合（underfit）：未拟合到位，训练集和测试集准确率未达到最高&lt;/li&gt;
@@ -1428,18 +1437,33 @@ data-flex-basis="317px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_pre&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reshape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;pre&gt;&lt;code&gt;W_hat:
-[[5.0464025 3.97908982 3.99958499 4.97364032 1.01995191]]
-X_pre:
-[[0.03016482 4.79096225 5.74410225 4.2038564 ]
-[0.0650456 9.53496505 3.37288732 7.77475153]
-[2.68648726 5.44484467 6.07293252 8.00564199]]
-Y_pre:
-[[57.18512159]
-[68.14652889]
-[75.88324745]]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="2ridge回归sklearn库"&gt;2、Ridge回归（sklearn库）
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;W_hat:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[[5.0464025 3.97908982 3.99958499 4.97364032 1.01995191]]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;X_pre:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; [0.0650456 9.53496505 3.37288732 7.77475153]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; [2.68648726 5.44484467 6.07293252 8.00564199]]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Y_pre:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[[57.18512159]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; [68.14652889]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; [75.88324745]]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="2ridge回归sklearn库"&gt;2、Ridge回归（sklearn库）
 &lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1707,8 +1731,11 @@ Y_pre:
 [67.77050846]
 [75.42653888]]
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/details&gt;
 &lt;h2 id="六升维方法--多项式回归polynomial-regression"&gt;六、升维方法 — 多项式回归（Polynomial Regression）
-&lt;/h2&gt;&lt;ul&gt;
+&lt;/h2&gt;&lt;details&gt;
+&lt;summary&gt;[展开]&lt;/summary&gt;
+&lt;ul&gt;
 &lt;li&gt;目的：解决欠拟合问题&lt;/li&gt;
 &lt;li&gt;常见手段：将已知维度进行相乘来构建新的维度，将非线性Data转换为线性Data&lt;/li&gt;
 &lt;li&gt;以二阶多项式升维为例：$y=w_0+w_1x_1+w_2x_2 $$\Rightarrow y^*=w_0+w_1x_1+w_2x_2+w_3x_1^2+w_4x_2^2+w_5x_1x_2$&lt;/li&gt;
@@ -1856,18 +1883,15 @@ Y_pre:
 &lt;/div&gt;
 &lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.legend.Legend at 0x1a768d8d150&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1.png"
-width="993"
-height="418"
-srcset="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_6158c7ba51946e0f.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_45_1_hu_b2879fb357e3dfa4.png 1024w"
+&lt;p&gt;&lt;img src="http://localhost:1313/output_45_1.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="237"
-data-flex-basis="570px"
 &gt;&lt;/p&gt;
+&lt;/details&gt;
 &lt;h2 id="七实践--保险花销预测"&gt;七、实践 — 保险花销预测
-&lt;/h2&gt;&lt;ul&gt;
+&lt;/h2&gt;&lt;details&gt;
+&lt;summary&gt;[展开]&lt;/summary&gt;
+&lt;ul&gt;
 &lt;li&gt;数据集路径： &amp;ldquo;.\Dataset\1_Insurance_Expense_Forecast\insurance.csv&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="1数据提取"&gt;1、数据提取
@@ -2130,15 +2154,9 @@ max 64.000000 53.130000 5.000000 63770.428010
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0.png"
-width="990"
-height="790"
-srcset="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_731b240234b22934.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_51_0_hu_dbbf73824ec82fec.png 1024w"
+&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/output_51_0.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="125"
-data-flex-basis="300px"
 &gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2194,15 +2212,9 @@ data-flex-basis="300px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0.png"
-width="546"
-height="431"
-srcset="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_2b402f6d6b3dd287.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_52_0_hu_facb1b1f2f768337.png 1024w"
+&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/output_52_0.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="126"
-data-flex-basis="304px"
 &gt;&lt;/p&gt;
 &lt;div&gt;
 &lt;style scoped&gt;
@@ -3078,15 +3090,9 @@ min 18.000000 15.960000 0.000000 7.023647
 75% 51.000000 34.693750 2.000000 9.719618
 max 64.000000 53.130000 5.000000 11.063061
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1.png"
-width="630"
-height="469"
-srcset="http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_15ddab4c1f41b39c.png 480w, http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/output_64_1_hu_b4d2b579c830e634.png 1024w"
+&lt;p&gt;&lt;img src="http://localhost:1313/output_64_1.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="134"
-data-flex-basis="322px"
 &gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; age bmi children smoker charges
 0 19 under no yes 9.734236
@@ -3121,4 +3127,5 @@ Name: charges, dtype: float64
 LinearRegression: 0.41171540130927264
 RidgeRegression: 0.4119283802418486
 GradientBoostingRegressor: 0.3163566171772987
-&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/details&gt;</description></item></channel></rss>
