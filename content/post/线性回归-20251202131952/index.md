@@ -10,9 +10,9 @@ categories= ["机器学习","学习笔记"]
 tags= ["梯度下降", "SGD", "sk-learn", "归一化", "正则化", "多项式升维", "EDA"]
 series= "人工智能"
 math=true
-
+toc = true
 +++
-
+{{<toc>}}
 # 线性回归（Linear Regression）
 
 - 任务类型分类：有监督学习

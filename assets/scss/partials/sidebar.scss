@@ -197,33 +197,3 @@
         }
     }
 }
-
-.toc-header {
-    display: flex;
-    align-items: center;
-    gap: 8px; /* 图标和文字之间的间距 */
-    margin-bottom: 12px; /* 标题和目录内容之间的间距 */
-}
-
-.widget-icon {
-    display: flex;
-    align-items: center;
-    margin: 0; /* 移除默认外边距 */
-}
-.right-sidebar {
-    width: 100%;
-    display: none; /* 默认隐藏 */
-    flex-direction: column;
-    gap: var(--widget-separation);
-
-    &.sticky {
-        top: 0;
-    }
-
-    @include respond(lg) {
-        display: flex;  /* 在桌面端显示 */
-        padding-top: var(--main-top-padding);
-        padding-bottom: var(--main-top-padding);
-    }
-}
-

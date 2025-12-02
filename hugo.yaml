@@ -85,6 +85,7 @@ params:
     article:
         math: true
         toc: true
+        showToc: true
         readingTime: false
         license:
             enabled: False
