@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>逻辑回归 on Lecuo's Blog</title><link>http://localhost:1313/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/</link><description>Recent content in 逻辑回归 on Lecuo's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Tue, 02 Dec 2025 18:51:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/index.xml" rel="self" type="application/rss+xml"/><item><title>机器学习-线性分类</title><link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/</link><pubDate>Tue, 02 Dec 2025 18:51:05 +0800</pubDate><guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/</guid><description>&lt;div class="custom-toc"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>逻辑回归 on Lecuo's Blog</title><link>http://localhost:1313/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/</link><description>Recent content in 逻辑回归 on Lecuo's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Tue, 02 Dec 2025 18:51:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/index.xml" rel="self" type="application/rss+xml"/><item><title>机器学习-线性分类</title><link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/</link><pubDate>Tue, 02 Dec 2025 18:51:05 +0800</pubDate><guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/</guid><description>&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/SVM.jpg" alt="Featured image of post 机器学习-线性分类" /&gt;&lt;div class="custom-toc"&gt;
 &lt;h3&gt;目录&lt;/h3&gt;
 &lt;nav id="TableOfContents"&gt;
 &lt;ul&gt;
@@ -26,7 +26,7 @@
 &lt;h1 id="线性分类linear-classification"&gt;线性分类（Linear Classification）
 &lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;逻辑回归算法：在多元线性回归算法的基础上把结果缩放到0-1之间&lt;/li&gt;
-&lt;li&gt;线性分类器（GLM与分布的连接器，可以通过内部核函数升维变成非线性算法）：$\eta = \theta^Tx = \theta_0+\theta_1x_1+……+\theta_nx_n$&lt;/li&gt;
+&lt;li&gt;线性分类器（GLM与分布的连接器，可以通过内部核函数升维变成非线性算法）：$$\eta = \theta^Tx = \theta_0+\theta_1x_1+……+\theta_nx_n$$&lt;/li&gt;
 &lt;li&gt;广义线性模型（GLM）：$\displaystyle{p(y;\eta)=b(y)e^{(\eta^TT(y)-a(\eta))}}$，其中$\eta$是自然参数，$T(y)$是充分统计量，$a(\eta)$是对数部分函数
 &lt;ul&gt;
 &lt;li&gt;Logistic回归（逻辑回归）：伯努利-GLM&lt;/li&gt;
@@ -55,11 +55,11 @@ $$
 $$&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 $$
 \displaystyle{\frac{\partial}{\partial_{\theta_j^{(k)}}}J(\theta^{(k)}) = \frac{1}{n}\sum^n_{i=1}(h_\theta(x_i)-y_i)x^{(j)}_i} \Rightarrow \nabla_{\theta^{(k+1)}}J(\theta^{(k+1)}) = \frac{1}{n}X^T(X\theta^{(k)}-y)
-$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+$$&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
 &lt;/span&gt;&lt;span class="lnt"&gt; 2
@@ -106,15 +106,9 @@ $$&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;​ &lt;br&gt;
-&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_2_0.png"
-width="563"
-height="418"
-srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_2_0_hu_c817842e4d94702.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_2_0_hu_3933db8e1ee9996d.png 1024w"
+&lt;img src="http://localhost:1313/output_2_0.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="134"
-data-flex-basis="323px"
 &gt;
 ​&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -613,36 +607,18 @@ $$，其中 $N$ 是样本数， $k$ 是分类数， $y_i^{(n)}$ 是真实标签�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;​ &lt;br&gt;
-&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_0.png"
-width="1568"
-height="3145"
-srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_0_hu_d163d3b79a4c2872.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_0_hu_956419ab666dd284.png 1024w"
+&lt;img src="http://localhost:1313/output_11_0.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="49"
-data-flex-basis="119px"
 &gt;
 ​&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_1.png"
-width="1571"
-height="3145"
-srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_1_hu_d791012947a734bd.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_1_hu_b0ef152b0bf40912.png 1024w"
+&lt;p&gt;&lt;img src="http://localhost:1313/output_11_1.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="49"
-data-flex-basis="119px"
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_2.png"
-width="2570"
-height="989"
-srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_2_hu_68b825f37c9f2d59.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/output_11_2_hu_6325f90d8fdb2483.png 1024w"
+&lt;p&gt;&lt;img src="http://localhost:1313/output_11_2.png"
 loading="lazy"
 alt="png"
-class="gallery-image"
-data-flex-grow="259"
-data-flex-basis="623px"
 &gt;&lt;/p&gt;
 &lt;h3 id="0初始化"&gt;0、初始化
 &lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1257,17 +1233,19 @@ $$
 训练完成
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;​ &lt;br&gt;
-测试集整体准确率：0.851&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;详细分类报告：
-precision recall f1-score support
+​ 测试集整体准确率：0.851
+​ &lt;br&gt;
+​ 详细分类报告：
+​ precision recall f1-score support
+​ &lt;br&gt;
 Ariel Sharon 1.00 0.47 0.64 19
 Colin Powell 0.84 0.90 0.87 59
 Donald Rumsfeld 0.95 0.70 0.81 30
 George W Bush 0.80 0.98 0.88 133
 Gerhard Schroeder 0.95 0.78 0.86 27
 Hugo Chavez 1.00 0.56 0.71 18
-Tony Blair 0.91 0.83 0.87 36
-accuracy 0.85 322
+Tony Blair 0.91 0.83 0.87 36&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; accuracy 0.85 322
 macro avg 0.92 0.75 0.81 322
 weighted avg 0.87 0.85 0.84 322
 &lt;/code&gt;&lt;/pre&gt;
