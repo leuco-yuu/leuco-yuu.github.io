@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/'>
 
-<link rel="stylesheet" href="/scss/style.min.1e912957c4981338073de425252b200dc6fca94cb512f3846f469fcf28d5da0f.css"><meta property='og:title' content="线性回归">
+<link rel="stylesheet" href="/scss/style.min.a789b4442413c03f3990877c4888f817feddf33f6118e8ef8263c6436c7b25c8.css"><meta property='og:title' content="线性回归">
 <meta property='og:description' content="零基础 机器学习 第一部分">
 <meta property='og:url' content='http://localhost:1313/p/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/'>
 <meta property='og:site_name' content='Lecuo&#39;s Blog'>
@@ -500,8 +500,14 @@
 <li>定义：拟合因变量(向量) <strong>y</strong> 与 <strong>x</strong> 之间呈线性关系，即 $\mathbf{y} = \mathbf{w}^T\mathbf{x} + \mathbf{b}$，其中 $\mathbf{x,y,w,b \in \mathbb{R}^n}$</li>
 <li>目标：寻找参数最优解使得$\operatorname{Loss}$函数最小。$(\hat{\mathbf{w}}, \hat{\mathbf{b}}) = \operatorname{Loss}(\mathbf{y}, \hat{\mathbf{y}}) \Leftrightarrow\operatorname{Argmin}(\operatorname{Loss}(\mathbf{w}, \mathbf{b}))$
 <ul>
-<li>多元线性回归常用损失函数 —— MSE(均方误差，由似然函数推导而来): $\displaystyle{\operatorname{\mathit{J}(\theta)} = \frac{1}{2} \displaystyle \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 = \frac{1}{2}(X\theta - y)^T(X\theta - y) = \frac{1}{2}(\theta^TX^TX\theta - \theta^TX^Ty - y^TX\theta + y^Ty)},系数可为\displaystyle{\frac{1}{2}、\frac{1}{n}、\frac{1}{2n}}$</li>
-<li>MSE对 $\theta$ 的梯度: $\displaystyle{\frac{\partial{J}(\theta)}{\partial\theta} = X^TX\theta - X^Ty = 0 \Rightarrow \theta = (X^TX)^{-1}X^Ty}$</li>
+<li>多元线性回归常用损失函数 —— MSE(均方误差，由似然函数推导而来):
+$$
+\displaystyle{\operatorname{\mathit{J}(\theta)} = \frac{1}{2} \displaystyle \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 = \frac{1}{2}(X\theta - y)^T(X\theta - y) = \frac{1}{2}(\theta^TX^TX\theta - \theta^TX^Ty - y^TX\theta + y^Ty)},系数可为\displaystyle{\frac{1}{2}、\frac{1}{n}、\frac{1}{2n}}
+$$</li>
+<li>MSE对 $\theta$ 的梯度:
+$$
+\displaystyle{\frac{\partial{J}(\theta)}{\partial\theta} = X^TX\theta - X^Ty = 0 \Rightarrow \theta = (X^TX)^{-1}X^Ty}
+$$</li>
 </ul>
 </li>
 </ul>
@@ -1846,28 +1852,57 @@ $$
 </li>
 <li>惩罚项（正则项）：
 <ul>
-<li>L1 正则项：$\displaystyle{L_1(w) = \sum^m_{i=0}|w_i|}$（曼哈顿距离），$\displaystyle{\frac{\partial}{\partial w_i}L_1(w_i) = sign(w_i) = \pm 1}$</li>
-<li>L2 正则项：$\displaystyle{L_2(w) = \sum^m_{i=0}|w_i|^2}$（欧式距离的平方），$\displaystyle{\frac{\partial}{\partial w_i}L_2(w_i) = 2w_i}$</li>
+<li>L1 正则项：
+$$
+\displaystyle{L_1(w) = \sum^m_{i=0}|w_i|}
+$$（曼哈顿距离），
+$$
+\displaystyle{\frac{\partial}{\partial w_i}L_1(w_i) = sign(w_i) = \pm 1}
+$$</li>
+<li>L2 正则项：
+$$
+\displaystyle{L_2(w) = \sum^m_{i=0}|w_i|^2}
+$$（欧式距离的平方），
+$$
+\displaystyle{\frac{\partial}{\partial w_i}L_2(w_i) = 2w_i}
+$$</li>
 </ul>
 </li>
 <li>正则化后的多元线性回归的损失函数
 <ul>
 <li>Lasso 回归（套索回归，稀疏性）：
 <ul>
-<li>损失函数 $J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)$</li>
-<li>梯度 $\displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)=X^T(X\theta-y)+\lambda sign(\theta)}$</li>
+<li>损失函数
+$$
+    J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)
+    $$</li>
+<li>梯度
+$$
+    \displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)=X^T(X\theta-y)+\lambda sign(\theta)}
+    $$</li>
 </ul>
 </li>
 <li>Ridge 回归（岭回归，平滑性）：
 <ul>
-<li>损失函数 $J_{ridge}(\theta)=MSE(\theta)+L_2(\theta)$</li>
-<li>梯度 $\displaystyle{\nabla_{\theta}J_{Ridge}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+2\lambda \theta}$</li>
+<li>损失函数
+$$
+    J_{ridge}(\theta)=MSE(\theta)+L_2(\theta)
+    $$</li>
+<li>梯度
+$$
+    \displaystyle{\nabla_{\theta}J_{Ridge}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+2\lambda \theta}
+    $$</li>
 </ul>
 </li>
 <li>ElasticNet回归（弹性网络回归）：
 <ul>
-<li>损失函数 $J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)+L_2(\theta)$</li>
-<li>梯度 $\displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+\lambda[(1-r)sign(\theta)+2r\theta)]}$</li>
+<li>损失函数
+$$
+    J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)+L_2(\theta)
+    $$</li>
+<li>梯度
+$$\displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+\lambda[(1-r)sign(\theta)+2r\theta)]}
+    $$</li>
 </ul>
 </li>
 </ul>
@@ -2247,7 +2282,10 @@ Y_pre:
 </h2><ul>
 <li>目的：解决欠拟合问题</li>
 <li>常见手段：将已知维度进行相乘来构建新的维度，将非线性Data转换为线性Data</li>
-<li>以二阶多项式升维为例：$y=w_0+w_1x_1+w_2x_2 $$\Rightarrow y^*=w_0+w_1x_1+w_2x_2+w_3x_1^2+w_4x_2^2+w_5x_1x_2$</li>
+<li>以二阶多项式升维为例：
+$$
+y=w_0+w_1x_1+w_2x_2\Rightarrow y^*=w_0+w_1x_1+w_2x_2+w_3x_1^2+w_4x_2^2+w_5x_1x_2
+$$</li>
 <li>以下面拟合过程为例：$D_3$ 达到最佳拟合。随着维度的增加，$D_3$ 以下训练集和测试集误差均减小，属于欠拟合；$D_3$ 以上训练集误差减小，测试集误差增大，属于过拟合</li>
 </ul>
 <div class="highlight"><div class="chroma">

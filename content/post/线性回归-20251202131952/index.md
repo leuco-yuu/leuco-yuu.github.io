@@ -10,7 +10,6 @@ categories= ["机器学习","学习笔记"]
 tags= ["梯度下降", "SGD", "sk-learn", "归一化", "正则化", "多项式升维", "EDA"]
 series= "人工智能"
 math=true
-toc = true
 +++
 {{<toc>}}
 # 线性回归（Linear Regression）
@@ -18,8 +17,14 @@ toc = true
 - 任务类型分类：有监督学习
 - 定义：拟合因变量(向量) **y** 与 **x** 之间呈线性关系，即 $\mathbf{y} = \mathbf{w}^T\mathbf{x} + \mathbf{b}$，其中 $\mathbf{x,y,w,b \in \mathbb{R}^n}$
 - 目标：寻找参数最优解使得$\operatorname{Loss}$函数最小。$(\hat{\mathbf{w}}, \hat{\mathbf{b}}) = \operatorname{Loss}(\mathbf{y}, \hat{\mathbf{y}}) \Leftrightarrow\operatorname{Argmin}(\operatorname{Loss}(\mathbf{w}, \mathbf{b}))$
-  * 多元线性回归常用损失函数 —— MSE(均方误差，由似然函数推导而来): $\displaystyle{\operatorname{\mathit{J}(\theta)} = \frac{1}{2} \displaystyle \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 = \frac{1}{2}(X\theta - y)^T(X\theta - y) = \frac{1}{2}(\theta^TX^TX\theta - \theta^TX^Ty - y^TX\theta + y^Ty)},系数可为\displaystyle{\frac{1}{2}、\frac{1}{n}、\frac{1}{2n}}$
-  * MSE对 $\theta$ 的梯度: $\displaystyle{\frac{\partial{J}(\theta)}{\partial\theta} = X^TX\theta - X^Ty = 0 \Rightarrow \theta = (X^TX)^{-1}X^Ty}$
+  * 多元线性回归常用损失函数 —— MSE(均方误差，由似然函数推导而来): 
+$$
+\displaystyle{\operatorname{\mathit{J}(\theta)} = \frac{1}{2} \displaystyle \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 = \frac{1}{2}(X\theta - y)^T(X\theta - y) = \frac{1}{2}(\theta^TX^TX\theta - \theta^TX^Ty - y^TX\theta + y^Ty)},系数可为\displaystyle{\frac{1}{2}、\frac{1}{n}、\frac{1}{2n}}
+$$
+  * MSE对 $\theta$ 的梯度: 
+$$
+\displaystyle{\frac{\partial{J}(\theta)}{\partial\theta} = X^TX\theta - X^Ty = 0 \Rightarrow \theta = (X^TX)^{-1}X^Ty}
+$$
 
 ## 一、正规方程（Normal Equation）
 
@@ -783,18 +788,47 @@ plt.show()
   * 鲁棒性调优：使模型具有更好的鲁棒性，让模型的的泛化能力和推广能力更加强大
   * 正则化本质：牺牲模型在训练集上的正确率以提高模型的推广能力，参数 **w** 在数值上越小越好，进而抵抗数值扰动。但 **w** 的数值不能极小，故而将原来的损失函数加上一个惩罚项
 - 惩罚项（正则项）：
-  * L1 正则项：$\displaystyle{L_1(w) = \sum^m_{i=0}|w_i|}$（曼哈顿距离），$\displaystyle{\frac{\partial}{\partial w_i}L_1(w_i) = sign(w_i) = \pm 1}$
-  * L2 正则项：$\displaystyle{L_2(w) = \sum^m_{i=0}|w_i|^2}$（欧式距离的平方），$\displaystyle{\frac{\partial}{\partial w_i}L_2(w_i) = 2w_i}$
+  * L1 正则项：
+$$
+\displaystyle{L_1(w) = \sum^m_{i=0}|w_i|}
+$$（曼哈顿距离），
+$$
+\displaystyle{\frac{\partial}{\partial w_i}L_1(w_i) = sign(w_i) = \pm 1}
+$$
+  * L2 正则项：
+$$
+\displaystyle{L_2(w) = \sum^m_{i=0}|w_i|^2}
+$$（欧式距离的平方），
+$$
+\displaystyle{\frac{\partial}{\partial w_i}L_2(w_i) = 2w_i}
+$$
 - 正则化后的多元线性回归的损失函数
   * Lasso 回归（套索回归，稀疏性）：
-    + 损失函数 $J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)$
-    + 梯度 $\displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)=X^T(X\theta-y)+\lambda sign(\theta)}$
+    + 损失函数 
+    $$
+    J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)
+    $$
+    + 梯度 
+    $$
+    \displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)=X^T(X\theta-y)+\lambda sign(\theta)}
+    $$
   * Ridge 回归（岭回归，平滑性）：
-    + 损失函数 $J_{ridge}(\theta)=MSE(\theta)+L_2(\theta)$
-    + 梯度 $\displaystyle{\nabla_{\theta}J_{Ridge}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+2\lambda \theta}$
+    + 损失函数 
+    $$
+    J_{ridge}(\theta)=MSE(\theta)+L_2(\theta)
+    $$
+    + 梯度 
+    $$
+    \displaystyle{\nabla_{\theta}J_{Ridge}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+2\lambda \theta}
+    $$
   * ElasticNet回归（弹性网络回归）：
-    + 损失函数 $J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)+L_2(\theta)$
-    + 梯度 $\displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+\lambda[(1-r)sign(\theta)+2r\theta)]}$
+    + 损失函数 
+    $$
+    J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)+L_2(\theta)
+    $$
+    + 梯度 
+    $$\displaystyle{\nabla_{\theta}J_{Lasso}(\theta)=\frac{\partial}{\partial \theta}J(\theta)+\frac{\partial}{\partial \theta}L_1(\theta)+\frac{\partial}{\partial \theta}L_2(\theta)=X^T(X\theta-y)+\lambda[(1-r)sign(\theta)+2r\theta)]}
+    $$
 - 注：Lasso 回归与 Ridge 回归只定义了 Loss 函数模型，可以用梯度下降法、坐标下降法、最小角回归（LARS）、正规方程等方法进行求解。在 sklearn 库中 Lasso 和 ElasticNet 使用坐标下降；Ridge 使用正规方程；SVGRegressor 使用随机梯度下降，可自定义正则化类型、正则化强度、学习率、阈值、迭代次数等等
 
 ### 1、Lasso回归（sklearn库）
@@ -1008,7 +1042,10 @@ print(y_pre.reshape(-1,1))
 
 - 目的：解决欠拟合问题
 - 常见手段：将已知维度进行相乘来构建新的维度，将非线性Data转换为线性Data
-- 以二阶多项式升维为例：$y=w_0+w_1x_1+w_2x_2 $$\Rightarrow y^*=w_0+w_1x_1+w_2x_2+w_3x_1^2+w_4x_2^2+w_5x_1x_2$
+- 以二阶多项式升维为例：
+$$
+y=w_0+w_1x_1+w_2x_2\Rightarrow y^*=w_0+w_1x_1+w_2x_2+w_3x_1^2+w_4x_2^2+w_5x_1x_2
+$$
 - 以下面拟合过程为例：$D_3$ 达到最佳拟合。随着维度的增加，$D_3$ 以下训练集和测试集误差均减小，属于欠拟合；$D_3$ 以上训练集误差减小，测试集误差增大，属于过拟合
 
 ```python
