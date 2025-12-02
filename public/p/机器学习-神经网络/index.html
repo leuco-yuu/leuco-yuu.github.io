@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/'>
 
-<link rel="stylesheet" href="/scss/style.min.a789b4442413c03f3990877c4888f817feddf33f6118e8ef8263c6436c7b25c8.css"><meta property='og:title' content="机器学习-神经网络">
+<link rel="stylesheet" href="/scss/style.min.4ebb72b19bf107a2d2a8110366ec741defa89660873efbae8076e12ff77b6661.css"><meta property='og:title' content="机器学习-神经网络">
 <meta property='og:description' content="【5】机器学习第五部分 神经网络是深度学习的开端">
 <meta property='og:url' content='http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/'>
 <meta property='og:site_name' content='Lecuo&#39;s Blog'>
@@ -409,11 +409,11 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" >
+            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="background-color: #2a9d8f; color: #fff;">
                 机器学习
             </a>
         
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" >
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
                 学习笔记
             </a>
         
@@ -464,7 +464,98 @@
     <section class="article-content">
     
     
-    <h1 id="神经网络neural-networknn">神经网络（Neural Network，NN）
+    <div class="custom-toc">
+  <h3>目录</h3>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前馈神经网络fnn">前馈神经网络（FNN）</a>
+      <ul>
+        <li><a href="#神经元">神经元</a></li>
+        <li><a href="#神经网络结构">神经网络结构</a>
+          <ul>
+            <li><a href="#神经网络结构模型搭建">神经网络结构模型搭建</a></li>
+          </ul>
+        </li>
+        <li><a href="#损失函数">损失函数</a>
+          <ul>
+            <li><a href="#二分类任务二元交叉熵损失sigmoid损失">二分类任务——二元交叉熵损失（Sigmoid损失）</a></li>
+            <li><a href="#多分类任务多元交叉熵损失softmax损失">多分类任务——多元交叉熵损失（Softmax损失）</a></li>
+            <li><a href="#回归损失mae损失函数l1范数曼哈顿距离">回归损失——MAE损失函数（L1范数/曼哈顿距离）</a></li>
+            <li><a href="#回归损失mse损失函数l2范数欧氏距离">回归损失——MSE损失函数（L2范数/欧氏距离）</a></li>
+            <li><a href="#回归损失smooth-l1损失函数l1与l2的结">回归损失——Smooth L1损失函数（L1与L2的结）</a></li>
+          </ul>
+        </li>
+        <li><a href="#反向传播与梯度下降">反向传播与梯度下降</a>
+          <ul>
+            <li><a href="#反向传播">反向传播</a></li>
+            <li><a href="#梯度下降">梯度下降</a></li>
+          </ul>
+        </li>
+        <li><a href="#正则化">正则化</a>
+          <ul>
+            <li><a href="#dropout正则化">Dropout正则化</a></li>
+            <li><a href="#bn层小批量归一化">BN层（小批量归一化）</a></li>
+          </ul>
+        </li>
+        <li><a href="#实践手机价格分类预测">实践——手机价格分类预测</a>
+          <ul>
+            <li><a href="#导入工具包">导入工具包</a></li>
+            <li><a href="#数据加载">数据加载</a></li>
+            <li><a href="#构建模型">构建模型</a></li>
+            <li><a href="#模型训练">模型训练</a></li>
+            <li><a href="#模型评估">模型评估</a></li>
+            <li><a href="#程序入口">程序入口</a></li>
+          </ul>
+        </li>
+        <li><a href="#实践改进手机价格分类预测">实践（改进）——手机价格分类预测</a>
+          <ul>
+            <li><a href="#工具导入">工具导入</a></li>
+            <li><a href="#数据加载-1">数据加载</a></li>
+            <li><a href="#模型构建">模型构建</a></li>
+            <li><a href="#模型训练-1">模型训练</a></li>
+            <li><a href="#模型评估-1">模型评估</a></li>
+            <li><a href="#函数入口">函数入口</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#卷积神经网络cnn">卷积神经网络（CNN）</a>
+      <ul>
+        <li><a href="#图像基础">图像基础</a></li>
+        <li><a href="#卷积神经网络结构">卷积神经网络结构</a>
+          <ul>
+            <li><a href="#卷积层特征提取">卷积层：特征提取</a></li>
+            <li><a href="#池化层">池化层</a></li>
+          </ul>
+        </li>
+        <li><a href="#实践--ccn实现图片分类">实践 —— CCN实现图片分类</a>
+          <ul>
+            <li><a href="#导入工具">导入工具</a></li>
+            <li><a href="#数据导入">数据导入</a></li>
+            <li><a href="#模型构建-1">模型构建</a></li>
+            <li><a href="#模型训练-2">模型训练</a></li>
+            <li><a href="#模型评估-2">模型评估</a></li>
+            <li><a href="#程序入口-1">程序入口</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#循环神经网络rnn">循环神经网络（RNN）</a>
+      <ul>
+        <li><a href="#自然语言处理基础">自然语言处理基础</a></li>
+        <li><a href="#文本处理与rnn网络">文本处理与RNN网络</a>
+          <ul>
+            <li><a href="#词嵌入层">词嵌入层</a></li>
+          </ul>
+        </li>
+        <li><a href="#rnn">RNN</a></li>
+        <li><a href="#词表生成">词表生成</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<h1 id="神经网络neural-networknn">神经网络（Neural Network，NN）
 </h1><h2 id="前馈神经网络fnn">前馈神经网络（FNN）
 </h2><h3 id="神经元">神经元
 </h3><ul>
@@ -3522,7 +3613,7 @@ Epoch[10] : Loss = 0.33738
         
         
             <div class="article-image">
-                <img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.97aa252439207abddc3143a10ae1f4f6_hu_56ce3e3bc8c400f0.png" 
+                <img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.97aa252439207abddc3143a10ae1f4f6.97aa252439207abddc3143a10ae1f4f6_hu_56ce3e3bc8c400f0.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3743,7 +3834,7 @@ Epoch[10] : Loss = 0.33738
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.3ea8e328b858fdafc7589bad120919d23cdc1acf03beee24ec769782e499a93e.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.2c897758e5161d223de0f28f0257464da1d3fdbe7af35af6e4f25cba359b5f26.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -3758,3 +3849,5 @@ Epoch[10] : Loss = 0.33738
 
     </body>
 </html>
+
+<button id="back-to-top" aria-label="返回顶部">∧</button>

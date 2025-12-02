@@ -16,7 +16,7 @@ top_min=1
 
 {{<toc>}}
 
-# 集成学习
+# 集成学习（Ensemble Learning）
 ## 决策树（Decision-Making Tree）
 - 决策树是有监督机器学习的一种
 - 模型生成：通过大量数据生成一棵非常好的树（寻找最优的分裂条件）
@@ -66,7 +66,7 @@ top_min=1
         & r(t)为结点t的错分样本率，p(t)为落入结点t的样本占所有样本的比例 \\
         & R(T_t)为子树T_t的错误代价，R(T_t)=\displaystyle{\sum_iR(i)},i为子树T_t的叶子节点
         \end{aligned}
-        $$
+      $$
 - 各特征重要性评估指标：$$FI(j)=\displaystyle{\frac{\displaystyle{\sum_{t\ use\ j}N_t·Gain(t)}}{\displaystyle{\sum_{all\ t}N_t·Gain(t)}}}$$，其中 $ N_t $ 是分裂节点 $ t $ 的样本数
 - 在线绘制工具：[Graphviz Online](https://dreampuf.github.io/GraphvizOnline/)
 

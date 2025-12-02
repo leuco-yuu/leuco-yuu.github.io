@@ -85,3 +85,44 @@
 .post-full-content ::-webkit-scrollbar-thumb:hover {
     background: rgba(150, 150, 150, 0.9) !important;
 }
+
+
+#back-to-top {
+    /* 基础定位 */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    /* 默认隐藏，滚动后显示 */
+    display: none;
+    /* 尺寸与外观 */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* 圆形按钮 */
+    border: none;
+    /* 颜色与字体 */
+    background-color: #666666; /* 按钮背景色 */
+    color: #fff; /* 箭头颜色 */
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    /* 层级与交互 */
+    z-index: 9999; /* 确保在最上层 */
+    opacity: 0.8;
+    transition: opacity 0.3s, background-color 0.3s;
+}
+/* 桌面端悬停效果 */
+#back-to-top:hover {
+    opacity: 1;
+    background-color: #555; /* 悬停时背景色变深 */
+}
+/* 移动端响应式优化 */
+@media (max-width: 768px) {
+    #back-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        opacity: 0.9; /* 移动端默认更明显一些 */
+    }
+}

@@ -120,3 +120,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 window.Stack = Stack;
 window.createElement = createElement;
+
+// 返回顶部按钮功能
+(function() {
+    const backToTopButton = document.getElementById('back-to-top');
+    if (!backToTopButton) return; // 如果按钮不存在就不执行
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 200) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
+    
+    backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+})();
