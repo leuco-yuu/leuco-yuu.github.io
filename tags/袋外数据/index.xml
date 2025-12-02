@@ -3,7 +3,7 @@
 &lt;nav id="TableOfContents"&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="#决策树decision-making-tree"&gt;决策树（Decision-Making Tree）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#集成学习ensemble-learning"&gt;集成学习（Ensemble Learning）&lt;/a&gt;
+&lt;li&gt;&lt;a href="#集成学习ensemble-learning-1"&gt;集成学习（Ensemble Learning）&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="#分类"&gt;分类&lt;/a&gt;
 &lt;ul&gt;
@@ -23,7 +23,7 @@
 &lt;/ul&gt;
 &lt;/nav&gt;
 &lt;/div&gt;
-&lt;h1 id="集成学习"&gt;集成学习
+&lt;h1 id="集成学习ensemble-learning"&gt;集成学习（Ensemble Learning）
 &lt;/h1&gt;&lt;h2 id="决策树decision-making-tree"&gt;决策树（Decision-Making Tree）
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;决策树是有监督机器学习的一种&lt;/li&gt;
@@ -407,7 +407,7 @@ class="gallery-image"
 data-flex-grow="135"
 data-flex-basis="324px"
 &gt;&lt;/p&gt;
-&lt;h2 id="集成学习ensemble-learning"&gt;集成学习（Ensemble Learning）
+&lt;h2 id="集成学习ensemble-learning-1"&gt;集成学习（Ensemble Learning）
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Advance-Organizer：假设有10个决策树
 &lt;ul&gt;
