@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OOB on Lecuo's Blog</title><link>http://localhost:1313/tags/oob/</link><description>Recent content in OOB on Lecuo's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Tue, 02 Dec 2025 20:30:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/oob/index.xml" rel="self" type="application/rss+xml"/><item><title>机器学习-集成学习</title><link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</link><pubDate>Tue, 02 Dec 2025 20:30:43 +0800</pubDate><guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</guid><description>&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.png" alt="Featured image of post 机器学习-集成学习" /&gt;&lt;div class="custom-toc"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OOB on Lecuo's Blog</title><link>http://localhost:1313/tags/oob/</link><description>Recent content in OOB on Lecuo's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh_CN</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Tue, 02 Dec 2025 20:30:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/oob/index.xml" rel="self" type="application/rss+xml"/><item><title>机器学习-集成学习</title><link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</link><pubDate>Tue, 02 Dec 2025 20:30:43 +0800</pubDate><guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</guid><description>&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.png" alt="Featured image of post 机器学习-集成学习" /&gt;&lt;div class="custom-toc"&gt;
 &lt;h3&gt;目录&lt;/h3&gt;
 &lt;nav id="TableOfContents"&gt;
 &lt;ul&gt;
@@ -254,7 +254,7 @@ $$&lt;/li&gt;
 &lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0.png"
 width="1189"
 height="689"
-srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0_hu_892aad4067364684.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0_hu_f67fb326619163b9.png 1024w"
+srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0_hu_13799860eabcd4b.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_1_0_hu_39aef76f75d8df35.png 1024w"
 loading="lazy"
 alt="png"
 class="gallery-image"
@@ -270,7 +270,7 @@ Accuracy of the test set (two features): 1.0
 &lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e.png"
 width="884"
 height="1135"
-srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e_hu_1aaed07c82852f48.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e_hu_a5cedf7af55ea54a.png 1024w"
+srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e_hu_4310355dda06628a.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/afe81b13-a054-4d53-b862-efd47e58b46e_hu_938fb556cc3da0bc.png 1024w"
 loading="lazy"
 alt="four_feature.png"
 class="gallery-image"
@@ -280,7 +280,7 @@ data-flex-basis="186px"
 &lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587.png"
 width="884"
 height="1135"
-srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587_hu_f0ad5320c811b6b6.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587_hu_8e001cae38735f5a.png 1024w"
+srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587_hu_dc81a28f8a5f1904.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/edb63317-19bf-4f88-a8aa-608ec5a4b587_hu_f7dab458aeda8ef1.png 1024w"
 loading="lazy"
 alt="two_feature.png"
 class="gallery-image"
@@ -400,7 +400,7 @@ data-flex-basis="186px"
 &lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.png"
 width="559"
 height="413"
-srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1_hu_334df7bfa543b7.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1_hu_2cebc004e3f10dc1.png 1024w"
+srcset="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1_hu_bb83a3537f251440.png 480w, http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1_hu_c5569eb4cc70021d.png 1024w"
 loading="lazy"
 alt="png"
 class="gallery-image"
