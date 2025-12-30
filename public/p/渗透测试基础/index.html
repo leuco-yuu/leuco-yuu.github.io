@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="【网络空间安全】网络安全入门-渗透测试基础">
+<meta name="keywords" content="网络空间安全, 渗透测试"><title>渗透测试基础</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/'>
+
+<link rel="stylesheet" href="/scss/style.min.4ebb72b19bf107a2d2a8110366ec741defa89660873efbae8076e12ff77b6661.css"><meta property='og:title' content="渗透测试基础">
+<meta property='og:description' content="【网络空间安全】网络安全入门-渗透测试基础">
+<meta property='og:url' content='http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/'>
+<meta property='og:site_name' content='Lecuo&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='网络空间安全' /><meta property='article:tag' content='渗透测试' /><meta property='article:published_time' content='2025-12-30T14:51:56&#43;08:00'/><meta property='article:modified_time' content='2025-12-30T14:51:56&#43;08:00'/>
+<meta name="twitter:title" content="渗透测试基础">
+<meta name="twitter:description" content="【网络空间安全】网络安全入门-渗透测试基础">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f6aa26e80a833272.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Lecuo&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/leuco-yuu/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://mail.google.com/mail/u/0/?tf=cm&amp;to=leucoyuu@gmail.com&amp;fs=1'
+                        target="_blank"
+                        title="Gmail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <!-- 信封外框 -->
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+  
+  <!-- 信封内部线条（模拟折叠效果） -->
+  <polyline points="3,5 12,14 21,5" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://wpa.qq.com/msgrd?v=3&amp;uin=1286938728&amp;site=qq&amp;menu=yes/'
+                        target="_blank"
+                        title="QQ"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="m15.9998867 0-.3175962.00373031c-6.8340705.16105657-10.59798873 5.52198001-10.62328209 13.09956699l.00099159.2727027-.86256398 2.1053645c-.34339269.8459887-.59479858 1.4918602-.8236549 2.1249911-.16246446.4494579-.31092035.8862129-.4515632 1.3302912-1.41043336 4.4529342-1.46997142 7.7313526 1.14979123 8.0424546l.19586827.0182568c.69853306.0462522 1.18775172-.1357889 1.69345756-.5695745l.04666502-.0427837.10703497.1859114.16295747.2641667.09000756.1369219-.10203891.0725127c-1.18457469.8599516-1.78515849 2.0422997-.8749963 3.5478041.72014893 1.1919865 1.68579016 1.3851809 4.67654251 1.4059241h1.2781117l.7210113-.0101194c1.4578857-.0287327 2.9764342-.1065736 3.9343697-.2001215l.2555297.0243167c1.1291243.09698 2.8606159.1735357 4.3993902.1859242h1.2781118c2.9907546-.0207471 3.95642-.2139816 4.6768437-1.4064227l.0983227-.1723424c.764361-1.4241985.1648309-2.548721-.9747412-3.3755348l-.1034569-.072941.0912293-.1362605.1629318-.2641511.1068389-.1855884.0466679.0427821c.5516504.4732059 1.0836451.6468525 1.8890001.5513616 2.6200145-.3116105 2.5604594-3.5895097 1.1502083-8.0424822-.136678-.4315245-.2810058-.8567817-.4385987-1.2939849l-.1781698-.4846461c-.0923296-.2464665-.1903348-.5013359-.2976536-.7744519l-.3954267-.9868956-.8290275-2.020683.0009399-.279262c-.038761-7.60576089-3.8169423-12.93053326-10.6187985-13.09291824zm.0001023 2c6.339972.00032813 9.0947051 5.25726658 8.9334981 11.7557738l.8516442 2.0748544c.5606846 1.3708665.9939584 2.4718584 1.3860782 3.7098724 1.2134003 3.8314013.8203049 5.4169539.5209683 5.4525554-.6424867.0761796-2.5006035-2.8842697-2.5006035-2.8842697 0 1.7141775-.8994592 3.9510027-2.8457046 5.5664147l.3377045.1073023c1.0249215.341207 2.6653848 1.0302704 2.2154641 1.7750936-.4078113.675007-6.9962271.4309917-8.8982689.2207732l-.4753503.0452169c-2.33636.195172-8.04423656.3608021-8.42291849-.2659901-.50418989-.8339832 1.61195836-1.5976385 2.55205373-1.8820678-1.94652419-1.615412-2.84615056-3.852456-2.84615056-5.5667428l-.32111727.4924567c-.56063792.838483-1.70355568 2.4482423-2.17943051 2.391813-.29933663-.0355468-.69254342-1.6211541.52102408-5.4525554l.21887662-.6654718c.52220361-1.5311231 1.13363576-2.9515889 2.01884579-5.1193097-.17029299-6.39290578 2.5220086-11.75539097 8.93338651-11.7557191z" fill="currentColor" fill-rule="nonzero"/></g></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8D%9A%E4%B8%BB/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>博主</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>博文</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#测试分类">测试分类</a>
+      <ul>
+        <li><a href="#黑盒测试">黑盒测试</a></li>
+        <li><a href="#白盒测试">白盒测试</a></li>
+        <li><a href="#灰盒测试">灰盒测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#目标分类">目标分类</a>
+      <ul>
+        <li><a href="#主机操作系统渗透">主机操作系统渗透</a></li>
+        <li><a href="#数据库系统渗透">数据库系统渗透</a></li>
+        <li><a href="#应用系统渗透">应用系统渗透</a></li>
+        <li><a href="#网络设备渗透">网络设备渗透</a></li>
+      </ul>
+    </li>
+    <li><a href="#渗透测试过程环节">渗透测试过程环节</a>
+      <ul>
+        <li><a href="#1-前期交互阶段"><strong>1. 前期交互阶段</strong></a></li>
+        <li><a href="#2-情报搜集阶段"><strong>2. 情报搜集阶段</strong></a></li>
+        <li><a href="#3-威胁建模阶段"><strong>3. 威胁建模阶段</strong></a></li>
+        <li><a href="#4-漏洞分析阶段"><strong>4. 漏洞分析阶段</strong></a></li>
+        <li><a href="#5-渗透攻击阶段"><strong>5. 渗透攻击阶段</strong></a></li>
+        <li><a href="#6-后渗透攻击阶段"><strong>6. 后渗透攻击阶段</strong></a></li>
+        <li><a href="#7-报告阶段"><strong>7. 报告阶段</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#渗透实践-metasploit开源的渗透测试框架">渗透实践-Metasploit开源的渗透测试框架</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/" >
+                网络空间安全
+            </a>
+        
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
+                学习笔记
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/">渗透测试基础</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            【网络空间安全】网络安全入门-渗透测试基础
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-12-30T14:51:56&#43;08:00'>Dec 30, 2025</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="渗透测试基础">渗透测试基础
+</h1><ul>
+<li><strong>概述</strong>：通过各种手段对目标进行渗透攻击，通过渗透来测试目标的安全防护能力</li>
+<li><strong>底层基础</strong>：目标系统中存在安全漏洞（Loophole，指信息系统中存在的缺陷或不适当的配置，其可使攻击者在未授权情况下访问或破坏系统，导致信息系统面临安全风险）</li>
+<li><strong>渗透代码（Exploit）</strong>：利用安全漏洞来造成入侵或破坏效果的程序或者漏洞利用代码</li>
+</ul>
+<h2 id="测试分类">测试分类
+</h2><h3 id="黑盒测试">黑盒测试
+</h3><ul>
+<li><strong>概念：</strong> 测试人员在<strong>完全不了解</strong>目标系统内部结构、源代码、网络拓扑、技术栈等信息的情况下进行测试。他们仅拥有一个公开的访问点（例如一个网站URL或公司名称）。</li>
+<li><strong>信息来源：</strong> 完全依赖公开信息收集，如搜索引擎、Whois查询、社交媒体、公开端口扫描等。</li>
+<li><strong>优点：</strong>
+<ul>
+<li><strong>模拟真实攻击：</strong> 最接近恶意黑客的真实攻击场景。</li>
+<li><strong>测试外部防御：</strong> 能有效评估边界安全防护（如防火墙、WAF）和暴露在外的服务的安全性。</li>
+<li><strong>关注业务逻辑漏洞：</strong> 更容易从用户视角发现业务逻辑缺陷。</li>
+</ul>
+</li>
+<li><strong>缺点：</strong>
+<ul>
+<li><strong>效率较低：</strong> 需要大量时间进行信息收集和摸索，可能无法覆盖深层次漏洞。</li>
+<li><strong>覆盖面有限：</strong> 很难在有限时间内测试到所有内部接口和路径，可能遗漏隐藏漏洞。</li>
+<li><strong>深度不足：</strong> 难以发现由糟糕的代码实现、错误的配置等引起的深层安全问题。</li>
+</ul>
+</li>
+<li><strong>适用场景：</strong> 外部网络渗透测试、红队演练、模拟APT攻击、对已上线系统进行外部风险评估。</li>
+</ul>
+<h3 id="白盒测试">白盒测试
+</h3><ul>
+<li><strong>概念：</strong> 测试人员在<strong>拥有目标系统全部或近乎全部信息</strong>的情况下进行测试。这通常包括源代码、架构设计文档、网络拓扑图、数据库 schema、API接口文档，甚至开发团队的直接沟通。</li>
+<li><strong>信息来源：</strong> 客户或开发团队提供的所有内部资料。</li>
+<li><strong>优点：</strong>
+<ul>
+<li><strong>全面深入：</strong> 可以系统性地审查所有代码路径、配置和接口，漏洞发现率最高。</li>
+<li><strong>效率极高：</strong> 无需猜测和盲目探测，可直接定位可能存在问题的代码模块。</li>
+<li><strong>发现根源问题：</strong> 不仅能找到漏洞，还能精准定位漏洞的代码行和根本原因，便于修复。</li>
+<li><strong>早期介入：</strong> 可以在开发阶段（如SAST，静态应用安全测试）或上线前进行。</li>
+</ul>
+</li>
+<li><strong>缺点：</strong>
+<ul>
+<li><strong>不模拟真实攻击：</strong> 无法评估系统在外部攻击者视角下的真实表现。</li>
+<li><strong>可能忽略配置漏洞：</strong> 过于关注代码，可能忽略运行时环境、网络配置等导致的问题。</li>
+<li><strong>依赖测试人员技术深度：</strong> 需要测试人员具备很强的代码审计和架构理解能力。</li>
+</ul>
+</li>
+<li><strong>适用场景：</strong> 代码安全审计、SDL（安全开发生命周期）中的安全测试、内部安全评估、对特定复杂应用进行深度检查。</li>
+</ul>
+<h3 id="灰盒测试">灰盒测试
+</h3><ul>
+<li><strong>概念：</strong> 介于黑盒与白盒之间。测试人员拥有<strong>部分、有限的内部信息</strong>。例如，一个低权限的用户账号、部分API文档、系统使用的技术框架信息，或者基本的网络架构图。</li>
+<li><strong>信息来源：</strong> 客户提供有限信息 + 测试人员自身信息收集。</li>
+<li><strong>优点：</strong>
+<ul>
+<li><strong>平衡效率与真实性：</strong> 在模拟一定真实攻击的同时，利用有限信息提高测试的深度和效率。</li>
+<li><strong>聚焦特权升级：</strong> 非常适合测试从低权限用户到高权限（垂直越权）或跨用户访问（水平越权）的漏洞。</li>
+<li><strong>评估内部威胁：</strong> 模拟内部员工或供应链攻击的场景。</li>
+</ul>
+</li>
+<li><strong>缺点：</strong>
+<ul>
+<li><strong>范围难以界定：</strong> 提供多少信息算“灰盒”需要与客户事先清晰约定。</li>
+<li><strong>可能遗漏两方面问题：</strong> 既可能不如白盒全面，也可能不如黑盒真实。</li>
+</ul>
+</li>
+<li><strong>适用场景：</strong> 最常见的渗透测试类型。适用于大多数需要对已上线系统进行内部和外部综合评估的项目，如Web应用渗透测试、移动应用测试（已知部分后端API）。</li>
+</ul>
+<h2 id="目标分类">目标分类
+</h2><h3 id="主机操作系统渗透">主机操作系统渗透
+</h3><p>​	如Windows、Solaris、AIX、Linux、SCO、SGI等操作系统本身进行渗透测试</p>
+<h3 id="数据库系统渗透">数据库系统渗透
+</h3><p>​	对MS-SQL、Oracle、MySQL、Informix、Sybase、DB2、Access等数据库应用系统进行渗透测试</p>
+<h3 id="应用系统渗透">应用系统渗透
+</h3><p>​	对渗透目标提供的各种应用，如ASP、CGI、JSP、PHP等组成的WWW应用进行渗透测试</p>
+<h3 id="网络设备渗透">网络设备渗透
+</h3><p>​	对各种防火墙、入侵检测系统、网络设备进行渗透测试</p>
+<h2 id="渗透测试过程环节">渗透测试过程环节
+</h2><ol>
+<li>
+<p>前期交互阶段（Pre-Engagement Interaction）</p>
+</li>
+<li>
+<p>情报搜集阶段（Information Gathering）</p>
+</li>
+<li>
+<p>威胁建模阶段（Threat Modeling）</p>
+</li>
+<li>
+<p>漏洞分析阶段（Vulnerability Analysis）</p>
+</li>
+<li>
+<p>渗透攻击阶段（Exploitation）</p>
+</li>
+<li>
+<p>后渗透攻击阶段（Post Exploitation）</p>
+</li>
+<li>
+<p>报告阶段（Reporting）</p>
+</li>
+</ol>
+<h3 id="1-前期交互阶段"><strong>1. 前期交互阶段</strong>
+</h3><p>正式测试开始前的规划和约定阶段，旨在明确测试的范围、规则和目标，确保测试合法、有效且可控。</p>
+<ul>
+<li><strong>核心活动</strong>：
+<ul>
+<li><strong>确定范围</strong>：与客户共同商定哪些系统、网络、应用程序或IP地址可以测试，哪些是绝对禁止的（如生产数据库、客户数据等）。</li>
+<li><strong>确定规则</strong>：定义测试方法（黑盒、白盒还是灰盒）、攻击强度（是否允许造成服务中断、社会工程攻击等）、测试时间窗口（是否只能在非工作时间进行）。</li>
+<li><strong>法律授权</strong>：签署<strong>渗透测试授权书</strong>，这是最重要的法律文件，确保测试行为合法，保护测试方和客户。</li>
+<li><strong>确定目标</strong>：明确测试的最终目的是什么（如：验证特定防火墙策略、评估新上线的Web应用安全、满足合规性要求等）。</li>
+</ul>
+</li>
+<li><strong>输出物</strong>：授权书、范围定义文档、沟通计划。</li>
+</ul>
+<h3 id="2-情报搜集阶段"><strong>2. 情报搜集阶段</strong>
+</h3><p>“信息收集”，是测试的基石。尽可能多地收集关于目标的各种信息，为后续攻击寻找入口。情报分为两类：</p>
+<ul>
+<li><strong>被动情报搜集</strong>：在不与目标系统直接交互的情况下，通过公开渠道获取信息。例如：搜索引擎、社交媒体、Whois域名信息、DNS记录、公开的代码仓库、新闻稿等。</li>
+<li><strong>主动情报搜集</strong>：通过与目标系统直接交互来获取信息，但可能被记录。例如：端口扫描、服务指纹识别、网络拓扑探测等。</li>
+<li><strong>关键目标</strong>：发现目标的所有网络资产、域名、子域名、IP地址、开放端口、运行的服务版本、员工信息、技术栈等。</li>
+</ul>
+<h3 id="3-威胁建模阶段"><strong>3. 威胁建模阶段</strong>
+</h3><p>对收集到的信息进行分析和提炼，识别出可能被利用的资产、潜在的安全漏洞和攻击路径。这是一个分析规划阶段。</p>
+<ul>
+<li><strong>核心活动</strong>：
+<ul>
+<li><strong>资产识别</strong>：梳理出高价值的攻击目标（如数据库服务器、文件服务器、Web应用后台）。</li>
+<li><strong>攻击面分析</strong>：分析目标暴露的所有可能被攻击的点（如开放的远程管理端口、未认证的Web API、过时的框架）。</li>
+<li><strong>攻击向量规划</strong>：基于情报，构思可能的攻击路径和方法。例如：“通过钓鱼邮件获取员工凭证 -&gt; 登录VPN -&gt; 利用内部文件服务器的漏洞获取域控权限”。</li>
+<li><strong>工具与技术选择</strong>：根据分析结果，准备下一阶段所需的漏洞扫描工具、攻击载荷等。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-漏洞分析阶段"><strong>4. 漏洞分析阶段</strong>
+</h3><p>对已识别的攻击面进行深入探测，以发现和验证具体的安全漏洞。</p>
+<ul>
+<li><strong>核心活动</strong>：
+<ul>
+<li><strong>自动化扫描</strong>：使用Nessus、Nexpose、AWVS等漏洞扫描器进行系统性扫描，生成初步漏洞报告。</li>
+<li><strong>手动验证与分析</strong>：<strong>这是体现测试人员技术的关键</strong>。对扫描器报告的结果进行去误报、分析漏洞的可利用性和实际风险等级。扫描器找不到的逻辑漏洞、业务逻辑缺陷、配置错误等，需要在此阶段通过手动测试发现。</li>
+<li><strong>漏洞优先级排序</strong>：根据CVSS分数、利用难度、对业务的影响等因素，对漏洞进行排序，决定后续攻击的优先级。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-渗透攻击阶段"><strong>5. 渗透攻击阶段</strong>
+</h3><p>这是模拟真实攻击者的核心环节，尝试利用已发现的漏洞来突破安全防线，获取对系统或数据的未授权访问。</p>
+<ul>
+<li><strong>核心活动</strong>：
+<ul>
+<li><strong>漏洞利用</strong>：使用Metasploit、定制化的EXP或手动攻击方式，利用漏洞获取初始访问权限。例如：利用SQL注入获取数据库数据、利用文件上传漏洞上传Webshell、利用缓冲区溢出漏洞获取系统Shell。</li>
+<li><strong>突破边界</strong>：成功从一个外部点（如Web服务器）攻入内部网络。</li>
+<li><strong>权限提升</strong>：在已控制的主机上，从普通用户权限提升为管理员/系统权限。</li>
+</ul>
+</li>
+<li><strong>关键点</strong>：此阶段需要谨慎操作，避免对目标系统造成意外损害。</li>
+</ul>
+<h3 id="6-后渗透攻击阶段"><strong>6. 后渗透攻击阶段</strong>
+</h3><p>在成功渗透进入目标系统后，模拟高级持续性威胁的攻击行为，目标是展示漏洞被利用后可能造成的实际业务影响。</p>
+<ul>
+<li><strong>核心活动</strong>：
+<ul>
+<li><strong>权限维持</strong>：在目标系统上安装后门、创建隐藏账户等，以维持长期控制。</li>
+<li><strong>横向移动</strong>：以已控制的机器为跳板，探测和攻击内网中的其他重要主机（如数据库服务器、域控制器）。</li>
+<li><strong>目标达成</strong>：窃取或篡改敏感数据（在授权范围内）、完全控制核心系统、访问关键业务功能等，以证明漏洞的严重性。</li>
+<li><strong>足迹清理</strong>：根据测试规则，可能需要清除测试过程中留下的日志、工具等痕迹（模拟真实攻击者），也可能保留用于报告证据。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-报告阶段"><strong>7. 报告阶段</strong>
+</h3><p>将整个测试过程、发现、影响和建议以清晰、专业的形式呈现给客户，这是渗透测试价值最终交付的体现。</p>
+<ul>
+<li><strong>报告内容</strong>：
+<ul>
+<li><strong>执行摘要</strong>：用非技术语言向管理层阐述测试概述、发现的高风险问题及其对业务的潜在影响。</li>
+<li><strong>技术细节</strong>：详细描述每个漏洞的发现过程（步骤、截图）、原理、影响范围和修复建议。这部分是给技术人员看的。</li>
+<li><strong>风险评级</strong>：对每个漏洞进行严重程度评级（如高、中、低）。</li>
+<li><strong>修复建议</strong>：提供具体、可操作的修复方案或缓解措施。</li>
+<li><strong>附录</strong>：可能包含工具输出、日志片段等证据材料。</li>
+</ul>
+</li>
+</ul>
+<h2 id="渗透实践-metasploit开源的渗透测试框架">渗透实践-Metasploit开源的渗透测试框架
+</h2><ul>
+<li><strong>Exploit（渗透攻击）</strong>：渗透攻击是指由攻击者或渗透测试者利用一个系统、应用或服务中的安全漏洞，所进行的攻击行为。流行的渗透攻击技术包括缓冲区溢出、WEB应用程序漏洞攻击（SQL注入、XSS等），以及利用配置错误等</li>
+<li>**Palyload（攻击载荷）**攻击载荷是我们期望目标系统在被渗透攻击之后执行的代码。在Metasploit框架中可以自由选择、传送和植入</li>
+<li><strong>ShellCode</strong>：SellCode是渗透攻击时作为攻击载荷运行的一组机器指令，通常用汇编语言编写</li>
+<li><strong>Module（模块）</strong>：Metasploit中一个模块是指Metasploit框架中所使用的一段软件代码组件</li>
+<li><strong>Listener（监听器）</strong>：监听器是Metasploit中用来等待接入网络连接主机的组件</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/">网络空间安全</a>
+        
+            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/kali-toolkitnmapnetwork-mapper/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【Kali Toolkit】Nmap（Network Mapper）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【实践】MS17-010漏洞利用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/np%E9%97%AE%E9%A2%98%E4%B8%8E%E5%BD%92%E7%BA%A6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">NP问题与归约</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/60aa0004-c259-49eb-b742-6515691c6d92.a2bc150b77d997c7aa74a554d4c80408_hu_137c9c1a94161db0.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 机器学习-神经网络"
+                        
+                        data-hash="md5-orwVC3fZl8eqdKVU1MgECA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">机器学习-神经网络</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.97aa252439207abddc3143a10ae1f4f6_hu_56ce3e3bc8c400f0.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 机器学习-集成学习"
+                        
+                        data-hash="md5-l6olJDkger3cMUOhCuH09g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">机器学习-集成学习</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="leuco-yuu/blog-comments"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Leuco(leucoyuu@163.com)
+    </section>
+    
+    <section class="powerby">
+        
+            Embrace Bit Art <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.2c897758e5161d223de0f28f0257464da1d3fdbe7af35af6e4f25cba359b5f26.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+	
+	<a id="back-to-top" href="#" title="返回顶部" 
+   style="position:fixed; bottom:20px; right:20px; display:none;"></a>
+	<script src="/js/back-to-top.js">^</script>
+
+
+    </body>
+</html>
