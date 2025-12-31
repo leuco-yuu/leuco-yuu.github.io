@@ -193,6 +193,14 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;渗透实践-metasploit开源的渗透测试框架&#34;&gt;渗透实践-Metasploit开源的渗透测试框架
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Exploit（渗透攻击）&lt;/strong&gt;：渗透攻击是指由攻击者或渗透测试者利用一个系统、应用或服务中的安全漏洞，所进行的攻击行为。流行的渗透攻击技术包括缓冲区溢出、WEB应用程序漏洞攻击（SQL注入、XSS等），以及利用配置错误等&lt;/li&gt;
+&lt;li&gt;**Palyload（攻击载荷）**攻击载荷是我们期望目标系统在被渗透攻击之后执行的代码。在Metasploit框架中可以自由选择、传送和植入&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ShellCode&lt;/strong&gt;：SellCode是渗透攻击时作为攻击载荷运行的一组机器指令，通常用汇编语言编写&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Module（模块）&lt;/strong&gt;：Metasploit中一个模块是指Metasploit框架中所使用的一段软件代码组件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Listener（监听器）&lt;/strong&gt;：监听器是Metasploit中用来等待接入网络连接主机的组件&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         

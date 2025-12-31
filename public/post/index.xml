@@ -18,14 +18,28 @@
   &lt;h3&gt;目录&lt;/h3&gt;
   &lt;nav id=&#34;TableOfContents&#34;&gt;
   &lt;ul&gt;
-    &lt;li&gt;&lt;a href=&#34;#主机发现&#34;&gt;主机发现&lt;/a&gt;
+    &lt;li&gt;&lt;a href=&#34;#目标选择与管理&#34;&gt;目标选择与管理&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#-il&#34;&gt;&lt;code&gt;-iL&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-ir&#34;&gt;&lt;code&gt;-iR&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--exclude&#34;&gt;&lt;code&gt;--exclude&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--excludefile&#34;&gt;&lt;code&gt;--excludefile&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--resume&#34;&gt;&lt;code&gt;--resume&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#主机发现与存活探测&#34;&gt;主机发现与存活探测&lt;/a&gt;
       &lt;ul&gt;
         &lt;li&gt;&lt;a href=&#34;#-sn&#34;&gt;&lt;code&gt;-sn&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-sp&#34;&gt;&lt;code&gt;-sP&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-pn&#34;&gt;&lt;code&gt;-Pn&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-ps&#34;&gt;&lt;code&gt;-PS&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-pa&#34;&gt;&lt;code&gt;-PA&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-pu&#34;&gt;&lt;code&gt;-PU&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-pi&#34;&gt;&lt;code&gt;-PI&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-p0&#34;&gt;&lt;code&gt;-P0&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
     &lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#端口扫描&#34;&gt;端口扫描&lt;/a&gt;
+    &lt;li&gt;&lt;a href=&#34;#端口扫描技术&#34;&gt;端口扫描技术&lt;/a&gt;
       &lt;ul&gt;
         &lt;li&gt;&lt;a href=&#34;#-ss&#34;&gt;&lt;code&gt;-sS&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-st&#34;&gt;&lt;code&gt;-sT&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
@@ -33,35 +47,18 @@
         &lt;li&gt;&lt;a href=&#34;#-sn-1&#34;&gt;&lt;code&gt;-sN&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-sf&#34;&gt;&lt;code&gt;-sF&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-sx&#34;&gt;&lt;code&gt;-sX&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-sｉ&#34;&gt;&lt;code&gt;-sＩ&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-si&#34;&gt;&lt;code&gt;-sI&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#端口规范&#34;&gt;端口规范&lt;/a&gt;
+      &lt;ul&gt;
         &lt;li&gt;&lt;a href=&#34;#-p&#34;&gt;&lt;code&gt;-p&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-p0&#34;&gt;&lt;code&gt;-P0&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-pu&#34;&gt;&lt;code&gt;-PU&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-ps&#34;&gt;&lt;code&gt;-PS&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-pa&#34;&gt;&lt;code&gt;-PA&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-pi&#34;&gt;&lt;code&gt;-PI&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-p-&#34;&gt;&lt;code&gt;-p-&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#--top-ports&#34;&gt;&lt;code&gt;--top-ports&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-f&#34;&gt;&lt;code&gt;-F&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-il&#34;&gt;&lt;code&gt;-iL&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-ir&#34;&gt;&lt;code&gt;-iR&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-exclude&#34;&gt;&lt;code&gt;-exclude&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-excludefile&#34;&gt;&lt;code&gt;-excludefile&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-n&#34;&gt;&lt;code&gt;-n&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-r&#34;&gt;&lt;code&gt;-R&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-e&#34;&gt;&lt;code&gt;-e&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-6&#34;&gt;&lt;code&gt;-6&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--traceroute&#34;&gt;&lt;code&gt;--traceroute&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--system-dns&#34;&gt;&lt;code&gt;--system-dns&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--spoof-mac&#34;&gt;&lt;code&gt;--spoof-mac&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--badsum&#34;&gt;&lt;code&gt;--badsum&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--resume&#34;&gt;&lt;code&gt;--resume&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--privileged----unprivileged&#34;&gt;&lt;code&gt;--privileged / --unprivileged&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--source-port&#34;&gt;&lt;code&gt;--source-port&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--data-length&#34;&gt;&lt;code&gt;--data-length&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
     &lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#服务版本探测&#34;&gt;服务/版本探测&lt;/a&gt;
+    &lt;li&gt;&lt;a href=&#34;#服务和版本探测&#34;&gt;服务和版本探测&lt;/a&gt;
       &lt;ul&gt;
         &lt;li&gt;&lt;a href=&#34;#-sv&#34;&gt;&lt;code&gt;-sV&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#--version-intensity&#34;&gt;&lt;code&gt;--version-intensity&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
@@ -73,9 +70,9 @@
         &lt;li&gt;&lt;a href=&#34;#-a&#34;&gt;&lt;code&gt;-A&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
     &lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#nse脚本引擎&#34;&gt;NSE脚本引擎&lt;/a&gt;
+    &lt;li&gt;&lt;a href=&#34;#nse-脚本引擎&#34;&gt;NSE 脚本引擎&lt;/a&gt;
       &lt;ul&gt;
-        &lt;li&gt;&lt;a href=&#34;#-sc---scriptdefault&#34;&gt;&lt;code&gt;-sC&lt;/code&gt; /&lt;code&gt;--script=default&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-sc----scriptdefault&#34;&gt;&lt;code&gt;-sC&lt;/code&gt; / &lt;code&gt;--script=default&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-scriptlua-scripts&#34;&gt;&lt;code&gt;-script=&amp;lt;Lua scripts&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-script-argsn1v1n2v2&#34;&gt;&lt;code&gt;-script-args=&amp;lt;n1=v1,[n2=v2,...]&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#script-args-filefilename&#34;&gt;&lt;code&gt;–script-args-file=filename&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
@@ -84,37 +81,115 @@
         &lt;li&gt;&lt;a href=&#34;#script-helpscripts&#34;&gt;&lt;code&gt;–script-help=&amp;lt;scripts&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
     &lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#输出选项&#34;&gt;输出选项&lt;/a&gt;
+    &lt;li&gt;&lt;a href=&#34;#输出格式与详情&#34;&gt;输出格式与详情&lt;/a&gt;
       &lt;ul&gt;
         &lt;li&gt;&lt;a href=&#34;#-on&#34;&gt;&lt;code&gt;-oN&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-ox&#34;&gt;&lt;code&gt;-oX&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#-oa&#34;&gt;&lt;code&gt;-oA&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--append-output&#34;&gt;&lt;code&gt;--append-output&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-v---vv---d---dd&#34;&gt;&lt;code&gt;-v&lt;/code&gt; / &lt;code&gt;-vv&lt;/code&gt; / &lt;code&gt;-d&lt;/code&gt; / &lt;code&gt;-dd&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#扫描结果筛选与解释&#34;&gt;扫描结果筛选与解释&lt;/a&gt;
+      &lt;ul&gt;
         &lt;li&gt;&lt;a href=&#34;#--open&#34;&gt;&lt;code&gt;--open&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#--reason&#34;&gt;&lt;code&gt;--reason&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#调试与信息收集&#34;&gt;调试与信息收集&lt;/a&gt;
+      &lt;ul&gt;
         &lt;li&gt;&lt;a href=&#34;#--packet-trace&#34;&gt;&lt;code&gt;--packet-trace&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#--iflist&#34;&gt;&lt;code&gt;--iflist&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--append-output&#34;&gt;&lt;code&gt;--append-output&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-v-vv-d--dd&#34;&gt;&lt;code&gt;-v&lt;/code&gt;/&lt;code&gt;-vv&lt;/code&gt;/&lt;code&gt;-d&lt;/code&gt;/&lt;code&gt; -dd&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--traceroute&#34;&gt;&lt;code&gt;--traceroute&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
     &lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#性能与防火墙规避&#34;&gt;性能与防火墙规避&lt;/a&gt;
+    &lt;li&gt;&lt;a href=&#34;#网络与dns配置&#34;&gt;网络与DNS配置&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#-n&#34;&gt;&lt;code&gt;-n&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-r&#34;&gt;&lt;code&gt;-R&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--system-dns&#34;&gt;&lt;code&gt;--system-dns&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-e&#34;&gt;&lt;code&gt;-e&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-6&#34;&gt;&lt;code&gt;-6&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#性能与定时控制&#34;&gt;性能与定时控制&lt;/a&gt;
       &lt;ul&gt;
         &lt;li&gt;&lt;a href=&#34;#-t0-5&#34;&gt;&lt;code&gt;-T&amp;lt;0-5&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-f-1&#34;&gt;&lt;code&gt;-f&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#-d&#34;&gt;&lt;code&gt;-D&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--scan-delay&#34;&gt;&lt;code&gt;--scan-delay&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--max-rate&#34;&gt;&lt;code&gt;--max-rate&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#--min-rate&#34;&gt;&lt;code&gt;--min-rate&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--max-rate&#34;&gt;&lt;code&gt;--max-rate&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--scan-delay&#34;&gt;&lt;code&gt;--scan-delay&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--min-parallelism----max-parallelism&#34;&gt;&lt;code&gt;--min-parallelism&lt;/code&gt; / &lt;code&gt;--max-parallelism&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&#34;#--max-retries&#34;&gt;&lt;code&gt;--max-retries&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--max-retries-1&#34;&gt;&lt;code&gt;--max-retries&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--min-parallelism----max-parallelism&#34;&gt;&lt;code&gt;--min-parallelism / --max-parallelism&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#--ttl&#34;&gt;&lt;code&gt;--ttl&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
     &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#防火墙ids规避与欺骗&#34;&gt;防火墙/IDS规避与欺骗&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#-f-1&#34;&gt;&lt;code&gt;-f&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#-d&#34;&gt;&lt;code&gt;-D&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--source-port&#34;&gt;&lt;code&gt;--source-port&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--data-length&#34;&gt;&lt;code&gt;--data-length&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--ttl&#34;&gt;&lt;code&gt;--ttl&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--spoof-mac&#34;&gt;&lt;code&gt;--spoof-mac&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#--badsum&#34;&gt;&lt;code&gt;--badsum&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#权限与运行模式&#34;&gt;权限与运行模式&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#--privileged----unprivileged&#34;&gt;&lt;code&gt;--privileged&lt;/code&gt; / &lt;code&gt;--unprivileged&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#附件--nmappdf&#34;&gt;附件 nmap.pdf&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;
 &lt;/div&gt;
-&lt;h2 id=&#34;主机发现&#34;&gt;主机发现
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h2 id=&#34;目标选择与管理&#34;&gt;目标选择与管理
+&lt;/h2&gt;&lt;h3 id=&#34;-il&#34;&gt;&lt;code&gt;-iL&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定扫描主机列表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -iL targets.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;targets.txt&lt;/code&gt;内容示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;192.168.1.100
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;192.168.1.101
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;scanme.nmap.org
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-ir&#34;&gt;&lt;code&gt;-iR&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：随机选择扫描目标。随机扫描10个IP地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -iR 10 -Pn&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--exclude&#34;&gt;&lt;code&gt;--exclude&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：排除扫描目标&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap 192.168.1.0/24 --exclude 192.168.1.100,192.168.1.101&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--excludefile&#34;&gt;&lt;code&gt;--excludefile&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：排除文件中目标列表&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap 192.168.1.0/24 --excludefile exclude.txt&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--resume&#34;&gt;&lt;code&gt;--resume&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：从上次中断的地方继续扫描。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --resume scan.log&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;主机发现与存活探测&#34;&gt;主机发现与存活探测
 &lt;/h2&gt;&lt;h3 id=&#34;-sn&#34;&gt;&lt;code&gt;-sn&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：探测主机是否在线，不扫描端口&lt;/li&gt;
@@ -130,11 +205,36 @@
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：跳过主机发现，将所有主机视为在线状态&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -Pn 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;端口扫描&#34;&gt;端口扫描
+&lt;h3 id=&#34;-ps&#34;&gt;&lt;code&gt;-PS&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，TCP SYN ping扫描。向指定端口发送SYN包进行主机发现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PS 80,443 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-pa&#34;&gt;&lt;code&gt;-PA&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，TCP ACK ping扫描。向指定端口发送ACK包，常用于穿透防火墙&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PA 80,443 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-pu&#34;&gt;&lt;code&gt;-PU&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，UDP ping扫描。向目标UDP端口发送空包，根据响应判断主机是否在线&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PU 53,161 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-pi&#34;&gt;&lt;code&gt;-PI&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，使用真正的ping ICMP echo请求扫描目标主机是否正在运行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PI 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-p0&#34;&gt;&lt;code&gt;-P0&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，无ping扫描。此参数已过时，使用&lt;code&gt;-Pn&lt;/code&gt;替代&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -P0 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;端口扫描技术&#34;&gt;端口扫描技术
 &lt;/h2&gt;&lt;h3 id=&#34;-ss&#34;&gt;&lt;code&gt;-sS&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：TCP SYN半开扫描，相对隐蔽&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -Pn 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -sS 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;-st&#34;&gt;&lt;code&gt;-sT&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
@@ -161,40 +261,16 @@
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：TCP Xmas扫描，发送FIN、PSH和URG标志位的TCP包&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -sX 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;-sｉ&#34;&gt;&lt;code&gt;-sＩ&lt;/code&gt;
+&lt;h3 id=&#34;-si&#34;&gt;&lt;code&gt;-sI&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：空闲扫描．通过&amp;quot;僵尸主机&amp;quot;进行隐蔽扫描&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：空闲扫描，通过“僵尸主机”进行隐蔽扫描&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -sI zombiehost:port target&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;-p&#34;&gt;&lt;code&gt;-p&lt;/code&gt;
+&lt;h2 id=&#34;端口规范&#34;&gt;端口规范
+&lt;/h2&gt;&lt;h3 id=&#34;-p&#34;&gt;&lt;code&gt;-p&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -p 1-80 192.168.1.100&lt;/code&gt;、&lt;code&gt;nmap -p 80,443 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-p0&#34;&gt;&lt;code&gt;-P0&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，无ping扫描。此参数已过时，使用&lt;code&gt;-Pn&lt;/code&gt;替代&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -P0 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-pu&#34;&gt;&lt;code&gt;-PU&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，UDP ping扫描。向目标UDP端口发送空包，根据响应判断主机是否在线&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PU 53,161 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-ps&#34;&gt;&lt;code&gt;-PS&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，TCP SYN ping扫描。向指定端口发送SYN包进行主机发现&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PS 80,443 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-pa&#34;&gt;&lt;code&gt;-PA&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，TCP ACK ping扫描。向指定端口发送ACK包，常用于穿透防火墙&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PA 80,443 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-pi&#34;&gt;&lt;code&gt;-PI&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定端口号，使用真正的ping ICMP echo请求扫描目标主机是否正在运行&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -PI 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;-p-&#34;&gt;&lt;code&gt;-p-&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
@@ -211,106 +287,7 @@
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：快速扫描，减少扫描的端口数量&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -F 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;-il&#34;&gt;&lt;code&gt;-iL&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定扫描主机列表&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -iL targets.txt&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;targets.txt&lt;/code&gt;内容示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;192.168.1.100
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;192.168.1.101
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;scanme.nmap.org
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-ir&#34;&gt;&lt;code&gt;-iR&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：随机选择扫描目标。随机扫描10个IP地址&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -iR 10 -Pn&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-exclude&#34;&gt;&lt;code&gt;-exclude&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：排除扫描目标&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap 192.168.1.0/24 --exclude 192.168.1.100,192.168.1.101&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-excludefile&#34;&gt;&lt;code&gt;-excludefile&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：排除文件中目标列表&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap 192.168.1.0/24 --excludefile exclude.txt&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-n&#34;&gt;&lt;code&gt;-n&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：不用域名解析（加快扫描速度，不进行反向DNS查询。）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -n 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-r&#34;&gt;&lt;code&gt;-R&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：为所有目标解析域名。即使目标以IP形式给出，也进行DNS解析。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -R scanme.nmap.org&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-e&#34;&gt;&lt;code&gt;-e&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定网络接口&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -e eth0 192.168.1.0/24&lt;/code&gt;、&lt;code&gt;nmap -e eth0 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-6&#34;&gt;&lt;code&gt;-6&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：IPv6扫描&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --traceroute 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--traceroute&#34;&gt;&lt;code&gt;--traceroute&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：路由跟踪&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --iflist&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--system-dns&#34;&gt;&lt;code&gt;--system-dns&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用系统DNS解析器而不是内置解析器&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --system-dns 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--spoof-mac&#34;&gt;&lt;code&gt;--spoof-mac&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：MAC地址欺骗&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --spoof-mac 00:11:22:33:44:55 192.168.1.100&lt;/code&gt;、&lt;code&gt;nmap --spoof-mac 0  # 随机MAC地址&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--badsum&#34;&gt;&lt;code&gt;--badsum&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：发送错误校验和&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --badsum 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--resume&#34;&gt;&lt;code&gt;--resume&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：从上次中断的地方继续扫描。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --resume scan.log&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--privileged----unprivileged&#34;&gt;&lt;code&gt;--privileged / --unprivileged&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：当以非root用户运行时模拟原始套接字。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --unprivileged 192.168.1.100  # 非特权模式&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--source-port&#34;&gt;&lt;code&gt;--source-port&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用特定源端口（如53端口可能被防火墙允许）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --source-port 53 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--data-length&#34;&gt;&lt;code&gt;--data-length&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：添加随机数据,在每个包后添加指定长度的随机数据。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --data-length 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;服务版本探测&#34;&gt;服务/版本探测
+&lt;h2 id=&#34;服务和版本探测&#34;&gt;服务和版本探测
 &lt;/h2&gt;&lt;h3 id=&#34;-sv&#34;&gt;&lt;code&gt;-sV&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：识别服务类型（HTTP、FTP等）和服务版本号，获取详细服务信息&lt;/li&gt;
@@ -329,18 +306,18 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;-a&#34;&gt;&lt;code&gt;-A&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：探测目标主机的操作系统类型&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：启用操作系统检测、版本检测、脚本扫描和路由追踪（聚合功能）&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -A 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;nse脚本引擎&#34;&gt;NSE脚本引擎
-&lt;/h2&gt;&lt;h3 id=&#34;-sc---scriptdefault&#34;&gt;&lt;code&gt;-sC&lt;/code&gt; /&lt;code&gt;--script=default&lt;/code&gt;
+&lt;h2 id=&#34;nse-脚本引擎&#34;&gt;NSE 脚本引擎
+&lt;/h2&gt;&lt;h3 id=&#34;-sc----scriptdefault&#34;&gt;&lt;code&gt;-sC&lt;/code&gt; / &lt;code&gt;--script=default&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用默认脚本进行扫描&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -sC 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;-scriptlua-scripts&#34;&gt;&lt;code&gt;-script=&amp;lt;Lua scripts&amp;gt;&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：&lt;Lua scripts&gt;使用某个或某类脚本进行扫描，支持通配符描述&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用某个或某类脚本进行扫描，支持通配符描述&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -script=vuln 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;脚本分类&lt;/strong&gt;：
 &lt;ul&gt;
@@ -368,21 +345,27 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;script-args-filefilename&#34;&gt;&lt;code&gt;–script-args-file=filename&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用文件来为脚本提供参数&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --script smb-enum-shares --script-args-file smb-args.txt 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;smb-args.txt&lt;/code&gt;内容&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用文件来为脚本提供参数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --script smb-enum-shares --script-args-file smb-args.txt 192.168.1.100&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;smb-args.txt&lt;/code&gt;内容&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-TEXT&#34; data-lang=&#34;TEXT&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;smbuser=admin
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;smbuser=admin
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;smbpass=password123
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;script-trace&#34;&gt;&lt;code&gt;–script-trace&lt;/code&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;script-trace&#34;&gt;&lt;code&gt;–script-trace&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：显示脚本执行过程中发送与接收的数据&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -O -script-trace 192.168.1.100&lt;/code&gt;&lt;/li&gt;
@@ -395,9 +378,9 @@
 &lt;h3 id=&#34;script-helpscripts&#34;&gt;&lt;code&gt;–script-help=&amp;lt;scripts&amp;gt;&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：显示脚本的帮助信息，其中&lt;scripts&gt;部分可以逗号分隔的文件或脚本类别。查看所有http漏洞相关脚本的帮助信息：&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -script-help http-voln-*&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -script-help http-vuln-*&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;输出选项&#34;&gt;输出选项
+&lt;h2 id=&#34;输出格式与详情&#34;&gt;输出格式与详情
 &lt;/h2&gt;&lt;h3 id=&#34;-on&#34;&gt;&lt;code&gt;-oN&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：输出至普通文本文件&lt;/li&gt;
@@ -413,36 +396,18 @@
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：一次性输出所有主要格式&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -oA result 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;--open&#34;&gt;&lt;code&gt;--open&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：只显示开放端口&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --open 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--reason&#34;&gt;&lt;code&gt;--reason&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：显示端口状态原因.显示为什么端口被标记为开放/关闭/过滤。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --reason 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--packet-trace&#34;&gt;&lt;code&gt;--packet-trace&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：数据包跟踪,显示发送和接收的每个数据包。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --packet-trace 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--iflist&#34;&gt;&lt;code&gt;--iflist&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：列出接口和路由&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --iflist&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&#34;--append-output&#34;&gt;&lt;code&gt;--append-output&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：追加输出,追加到现有日志文件而不是覆盖。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：追加输出，追加到现有日志文件而不是覆盖。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -oN scan.log --append-output 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;-v-vv-d--dd&#34;&gt;&lt;code&gt;-v&lt;/code&gt;/&lt;code&gt;-vv&lt;/code&gt;/&lt;code&gt;-d&lt;/code&gt;/&lt;code&gt; -dd&lt;/code&gt;
+&lt;h3 id=&#34;-v---vv---d---dd&#34;&gt;&lt;code&gt;-v&lt;/code&gt; / &lt;code&gt;-vv&lt;/code&gt; / &lt;code&gt;-d&lt;/code&gt; / &lt;code&gt;-dd&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：详细/调试输出&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：详细/调试输出&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -451,19 +416,100 @@
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -v 192.168.1.100      &lt;span class=&#34;c1&#34;&gt;# 详细输出&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -vv 192.168.1.100     &lt;span class=&#34;c1&#34;&gt;# 更详细&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -d 192.168.1.100      &lt;span class=&#34;c1&#34;&gt;# 调试级别1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -dd 192.168.1.100     &lt;span class=&#34;c1&#34;&gt;# 调试级别2&lt;/span&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -v 192.168.1.100      # 详细输出
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -vv 192.168.1.100     # 更详细
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -d 192.168.1.100      # 调试级别1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -dd 192.168.1.100     # 调试级别2
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;性能与防火墙规避&#34;&gt;性能与防火墙规避
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;扫描结果筛选与解释&#34;&gt;扫描结果筛选与解释
+&lt;/h2&gt;&lt;h3 id=&#34;--open&#34;&gt;&lt;code&gt;--open&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：只显示开放端口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --open 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--reason&#34;&gt;&lt;code&gt;--reason&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：显示端口状态原因。显示为什么端口被标记为开放/关闭/过滤。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --reason 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;调试与信息收集&#34;&gt;调试与信息收集
+&lt;/h2&gt;&lt;h3 id=&#34;--packet-trace&#34;&gt;&lt;code&gt;--packet-trace&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：数据包跟踪，显示发送和接收的每个数据包。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --packet-trace 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--iflist&#34;&gt;&lt;code&gt;--iflist&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：列出接口和路由&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --iflist&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--traceroute&#34;&gt;&lt;code&gt;--traceroute&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：路由跟踪&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --traceroute 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;网络与dns配置&#34;&gt;网络与DNS配置
+&lt;/h2&gt;&lt;h3 id=&#34;-n&#34;&gt;&lt;code&gt;-n&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：不用域名解析（加快扫描速度，不进行反向DNS查询。）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -n 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-r&#34;&gt;&lt;code&gt;-R&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：为所有目标解析域名。即使目标以IP形式给出，也进行DNS解析。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -R scanme.nmap.org&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--system-dns&#34;&gt;&lt;code&gt;--system-dns&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用系统DNS解析器而不是内置解析器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --system-dns 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-e&#34;&gt;&lt;code&gt;-e&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：指定网络接口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -e eth0 192.168.1.0/24&lt;/code&gt;、&lt;code&gt;nmap -e eth0 192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-6&#34;&gt;&lt;code&gt;-6&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：IPv6扫描&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -6 2001:db8::1&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;性能与定时控制&#34;&gt;性能与定时控制
 &lt;/h2&gt;&lt;h3 id=&#34;-t0-5&#34;&gt;&lt;code&gt;-T&amp;lt;0-5&amp;gt;&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：时序模板，数字越大越快,也越易被发现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：时序模板，数字越大越快，也越易被发现&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -T4 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;-f-1&#34;&gt;&lt;code&gt;-f&lt;/code&gt;
+&lt;h3 id=&#34;--min-rate&#34;&gt;&lt;code&gt;--min-rate&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最小速率。确保扫描速度不低于每秒100个包。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --min-rate 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--max-rate&#34;&gt;&lt;code&gt;--max-rate&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最大速率。限制扫描速度不超过每秒10个包。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --max-rate 10 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--scan-delay&#34;&gt;&lt;code&gt;--scan-delay&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：探测速率控制。每次探测间隔100ms&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --scan-delay 100ms 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--min-parallelism----max-parallelism&#34;&gt;&lt;code&gt;--min-parallelism&lt;/code&gt; / &lt;code&gt;--max-parallelism&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：并行度&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --min-parallelism 10 --max-parallelism 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--max-retries&#34;&gt;&lt;code&gt;--max-retries&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最大重试次数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --max-retries 1 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;防火墙ids规避与欺骗&#34;&gt;防火墙/IDS规避与欺骗
+&lt;/h2&gt;&lt;h3 id=&#34;-f-1&#34;&gt;&lt;code&gt;-f&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用小数据包分片&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -f 192.168.1.100&lt;/code&gt;&lt;/li&gt;
@@ -473,50 +519,115 @@
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用诱饵IP进行隐藏&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap -D RND:10 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;--scan-delay&#34;&gt;&lt;code&gt;--scan-delay&lt;/code&gt;
+&lt;h3 id=&#34;--source-port&#34;&gt;&lt;code&gt;--source-port&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：探测速率控制.每次探测间隔100ms&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --scan-delay 100ms 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：使用特定源端口（如53端口可能被防火墙允许）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --source-port 53 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;--max-rate&#34;&gt;&lt;code&gt;--max-rate&lt;/code&gt;
+&lt;h3 id=&#34;--data-length&#34;&gt;&lt;code&gt;--data-length&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：探测速率控制.每次探测间隔100ms&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --max-rate 10 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--min-rate&#34;&gt;&lt;code&gt;--min-rate&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最小速率.确保扫描速度不低于每秒100个包。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --min-rate 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--max-retries&#34;&gt;&lt;code&gt;--max-retries&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最大重试次数&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --max-retries 1 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--max-retries-1&#34;&gt;&lt;code&gt;--max-retries&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：最大重试次数&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --max-retries 1 192.168.1.100&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;--min-parallelism----max-parallelism&#34;&gt;&lt;code&gt;--min-parallelism / --max-parallelism&lt;/code&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：并行度&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --min-parallelism 10 --max-parallelism 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：添加随机数据，在每个包后添加指定长度的随机数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --data-length 100 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;--ttl&#34;&gt;&lt;code&gt;--ttl&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：设置TTL值&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --ttl 64 192.168.1.100&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
+&lt;h3 id=&#34;--spoof-mac&#34;&gt;&lt;code&gt;--spoof-mac&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：MAC地址欺骗&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --spoof-mac 00:11:22:33:44:55 192.168.1.100&lt;/code&gt;、&lt;code&gt;nmap --spoof-mac 0 # 随机MAC地址&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;--badsum&#34;&gt;&lt;code&gt;--badsum&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：发送错误校验和&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --badsum 192.168.1.100&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;权限与运行模式&#34;&gt;权限与运行模式
+&lt;/h2&gt;&lt;h3 id=&#34;--privileged----unprivileged&#34;&gt;&lt;code&gt;--privileged&lt;/code&gt; / &lt;code&gt;--unprivileged&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：当以非root用户运行时模拟原始套接字。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;nmap --unprivileged 192.168.1.100 # 非特权模式&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;附件--nmappdf&#34;&gt;附件  &lt;a class=&#34;link&#34; href=&#34;nmap.pdf&#34; &gt;nmap.pdf&lt;/a&gt;
+&lt;/h2&gt;</description>
         </item>
         <item>
-        <title>【实践】MS17-010漏洞利用</title>
-        <link>http://localhost:1313/p/%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>
+        <title>【攻防实践】MS17-010漏洞利用</title>
+        <link>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>
         <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</guid>
-        <description></description>
+        <guid>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</guid>
+        <description>&lt;h1 id=&#34;ms17-010漏洞利用&#34;&gt;MS17-010漏洞利用
+&lt;/h1&gt;&lt;div class=&#34;custom-toc&#34;&gt;
+  &lt;h3&gt;目录&lt;/h3&gt;
+  &lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#实践概览&#34;&gt;实践概览&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#ms17-010漏洞&#34;&gt;MS17-010漏洞&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#环境配置&#34;&gt;环境配置&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#实践步骤&#34;&gt;实践步骤&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#隔离网络环境配置&#34;&gt;隔离网络环境配置&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;实践概览&#34;&gt;实践概览
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：MS17-010漏洞利用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目的&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时间&lt;/strong&gt;：2025年12月30日&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;风险说明&lt;/strong&gt;：本实验在完全隔离的虚拟化实验室环境下进行，仅用于教育或授权测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ms17-010漏洞&#34;&gt;MS17-010漏洞
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：MS17-010&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;别名&lt;/strong&gt;：永恒之蓝（EternalBlue）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;公开时间&lt;/strong&gt;：2017.3.14（补丁发布）；2017.4.14（攻击工具公开）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相关CVE&lt;/strong&gt;：CVE-2017-0143；CVE-2017-0144；CVE-2017-0145；CVE-2017-0146；CVE-2017-0148 （远程代码执行）；CVE-2017-0147 （信息泄露）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相关协议&lt;/strong&gt;：服务器消息块 1.0 （SMBv1）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相关端口&lt;/strong&gt;：TCP &lt;strong&gt;445&lt;/strong&gt;（主要）；&lt;strong&gt;139&lt;/strong&gt;（次要）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;漏洞原理&lt;/strong&gt;：源于 Windows 内核处理 SMBv1 协议请求的缓冲区溢出。在处理文件扩展属性转换时，系统因错误计算内存大小，导致攻击者可以发送精心构造的数据包，在内核权限下执行任意代码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;破坏性&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;无需用户交互&lt;/strong&gt;：攻击者只需向目标主机的445端口发送恶意数据包即可入侵，无需用户点击/打开任何文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;危害等级高&lt;/strong&gt;：成功利用后攻击者可在目标系统上执行任意操作，如安装恶意程序、窃取数据、加密文件（勒索软件）或创建后门&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;易于蠕虫化传播&lt;/strong&gt;：&lt;strong&gt;WannaCry&lt;/strong&gt; 勒索病毒采用的方式，导致其在全球范围内像蠕虫一样自动、快速地蔓延&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;影响范围&lt;/strong&gt;：此漏洞影响当时几乎所有未打补丁的 Windows 版本，主要包括：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;桌面系统&lt;/strong&gt;：Windows XP, Vista, 7, 8, 8.1, Windows 10 (早期版本)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务器系统&lt;/strong&gt;：Windows Server 2003, 2008, 2008 R2, 2012, 2012 R2, 2016&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;漏洞修复：安装官方安全补丁——Windows Update 或访问微软官方安全公告手动下载并安装编号为&lt;strong&gt;KB4013389&lt;/strong&gt; 的补丁。或手动：&lt;strong&gt;禁用 SMBv1 协议&lt;/strong&gt;、&lt;strong&gt;网络层面封堵&lt;/strong&gt;、&lt;strong&gt;使用入侵防御系统（IPS）&lt;/strong&gt;、&lt;strong&gt;最小化网络暴露&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;环境配置&#34;&gt;环境配置
+&lt;/h2&gt;&lt;h2 id=&#34;实践步骤&#34;&gt;实践步骤
+&lt;/h2&gt;&lt;h3 id=&#34;隔离网络环境配置&#34;&gt;隔离网络环境配置
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在 VMware 中对 Kali 和 Win7 执行相同操作：&lt;/p&gt;
+&lt;p&gt;打开设置 -&amp;gt; 选择网络适配器 -&amp;gt; 右侧点击LAN区段单选框 -&amp;gt; 点击下方LAN区段按钮 -&amp;gt; 在弹出的窗口中点击添加 -&amp;gt; 输入名称“MS17-010_Experiment” -&amp;gt; 点击确定 -&amp;gt; 在下拉菜单中选中刚刚创建的LAN区段 -&amp;gt; 点击保存&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5cleuco%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251231094624478.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20251231094624478&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
         </item>
         <item>
         <title>渗透测试基础</title>

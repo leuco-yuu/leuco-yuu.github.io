@@ -272,7 +272,38 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ms17-010漏洞">MS17-010漏洞</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -337,7 +368,40 @@
     <section class="article-content">
     
     
-    
+    <h1 id="ms17-010漏洞利用">MS17-010漏洞利用
+</h1><div class="custom-toc">
+  <h3>目录</h3>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ms17-010漏洞">MS17-010漏洞</a></li>
+  </ul>
+</nav>
+</div>
+<h2 id="ms17-010漏洞">MS17-010漏洞
+</h2><ul>
+<li><strong>名称</strong>：MS17-010</li>
+<li><strong>别名</strong>：永恒之蓝（EternalBlue）</li>
+<li><strong>公开时间</strong>：2017.3.14（补丁发布）；2017.4.14（攻击工具公开）</li>
+<li><strong>相关CVE</strong>：CVE-2017-0143；CVE-2017-0144；CVE-2017-0145；CVE-2017-0146；CVE-2017-0148 （远程代码执行）；CVE-2017-0147 （信息泄露）</li>
+<li><strong>相关协议</strong>：服务器消息块 1.0 （SMBv1）</li>
+<li><strong>相关端口</strong>：TCP <strong>445</strong>（主要）；<strong>139</strong>（次要）</li>
+<li><strong>漏洞原理</strong>：源于Windows内核处理SMBv1协议请求的缓冲区溢出。在处理文件扩展属性转换时，系统因错误计算内存大小，导致攻击者可以发送精心构造的数据包，在内核权限下执行任意代码。</li>
+<li><strong>破坏性</strong>：
+<ul>
+<li><strong>无需用户交互</strong>：攻击者只需向目标主机的445端口发送恶意数据包即可入侵，无需用户点击/打开任何文件</li>
+<li><strong>危害等级高</strong>：成功利用后攻击者可在目标系统上执行任意操作，如安装恶意程序、窃取数据、加密文件（勒索软件）或创建后门</li>
+<li><strong>易于蠕虫化传播</strong>：<strong>WannaCry</strong>勒索病毒采用的方式，导致其在全球范围内像蠕虫一样自动、快速地蔓延</li>
+</ul>
+</li>
+<li><strong>影响范围</strong>：此漏洞影响当时几乎所有未打补丁的Windows版本，主要包括：
+<ul>
+<li><strong>桌面系统</strong>：Windows XP, Vista, 7, 8, 8.1, Windows 10 (早期版本)</li>
+<li><strong>服务器系统</strong>：Windows Server 2003, 2008, 2008 R2, 2012, 2012 R2, 2016</li>
+</ul>
+</li>
+<li>漏洞修复：安装官方安全补丁——Windows Update或访问微软官方安全公告手动下载并安装编号为<strong>KB4013389</strong>的补丁。或手动：<strong>禁用SMBv1协议</strong>、<strong>网络层面封堵</strong>、<strong>使用入侵防御系统（IPS）</strong>、<strong>最小化网络暴露</strong></li>
+</ul>
+
 </section>
 
 

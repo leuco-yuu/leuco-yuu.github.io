@@ -8,12 +8,78 @@
         <language>zh-cn</language>
         <copyright>Leuco(leucoyuu@163.com)</copyright>
         <lastBuildDate>Tue, 30 Dec 2025 16:23:12 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>【实践】MS17-010漏洞利用</title>
-        <link>http://localhost:1313/p/%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>
+        <title>【攻防实践】MS17-010漏洞利用</title>
+        <link>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>
         <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</guid>
-        <description></description>
+        <guid>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</guid>
+        <description>&lt;h1 id=&#34;ms17-010漏洞利用&#34;&gt;MS17-010漏洞利用
+&lt;/h1&gt;&lt;div class=&#34;custom-toc&#34;&gt;
+  &lt;h3&gt;目录&lt;/h3&gt;
+  &lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#实践概览&#34;&gt;实践概览&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#ms17-010漏洞&#34;&gt;MS17-010漏洞&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#环境配置&#34;&gt;环境配置&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#实践步骤&#34;&gt;实践步骤&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#隔离网络环境配置&#34;&gt;隔离网络环境配置&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;实践概览&#34;&gt;实践概览
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：MS17-010漏洞利用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目的&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时间&lt;/strong&gt;：2025年12月30日&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;风险说明&lt;/strong&gt;：本实验在完全隔离的虚拟化实验室环境下进行，仅用于教育或授权测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ms17-010漏洞&#34;&gt;MS17-010漏洞
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：MS17-010&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;别名&lt;/strong&gt;：永恒之蓝（EternalBlue）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;公开时间&lt;/strong&gt;：2017.3.14（补丁发布）；2017.4.14（攻击工具公开）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相关CVE&lt;/strong&gt;：CVE-2017-0143；CVE-2017-0144；CVE-2017-0145；CVE-2017-0146；CVE-2017-0148 （远程代码执行）；CVE-2017-0147 （信息泄露）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相关协议&lt;/strong&gt;：服务器消息块 1.0 （SMBv1）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相关端口&lt;/strong&gt;：TCP &lt;strong&gt;445&lt;/strong&gt;（主要）；&lt;strong&gt;139&lt;/strong&gt;（次要）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;漏洞原理&lt;/strong&gt;：源于 Windows 内核处理 SMBv1 协议请求的缓冲区溢出。在处理文件扩展属性转换时，系统因错误计算内存大小，导致攻击者可以发送精心构造的数据包，在内核权限下执行任意代码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;破坏性&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;无需用户交互&lt;/strong&gt;：攻击者只需向目标主机的445端口发送恶意数据包即可入侵，无需用户点击/打开任何文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;危害等级高&lt;/strong&gt;：成功利用后攻击者可在目标系统上执行任意操作，如安装恶意程序、窃取数据、加密文件（勒索软件）或创建后门&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;易于蠕虫化传播&lt;/strong&gt;：&lt;strong&gt;WannaCry&lt;/strong&gt; 勒索病毒采用的方式，导致其在全球范围内像蠕虫一样自动、快速地蔓延&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;影响范围&lt;/strong&gt;：此漏洞影响当时几乎所有未打补丁的 Windows 版本，主要包括：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;桌面系统&lt;/strong&gt;：Windows XP, Vista, 7, 8, 8.1, Windows 10 (早期版本)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务器系统&lt;/strong&gt;：Windows Server 2003, 2008, 2008 R2, 2012, 2012 R2, 2016&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;漏洞修复：安装官方安全补丁——Windows Update 或访问微软官方安全公告手动下载并安装编号为&lt;strong&gt;KB4013389&lt;/strong&gt; 的补丁。或手动：&lt;strong&gt;禁用 SMBv1 协议&lt;/strong&gt;、&lt;strong&gt;网络层面封堵&lt;/strong&gt;、&lt;strong&gt;使用入侵防御系统（IPS）&lt;/strong&gt;、&lt;strong&gt;最小化网络暴露&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;环境配置&#34;&gt;环境配置
+&lt;/h2&gt;&lt;h2 id=&#34;实践步骤&#34;&gt;实践步骤
+&lt;/h2&gt;&lt;h3 id=&#34;隔离网络环境配置&#34;&gt;隔离网络环境配置
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在 VMware 中对 Kali 和 Win7 执行相同操作：&lt;/p&gt;
+&lt;p&gt;打开设置 -&amp;gt; 选择网络适配器 -&amp;gt; 右侧点击LAN区段单选框 -&amp;gt; 点击下方LAN区段按钮 -&amp;gt; 在弹出的窗口中点击添加 -&amp;gt; 输入名称“MS17-010_Experiment” -&amp;gt; 点击确定 -&amp;gt; 在下拉菜单中选中刚刚创建的LAN区段 -&amp;gt; 点击保存&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5cleuco%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251231094624478.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20251231094624478&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
         </item>
         
     </channel>
