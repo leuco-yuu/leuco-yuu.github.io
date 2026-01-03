@@ -9,17 +9,18 @@ keywords= ["msfvenom", "shell", "Windowsl", "CS"]
 categories= ["网络空间安全", "攻防实践"]
 tags= ["msfvenom", "shell", "Windowsl", "CS"]
 math=true
+image="CS.png"
 
 +++
 
-# MSF恶意程序利用与CS上线
+# MSF恶意程序利用与CS制作钓鱼网站
 
 {{<toc>}}
 
 ## 实践概览
 
 - **名称**：MSF恶意程序利用与CS上线
-- **目的**：使用MSFVenom恶意软件获取shell；使用Cobalt Strike生成后门
+- **目的**：使用MSFVenom恶意软件获取shell；使用Cobalt Strike制作钓鱼网站并监听键盘
 - **时间**：2026年1月3日
 - **风险说明**：本实验在完全隔离的虚拟化实验室环境下进行，仅用于教育或授权测试
 
@@ -167,5 +168,164 @@ meterpreter > getuid
 Server username: Ankh-PC\Ankh
 ```
 
+### CS钓鱼网站制作
 
+为了克隆网站，虚拟机需要联网。这里设置靶机和Kali的网络连接模式为NAT模式，两者通过DHCP自动获取IP地址。此时Win7的IP地址为192.168.10.147/24；Kali的IP地址为192.168.10.135/24。两者之间与宿主机相互ping通并可以正常访问互联网
 
+#### Cobalt Strike安装
+
+将[cobalt_strike_4.5.zip](cobalt_strike_4.5.zip)下载至Kali并解压
+
+#### 更改CS读写权限
+
+```bash
+┌──(root㉿kali)-[/home/kali/Desktop/Tools/Cobalt Strike]
+└─# cd coablt_strike_4.5
+
+┌──(root㉿kali)-[/home/…/Desktop/Tools/Cobalt Strike/coablt_strike_4.5]
+└─# chmod 777 *
+```
+
+- **chmod** = **ch**ange **mod**e（改变模式）
+
+- **777** = 权限的数字表示法
+
+  - **第一个数字**：文件所有者（owner）的权限
+
+  - **第二个数字**：所属用户组（group）的权限
+
+  - **第三个数字**：其他用户（others）的权限
+
+- 每个数字由三个权限值相加组成：
+
+  - **4** = 读取权限（Read）
+
+  - **2** = 写入权限（Write）
+
+  - **1** = 执行权限（eXecute）
+
+- 777 的具体含义：`7 = 4 + 2 + 1`，即拥有所有权限
+
+  - **所有者**：读 + 写 + 执行（7）
+
+  - **所属组**：读 + 写 + 执行（7）
+
+  - **其他用户**：读 + 写 + 执行（7）
+
+#### 生成Cobalt Strike服务器组
+
+设置服务器IP和密码（CS服务器在kali的50050端口监听），创建组服务器实例
+
+```bash
+┌──(root㉿kali)-[/home/…/Desktop/Tools/Cobalt Strike/coablt_strike_4.5]
+└─# ./teamserver 192.168.10.135 admin
+[*] Will use existing X509 certificate and keystore (for SSL)
+[+] Team server is up on 0.0.0.0:50050
+[*] SHA256 hash of SSL cert is: 7eac4fdf25b2e55d39a7d9fcccc00978b95a7639a78a2c893bd2f6aac3637fb8
+[+] Listener: Listener started!
+```
+
+#### 打开Cobalt Strike客户端并连接服务器组
+
+```bash
+┌──(root㉿kali)-[/home/…/Desktop/Tools/Cobalt Strike/coablt_strike_4.5]
+└─# ./cobaltstrike
+```
+
+打开Cobal Strike，用刚才设置的密码和IP连接到用户组。Cobalt Strike支持多设备同时登录服务器。
+
+![1](1.png)
+
+#### 创建监听器
+
+![2](2.png)
+
+打开监听器选项，点击添加
+
+![3](3.png)
+
+HTTP地址为Kali地址，HTTP端口为钓鱼网站端口。添加监听器后，CS将在Kali的80端口上持续监听
+
+![4](4.png)
+
+#### 网站克隆与Web日志
+
+![5](5.png)
+
+![6](6.png)
+
+“克隆URL”中填写要伪装的网站，这里只支持HTTP协议。“本地HOST”为本地Kali的IP地址，也是伪装网址的IP地址；“本地端口”为伪装网址的运行端口，与监听器相一致；开启键盘记录
+
+![7](7.png)
+
+最终访问地址为http://192.168.10.135:80/。由于网络适配器为NAT模式。因此所有NAT连接的虚拟机以及宿主机都可访问该页面。
+
+![8](8.png)
+
+![9](9.png)
+
+打开Web日志。
+
+#### 靶机访问钓鱼网站
+
+![10](10.png)在Win7的浏览器中访问伪装网址，输入Kali
+
+#### 键盘记录
+
+![11](11.png)
+
+Web日志中打印Win7的键盘输入。该手段用于获取用户的密码等敏感信息。
+
+### CS菜单功能概览
+
+#### 视图
+
+此菜单主要用于管理和查看在后渗透阶段（Post-Exploitation）收集到的各类数据。
+
+- **应用程序 (Applications)**：显示由“系统分析器（System Profiler）”收集到的目标浏览器信息，包括浏览器版本、Flash版本、Java版本等，帮助你判断目标有哪些可被利用的客户端漏洞。
+- **密码凭证 (Credentials)**：这是一个中央数据库，存储所有通过 `hashdump`、`mimikatz` 或钓鱼攻击获取到的用户名、密码、NTLM 哈希及令牌。
+- **下载列表 (Downloads)**：记录所有从受控主机下载到 Team Server 的文件。你可以在这里右键将文件保存到本地。
+- **事件日志 (Event Log)**：整个团队的“聊天室”和审计中心。记录了谁上线了、执行了什么关键命令，以及团队成员之间的即时消息沟通。
+- **键盘记录 (Keystrokes)**：集中展示通过 `keylogger` 命令抓取到的所有目标击键记录。
+- **代理转发 (Proxy Pivots)**：管理 SOCKS 代理和反向端口转发。当你想利用受控主机作为跳板攻击内网其他机器时，在这里配置代理信息。
+- **屏幕截图 (Screenshots)**：展示所有从 Beacon 发回的屏幕截图。支持缩略图预览，方便快速查看目标当前的操作界面。
+- **脚本控制台 (Script Console)**：用于加载和调试 **Aggressor Script**（CS 的自动化脚本语言）。你可以在这里看到脚本运行的输出或错误信息。
+- **目标列表 (Targets)**：列出当前网络中所有已知的计算机及其元数据（IP、系统版本等）。你可以通过扫描或导入方式增加目标。
+- **Web日志 (Web Log)**：记录 CS 内置 Web 服务器的所有访问请求。包括谁访问了你的钓鱼页面、下载了什么文件。
+
+#### 攻击
+
+该菜单是 CS 的核心功能区，分为载荷生成、Web 渗透和邮件钓鱼三大类。
+
+- **生成后门 (Packages)**
+
+  用于创建各种形式的初始控制载荷（Payload）。
+
+  - **HTA文档**：生成 `.hta` 后缀的 HTML 应用程序。它常通过浏览器下载执行，利用 VBScript 或 JScript 在系统底层运行 Beacon。
+
+  - **Office宏**：生成一段 VBA 代码，你可以将其嵌入 Word 或 Excel 文档中。当受害者点击“启用宏”时，就会触发上线。
+
+  - **Payload生成器**：最基础的工具。它可以将 Beacon 生成各种格式的原始数据（Raw Shellcode），或者生成 C、C#、Java、Python 等语言的源代码供你二次开发。
+
+  - **Windows可执行程序**：生成一个 Staged（分阶段）的 EXE 或 DLL 文件。这种后门体积小，运行时会先连接服务器下载完整的 Beacon。
+
+  - **Windows可执行程序(Stageless)**：生成一个 Stageless（不分阶段）的后门。它包含完整的 Beacon 功能，虽然体积较大，但在复杂的网络环境下更稳定且更难被流量监控发现。
+
+- **Web钓鱼 (Web Drive-by)**
+
+  利用 CS 内置的 Web 服务器进行自动化 Web 攻击。
+
+  - **站点管理 (Manage)**：查看并管理当前所有正在运行的 Web 服务（克隆的页面、托管的文件等）。
+  - **网站克隆 (Clone Site)**：输入一个网址（如公司内网登录页），CS 会克隆该页面。你还可以配置它抓取用户输入的表单数据（如账号密码）。
+  - **文件托管 (Host File)**：简单的 Web 服务器功能，用于把你的木马或工具挂在网上供目标下载。
+  - **Web投递 (Web Delivery)**：提供一种“一键上线”的方案。它生成一个 PowerShell、Python 或 Bitsadmin 命令，只要在目标机器运行这行命令，即可远程下载执行 Beacon。
+  - **签名/智能 Applet 攻击**：利用旧版本 Java 的漏洞或诱导用户点击运行 Java 插件。*注意：由于现代浏览器已不再支持 Java 插件，这些功能在实战中已基本过时。*
+  - **信息收集 (System Profiler)**：生成一个隐藏的探测链接。当用户点击时，它会静默收集该用户的系统环境信息，并存入“视图 -> 应用程序”中。
+
+- **邮件钓鱼 (Spear Phish)**
+
+  这是一个专门的钓鱼邮件发送平台。
+
+  - 导入邮件模板和目标邮箱列表。
+  - 配置 SMTP 发信服务器。
+  - 将上述“生成后门”或“Web钓鱼”生成的链接/附件自动注入邮件并群发。
