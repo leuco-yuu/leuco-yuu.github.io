@@ -1,0 +1,546 @@
+<!doctype html><html lang=zh_CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="【0】一些常见的靶场搭建"><meta name=keywords content="Docker,靶场,PHP"><title>【攻防实践】靶场搭建</title><link rel=canonical href=http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/><link rel=stylesheet href=/scss/style.min.85f75f3209ee69adac3c94c489274ecc9d07b319e20cd3c86717f7734ee67869.css><meta property='og:title' content="【攻防实践】靶场搭建"><meta property='og:description' content="【0】一些常见的靶场搭建"><meta property='og:url' content='http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/'><meta property='og:site_name' content="Lecuo's Blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Docker'><meta property='article:tag' content='靶场'><meta property='article:tag' content='PHP'><meta property='article:published_time' content='2026-01-03T12:33:34+08:00'><meta property='article:modified_time' content='2026-01-03T12:33:34+08:00'><meta name=twitter:title content="【攻防实践】靶场搭建"><meta name=twitter:description content="【0】一些常见的靶场搭建"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_8cf2f27a1af30ef.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Lecuo's Blog</a></h1><h2 class=site-description></h2></div></header><ol class=menu-social><li><a href=https://github.com/leuco-yuu/ target=_blank title=GitHub rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></li><li><a href='https://mail.google.com/mail/u/0/?tf=cm&amp;to=leucoyuu@gmail.com&amp;fs=1' target=_blank title=Gmail rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="3,5 12,14 21,5"/></svg></a></li><li><a href='https://wpa.qq.com/msgrd?v=3&amp;uin=1286938728&amp;site=qq&amp;menu=yes/' target=_blank title=QQ rel=me><svg height="32" viewBox="0 0 32 32" width="32"><g fill="none" fill-rule="evenodd"><path d="m15.9998867.0-.3175962.00373031C8.84822.16478688 5.08430177 5.52571032 5.05900841 13.1032973L5.06 13.376l-.86256398 2.1053645c-.34339269.8459887-.59479858 1.4918602-.8236549 2.1249911-.16246446.4494579-.31092035.8862129-.4515632 1.3302912-1.41043336 4.4529342-1.46997142 7.7313526 1.14979123 8.0424546l.19586827.0182568c.69853306.0462522 1.18775172-.1357889 1.69345756-.5695745L6.008 26.385l.10703497.1859114.16295747.2641667L6.368 26.972l-.10203891.0725127c-1.18457469.8599516-1.78515849 2.0422997-.8749963 3.5478041.72014893 1.1919865 1.68579016 1.3851809 4.67654251 1.4059241h1.2781117l.7210113-.0101194c1.4578857-.0287327 2.9764342-.1065736 3.9343697-.2001215l.2555297.0243167c1.1291243.09698 2.8606159.1735357 4.3993902.1859242h1.2781118c2.9907546-.0207471 3.95642-.2139816 4.6768437-1.4064227l.0983227-.1723424c.764361-1.4241985.1648309-2.548721-.9747412-3.3755348L25.631 26.971l.0912293-.1362605.1629318-.2641511L25.992 26.385l.0466679.0427821c.5516504.4732059 1.0836451.6468525 1.8890001.5513616 2.6200145-.3116105 2.5604594-3.5895097 1.1502083-8.0424822-.136678-.4315245-.2810058-.8567817-.4385987-1.2939849l-.1781698-.4846461c-.0923296-.2464665-.1903348-.5013359-.2976536-.7744519l-.3954267-.9868956L26.939 13.376l9399e-7-.279262c-.038761-7.60576089-3.8169423-12.93053326-10.6187985-13.09291824zm1023e-7 2c6.339972 32813e-8 9.0947051 5.25726658 8.9334981 11.7557738l.8516442 2.0748544c.5606846 1.3708665.9939584 2.4718584 1.3860782 3.7098724 1.2134003 3.8314013.8203049 5.4169539.5209683 5.4525554-.6424867.0761796-2.5006035-2.8842697-2.5006035-2.8842697.0 1.7141775-.8994592 3.9510027-2.8457046 5.5664147l.3377045.1073023c1.0249215.341207 2.6653848 1.0302704 2.2154641 1.7750936-.4078113.675007-6.9962271.4309917-8.8982689.2207732l-.4753503.0452169c-2.33636.195172-8.04423656.3608021-8.42291849-.2659901-.50418989-.8339832 1.61195836-1.5976385 2.55205373-1.8820678-1.94652419-1.615412-2.84615056-3.852456-2.84615056-5.5667428l-.32111727.4924567c-.56063792.838483-1.70355568 2.4482423-2.17943051 2.391813-.29933663-.0355468-.69254342-1.6211541.52102408-5.4525554l.21887662-.6654718c.52220361-1.5311231 1.13363576-2.9515889 2.01884579-5.1193097C6.8963095 7.36281332 9.58861109 2.00032813 15.999989 2z" fill="currentColor" fill-rule="nonzero"/></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/%E5%8D%9A%E4%B8%BB/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>博主</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>博文</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/%E9%93%BE%E6%8E%A5/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>链接</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ul><li><a href=#靶场环境>靶场环境</a></li><li><a href=#pikachu-docker>Pikachu-Docker</a><ul><li><a href=#安装docker>安装Docker</a></li><li><a href=#配置docker镜像>配置Docker镜像</a></li><li><a href=#拉取pikachu镜像>拉取Pikachu镜像</a></li><li><a href=#运行容器>运行容器</a></li><li><a href=#持久化运行>持久化运行</a></li></ul></li></ul></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/>网络空间安全
+</a><a href=/categories/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5/>攻防实践</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/>【攻防实践】靶场搭建</a></h2><h3 class=article-subtitle>【0】一些常见的靶场搭建</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-01-03T12:33:34+08:00>Jan 03, 2026</time></div></footer></div></header><section class=article-content><h1 id=靶场搭建>靶场搭建</h1><div class=custom-toc><h3>目录</h3><nav id=TableOfContents><ul><li><a href=#靶场环境>靶场环境</a></li><li><a href=#pikachu-docker>Pikachu-Docker</a><ul><li><a href=#安装docker>安装Docker</a></li><li><a href=#配置docker镜像>配置Docker镜像</a></li><li><a href=#拉取pikachu镜像>拉取Pikachu镜像</a></li><li><a href=#运行容器>运行容器</a></li><li><a href=#持久化运行>持久化运行</a></li></ul></li></ul></nav></div><h2 id=靶场环境>靶场环境</h2><p>Ubuntu 24.01 64bit</p><h2 id=pikachu-docker>Pikachu-Docker</h2><h3 id=安装docker>安装Docker</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt update <span class=c1># 更新软件包列表</span>
+</span></span><span class=line><span class=cl>sudo install docker.io docker-compose -y <span class=c1># 安装Docker和Docker Compose</span>
+</span></span><span class=line><span class=cl>sudo systemctl start docker <span class=c1># 启动Docker服务</span>
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> docker <span class=c1># 设置Docker开机自启动 </span>
+</span></span><span class=line><span class=cl>docker --version <span class=c1># 查看Docker版本以验证安装</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=配置docker镜像>配置Docker镜像</h3><ul><li>编辑docker配置文件</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nano /etc/docker/daemon.json <span class=c1># 编辑Docekrs守护进程配置</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>添加镜像加速地址</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;registry-mirrors&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;https://docker.1ms.run&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>   	 	<span class=s2>&#34;https://docker-0.unsee.tech&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    	<span class=s2>&#34;https://docker.m.daocloud.io&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=c1>// 写入国内镜像加速器
+</span></span></span></code></pre></td></tr></table></div></div><ul><li>保存并重启Docker服务</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl daemon-reload <span class=c1># 重新加载 systemd 守护进程配置</span>
+</span></span><span class=line><span class=cl>sudo systemctl restart docker <span class=c1># 重启 Docker 服务使配置生效</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=拉取pikachu镜像>拉取Pikachu镜像</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo docker pull area39/pikachu
+</span></span></code></pre></td></tr></table></div></div><h3 id=运行容器>运行容器</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo docker run -d --name pikachu -p 8000:80 area39/pikachu
+</span></span></code></pre></td></tr></table></div></div><h3 id=持久化运行>持久化运行</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo docker stop pikachu
+</span></span><span class=line><span class=cl>sudo docker rm pikachu <span class=c1># 停止并删除容器</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建命名数据卷</span>
+</span></span><span class=line><span class=cl>sudo docker volume create pikachu_data
+</span></span></code></pre></td></tr></table></div></div><ul><li>启动脚本（pikachu-start.bash）:</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=c1># pikachu-manager.sh - Pikachu Docker 容器管理脚本</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>CONTAINER_NAME</span><span class=o>=</span><span class=s2>&#34;pikachu&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>IMAGE_NAME</span><span class=o>=</span><span class=s2>&#34;area39/pikachu&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>PORT</span><span class=o>=</span><span class=s2>&#34;8001:80&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>VOLUME_NAME</span><span class=o>=</span><span class=s2>&#34;pikachu_data&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>VOLUME_PATH</span><span class=o>=</span><span class=s2>&#34;/app/data&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 颜色定义</span>
+</span></span><span class=line><span class=cl><span class=nv>RED</span><span class=o>=</span><span class=s1>&#39;\033[0;31m&#39;</span>
+</span></span><span class=line><span class=cl><span class=nv>GREEN</span><span class=o>=</span><span class=s1>&#39;\033[0;32m&#39;</span>
+</span></span><span class=line><span class=cl><span class=nv>YELLOW</span><span class=o>=</span><span class=s1>&#39;\033[1;33m&#39;</span>
+</span></span><span class=line><span class=cl><span class=nv>BLUE</span><span class=o>=</span><span class=s1>&#39;\033[0;34m&#39;</span>
+</span></span><span class=line><span class=cl><span class=nv>NC</span><span class=o>=</span><span class=s1>&#39;\033[0m&#39;</span> <span class=c1># No Color</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>show_usage<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>BLUE</span><span class=si>}</span><span class=s2>Pikachu 容器管理脚本</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;用法: </span><span class=nv>$0</span><span class=s2> [命令]&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;命令:&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;  start    启动容器&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;  stop     停止容器&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;  restart  重启容器&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;  status   查看容器状态&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;  logs     查看容器日志&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;  remove   删除容器（保留数据卷）&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;  purge    彻底删除（容器+数据卷）&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;  backup   备份数据卷&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;  shell    进入容器shell&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>check_docker<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> ! <span class=nb>command</span> -v docker <span class=p>&amp;</span>&gt; /dev/null<span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>RED</span><span class=si>}</span><span class=s2>错误: Docker 未安装</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>exit</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> ! sudo docker info <span class=p>&amp;</span>&gt; /dev/null<span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>RED</span><span class=si>}</span><span class=s2>错误: Docker 服务未运行或无权限</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> <span class=s2>&#34;请确保Docker服务正在运行，或使用sudo权限&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>exit</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>start_container<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    check_docker
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>BLUE</span><span class=si>}</span><span class=s2>正在启动 Pikachu 容器...</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># 检查镜像是否存在，不存在则拉取</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> ! sudo docker images <span class=p>|</span> grep -q <span class=s2>&#34;</span><span class=k>$(</span><span class=nb>echo</span> <span class=nv>$IMAGE_NAME</span> <span class=p>|</span> cut -d<span class=s1>&#39;:&#39;</span> -f1<span class=k>)</span><span class=s2>&#34;</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>正在拉取镜像...</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        sudo docker pull <span class=si>${</span><span class=nv>IMAGE_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># 检查是否已存在同名容器</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> sudo docker ps -a --format <span class=s2>&#34;{{.Names}}&#34;</span> <span class=p>|</span> grep -q <span class=s2>&#34;^</span><span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span>$<span class=s2>&#34;</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> sudo docker ps --format <span class=s2>&#34;{{.Names}}&#34;</span> <span class=p>|</span> grep -q <span class=s2>&#34;^</span><span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span>$<span class=s2>&#34;</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>            <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>容器已在运行中</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span>
+</span></span><span class=line><span class=cl>            <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>发现停止的容器，正在启动...</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            sudo docker start <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>fi</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 创建数据卷（如果不存在）</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> ! sudo docker volume ls <span class=p>|</span> grep -q <span class=si>${</span><span class=nv>VOLUME_NAME</span><span class=si>}</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>            <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>创建数据卷: </span><span class=si>${</span><span class=nv>VOLUME_NAME</span><span class=si>}${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            sudo docker volume create <span class=si>${</span><span class=nv>VOLUME_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>fi</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=c1># 运行新容器</span>
+</span></span><span class=line><span class=cl>        sudo docker run -d <span class=se>\
+</span></span></span><span class=line><span class=cl>            --name <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>            --restart unless-stopped <span class=se>\
+</span></span></span><span class=line><span class=cl>            -p <span class=si>${</span><span class=nv>PORT</span><span class=si>}</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>            -v <span class=si>${</span><span class=nv>VOLUME_NAME</span><span class=si>}</span>:<span class=si>${</span><span class=nv>VOLUME_PATH</span><span class=si>}</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>            <span class=si>${</span><span class=nv>IMAGE_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>[</span> <span class=nv>$?</span> -eq <span class=m>0</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>GREEN</span><span class=si>}</span><span class=s2>✓ Pikachu 容器启动成功！</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>BLUE</span><span class=si>}</span><span class=s2>容器信息:</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> <span class=s2>&#34;  名称: </span><span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> <span class=s2>&#34;  镜像: </span><span class=si>${</span><span class=nv>IMAGE_NAME</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> <span class=s2>&#34;  端口: </span><span class=si>${</span><span class=nv>PORT</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> <span class=s2>&#34;  数据卷: </span><span class=si>${</span><span class=nv>VOLUME_NAME</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>BLUE</span><span class=si>}</span><span class=s2>访问地址:</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2> http://localhost:8001&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>RED</span><span class=si>}</span><span class=s2>✗ 容器启动失败</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>exit</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>stop_container<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    check_docker
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>正在停止容器...</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    sudo docker stop <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>[</span> <span class=nv>$?</span> -eq <span class=m>0</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>GREEN</span><span class=si>}</span><span class=s2>✓ 容器已停止</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>RED</span><span class=si>}</span><span class=s2>✗ 停止容器失败</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>restart_container<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    check_docker
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>正在重启容器...</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    sudo docker restart <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>[</span> <span class=nv>$?</span> -eq <span class=m>0</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>GREEN</span><span class=si>}</span><span class=s2>✓ 容器已重启</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>RED</span><span class=si>}</span><span class=s2>✗ 重启容器失败</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>show_status<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    check_docker
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>BLUE</span><span class=si>}</span><span class=s2>容器状态:</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    sudo docker ps -a --filter <span class=s2>&#34;name=</span><span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span><span class=s2>&#34;</span> --format <span class=s2>&#34;table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Image}}&#34;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;\n</span><span class=si>${</span><span class=nv>BLUE</span><span class=si>}</span><span class=s2>数据卷信息:</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    sudo docker volume ls --filter <span class=s2>&#34;name=</span><span class=si>${</span><span class=nv>VOLUME_NAME</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;\n</span><span class=si>${</span><span class=nv>BLUE</span><span class=si>}</span><span class=s2>资源使用情况:</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    sudo docker stats <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span> --no-stream --format <span class=s2>&#34;table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>show_logs<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    check_docker
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>BLUE</span><span class=si>}</span><span class=s2>容器日志 (最后50行):</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    sudo docker logs --tail <span class=m>50</span> <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>remove_container<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    check_docker
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>正在删除容器...</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    sudo docker rm <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>[</span> <span class=nv>$?</span> -eq <span class=m>0</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>GREEN</span><span class=si>}</span><span class=s2>✓ 容器已删除（数据卷保留）</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>RED</span><span class=si>}</span><span class=s2>✗ 删除容器失败</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>purge_all<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    check_docker
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>RED</span><span class=si>}</span><span class=s2>警告: 这将删除容器和数据卷！</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>read</span> -p <span class=s2>&#34;确认删除？(y/N): &#34;</span> confirm
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>[[</span> <span class=nv>$confirm</span> <span class=o>=</span>~ ^<span class=o>[</span>Yy<span class=o>]</span>$ <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>正在删除容器...</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        sudo docker rm -f <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span> 2&gt;/dev/null
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>正在删除数据卷...</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        sudo docker volume rm <span class=si>${</span><span class=nv>VOLUME_NAME</span><span class=si>}</span> 2&gt;/dev/null
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>GREEN</span><span class=si>}</span><span class=s2>✓ 容器和数据卷已彻底删除</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>操作已取消</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>backup_volume<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    check_docker
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nv>BACKUP_DIR</span><span class=o>=</span><span class=s2>&#34;./backups&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nv>BACKUP_FILE</span><span class=o>=</span><span class=s2>&#34;pikachu_backup_</span><span class=k>$(</span>date +%Y%m%d_%H%M%S<span class=k>)</span><span class=s2>.tar.gz&#34;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    mkdir -p <span class=si>${</span><span class=nv>BACKUP_DIR</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>BLUE</span><span class=si>}</span><span class=s2>正在备份数据卷...</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># 停止容器以确保数据一致性</span>
+</span></span><span class=line><span class=cl>    sudo docker stop <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span> 2&gt;/dev/null
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># 创建备份</span>
+</span></span><span class=line><span class=cl>    sudo docker run --rm <span class=se>\
+</span></span></span><span class=line><span class=cl>        -v <span class=si>${</span><span class=nv>VOLUME_NAME</span><span class=si>}</span>:/source <span class=se>\
+</span></span></span><span class=line><span class=cl>        -v <span class=si>${</span><span class=nv>BACKUP_DIR</span><span class=si>}</span>:/backup <span class=se>\
+</span></span></span><span class=line><span class=cl>        alpine tar czf /backup/<span class=si>${</span><span class=nv>BACKUP_FILE</span><span class=si>}</span> -C /source .
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># 重新启动容器</span>
+</span></span><span class=line><span class=cl>    sudo docker start <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span> 2&gt;/dev/null
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>GREEN</span><span class=si>}</span><span class=s2>✓ 备份完成: </span><span class=si>${</span><span class=nv>BACKUP_DIR</span><span class=si>}</span><span class=s2>/</span><span class=si>${</span><span class=nv>BACKUP_FILE</span><span class=si>}${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    ls -lh <span class=si>${</span><span class=nv>BACKUP_DIR</span><span class=si>}</span>/<span class=si>${</span><span class=nv>BACKUP_FILE</span><span class=si>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>enter_shell<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    check_docker
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>BLUE</span><span class=si>}</span><span class=s2>进入容器Shell...</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=si>${</span><span class=nv>YELLOW</span><span class=si>}</span><span class=s2>按 Ctrl+D 或输入 exit 退出</span><span class=si>${</span><span class=nv>NC</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    sudo docker <span class=nb>exec</span> -it <span class=si>${</span><span class=nv>CONTAINER_NAME</span><span class=si>}</span> /bin/sh
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 主程序</span>
+</span></span><span class=line><span class=cl><span class=k>case</span> <span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span> in
+</span></span><span class=line><span class=cl>    start<span class=o>)</span>
+</span></span><span class=line><span class=cl>        start_container
+</span></span><span class=line><span class=cl>        <span class=p>;;</span>
+</span></span><span class=line><span class=cl>    stop<span class=o>)</span>
+</span></span><span class=line><span class=cl>        stop_container
+</span></span><span class=line><span class=cl>        <span class=p>;;</span>
+</span></span><span class=line><span class=cl>    restart<span class=o>)</span>
+</span></span><span class=line><span class=cl>        restart_container
+</span></span><span class=line><span class=cl>        <span class=p>;;</span>
+</span></span><span class=line><span class=cl>    status<span class=o>)</span>
+</span></span><span class=line><span class=cl>        show_status
+</span></span><span class=line><span class=cl>        <span class=p>;;</span>
+</span></span><span class=line><span class=cl>    logs<span class=o>)</span>
+</span></span><span class=line><span class=cl>        show_logs
+</span></span><span class=line><span class=cl>        <span class=p>;;</span>
+</span></span><span class=line><span class=cl>    remove<span class=o>)</span>
+</span></span><span class=line><span class=cl>        remove_container
+</span></span><span class=line><span class=cl>        <span class=p>;;</span>
+</span></span><span class=line><span class=cl>    purge<span class=o>)</span>
+</span></span><span class=line><span class=cl>        purge_all
+</span></span><span class=line><span class=cl>        <span class=p>;;</span>
+</span></span><span class=line><span class=cl>    backup<span class=o>)</span>
+</span></span><span class=line><span class=cl>        backup_volume
+</span></span><span class=line><span class=cl>        <span class=p>;;</span>
+</span></span><span class=line><span class=cl>    shell<span class=o>)</span>
+</span></span><span class=line><span class=cl>        enter_shell
+</span></span><span class=line><span class=cl>        <span class=p>;;</span>
+</span></span><span class=line><span class=cl>    *<span class=o>)</span>
+</span></span><span class=line><span class=cl>        show_usage
+</span></span><span class=line><span class=cl>        <span class=nb>exit</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl>        <span class=p>;;</span>
+</span></span><span class=line><span class=cl><span class=k>esac</span>
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/docker/>Docker</a>
+<a href=/tags/%E9%9D%B6%E5%9C%BA/>靶场</a>
+<a href=/tags/php/>PHP</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/><div class=article-details><h2 class=article-title>【攻防实践】MSF恶意程序利用与CS上线</h2></div></a></article><article class=has-image><a href=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/><div class=article-image><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/ms17-010.992c28af9d4dc6152f59316c33d36a29_hu_c9fb065fb8253e47.png width=250 height=150 loading=lazy alt="Featured image of post 【攻防实践】MS17-010漏洞利用" data-hash="md5-mSwor51NxhUvWTFsM9NqKQ=="></div><div class=article-details><h2 class=article-title>【攻防实践】MS17-010漏洞利用</h2></div></a></article><article><a href=/p/kali-toolkitnmapnetwork-mapper/><div class=article-details><h2 class=article-title>【Kali Toolkit】Nmap（Network Mapper）</h2></div></a></article><article><a href=/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/><div class=article-details><h2 class=article-title>渗透测试基础</h2></div></a></article></div></div></aside><script src=https://utteranc.es/client.js repo=leuco-yuu/blog-comments issue-term=pathname crossorigin=anonymous async></script><style>.utterances{max-width:unset}</style><script>let utterancesLoaded=!1;function setUtterancesTheme(e){let t=document.querySelector(".utterances iframe");t&&t.contentWindow.postMessage({type:"set-theme",theme:`github-${e}`},"https://utteranc.es")}addEventListener("message",e=>{if(e.origin!=="https://utteranc.es")return;utterancesLoaded=!0,setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener("onColorSchemeChange",e=>{if(!utterancesLoaded)return;setUtterancesTheme(e.detail)})</script><footer class=site-footer><section class=copyright>&copy;
+2025 -
+2026 Leuco(leucoyuu@163.com)</section><section class=powerby>Embrace Bit Art<br>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.32.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.29c987cab5419174d4dc85c2a56544a08027cc7f77efb5749447a3e80f85a03d.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
