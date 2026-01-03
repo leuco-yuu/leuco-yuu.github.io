@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lecuo's Blog</title><link>http://localhost:1313/</link><description>Recent content on Lecuo's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh_CN</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Sat, 03 Jan 2026 13:48:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>【攻防实践】MSF恶意程序利用与CS上线</title><link>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/</link><pubDate>Sat, 03 Jan 2026 13:48:09 +0800</pubDate><guid>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/</guid><description>&lt;h1 id="msf恶意程序利用与cs上线"&gt;MSF恶意程序利用与CS上线
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lecuo's Blog</title><link>http://localhost:1313/</link><description>Recent content on Lecuo's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh_CN</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Sat, 03 Jan 2026 13:48:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>【攻防实践】MSF恶意程序利用与CS上线</title><link>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/</link><pubDate>Sat, 03 Jan 2026 13:48:09 +0800</pubDate><guid>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/</guid><description>&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/CS.png" alt="Featured image of post 【攻防实践】MSF恶意程序利用与CS上线" /&gt;&lt;h1 id="msf恶意程序利用与cs制作钓鱼网站"&gt;MSF恶意程序利用与CS制作钓鱼网站
 &lt;/h1&gt;&lt;div class="custom-toc"&gt;
 &lt;h3&gt;目录&lt;/h3&gt;
 &lt;nav id="TableOfContents"&gt;
@@ -17,6 +17,24 @@
 &lt;li&gt;&lt;a href="#等待靶机执行恶意程序"&gt;等待靶机执行恶意程序&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;a href="#cs钓鱼网站制作"&gt;CS钓鱼网站制作&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#cobalt-strike安装"&gt;Cobalt Strike安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#更改cs读写权限"&gt;更改CS读写权限&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#生成cobalt-strike服务器组"&gt;生成Cobalt Strike服务器组&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#打开cobalt-strike客户端并连接服务器组"&gt;打开Cobalt Strike客户端并连接服务器组&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#创建监听器"&gt;创建监听器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#网站克隆与web日志"&gt;网站克隆与Web日志&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#靶机访问钓鱼网站"&gt;靶机访问钓鱼网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#键盘记录"&gt;键盘记录&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#cs菜单功能概览"&gt;CS菜单功能概览&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#视图"&gt;视图&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#攻击"&gt;攻击&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -25,7 +43,7 @@
 &lt;h2 id="实践概览"&gt;实践概览
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：MSF恶意程序利用与CS上线&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;目的&lt;/strong&gt;：使用MSFVenom恶意软件获取shell；使用Cobalt Strike生成后门&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目的&lt;/strong&gt;：使用MSFVenom恶意软件获取shell；使用Cobalt Strike制作钓鱼网站并监听键盘&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;时间&lt;/strong&gt;：2026年1月3日&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;风险说明&lt;/strong&gt;：本实验在完全隔离的虚拟化实验室环境下进行，仅用于教育或授权测试&lt;/li&gt;
 &lt;/ul&gt;
@@ -230,7 +248,287 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Server username: Ankh-PC&lt;span class="se"&gt;\A&lt;/span&gt;nkh
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>【攻防实践】靶场搭建</title><link>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/</link><pubDate>Sat, 03 Jan 2026 12:33:34 +0800</pubDate><guid>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/</guid><description>&lt;h1 id="靶场搭建"&gt;靶场搭建
+&lt;/div&gt;&lt;h3 id="cs钓鱼网站制作"&gt;CS钓鱼网站制作
+&lt;/h3&gt;&lt;p&gt;为了克隆网站，虚拟机需要联网。这里设置靶机和Kali的网络连接模式为NAT模式，两者通过DHCP自动获取IP地址。此时Win7的IP地址为192.168.10.147/24；Kali的IP地址为192.168.10.135/24。两者之间与宿主机相互ping通并可以正常访问互联网&lt;/p&gt;
+&lt;h4 id="cobalt-strike安装"&gt;Cobalt Strike安装
+&lt;/h4&gt;&lt;p&gt;将&lt;a class="link" href="cobalt_strike_4.5.zip" &gt;cobalt_strike_4.5.zip&lt;/a&gt;下载至Kali并解压&lt;/p&gt;
+&lt;h4 id="更改cs读写权限"&gt;更改CS读写权限
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──&lt;span class="o"&gt;(&lt;/span&gt;root㉿kali&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;/home/kali/Desktop/Tools/Cobalt Strike&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─# &lt;span class="nb"&gt;cd&lt;/span&gt; coablt_strike_4.5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──&lt;span class="o"&gt;(&lt;/span&gt;root㉿kali&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;/home/…/Desktop/Tools/Cobalt Strike/coablt_strike_4.5&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─# chmod &lt;span class="m"&gt;777&lt;/span&gt; *
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;chmod&lt;/strong&gt; = &lt;strong&gt;ch&lt;/strong&gt;ange &lt;strong&gt;mod&lt;/strong&gt;e（改变模式）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;777&lt;/strong&gt; = 权限的数字表示法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;第一个数字&lt;/strong&gt;：文件所有者（owner）的权限&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;第二个数字&lt;/strong&gt;：所属用户组（group）的权限&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;第三个数字&lt;/strong&gt;：其他用户（others）的权限&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每个数字由三个权限值相加组成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;4&lt;/strong&gt; = 读取权限（Read）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;2&lt;/strong&gt; = 写入权限（Write）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;1&lt;/strong&gt; = 执行权限（eXecute）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;777 的具体含义：&lt;code&gt;7 = 4 + 2 + 1&lt;/code&gt;，即拥有所有权限&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;所有者&lt;/strong&gt;：读 + 写 + 执行（7）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;所属组&lt;/strong&gt;：读 + 写 + 执行（7）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;其他用户&lt;/strong&gt;：读 + 写 + 执行（7）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="生成cobalt-strike服务器组"&gt;生成Cobalt Strike服务器组
+&lt;/h4&gt;&lt;p&gt;设置服务器IP和密码（CS服务器在kali的50050端口监听），创建组服务器实例&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──&lt;span class="o"&gt;(&lt;/span&gt;root㉿kali&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;/home/…/Desktop/Tools/Cobalt Strike/coablt_strike_4.5&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─# ./teamserver 192.168.10.135 admin
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Will use existing X509 certificate and keystore &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; SSL&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; Team server is up on 0.0.0.0:50050
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; SHA256 &lt;span class="nb"&gt;hash&lt;/span&gt; of SSL cert is: 7eac4fdf25b2e55d39a7d9fcccc00978b95a7639a78a2c893bd2f6aac3637fb8
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; Listener: Listener started!
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="打开cobalt-strike客户端并连接服务器组"&gt;打开Cobalt Strike客户端并连接服务器组
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──&lt;span class="o"&gt;(&lt;/span&gt;root㉿kali&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;/home/…/Desktop/Tools/Cobalt Strike/coablt_strike_4.5&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─# ./cobaltstrike
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;打开Cobal Strike，用刚才设置的密码和IP连接到用户组。Cobalt Strike支持多设备同时登录服务器。&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/1.png"
+width="451"
+height="336"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/1_hu_dfd277f9c3886724.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/1_hu_7adff82c56280f88.png 1024w"
+loading="lazy"
+alt="1"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="322px"
+&gt;&lt;/p&gt;
+&lt;h4 id="创建监听器"&gt;创建监听器
+&lt;/h4&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/2.png"
+width="756"
+height="535"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/2_hu_fda38b9c08f2b636.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/2_hu_2e8ceeeb629cb410.png 1024w"
+loading="lazy"
+alt="2"
+class="gallery-image"
+data-flex-grow="141"
+data-flex-basis="339px"
+&gt;&lt;/p&gt;
+&lt;p&gt;打开监听器选项，点击添加&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/3.png"
+width="726"
+height="542"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/3_hu_615b68a541da84ce.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/3_hu_75b47fa3a0653c98.png 1024w"
+loading="lazy"
+alt="3"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="321px"
+&gt;&lt;/p&gt;
+&lt;p&gt;HTTP地址为Kali地址，HTTP端口为钓鱼网站端口。添加监听器后，CS将在Kali的80端口上持续监听&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/4.png"
+width="771"
+height="322"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/4_hu_4e8ab27613210910.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/4_hu_ec7f5d2c9270931e.png 1024w"
+loading="lazy"
+alt="4"
+class="gallery-image"
+data-flex-grow="239"
+data-flex-basis="574px"
+&gt;&lt;/p&gt;
+&lt;h4 id="网站克隆与web日志"&gt;网站克隆与Web日志
+&lt;/h4&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/5.png"
+width="765"
+height="520"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/5_hu_288c220c0dffa191.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/5_hu_45a6d554b5da9af5.png 1024w"
+loading="lazy"
+alt="5"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="353px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/6.png"
+width="772"
+height="527"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/6_hu_ffb2ad471411bcb7.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/6_hu_48f3c5c03aab573f.png 1024w"
+loading="lazy"
+alt="6"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+&gt;&lt;/p&gt;
+&lt;p&gt;“克隆URL”中填写要伪装的网站，这里只支持HTTP协议。“本地HOST”为本地Kali的IP地址，也是伪装网址的IP地址；“本地端口”为伪装网址的运行端口，与监听器相一致；开启键盘记录&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/7.png"
+width="772"
+height="523"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/7_hu_29b282956dc8cae.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/7_hu_74a13f5a50e50d70.png 1024w"
+loading="lazy"
+alt="7"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="354px"
+&gt;&lt;/p&gt;
+&lt;p&gt;最终访问地址为http://192.168.10.135:80/。由于网络适配器为NAT模式。因此所有NAT连接的虚拟机以及宿主机都可访问该页面。&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/8.png"
+width="765"
+height="528"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/8_hu_78e0ec527b90416.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/8_hu_4c8b308905dbb9a4.png 1024w"
+loading="lazy"
+alt="8"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/9.png"
+width="770"
+height="526"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/9_hu_633d48dec21a7da0.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/9_hu_47d82424b044b855.png 1024w"
+loading="lazy"
+alt="9"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+&gt;&lt;/p&gt;
+&lt;p&gt;打开Web日志。&lt;/p&gt;
+&lt;h4 id="靶机访问钓鱼网站"&gt;靶机访问钓鱼网站
+&lt;/h4&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/10.png"
+width="796"
+height="561"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/10_hu_fed279ba64956bd.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/10_hu_6ea032db29babd84.png 1024w"
+loading="lazy"
+alt="10"
+class="gallery-image"
+data-flex-grow="141"
+data-flex-basis="340px"
+&gt;在Win7的浏览器中访问伪装网址，输入Kali&lt;/p&gt;
+&lt;h4 id="键盘记录"&gt;键盘记录
+&lt;/h4&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/11.png"
+width="768"
+height="527"
+srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/11_hu_131a8edf5c77aa3c.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E4%B8%8A%E7%BA%BF/11_hu_a2edf1ef002e4be7.png 1024w"
+loading="lazy"
+alt="11"
+class="gallery-image"
+data-flex-grow="145"
+data-flex-basis="349px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Web日志中打印Win7的键盘输入。该手段用于获取用户的密码等敏感信息。&lt;/p&gt;
+&lt;h3 id="cs菜单功能概览"&gt;CS菜单功能概览
+&lt;/h3&gt;&lt;h4 id="视图"&gt;视图
+&lt;/h4&gt;&lt;p&gt;此菜单主要用于管理和查看在后渗透阶段（Post-Exploitation）收集到的各类数据。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;应用程序 (Applications)&lt;/strong&gt;：显示由“系统分析器（System Profiler）”收集到的目标浏览器信息，包括浏览器版本、Flash版本、Java版本等，帮助你判断目标有哪些可被利用的客户端漏洞。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;密码凭证 (Credentials)&lt;/strong&gt;：这是一个中央数据库，存储所有通过 &lt;code&gt;hashdump&lt;/code&gt;、&lt;code&gt;mimikatz&lt;/code&gt; 或钓鱼攻击获取到的用户名、密码、NTLM 哈希及令牌。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;下载列表 (Downloads)&lt;/strong&gt;：记录所有从受控主机下载到 Team Server 的文件。你可以在这里右键将文件保存到本地。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;事件日志 (Event Log)&lt;/strong&gt;：整个团队的“聊天室”和审计中心。记录了谁上线了、执行了什么关键命令，以及团队成员之间的即时消息沟通。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;键盘记录 (Keystrokes)&lt;/strong&gt;：集中展示通过 &lt;code&gt;keylogger&lt;/code&gt; 命令抓取到的所有目标击键记录。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代理转发 (Proxy Pivots)&lt;/strong&gt;：管理 SOCKS 代理和反向端口转发。当你想利用受控主机作为跳板攻击内网其他机器时，在这里配置代理信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;屏幕截图 (Screenshots)&lt;/strong&gt;：展示所有从 Beacon 发回的屏幕截图。支持缩略图预览，方便快速查看目标当前的操作界面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;脚本控制台 (Script Console)&lt;/strong&gt;：用于加载和调试 &lt;strong&gt;Aggressor Script&lt;/strong&gt;（CS 的自动化脚本语言）。你可以在这里看到脚本运行的输出或错误信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目标列表 (Targets)&lt;/strong&gt;：列出当前网络中所有已知的计算机及其元数据（IP、系统版本等）。你可以通过扫描或导入方式增加目标。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Web日志 (Web Log)&lt;/strong&gt;：记录 CS 内置 Web 服务器的所有访问请求。包括谁访问了你的钓鱼页面、下载了什么文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="攻击"&gt;攻击
+&lt;/h4&gt;&lt;p&gt;该菜单是 CS 的核心功能区，分为载荷生成、Web 渗透和邮件钓鱼三大类。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;生成后门 (Packages)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;用于创建各种形式的初始控制载荷（Payload）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTA文档&lt;/strong&gt;：生成 &lt;code&gt;.hta&lt;/code&gt; 后缀的 HTML 应用程序。它常通过浏览器下载执行，利用 VBScript 或 JScript 在系统底层运行 Beacon。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Office宏&lt;/strong&gt;：生成一段 VBA 代码，你可以将其嵌入 Word 或 Excel 文档中。当受害者点击“启用宏”时，就会触发上线。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Payload生成器&lt;/strong&gt;：最基础的工具。它可以将 Beacon 生成各种格式的原始数据（Raw Shellcode），或者生成 C、C#、Java、Python 等语言的源代码供你二次开发。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Windows可执行程序&lt;/strong&gt;：生成一个 Staged（分阶段）的 EXE 或 DLL 文件。这种后门体积小，运行时会先连接服务器下载完整的 Beacon。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Windows可执行程序(Stageless)&lt;/strong&gt;：生成一个 Stageless（不分阶段）的后门。它包含完整的 Beacon 功能，虽然体积较大，但在复杂的网络环境下更稳定且更难被流量监控发现。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Web钓鱼 (Web Drive-by)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;利用 CS 内置的 Web 服务器进行自动化 Web 攻击。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;站点管理 (Manage)&lt;/strong&gt;：查看并管理当前所有正在运行的 Web 服务（克隆的页面、托管的文件等）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网站克隆 (Clone Site)&lt;/strong&gt;：输入一个网址（如公司内网登录页），CS 会克隆该页面。你还可以配置它抓取用户输入的表单数据（如账号密码）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件托管 (Host File)&lt;/strong&gt;：简单的 Web 服务器功能，用于把你的木马或工具挂在网上供目标下载。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Web投递 (Web Delivery)&lt;/strong&gt;：提供一种“一键上线”的方案。它生成一个 PowerShell、Python 或 Bitsadmin 命令，只要在目标机器运行这行命令，即可远程下载执行 Beacon。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;签名/智能 Applet 攻击&lt;/strong&gt;：利用旧版本 Java 的漏洞或诱导用户点击运行 Java 插件。&lt;em&gt;注意：由于现代浏览器已不再支持 Java 插件，这些功能在实战中已基本过时。&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;信息收集 (System Profiler)&lt;/strong&gt;：生成一个隐藏的探测链接。当用户点击时，它会静默收集该用户的系统环境信息，并存入“视图 -&amp;gt; 应用程序”中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;邮件钓鱼 (Spear Phish)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是一个专门的钓鱼邮件发送平台。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;导入邮件模板和目标邮箱列表。&lt;/li&gt;
+&lt;li&gt;配置 SMTP 发信服务器。&lt;/li&gt;
+&lt;li&gt;将上述“生成后门”或“Web钓鱼”生成的链接/附件自动注入邮件并群发。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>【攻防实践】靶场搭建</title><link>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/</link><pubDate>Sat, 03 Jan 2026 12:33:34 +0800</pubDate><guid>http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/</guid><description>&lt;h1 id="靶场搭建"&gt;靶场搭建
 &lt;/h1&gt;&lt;div class="custom-toc"&gt;
 &lt;h3&gt;目录&lt;/h3&gt;
 &lt;nav id="TableOfContents"&gt;
