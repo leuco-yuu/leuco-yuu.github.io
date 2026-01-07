@@ -23,9 +23,9 @@ image="cover.png"
 
   [1] V. Dabra, S. Kumari, A. Bala, and S. Yadav, “SL3PAKE: Simple Lattice-based Three-party Password Authenticated Key Exchange for post-quantum world,” *Journal of Information Security and Applications*, vol. 84, p. 103826, Aug. 2024, doi: [10.1016/j.jisa.2024.103826](https://doi.org/10.1016/j.jisa.2024.103826).
 
-- 网址：https://www.sciencedirect.com/science/article/pii/S2214212624001297
+- 网址：[原文链接](https://www.sciencedirect.com/science/article/pii/S2214212624001297)
 
-- 附件：[文献原文](Dabra 等 - 2024 - SL3PAKE Simple Lattice-based Three-party Password Authenticated Key Exchange for post-quantum world.pdf)
+- 附件：[SL3PAKE: Simple Lattice-based Three-party Password Authenticated Key Exchange for post-quantum world](Full-Text.pdf)
 
 ## 基础信息
 
@@ -45,9 +45,9 @@ image="cover.png"
 
 - $q$：满足 $q\equiv 1 \ (mod\ 2n)$ 的大奇素数
 
-- $R$：$$\displaystyle{\frac{\mathbb{Z}\left[x\right]}{\left<f(x)\right>} = \frac{\mathbb{Z}\left[x\right]}{\left< x^n+1 \right>}}$$ （多项式商环，其中 $f(x)$ 为分圆多项式）
+- $R$：$\displaystyle{\frac{\mathbb{Z}\left[x\right]}{\langle f(x)\rangle} = \frac{\mathbb{Z}\left[x\right]}{\langle x^n+1 \rangle}}$（多项式商环，其中 $f(x)$ 为分圆多项式）
 
-- $R_q$：$$\displaystyle{\frac{R}{qR}}$$
+- $R_q$：$\displaystyle{\frac{R}{qR}}$
 
 - $\chi_\beta$：$R_q$ 上的标准差为 $\beta$ 的离散高斯分布
 
@@ -67,10 +67,10 @@ image="cover.png"
 
 - $\operatorname{Cha}(m)$：特征函数，
   $$
-  &\operatorname{Cha}(m) = 
+  \operatorname{Cha}(m) = 
   \begin{cases}
-  0, \quad & if\ m\in E \\
-  1, & else\\
+  0, \quad  if\ m\in E \\
+  1,  else\\
   \end{cases}\\
   $$
 
@@ -79,11 +79,11 @@ image="cover.png"
   \operatorname{Mod_2}(m,n) = \left(m+n\cdot\frac{q-1}{2} \right)\ \ mod\ q \ \ mod\ 2
   $$
 
-- $\operatorname{h_0}(\cdot)$：哈希函数，$\operatorname{h_0}:\{0,1\}^* \rightarrow R_q$
-- $\operatorname{h_1}(\cdot)$：哈希函数，$\operatorname{h_0}:\{0,1\}^* \rightarrow \{0,1\}^g$
-- $\operatorname{h_2}(\cdot)$：哈希函数，$\operatorname{h_0}:\{0,1\}^* \rightarrow \chi_\beta$
-- $pw_A$：A的口令
-- $pw_B$：B的口令
+- $\operatorname{h_0}(\cdot)$：哈希函数，$\operatorname{h_0}: \lbrace 0,1 \rbrace ^* \rightarrow R_q$
+- $\operatorname{h_1}(\cdot)$：哈希函数，$\operatorname{h_0}: \lbrace 0,1 \rbrace^* \rightarrow \lbrace 0,1\rbrace^g$
+- $\operatorname{h_2}(\cdot)$：哈希函数，$\operatorname{h_0}:\lbrace 0,1\rbrace^* \rightarrow \chi_\beta$
+- $pw_A,pw_B$：A和B的口令密码
+- $ID_S,ID_A,ID_B$：S、A和B的唯一身份标识
 
 ## 协议流程
 
@@ -95,43 +95,43 @@ image="cover.png"
 - S选取哈希函数 $\operatorname{h_0}(\cdot)$、$\operatorname{h_1}(\cdot)$、$\operatorname{h_2}(\cdot)$
 - S通过安全信道接受A和B的口令的哈希值 $\operatorname{h_0}(pw_A)$ 和 $\operatorname{h_0}(pw_B)$
 - S生成并公开S、A、B的身份标识 $ID_S$、$ID_A$、$ID_B$
-- S保存参数：$\left\{s_S,\operatorname{h_0}(pw_A),\operatorname{h_0}(pw_B) \right\}$
-- S公开参数：$\left\{n,q,\chi_\beta,a,x_S,ID_A,ID_B,ID_S,\operatorname{h_0}(\cdot),\operatorname{h_1}(\cdot),\operatorname{h_2}(\cdot) \right\}$
+- S保存参数：$\lbrace s_S,\operatorname{h_0}(pw_A),\operatorname{h_0}(pw_B) \rbrace$
+- S公开参数：$\lbrace n,q,\chi_\beta,a,x_S,ID_A,ID_B,ID_S,\operatorname{h_0}(\cdot),\operatorname{h_1}(\cdot),\operatorname{h_2}(\cdot) \rbrace$
 
 ### Client A：实例化会话
 
 - **Input**：$ID_A$ ， $pw_A$
 - $x_A = a\cdot s_A + 2e_A$，其中 $s_A,e_A\leftarrow \chi_\beta$
-- $x^*_A = x_A + \operatorname{h_0}(pw_A)$
+- $x_A^* = x_A + \operatorname{h_0}(pw_A)$
 - $h_{AS} = \operatorname{h_1}(ID_A,ID_S,x_A,x^*_A)$
 
 ### Client A => Client B
 
-- $A\Rightarrow B: \left\{ID_A,x^*_A,h_{AS}\right\}$
+- $ A \Rightarrow B: \lbrace ID_A,x_A^\*,h_{AS} \rbrace $
 
 ### Client B：实例化会话
 
 - **Input**：$ID_B$ ， $pw_B$
 - $x_B = a\cdot s_B + 2e_B$，其中 $s_B,e_B\leftarrow \chi_\beta$
 - $x^*_B = x_B + \operatorname{h_0}(pw_B)$
-- $h_{BS} = \operatorname{h_1}(ID_B,ID_S,x_B,x^*_B)$
+- $h_{BS} = \operatorname{h_1}(ID_B,ID_S,x_B,x^\*_B)$
 
 ### Client B => Server S
 
-- $B\Rightarrow S: \left\{ID_A,ID_B,x^*_A,x^*_B,h_{AS},h_{BS}\right\}$
+- $ B \Rightarrow S: \lbrace ID_A,ID_B,x_A^\*,x_B^\*,h_{AS},h_{BS} \rbrace $
 
 ### Server S：客户端身份认证
 
 #### 对 Client A 的身份认证
 
-- $x'_A = x^*_A - \operatorname{h_0}(pw_A)$，这里有 $x_A == x'_A$
-- **Check if ** $h_{AS} \overset{?}{==} \operatorname{h_1}(ID_A,ID_S,x'_A,x^*_A)$
+- $x_A\' = x^*_A - \operatorname{h_0}(pw_A)$，这里有 $x_A == x_A\'$
+- **Check if** $h_{AS} \overset{?}{==} \operatorname{h_1}(ID_A,ID_S,x_A\',x^\*_A)$
 - **If not, then abort.**
 
 #### 对 Client B 的身份认证
 
-- $x'_B = x^*_B - \operatorname{h_0}(pw_B)$，这里有 $x_B == x'_B$
-- **Check if ** $h_{BS} \overset{?}{==} \operatorname{h_1}(ID_B,ID_S,x'_B,x^*_B)$
+- $x_B\' = x^*_B - \operatorname{h_0}(pw_B)$，这里有 $x_B == x_B\'$
+- **Check if** $h_{BS} \overset{?}{==} \operatorname{h_1}(ID_B,ID_S,x_B\',x^*_B)$
 - **If not, then abort.**
 
 ### Server S：协助 Client A 和 Client B 建立协商密钥
@@ -140,25 +140,25 @@ image="cover.png"
 
 #### 对于 Client A ：
 
-- $c_A = x'_B\cdot s_S + 2f_{S_4}$，其中 $f_{S_4} \leftarrow \chi_\beta$
-- $m = \operatorname{h_2}(ID_S,ID_A,x_S,x'_A)$
-- $k_{SA}=(x'_A\cdot s_S+2m)\cdot m+2f_{S_1}$，其中 $f_{S_1} \leftarrow \chi_\beta$
+- $c_A = x_B\' \cdot s_S + 2f_{S_4}$，其中 $f_{S_4} \leftarrow \chi_\beta$
+- $m = \operatorname{h_2}(ID_S,ID_A,x_S,x_A\')$
+- $k_{SA}=(x_A\'\cdot s_S+2m)\cdot m+2f_{S_1}$，其中 $f_{S_1} \leftarrow \chi_\beta$
 - $\omega_{SA} = \operatorname{Cha}(k_{SA})$
 - $\sigma_{SA} = \operatorname{Mod_2}(k_{SA},\omega_{SA})$
-- $\alpha_{SA}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_A,x'_A,\sigma_{SA})$
+- $\alpha_{SA}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_A,x_A\',\sigma_{SA})$
 
 #### 对于 Client B：
 
-- $c_B = x'_A\cdot s_S + 2f_{S_5}$，其中 $f_{S_5} \leftarrow \chi_\beta$
-- $n = \operatorname{h_2}(ID_S,ID_B,x_S,x'_B)$
-- $k_{SB}=(x'_B\cdot s_S+2n)\cdot n+2f_{S_3}$，其中 $f_{S_3} \leftarrow \chi_\beta$
+- $c_B = x_A\'\cdot s_S + 2f_{S_5}$，其中 $f_{S_5} \leftarrow \chi_\beta$
+- $n = \operatorname{h_2}(ID_S,ID_B,x_S,x_B\')$
+- $k_{SB}=(x_B\'\cdot s_S+2n)\cdot n+2f_{S_3}$，其中 $f_{S_3} \leftarrow \chi_\beta$
 - $\omega_{SB} = \operatorname{Cha}(k_{SB})$
 - $\sigma_{SB} = \operatorname{Mod_2}(k_{SB},\omega_{SB})$
-- $\alpha_{SB}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_B,x'_B,\sigma_{SB})$
+- $\alpha_{SB}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_B,x_B\',\sigma_{SB})$
 
 ### Server S => Client B
 
-- $S\Rightarrow B: \left\{c_A,c_B,x_S,\omega_{SA},\omega_{SB},\alpha_{SA},\alpha_{SB}\right\}$
+- $S\Rightarrow B: \lbrace c_A,c_B,x_S,\omega_{SA},\omega_{SB},\alpha_{SA},\alpha_{SB}\rbrace$
 
 ### Client B：验证 S 身份并与 A 协商密钥
 
@@ -168,7 +168,7 @@ image="cover.png"
 - $k_{BS}=(x_S\cdot s_B+2n)\cdot n+2f_{B_1}$，其中 $f_{B_1} \leftarrow \chi_\beta$
 - $\sigma_{BS} = \operatorname{Mod_2}(k_{BS},\omega_{SB})$
 - $\alpha_{BS}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_B,x_B,\sigma_{BS})$
-- **Check if ** $\alpha_{BS} \overset{?}{==} \alpha_{SB}$
+- **Check if** $\alpha_{BS} \overset{?}{==} \alpha_{SB}$
 - **If not, then abort.**
 
 #### 与 Client A 完成协商
@@ -176,11 +176,11 @@ image="cover.png"
 - $\nu_{BA} = c_B\cdot s_B +2f_{B_2}$，其中 $f_{B_2} \leftarrow \chi_\beta$
 - $\omega_{BA}=\operatorname{Cha}(\nu_{BA})$
 - $\sigma_{BA}=\operatorname{Mod_2}(\nu_{BA},\omega_{BA})$
-- $sk_{BA} = \operatorname{h_1}(ID_A,ID_B,ID_S,x^*_A,x^*_B,\sigma_{BA})$
+- $ sk_{BA} = \operatorname{h_1}(ID_A,ID_B,ID_S,x_A^\*,x_B^\*,\sigma_{BA})$
 
 ### Client B => Client A
 
-- $B\Rightarrow A: \left\{ID_B,x^*_B,c_A,x_S,\omega_{BA},\omega_{SA},\alpha_{SA}\right\}$
+- $B\Rightarrow A: \lbrace ID_B,x_B^\*,c_A,x_S,\omega_{BA},\omega_{SA},\alpha_{SA}\rbrace$
 
 ### Client A：验证 S 身份并与 B 协商密钥
 
@@ -190,14 +190,14 @@ image="cover.png"
 - $k_{AS}=(x_S\cdot s_A+2m)\cdot m+2f_{A_1}$，其中 $f_{A_1} \leftarrow \chi_\beta$
 - $\sigma_{AS} = \operatorname{Mod_2}(k_{AS},\omega_{SA})$
 - $\alpha_{AS}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_A,x_A,\sigma_{AS})$
-- **Check if ** $\alpha_{AS} \overset{?}{==} \alpha_{SA}$
+- **Check if** $\alpha_{AS} \overset{?}{==} \alpha_{SA}$
 - **If not, then abort.**
 
 #### 与 Client B 完成协商
 
 - $\nu_{AB} = c_A\cdot s_A +2f_{A_2}$，其中 $f_{A_2} \leftarrow \chi_\beta$
 - $\sigma_{AB}=\operatorname{Mod_2}(\nu_{AB},\omega_{BA})$
-- $sk_{AB} = \operatorname{h_1}(ID_A,ID_B,ID_S,x^*_A,x^*_B,\sigma_{AB})$
+- $sk_{AB} = \operatorname{h_1}(ID_A,ID_B,ID_S,x_A^\*,x_B^\*,\sigma_{AB})$
 
 ### 完成密钥协商
 

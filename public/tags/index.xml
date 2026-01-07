@@ -1,13 +1,125 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Tags on Lecuo&#39;s Blog</title>
+        <title>Tags on Leuco&#39;s Blog</title>
         <link>http://localhost:1313/tags/</link>
-        <description>Recent content in Tags on Lecuo&#39;s Blog</description>
+        <description>Recent content in Tags on Leuco&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Leuco(leucoyuu@163.com)</copyright>
-        <lastBuildDate>Tue, 30 Dec 2025 16:27:59 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 07 Jan 2026 13:01:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>格基加密</title>
+        <link>http://localhost:1313/tags/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86/</link>
+        <pubDate>Wed, 07 Jan 2026 13:01:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>后量子加密算法</title>
+        <link>http://localhost:1313/tags/%E5%90%8E%E9%87%8F%E5%AD%90%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
+        <pubDate>Wed, 07 Jan 2026 13:01:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E5%90%8E%E9%87%8F%E5%AD%90%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>口令认证</title>
+        <link>http://localhost:1313/tags/%E5%8F%A3%E4%BB%A4%E8%AE%A4%E8%AF%81/</link>
+        <pubDate>Wed, 07 Jan 2026 13:01:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E5%8F%A3%E4%BB%A4%E8%AE%A4%E8%AF%81/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>密码学</title>
+        <link>http://localhost:1313/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/</link>
+        <pubDate>Wed, 07 Jan 2026 13:01:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>密钥交换</title>
+        <link>http://localhost:1313/tags/%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2/</link>
+        <pubDate>Wed, 07 Jan 2026 13:01:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>密钥协商</title>
+        <link>http://localhost:1313/tags/%E5%AF%86%E9%92%A5%E5%8D%8F%E5%95%86/</link>
+        <pubDate>Wed, 07 Jan 2026 13:01:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E5%AF%86%E9%92%A5%E5%8D%8F%E5%95%86/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>三方</title>
+        <link>http://localhost:1313/tags/%E4%B8%89%E6%96%B9/</link>
+        <pubDate>Wed, 07 Jan 2026 13:01:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E4%B8%89%E6%96%B9/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>CS</title>
+        <link>http://localhost:1313/tags/cs/</link>
+        <pubDate>Sat, 03 Jan 2026 13:48:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/cs/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Msfvenom</title>
+        <link>http://localhost:1313/tags/msfvenom/</link>
+        <pubDate>Sat, 03 Jan 2026 13:48:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/msfvenom/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Shell</title>
+        <link>http://localhost:1313/tags/shell/</link>
+        <pubDate>Sat, 03 Jan 2026 13:48:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/shell/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Windowsl</title>
+        <link>http://localhost:1313/tags/windowsl/</link>
+        <pubDate>Sat, 03 Jan 2026 13:48:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/windowsl/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Docker</title>
+        <link>http://localhost:1313/tags/docker/</link>
+        <pubDate>Sat, 03 Jan 2026 12:33:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/docker/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>PHP</title>
+        <link>http://localhost:1313/tags/php/</link>
+        <pubDate>Sat, 03 Jan 2026 12:33:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/php/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>靶场</title>
+        <link>http://localhost:1313/tags/%E9%9D%B6%E5%9C%BA/</link>
+        <pubDate>Sat, 03 Jan 2026 12:33:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E9%9D%B6%E5%9C%BA/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Kali</title>
         <link>http://localhost:1313/tags/kali/</link>
         <pubDate>Tue, 30 Dec 2025 16:27:59 +0800</pubDate>
@@ -32,6 +144,46 @@
         <description></description>
         </item>
         <item>
+        <title>Hashdump</title>
+        <link>http://localhost:1313/tags/hashdump/</link>
+        <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/hashdump/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Keylogging</title>
+        <link>http://localhost:1313/tags/keylogging/</link>
+        <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/keylogging/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>LAN</title>
+        <link>http://localhost:1313/tags/lan/</link>
+        <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/lan/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Metasploit</title>
+        <link>http://localhost:1313/tags/metasploit/</link>
+        <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/metasploit/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Mimikatz</title>
+        <link>http://localhost:1313/tags/mimikatz/</link>
+        <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/mimikatz/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>MS17-010</title>
         <link>http://localhost:1313/tags/ms17-010/</link>
         <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
@@ -40,11 +192,27 @@
         <description></description>
         </item>
         <item>
+        <title>VMware</title>
+        <link>http://localhost:1313/tags/vmware/</link>
+        <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/vmware/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Win7</title>
         <link>http://localhost:1313/tags/win7/</link>
         <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
         
         <guid>http://localhost:1313/tags/win7/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>持久化后门</title>
+        <link>http://localhost:1313/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E5%90%8E%E9%97%A8/</link>
+        <pubDate>Tue, 30 Dec 2025 16:23:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E5%90%8E%E9%97%A8/</guid>
         <description></description>
         </item>
         <item>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>RNN on Lecuo&#39;s Blog</title>
+        <title>RNN on Leuco&#39;s Blog</title>
         <link>http://localhost:1313/tags/rnn/</link>
-        <description>Recent content in RNN on Lecuo&#39;s Blog</description>
+        <description>Recent content in RNN on Leuco&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Leuco(leucoyuu@163.com)</copyright>

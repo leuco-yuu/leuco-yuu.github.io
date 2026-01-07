@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Personages on Lecuo&#39;s Blog</title>
+        <title>Personages on Leuco&#39;s Blog</title>
         <link>http://localhost:1313/personage/</link>
-        <description>Recent content in Personages on Lecuo&#39;s Blog</description>
+        <description>Recent content in Personages on Leuco&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Leuco(leucoyuu@163.com)</copyright><atom:link href="http://localhost:1313/personage/index.xml" rel="self" type="application/rss+xml" /><item>
