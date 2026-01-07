@@ -16,7 +16,7 @@ hasCJKLanguage: true
 languages:
     zh-cn:
         languageName: 中文
-        title: Lecuo's Blog
+        title: Leuco's Blog
         weight: 1
         params:
             sidebar:
