@@ -1,4 +1,483 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>网络空间安全 on Leuco's Blog</title><link>http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/</link><description>Recent content in 网络空间安全 on Leuco's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh_CN</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Tue, 30 Dec 2025 14:51:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>渗透测试基础</title><link>http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/</link><pubDate>Tue, 30 Dec 2025 14:51:56 +0800</pubDate><guid>http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="渗透测试基础"&gt;渗透测试基础
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>网络空间安全 on Leuco's Blog</title><link>http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/</link><description>Recent content in 网络空间安全 on Leuco's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh_CN</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Mon, 12 Jan 2026 14:08:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>Web安全基础</title><link>http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/</link><pubDate>Mon, 12 Jan 2026 14:08:04 +0800</pubDate><guid>http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="web安全基础"&gt;Web安全基础
+&lt;/h1&gt;&lt;div class="custom-toc"&gt;
+&lt;h3&gt;目录&lt;/h3&gt;
+&lt;nav id="TableOfContents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#web发展史"&gt;Web发展史&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#静态页面与动态页面"&gt;静态页面与动态页面&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#urlurl-uniform-resource-locator"&gt;URL（URL Uniform Resource Locator）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#html基础"&gt;HTML基础&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#html简介"&gt;HTML简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#html标签元素"&gt;HTML标签/元素&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#http与https"&gt;HTTP与HTTPS&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#http"&gt;HTTP&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#https"&gt;HTTPS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/div&gt;
+&lt;h2 id="web发展史"&gt;Web发展史
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Web1.0&lt;/strong&gt;：个人网站，门户网络等（www.163.com、www.souhu.com）。Web 1.0时代开始于1994年，其主要特征是大量使用静态的 HTML 网页来发布信息，并开始使用浏览器来获取信息，这个时候主要是单向的信息传递&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常见攻击手段：SQL注入；文件包含；命令执行；上传漏洞；WebShell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;web2.0&lt;/strong&gt;：微博，Blog等（www.weibo.com、www.lofter.com）。Web 2.0 始于 2004 年 3 月Web2.0中，软件被当成一种服务，为用户提供网络应用的服务平台，强调用户的参与、在线的网络协作、数据储存的网络化、社会关系网络、应用以及文件的共享等成为了Web2.0发展的主要支撑和表现&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常见攻击手段：钓鱼攻击；URL跳转；框架漏洞；逻辑漏洞；XSS；CSRF&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;两者的本质区别在于&lt;/strong&gt;：Web1.0 的主要是在于用户通过浏览器获取信息。Web2.0 则更注重用户的交互作用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="静态页面与动态页面"&gt;静态页面与动态页面
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;静态页面&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在静态html页面中，用户通过Web浏览器HTTP协议向web服务器发送一个响应请求，告诉web服务器要浏览这个网站的哪个页面，接着根据用户的响应请求返回一个html页面给用户，经过浏览器渲染解析呈现在用户眼前。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;静态web页面是没有数据库文件的，所以不能连接网络数据库&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;静态web页面主是通过HTML代码开发设计的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;部分静态web页面为了页面的好看，使用了大量的JS代码，导致静态web页面打开速度慢&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;动态页面&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在动态web页面中，依然要通过web服务器的http协议或https协议响应才能返回结果给用户，用户所有请求都必须要通过web服务器处理才能实现&lt;/li&gt;
+&lt;li&gt;用户的响应请求是一个静态的html页面，只需要响应请求web服务器从系统中调出用户响应的内容，将内容返回给客户端浏览器进行处理，再返回给用户&lt;/li&gt;
+&lt;li&gt;如果用户响应请求的是动态页面资源，例如.jsp/.asp/.aspx/.php等，响应步骤是先将用户请求发送给web服务器，web服务器再从数据库调出有户请求的数据，调出数据后将所需要展示给用户的内容发送给服务器，最后通过web服务器将需要展示给用户的内容返回给用户浏览器解析执行，展示给用户。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="urlurl-uniform-resource-locator"&gt;URL（URL Uniform Resource Locator）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;**统一资源定位符（Uniform Resource Locator，URL；俗称网页地址或简称网址）**是因特网上标准的资源的地址（Address），如同在网络上的门牌。它最初是由蒂姆·伯纳斯-李发明用来作为万维网的地址，现在它已经被万维网联盟编制为因特网标准 &lt;a class="link" href="https://www.rfc-editor.org/info/rfc1738" target="_blank" rel="noopener"
+&gt;RFC 1738&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;格式&lt;/strong&gt;：&lt;strong&gt;[protocol]://[hostname]:[port]/[path]/[parameters]?[query]&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;protocol&lt;/strong&gt;：协议，常用的协议是http、https、ftp等&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;hostname&lt;/strong&gt;：主机地址，可以是域名，也可以是IP地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;port&lt;/strong&gt;：端口号，http协议默认端口是80端口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;path&lt;/strong&gt;：路径，网络资源在服务器中的指定路径&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;parameter&lt;/strong&gt;：参数，如果要向服务器传入参数，在这部分输入&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;query&lt;/strong&gt;：查询字符串，如果需要从服务器那里查询内容，在这里编辑，可有多个参数，用“&amp;amp;”符号隔开，每个参数的名和值用“=”符号隔开。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;例如&lt;/strong&gt;：https://www.baidu.com/s?ie=UTF-8&amp;amp;wd=kali&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="html基础"&gt;HTML基础
+&lt;/h2&gt;&lt;h3 id="html简介"&gt;HTML简介
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;HTML 是用来描述网页的一种语言&lt;/li&gt;
+&lt;li&gt;HTML 指的是超文本标记语言: HyperText Markup Language&lt;/li&gt;
+&lt;li&gt;HTML 不是一种编程语言，而是一种标记语言，标记语言是一套标记标签 (markup tag)&lt;/li&gt;
+&lt;li&gt;HTML 使用标记标签来描述网页&lt;/li&gt;
+&lt;li&gt;HTML 文档包含了HTML 标签及文本内容&lt;/li&gt;
+&lt;li&gt;HTML文档也叫做 web 页面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="html标签元素"&gt;HTML标签/元素
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HTML 标记标签通常被称为 HTML 标签 (HTML tag)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTML 标签是由尖括号包围的关键词，比如&amp;lt;html&amp;gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTML 标签通常是成对出现的，比如 &amp;lt;b&amp;gt; 和 &amp;lt;/b&amp;gt;。第一个标签是开始标签，第二个标签是结束标签&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开始和结束标签也被称为开放标签和闭合标签 &amp;lt;标签&amp;gt; 内容 &amp;lt;/标签&amp;gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一个简单例子&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 声明为HTML5文档 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 元素是 HTML 页面的根元素 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 第一部分：头部元素 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 包含了文档的元数据，定义网页编码格式为 utf-8 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;网页学习&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 文档的标题 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 第二部分：可见页面内容 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;这是一个标题&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 元素定义一个大标题 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;hr&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!--横线--&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;这是一个段落&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 元素定义一个段落 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;常用的轻量编辑器：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sublime Text：http://www.sublimetext.com/&lt;/li&gt;
+&lt;li&gt;Notepad++：https://notepad-plus.en.softonic.com&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;常见HTML标签&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;lt;html&amp;gt;&amp;lt;/html&amp;gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;：头数据&lt;/li&gt;
+&lt;li&gt;&amp;lt;title&amp;gt;&amp;lt;/title&amp;gt;：标题&lt;/li&gt;
+&lt;li&gt;&amp;lt;body&amp;gt;&amp;lt;/body&amp;gt;：页面内容&lt;/li&gt;
+&lt;li&gt;&amp;lt;h1&amp;gt;&amp;lt;/h1&amp;gt;：标题 1-6级&lt;/li&gt;
+&lt;li&gt;&amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;：段落&lt;/li&gt;
+&lt;li&gt;&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;a&amp;gt;&amp;lt;/a&amp;gt;：链接&lt;/li&gt;
+&lt;li&gt;&amp;lt;ul&amp;gt;&amp;lt;/ul&amp;gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;br&amp;gt;：换行&lt;/li&gt;
+&lt;li&gt;&amp;lt;hr&amp;gt;：水平线&lt;/li&gt;
+&lt;li&gt;&amp;lt;meta&amp;gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;img&amp;gt;：图片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="http与https"&gt;HTTP与HTTPS
+&lt;/h2&gt;&lt;h3 id="http"&gt;HTTP
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;HTTP简介&lt;/strong&gt;：超文本传输协议（Hyper Text Transfer Protocol，HTTP）是一个简单的请求-响应协议，它通常运行在TCP/IP协议之上。它指定了客户端可能发送给服务器什么样的消息以及得到什么样的响应。当时选择使用HTTP协议，是因为它使开发和部署非常地直截了当。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如何访问Web应用&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;在浏览器地址栏键入URL访问&lt;/li&gt;
+&lt;li&gt;浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的 IP 地址&lt;/li&gt;
+&lt;li&gt;解析出 IP 地址后，根据该 IP 地址和默认端口 80，和服务器建立TCP连接&lt;/li&gt;
+&lt;li&gt;浏览器发出读取文件(URL 中域名后面部分对应的文件)的HTTP 请求，该请求报文作为 TCP 三次握手的第三个报文的数据发送给服务器&lt;/li&gt;
+&lt;li&gt;服务器对浏览器请求作出响应，并把对应的 html 文本发送给浏览器&lt;/li&gt;
+&lt;li&gt;浏览器将该 html 文本进行解析并显示内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP协议的内部操作过程&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;客户端与服务器端建立连接&lt;/li&gt;
+&lt;li&gt;客户端向服务器端发送请求&lt;/li&gt;
+&lt;li&gt;服务器端向客户端回复响应&lt;/li&gt;
+&lt;li&gt;断开连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP的发展历程&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP 是基于 TCP/IP 协议的应用层协议，在 OSI 七层模型中在最上层，它并不涉及数据包传输，主要规定了客户端和服务器之间的通信格式，默认使用80端口。&lt;/li&gt;
+&lt;li&gt;1991年发布的 HTTP/0.9 ，只支持：GET。这个版本的协议规定，服务器只能回应HTML格式的字符串，不能回应别的格式，也就是说今天的图像、视频等多媒体资源，在 HTTP/0.9这个版本上是无法进行传输的&lt;/li&gt;
+&lt;li&gt;1996年5月，HTTP/1.0 版本发布，增加了POST命令和HEAD命令，丰富了浏览器与服务器的互动手段。这个版本HTTP协议可以发送任何格式的内容，包括传输文字、图像、视频、文件，这为互联网的大发展奠定了基础。除了增加了请求方法以及对发送文件的支持之外，还增加了格式的改变。除了数据部分，每次通信都必须包括头信息，用来描述一些元数据。另外还增加了状态码、多字符集支持、多部分发送、权限、缓存、内容编码等等&lt;/li&gt;
+&lt;li&gt;1997年1月，HTTP/1.1 版本发布，这个版本只比 1.0 版本晚了半年。这个版本最大的变化就是将持久化连接加入了 HTTP 标准，即TCP连接默认不关闭，可以被多个请求复用。此外，HTTP/1.1版还新增了许多方法，例如：PUT、CONNECT、HEAD、 OPTIONS、DELETE。得到进一步完善的HTTP/1.1 版本，一直沿用至今&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP的请求类型&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;URL全称是资源描述符，一个URL地址用于描述一个网络上的资源，HTTP中的GET，POST，PUT，DELETE就对应着对这个资源的查 ，改 ，增 ，删 4个操作。&lt;/li&gt;
+&lt;li&gt;GET一般用于获取/查询资源信息；POST一般用于更新资源信息&lt;/li&gt;
+&lt;li&gt;GET用于信息获取时应该是安全的、幂等的。
+&lt;ul&gt;
+&lt;li&gt;安全：该操作用于获取信息而非修改信息。它仅仅是获取资源信息，就像数据库查询一样，不会修改，增加数据，不会影响资源的状态。&lt;/li&gt;
+&lt;li&gt;幂等：对同一URL的多个请求应该返回同样的结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;POST表示可能修改服务器上的资源的请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;GET&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求获取Request-URI（请求地址）所标识的资源。(请求读取由url所标志的信息)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;POST&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;在Request-URI所标识的资源后附加新的数据。（给服务器添加信息，例如注释）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;HEAD&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求获取由Request-URI所标识的资源的响应消息报头。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;PUT&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求服务器存储一个资源，并用Request-URI作为其标识。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;DELETE&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求服务器删除Request-URI所标识的资源。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;TRACE&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求服务器回送收到的请求信息，主要用于测试或诊断。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;CONNECT&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;用于代理服务器。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;OPTIONS&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求查询服务器的性能，或者查询与资源相关（特定）的选项和需求。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTTP的主要特点&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;支持客户/服务器模式&lt;/strong&gt;：一个服务器可以为分布在世界各地 的许多客户服务&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;简单快速&lt;/strong&gt;：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET和POST。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;灵活&lt;/strong&gt;：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTTP报文格式&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;请求报文：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;请求行：用来说明请求类型,要访问的资源以及所使用的HTTP版本&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;请求头：紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;请求载体：也叫主体，可以添加任意的其他数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;响应行：由HTTP协议版本号， 状态码， 状态消息三部分组成&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;响应头：消息报头，用来说明客户端要使用的一些附加信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;响应载体：响应正文，服务器返回给客户端的文本信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一个请求报文的格式与案例：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;GET&lt;/span&gt; &lt;span class="nn"&gt;&amp;lt;url&amp;gt;&lt;/span&gt; &lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;[field-name]&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="l"&gt;[value][\r][\n]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;[field-name]&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="l"&gt;[value][\r][\n]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;......&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="g"&gt;[field-name]:[value][\r][\n]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="g"&gt;[\r][\n]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="g"&gt;[Body data]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;GET&lt;/span&gt; &lt;span class="nn"&gt;/s?w=kali&lt;/span&gt; &lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Accept&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Accept-Encoding&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;gzip, deflate, br, zstd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Accept-Language&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;zh-CN,zh;q=0.9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Connection&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;keep-alive&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Cookie&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;[Cookie]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Host&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;www.baidu.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Sec-Fetch-Dest&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;document&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Sec-Fetch-Mode&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;navigate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Sec-Fetch-Site&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;none&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Sec-Fetch-User&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;?1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Upgrade-Insecure-Requests&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;User-Agent&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;sec-ch-ua&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;&amp;#34;Google Chrome&amp;#34;;v=&amp;#34;143&amp;#34;, &amp;#34;Chromium&amp;#34;;v=&amp;#34;143&amp;#34;, &amp;#34;Not A(Brand&amp;#34;;v=&amp;#34;24&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;sec-ch-ua-mobile&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;?0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;sec-ch-ua-platform&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;&amp;#34;Windows&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/http.png"
+width="1864"
+height="660"
+srcset="http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/http_hu_b65727d23d35a8e4.png 480w, http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/http_hu_7fe2560b9ce7bac9.png 1024w"
+loading="lazy"
+alt="http"
+class="gallery-image"
+data-flex-grow="282"
+data-flex-basis="677px"
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTTP请求报文的常用字段&lt;/strong&gt;：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;请求字段&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Accept&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;指定客户端接受信息的类型（MIME类型）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Connection&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;允许C/S指定与请求/响应连接的有关选项&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Host&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求的服务器的主机名和端口号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Referer&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的，服务器因此可以获得一些信息用于处理&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;User-Agent&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;发起请求的应用程序名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Accept-Encoding&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;告诉服务器能够接受哪些内容编码方式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Content-Length&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示请求消息正文的长度&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Cookie&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;客户端提供给服务器的认证数据&lt;br /&gt;Cookie通常也叫做网站cookie，浏览器cookie或者httpcookie，是保存在用户浏览器端的，并在发出http请求时会默认携带的一段文本片段。它可以用来做用户认证，服务器校验等通过文本数据可以处理的问题。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTTP响应报文常用状态码&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;状态码&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;临时响应（1xx）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示临时响应并需要请求者继续执行操作的状态代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;成功（2xx）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示成功处理了请求的状态代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;重定向（3xx）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示要完成请求，需要进一步操作，通常用来重定向&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;请求错误（4xx）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示请求可能出错，妨碍了服务器的处理&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;服务器错误（5xx）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示服务器在尝试处理请求时发生内部错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTTP的缺陷&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由于 HTTP 协议的简单特性，且不保存客户端的状态，不进行验证客户端是否是真实存在，传输使用的是明文传输，故也很具有缺点。
+&lt;ul&gt;
+&lt;li&gt;通信双方使用明文传输（不加密），内容可能会被窃听&lt;/li&gt;
+&lt;li&gt;不验证通信方的身份，因此可能遭遇伪装&lt;/li&gt;
+&lt;li&gt;无法证明报文的完整性，所以有可能已遭篡改。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="https"&gt;HTTPS
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;HTTPS简介&lt;/strong&gt;：HTTPS是在HTTP上建立SSL加密层，并对传输数据进行加密，是HTTP协议的安全版。默认HTTP的端口号为80，HTTPS的端口号为443。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主要作用&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;对数据进行加密，并建立一个信息安全通道，来保证传输过程中的数据安全&lt;/li&gt;
+&lt;li&gt;对网站服务器进行真实身份认证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;与HTTP的本质区别&lt;/strong&gt;：明文传输与加密传输
+&lt;ul&gt;
+&lt;li&gt;采用HTTPS协议的服务器（Server）必须从公信机构（CA）申请一个用于证明服务器用途类型的证书。该证书只有用于对应的Server的时候，客户端（Client）才信任该主机&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>渗透测试基础</title><link>http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/</link><pubDate>Tue, 30 Dec 2025 14:51:56 +0800</pubDate><guid>http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="渗透测试基础"&gt;渗透测试基础
 &lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;概述&lt;/strong&gt;：通过各种手段对目标进行渗透攻击，通过渗透来测试目标的安全防护能力&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;底层基础&lt;/strong&gt;：目标系统中存在安全漏洞（Loophole，指信息系统中存在的缺陷或不适当的配置，其可使攻击者在未授权情况下访问或破坏系统，导致信息系统面临安全风险）&lt;/li&gt;
