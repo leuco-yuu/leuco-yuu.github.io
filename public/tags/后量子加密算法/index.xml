@@ -73,10 +73,11 @@
     &gt;10.1016/j.jisa.2024.103826&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;网址：https://www.sciencedirect.com/science/article/pii/S2214212624001297&lt;/p&gt;
+&lt;p&gt;网址：&lt;a class=&#34;link&#34; href=&#34;https://www.sciencedirect.com/science/article/pii/S2214212624001297&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;原文链接&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;附件：[文献原文](Dabra 等 - 2024 - SL3PAKE Simple Lattice-based Three-party Password Authenticated Key Exchange for post-quantum world.pdf)&lt;/p&gt;
+&lt;p&gt;附件：&lt;a class=&#34;link&#34; href=&#34;Full-Text.pdf&#34; &gt;SL3PAKE: Simple Lattice-based Three-party Password Authenticated Key Exchange for post-quantum world&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;基础信息&#34;&gt;基础信息
@@ -97,12 +98,11 @@
 &lt;p&gt;$q$：满足 $q\equiv 1 \ (mod\ 2n)$ 的大奇素数&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$R$：&lt;/p&gt;
-$$\displaystyle{\frac{\mathbb{Z}\left[x\right]}{\left&lt;f(x)\right&gt;} = \frac{\mathbb{Z}\left[x\right]}{\left&lt; x^n+1 \right&gt;}}$$&lt;p&gt; （多项式商环，其中 $f(x)$ 为分圆多项式）&lt;/p&gt;
+&lt;p&gt;$R$：$\displaystyle{\frac{\mathbb{Z}\left[x\right]}{\langle f(x)\rangle} = \frac{\mathbb{Z}\left[x\right]}{\langle x^n+1 \rangle}}$（多项式商环，其中 $f(x)$ 为分圆多项式）&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$R_q$：&lt;/p&gt;
-$$\displaystyle{\frac{R}{qR}}$$&lt;/li&gt;
+&lt;p&gt;$R_q$：$\displaystyle{\frac{R}{qR}}$&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;$\chi_\beta$：$R_q$ 上的标准差为 $\beta$ 的离散高斯分布&lt;/p&gt;
 &lt;/li&gt;
@@ -131,10 +131,10 @@ $$\displaystyle{E=\left\{ -\left\lfloor \frac{q}{4} \right\rfloor \cdots \left\l
 &lt;p&gt;$\operatorname{Cha}(m)$：特征函数，
 &lt;/p&gt;
 $$
-  &amp;\operatorname{Cha}(m) = 
+  \operatorname{Cha}(m) = 
   \begin{cases}
-  0, \quad &amp; if\ m\in E \\
-  1, &amp; else\\
+  0, \quad  if\ m\in E \\
+  1,  else\\
   \end{cases}\\
   $$&lt;/li&gt;
 &lt;li&gt;
@@ -144,19 +144,19 @@ $$
   \operatorname{Mod_2}(m,n) = \left(m+n\cdot\frac{q-1}{2} \right)\ \ mod\ q \ \ mod\ 2
   $$&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$\operatorname{h_0}(\cdot)$：哈希函数，$\operatorname{h_0}:{0,1}^* \rightarrow R_q$&lt;/p&gt;
+&lt;p&gt;$\operatorname{h_0}(\cdot)$：哈希函数，$\operatorname{h_0}: \lbrace 0,1 \rbrace ^* \rightarrow R_q$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$\operatorname{h_1}(\cdot)$：哈希函数，$\operatorname{h_0}:{0,1}^* \rightarrow {0,1}^g$&lt;/p&gt;
+&lt;p&gt;$\operatorname{h_1}(\cdot)$：哈希函数，$\operatorname{h_0}: \lbrace 0,1 \rbrace^* \rightarrow \lbrace 0,1\rbrace^g$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$\operatorname{h_2}(\cdot)$：哈希函数，$\operatorname{h_0}:{0,1}^* \rightarrow \chi_\beta$&lt;/p&gt;
+&lt;p&gt;$\operatorname{h_2}(\cdot)$：哈希函数，$\operatorname{h_0}:\lbrace 0,1\rbrace^* \rightarrow \chi_\beta$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$pw_A$：A的口令&lt;/p&gt;
+&lt;p&gt;$pw_A,pw_B$：A和B的口令密码&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$pw_B$：B的口令&lt;/p&gt;
+&lt;p&gt;$ID_S,ID_A,ID_B$：S、A和B的唯一身份标识&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;协议流程&#34;&gt;协议流程
@@ -168,19 +168,19 @@ $$
 &lt;li&gt;S选取哈希函数 $\operatorname{h_0}(\cdot)$、$\operatorname{h_1}(\cdot)$、$\operatorname{h_2}(\cdot)$&lt;/li&gt;
 &lt;li&gt;S通过安全信道接受A和B的口令的哈希值 $\operatorname{h_0}(pw_A)$ 和 $\operatorname{h_0}(pw_B)$&lt;/li&gt;
 &lt;li&gt;S生成并公开S、A、B的身份标识 $ID_S$、$ID_A$、$ID_B$&lt;/li&gt;
-&lt;li&gt;S保存参数：$\left{s_S,\operatorname{h_0}(pw_A),\operatorname{h_0}(pw_B) \right}$&lt;/li&gt;
-&lt;li&gt;S公开参数：$\left{n,q,\chi_\beta,a,x_S,ID_A,ID_B,ID_S,\operatorname{h_0}(\cdot),\operatorname{h_1}(\cdot),\operatorname{h_2}(\cdot) \right}$&lt;/li&gt;
+&lt;li&gt;S保存参数：$\lbrace s_S,\operatorname{h_0}(pw_A),\operatorname{h_0}(pw_B) \rbrace$&lt;/li&gt;
+&lt;li&gt;S公开参数：$\lbrace n,q,\chi_\beta,a,x_S,ID_A,ID_B,ID_S,\operatorname{h_0}(\cdot),\operatorname{h_1}(\cdot),\operatorname{h_2}(\cdot) \rbrace$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;client-a实例化会话&#34;&gt;Client A：实例化会话
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Input&lt;/strong&gt;：$ID_A$ ， $pw_A$&lt;/li&gt;
 &lt;li&gt;$x_A = a\cdot s_A + 2e_A$，其中 $s_A,e_A\leftarrow \chi_\beta$&lt;/li&gt;
-&lt;li&gt;$x^*_A = x_A + \operatorname{h_0}(pw_A)$&lt;/li&gt;
+&lt;li&gt;$x_A^* = x_A + \operatorname{h_0}(pw_A)$&lt;/li&gt;
 &lt;li&gt;$h_{AS} = \operatorname{h_1}(ID_A,ID_S,x_A,x^*_A)$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;client-a--client-b&#34;&gt;Client A =&amp;gt; Client B
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$A\Rightarrow B: \left{ID_A,x^*&lt;em&gt;A,h&lt;/em&gt;{AS}\right}$&lt;/li&gt;
+&lt;li&gt;$ A \Rightarrow B: \lbrace ID_A,x_A^*,h_{AS} \rbrace $&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;client-b实例化会话&#34;&gt;Client B：实例化会话
 &lt;/h3&gt;&lt;ul&gt;
@@ -191,19 +191,19 @@ $$
 &lt;/ul&gt;
 &lt;h3 id=&#34;client-b--server-s&#34;&gt;Client B =&amp;gt; Server S
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$B\Rightarrow S: \left{ID_A,ID_B,x^&lt;em&gt;_A,x^&lt;/em&gt;&lt;em&gt;B,h&lt;/em&gt;{AS},h_{BS}\right}$&lt;/li&gt;
+&lt;li&gt;$ B \Rightarrow S: \lbrace ID_A,ID_B,x_A^*,x_B^*,h_{AS},h_{BS} \rbrace $&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;server-s客户端身份认证&#34;&gt;Server S：客户端身份认证
 &lt;/h3&gt;&lt;h4 id=&#34;对-client-a-的身份认证&#34;&gt;对 Client A 的身份认证
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;$x&amp;rsquo;_A = x^*_A - \operatorname{h_0}(pw_A)$，这里有 $x_A == x&amp;rsquo;_A$&lt;/li&gt;
-&lt;li&gt;**Check if ** $h_{AS} \overset{?}{==} \operatorname{h_1}(ID_A,ID_S,x&amp;rsquo;_A,x^*_A)$&lt;/li&gt;
+&lt;li&gt;$x_A&#39; = x^*_A - \operatorname{h_0}(pw_A)$，这里有 $x_A == x_A&#39;$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Check if&lt;/strong&gt; $h_{AS} \overset{?}{==} \operatorname{h_1}(ID_A,ID_S,x_A&#39;,x^*_A)$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;If not, then abort.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;对-client-b-的身份认证&#34;&gt;对 Client B 的身份认证
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;$x&amp;rsquo;_B = x^*_B - \operatorname{h_0}(pw_B)$，这里有 $x_B == x&amp;rsquo;_B$&lt;/li&gt;
-&lt;li&gt;**Check if ** $h_{BS} \overset{?}{==} \operatorname{h_1}(ID_B,ID_S,x&amp;rsquo;_B,x^*_B)$&lt;/li&gt;
+&lt;li&gt;$x_B&#39; = x^*_B - \operatorname{h_0}(pw_B)$，这里有 $x_B == x_B&#39;$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Check if&lt;/strong&gt; $h_{BS} \overset{?}{==} \operatorname{h_1}(ID_B,ID_S,x_B&#39;,x^*_B)$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;If not, then abort.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;server-s协助-client-a-和-client-b-建立协商密钥&#34;&gt;Server S：协助 Client A 和 Client B 建立协商密钥
@@ -212,25 +212,25 @@ $$
 &lt;/ul&gt;
 &lt;h4 id=&#34;对于-client-a-&#34;&gt;对于 Client A ：
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;$c_A = x&amp;rsquo;&lt;em&gt;B\cdot s_S + 2f&lt;/em&gt;{S_4}$，其中 $f_{S_4} \leftarrow \chi_\beta$&lt;/li&gt;
-&lt;li&gt;$m = \operatorname{h_2}(ID_S,ID_A,x_S,x&amp;rsquo;_A)$&lt;/li&gt;
-&lt;li&gt;$k_{SA}=(x&amp;rsquo;&lt;em&gt;A\cdot s_S+2m)\cdot m+2f&lt;/em&gt;{S_1}$，其中 $f_{S_1} \leftarrow \chi_\beta$&lt;/li&gt;
+&lt;li&gt;$c_A = x_B&#39; \cdot s_S + 2f_{S_4}$，其中 $f_{S_4} \leftarrow \chi_\beta$&lt;/li&gt;
+&lt;li&gt;$m = \operatorname{h_2}(ID_S,ID_A,x_S,x_A&#39;)$&lt;/li&gt;
+&lt;li&gt;$k_{SA}=(x_A&#39;\cdot s_S+2m)\cdot m+2f_{S_1}$，其中 $f_{S_1} \leftarrow \chi_\beta$&lt;/li&gt;
 &lt;li&gt;$\omega_{SA} = \operatorname{Cha}(k_{SA})$&lt;/li&gt;
 &lt;li&gt;$\sigma_{SA} = \operatorname{Mod_2}(k_{SA},\omega_{SA})$&lt;/li&gt;
-&lt;li&gt;$\alpha_{SA}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_A,x&amp;rsquo;&lt;em&gt;A,\sigma&lt;/em&gt;{SA})$&lt;/li&gt;
+&lt;li&gt;$\alpha_{SA}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_A,x_A&#39;,\sigma_{SA})$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;对于-client-b&#34;&gt;对于 Client B：
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;$c_B = x&amp;rsquo;&lt;em&gt;A\cdot s_S + 2f&lt;/em&gt;{S_5}$，其中 $f_{S_5} \leftarrow \chi_\beta$&lt;/li&gt;
-&lt;li&gt;$n = \operatorname{h_2}(ID_S,ID_B,x_S,x&amp;rsquo;_B)$&lt;/li&gt;
-&lt;li&gt;$k_{SB}=(x&amp;rsquo;&lt;em&gt;B\cdot s_S+2n)\cdot n+2f&lt;/em&gt;{S_3}$，其中 $f_{S_3} \leftarrow \chi_\beta$&lt;/li&gt;
+&lt;li&gt;$c_B = x_A&#39;\cdot s_S + 2f_{S_5}$，其中 $f_{S_5} \leftarrow \chi_\beta$&lt;/li&gt;
+&lt;li&gt;$n = \operatorname{h_2}(ID_S,ID_B,x_S,x_B&#39;)$&lt;/li&gt;
+&lt;li&gt;$k_{SB}=(x_B&#39;\cdot s_S+2n)\cdot n+2f_{S_3}$，其中 $f_{S_3} \leftarrow \chi_\beta$&lt;/li&gt;
 &lt;li&gt;$\omega_{SB} = \operatorname{Cha}(k_{SB})$&lt;/li&gt;
 &lt;li&gt;$\sigma_{SB} = \operatorname{Mod_2}(k_{SB},\omega_{SB})$&lt;/li&gt;
-&lt;li&gt;$\alpha_{SB}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_B,x&amp;rsquo;&lt;em&gt;B,\sigma&lt;/em&gt;{SB})$&lt;/li&gt;
+&lt;li&gt;$\alpha_{SB}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_B,x_B&#39;,\sigma_{SB})$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;server-s--client-b&#34;&gt;Server S =&amp;gt; Client B
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$S\Rightarrow B: \left{c_A,c_B,x_S,\omega_{SA},\omega_{SB},\alpha_{SA},\alpha_{SB}\right}$&lt;/li&gt;
+&lt;li&gt;$S\Rightarrow B: \lbrace c_A,c_B,x_S,\omega_{SA},\omega_{SB},\alpha_{SA},\alpha_{SB}\rbrace$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;client-b验证-s-身份并与-a-协商密钥&#34;&gt;Client B：验证 S 身份并与 A 协商密钥
 &lt;/h3&gt;&lt;h4 id=&#34;验证-server-s-的身份&#34;&gt;验证 Server S 的身份
@@ -239,7 +239,7 @@ $$
 &lt;li&gt;$k_{BS}=(x_S\cdot s_B+2n)\cdot n+2f_{B_1}$，其中 $f_{B_1} \leftarrow \chi_\beta$&lt;/li&gt;
 &lt;li&gt;$\sigma_{BS} = \operatorname{Mod_2}(k_{BS},\omega_{SB})$&lt;/li&gt;
 &lt;li&gt;$\alpha_{BS}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_B,x_B,\sigma_{BS})$&lt;/li&gt;
-&lt;li&gt;**Check if ** $\alpha_{BS} \overset{?}{==} \alpha_{SB}$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Check if&lt;/strong&gt; $\alpha_{BS} \overset{?}{==} \alpha_{SB}$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;If not, then abort.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;与-client-a-完成协商&#34;&gt;与 Client A 完成协商
@@ -247,11 +247,11 @@ $$
 &lt;li&gt;$\nu_{BA} = c_B\cdot s_B +2f_{B_2}$，其中 $f_{B_2} \leftarrow \chi_\beta$&lt;/li&gt;
 &lt;li&gt;$\omega_{BA}=\operatorname{Cha}(\nu_{BA})$&lt;/li&gt;
 &lt;li&gt;$\sigma_{BA}=\operatorname{Mod_2}(\nu_{BA},\omega_{BA})$&lt;/li&gt;
-&lt;li&gt;$sk_{BA} = \operatorname{h_1}(ID_A,ID_B,ID_S,x^&lt;em&gt;_A,x^&lt;/em&gt;&lt;em&gt;B,\sigma&lt;/em&gt;{BA})$&lt;/li&gt;
+&lt;li&gt;$ sk_{BA} = \operatorname{h_1}(ID_A,ID_B,ID_S,x_A^*,x_B^*,\sigma_{BA})$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;client-b--client-a&#34;&gt;Client B =&amp;gt; Client A
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$B\Rightarrow A: \left{ID_B,x^*&lt;em&gt;B,c_A,x_S,\omega&lt;/em&gt;{BA},\omega_{SA},\alpha_{SA}\right}$&lt;/li&gt;
+&lt;li&gt;$B\Rightarrow A: \lbrace ID_B,x_B^*,c_A,x_S,\omega_{BA},\omega_{SA},\alpha_{SA}\rbrace$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;client-a验证-s-身份并与-b-协商密钥&#34;&gt;Client A：验证 S 身份并与 B 协商密钥
 &lt;/h3&gt;&lt;h4 id=&#34;验证-server-s-的身份-1&#34;&gt;验证 Server S 的身份
@@ -260,14 +260,14 @@ $$
 &lt;li&gt;$k_{AS}=(x_S\cdot s_A+2m)\cdot m+2f_{A_1}$，其中 $f_{A_1} \leftarrow \chi_\beta$&lt;/li&gt;
 &lt;li&gt;$\sigma_{AS} = \operatorname{Mod_2}(k_{AS},\omega_{SA})$&lt;/li&gt;
 &lt;li&gt;$\alpha_{AS}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_A,x_A,\sigma_{AS})$&lt;/li&gt;
-&lt;li&gt;**Check if ** $\alpha_{AS} \overset{?}{==} \alpha_{SA}$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Check if&lt;/strong&gt; $\alpha_{AS} \overset{?}{==} \alpha_{SA}$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;If not, then abort.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;与-client-b-完成协商&#34;&gt;与 Client B 完成协商
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;$\nu_{AB} = c_A\cdot s_A +2f_{A_2}$，其中 $f_{A_2} \leftarrow \chi_\beta$&lt;/li&gt;
 &lt;li&gt;$\sigma_{AB}=\operatorname{Mod_2}(\nu_{AB},\omega_{BA})$&lt;/li&gt;
-&lt;li&gt;$sk_{AB} = \operatorname{h_1}(ID_A,ID_B,ID_S,x^&lt;em&gt;_A,x^&lt;/em&gt;&lt;em&gt;B,\sigma&lt;/em&gt;{AB})$&lt;/li&gt;
+&lt;li&gt;$sk_{AB} = \operatorname{h_1}(ID_A,ID_B,ID_S,x_A^*,x_B^*,\sigma_{AB})$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;完成密钥协商&#34;&gt;完成密钥协商
 &lt;/h3&gt;&lt;ul&gt;

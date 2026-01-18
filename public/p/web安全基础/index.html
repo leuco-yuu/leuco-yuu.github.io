@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="网络空间安全】网络安全入门-Web安全基础">
+<meta name="keywords" content="网络空间安全, Web安全"><title>Web安全基础</title>
+
+<link rel='canonical' href='http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/'>
+
+<link rel="stylesheet" href="/scss/style.min.4ebb72b19bf107a2d2a8110366ec741defa89660873efbae8076e12ff77b6661.css"><meta property='og:title' content="Web安全基础">
+<meta property='og:description' content="网络空间安全】网络安全入门-Web安全基础">
+<meta property='og:url' content='http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/'>
+<meta property='og:site_name' content='Leuco&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='网络空间安全' /><meta property='article:tag' content='Web安全' /><meta property='article:published_time' content='2026-01-12T14:08:04&#43;08:00'/><meta property='article:modified_time' content='2026-01-12T14:08:04&#43;08:00'/>
+<meta name="twitter:title" content="Web安全基础">
+<meta name="twitter:description" content="网络空间安全】网络安全入门-Web安全基础">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f6aa26e80a833272.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Leuco&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/leuco-yuu/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://mail.google.com/mail/u/0/?tf=cm&amp;to=leucoyuu@gmail.com&amp;fs=1'
+                        target="_blank"
+                        title="Gmail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <!-- 信封外框 -->
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+  
+  <!-- 信封内部线条（模拟折叠效果） -->
+  <polyline points="3,5 12,14 21,5" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://wpa.qq.com/msgrd?v=3&amp;uin=1286938728&amp;site=qq&amp;menu=yes/'
+                        target="_blank"
+                        title="QQ"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="m15.9998867 0-.3175962.00373031c-6.8340705.16105657-10.59798873 5.52198001-10.62328209 13.09956699l.00099159.2727027-.86256398 2.1053645c-.34339269.8459887-.59479858 1.4918602-.8236549 2.1249911-.16246446.4494579-.31092035.8862129-.4515632 1.3302912-1.41043336 4.4529342-1.46997142 7.7313526 1.14979123 8.0424546l.19586827.0182568c.69853306.0462522 1.18775172-.1357889 1.69345756-.5695745l.04666502-.0427837.10703497.1859114.16295747.2641667.09000756.1369219-.10203891.0725127c-1.18457469.8599516-1.78515849 2.0422997-.8749963 3.5478041.72014893 1.1919865 1.68579016 1.3851809 4.67654251 1.4059241h1.2781117l.7210113-.0101194c1.4578857-.0287327 2.9764342-.1065736 3.9343697-.2001215l.2555297.0243167c1.1291243.09698 2.8606159.1735357 4.3993902.1859242h1.2781118c2.9907546-.0207471 3.95642-.2139816 4.6768437-1.4064227l.0983227-.1723424c.764361-1.4241985.1648309-2.548721-.9747412-3.3755348l-.1034569-.072941.0912293-.1362605.1629318-.2641511.1068389-.1855884.0466679.0427821c.5516504.4732059 1.0836451.6468525 1.8890001.5513616 2.6200145-.3116105 2.5604594-3.5895097 1.1502083-8.0424822-.136678-.4315245-.2810058-.8567817-.4385987-1.2939849l-.1781698-.4846461c-.0923296-.2464665-.1903348-.5013359-.2976536-.7744519l-.3954267-.9868956-.8290275-2.020683.0009399-.279262c-.038761-7.60576089-3.8169423-12.93053326-10.6187985-13.09291824zm.0001023 2c6.339972.00032813 9.0947051 5.25726658 8.9334981 11.7557738l.8516442 2.0748544c.5606846 1.3708665.9939584 2.4718584 1.3860782 3.7098724 1.2134003 3.8314013.8203049 5.4169539.5209683 5.4525554-.6424867.0761796-2.5006035-2.8842697-2.5006035-2.8842697 0 1.7141775-.8994592 3.9510027-2.8457046 5.5664147l.3377045.1073023c1.0249215.341207 2.6653848 1.0302704 2.2154641 1.7750936-.4078113.675007-6.9962271.4309917-8.8982689.2207732l-.4753503.0452169c-2.33636.195172-8.04423656.3608021-8.42291849-.2659901-.50418989-.8339832 1.61195836-1.5976385 2.55205373-1.8820678-1.94652419-1.615412-2.84615056-3.852456-2.84615056-5.5667428l-.32111727.4924567c-.56063792.838483-1.70355568 2.4482423-2.17943051 2.391813-.29933663-.0355468-.69254342-1.6211541.52102408-5.4525554l.21887662-.6654718c.52220361-1.5311231 1.13363576-2.9515889 2.01884579-5.1193097-.17029299-6.39290578 2.5220086-11.75539097 8.93338651-11.7557191z" fill="currentColor" fill-rule="nonzero"/></g></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8D%9A%E4%B8%BB/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>博主</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>博文</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#web发展史">Web发展史</a></li>
+    <li><a href="#静态页面与动态页面">静态页面与动态页面</a></li>
+    <li><a href="#urlurl-uniform-resource-locator">URL（URL Uniform Resource Locator）</a></li>
+    <li><a href="#html基础">HTML基础</a>
+      <ul>
+        <li><a href="#html简介">HTML简介</a></li>
+        <li><a href="#html标签元素">HTML标签/元素</a></li>
+      </ul>
+    </li>
+    <li><a href="#http与https">HTTP与HTTPS</a>
+      <ul>
+        <li><a href="#http">HTTP</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/" >
+                网络空间安全
+            </a>
+        
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
+                学习笔记
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/">Web安全基础</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            网络空间安全】网络安全入门-Web安全基础
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-01-12T14:08:04&#43;08:00'>Jan 12, 2026</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="web安全基础">Web安全基础
+</h1><div class="custom-toc">
+  <h3>目录</h3>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#web发展史">Web发展史</a></li>
+    <li><a href="#静态页面与动态页面">静态页面与动态页面</a></li>
+    <li><a href="#urlurl-uniform-resource-locator">URL（URL Uniform Resource Locator）</a></li>
+    <li><a href="#html基础">HTML基础</a>
+      <ul>
+        <li><a href="#html简介">HTML简介</a></li>
+        <li><a href="#html标签元素">HTML标签/元素</a></li>
+      </ul>
+    </li>
+    <li><a href="#http与https">HTTP与HTTPS</a>
+      <ul>
+        <li><a href="#http">HTTP</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<h2 id="web发展史">Web发展史
+</h2><ul>
+<li>
+<p><strong>Web1.0</strong>：个人网站，门户网络等（www.163.com、www.souhu.com）。Web 1.0时代开始于1994年，其主要特征是大量使用静态的 HTML 网页来发布信息，并开始使用浏览器来获取信息，这个时候主要是单向的信息传递</p>
+<ul>
+<li>常见攻击手段：SQL注入；文件包含；命令执行；上传漏洞；WebShell</li>
+</ul>
+</li>
+<li>
+<p><strong>web2.0</strong>：微博，Blog等（www.weibo.com、www.lofter.com）。Web 2.0 始于 2004 年 3 月Web2.0中，软件被当成一种服务，为用户提供网络应用的服务平台，强调用户的参与、在线的网络协作、数据储存的网络化、社会关系网络、应用以及文件的共享等成为了Web2.0发展的主要支撑和表现</p>
+<ul>
+<li>常见攻击手段：钓鱼攻击；URL跳转；框架漏洞；逻辑漏洞；XSS；CSRF</li>
+</ul>
+</li>
+<li>
+<p><strong>两者的本质区别在于</strong>：Web1.0 的主要是在于用户通过浏览器获取信息。Web2.0 则更注重用户的交互作用。</p>
+</li>
+</ul>
+<h2 id="静态页面与动态页面">静态页面与动态页面
+</h2><ul>
+<li>
+<p><strong>静态页面</strong></p>
+<ul>
+<li>
+<p>在静态html页面中，用户通过Web浏览器HTTP协议向web服务器发送一个响应请求，告诉web服务器要浏览这个网站的哪个页面，接着根据用户的响应请求返回一个html页面给用户，经过浏览器渲染解析呈现在用户眼前。</p>
+</li>
+<li>
+<p>静态web页面是没有数据库文件的，所以不能连接网络数据库</p>
+</li>
+<li>
+<p>静态web页面主是通过HTML代码开发设计的</p>
+</li>
+<li>
+<p>部分静态web页面为了页面的好看，使用了大量的JS代码，导致静态web页面打开速度慢</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>动态页面</strong></p>
+<ul>
+<li>在动态web页面中，依然要通过web服务器的http协议或https协议响应才能返回结果给用户，用户所有请求都必须要通过web服务器处理才能实现</li>
+<li>用户的响应请求是一个静态的html页面，只需要响应请求web服务器从系统中调出用户响应的内容，将内容返回给客户端浏览器进行处理，再返回给用户</li>
+<li>如果用户响应请求的是动态页面资源，例如.jsp/.asp/.aspx/.php等，响应步骤是先将用户请求发送给web服务器，web服务器再从数据库调出有户请求的数据，调出数据后将所需要展示给用户的内容发送给服务器，最后通过web服务器将需要展示给用户的内容返回给用户浏览器解析执行，展示给用户。</li>
+</ul>
+</li>
+</ul>
+<h2 id="urlurl-uniform-resource-locator">URL（URL Uniform Resource Locator）
+</h2><ul>
+<li>**统一资源定位符（Uniform Resource Locator，URL；俗称网页地址或简称网址）**是因特网上标准的资源的地址（Address），如同在网络上的门牌。它最初是由蒂姆·伯纳斯-李发明用来作为万维网的地址，现在它已经被万维网联盟编制为因特网标准 <a class="link" href="https://www.rfc-editor.org/info/rfc1738"  target="_blank" rel="noopener"
+    >RFC 1738</a>。</li>
+<li><strong>格式</strong>：<strong>[protocol]://[hostname]:[port]/[path]/[parameters]?[query]</strong>
+<ul>
+<li><strong>protocol</strong>：协议，常用的协议是http、https、ftp等</li>
+<li><strong>hostname</strong>：主机地址，可以是域名，也可以是IP地址</li>
+<li><strong>port</strong>：端口号，http协议默认端口是80端口</li>
+<li><strong>path</strong>：路径，网络资源在服务器中的指定路径</li>
+<li><strong>parameter</strong>：参数，如果要向服务器传入参数，在这部分输入</li>
+<li><strong>query</strong>：查询字符串，如果需要从服务器那里查询内容，在这里编辑，可有多个参数，用“&amp;”符号隔开，每个参数的名和值用“=”符号隔开。</li>
+</ul>
+</li>
+<li><strong>例如</strong>：https://www.baidu.com/s?ie=UTF-8&amp;wd=kali</li>
+</ul>
+<h2 id="html基础">HTML基础
+</h2><h3 id="html简介">HTML简介
+</h3><ul>
+<li>HTML 是用来描述网页的一种语言</li>
+<li>HTML 指的是超文本标记语言: HyperText Markup Language</li>
+<li>HTML 不是一种编程语言，而是一种标记语言，标记语言是一套标记标签 (markup tag)</li>
+<li>HTML 使用标记标签来描述网页</li>
+<li>HTML 文档包含了HTML 标签及文本内容</li>
+<li>HTML文档也叫做 web 页面</li>
+</ul>
+<h3 id="html标签元素">HTML标签/元素
+</h3><ul>
+<li>
+<p>HTML 标记标签通常被称为 HTML 标签 (HTML tag)</p>
+</li>
+<li>
+<p>HTML 标签是由尖括号包围的关键词，比如&lt;html&gt;</p>
+</li>
+<li>
+<p>HTML 标签通常是成对出现的，比如 &lt;b&gt; 和 &lt;/b&gt;。第一个标签是开始标签，第二个标签是结束标签</p>
+</li>
+<li>
+<p>开始和结束标签也被称为开放标签和闭合标签 &lt;标签&gt; 内容 &lt;/标签&gt;</p>
+</li>
+<li>
+<p>一个简单例子</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>  <span class="c">&lt;!-- 声明为HTML5文档 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>  <span class="c">&lt;!-- 元素是 HTML 页面的根元素 --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span> <span class="c">&lt;!-- 第一部分：头部元素 --&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span><span class="p">&gt;</span>  <span class="c">&lt;!-- 包含了文档的元数据，定义网页编码格式为 utf-8 --&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>网页学习<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>  <span class="c">&lt;!-- 文档的标题 --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>  <span class="c">&lt;!-- 第二部分：可见页面内容 --&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>这是一个标题<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>  <span class="c">&lt;!-- 元素定义一个大标题 --&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">hr</span><span class="p">&gt;</span>  <span class="c">&lt;!--横线--&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>这是一个段落<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>  <span class="c">&lt;!-- 元素定义一个段落 --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>常用的轻量编辑器：</p>
+<ul>
+<li>Sublime Text：http://www.sublimetext.com/</li>
+<li>Notepad++：https://notepad-plus.en.softonic.com</li>
+</ul>
+</li>
+<li>
+<p>常见HTML标签</p>
+<ul>
+<li>&lt;html&gt;&lt;/html&gt;</li>
+<li>&lt;head&gt;&lt;/head&gt;：头数据</li>
+<li>&lt;title&gt;&lt;/title&gt;：标题</li>
+<li>&lt;body&gt;&lt;/body&gt;：页面内容</li>
+<li>&lt;h1&gt;&lt;/h1&gt;：标题 1-6级</li>
+<li>&lt;p&gt;&lt;/p&gt;：段落</li>
+<li>&lt;div&gt;&lt;/div&gt;</li>
+<li>&lt;a&gt;&lt;/a&gt;：链接</li>
+<li>&lt;ul&gt;&lt;/ul&gt;</li>
+<li>&lt;br&gt;：换行</li>
+<li>&lt;hr&gt;：水平线</li>
+<li>&lt;meta&gt;</li>
+<li>&lt;img&gt;：图片</li>
+</ul>
+</li>
+</ul>
+<h2 id="http与https">HTTP与HTTPS
+</h2><h3 id="http">HTTP
+</h3><ul>
+<li>
+<p><strong>HTTP简介</strong>：超文本传输协议（Hyper Text Transfer Protocol，HTTP）是一个简单的请求-响应协议，它通常运行在TCP/IP协议之上。它指定了客户端可能发送给服务器什么样的消息以及得到什么样的响应。当时选择使用HTTP协议，是因为它使开发和部署非常地直截了当。</p>
+</li>
+<li>
+<p>如何访问Web应用？</p>
+<ul>
+<li>在浏览器地址栏键入URL访问</li>
+<li>浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的 IP 地址</li>
+<li>解析出 IP 地址后，根据该 IP 地址和默认端口 80，和服务器建立TCP连接</li>
+<li>浏览器发出读取文件(URL 中域名后面部分对应的文件)的HTTP 请求，该请求报文作为 TCP 三次握手的第三个报文的数据发送给服务器</li>
+<li>服务器对浏览器请求作出响应，并把对应的 html 文本发送给浏览器</li>
+<li>浏览器将该 html 文本进行解析并显示内容;</li>
+</ul>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/">网络空间安全</a>
+        
+            <a href="/tags/web%E5%AE%89%E5%85%A8/">Web安全</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">渗透测试基础</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/cover.d152216b03afd1d4ba29cd5994c33571_hu_b6c3aaaa86fdfb50.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【攻防实践】基础环境搭建"
+                        
+                        data-hash="md5-0VIhawOv0dS6Kc1ZlMM1cQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【攻防实践】基础环境搭建</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover.e5a9a8588c5efdb3863784d243c8f49c_hu_eb5d8ce2be08dd9.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【格基加密】SL3PAKE协议"
+                        
+                        data-hash="md5-5amoWIxe/bOGN4TSQ8j0nA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【格基加密】SL3PAKE协议</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/CS.33e635531a05e71782117358a85aea03_hu_de3c00236819fd37.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【攻防实践】MSF恶意程序利用与CS钓鱼网站制作"
+                        
+                        data-hash="md5-M&#43;Y1UxoF5xeCEXNYqFrqAw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【攻防实践】MSF恶意程序利用与CS钓鱼网站制作</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【攻防实践】靶场搭建</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="leuco-yuu/blog-comments"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Leuco(leucoyuu@163.com)
+    </section>
+    
+    <section class="powerby">
+        
+            Embrace Bit Art <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.2c897758e5161d223de0f28f0257464da1d3fdbe7af35af6e4f25cba359b5f26.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+	
+	<a id="back-to-top" href="#" title="返回顶部" 
+   style="position:fixed; bottom:20px; right:20px; display:none;"></a>
+	<script src="/js/back-to-top.js">^</script>
+
+
+    </body>
+</html>
