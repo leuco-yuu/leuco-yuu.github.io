@@ -93,35 +93,38 @@
 &lt;/h1&gt;&lt;h2 id="前馈神经网络fnn"&gt;前馈神经网络（FNN）
 &lt;/h2&gt;&lt;h3 id="神经元"&gt;神经元
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;数学模型：$$output = f(b+\displaystyle{\sum_{i=1}^nx_iw_i})$$，其中 $f(x)$ 为非线性的激活函数（Activation Function）; $n$ 为输入样本的特征数量&lt;/li&gt;
+&lt;li&gt;数学模型：
+$$output = f(b+\displaystyle{\sum_{i=1}^nx_iw_i})$$，其中 $f(x)$ 为非线性的激活函数（Activation Function）; $n$ 为输入样本的特征数量&lt;/li&gt;
 &lt;li&gt;激活函数
 &lt;ul&gt;
-&lt;li&gt;Sigmoid: $$f(x) = \displaystyle{\frac{1}{1+e^{-x}}}$$
-&lt;ul&gt;
+&lt;li&gt;Sigmoid:
+$$f(x) = \displaystyle{\frac{1}{1+e^{-x}}}$$&lt;ul&gt;
 &lt;li&gt;优点：可微、有界、单调、直观&lt;/li&gt;
 &lt;li&gt;缺点：梯度消失、恒为正、饱和区&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;Tanh： $$\displaystyle{f(x)=\frac{1-e^{-2x}}{1+e^{-2x}}}$$
-&lt;ul&gt;
+&lt;li&gt;Tanh：
+$$\displaystyle{f(x)=\frac{1-e^{-2x}}{1+e^{-2x}}}$$&lt;ul&gt;
 &lt;li&gt;优点：零均值、导数幅度大、可微&lt;/li&gt;
 &lt;li&gt;缺点：梯度消失、饱和区&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;ReLU： $$f(x)=\max(0,x)$$
-&lt;ul&gt;
+&lt;li&gt;ReLU：
+$$f(x)=\max(0,x)$$&lt;ul&gt;
 &lt;li&gt;优点：无梯度消失、计算极简、稀疏激活、收敛更快、无界输出&lt;/li&gt;
 &lt;li&gt;缺点：神经元永久关闭、非0对称、不可微点0、对噪声敏感&lt;/li&gt;
 &lt;li&gt;ReLU扩展：
 &lt;ul&gt;
-&lt;li&gt;PReLU： $$
+&lt;li&gt;PReLU：
+$$
 f(x;\alpha) =
 \begin{cases}
 \alpha x,\ &amp;x&lt;0 \\
 \ x, &amp;x \ge 0
 \end{cases}
 $$&lt;/li&gt;
-&lt;li&gt;ELU: $$
+&lt;li&gt;ELU:
+$$
 f(x;\alpha) =
 \begin{cases}
 \alpha(e^x-1),\ &amp;x&lt;0 \\
@@ -138,7 +141,8 @@ $$&lt;/li&gt;
 &lt;li&gt;Softmax常用于多分类任务的k个输出节点，代表概率&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;求导：$$\displaystyle{\frac{\partial Out(w)}{\partial w}=\frac{\partial Out(w)}{\partial In(w)}\frac{\partial In(w)}{\partial w} = \frac{d f(In)}{d In}\frac{\partial In(w)}{\partial w}}$$&lt;/li&gt;
+&lt;li&gt;求导：
+$$\displaystyle{\frac{\partial Out(w)}{\partial w}=\frac{\partial Out(w)}{\partial In(w)}\frac{\partial In(w)}{\partial w} = \frac{d f(In)}{d In}\frac{\partial In(w)}{\partial w}}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;图示：&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/0039768b-8f5b-4368-8c7c-65a12aefee01.png"
@@ -179,7 +183,8 @@ data-flex-basis="355px"
 &lt;/li&gt;
 &lt;li&gt;参数初始化
 &lt;ul&gt;
-&lt;li&gt;均匀分布初始化参数：从 $$\displaystyle{(-\frac{1}{\sqrt d},\frac{1}{\sqrt{d}})}$$，其中 d 为每个神经元的输入数量
+&lt;li&gt;均匀分布初始化参数：从
+$$\displaystyle{(-\frac{1}{\sqrt d},\frac{1}{\sqrt{d}})}$$，其中 d 为每个神经元的输入数量
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -222,8 +227,8 @@ data-flex-basis="355px"
 &lt;li&gt;固定值初始化参数&lt;/li&gt;
 &lt;li&gt;KaiMing初始化（HE初始化）
 &lt;ul&gt;
-&lt;li&gt;正态HE初始化： $$\displaystyle{\mathcal{N}\left(0,\sqrt{\frac{2}{in\_dim}}\right)}$$
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;li&gt;正态HE初始化：
+$$\displaystyle{\mathcal{N}\left(0,\sqrt{\frac{2}{in\_dim}}\right)}$$&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
@@ -232,8 +237,8 @@ data-flex-basis="355px"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;均匀分布HE初始化：$$\displaystyle{\mathcal{U}\left(-\sqrt{\frac{6}{in_dim}},+\sqrt{\frac{6}{in_dim}}\right)}$$
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;li&gt;均匀分布HE初始化：
+$$\displaystyle{\mathcal{U}\left(-\sqrt{\frac{6}{in_dim}},+\sqrt{\frac{6}{in_dim}}\right)}$$&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
@@ -246,8 +251,8 @@ data-flex-basis="355px"
 &lt;/li&gt;
 &lt;li&gt;Xavier初始化（Glorot初始化）
 &lt;ul&gt;
-&lt;li&gt;正态Glorot初始化（默认）： $$\displaystyle{\mathcal{N}\left(0,\sqrt{\frac{2}{in\_dim+out\_dim}}\right)}$$
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;li&gt;正态Glorot初始化（默认）：
+$$\displaystyle{\mathcal{N}\left(0,\sqrt{\frac{2}{in\_dim+out\_dim}}\right)}$$&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
@@ -256,8 +261,8 @@ data-flex-basis="355px"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;均匀Glorot初始化： $$\displaystyle{\mathcal{U}\left(-\sqrt{\frac{6}{in_dim+out_dim}},+\sqrt{\frac{6}{in_dim+out_dim}}\right)}$$
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;li&gt;均匀Glorot初始化：
+$$\displaystyle{\mathcal{U}\left(-\sqrt{\frac{6}{in_dim+out_dim}},+\sqrt{\frac{6}{in_dim+out_dim}}\right)}$$&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
@@ -412,8 +417,8 @@ data-flex-basis="3456px"
 &lt;h3 id="损失函数"&gt;损失函数
 &lt;/h3&gt;&lt;h4 id="二分类任务二元交叉熵损失sigmoid损失"&gt;二分类任务——二元交叉熵损失（Sigmoid损失）
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;损失函数： $$\displaystyle{\mathcal{L}=-y\log \hat y - (1-y)\log(1-\hat y)}$$
-&lt;ul&gt;
+&lt;li&gt;损失函数：
+$$\displaystyle{\mathcal{L}=-y\log \hat y - (1-y)\log(1-\hat y)}$$&lt;ul&gt;
 &lt;li&gt;$ y_i $（采用 $One-Hot$ 编码）是第 $ i $ 条样本 $ x_i $ 对应的真实标签（共 $ m $ 条样本）&lt;/li&gt;
 &lt;li&gt;$\hat{y}$ 是模型预测值 $\hat{y} = \sigma(f_\theta(x_i))$&lt;/li&gt;
 &lt;li&gt;$ \sigma(·) $ 是 $ Sigmoid $ 函数，将模型输出转换为概率&lt;/li&gt;
@@ -424,8 +429,8 @@ data-flex-basis="3456px"
 &lt;/ul&gt;
 &lt;h4 id="多分类任务多元交叉熵损失softmax损失"&gt;多分类任务——多元交叉熵损失（Softmax损失）
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;损失函数：$$\mathcal{L} = \displaystyle{-\sum_{i=1}^my_i\log(\operatorname{S}(f_\theta(x_i)))}$$
-&lt;ul&gt;
+&lt;li&gt;损失函数：
+$$\mathcal{L} = \displaystyle{-\sum_{i=1}^my_i\log(\operatorname{S}(f_\theta(x_i)))}$$&lt;ul&gt;
 &lt;li&gt;$ y_i $（采用 $One-Hot$ 编码）是第 $ i $ 条样本 $ x_i $ 对应的真实标签（共 $ m $ 条样本）&lt;/li&gt;
 &lt;li&gt;$ f_\theta(x_i) $ 是第 $ i $ 条样本 $ x_i $ 对应的预测值&lt;/li&gt;
 &lt;li&gt;$S(·)$ 是 $Softmax$ 激活函数，将 $x_i$ 的预测值进行概率化，输出 $x_i$ 对应每个类别的概率&lt;/li&gt;
@@ -436,8 +441,8 @@ data-flex-basis="3456px"
 &lt;/ul&gt;
 &lt;h4 id="回归损失mae损失函数l1范数曼哈顿距离"&gt;回归损失——MAE损失函数（L1范数/曼哈顿距离）
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;损失函数： $$\mathcal{L} = \displaystyle{\frac{1}{m}\sum_{i=1}^m|y_i-f_\theta(x_i)|}$$
-&lt;ul&gt;
+&lt;li&gt;损失函数：
+$$\mathcal{L} = \displaystyle{\frac{1}{m}\sum_{i=1}^m|y_i-f_\theta(x_i)|}$$&lt;ul&gt;
 &lt;li&gt;$ y_i $ 是第 $ i $ 条样本 $ x_i $ 对应的真实值（共 $ m $ 条样本）&lt;/li&gt;
 &lt;li&gt;$ f_\theta(x_i) $ 是第 $ i $ 条样本 $ x_i $ 对应的预测值&lt;/li&gt;
 &lt;/ul&gt;
@@ -446,8 +451,8 @@ data-flex-basis="3456px"
 &lt;/ul&gt;
 &lt;h4 id="回归损失mse损失函数l2范数欧氏距离"&gt;回归损失——MSE损失函数（L2范数/欧氏距离）
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;损失函数： $$\mathcal{L} = \displaystyle{\frac{1}{m}\sum_{i=1}^m(y_i-f_\theta(x_i))^2}$$
-&lt;ul&gt;
+&lt;li&gt;损失函数：
+$$\mathcal{L} = \displaystyle{\frac{1}{m}\sum_{i=1}^m(y_i-f_\theta(x_i))^2}$$&lt;ul&gt;
 &lt;li&gt;$ y_i $ 是第 $ i $ 条样本 $ x_i $ 对应的真实值（共 $ m $ 条样本）&lt;/li&gt;
 &lt;li&gt;$ f_\theta(x_i) $ 是第 $ i $ 条样本 $ x_i $ 对应的预测值&lt;/li&gt;
 &lt;li&gt;L2 Loss也常作为正则项。当预测值与目标值相差很大时容易发生梯度爆炸&lt;/li&gt;
@@ -457,7 +462,8 @@ data-flex-basis="3456px"
 &lt;/ul&gt;
 &lt;h4 id="回归损失smooth-l1损失函数l1与l2的结"&gt;回归损失——Smooth L1损失函数（L1与L2的结）
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;损失函数： $$
+&lt;li&gt;损失函数：
+$$
 \mathcal{L} = \displaystyle{\frac{1}{m}\sum_{i=1}^m}
 \left[
 \begin{cases}
@@ -465,8 +471,7 @@ data-flex-basis="3456px"
 \displaystyle{|y_i-f_\theta(x_i)|-\frac{1}{2}}, &amp; otherwise
 \end{cases}
 \right]
-$$
-&lt;ul&gt;
+$$&lt;ul&gt;
 &lt;li&gt;$ y_i $ 是第 $ i $ 条样本 $ x_i $ 对应的真实值（共 $ m $ 条样本）&lt;/li&gt;
 &lt;li&gt;$ f_\theta(x_i) $ 是第 $ i $ 条样本 $ x_i $ 对应的预测值&lt;/li&gt;
 &lt;li&gt;真实值与预测值差值在 $[-1,1]$ 区间内实际上为L2损失，解决了L1的不光滑问题&lt;/li&gt;
@@ -478,10 +483,15 @@ $$
 &lt;h3 id="反向传播与梯度下降"&gt;反向传播与梯度下降
 &lt;/h3&gt;&lt;h4 id="反向传播"&gt;反向传播
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;前向传播（计算输出）： $$\displaystyle{Out = h(g(f(x_1w_1+Other_1)w_2+Other_2)w_3+Other_3)}$$&lt;/li&gt;
-&lt;li&gt;反向传播（链式求导）： $$\displaystyle{\frac{\partial \mathcal{Loss}}{\partial w_1} = \frac{\partial \mathcal{Loss}}{\partial Out}·\frac{\partial Out}{\partial M_3}·\frac{\partial M_3}{\partial O_2}·\frac{\partial O_2}{\partial M_2}·\frac{\partial M_2}{\partial O_1}·\frac{\partial O_1}{\partial M_1}·\frac{\partial M_1}{\partial w_1}}$$ $$\Rightarrow\displaystyle{\nabla_{w_1} \mathcal{Loss} = { \mathcal{L}}'_{\hat y}·h'_{M_3}·w_3·g'_{M_2}·w_2·f'_{M_1}·x_1}$$&lt;/li&gt;
-&lt;li&gt;参数迭代（梯度下降）： $$\displaystyle{w_1^{new} = w_1^{old}-\eta·\nabla_{w_1} \mathcal{Loss}}$$&lt;/li&gt;
-&lt;li&gt;注意：全体参数同时更新，无先后顺序。因此在计算 $$\displaystyle{\nabla_{w_1} \mathcal{Loss}}$$ 时用到的 $w_3$ 和 $w_2$ ，为 $w_3^{old}$ 和 $w_2^{old}$
+&lt;li&gt;前向传播（计算输出）：
+$$\displaystyle{Out = h(g(f(x_1w_1+Other_1)w_2+Other_2)w_3+Other_3)}$$&lt;/li&gt;
+&lt;li&gt;反向传播（链式求导）：
+$$\displaystyle{\frac{\partial \mathcal{Loss}}{\partial w_1} = \frac{\partial \mathcal{Loss}}{\partial Out}·\frac{\partial Out}{\partial M_3}·\frac{\partial M_3}{\partial O_2}·\frac{\partial O_2}{\partial M_2}·\frac{\partial M_2}{\partial O_1}·\frac{\partial O_1}{\partial M_1}·\frac{\partial M_1}{\partial w_1}}$$
+$$\Rightarrow\displaystyle{\nabla_{w_1} \mathcal{Loss} = { \mathcal{L}}'_{\hat y}·h'_{M_3}·w_3·g'_{M_2}·w_2·f'_{M_1}·x_1}$$&lt;/li&gt;
+&lt;li&gt;参数迭代（梯度下降）：
+$$\displaystyle{w_1^{new} = w_1^{old}-\eta·\nabla_{w_1} \mathcal{Loss}}$$&lt;/li&gt;
+&lt;li&gt;注意：全体参数同时更新，无先后顺序。因此在计算
+$$\displaystyle{\nabla_{w_1} \mathcal{Loss}}$$时用到的 $w_3$ 和 $w_2$ ，为 $w_3^{old}$ 和 $w_2^{old}$
 &lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/601b87f3-58a2-4951-9f80-e17a7a143379.png"
 width="704"
 height="493"
@@ -495,7 +505,8 @@ data-flex-basis="342px"
 &lt;/ul&gt;
 &lt;h4 id="梯度下降"&gt;梯度下降
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;迭代函数： $$\displaystyle{w^{new}_{ij} = w^{old}_{ij} - \eta·\frac{\partial\mathcal{L}}{\partial w_{ij}}}$$&lt;/li&gt;
+&lt;li&gt;迭代函数：
+$$\displaystyle{w^{new}_{ij} = w^{old}_{ij} - \eta·\frac{\partial\mathcal{L}}{\partial w_{ij}}}$$&lt;/li&gt;
 &lt;li&gt;梯度下降方式：全梯度（BGD）、随机梯度（SGD）、小批量梯度（Mini-Batch SGD，深度学习用）&lt;/li&gt;
 &lt;li&gt;传统梯度下降存在的问题
 &lt;ul&gt;
@@ -514,7 +525,8 @@ $$
 \beta·\mathcal{E}_{k-1} + (1-\beta)·\mathcal{G}_k,&amp; k \ge 2
 \end{cases}
 $$&lt;/li&gt;
-&lt;li&gt;参数迭代： $$\displaystyle{w^{new}_{ij} = w^{old}_{ij} - \eta·\mathcal{E}_k}$$&lt;/li&gt;
+&lt;li&gt;参数迭代：
+$$\displaystyle{w^{new}_{ij} = w^{old}_{ij} - \eta·\mathcal{E}_k}$$&lt;/li&gt;
 &lt;li&gt;Pytorch： &lt;code&gt;torch.optim.SGD(model.parameters(),lr=0.01,momentum=0.9)&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -524,11 +536,14 @@ $$&lt;/li&gt;
 &lt;li&gt;迭代流程（第 $k$ 轮迭代）：
 &lt;ol&gt;
 &lt;li&gt;从训练集中采样 $n$ 个样本的小批量，计算梯度 $\mathcal{G}_k$&lt;/li&gt;
-&lt;li&gt;累计平方梯度 $$s_k=s_{k-1}+\mathcal{G}_k\odot \mathcal{G}_k$$，$\odot$ 为逐元素相乘&lt;/li&gt;
-&lt;li&gt;学习率迭代： $$\displaystyle{\alpha_{k}=\frac{\alpha_{k-1}}{\sqrt{s_k}+\sigma}}$$&lt;/li&gt;
+&lt;li&gt;累计平方梯度
+$$s_k=s_{k-1}+\mathcal{G}_k\odot \mathcal{G}_k$$，$\odot$ 为逐元素相乘&lt;/li&gt;
+&lt;li&gt;学习率迭代：
+$$\displaystyle{\alpha_{k}=\frac{\alpha_{k-1}}{\sqrt{s_k}+\sigma}}$$&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
-&lt;li&gt;参数迭代： $$\displaystyle{w^{new}_{ij} = w^{old}_{ij} - \alpha_{k}·\mathcal{G}_k}$$&lt;/li&gt;
+&lt;li&gt;参数迭代：
+$$\displaystyle{w^{new}_{ij} = w^{old}_{ij} - \alpha_{k}·\mathcal{G}_k}$$&lt;/li&gt;
 &lt;li&gt;Pytorch： &lt;code&gt;torch.optim.Adagrad(model.parameters(),lr=0.01)&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -538,11 +553,14 @@ $$&lt;/li&gt;
 &lt;li&gt;迭代流程（第 $k$ 轮迭代）：
 &lt;ol&gt;
 &lt;li&gt;从训练集中采样 $n$ 个样本的小批量，计算梯度 $\mathcal{G}_k$&lt;/li&gt;
-&lt;li&gt;累计指数加权平均平方梯度 $$s_k=\beta·s_{k-1}+(1-\beta)·\mathcal{G}_k\odot \mathcal{G}_k$$&lt;/li&gt;
-&lt;li&gt;学习率迭代： $$\displaystyle{\alpha_k=\frac{\alpha_{k-1}}{\sqrt{s_k}+\sigma}}$$&lt;/li&gt;
+&lt;li&gt;累计指数加权平均平方梯度
+$$s_k=\beta·s_{k-1}+(1-\beta)·\mathcal{G}_k\odot \mathcal{G}_k$$&lt;/li&gt;
+&lt;li&gt;学习率迭代：
+$$\displaystyle{\alpha_k=\frac{\alpha_{k-1}}{\sqrt{s_k}+\sigma}}$$&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
-&lt;li&gt;参数迭代： $$\displaystyle{w^{new}_{ij} = w^{old}_{ij} - \alpha_{k}·\mathcal{G}_k}$$&lt;/li&gt;
+&lt;li&gt;参数迭代：
+$$\displaystyle{w^{new}_{ij} = w^{old}_{ij} - \alpha_{k}·\mathcal{G}_k}$$&lt;/li&gt;
 &lt;li&gt;Pytorch： &lt;code&gt;torch.optim.Adagrad(model.parameters(),lr=0.01,alpha=0.9)&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -552,18 +570,22 @@ $$&lt;/li&gt;
 &lt;li&gt;迭代流程（第 $k$ 轮迭代）：
 &lt;ol&gt;
 &lt;li&gt;从训练集中采样 $n$ 个样本的小批量，计算梯度 $\mathcal{G}_k$&lt;/li&gt;
-&lt;li&gt;计算指数加权平均梯度为$ \mathcal{E}_k $：$$
+&lt;li&gt;计算指数加权平均梯度为$ \mathcal{E}_k $：
+$$
 \mathcal{E}_k =
 \begin{cases}
 \mathcal{G}_1,\ &amp; k=1 \\
 \beta_1·\mathcal{E}_{k-1} + (1-\beta_1)·\mathcal{G}_k,&amp; k \ge 2
 \end{cases}
 $$&lt;/li&gt;
-&lt;li&gt;累计指数加权平均平方梯度 $$s_k=\beta_2·s_{k-1}+(1-\beta_2)·\mathcal{E}_k\odot \mathcal{E}_k$$&lt;/li&gt;
-&lt;li&gt;学习率迭代： $$\displaystyle{\alpha_k=\frac{\alpha_{k-1}}{\sqrt{s_k}+\sigma}}$$&lt;/li&gt;
+&lt;li&gt;累计指数加权平均平方梯度
+$$s_k=\beta_2·s_{k-1}+(1-\beta_2)·\mathcal{E}_k\odot \mathcal{E}_k$$&lt;/li&gt;
+&lt;li&gt;学习率迭代：
+$$\displaystyle{\alpha_k=\frac{\alpha_{k-1}}{\sqrt{s_k}+\sigma}}$$&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
-&lt;li&gt;参数迭代： $$\displaystyle{w^{new}_{ij} = w^{old}_{ij} - \alpha_{k}·\mathcal{E}_k}$$&lt;/li&gt;
+&lt;li&gt;参数迭代：
+$$\displaystyle{w^{new}_{ij} = w^{old}_{ij} - \alpha_{k}·\mathcal{E}_k}$$&lt;/li&gt;
 &lt;li&gt;Pytorch： &lt;code&gt;torch.optim.Adam(model.parameters(),lr=0.01,betas=[0.9,0.99])&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -666,11 +688,11 @@ $$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="bn层小批量归一化"&gt;BN层（小批量归一化）
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;BN层思想：BN层位于神经元中求和计算与非线性计算之间，即 $$\displaystyle{Input\overset{x}{\rightarrow}\left(\sum\overset{s_1}{\rightarrow} \mathcal{BN}\overset{s_2}{\rightarrow} f(s_2) \right)\rightarrow Output}$$，对 $s_1$ 进行小批量的归一化与平移缩放，数据范围为该批次的输入数据&lt;/li&gt;
+&lt;li&gt;BN层思想：BN层位于神经元中求和计算与非线性计算之间，即
+$$\displaystyle{Input\overset{x}{\rightarrow}\left(\sum\overset{s_1}{\rightarrow} \mathcal{BN}\overset{s_2}{\rightarrow} f(s_2) \right)\rightarrow Output}$$，对 $s_1$ 进行小批量的归一化与平移缩放，数据范围为该批次的输入数据&lt;/li&gt;
 &lt;li&gt;$\mathcal{BN}$ 层实现：
 $$\displaystyle{s_2 =\lambda·\left(\frac{ s_1 - \mu_B}{\sqrt{\sigma^2_B+\epsilon}}\right)+\beta}
-$$
-&lt;ul&gt;
+$$&lt;ul&gt;
 &lt;li&gt;$\lambda$ （系数）和 $\beta$ （偏置）为可学习参数，相当于对标准化后的值做一次线性变换&lt;/li&gt;
 &lt;li&gt;$ \epsilon $ 通常取 $ 1e-5 $ ，避免分母为 $ 0 $&lt;/li&gt;
 &lt;li&gt;$ \mu_B $ 为该批次样本均值， $ \mu_B = \displaystyle{\frac{1}{m}\sum^m_{i=1}x_i} $ ， $ m $ 为该批次样本数&lt;/li&gt;
@@ -1551,11 +1573,13 @@ data-flex-basis="4766px"
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;卷积计算方式：
 &lt;ul&gt;
-&lt;li&gt;单通道卷积层计算过程：$$output = input \otimes conv$$， $conv$ 称为卷积核（Convolutional Kernel），也叫滤波器（Fliter）
+&lt;li&gt;单通道卷积层计算过程：
+$$output = input \otimes conv$$， $conv$ 称为卷积核（Convolutional Kernel），也叫滤波器（Fliter）
 &lt;ul&gt;
 &lt;li&gt;单层卷积层移步大小为超参数，可以自行设置。当移步不为1时，可以在原输入矩阵四周进行填充0&lt;/li&gt;
 &lt;li&gt;计算过程：将输入矩阵的子矩阵与卷积核进行逐元素相乘再相加，得到输出矩阵的对应元素&lt;/li&gt;
-&lt;li&gt;数学公式：$$\displaystyle{Output_{[i,j]} = \sum_{m=0}^{k-1}\sum_{n=0}^{k-1}Kernel_{[m,n]}·Input_{[i+m,j+n]}}$$&lt;/li&gt;
+&lt;li&gt;数学公式：
+$$\displaystyle{Output_{[i,j]} = \sum_{m=0}^{k-1}\sum_{n=0}^{k-1}Kernel_{[m,n]}·Input_{[i+m,j+n]}}$$&lt;/li&gt;
 &lt;li&gt;图示（分别为[Step=1,NoPadding]与[Step=2,Padding]，这里的$\times$为逐元素相乘）：
 &lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/22d0dc01-97bb-4570-82a5-6f3d9d8d0775.png"
 width="492"
@@ -1615,7 +1639,8 @@ data-flex-basis="448px"
 &lt;li&gt;卷积核大小：$C\times C$ ，$C$ 一般为奇数&lt;/li&gt;
 &lt;li&gt;步长：$S$&lt;/li&gt;
 &lt;li&gt;填充圈：$P$ ，0填充&lt;/li&gt;
-&lt;li&gt;输出结果大小： $O\times O$，其中 $$\displaystyle{O = 1+\frac{I-C+2P}{S}}$$&lt;/li&gt;
+&lt;li&gt;输出结果大小： $O\times O$，其中
+$$\displaystyle{O = 1+\frac{I-C+2P}{S}}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -3290,7 +3315,8 @@ Y_pre:
 &lt;/ul&gt;
 &lt;h3 id="1批量梯度下降gd"&gt;1、批量梯度下降（GD）
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$$\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum^{m}_{i=1}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = X^T(X\theta-y)}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum^{m}_{i=1}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = X^T(X\theta-y)}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="代码实现"&gt;代码实现
 &lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -3398,7 +3424,8 @@ Y_pre:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="2随机梯度下降sgd"&gt;2、随机梯度下降（SGD）
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$$
+&lt;li&gt;
+$$
 \displaystyle {\nabla_{\theta}J(\theta) = \frac{\partial}{\partial\theta}J(\theta) = (h_\theta(x^{(i)})-y^{(i)})x^{(i)} = ({x^{(i)}})^T(x^{(i)}\theta-y^{(i)}) , i \sim \text{Uniform}\bigl(\{1,2,\dots,m\}\bigr)}
 $$&lt;/li&gt;
 &lt;/ul&gt;
@@ -3632,7 +3659,8 @@ Y_pre:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="3小批量梯度下降mini-batch-sgd"&gt;3、小批量梯度下降（Mini-batch SGD）
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$$
+&lt;li&gt;
+$$
 \displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum_{i\in S}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = ({x^{(S)}})^T(x^{(S)}\theta-y^{(S)}) , |S|=\text{batch\_size} &lt; m,\; S\subseteq \{1,2,\dots ,m\},\; S\text{均匀随机选取}}
 $$&lt;/li&gt;
 &lt;/ul&gt;
@@ -4253,7 +4281,8 @@ Y_pre:
 &lt;ul&gt;
 &lt;li&gt;最大值最小值归一化（Min-Max）：受离心值影响较大
 &lt;ul&gt;
-&lt;li&gt;对第j个特征值做归一化：$$\displaystyle{x^{*}_{i,j} = \frac{x_{i,j}-x_j^{\text{min}}}{x_j^{\text{max}}-x_j^{\text{min}}}}$$&lt;/li&gt;
+&lt;li&gt;对第j个特征值做归一化：
+$$\displaystyle{x^{*}_{i,j} = \frac{x_{i,j}-x_j^{\text{min}}}{x_j^{\text{max}}-x_j^{\text{min}}}}$$&lt;/li&gt;
 &lt;li&gt;对整个数据集做归一化：$\displaystyle{x^* = \frac{x-min(x)}{max(x)-min(x)}}$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;

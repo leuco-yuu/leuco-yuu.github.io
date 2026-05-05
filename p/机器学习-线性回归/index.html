@@ -1066,7 +1066,8 @@ Y_pre:
 [[57.23707594]
  [68.2285754 ]
  [75.97196488]]
-</code></pre><h2 id=四归一化normalization>四、归一化（Normalization）</h2><ul><li>归一化是将不同尺度、纲量和分布的数据缩放到同一标准区间的预处理技术</li><li>核心目的：消除纲量影响、加速模型收敛、提升数值稳定性，同时保留原始信息的相对关系</li><li>特征级归一化方法<ul><li>最大值最小值归一化（Min-Max）：受离心值影响较大<ul><li>对第j个特征值做归一化：$$\displaystyle{x^{*}_{i,j} = \frac{x_{i,j}-x_j^{\text{min}}}{x_j^{\text{max}}-x_j^{\text{min}}}}$$</li><li>对整个数据集做归一化：$\displaystyle{x^* = \frac{x-min(x)}{max(x)-min(x)}}$</li></ul></li><li>标准归一化（Z-score）：<ul><li>对第j个特征值做归一化：
+</code></pre><h2 id=四归一化normalization>四、归一化（Normalization）</h2><ul><li>归一化是将不同尺度、纲量和分布的数据缩放到同一标准区间的预处理技术</li><li>核心目的：消除纲量影响、加速模型收敛、提升数值稳定性，同时保留原始信息的相对关系</li><li>特征级归一化方法<ul><li>最大值最小值归一化（Min-Max）：受离心值影响较大<ul><li>对第j个特征值做归一化：
+$$\displaystyle{x^{*}_{i,j} = \frac{x_{i,j}-x_j^{\text{min}}}{x_j^{\text{max}}-x_j^{\text{min}}}}$$</li><li>对整个数据集做归一化：$\displaystyle{x^* = \frac{x-min(x)}{max(x)-min(x)}}$</li></ul></li><li>标准归一化（Z-score）：<ul><li>对第j个特征值做归一化：
 $$
 \displaystyle{x^*_{i,j} = \frac{x_{i,j} - \mu_j}{\sigma_j}}
 $$

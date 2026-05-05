@@ -329,7 +329,8 @@ Y_pre:
 &lt;/ul&gt;
 &lt;h3 id="1批量梯度下降gd"&gt;1、批量梯度下降（GD）
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$$\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum^{m}_{i=1}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = X^T(X\theta-y)}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum^{m}_{i=1}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = X^T(X\theta-y)}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="代码实现"&gt;代码实现
 &lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -437,7 +438,8 @@ Y_pre:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="2随机梯度下降sgd"&gt;2、随机梯度下降（SGD）
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$$
+&lt;li&gt;
+$$
 \displaystyle {\nabla_{\theta}J(\theta) = \frac{\partial}{\partial\theta}J(\theta) = (h_\theta(x^{(i)})-y^{(i)})x^{(i)} = ({x^{(i)}})^T(x^{(i)}\theta-y^{(i)}) , i \sim \text{Uniform}\bigl(\{1,2,\dots,m\}\bigr)}
 $$&lt;/li&gt;
 &lt;/ul&gt;
@@ -671,7 +673,8 @@ Y_pre:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="3小批量梯度下降mini-batch-sgd"&gt;3、小批量梯度下降（Mini-batch SGD）
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;$$
+&lt;li&gt;
+$$
 \displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum_{i\in S}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = ({x^{(S)}})^T(x^{(S)}\theta-y^{(S)}) , |S|=\text{batch\_size} &lt; m,\; S\subseteq \{1,2,\dots ,m\},\; S\text{均匀随机选取}}
 $$&lt;/li&gt;
 &lt;/ul&gt;
@@ -1292,7 +1295,8 @@ Y_pre:
 &lt;ul&gt;
 &lt;li&gt;最大值最小值归一化（Min-Max）：受离心值影响较大
 &lt;ul&gt;
-&lt;li&gt;对第j个特征值做归一化：$$\displaystyle{x^{*}_{i,j} = \frac{x_{i,j}-x_j^{\text{min}}}{x_j^{\text{max}}-x_j^{\text{min}}}}$$&lt;/li&gt;
+&lt;li&gt;对第j个特征值做归一化：
+$$\displaystyle{x^{*}_{i,j} = \frac{x_{i,j}-x_j^{\text{min}}}{x_j^{\text{max}}-x_j^{\text{min}}}}$$&lt;/li&gt;
 &lt;li&gt;对整个数据集做归一化：$\displaystyle{x^* = \frac{x-min(x)}{max(x)-min(x)}}$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;

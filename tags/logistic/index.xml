@@ -26,7 +26,8 @@
 &lt;h1 id="线性分类linear-classification"&gt;线性分类（Linear Classification）
 &lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;逻辑回归算法：在多元线性回归算法的基础上把结果缩放到0-1之间&lt;/li&gt;
-&lt;li&gt;线性分类器（GLM与分布的连接器，可以通过内部核函数升维变成非线性算法）：$$\eta = \theta^Tx = \theta_0+\theta_1x_1+……+\theta_nx_n$$&lt;/li&gt;
+&lt;li&gt;线性分类器（GLM与分布的连接器，可以通过内部核函数升维变成非线性算法）：
+$$\eta = \theta^Tx = \theta_0+\theta_1x_1+……+\theta_nx_n$$&lt;/li&gt;
 &lt;li&gt;广义线性模型（GLM）：$\displaystyle{p(y;\eta)=b(y)e^{(\eta^TT(y)-a(\eta))}}$，其中$\eta$是自然参数，$T(y)$是充分统计量，$a(\eta)$是对数部分函数
 &lt;ul&gt;
 &lt;li&gt;Logistic回归（逻辑回归）：伯努利-GLM&lt;/li&gt;
@@ -47,8 +48,7 @@ $$。当 $\hat y&amp;gt;0.5$ 时，$y$ 取1；当 $\hat y&amp;lt;0.5$ 时，$y$ 
 &lt;li&gt;损失函数（由极大似然推导而来）：
 $$
 \displaystyle{J(\theta)=-[\sum^m_{i=1}y^{(i)}lnh(x^{(i)})+(1-y^{(i)})ln(1-h(x^{(i)})]}
-$$
-&lt;ul&gt;
+$$&lt;ul&gt;
 &lt;li&gt;梯度下降：
 $$
 \displaystyle{\theta_j^{(k+1)} = \theta_j^{(k)}-\alpha\frac{\partial}{\partial_{\theta_j^{(k)}}}J(\theta^{(k)})}
@@ -402,10 +402,12 @@ Test accuracy: 97.78 %
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;多项式分布：
 $$\displaystyle{P(X_1=x_1,\dots,X_k=x_k;p_1,p_2,\dots,p_k) = \frac{n!}{x_1! \cdots x_k!} p_1^{x_1} \cdots p_k^{x_k}, \quad \sum_{i=1}^k x_i = n}\displaystyle{\Rightarrow P(y;\varphi)=e^{\displaystyle{\sum^{k-1}_{i=1}T(y)_iln(\frac{\varphi_i}{\varphi_k})+ln\varphi_k}} = e^{\displaystyle{\eta^TT(y)-a(\eta)}}}\Rightarrow\displaystyle{P_i = P({y^{(i)};\Theta})=P_k e^{\displaystyle{\Theta^{(i)}x}}},\displaystyle{P_k=\frac{1}{{\displaystyle{\sum^{k}_{j=1}e^{\displaystyle{\Theta^{(j)}x}}}}}}$$， $\displaystyle{\Theta^{(i)}}$ 为 $\Theta$ 的第 $i$ 行&lt;/li&gt;
-&lt;li&gt;Softmax回归函数：$$
+&lt;li&gt;Softmax回归函数：
+$$
 \displaystyle{P(y^{(i)}=k|x^{(i)};\theta) = \frac{\displaystyle{e^{\theta_k^Tx^{(i)}}}}{\displaystyle{\sum^k_{j=1}e^{\theta_j^Tx^{(i)}}}}}
 $$，此时 $\theta$ 是一个矩阵&lt;/li&gt;
-&lt;li&gt;损失函数——交叉熵损失函数（Cross-Entropy Loss，负对数似然损失）：$$
+&lt;li&gt;损失函数——交叉熵损失函数（Cross-Entropy Loss，负对数似然损失）：
+$$
 \displaystyle{J(\theta)=-\frac{1}{N}\sum^{N}_{n=1}\sum^{k}_{i=1}y_i^{(n)}ln(\hat y_i^{(n)})}
 $$，其中 $N$ 是样本数， $k$ 是分类数， $y_i^{(n)}$ 是真实标签，服从one-hot编码， $\hat y_i^{(n)}$ 是预测概率，取值为 $(0,1) $&lt;/li&gt;
 &lt;li&gt;当y的分类数为2时，Softmax回归退化为Logistc回归&lt;/li&gt;
@@ -805,12 +807,14 @@ $$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;几何距离：$\displaystyle{\gamma = \frac{|w^tx_0+b|}{||w||}}$，其中超平面为 $\displaystyle{w^tx+b=0}$
 &lt;ul&gt;
-&lt;li&gt;对于正确分类的样本点，有 $$\displaystyle{\gamma = \frac{y_0(w^tx_0+b)}{\sqrt{w^tw}} = \frac{y_0(\hat y_0+b)}{\sqrt{w^tw}}}$$&lt;/li&gt;
+&lt;li&gt;对于正确分类的样本点，有
+$$\displaystyle{\gamma = \frac{y_0(w^tx_0+b)}{\sqrt{w^tw}} = \frac{y_0(\hat y_0+b)}{\sqrt{w^tw}}}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;函数距离：$\displaystyle{\delta=|w^tx_0+b|}$
 &lt;ul&gt;
-&lt;li&gt;对于正确分类的样本点，有 $$\displaystyle{\delta=|w^tx_0+b|=y_0(w^tx_0+b)}$$&lt;/li&gt;
+&lt;li&gt;对于正确分类的样本点，有
+$$\displaystyle{\delta=|w^tx_0+b|=y_0(w^tx_0+b)}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;硬间隔：要求所有样本都必须正确分类，不允许任何错误&lt;/li&gt;
@@ -820,10 +824,12 @@ $$&lt;/li&gt;
 &lt;li&gt;支持向量：离分割超平面最近的那些样本点&lt;/li&gt;
 &lt;li&gt;Perceptron思想：期望使分类错误的所有样本（m条）到超平面的距离之和最小
 &lt;ul&gt;
-&lt;li&gt;$$\displaystyle{J(\theta)=\sum_{i\in M_\theta}\frac{-y^i(\theta^T x^i+b)}{||\theta||}}\Rightarrow \displaystyle{J(\theta)=-\sum_{i\in M_\theta}{y^i(\theta^T x^i+b)}}$$，其中 $M_\theta$ 为分类错误集&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{J(\theta)=\sum_{i\in M_\theta}\frac{-y^i(\theta^T x^i+b)}{||\theta||}}\Rightarrow \displaystyle{J(\theta)=-\sum_{i\in M_\theta}{y^i(\theta^T x^i+b)}}$$，其中 $M_\theta$ 为分类错误集&lt;/li&gt;
 &lt;li&gt;优化：随机梯度下降法（SGD）或小批量梯度下降法（MBGD）
 &lt;ul&gt;
-&lt;li&gt;$$\displaystyle{\nabla_\theta J(\theta) = -\sum_{i\in M_\theta}y^{(i)}x^{(i)}}$$$，注意，这里的梯度函数表达式内部虽然与 $\theta$ 无关，但错误集 $M_\theta$ 却与 $\theta$ 相关&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\nabla_\theta J(\theta) = -\sum_{i\in M_\theta}y^{(i)}x^{(i)}}$$$，注意，这里的梯度函数表达式内部虽然与 $\theta$ 无关，但错误集 $M_\theta$ 却与 $\theta$ 相关&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -851,8 +857,7 @@ $$&lt;/li&gt;
 &lt;li&gt;构建拉格朗日函数：
 $$\displaystyle{ L(w,b,\alpha)=\frac{1}{2}||w||^2-\sum^m_{i=1}\alpha_i[y_i(w^Tx_i+b)-1], \alpha_i \ge 0}$$&lt;/li&gt;
 &lt;li&gt;求解
-$$\displaystyle{\min\limits_{w,b}\max\limits_{\alpha_i\ge 0}L(w,b,\alpha) \overset{\text{对偶函数}}{\Leftrightarrow} \max\limits_{\alpha_i\ge 0}\min\limits_{w,b}L(w,b,\alpha)}$$
-&lt;ul&gt;
+$$\displaystyle{\min\limits_{w,b}\max\limits_{\alpha_i\ge 0}L(w,b,\alpha) \overset{\text{对偶函数}}{\Leftrightarrow} \max\limits_{\alpha_i\ge 0}\min\limits_{w,b}L(w,b,\alpha)}$$&lt;ul&gt;
 &lt;li&gt;原问题等价于（SMO算法推导）：
 $$
 \begin{aligned}
@@ -871,7 +876,8 @@ $$
 \displaystyle{\alpha^*(y_s({w^*}^Tx_s+b^*)-1)=0,\quad 可获得支持向量}
 \end{cases}
 $$&lt;/li&gt;
-&lt;li&gt;预测函数：$$\hat y = ({w^*}^T x+b^*)$$&lt;/li&gt;
+&lt;li&gt;预测函数：
+$$\hat y = ({w^*}^T x+b^*)$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -994,29 +1000,38 @@ $$&lt;/li&gt;
 &lt;/li&gt;
 &lt;li&gt;优化 $\alpha_i $ 和 $\alpha_j$ 使目标函数最大程度接近全局最优解（$\nabla_{\alpha_i,\alpha_j}J(\alpha)=0$），其余参数不变
 &lt;ul&gt;
-&lt;li&gt;$$\displaystyle{\min\limits_{\alpha_1,\alpha_2}J(\alpha_1,\alpha_2)=\min\limits_{\alpha_1,\alpha_2}\frac{1}{2}K_{11}\alpha_1^2+\frac{1}{2}K_{22}\alpha_2^2+y_1y_2K_{12}\alpha_1\alpha_2-(\alpha_1+\alpha_2)+y_1v_1\alpha_1+y_2v_2\alpha_2+Constant}$$ ，其中 $$v_i = \displaystyle{\sum^m_{j=3}\alpha_jy_jK(x_i,x_j), i = 1,2}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\min\limits_{\alpha_1,\alpha_2}J(\alpha_1,\alpha_2)=\min\limits_{\alpha_1,\alpha_2}\frac{1}{2}K_{11}\alpha_1^2+\frac{1}{2}K_{22}\alpha_2^2+y_1y_2K_{12}\alpha_1\alpha_2-(\alpha_1+\alpha_2)+y_1v_1\alpha_1+y_2v_2\alpha_2+Constant}$$，其中
+$$v_i = \displaystyle{\sum^m_{j=3}\alpha_jy_jK(x_i,x_j), i = 1,2}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;将二元函数视为一元函数
 &lt;ul&gt;
-&lt;li&gt;另 $$\alpha_1 = (\zeta-y_2\alpha_2)y_1$$ ，带回上式&lt;/li&gt;
-&lt;li&gt;$$\displaystyle{\min\limits_{\alpha_2}J(\alpha_2)=\min\limits_{\alpha_2}\frac{1}{2}K_{11}(\zeta-y_2\alpha_2)y_1^2+\frac{1}{2}K_{22}\alpha_2^2+y_1y_2K_{12}(\zeta-y_2\alpha_2)y_1\alpha_2-((\zeta-y_2\alpha_2)y_1+\alpha_2)+y_1v_1(\zeta-y_2\alpha_2)y_1+y_2v_2\alpha_2+Constant}$$&lt;/li&gt;
+&lt;li&gt;另
+$$\alpha_1 = (\zeta-y_2\alpha_2)y_1$$，带回上式&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\min\limits_{\alpha_2}J(\alpha_2)=\min\limits_{\alpha_2}\frac{1}{2}K_{11}(\zeta-y_2\alpha_2)y_1^2+\frac{1}{2}K_{22}\alpha_2^2+y_1y_2K_{12}(\zeta-y_2\alpha_2)y_1\alpha_2-((\zeta-y_2\alpha_2)y_1+\alpha_2)+y_1v_1(\zeta-y_2\alpha_2)y_1+y_2v_2\alpha_2+Constant}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;对 $J(\alpha_2)$ 求导，导数为0
 &lt;ul&gt;
-&lt;li&gt;$$
+&lt;li&gt;
+$$
 \begin{aligned}
 \displaystyle{v_1 = f(x_1)-\sum^2_{j=1}y_j\alpha_jK_{1j}-b} \\
 \displaystyle{v_2 = f(x_2)-\sum^2_{j=1}y_j\alpha_jK_{2j}-b}
 \end{aligned}
 $$&lt;/li&gt;
-&lt;li&gt;$$\displaystyle{\alpha^{new,unclipped}_2 = \alpha^{old}_2 + \frac{y_2(E_1-E_2)}{\eta}}$$，其中 $$\alpha_2^{new,unclipped}$$ 为未考虑约束的新值， $$E_i = f(x_i)-y_i, \ \eta = K_{11}+K_{22}-2K_{12}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\alpha^{new,unclipped}_2 = \alpha^{old}_2 + \frac{y_2(E_1-E_2)}{\eta}}$$，其中
+$$\alpha_2^{new,unclipped}$$为未考虑约束的新值，
+$$E_i = f(x_i)-y_i, \ \eta = K_{11}+K_{22}-2K_{12}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;对新值进行约束修建
 &lt;ul&gt;
-&lt;li&gt;$$
+&lt;li&gt;
+$$
 \begin{aligned}
 &amp; 0 \le \alpha_1,\alpha_2 \le C \\
 &amp; \alpha_1 + \alpha_2 = \zeta
@@ -1028,10 +1043,12 @@ $$&lt;/li&gt;
 $$
 L=\max(0,\alpha^{old}_2-\alpha^{old}_1),H=\min(C,C+\alpha^{old}_2-\alpha^{old}_1)
 $$&lt;/li&gt;
-&lt;li&gt;当 $y_1 \neq y_2$ 时，$$L=\max(0,\alpha_1^{old}+\alpha_2^{old}-C);H=\min(C,\alpha_2^{old}+\alpha_1^{old})$$&lt;/li&gt;
+&lt;li&gt;当 $y_1 \neq y_2$ 时，
+$$L=\max(0,\alpha_1^{old}+\alpha_2^{old}-C);H=\min(C,\alpha_2^{old}+\alpha_1^{old})$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;$$
+&lt;li&gt;
+$$
 \alpha_2^{\text{new}} =
 \begin{cases}
 H &amp;, \alpha_2^{\text{new,unclipped}} &gt; H \\
@@ -1084,8 +1101,10 @@ $$
 也就是说，数据点如果被正确分类，损失为0，如果没有被正确分类，损失为z&lt;/li&gt;
 &lt;li&gt;SVM的损失函数就是合页损失函数+正则化项:
 &lt;ul&gt;
-&lt;li&gt;$$\displaystyle{\min\limits_{w,b}\sum^m_{i=1}L(y^{(i)}(w^Tx^{(i)}+b)) + \lambda ||w||^2}$$&lt;/li&gt;
-&lt;li&gt;上述目标函数中，当 $\displaystyle{\lambda = \frac{1}{2C}}$ 时。等价于原目标函数 $$\displaystyle{\frac{1}{2}||w||^2+C\sum^m_{i=1}\xi_i}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\min\limits_{w,b}\sum^m_{i=1}L(y^{(i)}(w^Tx^{(i)}+b)) + \lambda ||w||^2}$$&lt;/li&gt;
+&lt;li&gt;上述目标函数中，当 $\displaystyle{\lambda = \frac{1}{2C}}$ 时。等价于原目标函数
+$$\displaystyle{\frac{1}{2}||w||^2+C\sum^m_{i=1}\xi_i}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;

@@ -34,8 +34,11 @@
 &lt;li&gt;初始化：指定中心数（簇数） $k$ 以及 $k$ 个簇中心（ $ \mu_1,\mu_2\dots \mu_k $ ，经典K-Means中随机选择中心）&lt;/li&gt;
 &lt;li&gt;迭代：
 &lt;ul&gt;
-&lt;li&gt;分配步：对每个样本 $$ x_i,i \in \{ 1,2\dots m \},$$ 计算 $ x_i $与 $ \mu_1,\mu_2\dots \mu_k $ 的距离，并将 $ x_i $ 分配给簇中心距离其最近的簇：$$\displaystyle{x_i \rightarrow Cluster_{ \underset{j}{argmin}||x_i-\mu_j||^2}}$$&lt;/li&gt;
-&lt;li&gt;更新步：更新簇中心：$$\displaystyle{\mu_j=\frac{1}{|N_j|}\sum_{x_i\in Cluster_j}x_i}$$&lt;/li&gt;
+&lt;li&gt;分配步：对每个样本
+$$ x_i,i \in \{ 1,2\dots m \},$$计算 $ x_i $与 $ \mu_1,\mu_2\dots \mu_k $ 的距离，并将 $ x_i $ 分配给簇中心距离其最近的簇：
+$$\displaystyle{x_i \rightarrow Cluster_{ \underset{j}{argmin}||x_i-\mu_j||^2}}$$&lt;/li&gt;
+&lt;li&gt;更新步：更新簇中心：
+$$\displaystyle{\mu_j=\frac{1}{|N_j|}\sum_{x_i\in Cluster_j}x_i}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;迭代至：
@@ -47,21 +50,30 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;K-Means损失函数MSE：每个点到中心点的距离 $$\displaystyle{J(\mu_1,\mu_2 \dots \mu_k) = \frac{1}{2} \sum^k_{j=1}\sum^{N_j}_{i=1}(x_i-\mu_j)^2}$$&lt;/li&gt;
+&lt;li&gt;K-Means损失函数MSE：每个点到中心点的距离
+$$\displaystyle{J(\mu_1,\mu_2 \dots \mu_k) = \frac{1}{2} \sum^k_{j=1}\sum^{N_j}_{i=1}(x_i-\mu_j)^2}$$&lt;/li&gt;
 &lt;li&gt;$k$ 的选取——肘部法
 &lt;ul&gt;
 &lt;li&gt;依次选取 $k\in{1,2\dots m}$，计算整体的损失&lt;/li&gt;
-&lt;li&gt;最终选取 $k_m$ 使得收益： $$Gain=|Loss(k_m-1)-Loss(k_m)|-|Loss(k_m)-Loss(k_m+1)|$$ 取得最大值。即$$\displaystyle{k_m = \underset{k}{\operatorname{argmax}} |Loss(k-1)-Loss(k)|-|Loss(k)-Loss(k+1)|}$$&lt;/li&gt;
+&lt;li&gt;最终选取 $k_m$ 使得收益：
+$$Gain=|Loss(k_m-1)-Loss(k_m)|-|Loss(k_m)-Loss(k_m+1)|$$取得最大值。即
+$$\displaystyle{k_m = \underset{k}{\operatorname{argmax}} |Loss(k-1)-Loss(k)|-|Loss(k)-Loss(k+1)|}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;相似度——以距离函数衡量
 &lt;ul&gt;
-&lt;li&gt;闵可夫斯基距离：$$\displaystyle{d_p(x,y)=\sqrt[p]{\sum_{i=1}^n|x_n-y_n|^p}}$$&lt;/li&gt;
-&lt;li&gt;曼哈顿距离(p=1)：$$\displaystyle{d_1(x,y)=\sum_{i=1}^n|x_n-y_n|}$$&lt;/li&gt;
-&lt;li&gt;欧式距离(p=2)：$$\displaystyle{d_2(x,y)=\sqrt{(x-y)^T(x-y)}}$$&lt;/li&gt;
-&lt;li&gt;切比雪夫距离(p=$\infty$)：$$\displaystyle{d_\infty(x,y)=\max\limits_{i\in\{1,2\dots n\}}|x_i-y_i|}$$&lt;/li&gt;
-&lt;li&gt;余弦距离：$$\displaystyle{d_{\cos}(x,y)=\frac{x^Ty}{||x||·||y||}} \in [-1,1]$$&lt;/li&gt;
-&lt;li&gt;Jaccard相似系数：$$\displaystyle{J(A,B) = \frac{|A\cap B|}{|A \cup B|} = \frac{|A\cap B|}{|A|+|B|-|A\cap B|}}$$&lt;/li&gt;
+&lt;li&gt;闵可夫斯基距离：
+$$\displaystyle{d_p(x,y)=\sqrt[p]{\sum_{i=1}^n|x_n-y_n|^p}}$$&lt;/li&gt;
+&lt;li&gt;曼哈顿距离(p=1)：
+$$\displaystyle{d_1(x,y)=\sum_{i=1}^n|x_n-y_n|}$$&lt;/li&gt;
+&lt;li&gt;欧式距离(p=2)：
+$$\displaystyle{d_2(x,y)=\sqrt{(x-y)^T(x-y)}}$$&lt;/li&gt;
+&lt;li&gt;切比雪夫距离(p=$\infty$)：
+$$\displaystyle{d_\infty(x,y)=\max\limits_{i\in\{1,2\dots n\}}|x_i-y_i|}$$&lt;/li&gt;
+&lt;li&gt;余弦距离：
+$$\displaystyle{d_{\cos}(x,y)=\frac{x^Ty}{||x||·||y||}} \in [-1,1]$$&lt;/li&gt;
+&lt;li&gt;Jaccard相似系数：
+$$\displaystyle{J(A,B) = \frac{|A\cap B|}{|A \cup B|} = \frac{|A\cap B|}{|A|+|B|-|A\cap B|}}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;K-Means变种
@@ -503,8 +515,10 @@ data-flex-basis="401px"
 &lt;li&gt;高斯分布：$N(\mu,\sigma)$&lt;/li&gt;
 &lt;li&gt;通过MLE思想估计 $\mu$ 和 $\sigma$ :
 &lt;ul&gt;
-&lt;li&gt;$$\displaystyle{\hat \mu=\frac{1}{n}\sum_{i \in \{1,2 \dots n\}} x_i=\bar x}$$&lt;/li&gt;
-&lt;li&gt;$$\displaystyle{\hat \sigma^2=\frac{1}{n}\sum_{i \in \{1,2 \dots n\}}(x_i-\hat\mu)^2$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\hat \mu=\frac{1}{n}\sum_{i \in \{1,2 \dots n\}} x_i=\bar x}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\hat \sigma^2=\frac{1}{n}\sum_{i \in \{1,2 \dots n\}}(x_i-\hat\mu)^2$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -512,14 +526,16 @@ data-flex-basis="401px"
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;GMM：假设随机变量 $X$ 是由 $k$ 个高斯分布混合而来，取到各个高斯分布的概率为 $\pi_1,\pi_2 \dots \pi_k$ ，第 $i$ 个高斯分布的均值为 $\mu_i$ ，标准差为 $\sigma_i$ 。当前观测到一系列样本 $X_1,X_2\dots X_n$ ，估计参数向量： $\pi，\mu，\sigma$
 &lt;ul&gt;
-&lt;li&gt;$$\displaystyle{L_{\pi,\mu,\sigma}(X) = \sum^N_{i=1}\log P(X_i)\overset{\text{全概率公式}}{=}\sum^N_{i=1}\log(\sum^K_{k=1}\pi_kN(x_i|\mu_k,\sigma_k))}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{L_{\pi,\mu,\sigma}(X) = \sum^N_{i=1}\log P(X_i)\overset{\text{全概率公式}}{=}\sum^N_{i=1}\log(\sum^K_{k=1}\pi_kN(x_i|\mu_k,\sigma_k))}$$&lt;/li&gt;
 &lt;li&gt;EM算法求解估计 $\pi，\mu，\sigma$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="em算法"&gt;EM算法
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Jensen不等式：若f是凸函数，x是随机变量。有： $$f(\mathcal{E}x) \le \mathcal{E}f(x),\displaystyle{\sum_i \mathcal{E}_i=1}$$&lt;/li&gt;
+&lt;li&gt;Jensen不等式：若f是凸函数，x是随机变量。有：
+$$f(\mathcal{E}x) \le \mathcal{E}f(x),\displaystyle{\sum_i \mathcal{E}_i=1}$$&lt;/li&gt;
 &lt;li&gt;E-Step（求责任度）与M-Step（更新参数）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="gmm流程"&gt;GMM流程
@@ -543,16 +559,21 @@ data-flex-basis="401px"
 &lt;/li&gt;
 &lt;li&gt;第一步：估计数据来源于哪个分布(E步——责任度)
 &lt;ul&gt;
-&lt;li&gt;代入：$$\displaystyle{\gamma(i,k) = P(X \in Z_k | X=X_i) \overset{\text{贝叶斯公式}}{=} \frac{\pi_kN(X_i|\mu_k,\sigma_k)}{\displaystyle{\sum^K_{j=1}\pi_jN(X_i|\mu_j,\sigma_j)}}}$$&lt;/li&gt;
+&lt;li&gt;代入：
+$$\displaystyle{\gamma(i,k) = P(X \in Z_k | X=X_i) \overset{\text{贝叶斯公式}}{=} \frac{\pi_kN(X_i|\mu_k,\sigma_k)}{\displaystyle{\sum^K_{j=1}\pi_jN(X_i|\mu_j,\sigma_j)}}}$$&lt;/li&gt;
 &lt;li&gt;根据 $\gamma$ 划分类别&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;第二步：更新参数（$\pi，\mu，\sigma$）（M步——参数更新）
 &lt;ul&gt;
-&lt;li&gt;$$\displaystyle{N_k=\sum^N_{i=1}\gamma(i,k)}$$&lt;/li&gt;
-&lt;li&gt;$$\displaystyle{\mu_k = \frac{1}{N_k}\displaystyle{\sum_{i}^N\gamma(i,k)X_i}}$$&lt;/li&gt;
-&lt;li&gt;$$\displaystyle{\sigma_k = \frac{1}{N_k}\sum^N_{i=1}\gamma(i,k)(x_i-\mu_k)(x_i-\mu_k)^T}$$&lt;/li&gt;
-&lt;li&gt;$$\displaystyle{\pi_k = \frac{N_k}{N}=\frac{1}{N}\sum_{i=1}^N\gamma(i,k)}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{N_k=\sum^N_{i=1}\gamma(i,k)}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\mu_k = \frac{1}{N_k}\displaystyle{\sum_{i}^N\gamma(i,k)X_i}}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\sigma_k = \frac{1}{N_k}\sum^N_{i=1}\gamma(i,k)(x_i-\mu_k)(x_i-\mu_k)^T}$$&lt;/li&gt;
+&lt;li&gt;
+$$\displaystyle{\pi_k = \frac{N_k}{N}=\frac{1}{N}\sum_{i=1}^N\gamma(i,k)}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;第三步：迭代，直到 $\pi,\mu,\sigma$ 不再变化&lt;/li&gt;
@@ -671,7 +692,8 @@ data-flex-basis="317px"
 &lt;li&gt;独立于任何机器学习算法。它基于数据本身的统计特征（如相关性、互信息）对特征进行评分和筛选，就像用一个“过滤器”把不好的特征过滤掉。&lt;/li&gt;
 &lt;li&gt;优点：快，计算开销小，不依赖具体模型。&lt;/li&gt;
 &lt;li&gt;缺点：可能忽略特征与模型的协同作用，选出的特征单独看很强，但组合起来对特定模型可能不是最优的。&lt;/li&gt;
-&lt;li&gt;互信息：$$\displaystyle{I(X;Y)=\sum_{x\in X}\sum_{y \in Y}P(X=x,Y=y)\log_2\frac{P(X=x,Y=y)}{P(X=x)P(Y=y)}}$$&lt;/li&gt;
+&lt;li&gt;互信息：
+$$\displaystyle{I(X;Y)=\sum_{x\in X}\sum_{y \in Y}P(X=x,Y=y)\log_2\frac{P(X=x,Y=y)}{P(X=x)P(Y=y)}}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;包裹式：每次迭代产生一个特征子集，评分
@@ -696,7 +718,8 @@ data-flex-basis="317px"
 &lt;li&gt;算法过程（对于样本矩阵 $X_{m×n}$，从 $n$ 维到 $k$ 维）
 &lt;ul&gt;
 &lt;li&gt;1、数据标准化（中心化）：计算每个特征的均值 $ X_{mean} $ ，另 $ X_c=X-X_{mean} $&lt;/li&gt;
-&lt;li&gt;2、计算协方差矩阵：$$\displaystyle{\Sigma = \frac{1}{m-1}X_c^TX_c}$$&lt;/li&gt;
+&lt;li&gt;2、计算协方差矩阵：
+$$\displaystyle{\Sigma = \frac{1}{m-1}X_c^TX_c}$$&lt;/li&gt;
 &lt;li&gt;3、特征值分解（正交对角化）：
 $$
 \begin{aligned}
@@ -718,7 +741,8 @@ $$
 $$&lt;/li&gt;
 &lt;li&gt;4、选择主成分（$\lambda_1,\lambda_2\dots \lambda_k,k&amp;lt;n$）
 &lt;ul&gt;
-&lt;li&gt;保留信息量（方差贡献量）：$$\displaystyle{\eta_{k/n} = \frac{\displaystyle{\sum_{i=1}^k\lambda_i}}{\displaystyle{\sum_{i=1}^n\lambda_i}}}$$&lt;/li&gt;
+&lt;li&gt;保留信息量（方差贡献量）：
+$$\displaystyle{\eta_{k/n} = \frac{\displaystyle{\sum_{i=1}^k\lambda_i}}{\displaystyle{\sum_{i=1}^n\lambda_i}}}$$&lt;/li&gt;
 &lt;li&gt;截取投影矩阵：
 $$
 \chi_k =
@@ -739,11 +763,13 @@ $$&lt;/li&gt;
 &lt;/li&gt;
 &lt;li&gt;特征值特征向量的求解：SVD分解
 &lt;ul&gt;
-&lt;li&gt;直接对 $X_c$ 进行SVD分解：$$X_c = U·\Sigma·V^T$$
-&lt;ul&gt;
+&lt;li&gt;直接对 $X_c$ 进行SVD分解：
+$$X_c = U·\Sigma·V^T$$&lt;ul&gt;
 &lt;li&gt;$ U $ 是一个 $ m×m $ 的正交矩阵，左奇异向量&lt;/li&gt;
-&lt;li&gt;$ \Sigma $ 是一个 $ m×n $ 的对角矩阵，对角线上的值 $ \sigma_i $ 是奇异值。 $$\displaystyle{\lambda_i=\frac{\sigma_i^2}{m-1}}$$&lt;/li&gt;
-&lt;li&gt;$ V $ 是一 $ n×n $ 的正交矩阵，右奇异向量。 $$V = \chi $$&lt;/li&gt;
+&lt;li&gt;$ \Sigma $ 是一个 $ m×n $ 的对角矩阵，对角线上的值 $ \sigma_i $ 是奇异值。
+$$\displaystyle{\lambda_i=\frac{\sigma_i^2}{m-1}}$$&lt;/li&gt;
+&lt;li&gt;$ V $ 是一 $ n×n $ 的正交矩阵，右奇异向量。
+$$V = \chi $$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
