@@ -1,0 +1,1566 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Namespace on Leuco's Blog</title><link>http://localhost:1313/tags/namespace/</link><description>Recent content in Namespace on Leuco's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh_CN</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Tue, 05 May 2026 16:26:19 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/namespace/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker 容器化技术</title><link>http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/</link><pubDate>Tue, 05 May 2026 16:26:19 +0800</pubDate><guid>http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/</guid><description>&lt;img src="http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/docker.png" alt="Featured image of post Docker 容器化技术" /&gt;&lt;h1 id="docker-容器化技术"&gt;Docker 容器化技术
+&lt;/h1&gt;&lt;div class="custom-toc"&gt;
+&lt;h3&gt;目录&lt;/h3&gt;
+&lt;nav id="TableOfContents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#容器技术"&gt;容器技术&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#三大核心机制"&gt;三大核心机制&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#namespace命名空间"&gt;Namespace（命名空间）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#cgroupscontrol-groups控制组"&gt;cGroups（Control Groups，控制组）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#unionfs联合文件系统"&gt;UnionFS（联合文件系统）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#容器-vs-虚拟机"&gt;容器 vs 虚拟机&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#docker-技术"&gt;Docker 技术&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#docker-核心工作流程"&gt;Docker 核心工作流程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#docker-持久化存储机制"&gt;Docker 持久化存储机制&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#docker-网络驱动"&gt;Docker 网络驱动&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#dockerfile"&gt;Dockerfile&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#运行机制"&gt;运行机制&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#指令字典"&gt;指令字典&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#环境配置"&gt;环境配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#文件配置"&gt;文件配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#环境构建"&gt;环境构建&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#启动程序"&gt;启动程序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#声明补充"&gt;声明补充&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#dockerignore"&gt;.dockerignore&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#一个示例"&gt;一个示例&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#docker-命令清单"&gt;Docker 命令清单&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#全局参数"&gt;全局参数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#容器管理"&gt;容器管理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#容器交互"&gt;容器交互&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#镜像管理"&gt;镜像管理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#全流程示例"&gt;全流程示例&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#step1-初始配置"&gt;Step1 初始配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#step2-构建镜像"&gt;Step2 构建镜像&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#step3-实例化与运行"&gt;Step3 实例化与运行&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#step4-容器交互"&gt;Step4 容器交互&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#step5-停止与清理"&gt;Step5 停止与清理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#开发环境-docker-化"&gt;开发环境 Docker 化&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#纯命令行下的挂载编译"&gt;纯命令行下的挂载编译&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#vs-code-现代工程选择dev-containers-插件"&gt;VS Code 现代工程选择：Dev Containers 插件&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#附加到已存在的容器attach-to-running-container"&gt;附加到已存在的容器（Attach to Running Container）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#通过工程化配置构建开发环境devcontainer"&gt;通过工程化配置构建开发环境（.devcontainer）&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#创建项目结构"&gt;&lt;strong&gt;创建项目结构&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#编写-dockerfile"&gt;编写 Dockerfile&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#devcontainerjson-与参数介绍"&gt;devcontainer.json 与参数介绍&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#自动化容器环境构建"&gt;&lt;strong&gt;自动化容器环境构建&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/div&gt;
+&lt;h2 id="容器技术"&gt;容器技术
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;容器并非“轻量级虚拟机”，其本质上是宿主机操作系统之上的一组具有高级隔离特性和严苛资源限制的常规Linux进程。&lt;/li&gt;
+&lt;li&gt;容器本身不负责硬件指令级别的虚拟化翻译，而是作为一层高级的管控平面，通过调用并配置Linux内核的三大核心机制——Namespaces（命名空间）、cGroups（控制组）以及UnionFS（联合文件系统），为目标进程创造出独占系统的幻觉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="三大核心机制"&gt;三大核心机制
+&lt;/h3&gt;&lt;h4 id="namespace命名空间"&gt;Namespace（命名空间）
+&lt;/h4&gt;&lt;p&gt;Namespaces机制在不阻断系统整体运行的前提下，为容器进程提供了一个虚拟化的、完全隔离的资源视图。不同的Namespace子系统负责隔离不同维度的系统资源。具体而言：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PID Namespace&lt;/strong&gt; 隔离了进程ID空间，使得每个容器内部的初始进程始终认为自己是系统的主进程（拥有独立的PID 1），从而无法感知宿主机层面或其他容器中的并发进程。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NET Namespace&lt;/strong&gt; 为容器分配了独立的网络协议栈，包括独立的网卡接口、IP地址、路由表以及防火墙规则，确保了网络流量的严格隔离与独立配置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MNT Namespace&lt;/strong&gt; 则使得容器拥有独立的文件系统挂载点视图，配合底层的根文件系统（RootFS）切换机制，进程只能看到挂载到其所在Namespace下的特定目录树结构。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UTS Namespace&lt;/strong&gt; 专门用于隔离主机名与域名&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IPC Namespace&lt;/strong&gt; 负责处理进程间通信（如共享内存机制和信号量）的隔离以防数据污染&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;USER Namespace&lt;/strong&gt; 则通过映射容器内部用户与宿主机全局用户组的ID，允许容器内部的进程以root权限运行，而在宿主机系统层面仅表现为一个无特权的普通用户，极大提升了多租户环境下的系统安全性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="cgroupscontrol-groups控制组"&gt;cGroups（Control Groups，控制组）
+&lt;/h4&gt;&lt;p&gt;cGroups机制赋予了Docker为各个容器分配、核算和强制管理硬件资源的能力。通过深度配置cGroups接口，系统管理员可以实施极为严格的资源限制策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;设置 &lt;strong&gt;CPU Quotas（绝对配额）&lt;/strong&gt; 与 &lt;strong&gt;CPU Shares（相对时间片权重）&lt;/strong&gt; 来限制计算资源的过度侵占&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置 &lt;strong&gt;物理内存（RAM）&lt;/strong&gt; 以及 &lt;strong&gt;交换空间（Swap）&lt;/strong&gt; 的硬性上限，以防止单个容器因内存泄漏而触发宿主机级别的OOM（Out of Memory）杀手程序&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过 &lt;strong&gt;I/O节流（Throttling）&lt;/strong&gt; 机制控制磁盘读写频率与网络接口的传输速率&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;限制 &lt;strong&gt;容器内部可分叉（fork）&lt;/strong&gt; 创建的最大进程数，从而在内核层面上有效抵御Fork炸弹等拒绝服务攻击。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在诸如Kubernetes等现代容器编排环境中，cGroups同样是实现资源请求配置、资源限制分配以及服务质量（QoS）动态分级的底层技术基石。&lt;/p&gt;
+&lt;h4 id="unionfs联合文件系统"&gt;UnionFS（联合文件系统）
+&lt;/h4&gt;&lt;p&gt;UnionFS（联合文件系统，现代Docker常采用OverlayFS驱动）机制能够将多个位于不同物理位置的只读目录（即镜像层）透明地叠加合并在一起，对外呈现为一个统一的、平坦的文件系统视图，且在整个过程中无需修改底层的原始数据源。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在Docker的运行时架构中，镜像通常由多个只读的底层叠加而成；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当容器正式启动时，系统会在这组只读层之上临时叠加一个极薄的可写层（Writable Container Layer）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种独特的分层架构与写时复制（Copy-on-Write）的延迟加载设计，使得成千上万个基于同一基础镜像的容器能够极其高效地复用底层文件系统，不仅将存储空间的占用降低了几个数量级，更实现了毫秒级的容器启动速度，这在传统的厚重基础设施时代是不可想象的。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="容器-vs-虚拟机"&gt;容器 vs 虚拟机
+&lt;/h3&gt;&lt;p&gt;容器和虚拟机在系统架构与资源调度层面上采取了截然不同的实现路径，导致其在资源利用率、启动特性、可移植性以及隔离级别上存在显著的物理差异。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;评估维度&lt;/th&gt;
+&lt;th&gt;Docker 容器架构&lt;/th&gt;
+&lt;th&gt;传统虚拟VM构&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;底层系统架构&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;依赖Docker Engine，所有容器直接复用宿主机操作系统的内核，通过Namespace进行逻辑隔离。&lt;/td&gt;
+&lt;td&gt;依赖Hypervisor（如VMware, Hyper-V），每个虚拟机均包含一套完整独立的Guest OS内核及依&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;资源请求与分配机制&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;采用按需使用的弹性动态资源共享模式，仅向宿主机内核请求必需的系统资源，无须预先进行硬性切&lt;/td&gt;
+&lt;td&gt;在启动前必须向Hypervisor请求并长期固定占用特定数量的硬件资源池，无论应用是否处于负载状态。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;存储开销与系统体积&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;体积通常在MB级别，由于无须虚拟化完整的操作系统，磁盘占用极小，内存利用率极高。&lt;/td&gt;
+&lt;td&gt;体积庞大（通常为几十甚至上百GB级别），必须加载整个Guest OS文件系统，产生极大的空耗。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;生命周期与启动时间&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;秒级甚至毫秒级启动，对于操作系统而言仅仅相当于唤醒一个常规的Linux用户态进程。&lt;/td&gt;
+&lt;td&gt;启动过程极为漫长（通常需要数分钟），必须完成操作系统的完整底层引导、内核加载与虚拟硬件初始化流程。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;隔离性边界与安全性&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;进程级逻辑隔离，由于与宿主机及其他容器共享内核，若内核存在漏洞，则面临潜在的内核级逃逸风险。&lt;/td&gt;
+&lt;td&gt;系统级物理隔离，通过Hypervisor实现底层硬件指令级别的阻断，容器间干扰可能性极低，提供企业级最高安全性。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;计算与I/O性能表现&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;由于直接与物理硬件交互，没有操作系统层的指令集开销转换，其性能表现几乎完全等同于原生宿主机应用。&lt;/td&gt;
+&lt;td&gt;Guest OS的额外指令转换、硬件模拟与系统调用拦截会引发不可避免的性能损耗，整体执行效率低于容器。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="docker-技术"&gt;Docker 技术
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;容器&lt;/strong&gt;是轻量级虚拟化技术标准&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Docker&lt;/strong&gt;是开源的平台与工具集，是实现容器化技术的工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="docker-核心工作流程"&gt;Docker 核心工作流程
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;编Dockerfile`&lt;/li&gt;
+&lt;li&gt;通过&lt;code&gt;docker build&lt;/code&gt;命令打包为&lt;strong&gt;镜像（Image）&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;镜像&lt;/strong&gt;：一个包含了指定应用程序、代码依赖、系统运行库甚至基础操作系统的只读文件包。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;通过&lt;code&gt;docker run&lt;/code&gt;命令生产实例，即容器（Container）
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;容器&lt;/strong&gt;：基于镜像运行起来的实体。当“运行这个镜像”时，Docker 就会在内存中开辟一块独立隔离的空间，把镜像里的程序跑起来。这个跑起来的、活生生的环境，就叫容器。容器是可以被启动、停止、删除的，且里面可以产生新的数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;可以根据同一个镜像，启动出无数个相互隔离的容器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/jp1.jpeg"
+width="800"
+height="849"
+srcset="http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/jp1_hu_7d31e09c9ec2d0f2.jpeg 480w, http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/jp1_hu_f871edfa012b5eb1.jpeg 1024w"
+loading="lazy"
+alt="docker"
+class="gallery-image"
+data-flex-grow="94"
+data-flex-basis="226px"
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="docker-持久化存储机制"&gt;Docker 持久化存储机制
+&lt;/h3&gt;&lt;p&gt;在Docker的默认行为模型中，容器内部产生的所有数据改动均被捕获并存储在最顶层的 &lt;strong&gt;可写层（Writable Layer）&lt;/strong&gt; 中。这种设计导致了 &lt;strong&gt;一旦容器被删除或销毁 ，这些非持久化数据将永久丢失&lt;/strong&gt;；同时，这种高度耦合的存储模式也使得外部监控系统或宿主机进程难以直接提取或共享容器内的数据流。为了满足现代生产环境中复杂的状态化应用（如关系型数据库、分布式消息队列、集中式日志收集系统）的持久化需求，Docker引擎提供了三大类底层的挂载存储机制。&lt;/p&gt;
+&lt;div class="mermaid"&gt;
+mindmap
+root((Docker 存储机制对比))
+Default(默认行为: 可写层)
+::icon(fa fa-exclamation-triangle)
+DataLoss(容器删除则数据永久丢失)
+Coupling(高度耦合，外部难以访问)
+Volumes(Volumes 卷存储)
+::icon(fa fa-database)
+Management(完全由 Docker 守护进程集中创建与管理)
+Lifecycle(独立于单个容器生命周期，容器移除后数据保留)
+Performance(驻留宿主机缓存，I/O 性能极高)
+Scenario(高性能数据库、分布式消息队列、集中式日志系统)
+BindMounts(Bind Mounts 绑定挂载)
+::icon(fa fa-link)
+Flexibility(映射宿主机任意绝对路径)
+Sync(宿主机与容器实时双向热同步)
+Scenario(本地开发测试，如前端代码热更新)
+SecurityRisk(安全隐患: 主机进程可篡改容器文件，打破隔离性)
+::icon(fa fa-shield-alt)
+tmpfs(tmpfs Mounts)
+::icon(fa fa-memory)
+StorageMedium(直接写入宿主机物理内存 RAM)
+Persistence(纯粹的短暂性 Ephemeral 存储，重启/断电后消失)
+Security(杜绝数据落盘，降低物理窃取风险)
+Scenario(敏感内存数据、密码学凭据、高读取速度缓存)
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Volumes（卷存储）&lt;/strong&gt;： &lt;strong&gt;Volumes（卷存储）&lt;/strong&gt; 是性能最稳健的数据持久化方案。Volumes完全由Docker守护进程在宿主机的一个受控受保护的目录下集中创建与管理。它们具备独立于任何单个容器生命周期的特性，即使挂载该Volume的所有容器均被彻底移除，Volume中的数据依然完好无损地保留在系统中，等待下一次被重新挂载使用。由于数据驻留在宿主机文件系统的高速缓存体系中，Volumes能够提供与直接物理读写几乎无异的极高I/O性能，是部署高性能数据库或关键数据处理引擎的理想选择。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Bind Mounts（绑定挂载）&lt;/strong&gt;：与Volumes不同， &lt;strong&gt;Bind Mounts（绑定挂载）&lt;/strong&gt; 允许开发者将宿主机操作系统上的任意绝对路径目录直接硬链接映射到容器内部的特定挂载点。这种机制赋予了系统极高的灵活性，能够实现宿主机代码库与容器内运行环境的实时双向热同步。因此，在本地开发测试阶段（例如修改了前端代码后希望立即在容器化的Nginx服务器中看到热更新效果），Bind Mounts是不可或缺的工具。然而，Bind Mounts打破了容器严格的隔离性边界，使得主机上的非Docker特权进程或恶意脚本能够轻易篡改容器内的文件，反之亦然，这在生产环境中构成了极其严重的安全隐患。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;tmpfs Mounts&lt;/strong&gt;：对于处理极其敏感的内存数据、密码学凭据（Credentials）或者需要极高读取速度但无需永久保留的中间态缓存数据，系统推荐使用&lt;strong&gt;tmpfs Mounts&lt;/strong&gt;。该存储模式通过将数据结构直接写入宿主机的系统物理内存（RAM）中，从根本上杜绝了数据落盘（写入物理磁盘）的可能性。因此，这是一种纯粹的短暂性（Ephemeral）存储方案，一旦容器停止、重启或宿主机遭遇断电，内存中的所有敏感痕迹将瞬间消失，极大地降低了数据在物理介质上被窃取的风险，同时彻底消除了磁盘I/O带来的性能损耗。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="mermaid"&gt;
+graph TD
+classDef storage fill:#e1f5fe,stroke:#01579b,stroke-width:2px,rx:5,ry:5;
+classDef container fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px,stroke-dasharray: 5 5;
+classDef host fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+classDef problem fill:#ffebee,stroke:#b71c1c,stroke-width:2px,stroke-dasharray: 2 2;
+classDef highlight fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,font-weight:bold;
+subgraph DefaultBehavior [默认行为：非持久化存储]
+direction TB
+AppChange(容器内数据改动) --&gt;|"捕获并存储"| WritableLayer[最顶层可写层]
+WritableLayer -.-&gt;|"容器删除或销毁"| DataLoss(数据永久丢失)
+WritableLayer -.-&gt;|"高度耦合"| MonitorIssue(外部难以提取数据流)
+end
+class WritableLayer storage;
+class DataLoss problem;
+subgraph HostSystem [宿主机]
+direction TB
+DockerManaged[Docker 受控目录 /var/lib/docker/volumes]
+ArbitraryPath[宿主机任意绝对路径目录]
+HostRAM[宿主机物理内存 RAM]
+end
+class HostSystem host;
+class DockerManaged,ArbitraryPath,HostRAM storage;
+subgraph ContainerInstance [Docker 容器实例]
+ContainerFS[容器文件系统]
+MountPointA[挂载点 A]
+MountPointB[挂载点 B]
+MountPointC[挂载点 C]
+end
+class ContainerInstance container;
+AppChange ==&gt;|"满足持久化需求"| Mechanisms(三大底层挂载机制)
+class Mechanisms highlight;
+Mechanisms -.-&gt;|"方案一"| Vol[Volumes 卷存储]
+Vol --&gt;|"1. 集中管理"| DockerManaged
+DockerManaged &lt;--&gt;|"2. 挂载 - IO性能极高"| MountPointA
+Mechanisms -.-&gt;|"方案二"| Bind[Bind Mounts 绑定挂载]
+Bind --&gt;|"1. 硬链接映射"| ArbitraryPath
+ArbitraryPath &lt;--&gt;|"2. 实时双向热同步"| MountPointB
+Mechanisms -.-&gt;|"方案三"| Tmp[tmpfs Mounts]
+Tmp --&gt;|"1. 直接写入"| HostRAM
+HostRAM --&gt;|"2. 短暂性存储"| MountPointC
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;h3 id="docker-网络驱动"&gt;Docker 网络驱动
+&lt;/h3&gt;&lt;p&gt;在网络拓扑与通信架构设计方面，Docker通过灵活的插件化网络驱动程序（Network Drivers），满足了从简单的单机调试到复杂的跨数据中心编排的各类连通性需求。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Bridge（网桥架构）&lt;/strong&gt;：这是所有在单机上新建容器的默认骨干网络。Docker引擎会在宿主机上虚拟出一个网桥（通常名为docker0），所有加入该网络的容器均会被分配一个内网IP并接入此虚拟交换机。虽然容器之间可以通过该内网畅通无阻地互相访问，但对于宿主机外部的真实网络而言，这些容器是隐身的。外部请求必须依赖于宿主机上设置的端口映射规则（Port Publishing），通过NAT（网络地址转换）技术才能精准穿透隔离屏障，抵达目标容器内部的服务进程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="mermaid"&gt;
+graph TD
+Ext["外部真实网络"]
+subgraph Host["宿主机"]
+NAT["端口映射规则 (Port Publishing / NAT)"]
+Bridge["虚拟交换机 (docker0 网桥)"]
+C1["容器 A (分配内网 IP)"]
+C2["容器 B (分配内网 IP)"]
+end
+Ext --&gt;|"依赖端口穿透隔离屏障"| NAT
+NAT --&gt;|"地址转换与转发"| Bridge
+Bridge --&gt;|"接入"| C1
+Bridge --&gt;|"接入"| C2
+C1 -.-&gt;|"内网畅通互访"| C2
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Host（主机网络）&lt;/strong&gt;：该驱动机制会直接移除容器与宿主机之间的网络隔离墙。容器将直接复用并接管宿主机的物理网络协议栈。举例而言，如果一个容器在Host模式下监听了80端口，那么它将直接占用宿主机物理网卡的80端口，任何针对该物理机80端口的请求都将直接被容器接收。这种模式虽然牺牲了网络隔离性，但彻底免除了NAT转发带来的计算开销与延迟，在对网络吞吐量和延迟要求极高的分布式高频交易系统或高性能网络嗅探器中广泛应用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="mermaid"&gt;
+graph TD
+Ext["外部真实网络"]
+subgraph HostEnv["宿主机"]
+HostNet["宿主机物理网络协议栈 (如: 物理网卡 80 端口)"]
+subgraph C1["Host 模式容器"]
+App["服务进程 (直接监听占用)"]
+end
+end
+Ext --&gt;|"无 NAT 延迟，直接接收"| HostNet
+HostNet ---|"复用网络栈 (无隔离墙)"| App
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Overlay（覆盖网络）&lt;/strong&gt;：针对跨多台物理主机的分布式集群（如Docker Swarm或Kubernetes集群），Overlay网络驱动发挥了中流砥柱的作用。它利用VXLAN等底层隧道封包技术，在分散于不同物理数据中心的Docker守护进程之间建立起一层加密的虚拟二层网络，使得调度在不同节点上的容器能够像处于同一个局域网内一样，利用服务名称进行透明的直接通信。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="mermaid"&gt;
+graph TD
+subgraph Cluster["分布式集群 (如 Swarm / K8s)"]
+subgraph HostA["物理数据中心节点 A"]
+DaemonA["Docker 守护进程"]
+C1["容器 1"]
+end
+subgraph HostB["物理数据中心节点 B"]
+DaemonB["Docker 守护进程"]
+C2["容器 2"]
+end
+end
+Tunnel["Overlay 加密虚拟二层网络 (VXLAN 隧道)"]
+C1 -.-&gt;|"按服务名称透明通信"| Tunnel
+Tunnel -.-&gt;|"按服务名称透明通信"| C2
+DaemonA ---|"底层物理网络封包传输"| DaemonB
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Macvlan（物理MAC虚拟化）&lt;/strong&gt;：对于许多陈旧的企业应用而言，它们往往在底层代码中硬编码了对物理网络环境的期望。Macvlan驱动通过向容器分配一个真实的物理硬件MAC地址，使得容器在外部物理网络交换机的路由表中表现为一台真实的物理服务器设备。这允许容器直接接入现有的企业内部VLAN网络，彻底绕过了Docker主机的路由转发逻辑。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="mermaid"&gt;
+graph TD
+Switch["外部物理网络交换机 (企业现有 VLAN)"]
+subgraph Host["宿主机"]
+NIC["宿主机物理网卡 (如 eth0)"]
+C1["Macvlan 容器"]
+MAC["分配真实的物理硬件 MAC 地址"]
+end
+Switch --&gt;|"视为真实的物理服务器"| NIC
+NIC --&gt;|"彻底绕过 Docker 路由逻辑"| C1
+C1 --- MAC
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;None（完全隔离）&lt;/strong&gt;：在某些执行高度敏感的离线数据分析、密码学运算或者被用作沙盒执行恶意代码样本分析的场景下，可以为容器分配None网络驱动。此时，容器内部将仅保留环回网卡（Loopback），被完全切断与外界（包括宿主机和其他容器）的任何网络数据交互通道，实现极致的封闭隔离。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="mermaid"&gt;
+graph TD
+Outside["外部网络环境 / 宿主机 / 其他容器"]
+subgraph Sandbox["None 模式容器"]
+LO["环回网卡 (Loopback)"]
+App["离线分析/密码学运算/恶意代码样本"]
+end
+Outside -.-|"网络数据交互通道被完全切断"| Sandbox
+App --&gt;|"仅限容器内部调用"| LO
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2 id="dockerfile"&gt;Dockerfile
+&lt;/h2&gt;&lt;h3 id="运行机制"&gt;运行机制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;从上到下逐行执行：&lt;/strong&gt; Docker 会从文件的第一行开始，逐条读取并执行指令。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;每一条指令都是一层（Layer）：&lt;/strong&gt; 每一次 &lt;code&gt;COPY&lt;/code&gt;、每一次 &lt;code&gt;RUN&lt;/code&gt; 都会在原有的镜像上“套”上一层新的只读层。&lt;strong&gt;层数越多，镜像体积越大，构建越慢。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="指令字典"&gt;指令字典
+&lt;/h3&gt;&lt;h4 id="环境配置"&gt;环境配置
+&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;指令&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;th&gt;示例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;FROM&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;指定镜像基于哪个基础镜像构建。&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;FROM ubuntu:22.04&lt;/code&gt; 或 &lt;code&gt;FROM python:3.10-alpine&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;WORKDIR&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置容器内的工作目录。如果目录不存在会自动创建。后续的 &lt;code&gt;RUN&lt;/code&gt;, &lt;code&gt;CMD&lt;/code&gt;, &lt;code&gt;COPY&lt;/code&gt; 等指令都会在这个目录下执行。&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;WORKDIR /app&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ENV&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置环境变量。这些变量在构建时和运行中的容器内都有效。&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ENV PORT=8080&lt;/code&gt; (后续可以用 &lt;code&gt;$PORT&lt;/code&gt; 引用它)。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id="文件配置"&gt;文件配置
+&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;指令&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;th&gt;示例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;COPY&lt;/code&gt;（推荐）&lt;/td&gt;
+&lt;td&gt;纯粹地把宿主机的文件或目录复制到镜像中。&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;COPY requirements.txt .&lt;/code&gt; (把当前目录的 &lt;code&gt;requirements.txt&lt;/code&gt; 复制到 &lt;code&gt;WORKDIR&lt;/code&gt; 中)。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ADD&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;COPY&lt;/code&gt; 的增强版。除了复制，如果源文件是一个 &lt;code&gt;.tar.gz&lt;/code&gt; 压缩包，它会自动解压到目标路径；如果源路径是一个 URL，它会自动下载。&lt;/td&gt;
+&lt;td&gt;同上&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id="环境构建"&gt;环境构建
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;RUN&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：在构建镜像的过程中执行linux命令（如安装软件、创建目录等）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;code&gt;RUN apt-get update &amp;amp;&amp;amp; apt-get install -y vim&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：避免“多行&lt;code&gt;RUN&lt;/code&gt;”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;错误（根据构建机制，三个&lt;code&gt;RUN&lt;/code&gt;会产生三个冗余镜像层）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; apt-get update&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; apt-get install -y python3&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; apt-get clean&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;正确：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; apt-get update &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get install -y python3 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get clean &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -rf /var/lib/apt/lists/*&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="启动程序"&gt;启动程序
+&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;指令&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;th&gt;特点&lt;/th&gt;
+&lt;th&gt;示例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cmd&lt;/code&gt;（默认启动命令）&lt;/td&gt;
+&lt;td&gt;指定容器&lt;strong&gt;启动时&lt;/strong&gt;默认执行的命令。&lt;/td&gt;
+&lt;td&gt;可以被覆盖。如果在 &lt;code&gt;docker run&lt;/code&gt; 后面加了命令，&lt;code&gt;CMD&lt;/code&gt; 就会被完全无视。&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;CMD [&amp;quot;python&amp;quot;, &amp;quot;app.py&amp;quot;]&lt;/code&gt;。如果用户执行 &lt;code&gt;docker run myapp bash&lt;/code&gt;，那么容器启动的将是 &lt;code&gt;bash&lt;/code&gt; 而不是 Python 程序。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ENTRYPOINT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;也是容器启动时执行的命令&lt;/td&gt;
+&lt;td&gt;不可被常规覆盖。如果在 &lt;code&gt;docker run&lt;/code&gt; 后面加了参数，这些参数会被当做&lt;strong&gt;参数&lt;/strong&gt;传给 &lt;code&gt;ENTRYPOINT&lt;/code&gt;，而不是覆盖它。&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ENTRYPOINT [&amp;quot;ping&amp;quot;]&lt;/code&gt;。此时执行 &lt;code&gt;docker run myping 8.8.8.8&lt;/code&gt;，实际容器内执行的命令是 &lt;code&gt;ping 8.8.8.8&lt;/code&gt;。让一个容器用起来就像一个常规的可执行命令行工具。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id="声明补充"&gt;声明补充
+&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;指令&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;EXPOSE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;声明容器打算使用什么端口。&lt;strong&gt;这只是一个文档说明&lt;/strong&gt;，写了 &lt;code&gt;EXPOSE 80&lt;/code&gt; 并不会让它自动绑定到宿主机的 80 端口，仍然需要在 run 时通过 &lt;code&gt;-p&lt;/code&gt; 映射。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;VOLUME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;声明匿名数据卷。提醒使用者该目录里的数据需要持久化。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id="dockerignore"&gt;.dockerignore
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;docker build -t myapp .&lt;/code&gt; 最后的 &lt;code&gt;.&lt;/code&gt; 代表当前目录。 Docker 在构建前，&lt;strong&gt;会把这个目录下的所有文件打包发送给 Docker Daemon (守护进程)&lt;/strong&gt;。如果目录下有 &lt;code&gt;venv/&lt;/code&gt; 虚拟环境、&lt;code&gt;.git/&lt;/code&gt; 隐藏文件夹、几 GB 的测试数据、或是 &lt;code&gt;__pycache__/&lt;/code&gt;，它们全都会被发送，导致构建过程十分缓慢，甚至将敏感配置打包进镜像。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案：&lt;/strong&gt; 在 Dockerfile 同级目录下创建一个 &lt;code&gt;.dockerignore&lt;/code&gt; 文件（语法和 &lt;code&gt;.gitignore&lt;/code&gt; 完全一样）。示例：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.gitignore
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;__pycache__/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;*.pyc
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;*.pyo
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;venv/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;env/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.env
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Dockerfile
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.dockerignore
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id="一个示例"&gt;一个示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 1. 选择精简版的基础镜像 (Slim 或 Alpine 均可)&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;python:3.10-slim&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 2. 设置不生成 .pyc 文件，并强制不缓冲标准输出 (Python 容器常见优化)&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; &lt;span class="nv"&gt;PYTHONDONTWRITEBYTECODE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; &lt;span class="nv"&gt;PYTHONUNBUFFERED&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 3. 设置工作目录&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;WORKDIR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;/app&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 4. 依赖缓存优化 (极度重要⭐⭐⭐)&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 我们先单独 COPY requirements.txt，再执行 RUN 安装依赖。&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 为什么要分开？因为 Docker 有层缓存机制。只要 requirements.txt 内容没变，Docker 就会直接使用上一次安装好依赖的缓存层，极大地加快后续代码修改时的构建速度。&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;COPY&lt;/span&gt; requirements.txt .&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; pip install --no-cache-dir -r requirements.txt&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 5. 复制项目实际代码&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;COPY&lt;/span&gt; . .&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 6. 声明端口&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;EXPOSE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;8000&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 7. 指定启动命令&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;python&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;app.py&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="docker-命令清单"&gt;Docker 命令清单
+&lt;/h2&gt;&lt;h3 id="全局参数"&gt;全局参数
+&lt;/h3&gt;&lt;p&gt;通常直接跟在 &lt;code&gt;docker&lt;/code&gt; 关键字后面，用于控制 Docker 客户端与服务端（Daemon）的连接和行为级别：&lt;code&gt;docker [OPTIONS] COMMAND&lt;/code&gt;。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;参数&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;简写&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;作用说明&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;常见场景&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--config&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;无&lt;/td&gt;
+&lt;td&gt;指定客户端配置文件的存放路径&lt;/td&gt;
+&lt;td&gt;默认在 &lt;code&gt;~/.docker&lt;/code&gt;，当你想隔离不同的认证凭据时使用。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--context&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;-c&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;指定连接 Daemon 的上下文名称&lt;/td&gt;
+&lt;td&gt;在本地管理多个远程 Docker 主机时切换环境。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--debug&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;-D&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;开启调试模式&lt;/td&gt;
+&lt;td&gt;遇到部分报错，需要看底层 API 调用过程时使用。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--host&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;-H&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;指定连接的 Docker Daemon 的 Socket 或 IP&lt;/td&gt;
+&lt;td&gt;例如连接远程机器：&lt;code&gt;docker -H tcp://192.168.1.100:2375 ps&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--log-level&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;-l&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置日志级别 (debug, info, warn, error, fatal)&lt;/td&gt;
+&lt;td&gt;默认是 info，排障时可调高。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--tls*&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;无&lt;/td&gt;
+&lt;td&gt;一系列 TLS 相关的证书配置参数&lt;/td&gt;
+&lt;td&gt;结合 &lt;code&gt;-H&lt;/code&gt; 使用，确保远程连接 Docker 服务的安全性。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="容器管理"&gt;容器管理
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;命令&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;核心作用&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;常用进阶参数与示例&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;run&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;创建并启动&lt;/strong&gt;一个新容器&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker run -itd --name myweb -p 8080:80 nginx&lt;/code&gt; （&lt;code&gt;-i&lt;/code&gt; 交互, &lt;code&gt;-t&lt;/code&gt; 终端, &lt;code&gt;-d&lt;/code&gt; 后台运行, &lt;code&gt;-p&lt;/code&gt; 端口映射, &lt;code&gt;-v&lt;/code&gt; 挂载目录）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;create&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;仅创建容器，但不启动&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker create --name test ubuntu&lt;/code&gt; (准备好资源，等待 start)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;start&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;启动一个已被停止的容器&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker start &amp;lt;容器名或ID&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;stop&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;停止运行中的容器&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker stop &amp;lt;容器名或ID&amp;gt;&lt;/code&gt; (发送 SIGTERM 信号)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;restart&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;重启容器&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker restart &amp;lt;容器名或ID&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;kill&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;强制终止容器&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker kill &amp;lt;容器名或ID&amp;gt;&lt;/code&gt; (发送 SIGKILL 信号，适用于卡死的容器)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;rm&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;删除已停止的容器&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker rm &amp;lt;容器名或ID&amp;gt;&lt;/code&gt; 加 &lt;code&gt;-f&lt;/code&gt; 可以强制删除正在运行的容器。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;pause&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;暂停容器内的所有进程&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker pause &amp;lt;容器名&amp;gt;&lt;/code&gt; (冻结状态，CPU 占用降为 0)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;unpause&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;恢复被暂停的容器进程&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker unpause &amp;lt;容器名&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;wait&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;阻塞直到容器停止，并打印退出码&lt;/td&gt;
+&lt;td&gt;用于自动化脚本同步执行状态。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="容器交互"&gt;容器交互
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;命令&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;核心作用&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;常用进阶参数与示例&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;exec&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;在&lt;strong&gt;运行中&lt;/strong&gt;的容器内执行新命令&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker exec -it &amp;lt;容器名&amp;gt; /bin/bash&lt;/code&gt; (最常用的“进入容器”的方法)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;ps&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;列出容器列表&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker ps&lt;/code&gt; (仅列出运行中) &lt;code&gt;docker ps -a&lt;/code&gt; (列出所有，包括已停止的) &lt;code&gt;docker ps -q&lt;/code&gt; (仅列出容器 ID)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;logs&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;查看容器的输出日志&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker logs -f --tail 100 &amp;lt;容器名&amp;gt;&lt;/code&gt; (&lt;code&gt;-f&lt;/code&gt; 持续跟踪，&lt;code&gt;--tail&lt;/code&gt; 仅看最后 100 行)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;cp&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;宿主机与容器之间拷贝文件&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker cp ./local.txt &amp;lt;容器名&amp;gt;:/app/&lt;/code&gt; (拷入) &lt;code&gt;docker cp &amp;lt;容器名&amp;gt;:/app/log.txt ./&lt;/code&gt; (拷出)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;inspect&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;返回容器/镜像的底层详细 JSON 数据&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker inspect &amp;lt;容器名&amp;gt;&lt;/code&gt; (常用于查找容器 IP、挂载点等详细信息)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;stats&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;实时显示容器的资源利用率 (类似 &lt;code&gt;top&lt;/code&gt;)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker stats&lt;/code&gt; (查看所有容器的 CPU、内存、网络 I/O 实时消耗)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;top&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;查看容器内部运行的系统进程&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker top &amp;lt;容器名&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;port&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;查看容器的端口映射情况&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker port &amp;lt;容器名&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;diff&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;查看容器文件系统相较于镜像的变化&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker diff &amp;lt;容器名&amp;gt;&lt;/code&gt; (A: 增加, D: 删除, C: 修改)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;attach&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;将终端的标准输入输出附加到容器的主进程&lt;/td&gt;
+&lt;td&gt;不常用。注意：退出时如果按 &lt;code&gt;Ctrl+C&lt;/code&gt; 会导致容器直接停止运行。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="镜像管理"&gt;镜像管理
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;命令&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;核心作用&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;常用进阶参数与示例&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;build&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;根据 Dockerfile 构建镜像&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker build -t myapp:1.0 .&lt;/code&gt; (&lt;code&gt;-t&lt;/code&gt; 指定名称和标签，&lt;code&gt;.&lt;/code&gt; 代表当前上下文目录)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;pull&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;从镜像仓库下载镜像&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker pull ubuntu:22.04&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;push&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;将本地镜像上传到镜像仓库&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker push myregistry/myapp:1.0&lt;/code&gt; (通常需要先 login)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;images&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;列出本地存在的镜像&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker images&lt;/code&gt; 或 &lt;code&gt;docker image ls&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;rmi&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;删除本地镜像&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker rmi &amp;lt;镜像ID&amp;gt;&lt;/code&gt; (如果有基于该镜像的容器存在，需先删除容器或加 &lt;code&gt;-f&lt;/code&gt; 强制删除)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;tag&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;给镜像打标签（改名/版本管理）&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker tag source_image:latest my_image:v1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;commit&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;将容器的当前状态保存为新镜像&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker commit &amp;lt;容器名&amp;gt; new_image_name&lt;/code&gt; (不推荐作为常规构建方式，更推荐 Dockerfile)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;history&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;查看镜像的构建历史分层&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker history &amp;lt;镜像名&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;save&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;将镜像打包成 tar 归档文件（用于离线传输）&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker save -o ubuntu.tar ubuntu:latest&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;load&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;从 tar 归档文件中恢复镜像&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker load -i ubuntu.tar&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;export&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;导出&lt;strong&gt;容器&lt;/strong&gt;的文件系统为 tar 归档&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker export &amp;lt;容器名&amp;gt; &amp;gt; container.tar&lt;/code&gt; (丢失历史层信息，变得非常扁平)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;import&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;从 tar 归档中导入内容为&lt;strong&gt;镜像&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker import container.tar new_image:v1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="全流程示例"&gt;全流程示例
+&lt;/h2&gt;&lt;div class="mermaid"&gt;
+stateDiagram-v2
+direction LR
+state "编写阶段" as Phase1 {
+app[app.py]
+df[Dockerfile]
+}
+state "镜像 (Image)" as Image
+state "运行中容器 (Running)" as Running
+state "已停止容器 (Exited)" as Stopped
+Phase1 --&gt; Image : docker build
+Image --&gt; Running : docker run
+Running --&gt; Running : docker exec (进入交互)\ndocker logs (看日志)
+Running --&gt; Stopped : docker stop
+Stopped --&gt; Running : docker start
+Stopped --&gt; [*] : docker rm (删除容器)
+Image --&gt; [*] : docker rmi (删除镜像)
+&lt;/div&gt;
+&lt;h3 id="step1-初始配置"&gt;Step1 初始配置
+&lt;/h3&gt;&lt;p&gt;每个 Dockerfile 都应该有一个独立的文件夹，因为 Docker 在构建时会将整个文件夹的内容作为“上下文”发送给 Docker 引擎。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mkdir docker-demo
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; docker-demo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在 &lt;code&gt;docker-demo&lt;/code&gt; 下构建两个文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;app.py&lt;/code&gt;：一个简单的HTTP服务，返回一段信息&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;http.server&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BaseHTTPRequestHandler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;HTTPServer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;socket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SimpleHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BaseHTTPRequestHandler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;do_GET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send_header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Content-type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;text/plain; charset=utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end_headers&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;hostname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gethostname&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Hello from Docker! 容器的主机名是: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;服务已启动，监听端口 8000...&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;HTTPServer&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0.0.0.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8888&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;SimpleHandler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serve_forever&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Dockerfile&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;python:3.10-slim&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;WORKDIR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;/usr/src/app&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 第一个（.）代表宿主机当前目录下的所有文件，第二个（.）代表容器工作目录&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;copy&lt;/span&gt; . .&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;EXPOSE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;8888&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 默认执行&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;python&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;app.py&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="step2-构建镜像"&gt;Step2 构建镜像
+&lt;/h3&gt;&lt;p&gt;在 &lt;code&gt;docker-demo&lt;/code&gt; 下执行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker build -t my-python-service:v1 .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;build&lt;/code&gt;: 告诉 Docker 开始构建。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-t my-python-service:v1&lt;/code&gt;: 给这个镜像打个标签（Tag）。名字叫 &lt;code&gt;my-python-service&lt;/code&gt;，版本号是 &lt;code&gt;v1&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.&lt;/code&gt; : 指示 Docker 构建上下文在&lt;strong&gt;当前目录&lt;/strong&gt;。Docker 会在当前目录寻找 &lt;code&gt;Dockerfile&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Docker 会下载 &lt;code&gt;python:3.10-slim&lt;/code&gt; 基础层，然后创建工作目录层，复制文件层，最后生成最终镜像。可以用 &lt;code&gt;docker images&lt;/code&gt; 查看刚刚生成的镜像。&lt;/p&gt;
+&lt;h3 id="step3-实例化与运行"&gt;Step3 实例化与运行
+&lt;/h3&gt;&lt;p&gt;在任意终端执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run -d --name my-running-app -p 8080:8000 my-python-service:v1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;run&lt;/code&gt;: 创建并启动容器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-d&lt;/code&gt;: Detach 模式，让容器在&lt;strong&gt;后台&lt;/strong&gt;运行，不阻塞你的终端。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--name my-running-app&lt;/code&gt;: 给这个容器起名字，如果不写，Docker 会随机分配一个搞笑的名字（比如 &lt;code&gt;crazy_einstein&lt;/code&gt;）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-p 8888:8888&lt;/code&gt;: &lt;strong&gt;端口映射&lt;/strong&gt;。将宿主机（你的电脑）的 &lt;code&gt;8888&lt;/code&gt; 端口映射到容器内部的 &lt;code&gt;8888&lt;/code&gt; 端口。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;my-python-service:v1&lt;/code&gt;: 指定要运行的镜像名称和版本。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;运行后，可以用宿主机浏览器访问 &lt;code&gt;http://localhost:8888&lt;/code&gt;，或者用 &lt;code&gt;curl http://localhost:8888&lt;/code&gt; 测试，会看到容器内部返回的响应。&lt;/p&gt;
+&lt;h3 id="step4-容器交互"&gt;Step4 容器交互
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;查看运行状态&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker ps
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;会看到 &lt;code&gt;my-running-app&lt;/code&gt; 正在运行，并且显示了端口映射关系。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;查看容器日志&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker logs my-running-app
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;进入容器内部执行命令&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; -it my-running-app /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此时终端前缀会改变，说明已经在容器内部了！可以输入 &lt;code&gt;ls&lt;/code&gt; 看看 &lt;code&gt;/usr/src/app&lt;/code&gt; 目录下的文件。输入 &lt;code&gt;exit&lt;/code&gt; 即可退出容器，但这不会停止容器运行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="step5-停止与清理"&gt;Step5 停止与清理
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;停止运行中的容器&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker stop my-running-app
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此时再执行 &lt;code&gt;docker ps&lt;/code&gt; 就看不到它了。但如果执行 &lt;code&gt;docker ps -a&lt;/code&gt;（显示所有容器），会发现它变成了 &lt;code&gt;Exited&lt;/code&gt; 状态。&lt;strong&gt;停止并不等于删除&lt;/strong&gt;，它的读写层（UpperDir）数据还在。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;删除容器&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rm my-running-app
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果容器还在运行中，可以加 &lt;code&gt;-f&lt;/code&gt; 强制删除：&lt;code&gt;docker rm -f my-running-app&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;删除镜像&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rmi my-python-service:v1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="开发环境-docker-化"&gt;开发环境 Docker 化
+&lt;/h2&gt;&lt;p&gt;将开发环境彻底 Docker 化，是现代软件工程中十分常见的一种做法。它能完美解决程序跨设备兼容性问题，同时让宿主机保持绝对的纯净——不需要装杂乱的 Python 库、不同版本的 JDK，或者各种 C++ 依赖库（比如 Boost）。&lt;/p&gt;
+&lt;h3 id="纯命令行下的挂载编译"&gt;纯命令行下的挂载编译
+&lt;/h3&gt;&lt;p&gt;通过将编写好的python程序、jar包等等，Copy 到容器环境中执行，从而达到 Docker 化执行效果。以下是几个比较直观的例子：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;运行python脚本&lt;/p&gt;
+&lt;p&gt;不需要在宿主机上安装python环境，直接使用一行命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/app -w /app python:3.10-slim python main.py
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--rm&lt;/code&gt;：运行完毕后立刻销毁容器&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-v $(pwd):/app &lt;/code&gt;：把当前目录挂载到容器内的&lt;code&gt;/app&lt;/code&gt;目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-w /app&lt;/code&gt;：设置工作目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;编译和运行C++程序&lt;/p&gt;
+&lt;p&gt;C++程序需要编译+运行两步&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/src -w /src gcc:latest bash -c &lt;span class="s2"&gt;&amp;#34;g++ main.cpp -o main_app &amp;amp;&amp;amp; ./main_app&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;执行完毕后，宿主机的目录下多了一个编译好的 &lt;code&gt;main_app&lt;/code&gt; 可执行文件。这是通过 &lt;code&gt;-v&lt;/code&gt; 挂载的优点：容器内生成的文件会直接保留在宿主机上。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;编译并运行Java&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/src -w /src openjdk:17-jdk bash -c &lt;span class="s2"&gt;&amp;#34;javac Main.java &amp;amp;&amp;amp; java Main&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="vs-code-现代工程选择dev-containers-插件"&gt;VS Code 现代工程选择：Dev Containers 插件
+&lt;/h3&gt;&lt;p&gt;VS Code 的 &lt;strong&gt;Dev Containers&lt;/strong&gt; 插件的核心在于：把 VS Code “一分为二”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;前端 UI&lt;/strong&gt;（代码高亮、主题）留在你的宿主机上；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;后端服务&lt;/strong&gt;（语言解析、终端、调试器）直接安装并运行在 Docker 容器内部。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;准备工作：在 VS Code 扩展商店安装 &lt;code&gt;Dev Containers&lt;/code&gt; 插件（搜索 &lt;code&gt;@id:ms-vscode-remote.remote-containers&lt;/code&gt;）。&lt;/p&gt;
+&lt;h4 id="附加到已存在的容器attach-to-running-container"&gt;附加到已存在的容器（Attach to Running Container）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在终端已经启动一个长期运行的容器：&lt;/strong&gt; 为了开发，通常启动一个带交互终端并在后台运行的系统镜像：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run -itd --name my-cpp-dev gcc:latest /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在 VS Code 中连接：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;按下 &lt;code&gt;Ctrl+Shift+P&lt;/code&gt; (或 &lt;code&gt;F1&lt;/code&gt;) 打开命令面板。&lt;/li&gt;
+&lt;li&gt;输入并选择：&lt;code&gt;Dev Containers: Attach to Running Container...&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在弹出的列表中，选择刚才运行的 &lt;code&gt;my-cpp-dev&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;VS Code 会打开一个新的窗口，把一段名为 &lt;code&gt;vscode-server&lt;/code&gt; 的程序注入到容器里并运行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;开发&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;左侧资源管理器的 &lt;code&gt;打开文件夹&lt;/code&gt;，路径是&lt;strong&gt;容器内部的文件系统&lt;/strong&gt;（比如 &lt;code&gt;/&lt;/code&gt; 根目录）。&lt;/li&gt;
+&lt;li&gt;在 VS Code 里打开终端（Ctrl+`），实际上是在敲容器内部的 bash。&lt;/li&gt;
+&lt;li&gt;在 VS Code 里安装的 C++ 扩展会被安装在&lt;strong&gt;容器&lt;/strong&gt;里。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="通过工程化配置构建开发环境devcontainer"&gt;通过工程化配置构建开发环境（.devcontainer）
+&lt;/h4&gt;&lt;p&gt;现代化开发选择将&lt;strong&gt;开发环境本身作为代码（Infrastructure as Code）&lt;/strong&gt;。假设要开发一个需要 &lt;code&gt;boost&lt;/code&gt; 和 &lt;code&gt;cmake&lt;/code&gt; 的 C++ 网络编程项目：&lt;/p&gt;
+&lt;h5 id="创建项目结构"&gt;&lt;strong&gt;创建项目结构&lt;/strong&gt;
+&lt;/h5&gt;&lt;p&gt;在空项目文件夹下，创建一个特殊的文件夹 &lt;code&gt;.devcontainer&lt;/code&gt;，并在里面放两个文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;my-project/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── .devcontainer/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ├── devcontainer.json &lt;span class="c1"&gt;# 定义 VS Code 行为&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── Dockerfile &lt;span class="c1"&gt;# 与之前的 Dockerfile 一致&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── main.cpp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h5 id="编写-dockerfile"&gt;编写 Dockerfile
+&lt;/h5&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;span class="lnt"&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 微软提供了很多官方的 devcontainer 基础镜像，自带普通非 root 用户等安全配置&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;mcr.microsoft.com/devcontainers/cpp:ubuntu-22.04&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;DEBIAN_FRONTEND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;noninteractive &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get -y install --no-install-recommends &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; cmake &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; gdb &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; libboost-all-dev &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get clean &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -rf /var/lib/apt/lists/*&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h5 id="devcontainerjson-与参数介绍"&gt;devcontainer.json 与参数介绍
+&lt;/h5&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;My C++ Boost Env&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;build&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dockerfile&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Dockerfile&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;customizations&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;vscode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 当容器启动后，自动为这个环境安装以下 VS Code 插件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;extensions&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;ms-vscode.cpptools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;ms-vscode.cmake-tools&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 将容器内的用户设置为 vscode (基础镜像自带的普通用户，避免用 root 引起权限混乱)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;remoteUser&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;vscode&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;核心构建参数 (Build &amp;amp; Image)&lt;/p&gt;
+&lt;p&gt;这部分决定了容器基于什么“底座”运行。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;参数名称&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;类型&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;详解与示例&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;image&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;最简单的方式&lt;/strong&gt;，直接使用现成的 Docker 镜像。不支持复杂的自定义。 &lt;code&gt;&amp;quot;image&amp;quot;: &amp;quot;[mcr.microsoft.com/devcontainers/python:3.10](https://mcr.microsoft.com/devcontainers/python:3.10)&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;build&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Object&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;最常用的方式&lt;/strong&gt;，通过指定 Dockerfile 来动态构建环境。 - &lt;code&gt;dockerfile&lt;/code&gt;: 指定 Dockerfile 相对路径。 - &lt;code&gt;context&lt;/code&gt;: 构建上下文路径（通常是 &lt;code&gt;.&lt;/code&gt;）。 - &lt;code&gt;args&lt;/code&gt;: 传递给 Dockerfile 的构建参数 (ARG)。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;dockerComposeFile&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;String/Array&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;针对复杂微服务&lt;/strong&gt;。如果你的开发环境不仅需要 Python，还需要 Redis 和 MySQL，可以通过指定的 docker-compose.yml 来启动整个集群。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;service&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;配合 &lt;code&gt;dockerComposeFile&lt;/code&gt; 使用，告诉 VS Code 应该“钻”进哪一个容器里去开发。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;容器运行时配置 (Container Runtime)&lt;/p&gt;
+&lt;p&gt;这部分决定了容器跑起来之后，底层的系统属性和权限。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;参数名称&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;类型&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;详解与示例&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;name&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;给你这个开发环境起个好听的名字，会显示在 VS Code 左下角。 &lt;code&gt;&amp;quot;name&amp;quot;: &amp;quot;My Awesome Python Env&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;remoteUser&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;⭐⭐⭐极其重要&lt;/strong&gt;。默认容器里是 root 用户，如果用 root 写代码，生成的文件在宿主机上会变成 root 权限，导致各种麻烦。建议填入基础镜像自带的普通用户（比如 &lt;code&gt;&amp;quot;vscode&amp;quot;&lt;/code&gt;, &lt;code&gt;&amp;quot;node&amp;quot;&lt;/code&gt;, &lt;code&gt;&amp;quot;ubuntu&amp;quot;&lt;/code&gt;）。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;containerEnv&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Object&lt;/td&gt;
+&lt;td&gt;注入到容器内部的系统环境变量。 &lt;code&gt;&amp;quot;containerEnv&amp;quot;: {&amp;quot;MY_API_KEY&amp;quot;: &amp;quot;12345&amp;quot;}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;runArgs&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;透传给底层的 &lt;code&gt;docker run&lt;/code&gt; 命令。如果你需要特权模式或特定的网络设置，在这里加。 &lt;code&gt;&amp;quot;runArgs&amp;quot;: [&amp;quot;--cap-add=SYS_PTRACE&amp;quot;, &amp;quot;--network=host&amp;quot;]&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;workspaceMount&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;覆盖默认的代码挂载行为。通常不需要改，除非你想把代码挂载到容器里的特定位置。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;workspaceFolder&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;容器启动后，VS Code 默认打开的目录。配合 &lt;code&gt;workspaceMount&lt;/code&gt; 使用。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;编辑器与插件定制（Editor Customization）&lt;/p&gt;
+&lt;p&gt;这部分是决定了的 VS Code 长有什么功能。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;customizations&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;vscode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 1. 设置项 (Settings)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;settings&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;editor.formatOnSave&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;python.formatting.provider&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;black&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;terminal.integrated.defaultProfile.linux&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;bash&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 2. 插件列表 (Extensions)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;extensions&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;ms-python.python&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// Python 核心支持
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;ms-azuretools.vscode-docker&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// Docker 插件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;github.copilot&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;// AI 辅助
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;生命周期钩子脚本 (Lifecycle Hooks)&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;生命周期阶段&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;参数名称&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;执行时机与用途&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;阶段 1 (宿主机)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;initializeCommand&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;在 &lt;strong&gt;宿主机（你的 Kali）&lt;/strong&gt; 上，容器创建之前运行。常用于生成临时文件或检查宿主机环境。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;阶段 2 (后台建)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;onCreateCommand&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;容器刚创建，在后台默默执行。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;阶段 3 (装依赖)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;updateContentCommand&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;容器已创建，源代码也挂载进去了。&lt;strong&gt;极其适合用来装依赖！&lt;/strong&gt; 例如：&lt;code&gt;&amp;quot;pip install -r requirements.txt&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;阶段 4 (刚连上)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;postCreateCommand&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;容器创建完毕，UI 准备连接时。常用来打印欢迎信息，或进行最后的配置。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;阶段 5 (每次启动)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;postStartCommand&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;每次&lt;/strong&gt;重启并连接容器时执行。比如启动一个后台监控脚本或后台数据库服务。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特性模块 (Features)&lt;/p&gt;
+&lt;p&gt;这是微软后来推出的“积木式”环境搭建方案。以前你想在环境里加个 Go、加个 Rust、加个 Docker-in-Docker，你需要自己写很长的 Dockerfile。现在只需要在 &lt;code&gt;devcontainer.json&lt;/code&gt; 里加几行配置，它会自动帮你装好。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;features&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 一键安装特定版本的 Go
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;ghcr.io/devcontainers/features/go:1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;version&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;1.20&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 一键让容器内可以运行 docker 命令 (Docker-in-Docker)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;ghcr.io/devcontainers/features/docker-in-docker:2&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;version&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;latest&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;moby&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;端口转发 (Port Forwarding)&lt;/p&gt;
+&lt;p&gt;当容器里跑了一个 Web 服务（比如监听了 8000 端口），通过以下配置可以在宿主机的浏览器里访问：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;forwardPorts&lt;/code&gt;&lt;/strong&gt;: &lt;code&gt;[8000, 3306]&lt;/code&gt; (自动将容器的 8000 和 3306 转发到宿主机)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;portsAttributes&lt;/code&gt;&lt;/strong&gt;: 可以进一步定义端口的行为。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;portsAttributes&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;8000&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;label&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;My Web App&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// 给端口起个别名
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;onAutoForward&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;openBrowser&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;// 容器启动时自动在宿主机打开浏览器
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一个示例&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Python Data Science Env&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;build&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dockerfile&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Dockerfile&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;context&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;features&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;ghcr.io/devcontainers/features/git:1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt; &lt;span class="c1"&gt;// 确保容器内有最新版 git
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;forwardPorts&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;8000&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="c1"&gt;// 自动映射 8000 端口
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;portsAttributes&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;8000&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;label&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;FastAPI Server&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;onAutoForward&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;ignore&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;remoteUser&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;vscode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// 使用非 root 用户
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;updateContentCommand&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;pip install -r requirements.txt&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// 自动装库
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;customizations&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;vscode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;settings&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;python.defaultInterpreterPath&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/usr/local/bin/python&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;extensions&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;ms-python.python&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;ms-python.vscode-pylance&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="自动化容器环境构建"&gt;&lt;strong&gt;自动化容器环境构建&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;用普通的 VS Code 打开你的 &lt;code&gt;my-project&lt;/code&gt; 文件夹。&lt;/li&gt;
+&lt;li&gt;VS Code 会在右下角弹出一个提示：“检测到 Dev Container 配置文件，是否在容器中重新打开？” -&amp;gt; 点击 &lt;strong&gt;Reopen in Container&lt;/strong&gt;（如果没有弹窗，按 &lt;code&gt;F1&lt;/code&gt; 输入 &lt;code&gt;Dev Containers: Reopen in Container&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;自动化过程：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VS Code 读取 &lt;code&gt;.devcontainer.json&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;发现需要 Build，它就在后台执行 &lt;code&gt;docker build&lt;/code&gt; 根据 &lt;code&gt;Dockerfile&lt;/code&gt; 编译镜像。&lt;/li&gt;
+&lt;li&gt;镜像建好后，执行 &lt;code&gt;docker run&lt;/code&gt; 启动容器，并自动将项目目录挂载到容器内的 &lt;code&gt;/workspaces/my-project&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;将 VS Code Server 注入容器。&lt;/li&gt;
+&lt;li&gt;自动在容器内部下载并安装指定的 &lt;code&gt;cpptools&lt;/code&gt; 和 &lt;code&gt;cmake-tools&lt;/code&gt; 插件。&lt;/li&gt;
+&lt;li&gt;连接完成。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此时，代码文件还在宿主机硬盘上，但 VS Code 的终端、编译器（g++）、调试器（gdb）、库文件（boost）、甚至代码自动补全系统，全部在 Docker 容器里运行。当把该项目推送到 GitHub 给其他用户时，他们只需要用 VS Code 打开并点击 &lt;code&gt;Reopen in Container&lt;/code&gt;，几分钟后就能获得一个一模一样、装配好所有 C++ 工具链的开发环境。&lt;/p&gt;
+&lt;hr&gt;</description></item></channel></rss>
