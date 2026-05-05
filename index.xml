@@ -185,16 +185,6 @@
 &lt;/li&gt;
 &lt;li&gt;可以根据同一个镜像，启动出无数个相互隔离的容器&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src="http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/jp1.jpeg"
-width="800"
-height="849"
-srcset="http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/jp1_hu_7d31e09c9ec2d0f2.jpeg 480w, http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/jp1_hu_f871edfa012b5eb1.jpeg 1024w"
-loading="lazy"
-alt="docker"
-class="gallery-image"
-data-flex-grow="94"
-data-flex-basis="226px"
-&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id="docker-持久化存储机制"&gt;Docker 持久化存储机制
 &lt;/h3&gt;&lt;p&gt;在Docker的默认行为模型中，容器内部产生的所有数据改动均被捕获并存储在最顶层的 &lt;strong&gt;可写层（Writable Layer）&lt;/strong&gt; 中。这种设计导致了 &lt;strong&gt;一旦容器被删除或销毁 ，这些非持久化数据将永久丢失&lt;/strong&gt;；同时，这种高度耦合的存储模式也使得外部监控系统或宿主机进程难以直接提取或共享容器内的数据流。为了满足现代生产环境中复杂的状态化应用（如关系型数据库、分布式消息队列、集中式日志收集系统）的持久化需求，Docker引擎提供了三大类底层的挂载存储机制。&lt;/p&gt;
