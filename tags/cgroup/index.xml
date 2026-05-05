@@ -188,33 +188,6 @@
 &lt;hr&gt;
 &lt;h3 id="docker-持久化存储机制"&gt;Docker 持久化存储机制
 &lt;/h3&gt;&lt;p&gt;在Docker的默认行为模型中，容器内部产生的所有数据改动均被捕获并存储在最顶层的 &lt;strong&gt;可写层（Writable Layer）&lt;/strong&gt; 中。这种设计导致了 &lt;strong&gt;一旦容器被删除或销毁 ，这些非持久化数据将永久丢失&lt;/strong&gt;；同时，这种高度耦合的存储模式也使得外部监控系统或宿主机进程难以直接提取或共享容器内的数据流。为了满足现代生产环境中复杂的状态化应用（如关系型数据库、分布式消息队列、集中式日志收集系统）的持久化需求，Docker引擎提供了三大类底层的挂载存储机制。&lt;/p&gt;
-&lt;div class="mermaid"&gt;
-mindmap
-root((Docker 存储机制对比))
-Default(默认行为: 可写层)
-::icon(fa fa-exclamation-triangle)
-DataLoss(容器删除则数据永久丢失)
-Coupling(高度耦合，外部难以访问)
-Volumes(Volumes 卷存储)
-::icon(fa fa-database)
-Management(完全由 Docker 守护进程集中创建与管理)
-Lifecycle(独立于单个容器生命周期，容器移除后数据保留)
-Performance(驻留宿主机缓存，I/O 性能极高)
-Scenario(高性能数据库、分布式消息队列、集中式日志系统)
-BindMounts(Bind Mounts 绑定挂载)
-::icon(fa fa-link)
-Flexibility(映射宿主机任意绝对路径)
-Sync(宿主机与容器实时双向热同步)
-Scenario(本地开发测试，如前端代码热更新)
-SecurityRisk(安全隐患: 主机进程可篡改容器文件，打破隔离性)
-::icon(fa fa-shield-alt)
-tmpfs(tmpfs Mounts)
-::icon(fa fa-memory)
-StorageMedium(直接写入宿主机物理内存 RAM)
-Persistence(纯粹的短暂性 Ephemeral 存储，重启/断电后消失)
-Security(杜绝数据落盘，降低物理窃取风险)
-Scenario(敏感内存数据、密码学凭据、高读取速度缓存)
-&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Volumes（卷存储）&lt;/strong&gt;： &lt;strong&gt;Volumes（卷存储）&lt;/strong&gt; 是性能最稳健的数据持久化方案。Volumes完全由Docker守护进程在宿主机的一个受控受保护的目录下集中创建与管理。它们具备独立于任何单个容器生命周期的特性，即使挂载该Volume的所有容器均被彻底移除，Volume中的数据依然完好无损地保留在系统中，等待下一次被重新挂载使用。由于数据驻留在宿主机文件系统的高速缓存体系中，Volumes能够提供与直接物理读写几乎无异的极高I/O性能，是部署高性能数据库或关键数据处理引擎的理想选择。&lt;/p&gt;
