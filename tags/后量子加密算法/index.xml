@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>后量子加密算法 on Leuco&#39;s Blog</title>
-        <link>http://localhost:35119/tags/%E5%90%8E%E9%87%8F%E5%AD%90%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
+        <link>http://localhost:53793/tags/%E5%90%8E%E9%87%8F%E5%AD%90%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
         <description>Recent content in 后量子加密算法 on Leuco&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh_CN</language>
+        <language>zh-cn</language>
         <copyright>Leuco(leucoyuu@163.com)</copyright>
-        <lastBuildDate>Wed, 07 Jan 2026 13:01:39 +0800</lastBuildDate><atom:link href="http://localhost:35119/tags/%E5%90%8E%E9%87%8F%E5%AD%90%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 07 Jan 2026 13:01:39 +0800</lastBuildDate><atom:link href="http://localhost:53793/tags/%E5%90%8E%E9%87%8F%E5%AD%90%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【格基加密】SL3PAKE协议</title>
-        <link>http://localhost:35119/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/</link>
+        <link>http://localhost:53793/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/</link>
         <pubDate>Wed, 07 Jan 2026 13:01:39 +0800</pubDate>
         
-        <guid>http://localhost:35119/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/</guid>
-        <description>&lt;img src="http://localhost:35119/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover.png" alt="Featured image of post 【格基加密】SL3PAKE协议" /&gt;&lt;h1 id=&#34;sl3pake协议&#34;&gt;SL3PAKE协议
+        <guid>http://localhost:53793/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/</guid>
+        <description>&lt;img src="http://localhost:53793/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover.png" alt="Featured image of post 【格基加密】SL3PAKE协议" /&gt;&lt;h1 id=&#34;sl3pake协议&#34;&gt;SL3PAKE协议
 &lt;/h1&gt;&lt;div class=&#34;custom-toc&#34;&gt;
   &lt;h3&gt;目录&lt;/h3&gt;
   &lt;nav id=&#34;TableOfContents&#34;&gt;

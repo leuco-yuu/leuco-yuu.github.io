@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh_CN" dir="ltr">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=35119&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=53793&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="适用于后量子时代的基于格的简单三方口令认证密钥交换技术（Simple Lattice-based Three-party Password Authenticated Key Exchange for post-quantum world）">
 <meta name="keywords" content="后量子加密算法, 密钥协商, 格基加密, 密码学, 三方, 口令认证, 密钥交换"><title>【格基加密】SL3PAKE协议</title>
 
-<link rel='canonical' href='http://localhost:35119/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/'>
+<link rel='canonical' href='http://localhost:53793/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/'>
 
-<link rel="stylesheet" href="/scss/style.min.85f75f3209ee69adac3c94c489274ecc9d07b319e20cd3c86717f7734ee67869.css"><meta property='og:title' content="【格基加密】SL3PAKE协议">
+<link rel="stylesheet" href="/scss/style.min.64acfd2cc98755057967a16c4287b722d185d749d575a76cf98ad864fabb9400.css"><meta property='og:title' content="【格基加密】SL3PAKE协议">
 <meta property='og:description' content="适用于后量子时代的基于格的简单三方口令认证密钥交换技术（Simple Lattice-based Three-party Password Authenticated Key Exchange for post-quantum world）">
-<meta property='og:url' content='http://localhost:35119/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/'>
+<meta property='og:url' content='http://localhost:53793/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/'>
 <meta property='og:site_name' content='Leuco&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='后量子加密算法' /><meta property='article:tag' content='密钥协商' /><meta property='article:tag' content='格基加密' /><meta property='article:tag' content='密码学' /><meta property='article:tag' content='三方' /><meta property='article:tag' content='口令认证' /><meta property='article:tag' content='密钥交换' /><meta property='article:published_time' content='2026-01-07T13:01:39&#43;08:00'/><meta property='article:modified_time' content='2026-01-07T13:01:39&#43;08:00'/><meta property='og:image' content='http://localhost:35119/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='后量子加密算法' /><meta property='article:tag' content='密钥协商' /><meta property='article:tag' content='格基加密' /><meta property='article:tag' content='密码学' /><meta property='article:tag' content='三方' /><meta property='article:tag' content='口令认证' /><meta property='article:tag' content='密钥交换' /><meta property='article:published_time' content='2026-01-07T13:01:39&#43;08:00'/><meta property='article:modified_time' content='2026-01-07T13:01:39&#43;08:00'/><meta property='og:image' content='http://localhost:53793/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover.png' />
 <meta name="twitter:title" content="【格基加密】SL3PAKE协议">
 <meta name="twitter:description" content="适用于后量子时代的基于格的简单三方口令认证密钥交换技术（Simple Lattice-based Three-party Password Authenticated Key Exchange for post-quantum world）"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:35119/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover.png' />
+    <meta name="twitter:image" content='http://localhost:53793/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover.png' />
     </head>
     <body class="
     article-page
@@ -57,7 +57,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_8cf2f27a1af30ef.png" width="300"
+                        <img src="/img/avatar_hu_f6aa26e80a833272.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -354,8 +354,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/">
-                <img src="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover_hu_a0490e5066bd46a5.png"
-                        srcset="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover_hu_a0490e5066bd46a5.png 800w, /p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover_hu_fee4b5dc65559891.png 1600w"
+                <img src="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover_hu_1aa2424fd9fdf6e1.png"
+                        srcset="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover_hu_1aa2424fd9fdf6e1.png 800w, /p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover_hu_15993548fa83c0f3.png 1600w"
                         width="800" 
                         height="431" 
                         loading="lazy"
@@ -762,7 +762,7 @@ $$
         
         
             <div class="article-image">
-                <img src="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/cover.d152216b03afd1d4ba29cd5994c33571_hu_3b70a07c1656acad.png" 
+                <img src="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/cover.d152216b03afd1d4ba29cd5994c33571_hu_b6c3aaaa86fdfb50.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -799,7 +799,7 @@ $$
         
         
             <div class="article-image">
-                <img src="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/CS.33e635531a05e71782117358a85aea03_hu_5ab10f788bec14d0.png" 
+                <img src="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/CS.33e635531a05e71782117358a85aea03_hu_de3c00236819fd37.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1000,7 +1000,7 @@ $$
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.bef842911925837c39dbd3dbf882f33932671f1922904a5f1f5197bf171b356e.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.87e2592de8536ee90b02b1e2668bf69406dde2f7d8601d810f820b85bc270b0c.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -1011,6 +1011,52 @@ $$
 
         document.head.appendChild(customFont);
     }());
+</script>
+
+<button id="back-to-top" aria-label="返回顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var backToTopBtn = document.getElementById("back-to-top");
+
+        
+        window.addEventListener("scroll", function() {
+            
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = "flex"; 
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+
+        
+        backToTopBtn.addEventListener("click", function() {
+            
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    });
+</script>
+
+
+
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.13.0/dist/mermaid.esm.min.mjs';
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'default', 
+            securityLevel: 'loose'
+        });
+    });
 </script>
 
     </body>
