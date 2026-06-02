@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>网络空间安全 on Leuco's Blog</title><link>http://localhost:1313/keywords/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/</link><description>Recent content in 网络空间安全 on Leuco's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh_CN</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Mon, 12 Jan 2026 14:08:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/keywords/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>Web安全基础</title><link>http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/</link><pubDate>Mon, 12 Jan 2026 14:08:04 +0800</pubDate><guid>http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="web安全基础"&gt;Web安全基础
+&lt;/h1&gt;&lt;div class="custom-toc"&gt;
+&lt;h3&gt;目录&lt;/h3&gt;
+&lt;nav id="TableOfContents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#web发展史"&gt;Web发展史&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#静态页面与动态页面"&gt;静态页面与动态页面&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#urlurl-uniform-resource-locator"&gt;URL（URL Uniform Resource Locator）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#html基础"&gt;HTML基础&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#html简介"&gt;HTML简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#html标签元素"&gt;HTML标签/元素&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#http与https"&gt;HTTP与HTTPS&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#http"&gt;HTTP&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#https"&gt;HTTPS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/div&gt;
+&lt;h2 id="web发展史"&gt;Web发展史
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Web1.0&lt;/strong&gt;：个人网站，门户网络等（www.163.com、www.souhu.com）。Web 1.0时代开始于1994年，其主要特征是大量使用静态的 HTML 网页来发布信息，并开始使用浏览器来获取信息，这个时候主要是单向的信息传递&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常见攻击手段：SQL注入；文件包含；命令执行；上传漏洞；WebShell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;web2.0&lt;/strong&gt;：微博，Blog等（www.weibo.com、www.lofter.com）。Web 2.0 始于 2004 年 3 月Web2.0中，软件被当成一种服务，为用户提供网络应用的服务平台，强调用户的参与、在线的网络协作、数据储存的网络化、社会关系网络、应用以及文件的共享等成为了Web2.0发展的主要支撑和表现&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常见攻击手段：钓鱼攻击；URL跳转；框架漏洞；逻辑漏洞；XSS；CSRF&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;两者的本质区别在于&lt;/strong&gt;：Web1.0 的主要是在于用户通过浏览器获取信息。Web2.0 则更注重用户的交互作用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="静态页面与动态页面"&gt;静态页面与动态页面
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;静态页面&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在静态html页面中，用户通过Web浏览器HTTP协议向web服务器发送一个响应请求，告诉web服务器要浏览这个网站的哪个页面，接着根据用户的响应请求返回一个html页面给用户，经过浏览器渲染解析呈现在用户眼前。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;静态web页面是没有数据库文件的，所以不能连接网络数据库&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;静态web页面主是通过HTML代码开发设计的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;部分静态web页面为了页面的好看，使用了大量的JS代码，导致静态web页面打开速度慢&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;动态页面&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在动态web页面中，依然要通过web服务器的http协议或https协议响应才能返回结果给用户，用户所有请求都必须要通过web服务器处理才能实现&lt;/li&gt;
+&lt;li&gt;用户的响应请求是一个静态的html页面，只需要响应请求web服务器从系统中调出用户响应的内容，将内容返回给客户端浏览器进行处理，再返回给用户&lt;/li&gt;
+&lt;li&gt;如果用户响应请求的是动态页面资源，例如.jsp/.asp/.aspx/.php等，响应步骤是先将用户请求发送给web服务器，web服务器再从数据库调出有户请求的数据，调出数据后将所需要展示给用户的内容发送给服务器，最后通过web服务器将需要展示给用户的内容返回给用户浏览器解析执行，展示给用户。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="urlurl-uniform-resource-locator"&gt;URL（URL Uniform Resource Locator）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;**统一资源定位符（Uniform Resource Locator，URL；俗称网页地址或简称网址）**是因特网上标准的资源的地址（Address），如同在网络上的门牌。它最初是由蒂姆·伯纳斯-李发明用来作为万维网的地址，现在它已经被万维网联盟编制为因特网标准 &lt;a class="link" href="https://www.rfc-editor.org/info/rfc1738" target="_blank" rel="noopener"
+&gt;RFC 1738&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;格式&lt;/strong&gt;：&lt;strong&gt;[protocol]://[hostname]:[port]/[path]/[parameters]?[query]&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;protocol&lt;/strong&gt;：协议，常用的协议是http、https、ftp等&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;hostname&lt;/strong&gt;：主机地址，可以是域名，也可以是IP地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;port&lt;/strong&gt;：端口号，http协议默认端口是80端口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;path&lt;/strong&gt;：路径，网络资源在服务器中的指定路径&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;parameter&lt;/strong&gt;：参数，如果要向服务器传入参数，在这部分输入&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;query&lt;/strong&gt;：查询字符串，如果需要从服务器那里查询内容，在这里编辑，可有多个参数，用“&amp;amp;”符号隔开，每个参数的名和值用“=”符号隔开。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;例如&lt;/strong&gt;：https://www.baidu.com/s?ie=UTF-8&amp;amp;wd=kali&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="html基础"&gt;HTML基础
+&lt;/h2&gt;&lt;h3 id="html简介"&gt;HTML简介
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;HTML 是用来描述网页的一种语言&lt;/li&gt;
+&lt;li&gt;HTML 指的是超文本标记语言: HyperText Markup Language&lt;/li&gt;
+&lt;li&gt;HTML 不是一种编程语言，而是一种标记语言，标记语言是一套标记标签 (markup tag)&lt;/li&gt;
+&lt;li&gt;HTML 使用标记标签来描述网页&lt;/li&gt;
+&lt;li&gt;HTML 文档包含了HTML 标签及文本内容&lt;/li&gt;
+&lt;li&gt;HTML文档也叫做 web 页面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="html标签元素"&gt;HTML标签/元素
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HTML 标记标签通常被称为 HTML 标签 (HTML tag)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTML 标签是由尖括号包围的关键词，比如&amp;lt;html&amp;gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTML 标签通常是成对出现的，比如 &amp;lt;b&amp;gt; 和 &amp;lt;/b&amp;gt;。第一个标签是开始标签，第二个标签是结束标签&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开始和结束标签也被称为开放标签和闭合标签 &amp;lt;标签&amp;gt; 内容 &amp;lt;/标签&amp;gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一个简单例子&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 声明为HTML5文档 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 元素是 HTML 页面的根元素 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 第一部分：头部元素 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 包含了文档的元数据，定义网页编码格式为 utf-8 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;网页学习&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 文档的标题 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 第二部分：可见页面内容 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;这是一个标题&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 元素定义一个大标题 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;hr&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!--横线--&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;这是一个段落&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- 元素定义一个段落 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;常用的轻量编辑器：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sublime Text：http://www.sublimetext.com/&lt;/li&gt;
+&lt;li&gt;Notepad++：https://notepad-plus.en.softonic.com&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;常见HTML标签&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;lt;html&amp;gt;&amp;lt;/html&amp;gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;：头数据&lt;/li&gt;
+&lt;li&gt;&amp;lt;title&amp;gt;&amp;lt;/title&amp;gt;：标题&lt;/li&gt;
+&lt;li&gt;&amp;lt;body&amp;gt;&amp;lt;/body&amp;gt;：页面内容&lt;/li&gt;
+&lt;li&gt;&amp;lt;h1&amp;gt;&amp;lt;/h1&amp;gt;：标题 1-6级&lt;/li&gt;
+&lt;li&gt;&amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;：段落&lt;/li&gt;
+&lt;li&gt;&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;a&amp;gt;&amp;lt;/a&amp;gt;：链接&lt;/li&gt;
+&lt;li&gt;&amp;lt;ul&amp;gt;&amp;lt;/ul&amp;gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;br&amp;gt;：换行&lt;/li&gt;
+&lt;li&gt;&amp;lt;hr&amp;gt;：水平线&lt;/li&gt;
+&lt;li&gt;&amp;lt;meta&amp;gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;img&amp;gt;：图片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="http与https"&gt;HTTP与HTTPS
+&lt;/h2&gt;&lt;h3 id="http"&gt;HTTP
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;HTTP简介&lt;/strong&gt;：超文本传输协议（Hyper Text Transfer Protocol，HTTP）是一个简单的请求-响应协议，它通常运行在TCP/IP协议之上。它指定了客户端可能发送给服务器什么样的消息以及得到什么样的响应。当时选择使用HTTP协议，是因为它使开发和部署非常地直截了当。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如何访问Web应用&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;在浏览器地址栏键入URL访问&lt;/li&gt;
+&lt;li&gt;浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的 IP 地址&lt;/li&gt;
+&lt;li&gt;解析出 IP 地址后，根据该 IP 地址和默认端口 80，和服务器建立TCP连接&lt;/li&gt;
+&lt;li&gt;浏览器发出读取文件(URL 中域名后面部分对应的文件)的HTTP 请求，该请求报文作为 TCP 三次握手的第三个报文的数据发送给服务器&lt;/li&gt;
+&lt;li&gt;服务器对浏览器请求作出响应，并把对应的 html 文本发送给浏览器&lt;/li&gt;
+&lt;li&gt;浏览器将该 html 文本进行解析并显示内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP协议的内部操作过程&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;客户端与服务器端建立连接&lt;/li&gt;
+&lt;li&gt;客户端向服务器端发送请求&lt;/li&gt;
+&lt;li&gt;服务器端向客户端回复响应&lt;/li&gt;
+&lt;li&gt;断开连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP的发展历程&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP 是基于 TCP/IP 协议的应用层协议，在 OSI 七层模型中在最上层，它并不涉及数据包传输，主要规定了客户端和服务器之间的通信格式，默认使用80端口。&lt;/li&gt;
+&lt;li&gt;1991年发布的 HTTP/0.9 ，只支持：GET。这个版本的协议规定，服务器只能回应HTML格式的字符串，不能回应别的格式，也就是说今天的图像、视频等多媒体资源，在 HTTP/0.9这个版本上是无法进行传输的&lt;/li&gt;
+&lt;li&gt;1996年5月，HTTP/1.0 版本发布，增加了POST命令和HEAD命令，丰富了浏览器与服务器的互动手段。这个版本HTTP协议可以发送任何格式的内容，包括传输文字、图像、视频、文件，这为互联网的大发展奠定了基础。除了增加了请求方法以及对发送文件的支持之外，还增加了格式的改变。除了数据部分，每次通信都必须包括头信息，用来描述一些元数据。另外还增加了状态码、多字符集支持、多部分发送、权限、缓存、内容编码等等&lt;/li&gt;
+&lt;li&gt;1997年1月，HTTP/1.1 版本发布，这个版本只比 1.0 版本晚了半年。这个版本最大的变化就是将持久化连接加入了 HTTP 标准，即TCP连接默认不关闭，可以被多个请求复用。此外，HTTP/1.1版还新增了许多方法，例如：PUT、CONNECT、HEAD、 OPTIONS、DELETE。得到进一步完善的HTTP/1.1 版本，一直沿用至今&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP的请求类型&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;URL全称是资源描述符，一个URL地址用于描述一个网络上的资源，HTTP中的GET，POST，PUT，DELETE就对应着对这个资源的查 ，改 ，增 ，删 4个操作。&lt;/li&gt;
+&lt;li&gt;GET一般用于获取/查询资源信息；POST一般用于更新资源信息&lt;/li&gt;
+&lt;li&gt;GET用于信息获取时应该是安全的、幂等的。
+&lt;ul&gt;
+&lt;li&gt;安全：该操作用于获取信息而非修改信息。它仅仅是获取资源信息，就像数据库查询一样，不会修改，增加数据，不会影响资源的状态。&lt;/li&gt;
+&lt;li&gt;幂等：对同一URL的多个请求应该返回同样的结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;POST表示可能修改服务器上的资源的请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;GET&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求获取Request-URI（请求地址）所标识的资源。(请求读取由url所标志的信息)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;POST&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;在Request-URI所标识的资源后附加新的数据。（给服务器添加信息，例如注释）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;HEAD&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求获取由Request-URI所标识的资源的响应消息报头。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;PUT&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求服务器存储一个资源，并用Request-URI作为其标识。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;DELETE&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求服务器删除Request-URI所标识的资源。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;TRACE&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求服务器回送收到的请求信息，主要用于测试或诊断。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;CONNECT&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;用于代理服务器。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;OPTIONS&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求查询服务器的性能，或者查询与资源相关（特定）的选项和需求。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTTP的主要特点&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;支持客户/服务器模式&lt;/strong&gt;：一个服务器可以为分布在世界各地 的许多客户服务&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;简单快速&lt;/strong&gt;：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET和POST。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;灵活&lt;/strong&gt;：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTTP报文格式&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;请求报文：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;请求行：用来说明请求类型,要访问的资源以及所使用的HTTP版本&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;请求头：紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;请求载体：也叫主体，可以添加任意的其他数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;响应行：由HTTP协议版本号， 状态码， 状态消息三部分组成&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;响应头：消息报头，用来说明客户端要使用的一些附加信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;响应载体：响应正文，服务器返回给客户端的文本信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一个请求报文的格式与案例：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;GET&lt;/span&gt; &lt;span class="nn"&gt;&amp;lt;url&amp;gt;&lt;/span&gt; &lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;[field-name]&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="l"&gt;[value][\r][\n]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;[field-name]&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="l"&gt;[value][\r][\n]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;......&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="g"&gt;[field-name]:[value][\r][\n]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="g"&gt;[\r][\n]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="g"&gt;[Body data]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;GET&lt;/span&gt; &lt;span class="nn"&gt;/s?w=kali&lt;/span&gt; &lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Accept&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Accept-Encoding&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;gzip, deflate, br, zstd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Accept-Language&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;zh-CN,zh;q=0.9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Connection&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;keep-alive&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Cookie&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;[Cookie]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Host&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;www.baidu.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Sec-Fetch-Dest&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;document&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Sec-Fetch-Mode&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;navigate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Sec-Fetch-Site&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;none&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Sec-Fetch-User&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;?1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Upgrade-Insecure-Requests&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;User-Agent&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;sec-ch-ua&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;&amp;#34;Google Chrome&amp;#34;;v=&amp;#34;143&amp;#34;, &amp;#34;Chromium&amp;#34;;v=&amp;#34;143&amp;#34;, &amp;#34;Not A(Brand&amp;#34;;v=&amp;#34;24&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;sec-ch-ua-mobile&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;?0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;sec-ch-ua-platform&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;&amp;#34;Windows&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/http.png"
+width="1864"
+height="660"
+srcset="http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/http_hu_b65727d23d35a8e4.png 480w, http://localhost:1313/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/http_hu_7fe2560b9ce7bac9.png 1024w"
+loading="lazy"
+alt="http"
+class="gallery-image"
+data-flex-grow="282"
+data-flex-basis="677px"
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTTP请求报文的常用字段&lt;/strong&gt;：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;请求字段&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Accept&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;指定客户端接受信息的类型（MIME类型）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Connection&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;允许C/S指定与请求/响应连接的有关选项&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Host&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求的服务器的主机名和端口号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Referer&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的，服务器因此可以获得一些信息用于处理&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;User-Agent&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;发起请求的应用程序名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Accept-Encoding&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;告诉服务器能够接受哪些内容编码方式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Content-Length&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示请求消息正文的长度&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Cookie&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;客户端提供给服务器的认证数据&lt;br /&gt;Cookie通常也叫做网站cookie，浏览器cookie或者httpcookie，是保存在用户浏览器端的，并在发出http请求时会默认携带的一段文本片段。它可以用来做用户认证，服务器校验等通过文本数据可以处理的问题。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTTP响应报文常用状态码&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;状态码&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;临时响应（1xx）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示临时响应并需要请求者继续执行操作的状态代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;成功（2xx）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示成功处理了请求的状态代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;重定向（3xx）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示要完成请求，需要进一步操作，通常用来重定向&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;请求错误（4xx）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示请求可能出错，妨碍了服务器的处理&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;服务器错误（5xx）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;表示服务器在尝试处理请求时发生内部错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTTP的缺陷&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由于 HTTP 协议的简单特性，且不保存客户端的状态，不进行验证客户端是否是真实存在，传输使用的是明文传输，故也很具有缺点。
+&lt;ul&gt;
+&lt;li&gt;通信双方使用明文传输（不加密），内容可能会被窃听&lt;/li&gt;
+&lt;li&gt;不验证通信方的身份，因此可能遭遇伪装&lt;/li&gt;
+&lt;li&gt;无法证明报文的完整性，所以有可能已遭篡改。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="https"&gt;HTTPS
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;HTTPS简介&lt;/strong&gt;：HTTPS是在HTTP上建立SSL加密层，并对传输数据进行加密，是HTTP协议的安全版。默认HTTP的端口号为80，HTTPS的端口号为443。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主要作用&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;对数据进行加密，并建立一个信息安全通道，来保证传输过程中的数据安全&lt;/li&gt;
+&lt;li&gt;对网站服务器进行真实身份认证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;与HTTP的本质区别&lt;/strong&gt;：明文传输与加密传输
+&lt;ul&gt;
+&lt;li&gt;采用HTTPS协议的服务器（Server）必须从公信机构（CA）申请一个用于证明服务器用途类型的证书。该证书只有用于对应的Server的时候，客户端（Client）才信任该主机&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>渗透测试基础</title><link>http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/</link><pubDate>Tue, 30 Dec 2025 14:51:56 +0800</pubDate><guid>http://localhost:1313/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="渗透测试基础"&gt;渗透测试基础
+&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;概述&lt;/strong&gt;：通过各种手段对目标进行渗透攻击，通过渗透来测试目标的安全防护能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;底层基础&lt;/strong&gt;：目标系统中存在安全漏洞（Loophole，指信息系统中存在的缺陷或不适当的配置，其可使攻击者在未授权情况下访问或破坏系统，导致信息系统面临安全风险）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;渗透代码（Exploit）&lt;/strong&gt;：利用安全漏洞来造成入侵或破坏效果的程序或者漏洞利用代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="测试分类"&gt;测试分类
+&lt;/h2&gt;&lt;h3 id="黑盒测试"&gt;黑盒测试
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;概念：&lt;/strong&gt; 测试人员在&lt;strong&gt;完全不了解&lt;/strong&gt;目标系统内部结构、源代码、网络拓扑、技术栈等信息的情况下进行测试。他们仅拥有一个公开的访问点（例如一个网站URL或公司名称）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;信息来源：&lt;/strong&gt; 完全依赖公开信息收集，如搜索引擎、Whois查询、社交媒体、公开端口扫描等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;模拟真实攻击：&lt;/strong&gt; 最接近恶意黑客的真实攻击场景。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;测试外部防御：&lt;/strong&gt; 能有效评估边界安全防护（如防火墙、WAF）和暴露在外的服务的安全性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关注业务逻辑漏洞：&lt;/strong&gt; 更容易从用户视角发现业务逻辑缺陷。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效率较低：&lt;/strong&gt; 需要大量时间进行信息收集和摸索，可能无法覆盖深层次漏洞。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;覆盖面有限：&lt;/strong&gt; 很难在有限时间内测试到所有内部接口和路径，可能遗漏隐藏漏洞。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;深度不足：&lt;/strong&gt; 难以发现由糟糕的代码实现、错误的配置等引起的深层安全问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用场景：&lt;/strong&gt; 外部网络渗透测试、红队演练、模拟APT攻击、对已上线系统进行外部风险评估。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="白盒测试"&gt;白盒测试
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;概念：&lt;/strong&gt; 测试人员在&lt;strong&gt;拥有目标系统全部或近乎全部信息&lt;/strong&gt;的情况下进行测试。这通常包括源代码、架构设计文档、网络拓扑图、数据库 schema、API接口文档，甚至开发团队的直接沟通。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;信息来源：&lt;/strong&gt; 客户或开发团队提供的所有内部资料。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;全面深入：&lt;/strong&gt; 可以系统性地审查所有代码路径、配置和接口，漏洞发现率最高。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;效率极高：&lt;/strong&gt; 无需猜测和盲目探测，可直接定位可能存在问题的代码模块。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;发现根源问题：&lt;/strong&gt; 不仅能找到漏洞，还能精准定位漏洞的代码行和根本原因，便于修复。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;早期介入：&lt;/strong&gt; 可以在开发阶段（如SAST，静态应用安全测试）或上线前进行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;不模拟真实攻击：&lt;/strong&gt; 无法评估系统在外部攻击者视角下的真实表现。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可能忽略配置漏洞：&lt;/strong&gt; 过于关注代码，可能忽略运行时环境、网络配置等导致的问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;依赖测试人员技术深度：&lt;/strong&gt; 需要测试人员具备很强的代码审计和架构理解能力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用场景：&lt;/strong&gt; 代码安全审计、SDL（安全开发生命周期）中的安全测试、内部安全评估、对特定复杂应用进行深度检查。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="灰盒测试"&gt;灰盒测试
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;概念：&lt;/strong&gt; 介于黑盒与白盒之间。测试人员拥有&lt;strong&gt;部分、有限的内部信息&lt;/strong&gt;。例如，一个低权限的用户账号、部分API文档、系统使用的技术框架信息，或者基本的网络架构图。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;信息来源：&lt;/strong&gt; 客户提供有限信息 + 测试人员自身信息收集。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;平衡效率与真实性：&lt;/strong&gt; 在模拟一定真实攻击的同时，利用有限信息提高测试的深度和效率。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;聚焦特权升级：&lt;/strong&gt; 非常适合测试从低权限用户到高权限（垂直越权）或跨用户访问（水平越权）的漏洞。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;评估内部威胁：&lt;/strong&gt; 模拟内部员工或供应链攻击的场景。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;范围难以界定：&lt;/strong&gt; 提供多少信息算“灰盒”需要与客户事先清晰约定。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可能遗漏两方面问题：&lt;/strong&gt; 既可能不如白盒全面，也可能不如黑盒真实。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用场景：&lt;/strong&gt; 最常见的渗透测试类型。适用于大多数需要对已上线系统进行内部和外部综合评估的项目，如Web应用渗透测试、移动应用测试（已知部分后端API）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="目标分类"&gt;目标分类
+&lt;/h2&gt;&lt;h3 id="主机操作系统渗透"&gt;主机操作系统渗透
+&lt;/h3&gt;&lt;p&gt;​ 如Windows、Solaris、AIX、Linux、SCO、SGI等操作系统本身进行渗透测试&lt;/p&gt;
+&lt;h3 id="数据库系统渗透"&gt;数据库系统渗透
+&lt;/h3&gt;&lt;p&gt;​ 对MS-SQL、Oracle、MySQL、Informix、Sybase、DB2、Access等数据库应用系统进行渗透测试&lt;/p&gt;
+&lt;h3 id="应用系统渗透"&gt;应用系统渗透
+&lt;/h3&gt;&lt;p&gt;​ 对渗透目标提供的各种应用，如ASP、CGI、JSP、PHP等组成的WWW应用进行渗透测试&lt;/p&gt;
+&lt;h3 id="网络设备渗透"&gt;网络设备渗透
+&lt;/h3&gt;&lt;p&gt;​ 对各种防火墙、入侵检测系统、网络设备进行渗透测试&lt;/p&gt;
+&lt;h2 id="渗透测试过程环节"&gt;渗透测试过程环节
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;前期交互阶段（Pre-Engagement Interaction）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;情报搜集阶段（Information Gathering）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;威胁建模阶段（Threat Modeling）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;漏洞分析阶段（Vulnerability Analysis）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;渗透攻击阶段（Exploitation）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;后渗透攻击阶段（Post Exploitation）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;报告阶段（Reporting）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="1-前期交互阶段"&gt;&lt;strong&gt;1. 前期交互阶段&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;正式测试开始前的规划和约定阶段，旨在明确测试的范围、规则和目标，确保测试合法、有效且可控。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心活动&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;确定范围&lt;/strong&gt;：与客户共同商定哪些系统、网络、应用程序或IP地址可以测试，哪些是绝对禁止的（如生产数据库、客户数据等）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;确定规则&lt;/strong&gt;：定义测试方法（黑盒、白盒还是灰盒）、攻击强度（是否允许造成服务中断、社会工程攻击等）、测试时间窗口（是否只能在非工作时间进行）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;法律授权&lt;/strong&gt;：签署&lt;strong&gt;渗透测试授权书&lt;/strong&gt;，这是最重要的法律文件，确保测试行为合法，保护测试方和客户。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;确定目标&lt;/strong&gt;：明确测试的最终目的是什么（如：验证特定防火墙策略、评估新上线的Web应用安全、满足合规性要求等）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输出物&lt;/strong&gt;：授权书、范围定义文档、沟通计划。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-情报搜集阶段"&gt;&lt;strong&gt;2. 情报搜集阶段&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;“信息收集”，是测试的基石。尽可能多地收集关于目标的各种信息，为后续攻击寻找入口。情报分为两类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;被动情报搜集&lt;/strong&gt;：在不与目标系统直接交互的情况下，通过公开渠道获取信息。例如：搜索引擎、社交媒体、Whois域名信息、DNS记录、公开的代码仓库、新闻稿等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主动情报搜集&lt;/strong&gt;：通过与目标系统直接交互来获取信息，但可能被记录。例如：端口扫描、服务指纹识别、网络拓扑探测等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键目标&lt;/strong&gt;：发现目标的所有网络资产、域名、子域名、IP地址、开放端口、运行的服务版本、员工信息、技术栈等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-威胁建模阶段"&gt;&lt;strong&gt;3. 威胁建模阶段&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;对收集到的信息进行分析和提炼，识别出可能被利用的资产、潜在的安全漏洞和攻击路径。这是一个分析规划阶段。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心活动&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;资产识别&lt;/strong&gt;：梳理出高价值的攻击目标（如数据库服务器、文件服务器、Web应用后台）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击面分析&lt;/strong&gt;：分析目标暴露的所有可能被攻击的点（如开放的远程管理端口、未认证的Web API、过时的框架）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击向量规划&lt;/strong&gt;：基于情报，构思可能的攻击路径和方法。例如：“通过钓鱼邮件获取员工凭证 -&amp;gt; 登录VPN -&amp;gt; 利用内部文件服务器的漏洞获取域控权限”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工具与技术选择&lt;/strong&gt;：根据分析结果，准备下一阶段所需的漏洞扫描工具、攻击载荷等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="4-漏洞分析阶段"&gt;&lt;strong&gt;4. 漏洞分析阶段&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;对已识别的攻击面进行深入探测，以发现和验证具体的安全漏洞。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心活动&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;自动化扫描&lt;/strong&gt;：使用Nessus、Nexpose、AWVS等漏洞扫描器进行系统性扫描，生成初步漏洞报告。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;手动验证与分析&lt;/strong&gt;：&lt;strong&gt;这是体现测试人员技术的关键&lt;/strong&gt;。对扫描器报告的结果进行去误报、分析漏洞的可利用性和实际风险等级。扫描器找不到的逻辑漏洞、业务逻辑缺陷、配置错误等，需要在此阶段通过手动测试发现。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;漏洞优先级排序&lt;/strong&gt;：根据CVSS分数、利用难度、对业务的影响等因素，对漏洞进行排序，决定后续攻击的优先级。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="5-渗透攻击阶段"&gt;&lt;strong&gt;5. 渗透攻击阶段&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;这是模拟真实攻击者的核心环节，尝试利用已发现的漏洞来突破安全防线，获取对系统或数据的未授权访问。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心活动&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;漏洞利用&lt;/strong&gt;：使用Metasploit、定制化的EXP或手动攻击方式，利用漏洞获取初始访问权限。例如：利用SQL注入获取数据库数据、利用文件上传漏洞上传Webshell、利用缓冲区溢出漏洞获取系统Shell。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;突破边界&lt;/strong&gt;：成功从一个外部点（如Web服务器）攻入内部网络。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;权限提升&lt;/strong&gt;：在已控制的主机上，从普通用户权限提升为管理员/系统权限。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键点&lt;/strong&gt;：此阶段需要谨慎操作，避免对目标系统造成意外损害。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="6-后渗透攻击阶段"&gt;&lt;strong&gt;6. 后渗透攻击阶段&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;在成功渗透进入目标系统后，模拟高级持续性威胁的攻击行为，目标是展示漏洞被利用后可能造成的实际业务影响。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心活动&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;权限维持&lt;/strong&gt;：在目标系统上安装后门、创建隐藏账户等，以维持长期控制。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;横向移动&lt;/strong&gt;：以已控制的机器为跳板，探测和攻击内网中的其他重要主机（如数据库服务器、域控制器）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目标达成&lt;/strong&gt;：窃取或篡改敏感数据（在授权范围内）、完全控制核心系统、访问关键业务功能等，以证明漏洞的严重性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;足迹清理&lt;/strong&gt;：根据测试规则，可能需要清除测试过程中留下的日志、工具等痕迹（模拟真实攻击者），也可能保留用于报告证据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="7-报告阶段"&gt;&lt;strong&gt;7. 报告阶段&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;将整个测试过程、发现、影响和建议以清晰、专业的形式呈现给客户，这是渗透测试价值最终交付的体现。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;报告内容&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;执行摘要&lt;/strong&gt;：用非技术语言向管理层阐述测试概述、发现的高风险问题及其对业务的潜在影响。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;技术细节&lt;/strong&gt;：详细描述每个漏洞的发现过程（步骤、截图）、原理、影响范围和修复建议。这部分是给技术人员看的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;风险评级&lt;/strong&gt;：对每个漏洞进行严重程度评级（如高、中、低）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;修复建议&lt;/strong&gt;：提供具体、可操作的修复方案或缓解措施。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;附录&lt;/strong&gt;：可能包含工具输出、日志片段等证据材料。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="渗透实践-metasploit开源的渗透测试框架"&gt;渗透实践-Metasploit开源的渗透测试框架
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Exploit（渗透攻击）&lt;/strong&gt;：渗透攻击是指由攻击者或渗透测试者利用一个系统、应用或服务中的安全漏洞，所进行的攻击行为。流行的渗透攻击技术包括缓冲区溢出、WEB应用程序漏洞攻击（SQL注入、XSS等），以及利用配置错误等&lt;/li&gt;
+&lt;li&gt;**Palyload（攻击载荷）**攻击载荷是我们期望目标系统在被渗透攻击之后执行的代码。在Metasploit框架中可以自由选择、传送和植入&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ShellCode&lt;/strong&gt;：SellCode是渗透攻击时作为攻击载荷运行的一组机器指令，通常用汇编语言编写&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Module（模块）&lt;/strong&gt;：Metasploit中一个模块是指Metasploit框架中所使用的一段软件代码组件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Listener（监听器）&lt;/strong&gt;：监听器是Metasploit中用来等待接入网络连接主机的组件&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

@@ -1,0 +1,522 @@
+<!doctype html><html lang=zh_CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="系统梳理了 Docker  容器化技术的底层原理，详解了持久化存储、网络驱动、Dockerfile  编写与命令清单，给出开发环境全面容器化的实践方案与 Dev Containers 配置。"><meta name=keywords content="Docker,容器,Dockerfile,Namespace,cGroup,UnionFS,OverlayFS,Bridge,Overlay,Dev Containers,Bind Mount,tmpfs"><title>Docker 容器化技术</title><link rel=canonical href=http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/><link rel=stylesheet href=/scss/style.min.6138f8d9e0ae0ed3ef3a889a3691a584ab985790f8f89d356ea98eb0c8008f37.css><meta property='og:title' content="Docker 容器化技术"><meta property='og:description' content="系统梳理了 Docker  容器化技术的底层原理，详解了持久化存储、网络驱动、Dockerfile  编写与命令清单，给出开发环境全面容器化的实践方案与 Dev Containers 配置。"><meta property='og:url' content='http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/'><meta property='og:site_name' content="Leuco's Blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Docker'><meta property='article:tag' content='容器'><meta property='article:tag' content='Dockerfile'><meta property='article:tag' content='Namespace'><meta property='article:tag' content='cGroup'><meta property='article:tag' content='UnionFS'><meta property='article:tag' content='OverlayFS'><meta property='article:tag' content='Bridge'><meta property='article:tag' content='Overlay'><meta property='article:tag' content='Dev Containers'><meta property='article:tag' content='Bind Mount'><meta property='article:tag' content='tmpfs'><meta property='article:published_time' content='2026-05-05T16:26:19+08:00'><meta property='article:modified_time' content='2026-05-05T16:26:19+08:00'><meta property='og:image' content='http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/docker.png'><meta name=twitter:title content="Docker 容器化技术"><meta name=twitter:description content="系统梳理了 Docker  容器化技术的底层原理，详解了持久化存储、网络驱动、Dockerfile  编写与命令清单，给出开发环境全面容器化的实践方案与 Dev Containers 配置。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/docker.png'></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky" id=left-sidebar><button class="sidebar-fold-toggle sidebar-fold-toggle--left" type=button data-sidebar-toggle=left data-i18n-title=sidebar.collapseLeft aria-label=收起左侧栏 aria-expanded=true>
+<span></span>
+</button>
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单 data-i18n-title=toggleMenu>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_8cf2f27a1af30ef.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Leuco's Blog</a></h1><h2 class=site-description></h2></div></header><ol class=menu-social><li><a href=https://github.com/leuco-yuu/ target=_blank title=GitHub rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></li><li><a href='https://mail.google.com/mail/u/0/?tf=cm&amp;to=leucoyuu@gmail.com&amp;fs=1' target=_blank title=Gmail rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="3,5 12,14 21,5"/></svg></a></li><li><a href='https://wpa.qq.com/msgrd?v=3&amp;uin=1286938728&amp;site=qq&amp;menu=yes/' target=_blank title=QQ rel=me><svg height="32" viewBox="0 0 32 32" width="32"><g fill="none" fill-rule="evenodd"><path d="m15.9998867.0-.3175962.00373031C8.84822.16478688 5.08430177 5.52571032 5.05900841 13.1032973L5.06 13.376l-.86256398 2.1053645c-.34339269.8459887-.59479858 1.4918602-.8236549 2.1249911-.16246446.4494579-.31092035.8862129-.4515632 1.3302912-1.41043336 4.4529342-1.46997142 7.7313526 1.14979123 8.0424546l.19586827.0182568c.69853306.0462522 1.18775172-.1357889 1.69345756-.5695745L6.008 26.385l.10703497.1859114.16295747.2641667L6.368 26.972l-.10203891.0725127c-1.18457469.8599516-1.78515849 2.0422997-.8749963 3.5478041.72014893 1.1919865 1.68579016 1.3851809 4.67654251 1.4059241h1.2781117l.7210113-.0101194c1.4578857-.0287327 2.9764342-.1065736 3.9343697-.2001215l.2555297.0243167c1.1291243.09698 2.8606159.1735357 4.3993902.1859242h1.2781118c2.9907546-.0207471 3.95642-.2139816 4.6768437-1.4064227l.0983227-.1723424c.764361-1.4241985.1648309-2.548721-.9747412-3.3755348L25.631 26.971l.0912293-.1362605.1629318-.2641511L25.992 26.385l.0466679.0427821c.5516504.4732059 1.0836451.6468525 1.8890001.5513616 2.6200145-.3116105 2.5604594-3.5895097 1.1502083-8.0424822-.136678-.4315245-.2810058-.8567817-.4385987-1.2939849l-.1781698-.4846461c-.0923296-.2464665-.1903348-.5013359-.2976536-.7744519l-.3954267-.9868956L26.939 13.376l9399e-7-.279262c-.038761-7.60576089-3.8169423-12.93053326-10.6187985-13.09291824zm1023e-7 2c6.339972 32813e-8 9.0947051 5.25726658 8.9334981 11.7557738l.8516442 2.0748544c.5606846 1.3708665.9939584 2.4718584 1.3860782 3.7098724 1.2134003 3.8314013.8203049 5.4169539.5209683 5.4525554-.6424867.0761796-2.5006035-2.8842697-2.5006035-2.8842697.0 1.7141775-.8994592 3.9510027-2.8457046 5.5664147l.3377045.1073023c1.0249215.341207 2.6653848 1.0302704 2.2154641 1.7750936-.4078113.675007-6.9962271.4309917-8.8982689.2207732l-.4753503.0452169c-2.33636.195172-8.04423656.3608021-8.42291849-.2659901-.50418989-.8339832 1.61195836-1.5976385 2.55205373-1.8820678-1.94652419-1.615412-2.84615056-3.852456-2.84615056-5.5667428l-.32111727.4924567c-.56063792.838483-1.70355568 2.4482423-2.17943051 2.391813-.29933663-.0355468-.69254342-1.6211541.52102408-5.4525554l.21887662-.6654718c.52220361-1.5311231 1.13363576-2.9515889 2.01884579-5.1193097C6.8963095 7.36281332 9.58861109 2.00032813 15.999989 2z" fill="currentColor" fill-rule="nonzero"/></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span data-i18n-key=nav.home>主页</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span data-i18n-key=nav.about>关于</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span data-i18n-key=nav.archives>博文</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span data-i18n-key=nav.search>搜索</span></a></li><li class=menu-bottom-section><ol class=menu><li id=language-mode-toggle><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<label for=language-mode-select data-i18n-key=language.label>语言</label>
+<select id=language-mode-select name=language-mode title=语言 data-i18n-title=language.label aria-label=语言><option value=cn>简体中文</option><option value=tw>繁體中文</option><option value=en>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span data-i18n-key=darkMode>暗色模式</span></li><li id=article-list-image-toggle role=button tabindex=0 aria-pressed=false><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span data-i18n-key=image.hide data-show-key=image.hide data-hide-key=image.show data-show-text=隐藏图片 data-hide-text=展示图片>隐藏图片</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky" id=right-sidebar><button class="sidebar-fold-toggle sidebar-fold-toggle--right" type=button data-sidebar-toggle=right data-i18n-title=sidebar.collapseRight aria-label=收起右侧栏 aria-expanded=true>
+<span></span></button><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title" data-i18n-key=article.tableOfContents>目录</h2><div class=widget--toc><nav id=TableOfContents><ul><li><a href=#容器技术>容器技术</a><ul><li><a href=#三大核心机制>三大核心机制</a><ul><li><a href=#namespace命名空间>Namespace（命名空间）</a></li><li><a href=#cgroupscontrol-groups控制组>cGroups（Control Groups，控制组）</a></li><li><a href=#unionfs联合文件系统>UnionFS（联合文件系统）</a></li></ul></li><li><a href=#容器-vs-虚拟机>容器 vs 虚拟机</a></li></ul></li><li><a href=#docker-技术>Docker 技术</a><ul><li><a href=#docker-核心工作流程>Docker 核心工作流程</a></li><li><a href=#docker-持久化存储机制>Docker 持久化存储机制</a></li><li><a href=#docker-网络驱动>Docker 网络驱动</a></li></ul></li><li><a href=#dockerfile>Dockerfile</a><ul><li><a href=#运行机制>运行机制</a></li><li><a href=#指令字典>指令字典</a><ul><li><a href=#环境配置>环境配置</a></li><li><a href=#文件配置>文件配置</a></li><li><a href=#环境构建>环境构建</a></li><li><a href=#启动程序>启动程序</a></li><li><a href=#声明补充>声明补充</a></li></ul></li><li><a href=#dockerignore>.dockerignore</a></li><li><a href=#一个示例>一个示例</a></li></ul></li><li><a href=#docker-命令清单>Docker 命令清单</a><ul><li><a href=#全局参数>全局参数</a></li><li><a href=#容器管理>容器管理</a></li><li><a href=#容器交互>容器交互</a></li><li><a href=#镜像管理>镜像管理</a></li></ul></li><li><a href=#全流程示例>全流程示例</a><ul><li><a href=#step1-初始配置>Step1 初始配置</a></li><li><a href=#step2-构建镜像>Step2 构建镜像</a></li><li><a href=#step3-实例化与运行>Step3 实例化与运行</a></li><li><a href=#step4-容器交互>Step4 容器交互</a></li><li><a href=#step5-停止与清理>Step5 停止与清理</a></li></ul></li><li><a href=#开发环境-docker-化>开发环境 Docker 化</a><ul><li><a href=#纯命令行下的挂载编译>纯命令行下的挂载编译</a></li><li><a href=#vs-code-现代工程选择dev-containers-插件>VS Code 现代工程选择：Dev Containers 插件</a><ul><li><a href=#附加到已存在的容器attach-to-running-container>附加到已存在的容器（Attach to Running Container）</a></li><li><a href=#通过工程化配置构建开发环境devcontainer>通过工程化配置构建开发环境（.devcontainer）</a><ul><li><a href=#创建项目结构><strong>创建项目结构</strong></a></li><li><a href=#编写-dockerfile>编写 Dockerfile</a></li><li><a href=#devcontainerjson-与参数介绍>devcontainer.json 与参数介绍</a></li><li><a href=#自动化容器环境构建><strong>自动化容器环境构建</strong></a></li></ul></li></ul></li></ul></li></ul></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/><img src=/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/docker_hu_8d1df40a2f2bc246.png srcset="/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/docker_hu_8d1df40a2f2bc246.png 800w, /p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/docker_hu_5660bc4a571ee822.png 1600w" width=800 height=460 loading=lazy alt="Featured image of post Docker 容器化技术"></a></div><div class=article-details><header class=article-category><a href=/categories/linux%E5%9F%BA%E7%A1%80/ class="taxonomy-chip category-chip" data-taxonomy-term=Linux基础 data-taxonomy-kind=categories data-i18n-term=Linux基础>Linux基础
+</a><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ class="taxonomy-chip category-chip" data-taxonomy-term=学习笔记 data-taxonomy-kind=categories data-i18n-term=学习笔记>学习笔记</a></header><section class=article-keywords><a href=/keywords/docker/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Docker data-taxonomy-kind=keywords>Docker</a>
+<a href=/keywords/%E5%AE%B9%E5%99%A8/ class="taxonomy-chip keyword-chip" data-taxonomy-term=容器 data-taxonomy-kind=keywords>容器</a>
+<a href=/keywords/dockerfile/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Dockerfile data-taxonomy-kind=keywords>Dockerfile</a>
+<a href=/keywords/namespace/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Namespace data-taxonomy-kind=keywords>Namespace</a>
+<a href=/keywords/cgroup/ class="taxonomy-chip keyword-chip" data-taxonomy-term=CGroup data-taxonomy-kind=keywords>CGroup</a>
+<a href=/keywords/unionfs/ class="taxonomy-chip keyword-chip" data-taxonomy-term=UnionFS data-taxonomy-kind=keywords>UnionFS</a>
+<a href=/keywords/overlayfs/ class="taxonomy-chip keyword-chip" data-taxonomy-term=OverlayFS data-taxonomy-kind=keywords>OverlayFS</a>
+<a href=/keywords/bridge/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Bridge data-taxonomy-kind=keywords>Bridge</a>
+<a href=/keywords/overlay/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Overlay data-taxonomy-kind=keywords>Overlay</a>
+<a href=/keywords/dev-containers/ class="taxonomy-chip keyword-chip" data-taxonomy-term="Dev Containers" data-taxonomy-kind=keywords>Dev Containers</a>
+<a href=/keywords/bind-mount/ class="taxonomy-chip keyword-chip" data-taxonomy-term="Bind Mount" data-taxonomy-kind=keywords>Bind Mount</a>
+<a href=/keywords/tmpfs/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Tmpfs data-taxonomy-kind=keywords>Tmpfs</a></section><div class=article-title-wrapper><h2 class=article-title><a href=/p/docker-%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF/><span class=article-series-prefix data-i18n-term=系统工程>系统工程</span>
+Docker 容器化技术</a></h2><h3 class=article-subtitle>系统梳理了 Docker 容器化技术的底层原理，详解了持久化存储、网络驱动、Dockerfile 编写与命令清单，给出开发环境全面容器化的实践方案与 Dev Containers 配置。</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-05-05T16:26:19+08:00>May 05, 2026</time></div></footer></div></header><div class=article-local-search role=search><label class=article-local-search__label for=article-local-search-input data-i18n-key=article.localSearch>正文搜索</label>
+<input id=article-local-search-input type=search autocomplete=off spellcheck=false placeholder="文本或 /正则/gi" data-i18n-placeholder=article.localSearchPlaceholder>
+<button type=button class=article-local-search__button data-article-search-prev data-i18n-title=article.localSearchPrev aria-label=上一处>‹</button>
+<button type=button class=article-local-search__button data-article-search-next data-i18n-title=article.localSearchNext aria-label=下一处>›</button>
+<button type=button class=article-local-search__button data-article-search-clear data-i18n-title=article.localSearchClear aria-label=清除>×</button>
+<span class=article-local-search__count data-article-search-count>0/0</span></div><section class=article-content><h1 id=docker-容器化技术>Docker 容器化技术</h1><div class=custom-toc><h3>目录</h3><nav id=TableOfContents><ul><li><a href=#容器技术>容器技术</a><ul><li><a href=#三大核心机制>三大核心机制</a><ul><li><a href=#namespace命名空间>Namespace（命名空间）</a></li><li><a href=#cgroupscontrol-groups控制组>cGroups（Control Groups，控制组）</a></li><li><a href=#unionfs联合文件系统>UnionFS（联合文件系统）</a></li></ul></li><li><a href=#容器-vs-虚拟机>容器 vs 虚拟机</a></li></ul></li><li><a href=#docker-技术>Docker 技术</a><ul><li><a href=#docker-核心工作流程>Docker 核心工作流程</a></li><li><a href=#docker-持久化存储机制>Docker 持久化存储机制</a></li><li><a href=#docker-网络驱动>Docker 网络驱动</a></li></ul></li><li><a href=#dockerfile>Dockerfile</a><ul><li><a href=#运行机制>运行机制</a></li><li><a href=#指令字典>指令字典</a><ul><li><a href=#环境配置>环境配置</a></li><li><a href=#文件配置>文件配置</a></li><li><a href=#环境构建>环境构建</a></li><li><a href=#启动程序>启动程序</a></li><li><a href=#声明补充>声明补充</a></li></ul></li><li><a href=#dockerignore>.dockerignore</a></li><li><a href=#一个示例>一个示例</a></li></ul></li><li><a href=#docker-命令清单>Docker 命令清单</a><ul><li><a href=#全局参数>全局参数</a></li><li><a href=#容器管理>容器管理</a></li><li><a href=#容器交互>容器交互</a></li><li><a href=#镜像管理>镜像管理</a></li></ul></li><li><a href=#全流程示例>全流程示例</a><ul><li><a href=#step1-初始配置>Step1 初始配置</a></li><li><a href=#step2-构建镜像>Step2 构建镜像</a></li><li><a href=#step3-实例化与运行>Step3 实例化与运行</a></li><li><a href=#step4-容器交互>Step4 容器交互</a></li><li><a href=#step5-停止与清理>Step5 停止与清理</a></li></ul></li><li><a href=#开发环境-docker-化>开发环境 Docker 化</a><ul><li><a href=#纯命令行下的挂载编译>纯命令行下的挂载编译</a></li><li><a href=#vs-code-现代工程选择dev-containers-插件>VS Code 现代工程选择：Dev Containers 插件</a><ul><li><a href=#附加到已存在的容器attach-to-running-container>附加到已存在的容器（Attach to Running Container）</a></li><li><a href=#通过工程化配置构建开发环境devcontainer>通过工程化配置构建开发环境（.devcontainer）</a><ul><li><a href=#创建项目结构><strong>创建项目结构</strong></a></li><li><a href=#编写-dockerfile>编写 Dockerfile</a></li><li><a href=#devcontainerjson-与参数介绍>devcontainer.json 与参数介绍</a></li><li><a href=#自动化容器环境构建><strong>自动化容器环境构建</strong></a></li></ul></li></ul></li></ul></li></ul></nav></div><h2 id=容器技术>容器技术</h2><ul><li>容器并非“轻量级虚拟机”，其本质上是宿主机操作系统之上的一组具有高级隔离特性和严苛资源限制的常规Linux进程。</li><li>容器本身不负责硬件指令级别的虚拟化翻译，而是作为一层高级的管控平面，通过调用并配置Linux内核的三大核心机制——Namespaces（命名空间）、cGroups（控制组）以及UnionFS（联合文件系统），为目标进程创造出独占系统的幻觉。</li></ul><h3 id=三大核心机制>三大核心机制</h3><h4 id=namespace命名空间>Namespace（命名空间）</h4><p>Namespaces机制在不阻断系统整体运行的前提下，为容器进程提供了一个虚拟化的、完全隔离的资源视图。不同的Namespace子系统负责隔离不同维度的系统资源。具体而言：</p><ul><li><strong>PID Namespace</strong> 隔离了进程ID空间，使得每个容器内部的初始进程始终认为自己是系统的主进程（拥有独立的PID 1），从而无法感知宿主机层面或其他容器中的并发进程。</li><li><strong>NET Namespace</strong> 为容器分配了独立的网络协议栈，包括独立的网卡接口、IP地址、路由表以及防火墙规则，确保了网络流量的严格隔离与独立配置。</li><li><strong>MNT Namespace</strong> 则使得容器拥有独立的文件系统挂载点视图，配合底层的根文件系统（RootFS）切换机制，进程只能看到挂载到其所在Namespace下的特定目录树结构。</li><li><strong>UTS Namespace</strong> 专门用于隔离主机名与域名</li><li><strong>IPC Namespace</strong> 负责处理进程间通信（如共享内存机制和信号量）的隔离以防数据污染</li><li><strong>USER Namespace</strong> 则通过映射容器内部用户与宿主机全局用户组的ID，允许容器内部的进程以root权限运行，而在宿主机系统层面仅表现为一个无特权的普通用户，极大提升了多租户环境下的系统安全性。</li></ul><h4 id=cgroupscontrol-groups控制组>cGroups（Control Groups，控制组）</h4><p>cGroups机制赋予了Docker为各个容器分配、核算和强制管理硬件资源的能力。通过深度配置cGroups接口，系统管理员可以实施极为严格的资源限制策略：</p><ul><li><p>设置 <strong>CPU Quotas（绝对配额）</strong> 与 <strong>CPU Shares（相对时间片权重）</strong> 来限制计算资源的过度侵占</p></li><li><p>设置 <strong>物理内存（RAM）</strong> 以及 <strong>交换空间（Swap）</strong> 的硬性上限，以防止单个容器因内存泄漏而触发宿主机级别的OOM（Out of Memory）杀手程序</p></li><li><p>通过 <strong>I/O节流（Throttling）</strong> 机制控制磁盘读写频率与网络接口的传输速率</p></li><li><p>限制 <strong>容器内部可分叉（fork）</strong> 创建的最大进程数，从而在内核层面上有效抵御Fork炸弹等拒绝服务攻击。</p></li></ul><p>在诸如Kubernetes等现代容器编排环境中，cGroups同样是实现资源请求配置、资源限制分配以及服务质量（QoS）动态分级的底层技术基石。</p><h4 id=unionfs联合文件系统>UnionFS（联合文件系统）</h4><p>UnionFS（联合文件系统，现代Docker常采用OverlayFS驱动）机制能够将多个位于不同物理位置的只读目录（即镜像层）透明地叠加合并在一起，对外呈现为一个统一的、平坦的文件系统视图，且在整个过程中无需修改底层的原始数据源。</p><ul><li><p>在Docker的运行时架构中，镜像通常由多个只读的底层叠加而成；</p></li><li><p>当容器正式启动时，系统会在这组只读层之上临时叠加一个极薄的可写层（Writable Container Layer）。</p></li></ul><p>这种独特的分层架构与写时复制（Copy-on-Write）的延迟加载设计，使得成千上万个基于同一基础镜像的容器能够极其高效地复用底层文件系统，不仅将存储空间的占用降低了几个数量级，更实现了毫秒级的容器启动速度，这在传统的厚重基础设施时代是不可想象的。</p><hr><h3 id=容器-vs-虚拟机>容器 vs 虚拟机</h3><p>容器和虚拟机在系统架构与资源调度层面上采取了截然不同的实现路径，导致其在资源利用率、启动特性、可移植性以及隔离级别上存在显著的物理差异。</p><div class=table-wrapper><table><thead><tr><th>评估维度</th><th>Docker 容器架构</th><th>传统虚拟VM构</th></tr></thead><tbody><tr><td><strong>底层系统架构</strong></td><td>依赖Docker Engine，所有容器直接复用宿主机操作系统的内核，通过Namespace进行逻辑隔离。</td><td>依赖Hypervisor（如VMware, Hyper-V），每个虚拟机均包含一套完整独立的Guest OS内核及依</td></tr><tr><td><strong>资源请求与分配机制</strong></td><td>采用按需使用的弹性动态资源共享模式，仅向宿主机内核请求必需的系统资源，无须预先进行硬性切</td><td>在启动前必须向Hypervisor请求并长期固定占用特定数量的硬件资源池，无论应用是否处于负载状态。</td></tr><tr><td><strong>存储开销与系统体积</strong></td><td>体积通常在MB级别，由于无须虚拟化完整的操作系统，磁盘占用极小，内存利用率极高。</td><td>体积庞大（通常为几十甚至上百GB级别），必须加载整个Guest OS文件系统，产生极大的空耗。</td></tr><tr><td><strong>生命周期与启动时间</strong></td><td>秒级甚至毫秒级启动，对于操作系统而言仅仅相当于唤醒一个常规的Linux用户态进程。</td><td>启动过程极为漫长（通常需要数分钟），必须完成操作系统的完整底层引导、内核加载与虚拟硬件初始化流程。</td></tr><tr><td><strong>隔离性边界与安全性</strong></td><td>进程级逻辑隔离，由于与宿主机及其他容器共享内核，若内核存在漏洞，则面临潜在的内核级逃逸风险。</td><td>系统级物理隔离，通过Hypervisor实现底层硬件指令级别的阻断，容器间干扰可能性极低，提供企业级最高安全性。</td></tr><tr><td><strong>计算与I/O性能表现</strong></td><td>由于直接与物理硬件交互，没有操作系统层的指令集开销转换，其性能表现几乎完全等同于原生宿主机应用。</td><td>Guest OS的额外指令转换、硬件模拟与系统调用拦截会引发不可避免的性能损耗，整体执行效率低于容器。</td></tr></tbody></table></div><hr><h2 id=docker-技术>Docker 技术</h2><ul><li><strong>容器</strong>是轻量级虚拟化技术标准</li><li><strong>Docker</strong>是开源的平台与工具集，是实现容器化技术的工具</li></ul><h3 id=docker-核心工作流程>Docker 核心工作流程</h3><ul><li>编Dockerfile`</li><li>通过<code>docker build</code>命令打包为<strong>镜像（Image）</strong><ul><li><strong>镜像</strong>：一个包含了指定应用程序、代码依赖、系统运行库甚至基础操作系统的只读文件包。</li></ul></li><li>通过<code>docker run</code>命令生产实例，即容器（Container）<ul><li><strong>容器</strong>：基于镜像运行起来的实体。当“运行这个镜像”时，Docker 就会在内存中开辟一块独立隔离的空间，把镜像里的程序跑起来。这个跑起来的、活生生的环境，就叫容器。容器是可以被启动、停止、删除的，且里面可以产生新的数据。</li></ul></li><li>可以根据同一个镜像，启动出无数个相互隔离的容器</li></ul><hr><h3 id=docker-持久化存储机制>Docker 持久化存储机制</h3><p>在Docker的默认行为模型中，容器内部产生的所有数据改动均被捕获并存储在最顶层的 <strong>可写层（Writable Layer）</strong> 中。这种设计导致了 <strong>一旦容器被删除或销毁 ，这些非持久化数据将永久丢失</strong>；同时，这种高度耦合的存储模式也使得外部监控系统或宿主机进程难以直接提取或共享容器内的数据流。为了满足现代生产环境中复杂的状态化应用（如关系型数据库、分布式消息队列、集中式日志收集系统）的持久化需求，Docker引擎提供了三大类底层的挂载存储机制。</p><ul><li><p><strong>Volumes（卷存储）</strong>： <strong>Volumes（卷存储）</strong> 是性能最稳健的数据持久化方案。Volumes完全由Docker守护进程在宿主机的一个受控受保护的目录下集中创建与管理。它们具备独立于任何单个容器生命周期的特性，即使挂载该Volume的所有容器均被彻底移除，Volume中的数据依然完好无损地保留在系统中，等待下一次被重新挂载使用。由于数据驻留在宿主机文件系统的高速缓存体系中，Volumes能够提供与直接物理读写几乎无异的极高I/O性能，是部署高性能数据库或关键数据处理引擎的理想选择。</p></li><li><p><strong>Bind Mounts（绑定挂载）</strong>：与Volumes不同， <strong>Bind Mounts（绑定挂载）</strong> 允许开发者将宿主机操作系统上的任意绝对路径目录直接硬链接映射到容器内部的特定挂载点。这种机制赋予了系统极高的灵活性，能够实现宿主机代码库与容器内运行环境的实时双向热同步。因此，在本地开发测试阶段（例如修改了前端代码后希望立即在容器化的Nginx服务器中看到热更新效果），Bind Mounts是不可或缺的工具。然而，Bind Mounts打破了容器严格的隔离性边界，使得主机上的非Docker特权进程或恶意脚本能够轻易篡改容器内的文件，反之亦然，这在生产环境中构成了极其严重的安全隐患。</p></li><li><p><strong>tmpfs Mounts</strong>：对于处理极其敏感的内存数据、密码学凭据（Credentials）或者需要极高读取速度但无需永久保留的中间态缓存数据，系统推荐使用<strong>tmpfs Mounts</strong>。该存储模式通过将数据结构直接写入宿主机的系统物理内存（RAM）中，从根本上杜绝了数据落盘（写入物理磁盘）的可能性。因此，这是一种纯粹的短暂性（Ephemeral）存储方案，一旦容器停止、重启或宿主机遭遇断电，内存中的所有敏感痕迹将瞬间消失，极大地降低了数据在物理介质上被窃取的风险，同时彻底消除了磁盘I/O带来的性能损耗。</p></li></ul><div class=mermaid>graph TD
+classDef storage fill:#e1f5fe,stroke:#01579b,stroke-width:2px,rx:5,ry:5;
+classDef container fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px,stroke-dasharray: 5 5;
+classDef host fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+classDef problem fill:#ffebee,stroke:#b71c1c,stroke-width:2px,stroke-dasharray: 2 2;
+classDef highlight fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,font-weight:bold;
+subgraph DefaultBehavior [默认行为：非持久化存储]
+direction TB
+AppChange(容器内数据改动) -->|"捕获并存储"| WritableLayer[最顶层可写层]
+WritableLayer -.->|"容器删除或销毁"| DataLoss(数据永久丢失)
+WritableLayer -.->|"高度耦合"| MonitorIssue(外部难以提取数据流)
+end
+class WritableLayer storage;
+class DataLoss problem;
+subgraph HostSystem [宿主机]
+direction TB
+DockerManaged[Docker 受控目录 /var/lib/docker/volumes]
+ArbitraryPath[宿主机任意绝对路径目录]
+HostRAM[宿主机物理内存 RAM]
+end
+class HostSystem host;
+class DockerManaged,ArbitraryPath,HostRAM storage;
+subgraph ContainerInstance [Docker 容器实例]
+ContainerFS[容器文件系统]
+MountPointA[挂载点 A]
+MountPointB[挂载点 B]
+MountPointC[挂载点 C]
+end
+class ContainerInstance container;
+AppChange ==>|"满足持久化需求"| Mechanisms(三大底层挂载机制)
+class Mechanisms highlight;
+Mechanisms -.->|"方案一"| Vol[Volumes 卷存储]
+Vol -->|"1. 集中管理"| DockerManaged
+DockerManaged <-->|"2. 挂载 - IO性能极高"| MountPointA
+Mechanisms -.->|"方案二"| Bind[Bind Mounts 绑定挂载]
+Bind -->|"1. 硬链接映射"| ArbitraryPath
+ArbitraryPath <-->|"2. 实时双向热同步"| MountPointB
+Mechanisms -.->|"方案三"| Tmp[tmpfs Mounts]
+Tmp -->|"1. 直接写入"| HostRAM
+HostRAM -->|"2. 短暂性存储"| MountPointC</div><hr><h3 id=docker-网络驱动>Docker 网络驱动</h3><p>在网络拓扑与通信架构设计方面，Docker通过灵活的插件化网络驱动程序（Network Drivers），满足了从简单的单机调试到复杂的跨数据中心编排的各类连通性需求。</p><ul><li><strong>Bridge（网桥架构）</strong>：这是所有在单机上新建容器的默认骨干网络。Docker引擎会在宿主机上虚拟出一个网桥（通常名为docker0），所有加入该网络的容器均会被分配一个内网IP并接入此虚拟交换机。虽然容器之间可以通过该内网畅通无阻地互相访问，但对于宿主机外部的真实网络而言，这些容器是隐身的。外部请求必须依赖于宿主机上设置的端口映射规则（Port Publishing），通过NAT（网络地址转换）技术才能精准穿透隔离屏障，抵达目标容器内部的服务进程。</li></ul><div class=mermaid>graph TD
+Ext["外部真实网络"]
+subgraph Host["宿主机"]
+NAT["端口映射规则 (Port Publishing / NAT)"]
+Bridge["虚拟交换机 (docker0 网桥)"]
+C1["容器 A (分配内网 IP)"]
+C2["容器 B (分配内网 IP)"]
+end
+Ext -->|"依赖端口穿透隔离屏障"| NAT
+NAT -->|"地址转换与转发"| Bridge
+Bridge -->|"接入"| C1
+Bridge -->|"接入"| C2
+C1 -.->|"内网畅通互访"| C2</div><ul><li><strong>Host（主机网络）</strong>：该驱动机制会直接移除容器与宿主机之间的网络隔离墙。容器将直接复用并接管宿主机的物理网络协议栈。举例而言，如果一个容器在Host模式下监听了80端口，那么它将直接占用宿主机物理网卡的80端口，任何针对该物理机80端口的请求都将直接被容器接收。这种模式虽然牺牲了网络隔离性，但彻底免除了NAT转发带来的计算开销与延迟，在对网络吞吐量和延迟要求极高的分布式高频交易系统或高性能网络嗅探器中广泛应用。</li></ul><div class=mermaid>graph TD
+Ext["外部真实网络"]
+subgraph HostEnv["宿主机"]
+HostNet["宿主机物理网络协议栈 (如: 物理网卡 80 端口)"]
+subgraph C1["Host 模式容器"]
+App["服务进程 (直接监听占用)"]
+end
+end
+Ext -->|"无 NAT 延迟，直接接收"| HostNet
+HostNet ---|"复用网络栈 (无隔离墙)"| App</div><ul><li><strong>Overlay（覆盖网络）</strong>：针对跨多台物理主机的分布式集群（如Docker Swarm或Kubernetes集群），Overlay网络驱动发挥了中流砥柱的作用。它利用VXLAN等底层隧道封包技术，在分散于不同物理数据中心的Docker守护进程之间建立起一层加密的虚拟二层网络，使得调度在不同节点上的容器能够像处于同一个局域网内一样，利用服务名称进行透明的直接通信。</li></ul><div class=mermaid>graph TD
+subgraph Cluster["分布式集群 (如 Swarm / K8s)"]
+subgraph HostA["物理数据中心节点 A"]
+DaemonA["Docker 守护进程"]
+C1["容器 1"]
+end
+subgraph HostB["物理数据中心节点 B"]
+DaemonB["Docker 守护进程"]
+C2["容器 2"]
+end
+end
+Tunnel["Overlay 加密虚拟二层网络 (VXLAN 隧道)"]
+C1 -.->|"按服务名称透明通信"| Tunnel
+Tunnel -.->|"按服务名称透明通信"| C2
+DaemonA ---|"底层物理网络封包传输"| DaemonB</div><ul><li><strong>Macvlan（物理MAC虚拟化）</strong>：对于许多陈旧的企业应用而言，它们往往在底层代码中硬编码了对物理网络环境的期望。Macvlan驱动通过向容器分配一个真实的物理硬件MAC地址，使得容器在外部物理网络交换机的路由表中表现为一台真实的物理服务器设备。这允许容器直接接入现有的企业内部VLAN网络，彻底绕过了Docker主机的路由转发逻辑。</li></ul><div class=mermaid>graph TD
+Switch["外部物理网络交换机 (企业现有 VLAN)"]
+subgraph Host["宿主机"]
+NIC["宿主机物理网卡 (如 eth0)"]
+C1["Macvlan 容器"]
+MAC["分配真实的物理硬件 MAC 地址"]
+end
+Switch -->|"视为真实的物理服务器"| NIC
+NIC -->|"彻底绕过 Docker 路由逻辑"| C1
+C1 --- MAC</div><ul><li><strong>None（完全隔离）</strong>：在某些执行高度敏感的离线数据分析、密码学运算或者被用作沙盒执行恶意代码样本分析的场景下，可以为容器分配None网络驱动。此时，容器内部将仅保留环回网卡（Loopback），被完全切断与外界（包括宿主机和其他容器）的任何网络数据交互通道，实现极致的封闭隔离。</li></ul><div class=mermaid>graph TD
+Outside["外部网络环境 / 宿主机 / 其他容器"]
+subgraph Sandbox["None 模式容器"]
+LO["环回网卡 (Loopback)"]
+App["离线分析/密码学运算/恶意代码样本"]
+end
+Outside -.-|"网络数据交互通道被完全切断"| Sandbox
+App -->|"仅限容器内部调用"| LO</div><hr><h2 id=dockerfile>Dockerfile</h2><h3 id=运行机制>运行机制</h3><ul><li><strong>从上到下逐行执行：</strong> Docker 会从文件的第一行开始，逐条读取并执行指令。</li><li><strong>每一条指令都是一层（Layer）：</strong> 每一次 <code>COPY</code>、每一次 <code>RUN</code> 都会在原有的镜像上“套”上一层新的只读层。<strong>层数越多，镜像体积越大，构建越慢。</strong></li></ul><hr><h3 id=指令字典>指令字典</h3><h4 id=环境配置>环境配置</h4><div class=table-wrapper><table><thead><tr><th>指令</th><th>作用</th><th>示例</th></tr></thead><tbody><tr><td><code>FROM</code></td><td>指定镜像基于哪个基础镜像构建。</td><td><code>FROM ubuntu:22.04</code> 或 <code>FROM python:3.10-alpine</code></td></tr><tr><td><code>WORKDIR</code></td><td>设置容器内的工作目录。如果目录不存在会自动创建。后续的 <code>RUN</code>, <code>CMD</code>, <code>COPY</code> 等指令都会在这个目录下执行。</td><td><code>WORKDIR /app</code></td></tr><tr><td><code>ENV</code></td><td>设置环境变量。这些变量在构建时和运行中的容器内都有效。</td><td><code>ENV PORT=8080</code> (后续可以用 <code>$PORT</code> 引用它)。</td></tr></tbody></table></div><h4 id=文件配置>文件配置</h4><div class=table-wrapper><table><thead><tr><th>指令</th><th>作用</th><th>示例</th></tr></thead><tbody><tr><td><code>COPY</code>（推荐）</td><td>纯粹地把宿主机的文件或目录复制到镜像中。</td><td><code>COPY requirements.txt .</code> (把当前目录的 <code>requirements.txt</code> 复制到 <code>WORKDIR</code> 中)。</td></tr><tr><td><code>ADD</code></td><td><code>COPY</code> 的增强版。除了复制，如果源文件是一个 <code>.tar.gz</code> 压缩包，它会自动解压到目标路径；如果源路径是一个 URL，它会自动下载。</td><td>同上</td></tr></tbody></table></div><h4 id=环境构建>环境构建</h4><ul><li><p><code>RUN</code></p><ul><li><p><strong>作用</strong>：在构建镜像的过程中执行linux命令（如安装软件、创建目录等）</p></li><li><p><strong>示例</strong>：<code>RUN apt-get update && apt-get install -y vim</code></p></li><li><p><strong>注意</strong>：避免“多行<code>RUN</code>”。</p><ul><li><p>错误（根据构建机制，三个<code>RUN</code>会产生三个冗余镜像层）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=line><span class=cl><span class=k>RUN</span> apt-get update<span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>RUN</span> apt-get install -y python3<span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>RUN</span> apt-get clean<span class=err>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p>正确：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=line><span class=cl><span class=k>RUN</span> apt-get update <span class=se>\
+</span></span></span><span class=line><span class=cl>    <span class=o>&amp;&amp;</span> apt-get install -y python3 <span class=se>\
+</span></span></span><span class=line><span class=cl>    <span class=o>&amp;&amp;</span> apt-get clean <span class=se>\
+</span></span></span><span class=line><span class=cl>    <span class=o>&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=err>
+</span></span></span></code></pre></td></tr></table></div></div></li></ul></li></ul></li></ul><h4 id=启动程序>启动程序</h4><div class=table-wrapper><table><thead><tr><th>指令</th><th>作用</th><th>特点</th><th>示例</th></tr></thead><tbody><tr><td><code>cmd</code>（默认启动命令）</td><td>指定容器<strong>启动时</strong>默认执行的命令。</td><td>可以被覆盖。如果在 <code>docker run</code> 后面加了命令，<code>CMD</code> 就会被完全无视。</td><td><code>CMD ["python", "app.py"]</code>。如果用户执行 <code>docker run myapp bash</code>，那么容器启动的将是 <code>bash</code> 而不是 Python 程序。</td></tr><tr><td><code>ENTRYPOINT</code></td><td>也是容器启动时执行的命令</td><td>不可被常规覆盖。如果在 <code>docker run</code> 后面加了参数，这些参数会被当做<strong>参数</strong>传给 <code>ENTRYPOINT</code>，而不是覆盖它。</td><td><code>ENTRYPOINT ["ping"]</code>。此时执行 <code>docker run myping 8.8.8.8</code>，实际容器内执行的命令是 <code>ping 8.8.8.8</code>。让一个容器用起来就像一个常规的可执行命令行工具。</td></tr></tbody></table></div><h4 id=声明补充>声明补充</h4><div class=table-wrapper><table><thead><tr><th>指令</th><th>作用</th></tr></thead><tbody><tr><td><code>EXPOSE</code></td><td>声明容器打算使用什么端口。<strong>这只是一个文档说明</strong>，写了 <code>EXPOSE 80</code> 并不会让它自动绑定到宿主机的 80 端口，仍然需要在 run 时通过 <code>-p</code> 映射。</td></tr><tr><td><code>VOLUME</code></td><td>声明匿名数据卷。提醒使用者该目录里的数据需要持久化。</td></tr></tbody></table></div><hr><h3 id=dockerignore>.dockerignore</h3><p><code>docker build -t myapp .</code> 最后的 <code>.</code> 代表当前目录。 Docker 在构建前，<strong>会把这个目录下的所有文件打包发送给 Docker Daemon (守护进程)</strong>。如果目录下有 <code>venv/</code> 虚拟环境、<code>.git/</code> 隐藏文件夹、几 GB 的测试数据、或是 <code>__pycache__/</code>，它们全都会被发送，导致构建过程十分缓慢，甚至将敏感配置打包进镜像。</p><p><strong>解决方案：</strong> 在 Dockerfile 同级目录下创建一个 <code>.dockerignore</code> 文件（语法和 <code>.gitignore</code> 完全一样）。示例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>.git
+</span></span><span class=line><span class=cl>.gitignore
+</span></span><span class=line><span class=cl>__pycache__/
+</span></span><span class=line><span class=cl>*.pyc
+</span></span><span class=line><span class=cl>*.pyo
+</span></span><span class=line><span class=cl>venv/
+</span></span><span class=line><span class=cl>env/
+</span></span><span class=line><span class=cl>.env
+</span></span><span class=line><span class=cl>Dockerfile
+</span></span><span class=line><span class=cl>.dockerignore
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=一个示例>一个示例</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=line><span class=cl><span class=c># 1. 选择精简版的基础镜像 (Slim 或 Alpine 均可)</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>FROM</span><span class=w> </span><span class=s>python:3.10-slim</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 2. 设置不生成 .pyc 文件，并强制不缓冲标准输出 (Python 容器常见优化)</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>ENV</span> <span class=nv>PYTHONDONTWRITEBYTECODE</span><span class=o>=</span><span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=k>ENV</span> <span class=nv>PYTHONUNBUFFERED</span><span class=o>=</span><span class=m>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 3. 设置工作目录</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 4. 依赖缓存优化 (极度重要⭐⭐⭐)</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 我们先单独 COPY requirements.txt，再执行 RUN 安装依赖。</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 为什么要分开？因为 Docker 有层缓存机制。只要 requirements.txt 内容没变，Docker 就会直接使用上一次安装好依赖的缓存层，极大地加快后续代码修改时的构建速度。</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>COPY</span> requirements.txt .<span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>RUN</span> pip install --no-cache-dir -r requirements.txt<span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 5. 复制项目实际代码</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>COPY</span> . .<span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 6. 声明端口</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>EXPOSE</span><span class=w> </span><span class=s>8000</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 7. 指定启动命令</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>CMD</span> <span class=p>[</span><span class=s2>&#34;python&#34;</span><span class=p>,</span> <span class=s2>&#34;app.py&#34;</span><span class=p>]</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><hr><h2 id=docker-命令清单>Docker 命令清单</h2><h3 id=全局参数>全局参数</h3><p>通常直接跟在 <code>docker</code> 关键字后面，用于控制 Docker 客户端与服务端（Daemon）的连接和行为级别：<code>docker [OPTIONS] COMMAND</code>。</p><div class=table-wrapper><table><thead><tr><th><strong>参数</strong></th><th><strong>简写</strong></th><th><strong>作用说明</strong></th><th><strong>常见场景</strong></th></tr></thead><tbody><tr><td><code>--config</code></td><td>无</td><td>指定客户端配置文件的存放路径</td><td>默认在 <code>~/.docker</code>，当你想隔离不同的认证凭据时使用。</td></tr><tr><td><code>--context</code></td><td><code>-c</code></td><td>指定连接 Daemon 的上下文名称</td><td>在本地管理多个远程 Docker 主机时切换环境。</td></tr><tr><td><code>--debug</code></td><td><code>-D</code></td><td>开启调试模式</td><td>遇到部分报错，需要看底层 API 调用过程时使用。</td></tr><tr><td><code>--host</code></td><td><code>-H</code></td><td>指定连接的 Docker Daemon 的 Socket 或 IP</td><td>例如连接远程机器：<code>docker -H tcp://192.168.1.100:2375 ps</code></td></tr><tr><td><code>--log-level</code></td><td><code>-l</code></td><td>设置日志级别 (debug, info, warn, error, fatal)</td><td>默认是 info，排障时可调高。</td></tr><tr><td><code>--tls*</code></td><td>无</td><td>一系列 TLS 相关的证书配置参数</td><td>结合 <code>-H</code> 使用，确保远程连接 Docker 服务的安全性。</td></tr></tbody></table></div><h3 id=容器管理>容器管理</h3><div class=table-wrapper><table><thead><tr><th><strong>命令</strong></th><th><strong>核心作用</strong></th><th><strong>常用进阶参数与示例</strong></th></tr></thead><tbody><tr><td><strong><code>run</code></strong></td><td><strong>创建并启动</strong>一个新容器</td><td><code>docker run -itd --name myweb -p 8080:80 nginx</code> （<code>-i</code> 交互, <code>-t</code> 终端, <code>-d</code> 后台运行, <code>-p</code> 端口映射, <code>-v</code> 挂载目录）</td></tr><tr><td><strong><code>create</code></strong></td><td>仅创建容器，但不启动</td><td><code>docker create --name test ubuntu</code> (准备好资源，等待 start)</td></tr><tr><td><strong><code>start</code></strong></td><td>启动一个已被停止的容器</td><td><code>docker start &lt;容器名或ID></code></td></tr><tr><td><strong><code>stop</code></strong></td><td>停止运行中的容器</td><td><code>docker stop &lt;容器名或ID></code> (发送 SIGTERM 信号)</td></tr><tr><td><strong><code>restart</code></strong></td><td>重启容器</td><td><code>docker restart &lt;容器名或ID></code></td></tr><tr><td><strong><code>kill</code></strong></td><td>强制终止容器</td><td><code>docker kill &lt;容器名或ID></code> (发送 SIGKILL 信号，适用于卡死的容器)</td></tr><tr><td><strong><code>rm</code></strong></td><td>删除已停止的容器</td><td><code>docker rm &lt;容器名或ID></code> 加 <code>-f</code> 可以强制删除正在运行的容器。</td></tr><tr><td><strong><code>pause</code></strong></td><td>暂停容器内的所有进程</td><td><code>docker pause &lt;容器名></code> (冻结状态，CPU 占用降为 0)</td></tr><tr><td><strong><code>unpause</code></strong></td><td>恢复被暂停的容器进程</td><td><code>docker unpause &lt;容器名></code></td></tr><tr><td><strong><code>wait</code></strong></td><td>阻塞直到容器停止，并打印退出码</td><td>用于自动化脚本同步执行状态。</td></tr></tbody></table></div><h3 id=容器交互>容器交互</h3><div class=table-wrapper><table><thead><tr><th><strong>命令</strong></th><th><strong>核心作用</strong></th><th><strong>常用进阶参数与示例</strong></th></tr></thead><tbody><tr><td><strong><code>exec</code></strong></td><td>在<strong>运行中</strong>的容器内执行新命令</td><td><code>docker exec -it &lt;容器名> /bin/bash</code> (最常用的“进入容器”的方法)</td></tr><tr><td><strong><code>ps</code></strong></td><td>列出容器列表</td><td><code>docker ps</code> (仅列出运行中) <code>docker ps -a</code> (列出所有，包括已停止的) <code>docker ps -q</code> (仅列出容器 ID)</td></tr><tr><td><strong><code>logs</code></strong></td><td>查看容器的输出日志</td><td><code>docker logs -f --tail 100 &lt;容器名></code> (<code>-f</code> 持续跟踪，<code>--tail</code> 仅看最后 100 行)</td></tr><tr><td><strong><code>cp</code></strong></td><td>宿主机与容器之间拷贝文件</td><td><code>docker cp ./local.txt &lt;容器名>:/app/</code> (拷入) <code>docker cp &lt;容器名>:/app/log.txt ./</code> (拷出)</td></tr><tr><td><strong><code>inspect</code></strong></td><td>返回容器/镜像的底层详细 JSON 数据</td><td><code>docker inspect &lt;容器名></code> (常用于查找容器 IP、挂载点等详细信息)</td></tr><tr><td><strong><code>stats</code></strong></td><td>实时显示容器的资源利用率 (类似 <code>top</code>)</td><td><code>docker stats</code> (查看所有容器的 CPU、内存、网络 I/O 实时消耗)</td></tr><tr><td><strong><code>top</code></strong></td><td>查看容器内部运行的系统进程</td><td><code>docker top &lt;容器名></code></td></tr><tr><td><strong><code>port</code></strong></td><td>查看容器的端口映射情况</td><td><code>docker port &lt;容器名></code></td></tr><tr><td><strong><code>diff</code></strong></td><td>查看容器文件系统相较于镜像的变化</td><td><code>docker diff &lt;容器名></code> (A: 增加, D: 删除, C: 修改)</td></tr><tr><td><strong><code>attach</code></strong></td><td>将终端的标准输入输出附加到容器的主进程</td><td>不常用。注意：退出时如果按 <code>Ctrl+C</code> 会导致容器直接停止运行。</td></tr></tbody></table></div><h3 id=镜像管理>镜像管理</h3><div class=table-wrapper><table><thead><tr><th><strong>命令</strong></th><th><strong>核心作用</strong></th><th><strong>常用进阶参数与示例</strong></th></tr></thead><tbody><tr><td><strong><code>build</code></strong></td><td>根据 Dockerfile 构建镜像</td><td><code>docker build -t myapp:1.0 .</code> (<code>-t</code> 指定名称和标签，<code>.</code> 代表当前上下文目录)</td></tr><tr><td><strong><code>pull</code></strong></td><td>从镜像仓库下载镜像</td><td><code>docker pull ubuntu:22.04</code></td></tr><tr><td><strong><code>push</code></strong></td><td>将本地镜像上传到镜像仓库</td><td><code>docker push myregistry/myapp:1.0</code> (通常需要先 login)</td></tr><tr><td><strong><code>images</code></strong></td><td>列出本地存在的镜像</td><td><code>docker images</code> 或 <code>docker image ls</code></td></tr><tr><td><strong><code>rmi</code></strong></td><td>删除本地镜像</td><td><code>docker rmi &lt;镜像ID></code> (如果有基于该镜像的容器存在，需先删除容器或加 <code>-f</code> 强制删除)</td></tr><tr><td><strong><code>tag</code></strong></td><td>给镜像打标签（改名/版本管理）</td><td><code>docker tag source_image:latest my_image:v1</code></td></tr><tr><td><strong><code>commit</code></strong></td><td>将容器的当前状态保存为新镜像</td><td><code>docker commit &lt;容器名> new_image_name</code> (不推荐作为常规构建方式，更推荐 Dockerfile)</td></tr><tr><td><strong><code>history</code></strong></td><td>查看镜像的构建历史分层</td><td><code>docker history &lt;镜像名></code></td></tr><tr><td><strong><code>save</code></strong></td><td>将镜像打包成 tar 归档文件（用于离线传输）</td><td><code>docker save -o ubuntu.tar ubuntu:latest</code></td></tr><tr><td><strong><code>load</code></strong></td><td>从 tar 归档文件中恢复镜像</td><td><code>docker load -i ubuntu.tar</code></td></tr><tr><td><strong><code>export</code></strong></td><td>导出<strong>容器</strong>的文件系统为 tar 归档</td><td><code>docker export &lt;容器名> > container.tar</code> (丢失历史层信息，变得非常扁平)</td></tr><tr><td><strong><code>import</code></strong></td><td>从 tar 归档中导入内容为<strong>镜像</strong></td><td><code>docker import container.tar new_image:v1</code></td></tr></tbody></table></div><hr><h2 id=全流程示例>全流程示例</h2><div class=mermaid>stateDiagram-v2
+direction LR
+state "编写阶段" as Phase1 {
+app[app.py]
+df[Dockerfile]
+}
+state "镜像 (Image)" as Image
+state "运行中容器 (Running)" as Running
+state "已停止容器 (Exited)" as Stopped
+Phase1 --> Image : docker build
+Image --> Running : docker run
+Running --> Running : docker exec (进入交互)\ndocker logs (看日志)
+Running --> Stopped : docker stop
+Stopped --> Running : docker start
+Stopped --> [*] : docker rm (删除容器)
+Image --> [*] : docker rmi (删除镜像)</div><h3 id=step1-初始配置>Step1 初始配置</h3><p>每个 Dockerfile 都应该有一个独立的文件夹，因为 Docker 在构建时会将整个文件夹的内容作为“上下文”发送给 Docker 引擎。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir docker-demo
+</span></span><span class=line><span class=cl><span class=nb>cd</span> docker-demo
+</span></span></code></pre></td></tr></table></div></div><p>在 <code>docker-demo</code> 下构建两个文件：</p><ul><li><p><code>app.py</code>：一个简单的HTTP服务，返回一段信息</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>http.server</span> <span class=kn>import</span> <span class=n>BaseHTTPRequestHandler</span><span class=p>,</span> <span class=n>HTTPServer</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>socket</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>SimpleHandler</span><span class=p>(</span><span class=n>BaseHTTPRequestHandler</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>do_GET</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>send_response</span><span class=p>(</span><span class=mi>200</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>send_header</span><span class=p>(</span><span class=s1>&#39;Content-type&#39;</span><span class=p>,</span> <span class=s1>&#39;text/plain; charset=utf-8&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>end_headers</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>hostname</span> <span class=o>=</span> <span class=n>socket</span><span class=o>.</span><span class=n>gethostname</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;Hello from Docker! 容器的主机名是: </span><span class=si>{</span><span class=n>hostname</span><span class=si>}</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>wfile</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=n>message</span><span class=o>.</span><span class=n>encode</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;服务已启动，监听端口 8000...&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>server</span> <span class=o>=</span> <span class=n>HTTPServer</span><span class=p>((</span><span class=s1>&#39;0.0.0.0&#39;</span><span class=p>,</span> <span class=mi>8888</span><span class=p>),</span> <span class=n>SimpleHandler</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>server</span><span class=o>.</span><span class=n>serve_forever</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><code>Dockerfile</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=line><span class=cl><span class=k>FROM</span><span class=w> </span><span class=s>python:3.10-slim</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>WORKDIR</span><span class=w> </span><span class=s>/usr/src/app</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 第一个（.）代表宿主机当前目录下的所有文件，第二个（.）代表容器工作目录</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>copy</span> . .<span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>EXPOSE</span><span class=w> </span><span class=s>8888</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 默认执行</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>CMD</span> <span class=p>[</span><span class=s2>&#34;python&#34;</span><span class=p>,</span><span class=s2>&#34;app.py&#34;</span><span class=p>]</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div></li></ul><h3 id=step2-构建镜像>Step2 构建镜像</h3><p>在 <code>docker-demo</code> 下执行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker build -t my-python-service:v1 .
+</span></span></code></pre></td></tr></table></div></div><ul><li><p><code>build</code>: 告诉 Docker 开始构建。</p></li><li><p><code>-t my-python-service:v1</code>: 给这个镜像打个标签（Tag）。名字叫 <code>my-python-service</code>，版本号是 <code>v1</code>。</p></li><li><p><code>.</code> : 指示 Docker 构建上下文在<strong>当前目录</strong>。Docker 会在当前目录寻找 <code>Dockerfile</code>。</p></li></ul><p>Docker 会下载 <code>python:3.10-slim</code> 基础层，然后创建工作目录层，复制文件层，最后生成最终镜像。可以用 <code>docker images</code> 查看刚刚生成的镜像。</p><h3 id=step3-实例化与运行>Step3 实例化与运行</h3><p>在任意终端执行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -d --name my-running-app -p 8080:8000 my-python-service:v1
+</span></span></code></pre></td></tr></table></div></div><ul><li><p><code>run</code>: 创建并启动容器。</p></li><li><p><code>-d</code>: Detach 模式，让容器在<strong>后台</strong>运行，不阻塞你的终端。</p></li><li><p><code>--name my-running-app</code>: 给这个容器起名字，如果不写，Docker 会随机分配一个搞笑的名字（比如 <code>crazy_einstein</code>）。</p></li><li><p><code>-p 8888:8888</code>: <strong>端口映射</strong>。将宿主机（你的电脑）的 <code>8888</code> 端口映射到容器内部的 <code>8888</code> 端口。</p></li><li><p><code>my-python-service:v1</code>: 指定要运行的镜像名称和版本。</p></li></ul><p>运行后，可以用宿主机浏览器访问 <code>http://localhost:8888</code>，或者用 <code>curl http://localhost:8888</code> 测试，会看到容器内部返回的响应。</p><h3 id=step4-容器交互>Step4 容器交互</h3><ul><li><p><strong>查看运行状态</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker ps
+</span></span></code></pre></td></tr></table></div></div><p>会看到 <code>my-running-app</code> 正在运行，并且显示了端口映射关系。</p></li><li><p><strong>查看容器日志</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker logs my-running-app
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>进入容器内部执行命令</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker <span class=nb>exec</span> -it my-running-app /bin/bash
+</span></span></code></pre></td></tr></table></div></div><p>此时终端前缀会改变，说明已经在容器内部了！可以输入 <code>ls</code> 看看 <code>/usr/src/app</code> 目录下的文件。输入 <code>exit</code> 即可退出容器，但这不会停止容器运行。</p></li></ul><h3 id=step5-停止与清理>Step5 停止与清理</h3><ul><li><p><strong>停止运行中的容器</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker stop my-running-app
+</span></span></code></pre></td></tr></table></div></div><p>此时再执行 <code>docker ps</code> 就看不到它了。但如果执行 <code>docker ps -a</code>（显示所有容器），会发现它变成了 <code>Exited</code> 状态。<strong>停止并不等于删除</strong>，它的读写层（UpperDir）数据还在。</p></li><li><p><strong>删除容器</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker rm my-running-app
+</span></span></code></pre></td></tr></table></div></div><p>如果容器还在运行中，可以加 <code>-f</code> 强制删除：<code>docker rm -f my-running-app</code></p></li><li><p><strong>删除镜像</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker rmi my-python-service:v1
+</span></span></code></pre></td></tr></table></div></div></li></ul><hr><h2 id=开发环境-docker-化>开发环境 Docker 化</h2><p>将开发环境彻底 Docker 化，是现代软件工程中十分常见的一种做法。它能完美解决程序跨设备兼容性问题，同时让宿主机保持绝对的纯净——不需要装杂乱的 Python 库、不同版本的 JDK，或者各种 C++ 依赖库（比如 Boost）。</p><h3 id=纯命令行下的挂载编译>纯命令行下的挂载编译</h3><p>通过将编写好的python程序、jar包等等，Copy 到容器环境中执行，从而达到 Docker 化执行效果。以下是几个比较直观的例子：</p><ul><li><p>运行python脚本</p><p>不需要在宿主机上安装python环境，直接使用一行命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run --rm -v <span class=k>$(</span><span class=nb>pwd</span><span class=k>)</span>:/app -w /app python:3.10-slim python main.py
+</span></span></code></pre></td></tr></table></div></div><ul><li><code>--rm</code>：运行完毕后立刻销毁容器</li><li><code>-v $(pwd):/app </code>：把当前目录挂载到容器内的<code>/app</code>目录</li><li><code>-w /app</code>：设置工作目录</li></ul></li><li><p>编译和运行C++程序</p><p>C++程序需要编译+运行两步</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run --rm -v <span class=k>$(</span><span class=nb>pwd</span><span class=k>)</span>:/src -w /src gcc:latest bash -c <span class=s2>&#34;g++ main.cpp -o main_app &amp;&amp; ./main_app&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>执行完毕后，宿主机的目录下多了一个编译好的 <code>main_app</code> 可执行文件。这是通过 <code>-v</code> 挂载的优点：容器内生成的文件会直接保留在宿主机上。</p></li><li><p>编译并运行Java</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run --rm -v <span class=k>$(</span><span class=nb>pwd</span><span class=k>)</span>:/src -w /src openjdk:17-jdk bash -c <span class=s2>&#34;javac Main.java &amp;&amp; java Main&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><hr></li></ul><h3 id=vs-code-现代工程选择dev-containers-插件>VS Code 现代工程选择：Dev Containers 插件</h3><p>VS Code 的 <strong>Dev Containers</strong> 插件的核心在于：把 VS Code “一分为二”。</p><ul><li><strong>前端 UI</strong>（代码高亮、主题）留在你的宿主机上；</li><li><strong>后端服务</strong>（语言解析、终端、调试器）直接安装并运行在 Docker 容器内部。</li></ul><p>准备工作：在 VS Code 扩展商店安装 <code>Dev Containers</code> 插件（搜索 <code>@id:ms-vscode-remote.remote-containers</code>）。</p><h4 id=附加到已存在的容器attach-to-running-container>附加到已存在的容器（Attach to Running Container）</h4><ul><li><p><strong>在终端已经启动一个长期运行的容器：</strong> 为了开发，通常启动一个带交互终端并在后台运行的系统镜像：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -itd --name my-cpp-dev gcc:latest /bin/bash
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>在 VS Code 中连接：</strong></p><ul><li>按下 <code>Ctrl+Shift+P</code> (或 <code>F1</code>) 打开命令面板。</li><li>输入并选择：<code>Dev Containers: Attach to Running Container...</code></li><li>在弹出的列表中，选择刚才运行的 <code>my-cpp-dev</code>。</li></ul></li><li><p>VS Code 会打开一个新的窗口，把一段名为 <code>vscode-server</code> 的程序注入到容器里并运行。</p></li><li><p><strong>开发</strong>：</p><ul><li>左侧资源管理器的 <code>打开文件夹</code>，路径是<strong>容器内部的文件系统</strong>（比如 <code>/</code> 根目录）。</li><li>在 VS Code 里打开终端（Ctrl+`），实际上是在敲容器内部的 bash。</li><li>在 VS Code 里安装的 C++ 扩展会被安装在<strong>容器</strong>里。</li></ul></li></ul><hr><h4 id=通过工程化配置构建开发环境devcontainer>通过工程化配置构建开发环境（.devcontainer）</h4><p>现代化开发选择将<strong>开发环境本身作为代码（Infrastructure as Code）</strong>。假设要开发一个需要 <code>boost</code> 和 <code>cmake</code> 的 C++ 网络编程项目：</p><h5 id=创建项目结构><strong>创建项目结构</strong></h5><p>在空项目文件夹下，创建一个特殊的文件夹 <code>.devcontainer</code>，并在里面放两个文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>my-project/
+</span></span><span class=line><span class=cl>├── .devcontainer/
+</span></span><span class=line><span class=cl>│   ├── devcontainer.json  <span class=c1># 定义 VS Code 行为</span>
+</span></span><span class=line><span class=cl>│   └── Dockerfile         <span class=c1># 与之前的 Dockerfile 一致</span>
+</span></span><span class=line><span class=cl>├── main.cpp
+</span></span></code></pre></td></tr></table></div></div><h5 id=编写-dockerfile>编写 Dockerfile</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=line><span class=cl><span class=c># 微软提供了很多官方的 devcontainer 基础镜像，自带普通非 root 用户等安全配置</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>FROM</span><span class=w> </span><span class=s>mcr.microsoft.com/devcontainers/cpp:ubuntu-22.04</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>RUN</span> apt-get update <span class=o>&amp;&amp;</span> <span class=nb>export</span> <span class=nv>DEBIAN_FRONTEND</span><span class=o>=</span>noninteractive <span class=se>\
+</span></span></span><span class=line><span class=cl>    <span class=o>&amp;&amp;</span> apt-get -y install --no-install-recommends <span class=se>\
+</span></span></span><span class=line><span class=cl>    cmake <span class=se>\
+</span></span></span><span class=line><span class=cl>    gdb <span class=se>\
+</span></span></span><span class=line><span class=cl>    libboost-all-dev <span class=se>\
+</span></span></span><span class=line><span class=cl>    <span class=o>&amp;&amp;</span> apt-get clean <span class=o>&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><h5 id=devcontainerjson-与参数介绍>devcontainer.json 与参数介绍</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;My C++ Boost Env&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;build&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;dockerfile&#34;</span><span class=p>:</span> <span class=s2>&#34;Dockerfile&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;customizations&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;vscode&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// 当容器启动后，自动为这个环境安装以下 VS Code 插件
+</span></span></span><span class=line><span class=cl>            <span class=nt>&#34;extensions&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;ms-vscode.cpptools&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;ms-vscode.cmake-tools&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 将容器内的用户设置为 vscode (基础镜像自带的普通用户，避免用 root 引起权限混乱)
+</span></span></span><span class=line><span class=cl>    <span class=nt>&#34;remoteUser&#34;</span><span class=p>:</span> <span class=s2>&#34;vscode&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>核心构建参数 (Build & Image)</p><p>这部分决定了容器基于什么“底座”运行。</p><div class=table-wrapper><table><thead><tr><th><strong>参数名称</strong></th><th><strong>类型</strong></th><th><strong>详解与示例</strong></th></tr></thead><tbody><tr><td><strong><code>image</code></strong></td><td>String</td><td><strong>最简单的方式</strong>，直接使用现成的 Docker 镜像。不支持复杂的自定义。 <code>"image": "[mcr.microsoft.com/devcontainers/python:3.10](https://mcr.microsoft.com/devcontainers/python:3.10)"</code></td></tr><tr><td><strong><code>build</code></strong></td><td>Object</td><td><strong>最常用的方式</strong>，通过指定 Dockerfile 来动态构建环境。 - <code>dockerfile</code>: 指定 Dockerfile 相对路径。 - <code>context</code>: 构建上下文路径（通常是 <code>.</code>）。 - <code>args</code>: 传递给 Dockerfile 的构建参数 (ARG)。</td></tr><tr><td><strong><code>dockerComposeFile</code></strong></td><td>String/Array</td><td><strong>针对复杂微服务</strong>。如果你的开发环境不仅需要 Python，还需要 Redis 和 MySQL，可以通过指定的 docker-compose.yml 来启动整个集群。</td></tr><tr><td><strong><code>service</code></strong></td><td>String</td><td>配合 <code>dockerComposeFile</code> 使用，告诉 VS Code 应该“钻”进哪一个容器里去开发。</td></tr></tbody></table></div></li><li><p>容器运行时配置 (Container Runtime)</p><p>这部分决定了容器跑起来之后，底层的系统属性和权限。</p><div class=table-wrapper><table><thead><tr><th><strong>参数名称</strong></th><th><strong>类型</strong></th><th><strong>详解与示例</strong></th></tr></thead><tbody><tr><td><strong><code>name</code></strong></td><td>String</td><td>给你这个开发环境起个好听的名字，会显示在 VS Code 左下角。 <code>"name": "My Awesome Python Env"</code></td></tr><tr><td><strong><code>remoteUser</code></strong></td><td>String</td><td><strong>⭐⭐⭐极其重要</strong>。默认容器里是 root 用户，如果用 root 写代码，生成的文件在宿主机上会变成 root 权限，导致各种麻烦。建议填入基础镜像自带的普通用户（比如 <code>"vscode"</code>, <code>"node"</code>, <code>"ubuntu"</code>）。</td></tr><tr><td><strong><code>containerEnv</code></strong></td><td>Object</td><td>注入到容器内部的系统环境变量。 <code>"containerEnv": {"MY_API_KEY": "12345"}</code></td></tr><tr><td><strong><code>runArgs</code></strong></td><td>Array</td><td>透传给底层的 <code>docker run</code> 命令。如果你需要特权模式或特定的网络设置，在这里加。 <code>"runArgs": ["--cap-add=SYS_PTRACE", "--network=host"]</code></td></tr><tr><td><strong><code>workspaceMount</code></strong></td><td>String</td><td>覆盖默认的代码挂载行为。通常不需要改，除非你想把代码挂载到容器里的特定位置。</td></tr><tr><td><strong><code>workspaceFolder</code></strong></td><td>String</td><td>容器启动后，VS Code 默认打开的目录。配合 <code>workspaceMount</code> 使用。</td></tr></tbody></table></div></li><li><p>编辑器与插件定制（Editor Customization）</p><p>这部分是决定了的 VS Code 长有什么功能。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=s2>&#34;customizations&#34;</span><span class=err>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;vscode&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 1. 设置项 (Settings)
+</span></span></span><span class=line><span class=cl>        <span class=nt>&#34;settings&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;editor.formatOnSave&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;python.formatting.provider&#34;</span><span class=p>:</span> <span class=s2>&#34;black&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;terminal.integrated.defaultProfile.linux&#34;</span><span class=p>:</span> <span class=s2>&#34;bash&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 2. 插件列表 (Extensions)
+</span></span></span><span class=line><span class=cl>        <span class=nt>&#34;extensions&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;ms-python.python&#34;</span><span class=p>,</span>       <span class=c1>// Python 核心支持
+</span></span></span><span class=line><span class=cl>            <span class=s2>&#34;ms-azuretools.vscode-docker&#34;</span><span class=p>,</span> <span class=c1>// Docker 插件
+</span></span></span><span class=line><span class=cl>            <span class=s2>&#34;github.copilot&#34;</span>          <span class=c1>// AI 辅助
+</span></span></span><span class=line><span class=cl>        <span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>生命周期钩子脚本 (Lifecycle Hooks)</p><div class=table-wrapper><table><thead><tr><th><strong>生命周期阶段</strong></th><th><strong>参数名称</strong></th><th><strong>执行时机与用途</strong></th></tr></thead><tbody><tr><td><strong>阶段 1 (宿主机)</strong></td><td><code>initializeCommand</code></td><td>在 <strong>宿主机（你的 Kali）</strong> 上，容器创建之前运行。常用于生成临时文件或检查宿主机环境。</td></tr><tr><td><strong>阶段 2 (后台建)</strong></td><td><code>onCreateCommand</code></td><td>容器刚创建，在后台默默执行。</td></tr><tr><td><strong>阶段 3 (装依赖)</strong></td><td><code>updateContentCommand</code></td><td>容器已创建，源代码也挂载进去了。<strong>极其适合用来装依赖！</strong> 例如：<code>"pip install -r requirements.txt"</code></td></tr><tr><td><strong>阶段 4 (刚连上)</strong></td><td><code>postCreateCommand</code></td><td>容器创建完毕，UI 准备连接时。常用来打印欢迎信息，或进行最后的配置。</td></tr><tr><td><strong>阶段 5 (每次启动)</strong></td><td><code>postStartCommand</code></td><td><strong>每次</strong>重启并连接容器时执行。比如启动一个后台监控脚本或后台数据库服务。</td></tr></tbody></table></div></li><li><p>特性模块 (Features)</p><p>这是微软后来推出的“积木式”环境搭建方案。以前你想在环境里加个 Go、加个 Rust、加个 Docker-in-Docker，你需要自己写很长的 Dockerfile。现在只需要在 <code>devcontainer.json</code> 里加几行配置，它会自动帮你装好。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=s2>&#34;features&#34;</span><span class=err>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 一键安装特定版本的 Go
+</span></span></span><span class=line><span class=cl>    <span class=nt>&#34;ghcr.io/devcontainers/features/go:1&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=s2>&#34;1.20&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 一键让容器内可以运行 docker 命令 (Docker-in-Docker)
+</span></span></span><span class=line><span class=cl>    <span class=nt>&#34;ghcr.io/devcontainers/features/docker-in-docker:2&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=s2>&#34;latest&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;moby&#34;</span><span class=p>:</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>端口转发 (Port Forwarding)</p><p>当容器里跑了一个 Web 服务（比如监听了 8000 端口），通过以下配置可以在宿主机的浏览器里访问：</p><ul><li><strong><code>forwardPorts</code></strong>: <code>[8000, 3306]</code> (自动将容器的 8000 和 3306 转发到宿主机)。</li><li><strong><code>portsAttributes</code></strong>: 可以进一步定义端口的行为。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=s2>&#34;portsAttributes&#34;</span><span class=err>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;8000&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;label&#34;</span><span class=p>:</span> <span class=s2>&#34;My Web App&#34;</span><span class=p>,</span> <span class=c1>// 给端口起个别名
+</span></span></span><span class=line><span class=cl>        <span class=nt>&#34;onAutoForward&#34;</span><span class=p>:</span> <span class=s2>&#34;openBrowser&#34;</span> <span class=c1>// 容器启动时自动在宿主机打开浏览器
+</span></span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>一个示例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Python Data Science Env&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;build&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;dockerfile&#34;</span><span class=p>:</span> <span class=s2>&#34;Dockerfile&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;context&#34;</span><span class=p>:</span> <span class=s2>&#34;.&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;features&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;ghcr.io/devcontainers/features/git:1&#34;</span><span class=p>:</span> <span class=p>{}</span> <span class=c1>// 确保容器内有最新版 git
+</span></span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;forwardPorts&#34;</span><span class=p>:</span> <span class=p>[</span><span class=mi>8000</span><span class=p>],</span> <span class=c1>// 自动映射 8000 端口
+</span></span></span><span class=line><span class=cl>    <span class=nt>&#34;portsAttributes&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;8000&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;label&#34;</span><span class=p>:</span> <span class=s2>&#34;FastAPI Server&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;onAutoForward&#34;</span><span class=p>:</span> <span class=s2>&#34;ignore&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;remoteUser&#34;</span><span class=p>:</span> <span class=s2>&#34;vscode&#34;</span><span class=p>,</span> <span class=c1>// 使用非 root 用户
+</span></span></span><span class=line><span class=cl>    <span class=nt>&#34;updateContentCommand&#34;</span><span class=p>:</span> <span class=s2>&#34;pip install -r requirements.txt&#34;</span><span class=p>,</span> <span class=c1>// 自动装库
+</span></span></span><span class=line><span class=cl>    <span class=nt>&#34;customizations&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;vscode&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;settings&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nt>&#34;python.defaultInterpreterPath&#34;</span><span class=p>:</span> <span class=s2>&#34;/usr/local/bin/python&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=p>},</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;extensions&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;ms-python.python&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;ms-python.vscode-pylance&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><h5 id=自动化容器环境构建><strong>自动化容器环境构建</strong></h5><ul><li>用普通的 VS Code 打开你的 <code>my-project</code> 文件夹。</li><li>VS Code 会在右下角弹出一个提示：“检测到 Dev Container 配置文件，是否在容器中重新打开？” -> 点击 <strong>Reopen in Container</strong>（如果没有弹窗，按 <code>F1</code> 输入 <code>Dev Containers: Reopen in Container</code>）。</li></ul><p><strong>自动化过程：</strong></p><ul><li>VS Code 读取 <code>.devcontainer.json</code>。</li><li>发现需要 Build，它就在后台执行 <code>docker build</code> 根据 <code>Dockerfile</code> 编译镜像。</li><li>镜像建好后，执行 <code>docker run</code> 启动容器，并自动将项目目录挂载到容器内的 <code>/workspaces/my-project</code>。</li><li>将 VS Code Server 注入容器。</li><li>自动在容器内部下载并安装指定的 <code>cpptools</code> 和 <code>cmake-tools</code> 插件。</li><li>连接完成。</li></ul><p>此时，代码文件还在宿主机硬盘上，但 VS Code 的终端、编译器（g++）、调试器（gdb）、库文件（boost）、甚至代码自动补全系统，全部在 Docker 容器里运行。当把该项目推送到 GitHub 给其他用户时，他们只需要用 VS Code 打开并点击 <code>Reopen in Container</code>，几分钟后就能获得一个一模一样、装配好所有 C++ 工具链的开发环境。</p><hr></section><footer class=article-footer><section class=article-keywords><a href=/keywords/docker/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Docker data-taxonomy-kind=keywords>Docker</a>
+<a href=/keywords/%E5%AE%B9%E5%99%A8/ class="taxonomy-chip keyword-chip" data-taxonomy-term=容器 data-taxonomy-kind=keywords>容器</a>
+<a href=/keywords/dockerfile/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Dockerfile data-taxonomy-kind=keywords>Dockerfile</a>
+<a href=/keywords/namespace/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Namespace data-taxonomy-kind=keywords>Namespace</a>
+<a href=/keywords/cgroup/ class="taxonomy-chip keyword-chip" data-taxonomy-term=CGroup data-taxonomy-kind=keywords>CGroup</a>
+<a href=/keywords/unionfs/ class="taxonomy-chip keyword-chip" data-taxonomy-term=UnionFS data-taxonomy-kind=keywords>UnionFS</a>
+<a href=/keywords/overlayfs/ class="taxonomy-chip keyword-chip" data-taxonomy-term=OverlayFS data-taxonomy-kind=keywords>OverlayFS</a>
+<a href=/keywords/bridge/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Bridge data-taxonomy-kind=keywords>Bridge</a>
+<a href=/keywords/overlay/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Overlay data-taxonomy-kind=keywords>Overlay</a>
+<a href=/keywords/dev-containers/ class="taxonomy-chip keyword-chip" data-taxonomy-term="Dev Containers" data-taxonomy-kind=keywords>Dev Containers</a>
+<a href=/keywords/bind-mount/ class="taxonomy-chip keyword-chip" data-taxonomy-term="Bind Mount" data-taxonomy-kind=keywords>Bind Mount</a>
+<a href=/keywords/tmpfs/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Tmpfs data-taxonomy-kind=keywords>Tmpfs</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title data-i18n-key=article.relatedContent>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/><div class=article-details><h2 class=article-title>Web安全基础</h2></div></a></article><article><a href=/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/><div class=article-details><h2 class=article-title>渗透测试基础</h2></div></a></article><article><a href=/p/np%E9%97%AE%E9%A2%98%E4%B8%8E%E5%BD%92%E7%BA%A6/><div class=article-details><h2 class=article-title>NP问题与归约</h2></div></a></article><article class=has-image><a href=/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/><div class=article-image><img src=/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/60aa0004-c259-49eb-b742-6515691c6d92.a2bc150b77d997c7aa74a554d4c80408_hu_8537dc38e7704171.png width=250 height=150 loading=lazy alt="Featured image of post 机器学习-神经网络" data-hash="md5-orwVC3fZl8eqdKVU1MgECA=="></div><div class=article-details><h2 class=article-title>机器学习-神经网络</h2></div></a></article><article class=has-image><a href=/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/><div class=article-image><img src=/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/output_3_1.97aa252439207abddc3143a10ae1f4f6_hu_da17dbe7b51b8dad.png width=250 height=150 loading=lazy alt="Featured image of post 机器学习-集成学习" data-hash="md5-l6olJDkger3cMUOhCuH09g=="></div><div class=article-details><h2 class=article-title>机器学习-集成学习</h2></div></a></article></div></div></aside><script src=https://utteranc.es/client.js repo=leuco-yuu/blog-comments issue-term=pathname crossorigin=anonymous async></script><style>.utterances{max-width:unset}</style><script>let utterancesLoaded=!1;function setUtterancesTheme(e){let t=document.querySelector(".utterances iframe");t&&t.contentWindow.postMessage({type:"set-theme",theme:`github-${e}`},"https://utteranc.es")}addEventListener("message",e=>{if(e.origin!=="https://utteranc.es")return;utterancesLoaded=!0,setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener("onColorSchemeChange",e=>{if(!utterancesLoaded)return;setUtterancesTheme(e.detail)})</script><footer class=site-footer><section class=copyright>&copy;
+2025 -
+2026 Leuco · leucoyuu@163.com</section><section class=powerby><span data-i18n-key=footer.motto>持续记录技术、实验与复盘。</span><br><span data-i18n-key=footer.engine>由 Hugo 驱动</span> · <span data-i18n-key=footer.theme>主题 Stack</span></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.29c987cab5419174d4dc85c2a56544a08027cc7f77efb5749447a3e80f85a03d.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script><button id=back-to-top data-i18n-title=backToTop aria-label=返回顶部>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+<script>document.addEventListener("DOMContentLoaded",async function(){const o="LeucoUILanguage";let n={},t=localStorage.getItem(o)||"cn";const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",function(){s.style.display=window.scrollY>300?"flex":"none"}),s.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})}));function p(e){return Array.from(e.trim().toLowerCase()).reduce((e,t)=>Math.imul(31,e)+t.charCodeAt(0)|0,0)}function e(e){return n[e]?.[t]||n[e]?.cn||""}function u(t){return e("term."+t)}async function l(){try{const e=await fetch("/language.json",{cache:"no-store"});e.ok&&(n=await e.json())}catch{n={}}}function c(){document.querySelectorAll(".taxonomy-chip").forEach(e=>{const a=e.dataset.taxonomyTerm||e.textContent||"",i=e.dataset.taxonomyKind||(e.classList.contains("keyword-chip")?"keywords":"categories"),t=Math.abs(p(a)),o=Math.round(t*137.508%360);let n=30+t%8,s=74+t%6;i==="keywords"?(n=22+t%7,s=84+t%5):i==="series"&&(n=28+t%7,s=78+t%5),e.style.setProperty("--chip-bg",`hsl(${o}, ${n}%, ${s}%)`),e.style.setProperty("--chip-color",`hsl(${o}, ${Math.max(26,n+6)}%, 28%)`),e.style.setProperty("--chip-border",`hsl(${o}, ${Math.max(18,n-4)}%, ${Math.max(64,s-10)}%)`)})}function r(){document.documentElement.dataset.uiLanguage=t,document.querySelectorAll("[data-i18n-key]").forEach(t=>{const n=e(t.dataset.i18nKey);n&&(t.textContent=n)}),document.querySelectorAll("[data-i18n-count-key]").forEach(t=>{const n=e(t.dataset.i18nCountKey);n&&(t.textContent=n.replace("#COUNT",t.dataset.i18nCount||"0"))}),document.querySelectorAll("[data-i18n-placeholder]").forEach(t=>{const n=e(t.dataset.i18nPlaceholder);n&&t.setAttribute("placeholder",n)}),document.querySelectorAll("[data-i18n-title]").forEach(t=>{const n=e(t.dataset.i18nTitle);n&&(t.setAttribute("title",n),t.setAttribute("aria-label",n))}),document.querySelectorAll("[data-i18n-term]").forEach(e=>{const t=u(e.dataset.i18nTerm);t&&(e.textContent=t)}),e("search.resultTitle")&&(window.searchResultTitleTemplate=e("search.resultTitle"))}function d(){const e=document.getElementById("language-mode-select");if(!e)return;e.value=t,e.addEventListener("change",()=>{t=e.value,localStorage.setItem(o,t),r(),i()})}function a(t){const s="LeucoSidebarCollapsed:"+t,o=t+"-sidebar-collapsed",n=document.querySelector(`[data-sidebar-toggle="${t}"]`);if(!n)return;const i=(i,a=!0)=>{document.body.classList.toggle(o,i),n.setAttribute("aria-expanded",String(!i));const c=t==="left"?i?"sidebar.expandLeft":"sidebar.collapseLeft":i?"sidebar.expandRight":"sidebar.collapseRight",r=e(c)||(i?"展开侧栏":"收起侧栏");n.setAttribute("aria-label",r),n.setAttribute("title",r),a&&localStorage.setItem(s,i?"1":"0")},a=localStorage.getItem(s),r=a===null&&t==="right"&&window.matchMedia("(max-width: 767px)").matches;i(a==="1"||r,!1),n.addEventListener("click",()=>i(!document.body.classList.contains(o)))}function h(){const t=document.getElementById("article-list-image-toggle"),n="LeucoHideArticleListImages";function s(s){if(document.body.classList.toggle("article-list-images-hidden",s),!t)return;const o=t.querySelector("span");if(o){const t=s?o.dataset.hideKey:o.dataset.showKey;o.textContent=e(t)||(s?o.dataset.hideText:o.dataset.showText)}t.setAttribute("aria-pressed",String(s)),localStorage.setItem(n,s?"1":"0")}s(localStorage.getItem(n)==="1"),t&&(t.addEventListener("click",()=>s(!document.body.classList.contains("article-list-images-hidden"))),t.addEventListener("keydown",e=>{(e.key==="Enter"||e.key===" ")&&(e.preventDefault(),t.click())}))}function m(){function n(e,t){t?(e.style.maxHeight=e.scrollHeight+"px",requestAnimationFrame(()=>{e.classList.add("is-collapsed"),e.style.maxHeight="0px"})):(e.classList.remove("is-collapsed"),e.style.maxHeight=e.scrollHeight+"px",window.setTimeout(()=>{e.classList.contains("is-collapsed")||(e.style.maxHeight="")},260))}const t=document.querySelector(".article-content");if(!t)return;const s=Array.from(t.querySelectorAll("h2, h3, h4, h5, h6")).filter(e=>!e.closest(".custom-toc")&&!e.closest("#TableOfContents"));s.forEach((t,s)=>{if(t.dataset.foldReady==="1")return;t.dataset.foldReady="1",t.classList.add("collapsible-heading"),t.setAttribute("tabindex","0");const c=Number(t.tagName.slice(1)),o=document.createElement("div");o.className="heading-section-body",o.dataset.headingLevel=String(c),o.id=`heading-section-${s}`,t.after(o);let a=o.nextSibling;for(;a;){if(a.nodeType===Node.ELEMENT_NODE){const e=a;if(/^H[2-6]$/.test(e.tagName)&&Number(e.tagName.slice(1))<=c)break}const e=a.nextSibling;o.appendChild(a),a=e}if(!o.childNodes.length)return;const i=document.createElement("button");i.className="heading-fold-toggle",i.type="button",i.setAttribute("aria-expanded","true"),i.setAttribute("aria-controls",o.id),i.setAttribute("aria-label",e("heading.collapse")||"收起本节"),t.prepend(i);const r=()=>{const s=!o.classList.contains("is-collapsed");t.classList.toggle("is-collapsed",s),i.setAttribute("aria-expanded",String(!s)),i.setAttribute("aria-label",e(s?"heading.expand":"heading.collapse")||(s?"展开本节":"收起本节")),n(o,s)};i.addEventListener("click",e=>{e.stopPropagation(),r()}),t.addEventListener("click",e=>{if(e.target.closest("a"))return;r()}),t.addEventListener("keydown",e=>{(e.key==="Enter"||e.key===" ")&&(e.preventDefault(),r())})})}function f(){const n=document.querySelector(".article-local-search"),r=document.querySelector(".article-content");if(!n||!r)return;const s=n.querySelector("#article-local-search-input"),l=n.querySelector("[data-article-search-prev]"),m=n.querySelector("[data-article-search-next]"),h=n.querySelector("[data-article-search-clear]"),c=n.querySelector("[data-article-search-count]");let e=[],t=-1;function u(e){return e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}function d(e){if(!e.trim())return null;const t=e.match(/^\/(.+)\/([dgimsuvy]*)$/);if(t){const e=t[2].includes("g")?t[2]:t[2]+"g";return new RegExp(t[1],e)}return new RegExp(u(e),"gi")}function a(){e.forEach(e=>{const t=e.parentNode;if(!t)return;t.replaceChild(document.createTextNode(e.textContent),e),t.normalize()}),e=[],t=-1,n.classList.remove("has-error"),o()}function o(){if(!c)return;c.textContent=e.length?`${t+1}/${e.length}`:"0/0"}function i(n){if(!e.length){t=-1,o();return}e.forEach(e=>e.classList.remove("is-active")),t=(n+e.length)%e.length,e[t].classList.add("is-active"),e[t].scrollIntoView({behavior:"smooth",block:"center"}),o()}function f(){a();const c=s.value.trim();if(!c)return;let t;try{t=d(c)}catch{n.classList.add("has-error");return}if(!t)return;const l=document.createTreeWalker(r,NodeFilter.SHOW_TEXT,{acceptNode(e){if(!e.nodeValue.trim())return NodeFilter.FILTER_REJECT;const t=e.parentElement;return t?t.closest("script, style, .article-local-search, .heading-fold-toggle")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}}),u=[];for(;l.nextNode();)u.push(l.currentNode);u.forEach(n=>{const s=n.nodeValue,r=[];t.lastIndex=0;let o;for(;(o=t.exec(s))!==null;){if(o[0]===""){t.lastIndex++;continue}r.push({start:o.index,end:o.index+o[0].length})}if(!r.length)return;const a=document.createDocumentFragment();let i=0;r.forEach(({start:t,end:n})=>{t>i&&a.appendChild(document.createTextNode(s.slice(i,t)));const o=document.createElement("mark");o.className="article-search-mark",o.textContent=s.slice(t,n),a.appendChild(o),e.push(o),i=n}),i<s.length&&a.appendChild(document.createTextNode(s.slice(i))),n.parentNode.replaceChild(a,n)}),e.length&&i(0),o()}s.addEventListener("input",f),s.addEventListener("keydown",e=>{e.key==="Enter"&&(e.preventDefault(),i(t+1))}),l?.addEventListener("click",()=>i(t-1)),m?.addEventListener("click",()=>i(t+1)),h?.addEventListener("click",()=>{s.value="",a(),s.focus()}),o()}function i(){["left","right"].forEach(t=>{const n=document.querySelector(`[data-sidebar-toggle="${t}"]`);if(!n)return;const o=document.body.classList.contains(t+"-sidebar-collapsed"),i=t==="left"?o?"sidebar.expandLeft":"sidebar.collapseLeft":o?"sidebar.expandRight":"sidebar.collapseRight",s=e(i);s&&(n.setAttribute("aria-label",s),n.setAttribute("title",s))}),document.querySelectorAll(".heading-fold-toggle").forEach(t=>{const s=t.getAttribute("aria-expanded")==="false",n=e(s?"heading.expand":"heading.collapse");n&&t.setAttribute("aria-label",n)})}await l(),a("left"),a("right"),h(),d(),m(),f(),c(),r(),i()})</script><script type=module>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.13.0/dist/mermaid.esm.min.mjs';
+    document.addEventListener('DOMContentLoaded', () => {
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+    });
+</script></body></html>

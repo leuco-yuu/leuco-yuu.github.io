@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
+<title>Keyword: 密钥协商 - Leuco&#39;s Blog</title>
+
+<link rel='canonical' href='http://localhost:1313/keywords/%E5%AF%86%E9%92%A5%E5%8D%8F%E5%95%86/'>
+
+<link rel="stylesheet" href="/scss/style.min.3f9081d392f66d28909bff01fee451f37a6e2bda3a9a2c2952e8fdba0c74fd39.css"><meta property='og:title' content="Keyword: 密钥协商 - Leuco's Blog">
+<meta property='og:description' content="">
+<meta property='og:url' content='http://localhost:1313/keywords/%E5%AF%86%E9%92%A5%E5%8D%8F%E5%95%86/'>
+<meta property='og:site_name' content='Leuco&#39;s Blog'>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-05-31T00:00:00&#43;00:00 '/>
+<meta name="twitter:title" content="Keyword: 密钥协商 - Leuco's Blog">
+<meta name="twitter:description" content=""><link rel="alternate" type="application/rss&#43;xml" href="http://localhost:1313/keywords/%E5%AF%86%E9%92%A5%E5%8D%8F%E5%95%86/index.xml">
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky " id="left-sidebar">
+    <button class="sidebar-fold-toggle sidebar-fold-toggle--left" type="button" data-sidebar-toggle="left" data-i18n-title="sidebar.collapseLeft" aria-label="收起左侧栏" aria-expanded="true">
+        <span></span>
+    </button>
+
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单" data-i18n-title="toggleMenu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f6aa26e80a833272.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Leuco&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/leuco-yuu/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://mail.google.com/mail/u/0/?tf=cm&amp;to=leucoyuu@gmail.com&amp;fs=1'
+                        target="_blank"
+                        title="Gmail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <!-- 信封外框 -->
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+  
+  <!-- 信封内部线条（模拟折叠效果） -->
+  <polyline points="3,5 12,14 21,5" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://wpa.qq.com/msgrd?v=3&amp;uin=1286938728&amp;site=qq&amp;menu=yes/'
+                        target="_blank"
+                        title="QQ"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="m15.9998867 0-.3175962.00373031c-6.8340705.16105657-10.59798873 5.52198001-10.62328209 13.09956699l.00099159.2727027-.86256398 2.1053645c-.34339269.8459887-.59479858 1.4918602-.8236549 2.1249911-.16246446.4494579-.31092035.8862129-.4515632 1.3302912-1.41043336 4.4529342-1.46997142 7.7313526 1.14979123 8.0424546l.19586827.0182568c.69853306.0462522 1.18775172-.1357889 1.69345756-.5695745l.04666502-.0427837.10703497.1859114.16295747.2641667.09000756.1369219-.10203891.0725127c-1.18457469.8599516-1.78515849 2.0422997-.8749963 3.5478041.72014893 1.1919865 1.68579016 1.3851809 4.67654251 1.4059241h1.2781117l.7210113-.0101194c1.4578857-.0287327 2.9764342-.1065736 3.9343697-.2001215l.2555297.0243167c1.1291243.09698 2.8606159.1735357 4.3993902.1859242h1.2781118c2.9907546-.0207471 3.95642-.2139816 4.6768437-1.4064227l.0983227-.1723424c.764361-1.4241985.1648309-2.548721-.9747412-3.3755348l-.1034569-.072941.0912293-.1362605.1629318-.2641511.1068389-.1855884.0466679.0427821c.5516504.4732059 1.0836451.6468525 1.8890001.5513616 2.6200145-.3116105 2.5604594-3.5895097 1.1502083-8.0424822-.136678-.4315245-.2810058-.8567817-.4385987-1.2939849l-.1781698-.4846461c-.0923296-.2464665-.1903348-.5013359-.2976536-.7744519l-.3954267-.9868956-.8290275-2.020683.0009399-.279262c-.038761-7.60576089-3.8169423-12.93053326-10.6187985-13.09291824zm.0001023 2c6.339972.00032813 9.0947051 5.25726658 8.9334981 11.7557738l.8516442 2.0748544c.5606846 1.3708665.9939584 2.4718584 1.3860782 3.7098724 1.2134003 3.8314013.8203049 5.4169539.5209683 5.4525554-.6424867.0761796-2.5006035-2.8842697-2.5006035-2.8842697 0 1.7141775-.8994592 3.9510027-2.8457046 5.5664147l.3377045.1073023c1.0249215.341207 2.6653848 1.0302704 2.2154641 1.7750936-.4078113.675007-6.9962271.4309917-8.8982689.2207732l-.4753503.0452169c-2.33636.195172-8.04423656.3608021-8.42291849-.2659901-.50418989-.8339832 1.61195836-1.5976385 2.55205373-1.8820678-1.94652419-1.615412-2.84615056-3.852456-2.84615056-5.5667428l-.32111727.4924567c-.56063792.838483-1.70355568 2.4482423-2.17943051 2.391813-.29933663-.0355468-.69254342-1.6211541.52102408-5.4525554l.21887662-.6654718c.52220361-1.5311231 1.13363576-2.9515889 2.01884579-5.1193097-.17029299-6.39290578 2.5220086-11.75539097 8.93338651-11.7557191z" fill="currentColor" fill-rule="nonzero"/></g></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span data-i18n-key="nav.home">主页</span>
+            </a>
+        </li>
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span data-i18n-key="nav.about">关于</span>
+            </a>
+        </li>
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span data-i18n-key="nav.archives">博文</span>
+            </a>
+        </li>
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span data-i18n-key="nav.search">搜索</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                <li id="language-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <label for="language-mode-select" data-i18n-key="language.label">语言</label>
+                    <select id="language-mode-select" name="language-mode" title="语言" data-i18n-title="language.label" aria-label="语言">
+                        <option value="cn">简体中文</option>
+                        <option value="tw">繁體中文</option>
+                        <option value="en">English</option>
+                    </select>
+                </li>
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span data-i18n-key="darkMode">暗色模式</span>
+                    </li>
+                
+
+                <li id="article-list-image-toggle" role="button" tabindex="0" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span data-i18n-key="image.hide" data-show-key="image.hide" data-hide-key="image.show" data-show-text="隐藏图片" data-hide-text="展示图片">隐藏图片</span>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky" id="right-sidebar">
+        <button class="sidebar-fold-toggle sidebar-fold-toggle--right" type="button" data-sidebar-toggle="right" data-i18n-title="sidebar.collapseRight" aria-label="收起右侧栏" aria-expanded="true">
+            <span></span>
+        </button>
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label data-i18n-key="search.title">搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." data-i18n-placeholder="search.placeholder" />
+        
+            <button title="搜索" data-i18n-title="search.title">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            <section class="widget archives category-archive">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title" data-i18n-key="widget.archives">分类归档</h2>
+
+    <div class="widget-archive--list taxonomy-archive-list">
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="taxonomy-archive-link" data-taxonomy-term="学习笔记" data-taxonomy-kind="categories">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="学习笔记" data-taxonomy-kind="categories" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="学习笔记">学习笔记</span>
+                    <span class="count">9</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/categories/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/" class="taxonomy-archive-link" data-taxonomy-term="网络空间安全" data-taxonomy-kind="categories">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="网络空间安全" data-taxonomy-kind="categories" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="网络空间安全">网络空间安全</span>
+                    <span class="count">8</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="taxonomy-archive-link" data-taxonomy-term="机器学习" data-taxonomy-kind="categories">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="机器学习" data-taxonomy-kind="categories" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="机器学习">机器学习</span>
+                    <span class="count">5</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/categories/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5/" class="taxonomy-archive-link" data-taxonomy-term="攻防实践" data-taxonomy-kind="categories">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="攻防实践" data-taxonomy-kind="categories" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="攻防实践">攻防实践</span>
+                    <span class="count">4</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/categories/kali-toolkit/" class="taxonomy-archive-link" data-taxonomy-term="Kali Toolkit" data-taxonomy-kind="categories">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="Kali Toolkit" data-taxonomy-kind="categories" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="Kali Toolkit">Kali Toolkit</span>
+                    <span class="count">1</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/categories/linux%E5%9F%BA%E7%A1%80/" class="taxonomy-archive-link" data-taxonomy-term="Linux基础" data-taxonomy-kind="categories">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="Linux基础" data-taxonomy-kind="categories" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="Linux基础">Linux基础</span>
+                    <span class="count">1</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/categories/%E5%90%8E%E9%87%8F%E5%AD%90%E6%97%B6%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6/" class="taxonomy-archive-link" data-taxonomy-term="后量子时代密码学" data-taxonomy-kind="categories">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="后量子时代密码学" data-taxonomy-kind="categories" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="后量子时代密码学">后量子时代密码学</span>
+                    <span class="count">1</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/categories/%E5%B7%A5%E5%85%B7%E9%9B%86/" class="taxonomy-archive-link" data-taxonomy-term="工具集" data-taxonomy-kind="categories">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="工具集" data-taxonomy-kind="categories" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="工具集">工具集</span>
+                    <span class="count">1</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/categories/%E7%AE%97%E6%B3%95%E7%90%86%E8%AE%BA/" class="taxonomy-archive-link" data-taxonomy-term="算法理论" data-taxonomy-kind="categories">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="算法理论" data-taxonomy-kind="categories" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="算法理论">算法理论</span>
+                    <span class="count">1</span>
+                </a>
+            </div>
+        
+    </div>
+</section>
+            
+        
+            <section class="widget archives series-archive">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title" data-i18n-key="widget.series">系列</h2>
+
+    <div class="widget-archive--list taxonomy-archive-list">
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/series/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5/" class="taxonomy-archive-link" data-taxonomy-term="网络安全实践" data-taxonomy-kind="series">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="网络安全实践" data-taxonomy-kind="series" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="网络安全实践">网络安全实践</span>
+                    <span class="count">6</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/series/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="taxonomy-archive-link" data-taxonomy-term="人工智能" data-taxonomy-kind="series">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="人工智能" data-taxonomy-kind="series" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="人工智能">人工智能</span>
+                    <span class="count">5</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/series/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E9%93%BE/" class="taxonomy-archive-link" data-taxonomy-term="安全工具链" data-taxonomy-kind="series">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="安全工具链" data-taxonomy-kind="series" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="安全工具链">安全工具链</span>
+                    <span class="count">1</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/series/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8D%8F%E8%AE%AE/" class="taxonomy-archive-link" data-taxonomy-term="密码学协议" data-taxonomy-kind="series">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="密码学协议" data-taxonomy-kind="series" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="密码学协议">密码学协议</span>
+                    <span class="count">1</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/series/%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%8D%E6%9D%82%E6%80%A7/" class="taxonomy-archive-link" data-taxonomy-term="算法与复杂性" data-taxonomy-kind="series">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="算法与复杂性" data-taxonomy-kind="series" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="算法与复杂性">算法与复杂性</span>
+                    <span class="count">1</span>
+                </a>
+            </div>
+        
+            <div class="archives-year taxonomy-archive-item">
+                <a href="/series/%E7%B3%BB%E7%BB%9F%E5%B7%A5%E7%A8%8B/" class="taxonomy-archive-link" data-taxonomy-term="系统工程" data-taxonomy-kind="series">
+                    <span class="taxonomy-color-dot taxonomy-chip" data-taxonomy-term="系统工程" data-taxonomy-kind="series" aria-hidden="true"></span>
+                    <span class="year taxonomy-archive-name" data-i18n-term="系统工程">系统工程</span>
+                    <span class="count">1</span>
+                </a>
+            </div>
+        
+    </div>
+</section>
+            
+        
+            <section class="widget taxonomy-cloud keyword-cloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title" data-i18n-key="widget.keywords">关键词</h2>
+
+    <div class="taxonomy-cloud-items">
+        
+            <a href="/keywords/docker/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Docker" data-taxonomy-kind="keywords">
+                Docker
+            </a>
+        
+            <a href="/keywords/kali/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Kali" data-taxonomy-kind="keywords">
+                Kali
+            </a>
+        
+            <a href="/keywords/shell/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Shell" data-taxonomy-kind="keywords">
+                Shell
+            </a>
+        
+            <a href="/keywords/sk-learn/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Sk-Learn" data-taxonomy-kind="keywords">
+                Sk-Learn
+            </a>
+        
+            <a href="/keywords/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/" class="taxonomy-chip keyword-chip" data-taxonomy-term="梯度下降" data-taxonomy-kind="keywords">
+                梯度下降
+            </a>
+        
+            <a href="/keywords/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/" class="taxonomy-chip keyword-chip" data-taxonomy-term="网络空间安全" data-taxonomy-kind="keywords">
+                网络空间安全
+            </a>
+        
+            <a href="/keywords/adaboost/" class="taxonomy-chip keyword-chip" data-taxonomy-term="AdaBoost" data-taxonomy-kind="keywords">
+                AdaBoost
+            </a>
+        
+            <a href="/keywords/bagging/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Bagging" data-taxonomy-kind="keywords">
+                Bagging
+            </a>
+        
+            <a href="/keywords/bind-mount/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Bind Mount" data-taxonomy-kind="keywords">
+                Bind Mount
+            </a>
+        
+            <a href="/keywords/bn/" class="taxonomy-chip keyword-chip" data-taxonomy-term="BN" data-taxonomy-kind="keywords">
+                BN
+            </a>
+        
+            <a href="/keywords/boosting/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Boosting" data-taxonomy-kind="keywords">
+                Boosting
+            </a>
+        
+            <a href="/keywords/bp/" class="taxonomy-chip keyword-chip" data-taxonomy-term="BP" data-taxonomy-kind="keywords">
+                BP
+            </a>
+        
+            <a href="/keywords/bridge/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Bridge" data-taxonomy-kind="keywords">
+                Bridge
+            </a>
+        
+            <a href="/keywords/cgroup/" class="taxonomy-chip keyword-chip" data-taxonomy-term="CGroup" data-taxonomy-kind="keywords">
+                CGroup
+            </a>
+        
+            <a href="/keywords/cnn/" class="taxonomy-chip keyword-chip" data-taxonomy-term="CNN" data-taxonomy-kind="keywords">
+                CNN
+            </a>
+        
+            <a href="/keywords/cs/" class="taxonomy-chip keyword-chip" data-taxonomy-term="CS" data-taxonomy-kind="keywords">
+                CS
+            </a>
+        
+            <a href="/keywords/dev-containers/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Dev Containers" data-taxonomy-kind="keywords">
+                Dev Containers
+            </a>
+        
+            <a href="/keywords/dockerfile/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Dockerfile" data-taxonomy-kind="keywords">
+                Dockerfile
+            </a>
+        
+            <a href="/keywords/dropout/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Dropout" data-taxonomy-kind="keywords">
+                Dropout
+            </a>
+        
+            <a href="/keywords/dvwa/" class="taxonomy-chip keyword-chip" data-taxonomy-term="DVWA" data-taxonomy-kind="keywords">
+                DVWA
+            </a>
+        
+            <a href="/keywords/eda/" class="taxonomy-chip keyword-chip" data-taxonomy-term="EDA" data-taxonomy-kind="keywords">
+                EDA
+            </a>
+        
+            <a href="/keywords/em/" class="taxonomy-chip keyword-chip" data-taxonomy-term="EM" data-taxonomy-kind="keywords">
+                EM
+            </a>
+        
+            <a href="/keywords/flask/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Flask" data-taxonomy-kind="keywords">
+                Flask
+            </a>
+        
+            <a href="/keywords/gbdt/" class="taxonomy-chip keyword-chip" data-taxonomy-term="GBDT" data-taxonomy-kind="keywords">
+                GBDT
+            </a>
+        
+            <a href="/keywords/gm/" class="taxonomy-chip keyword-chip" data-taxonomy-term="GM" data-taxonomy-kind="keywords">
+                GM
+            </a>
+        
+            <a href="/keywords/gmm/" class="taxonomy-chip keyword-chip" data-taxonomy-term="GMM" data-taxonomy-kind="keywords">
+                GMM
+            </a>
+        
+            <a href="/keywords/hashdump/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Hashdump" data-taxonomy-kind="keywords">
+                Hashdump
+            </a>
+        
+            <a href="/keywords/k-means/" class="taxonomy-chip keyword-chip" data-taxonomy-term="K-Means" data-taxonomy-kind="keywords">
+                K-Means
+            </a>
+        
+            <a href="/keywords/keylogging/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Keylogging" data-taxonomy-kind="keywords">
+                Keylogging
+            </a>
+        
+            <a href="/keywords/lan/" class="taxonomy-chip keyword-chip" data-taxonomy-term="LAN" data-taxonomy-kind="keywords">
+                LAN
+            </a>
+        
+            <a href="/keywords/logistic/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Logistic" data-taxonomy-kind="keywords">
+                Logistic
+            </a>
+        
+            <a href="/keywords/metasploit/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Metasploit" data-taxonomy-kind="keywords">
+                Metasploit
+            </a>
+        
+            <a href="/keywords/mimikatz/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Mimikatz" data-taxonomy-kind="keywords">
+                Mimikatz
+            </a>
+        
+            <a href="/keywords/ms17-010/" class="taxonomy-chip keyword-chip" data-taxonomy-term="MS17-010" data-taxonomy-kind="keywords">
+                MS17-010
+            </a>
+        
+            <a href="/keywords/msfvenom/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Msfvenom" data-taxonomy-kind="keywords">
+                Msfvenom
+            </a>
+        
+            <a href="/keywords/namespace/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Namespace" data-taxonomy-kind="keywords">
+                Namespace
+            </a>
+        
+            <a href="/keywords/nmap/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Nmap" data-taxonomy-kind="keywords">
+                Nmap
+            </a>
+        
+            <a href="/keywords/np%E9%97%AE%E9%A2%98/" class="taxonomy-chip keyword-chip" data-taxonomy-term="NP问题" data-taxonomy-kind="keywords">
+                NP问题
+            </a>
+        
+            <a href="/keywords/oob/" class="taxonomy-chip keyword-chip" data-taxonomy-term="OOB" data-taxonomy-kind="keywords">
+                OOB
+            </a>
+        
+            <a href="/keywords/overlay/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Overlay" data-taxonomy-kind="keywords">
+                Overlay
+            </a>
+        
+            <a href="/keywords/overlayfs/" class="taxonomy-chip keyword-chip" data-taxonomy-term="OverlayFS" data-taxonomy-kind="keywords">
+                OverlayFS
+            </a>
+        
+            <a href="/keywords/pca/" class="taxonomy-chip keyword-chip" data-taxonomy-term="PCA" data-taxonomy-kind="keywords">
+                PCA
+            </a>
+        
+            <a href="/keywords/pikachu/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Pikachu" data-taxonomy-kind="keywords">
+                Pikachu
+            </a>
+        
+            <a href="/keywords/python/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Python" data-taxonomy-kind="keywords">
+                Python
+            </a>
+        
+            <a href="/keywords/p%E9%97%AE%E9%A2%98/" class="taxonomy-chip keyword-chip" data-taxonomy-term="P问题" data-taxonomy-kind="keywords">
+                P问题
+            </a>
+        
+            <a href="/keywords/rnn/" class="taxonomy-chip keyword-chip" data-taxonomy-term="RNN" data-taxonomy-kind="keywords">
+                RNN
+            </a>
+        
+            <a href="/keywords/sgd/" class="taxonomy-chip keyword-chip" data-taxonomy-term="SGD" data-taxonomy-kind="keywords">
+                SGD
+            </a>
+        
+            <a href="/keywords/smo/" class="taxonomy-chip keyword-chip" data-taxonomy-term="SMO" data-taxonomy-kind="keywords">
+                SMO
+            </a>
+        
+            <a href="/keywords/softmax/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Softmax" data-taxonomy-kind="keywords">
+                Softmax
+            </a>
+        
+            <a href="/keywords/svm/" class="taxonomy-chip keyword-chip" data-taxonomy-term="SVM" data-taxonomy-kind="keywords">
+                SVM
+            </a>
+        
+            <a href="/keywords/tcp/" class="taxonomy-chip keyword-chip" data-taxonomy-term="TCP" data-taxonomy-kind="keywords">
+                TCP
+            </a>
+        
+            <a href="/keywords/tmpfs/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Tmpfs" data-taxonomy-kind="keywords">
+                Tmpfs
+            </a>
+        
+            <a href="/keywords/unionfs/" class="taxonomy-chip keyword-chip" data-taxonomy-term="UnionFS" data-taxonomy-kind="keywords">
+                UnionFS
+            </a>
+        
+            <a href="/keywords/vmware/" class="taxonomy-chip keyword-chip" data-taxonomy-term="VMware" data-taxonomy-kind="keywords">
+                VMware
+            </a>
+        
+            <a href="/keywords/vulhub/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Vulhub" data-taxonomy-kind="keywords">
+                Vulhub
+            </a>
+        
+            <a href="/keywords/webgoat/" class="taxonomy-chip keyword-chip" data-taxonomy-term="WebGoat" data-taxonomy-kind="keywords">
+                WebGoat
+            </a>
+        
+            <a href="/keywords/web%E5%AE%89%E5%85%A8/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Web安全" data-taxonomy-kind="keywords">
+                Web安全
+            </a>
+        
+            <a href="/keywords/win7/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Win7" data-taxonomy-kind="keywords">
+                Win7
+            </a>
+        
+            <a href="/keywords/windowsl/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Windowsl" data-taxonomy-kind="keywords">
+                Windowsl
+            </a>
+        
+            <a href="/keywords/%E4%B8%89%E6%96%B9/" class="taxonomy-chip keyword-chip" data-taxonomy-term="三方" data-taxonomy-kind="keywords">
+                三方
+            </a>
+        
+            <a href="/keywords/%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1/" class="taxonomy-chip keyword-chip" data-taxonomy-term="交叉熵损失" data-taxonomy-kind="keywords">
+                交叉熵损失
+            </a>
+        
+            <a href="/keywords/%E5%86%85%E7%BD%91/" class="taxonomy-chip keyword-chip" data-taxonomy-term="内网" data-taxonomy-kind="keywords">
+                内网
+            </a>
+        
+            <a href="/keywords/%E5%86%B3%E7%AD%96%E6%A0%91/" class="taxonomy-chip keyword-chip" data-taxonomy-term="决策树" data-taxonomy-kind="keywords">
+                决策树
+            </a>
+        
+            <a href="/keywords/%E5%8D%B7%E7%A7%AF%E5%B1%82/" class="taxonomy-chip keyword-chip" data-taxonomy-term="卷积层" data-taxonomy-kind="keywords">
+                卷积层
+            </a>
+        
+            <a href="/keywords/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="taxonomy-chip keyword-chip" data-taxonomy-term="卷积神经网络" data-taxonomy-kind="keywords">
+                卷积神经网络
+            </a>
+        
+            <a href="/keywords/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" class="taxonomy-chip keyword-chip" data-taxonomy-term="反向传播" data-taxonomy-kind="keywords">
+                反向传播
+            </a>
+        
+            <a href="/keywords/%E5%8F%A3%E4%BB%A4%E8%AE%A4%E8%AF%81/" class="taxonomy-chip keyword-chip" data-taxonomy-term="口令认证" data-taxonomy-kind="keywords">
+                口令认证
+            </a>
+        
+            <a href="/keywords/%E5%90%8E%E9%87%8F%E5%AD%90%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="taxonomy-chip keyword-chip" data-taxonomy-term="后量子加密算法" data-taxonomy-kind="keywords">
+                后量子加密算法
+            </a>
+        
+            <a href="/keywords/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8D%87%E7%BB%B4/" class="taxonomy-chip keyword-chip" data-taxonomy-term="多项式升维" data-taxonomy-kind="keywords">
+                多项式升维
+            </a>
+        
+            <a href="/keywords/%E5%AE%B9%E5%99%A8/" class="taxonomy-chip keyword-chip" data-taxonomy-term="容器" data-taxonomy-kind="keywords">
+                容器
+            </a>
+        
+            <a href="/keywords/%E5%AF%86%E5%BA%A6%E8%81%9A%E7%B1%BB/" class="taxonomy-chip keyword-chip" data-taxonomy-term="密度聚类" data-taxonomy-kind="keywords">
+                密度聚类
+            </a>
+        
+            <a href="/keywords/%E5%AF%86%E7%A0%81%E5%AD%A6/" class="taxonomy-chip keyword-chip" data-taxonomy-term="密码学" data-taxonomy-kind="keywords">
+                密码学
+            </a>
+        
+            <a href="/keywords/%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2/" class="taxonomy-chip keyword-chip" data-taxonomy-term="密钥交换" data-taxonomy-kind="keywords">
+                密钥交换
+            </a>
+        
+            <a href="/keywords/%E5%AF%86%E9%92%A5%E5%8D%8F%E5%95%86/" class="taxonomy-chip keyword-chip" data-taxonomy-term="密钥协商" data-taxonomy-kind="keywords">
+                密钥协商
+            </a>
+        
+            <a href="/keywords/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/" class="taxonomy-chip keyword-chip" data-taxonomy-term="层次聚类" data-taxonomy-kind="keywords">
+                层次聚类
+            </a>
+        
+            <a href="/keywords/%E5%BD%92%E4%B8%80%E5%8C%96/" class="taxonomy-chip keyword-chip" data-taxonomy-term="归一化" data-taxonomy-kind="keywords">
+                归一化
+            </a>
+        
+            <a href="/keywords/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="taxonomy-chip keyword-chip" data-taxonomy-term="循环神经网络" data-taxonomy-kind="keywords">
+                循环神经网络
+            </a>
+        
+            <a href="/keywords/%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="taxonomy-chip keyword-chip" data-taxonomy-term="感知机" data-taxonomy-kind="keywords">
+                感知机
+            </a>
+        
+            <a href="/keywords/%E6%8C%81%E4%B9%85%E5%8C%96%E5%90%8E%E9%97%A8/" class="taxonomy-chip keyword-chip" data-taxonomy-term="持久化后门" data-taxonomy-kind="keywords">
+                持久化后门
+            </a>
+        
+            <a href="/keywords/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" class="taxonomy-chip keyword-chip" data-taxonomy-term="支持向量机" data-taxonomy-kind="keywords">
+                支持向量机
+            </a>
+        
+            <a href="/keywords/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E7%B3%BB%E7%BB%9F/" class="taxonomy-chip keyword-chip" data-taxonomy-term="文件共享系统" data-taxonomy-kind="keywords">
+                文件共享系统
+            </a>
+        
+            <a href="/keywords/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="taxonomy-chip keyword-chip" data-taxonomy-term="时间复杂度" data-taxonomy-kind="keywords">
+                时间复杂度
+            </a>
+        
+            <a href="/keywords/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86/" class="taxonomy-chip keyword-chip" data-taxonomy-term="格基加密" data-taxonomy-kind="keywords">
+                格基加密
+            </a>
+        
+            <a href="/keywords/%E6%AD%A3%E5%88%99%E5%8C%96/" class="taxonomy-chip keyword-chip" data-taxonomy-term="正则化" data-taxonomy-kind="keywords">
+                正则化
+            </a>
+        
+            <a href="/keywords/%E6%B1%A0%E5%8C%96%E5%B1%82/" class="taxonomy-chip keyword-chip" data-taxonomy-term="池化层" data-taxonomy-kind="keywords">
+                池化层
+            </a>
+        
+            <a href="/keywords/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="taxonomy-chip keyword-chip" data-taxonomy-term="渗透测试" data-taxonomy-kind="keywords">
+                渗透测试
+            </a>
+        
+            <a href="/keywords/%E6%BC%8F%E6%B4%9E/" class="taxonomy-chip keyword-chip" data-taxonomy-term="漏洞" data-taxonomy-kind="keywords">
+                漏洞
+            </a>
+        
+            <a href="/keywords/%E8%81%9A%E7%B1%BB/" class="taxonomy-chip keyword-chip" data-taxonomy-term="聚类" data-taxonomy-kind="keywords">
+                聚类
+            </a>
+        
+            <a href="/keywords/%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE/" class="taxonomy-chip keyword-chip" data-taxonomy-term="袋外数据" data-taxonomy-kind="keywords">
+                袋外数据
+            </a>
+        
+            <a href="/keywords/%E8%AF%8D%E5%B5%8C%E5%85%A5%E5%B1%82/" class="taxonomy-chip keyword-chip" data-taxonomy-term="词嵌入层" data-taxonomy-kind="keywords">
+                词嵌入层
+            </a>
+        
+            <a href="/keywords/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/" class="taxonomy-chip keyword-chip" data-taxonomy-term="逻辑回归" data-taxonomy-kind="keywords">
+                逻辑回归
+            </a>
+        
+            <a href="/keywords/%E9%99%8D%E7%BB%B4/" class="taxonomy-chip keyword-chip" data-taxonomy-term="降维" data-taxonomy-kind="keywords">
+                降维
+            </a>
+        
+            <a href="/keywords/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" class="taxonomy-chip keyword-chip" data-taxonomy-term="随机森林" data-taxonomy-kind="keywords">
+                随机森林
+            </a>
+        
+            <a href="/keywords/%E9%9D%B6%E5%9C%BA/" class="taxonomy-chip keyword-chip" data-taxonomy-term="靶场" data-taxonomy-kind="keywords">
+                靶场
+            </a>
+        
+            <a href="/keywords/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/" class="taxonomy-chip keyword-chip" data-taxonomy-term="高斯混合模型" data-taxonomy-kind="keywords">
+                高斯混合模型
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+
+            <main class="main full-width">
+    <header>
+        <h3 class="section-title">
+            
+                
+                
+                
+                
+                
+                <span data-i18n-key="widget.keywords">Keywords</span>
+            
+        </h3>
+
+        <div class="section-card">
+            <div class="section-details">
+                <h3 class="section-count" data-i18n-count-key="list.page" data-i18n-count="1">1 个页面</h3>
+                
+                
+                
+                
+                
+                
+                <h1 class="section-term"  >密钥协商</h1>
+                
+            </div>
+        </div>
+    </header>
+    
+    <section class="article-list--compact">
+        
+            <article>
+    <a href="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/">
+        <div class="article-details">
+            <h2 class="article-title">
+                
+                    <span class="article-series-prefix" data-i18n-term="密码学协议">密码学协议</span>
+                【格基加密】SL3PAKE协议</h2>
+            <footer class="article-time">
+                <time datetime='2026-01-07T13:01:39&#43;08:00'>Jan 07, 2026</time>
+            </footer>
+        </div>
+            <div class="article-image">
+                <img src="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover_hu_599fd0d5c401a3a4.png" 
+                        width="120"
+                        height="120" 
+                        alt="【格基加密】SL3PAKE协议"
+                        loading="lazy">
+                
+            </div>
+        
+    </a>
+</article>
+
+        
+    </section>
+<footer class="site-footer">
+    <section class="copyright">
+        &copy;
+        
+            2025 -
+        
+        2026 Leuco · leucoyuu@163.com
+    </section>
+    
+    <section class="powerby">
+        <span data-i18n-key="footer.motto">持续记录技术、实验与复盘。</span><br/>
+        <span data-i18n-key="footer.engine">由 Hugo 驱动</span> · <span data-i18n-key="footer.theme">主题 Stack</span>
+    </section>
+</footer>
+
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.87e2592de8536ee90b02b1e2668bf69406dde2f7d8601d810f820b85bc270b0c.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<button id="back-to-top" data-i18n-title="backToTop" aria-label="返回顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async function() {
+        const uiLanguageKey = "LeucoUILanguage";
+        let languageDictionary = {};
+        let currentLanguage = localStorage.getItem(uiLanguageKey) || "cn";
+
+        const backToTopBtn = document.getElementById("back-to-top");
+        if (backToTopBtn) {
+            window.addEventListener("scroll", function() {
+                backToTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+            });
+            backToTopBtn.addEventListener("click", function() {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+
+        function hashText(text) {
+            return Array.from(text.trim().toLowerCase()).reduce((hash, char) => {
+                return Math.imul(31, hash) + char.charCodeAt(0) | 0;
+            }, 0);
+        }
+
+        function text(key) {
+            return languageDictionary[key]?.[currentLanguage] || languageDictionary[key]?.cn || "";
+        }
+
+        function termText(term) {
+            return text("term." + term);
+        }
+
+        async function loadLanguageDictionary() {
+            try {
+                const response = await fetch("/language.json", { cache: "no-store" });
+                if (response.ok) languageDictionary = await response.json();
+            } catch (error) {
+                languageDictionary = {};
+            }
+        }
+
+        function assignTaxonomyColors() {
+            document.querySelectorAll(".taxonomy-chip").forEach((chip) => {
+                const term = chip.dataset.taxonomyTerm || chip.textContent || "";
+                const kind = chip.dataset.taxonomyKind || (chip.classList.contains("keyword-chip") ? "keywords" : "categories");
+                const seed = Math.abs(hashText(term));
+                const hue = Math.round((seed * 137.508) % 360);
+
+                let saturation = 30 + (seed % 8);
+                let lightness = 74 + (seed % 6);
+                if (kind === "keywords") {
+                    saturation = 22 + (seed % 7);
+                    lightness = 84 + (seed % 5);
+                } else if (kind === "series") {
+                    saturation = 28 + (seed % 7);
+                    lightness = 78 + (seed % 5);
+                }
+
+                chip.style.setProperty("--chip-bg", `hsl(${hue}, ${saturation}%, ${lightness}%)`);
+                chip.style.setProperty("--chip-color", `hsl(${hue}, ${Math.max(26, saturation + 6)}%, 28%)`);
+                chip.style.setProperty("--chip-border", `hsl(${hue}, ${Math.max(18, saturation - 4)}%, ${Math.max(64, lightness - 10)}%)`);
+            });
+        }
+
+        function applyTextTranslations() {
+            document.documentElement.dataset.uiLanguage = currentLanguage;
+            document.querySelectorAll("[data-i18n-key]").forEach((element) => {
+                const translated = text(element.dataset.i18nKey);
+                if (translated) element.textContent = translated;
+            });
+            document.querySelectorAll("[data-i18n-count-key]").forEach((element) => {
+                const translated = text(element.dataset.i18nCountKey);
+                if (translated) element.textContent = translated.replace("#COUNT", element.dataset.i18nCount || "0");
+            });
+            document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+                const translated = text(element.dataset.i18nPlaceholder);
+                if (translated) element.setAttribute("placeholder", translated);
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+                const translated = text(element.dataset.i18nTitle);
+                if (translated) {
+                    element.setAttribute("title", translated);
+                    element.setAttribute("aria-label", translated);
+                }
+            });
+            document.querySelectorAll("[data-i18n-term]").forEach((element) => {
+                const translated = termText(element.dataset.i18nTerm);
+                if (translated) element.textContent = translated;
+            });
+            if (text("search.resultTitle")) {
+                window.searchResultTitleTemplate = text("search.resultTitle");
+            }
+        }
+
+        function bindLanguageSwitch() {
+            const languageSelect = document.getElementById("language-mode-select");
+            if (!languageSelect) return;
+            languageSelect.value = currentLanguage;
+            languageSelect.addEventListener("change", () => {
+                currentLanguage = languageSelect.value;
+                localStorage.setItem(uiLanguageKey, currentLanguage);
+                applyTextTranslations();
+                refreshDynamicLabels();
+            });
+        }
+
+        function bindSidebarToggle(side) {
+            const key = "LeucoSidebarCollapsed:" + side;
+            const className = side + "-sidebar-collapsed";
+            const button = document.querySelector(`[data-sidebar-toggle="${side}"]`);
+            if (!button) return;
+
+            const apply = (collapsed, persist = true) => {
+                document.body.classList.toggle(className, collapsed);
+                button.setAttribute("aria-expanded", String(!collapsed));
+                const labelKey = side === "left"
+                    ? (collapsed ? "sidebar.expandLeft" : "sidebar.collapseLeft")
+                    : (collapsed ? "sidebar.expandRight" : "sidebar.collapseRight");
+                const label = text(labelKey) || (collapsed ? "展开侧栏" : "收起侧栏");
+                button.setAttribute("aria-label", label);
+                button.setAttribute("title", label);
+                if (persist) localStorage.setItem(key, collapsed ? "1" : "0");
+            };
+
+            const storedValue = localStorage.getItem(key);
+            const collapseByDefault = storedValue === null && side === "right" && window.matchMedia("(max-width: 767px)").matches;
+            apply(storedValue === "1" || collapseByDefault, false);
+            button.addEventListener("click", () => apply(!document.body.classList.contains(className)));
+        }
+
+        function bindImageToggle() {
+            const imageToggle = document.getElementById("article-list-image-toggle");
+            const imageKey = "LeucoHideArticleListImages";
+
+            function applyImagePreference(hidden) {
+                document.body.classList.toggle("article-list-images-hidden", hidden);
+                if (!imageToggle) return;
+                const label = imageToggle.querySelector("span");
+                if (label) {
+                    const labelKey = hidden ? label.dataset.hideKey : label.dataset.showKey;
+                    label.textContent = text(labelKey) || (hidden ? label.dataset.hideText : label.dataset.showText);
+                }
+                imageToggle.setAttribute("aria-pressed", String(hidden));
+                localStorage.setItem(imageKey, hidden ? "1" : "0");
+            }
+
+            applyImagePreference(localStorage.getItem(imageKey) === "1");
+            if (imageToggle) {
+                imageToggle.addEventListener("click", () => applyImagePreference(!document.body.classList.contains("article-list-images-hidden")));
+                imageToggle.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        imageToggle.click();
+                    }
+                });
+            }
+        }
+
+        function bindHeadingFold() {
+            function setSectionCollapsed(section, collapsed) {
+                if (collapsed) {
+                    section.style.maxHeight = section.scrollHeight + "px";
+                    requestAnimationFrame(() => {
+                        section.classList.add("is-collapsed");
+                        section.style.maxHeight = "0px";
+                    });
+                } else {
+                    section.classList.remove("is-collapsed");
+                    section.style.maxHeight = section.scrollHeight + "px";
+                    window.setTimeout(() => {
+                        if (!section.classList.contains("is-collapsed")) section.style.maxHeight = "";
+                    }, 260);
+                }
+            }
+
+            const articleContent = document.querySelector(".article-content");
+            if (!articleContent) return;
+
+            const headings = Array.from(articleContent.querySelectorAll("h2, h3, h4, h5, h6"))
+                .filter((heading) => !heading.closest(".custom-toc") && !heading.closest("#TableOfContents"));
+
+            headings.forEach((heading, index) => {
+                if (heading.dataset.foldReady === "1") return;
+                heading.dataset.foldReady = "1";
+                heading.classList.add("collapsible-heading");
+                heading.setAttribute("tabindex", "0");
+
+                const level = Number(heading.tagName.slice(1));
+                const body = document.createElement("div");
+                body.className = "heading-section-body";
+                body.dataset.headingLevel = String(level);
+                body.id = `heading-section-${index}`;
+                heading.after(body);
+
+                let node = body.nextSibling;
+                while (node) {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        const element = node;
+                        if (/^H[2-6]$/.test(element.tagName) && Number(element.tagName.slice(1)) <= level) break;
+                    }
+                    const next = node.nextSibling;
+                    body.appendChild(node);
+                    node = next;
+                }
+
+                if (!body.childNodes.length) return;
+
+                const toggle = document.createElement("button");
+                toggle.className = "heading-fold-toggle";
+                toggle.type = "button";
+                toggle.setAttribute("aria-expanded", "true");
+                toggle.setAttribute("aria-controls", body.id);
+                toggle.setAttribute("aria-label", text("heading.collapse") || "收起本节");
+                heading.prepend(toggle);
+
+                const flip = () => {
+                    const collapsed = !body.classList.contains("is-collapsed");
+                    heading.classList.toggle("is-collapsed", collapsed);
+                    toggle.setAttribute("aria-expanded", String(!collapsed));
+                    toggle.setAttribute("aria-label", text(collapsed ? "heading.expand" : "heading.collapse") || (collapsed ? "展开本节" : "收起本节"));
+                    setSectionCollapsed(body, collapsed);
+                };
+
+                toggle.addEventListener("click", (event) => {
+                    event.stopPropagation();
+                    flip();
+                });
+                heading.addEventListener("click", (event) => {
+                    if (event.target.closest("a")) return;
+                    flip();
+                });
+                heading.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        flip();
+                    }
+                });
+            });
+        }
+
+        function bindArticleLocalSearch() {
+            const searchBox = document.querySelector(".article-local-search");
+            const articleContent = document.querySelector(".article-content");
+            if (!searchBox || !articleContent) return;
+
+            const input = searchBox.querySelector("#article-local-search-input");
+            const prevButton = searchBox.querySelector("[data-article-search-prev]");
+            const nextButton = searchBox.querySelector("[data-article-search-next]");
+            const clearButton = searchBox.querySelector("[data-article-search-clear]");
+            const count = searchBox.querySelector("[data-article-search-count]");
+            let marks = [];
+            let activeIndex = -1;
+
+            function escapeRegExp(value) {
+                return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            }
+
+            function buildRegex(query) {
+                if (!query.trim()) return null;
+                const regexMatch = query.match(/^\/(.+)\/([dgimsuvy]*)$/);
+                if (regexMatch) {
+                    const flags = regexMatch[2].includes("g") ? regexMatch[2] : regexMatch[2] + "g";
+                    return new RegExp(regexMatch[1], flags);
+                }
+                return new RegExp(escapeRegExp(query), "gi");
+            }
+
+            function clearHighlights() {
+                marks.forEach((mark) => {
+                    const parent = mark.parentNode;
+                    if (!parent) return;
+                    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                    parent.normalize();
+                });
+                marks = [];
+                activeIndex = -1;
+                searchBox.classList.remove("has-error");
+                updateCount();
+            }
+
+            function updateCount() {
+                if (!count) return;
+                count.textContent = marks.length ? `${activeIndex + 1}/${marks.length}` : "0/0";
+            }
+
+            function activate(index) {
+                if (!marks.length) {
+                    activeIndex = -1;
+                    updateCount();
+                    return;
+                }
+                marks.forEach((mark) => mark.classList.remove("is-active"));
+                activeIndex = (index + marks.length) % marks.length;
+                marks[activeIndex].classList.add("is-active");
+                marks[activeIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+                updateCount();
+            }
+
+            function runSearch() {
+                clearHighlights();
+                const query = input.value.trim();
+                if (!query) return;
+
+                let regex;
+                try {
+                    regex = buildRegex(query);
+                } catch (error) {
+                    searchBox.classList.add("has-error");
+                    return;
+                }
+                if (!regex) return;
+
+                const walker = document.createTreeWalker(articleContent, NodeFilter.SHOW_TEXT, {
+                    acceptNode(node) {
+                        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                        const parent = node.parentElement;
+                        if (!parent) return NodeFilter.FILTER_REJECT;
+                        if (parent.closest("script, style, .article-local-search, .heading-fold-toggle")) return NodeFilter.FILTER_REJECT;
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                });
+
+                const textNodes = [];
+                while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+                textNodes.forEach((node) => {
+                    const value = node.nodeValue;
+                    const localMatches = [];
+                    regex.lastIndex = 0;
+                    let match;
+                    while ((match = regex.exec(value)) !== null) {
+                        if (match[0] === "") {
+                            regex.lastIndex++;
+                            continue;
+                        }
+                        localMatches.push({ start: match.index, end: match.index + match[0].length });
+                    }
+                    if (!localMatches.length) return;
+
+                    const fragment = document.createDocumentFragment();
+                    let cursor = 0;
+                    localMatches.forEach(({ start, end }) => {
+                        if (start > cursor) fragment.appendChild(document.createTextNode(value.slice(cursor, start)));
+                        const mark = document.createElement("mark");
+                        mark.className = "article-search-mark";
+                        mark.textContent = value.slice(start, end);
+                        fragment.appendChild(mark);
+                        marks.push(mark);
+                        cursor = end;
+                    });
+                    if (cursor < value.length) fragment.appendChild(document.createTextNode(value.slice(cursor)));
+                    node.parentNode.replaceChild(fragment, node);
+                });
+
+                if (marks.length) activate(0);
+                updateCount();
+            }
+
+            input.addEventListener("input", runSearch);
+            input.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    activate(activeIndex + 1);
+                }
+            });
+            prevButton?.addEventListener("click", () => activate(activeIndex - 1));
+            nextButton?.addEventListener("click", () => activate(activeIndex + 1));
+            clearButton?.addEventListener("click", () => {
+                input.value = "";
+                clearHighlights();
+                input.focus();
+            });
+            updateCount();
+        }
+
+        function refreshDynamicLabels() {
+            ["left", "right"].forEach((side) => {
+                const button = document.querySelector(`[data-sidebar-toggle="${side}"]`);
+                if (!button) return;
+                const collapsed = document.body.classList.contains(side + "-sidebar-collapsed");
+                const labelKey = side === "left"
+                    ? (collapsed ? "sidebar.expandLeft" : "sidebar.collapseLeft")
+                    : (collapsed ? "sidebar.expandRight" : "sidebar.collapseRight");
+                const label = text(labelKey);
+                if (label) {
+                    button.setAttribute("aria-label", label);
+                    button.setAttribute("title", label);
+                }
+            });
+            document.querySelectorAll(".heading-fold-toggle").forEach((toggle) => {
+                const collapsed = toggle.getAttribute("aria-expanded") === "false";
+                const label = text(collapsed ? "heading.expand" : "heading.collapse");
+                if (label) toggle.setAttribute("aria-label", label);
+            });
+        }
+
+        await loadLanguageDictionary();
+        bindSidebarToggle("left");
+        bindSidebarToggle("right");
+        bindImageToggle();
+        bindLanguageSwitch();
+        bindHeadingFold();
+        bindArticleLocalSearch();
+        assignTaxonomyColors();
+        applyTextTranslations();
+        refreshDynamicLabels();
+    });
+</script>
+
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.13.0/dist/mermaid.esm.min.mjs';
+    document.addEventListener('DOMContentLoaded', () => {
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+    });
+</script>
+
+    </body>
+</html>

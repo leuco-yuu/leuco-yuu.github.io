@@ -1,0 +1,397 @@
+{
+  "blog": {
+    "cn": "博客",
+    "tw": "部落格",
+    "en": "Blog"
+  },
+  "toggleMenu": {
+    "cn": "切换菜单",
+    "tw": "切換選單",
+    "en": "Toggle menu"
+  },
+  "darkMode": {
+    "cn": "暗色模式",
+    "tw": "深色模式",
+    "en": "Dark mode"
+  },
+  "language.label": {
+    "cn": "语言",
+    "tw": "語言",
+    "en": "Language"
+  },
+  "nav.home": {
+    "cn": "主页",
+    "tw": "首頁",
+    "en": "Home"
+  },
+  "nav.about": {
+    "cn": "关于",
+    "tw": "關於",
+    "en": "About"
+  },
+  "nav.archives": {
+    "cn": "博文",
+    "tw": "文章",
+    "en": "Posts"
+  },
+  "nav.search": {
+    "cn": "搜索",
+    "tw": "搜尋",
+    "en": "Search"
+  },
+  "widget.search": {
+    "cn": "搜索",
+    "tw": "搜尋",
+    "en": "Search"
+  },
+  "widget.archives": {
+    "cn": "分类归档",
+    "tw": "分類歸檔",
+    "en": "Category Archive"
+  },
+  "widget.categories": {
+    "cn": "分类",
+    "tw": "分類",
+    "en": "Categories"
+  },
+  "widget.series": {
+    "cn": "系列",
+    "tw": "系列",
+    "en": "Series"
+  },
+  "widget.keywords": {
+    "cn": "关键词",
+    "tw": "關鍵詞",
+    "en": "Keywords"
+  },
+  "widget.more": {
+    "cn": "更多",
+    "tw": "更多",
+    "en": "More"
+  },
+  "list.page": {
+    "cn": "#COUNT 个页面",
+    "tw": "#COUNT 個頁面",
+    "en": "#COUNT pages"
+  },
+  "list.section": {
+    "cn": "章节",
+    "tw": "章節",
+    "en": "Section"
+  },
+  "list.subsection": {
+    "cn": "子章节",
+    "tw": "子章節",
+    "en": "Subsections"
+  },
+  "search.title": {
+    "cn": "搜索",
+    "tw": "搜尋",
+    "en": "Search"
+  },
+  "search.placeholder": {
+    "cn": "输入关键词...",
+    "tw": "輸入關鍵詞...",
+    "en": "Type keywords..."
+  },
+  "search.resultTitle": {
+    "cn": "#PAGES_COUNT 个结果（用时 #TIME_SECONDS 秒）",
+    "tw": "#PAGES_COUNT 個結果（用時 #TIME_SECONDS 秒）",
+    "en": "#PAGES_COUNT results (#TIME_SECONDS seconds)"
+  },
+  "article.tableOfContents": {
+    "cn": "目录",
+    "tw": "目錄",
+    "en": "Contents"
+  },
+  "article.relatedContent": {
+    "cn": "相关文章",
+    "tw": "相關文章",
+    "en": "Related posts"
+  },
+  "article.lastUpdatedOn": {
+    "cn": "最后更新于",
+    "tw": "最後更新於",
+    "en": "Last updated on"
+  },
+  "article.readingTime": {
+    "cn": "阅读时长",
+    "tw": "閱讀時長",
+    "en": "Reading time"
+  },
+  "article.localSearch": {
+    "cn": "正文搜索",
+    "tw": "正文搜尋",
+    "en": "Find in article"
+  },
+  "article.localSearchPlaceholder": {
+    "cn": "文本或 /正则/gi",
+    "tw": "文字或 /正則/gi",
+    "en": "Text or /regex/gi"
+  },
+  "article.localSearchPrev": {
+    "cn": "上一处",
+    "tw": "上一處",
+    "en": "Previous match"
+  },
+  "article.localSearchNext": {
+    "cn": "下一处",
+    "tw": "下一處",
+    "en": "Next match"
+  },
+  "article.localSearchClear": {
+    "cn": "清除搜索",
+    "tw": "清除搜尋",
+    "en": "Clear search"
+  },
+  "image.hide": {
+    "cn": "隐藏图片",
+    "tw": "隱藏圖片",
+    "en": "Hide images"
+  },
+  "image.show": {
+    "cn": "展示图片",
+    "tw": "顯示圖片",
+    "en": "Show images"
+  },
+  "sidebar.collapseLeft": {
+    "cn": "收起左侧栏",
+    "tw": "收起左側欄",
+    "en": "Collapse left sidebar"
+  },
+  "sidebar.expandLeft": {
+    "cn": "展开左侧栏",
+    "tw": "展開左側欄",
+    "en": "Expand left sidebar"
+  },
+  "sidebar.collapseRight": {
+    "cn": "收起右侧栏",
+    "tw": "收起右側欄",
+    "en": "Collapse right sidebar"
+  },
+  "sidebar.expandRight": {
+    "cn": "展开右侧栏",
+    "tw": "展開右側欄",
+    "en": "Expand right sidebar"
+  },
+  "heading.collapse": {
+    "cn": "收起本节",
+    "tw": "收起本節",
+    "en": "Collapse section"
+  },
+  "heading.expand": {
+    "cn": "展开本节",
+    "tw": "展開本節",
+    "en": "Expand section"
+  },
+  "backToTop": {
+    "cn": "返回顶部",
+    "tw": "返回頂部",
+    "en": "Back to top"
+  },
+  "notFound.title": {
+    "cn": "404 错误",
+    "tw": "404 錯誤",
+    "en": "Not found"
+  },
+  "notFound.subtitle": {
+    "cn": "页面不存在",
+    "tw": "頁面不存在",
+    "en": "This page does not exist"
+  },
+  "footer.motto": {
+    "cn": "持续记录技术、实验与复盘。",
+    "tw": "持續記錄技術、實驗與復盤。",
+    "en": "Technical notes, experiments, and reviews."
+  },
+  "footer.engine": {
+    "cn": "由 Hugo 驱动",
+    "tw": "由 Hugo 驅動",
+    "en": "Powered by Hugo"
+  },
+  "footer.theme": {
+    "cn": "主题 Stack",
+    "tw": "主題 Stack",
+    "en": "Theme Stack"
+  },
+  "about.title": {
+    "cn": "关于",
+    "tw": "關於",
+    "en": "About"
+  },
+  "about.description": {
+    "cn": "Leuco 的技术博客说明、内容地图与联系方式。",
+    "tw": "Leuco 的技術部落格說明、內容地圖與聯絡方式。",
+    "en": "A map of Leuco's technical blog, topics, and contact channels."
+  },
+  "about.intro.1": {
+    "cn": "这里是 Leuco 的个人技术博客，主要记录网络空间安全、机器学习、系统工程与密码学方向的学习、实验和复盘。",
+    "tw": "這裡是 Leuco 的個人技術部落格，主要記錄網路空間安全、機器學習、系統工程與密碼學方向的學習、實驗和復盤。",
+    "en": "This is Leuco's personal technical blog, focused on cybersecurity, machine learning, systems engineering, cryptography, experiments, and review notes."
+  },
+  "about.intro.2": {
+    "cn": "我希望它更像一份持续生长的技术笔记，而不是只按时间堆叠的文章列表；每篇内容都会尽量保留推导过程、实验环境、踩坑记录和可复现步骤。",
+    "tw": "我希望它更像一份持續生長的技術筆記，而不是只按時間堆疊的文章列表；每篇內容都會盡量保留推導過程、實驗環境、踩坑記錄和可重現步驟。",
+    "en": "I want it to feel like a living notebook rather than a date-only archive, so posts try to preserve reasoning, environments, pitfalls, and reproducible steps."
+  },
+  "about.heading.topics": {
+    "cn": "内容方向",
+    "tw": "內容方向",
+    "en": "Topics"
+  },
+  "about.heading.security": {
+    "cn": "网络空间安全",
+    "tw": "網路空間安全",
+    "en": "Cybersecurity"
+  },
+  "about.security": {
+    "cn": "围绕渗透测试基础、Web 安全、靶场搭建、Kali 工具链和攻防实践展开，文章会尽量区分原理、环境、命令、结果与复盘。",
+    "tw": "圍繞滲透測試基礎、Web 安全、靶場搭建、Kali 工具鏈和攻防實踐展開，文章會盡量區分原理、環境、命令、結果與復盤。",
+    "en": "Notes cover penetration testing basics, web security, lab setup, Kali tooling, and offensive-defensive practice, with clear separation between principles, environment, commands, results, and review."
+  },
+  "about.heading.ml": {
+    "cn": "机器学习",
+    "tw": "機器學習",
+    "en": "Machine Learning"
+  },
+  "about.ml": {
+    "cn": "从线性模型、分类、聚类、集成学习到神经网络，重点整理数学直觉、关键公式、代码实验和模型边界。",
+    "tw": "從線性模型、分類、聚類、集成學習到神經網路，重點整理數學直覺、關鍵公式、程式實驗和模型邊界。",
+    "en": "From linear models, classification, clustering, ensemble learning, to neural networks, the focus is on intuition, formulas, code experiments, and model boundaries."
+  },
+  "about.heading.systems": {
+    "cn": "系统与工程",
+    "tw": "系統與工程",
+    "en": "Systems and Engineering"
+  },
+  "about.systems": {
+    "cn": "记录 Docker、Linux、开发环境、自动化脚本和工程化实践，偏向“为什么这样设计”和“出了问题怎么定位”。",
+    "tw": "記錄 Docker、Linux、開發環境、自動化腳本和工程化實踐，偏向「為什麼這樣設計」和「出了問題怎麼定位」。",
+    "en": "Systems notes cover Docker, Linux, development environments, automation scripts, and engineering practice, with emphasis on design choices and debugging."
+  },
+  "about.heading.crypto": {
+    "cn": "密码学与理论",
+    "tw": "密碼學與理論",
+    "en": "Cryptography and Theory"
+  },
+  "about.crypto": {
+    "cn": "包括后量子密码、格基协议、复杂性理论等内容，更重视定义、假设、证明结构和协议流程。",
+    "tw": "包括後量子密碼、格基協議、複雜性理論等內容，更重視定義、假設、證明結構和協議流程。",
+    "en": "Cryptography and theory notes include post-quantum cryptography, lattice-based protocols, and complexity theory, with attention to definitions, assumptions, proof structure, and protocol flow."
+  },
+  "about.heading.reading": {
+    "cn": "阅读建议",
+    "tw": "閱讀建議",
+    "en": "Reading Guide"
+  },
+  "about.reading.1": {
+    "cn": "如果你是第一次来，可以从归档页按分类浏览，也可以从右侧分类归档、系列或关键词进入专题。",
+    "tw": "如果你是第一次來，可以從歸檔頁按分類瀏覽，也可以從右側分類歸檔、系列或關鍵詞進入專題。",
+    "en": "If this is your first visit, start from the archive page, the category archive, series list, or keyword cloud."
+  },
+  "about.reading.2": {
+    "cn": "长文通常会带目录，适合按章节跳读；实验类文章建议先看环境约束，再看命令步骤。",
+    "tw": "長文通常會帶目錄，適合按章節跳讀；實驗類文章建議先看環境約束，再看命令步驟。",
+    "en": "Long posts usually include a table of contents. For experiments, read the environment constraints before following commands."
+  },
+  "about.heading.boundary": {
+    "cn": "边界说明",
+    "tw": "邊界說明",
+    "en": "Boundaries"
+  },
+  "about.boundary.1": {
+    "cn": "安全相关内容仅用于学习、复现和防御研究，所有攻防实验都应在授权环境、靶场或本地隔离环境中进行。",
+    "tw": "安全相關內容僅用於學習、復現和防禦研究，所有攻防實驗都應在授權環境、靶場或本地隔離環境中進行。",
+    "en": "Security content is for learning, reproduction, and defensive research only. Experiments should be done in authorized labs or local isolated environments."
+  },
+  "about.boundary.2": {
+    "cn": "博客里的笔记不追求一次写成最终答案；理解会随实践更新，我也会逐步重构旧文，让它们更像可维护的知识库。",
+    "tw": "部落格裡的筆記不追求一次寫成最終答案；理解會隨實踐更新，我也會逐步重構舊文，讓它們更像可維護的知識庫。",
+    "en": "The notes are not meant to be final on first publication. Understanding changes with practice, and older posts will be refined into a more maintainable knowledge base."
+  },
+  "about.heading.contact": {
+    "cn": "联系方式",
+    "tw": "聯絡方式",
+    "en": "Contact"
+  },
+  "term.Linux基础": {
+    "cn": "Linux基础",
+    "tw": "Linux基礎",
+    "en": "Linux Basics"
+  },
+  "term.学习笔记": {
+    "cn": "学习笔记",
+    "tw": "學習筆記",
+    "en": "Study Notes"
+  },
+  "term.算法理论": {
+    "cn": "算法理论",
+    "tw": "演算法理論",
+    "en": "Algorithm Theory"
+  },
+  "term.网络空间安全": {
+    "cn": "网络空间安全",
+    "tw": "網路空間安全",
+    "en": "Cybersecurity"
+  },
+  "term.工具集": {
+    "cn": "工具集",
+    "tw": "工具集",
+    "en": "Toolbox"
+  },
+  "term.Kali Toolkit": {
+    "cn": "Kali Toolkit",
+    "tw": "Kali Toolkit",
+    "en": "Kali Toolkit"
+  },
+  "term.攻防实践": {
+    "cn": "攻防实践",
+    "tw": "攻防實踐",
+    "en": "Offense and Defense"
+  },
+  "term.后量子时代密码学": {
+    "cn": "后量子时代密码学",
+    "tw": "後量子時代密碼學",
+    "en": "Post-Quantum Cryptography"
+  },
+  "term.机器学习": {
+    "cn": "机器学习",
+    "tw": "機器學習",
+    "en": "Machine Learning"
+  },
+  "term.人工智能": {
+    "cn": "人工智能",
+    "tw": "人工智慧",
+    "en": "AI"
+  },
+  "term.系统工程": {
+    "cn": "系统工程",
+    "tw": "系統工程",
+    "en": "Systems Engineering"
+  },
+  "term.网络安全实践": {
+    "cn": "网络安全实践",
+    "tw": "網路安全實踐",
+    "en": "Security Practice"
+  },
+  "term.安全工具链": {
+    "cn": "安全工具链",
+    "tw": "安全工具鏈",
+    "en": "Security Tooling"
+  },
+  "term.密码学协议": {
+    "cn": "密码学协议",
+    "tw": "密碼學協議",
+    "en": "Cryptographic Protocols"
+  },
+  "term.算法与复杂性": {
+    "cn": "算法与复杂性",
+    "tw": "演算法與複雜性",
+    "en": "Algorithms and Complexity"
+  },
+  "term.Web安全": {
+    "cn": "Web安全",
+    "tw": "Web安全",
+    "en": "Web Security"
+  }
+}
