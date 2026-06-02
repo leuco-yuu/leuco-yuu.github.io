@@ -160,9 +160,9 @@
     "en": "Art view"
   },
   "artView.disable": {
-    "cn": "标准视图",
-    "tw": "標準視圖",
-    "en": "Standard view"
+    "cn": "列表视图",
+    "tw": "列表視圖",
+    "en": "List view"
   },
   "keywords.more": {
     "cn": "展开更多",
