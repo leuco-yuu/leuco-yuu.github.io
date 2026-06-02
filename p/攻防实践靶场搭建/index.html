@@ -1,146 +1,1441 @@
-<!doctype html><html lang=zh_CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="常见的靶场搭建"><meta name=keywords content="Docker,靶场,DVWA,Pikachu,WebGoat,Vulhub"><title>【攻防实践】靶场搭建</title><link rel=canonical href=http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/><link rel=stylesheet href=/scss/style.min.6138f8d9e0ae0ed3ef3a889a3691a584ab985790f8f89d356ea98eb0c8008f37.css><meta property='og:title' content="【攻防实践】靶场搭建"><meta property='og:description' content="常见的靶场搭建"><meta property='og:url' content='http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/'><meta property='og:site_name' content="Leuco's Blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Docker'><meta property='article:tag' content='靶场'><meta property='article:tag' content='DVWA'><meta property='article:tag' content='Pikachu'><meta property='article:tag' content='WebGoat'><meta property='article:tag' content='Vulhub'><meta property='article:published_time' content='2026-01-03T12:33:34+08:00'><meta property='article:modified_time' content='2026-02-13T12:33:34+08:00'><meta name=twitter:title content="【攻防实践】靶场搭建"><meta name=twitter:description content="常见的靶场搭建"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky" id=left-sidebar><button class="sidebar-fold-toggle sidebar-fold-toggle--left" type=button data-sidebar-toggle=left data-i18n-title=sidebar.collapseLeft aria-label=收起左侧栏 aria-expanded=true>
-<span></span>
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="常见的靶场搭建">
+<meta name="keywords" content="Docker, 靶场, DVWA, Pikachu, WebGoat, Vulhub"><title>【攻防实践】靶场搭建</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/'>
+
+<link rel="stylesheet" href="/scss/style.min.3f9081d392f66d28909bff01fee451f37a6e2bda3a9a2c2952e8fdba0c74fd39.css"><meta property='og:title' content="【攻防实践】靶场搭建">
+<meta property='og:description' content="常见的靶场搭建">
+<meta property='og:url' content='http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/'>
+<meta property='og:site_name' content='Leuco&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Docker' /><meta property='article:tag' content='靶场' /><meta property='article:tag' content='DVWA' /><meta property='article:tag' content='Pikachu' /><meta property='article:tag' content='WebGoat' /><meta property='article:tag' content='Vulhub' /><meta property='article:published_time' content='2026-01-03T12:33:34&#43;08:00'/><meta property='article:modified_time' content='2026-02-13T12:33:34&#43;08:00'/>
+<meta name="twitter:title" content="【攻防实践】靶场搭建">
+<meta name="twitter:description" content="常见的靶场搭建">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky " id="left-sidebar">
+    <button class="sidebar-fold-toggle sidebar-fold-toggle--left" type="button" data-sidebar-toggle="left" data-i18n-title="sidebar.collapseLeft" aria-label="收起左侧栏" aria-expanded="true">
+        <span></span>
+    </button>
+
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单" data-i18n-title="toggleMenu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f6aa26e80a833272.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Leuco&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/leuco-yuu/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://mail.google.com/mail/u/0/?tf=cm&amp;to=leucoyuu@gmail.com&amp;fs=1'
+                        target="_blank"
+                        title="Gmail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <!-- 信封外框 -->
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+  
+  <!-- 信封内部线条（模拟折叠效果） -->
+  <polyline points="3,5 12,14 21,5" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://wpa.qq.com/msgrd?v=3&amp;uin=1286938728&amp;site=qq&amp;menu=yes/'
+                        target="_blank"
+                        title="QQ"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="m15.9998867 0-.3175962.00373031c-6.8340705.16105657-10.59798873 5.52198001-10.62328209 13.09956699l.00099159.2727027-.86256398 2.1053645c-.34339269.8459887-.59479858 1.4918602-.8236549 2.1249911-.16246446.4494579-.31092035.8862129-.4515632 1.3302912-1.41043336 4.4529342-1.46997142 7.7313526 1.14979123 8.0424546l.19586827.0182568c.69853306.0462522 1.18775172-.1357889 1.69345756-.5695745l.04666502-.0427837.10703497.1859114.16295747.2641667.09000756.1369219-.10203891.0725127c-1.18457469.8599516-1.78515849 2.0422997-.8749963 3.5478041.72014893 1.1919865 1.68579016 1.3851809 4.67654251 1.4059241h1.2781117l.7210113-.0101194c1.4578857-.0287327 2.9764342-.1065736 3.9343697-.2001215l.2555297.0243167c1.1291243.09698 2.8606159.1735357 4.3993902.1859242h1.2781118c2.9907546-.0207471 3.95642-.2139816 4.6768437-1.4064227l.0983227-.1723424c.764361-1.4241985.1648309-2.548721-.9747412-3.3755348l-.1034569-.072941.0912293-.1362605.1629318-.2641511.1068389-.1855884.0466679.0427821c.5516504.4732059 1.0836451.6468525 1.8890001.5513616 2.6200145-.3116105 2.5604594-3.5895097 1.1502083-8.0424822-.136678-.4315245-.2810058-.8567817-.4385987-1.2939849l-.1781698-.4846461c-.0923296-.2464665-.1903348-.5013359-.2976536-.7744519l-.3954267-.9868956-.8290275-2.020683.0009399-.279262c-.038761-7.60576089-3.8169423-12.93053326-10.6187985-13.09291824zm.0001023 2c6.339972.00032813 9.0947051 5.25726658 8.9334981 11.7557738l.8516442 2.0748544c.5606846 1.3708665.9939584 2.4718584 1.3860782 3.7098724 1.2134003 3.8314013.8203049 5.4169539.5209683 5.4525554-.6424867.0761796-2.5006035-2.8842697-2.5006035-2.8842697 0 1.7141775-.8994592 3.9510027-2.8457046 5.5664147l.3377045.1073023c1.0249215.341207 2.6653848 1.0302704 2.2154641 1.7750936-.4078113.675007-6.9962271.4309917-8.8982689.2207732l-.4753503.0452169c-2.33636.195172-8.04423656.3608021-8.42291849-.2659901-.50418989-.8339832 1.61195836-1.5976385 2.55205373-1.8820678-1.94652419-1.615412-2.84615056-3.852456-2.84615056-5.5667428l-.32111727.4924567c-.56063792.838483-1.70355568 2.4482423-2.17943051 2.391813-.29933663-.0355468-.69254342-1.6211541.52102408-5.4525554l.21887662-.6654718c.52220361-1.5311231 1.13363576-2.9515889 2.01884579-5.1193097-.17029299-6.39290578 2.5220086-11.75539097 8.93338651-11.7557191z" fill="currentColor" fill-rule="nonzero"/></g></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span data-i18n-key="nav.home">主页</span>
+            </a>
+        </li>
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span data-i18n-key="nav.about">关于</span>
+            </a>
+        </li>
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span data-i18n-key="nav.archives">博文</span>
+            </a>
+        </li>
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span data-i18n-key="nav.search">搜索</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                <li id="language-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <label for="language-mode-select" data-i18n-key="language.label">语言</label>
+                    <select id="language-mode-select" name="language-mode" title="语言" data-i18n-title="language.label" aria-label="语言">
+                        <option value="cn">简体中文</option>
+                        <option value="tw">繁體中文</option>
+                        <option value="en">English</option>
+                    </select>
+                </li>
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span data-i18n-key="darkMode">暗色模式</span>
+                    </li>
+                
+
+                <li id="article-list-image-toggle" role="button" tabindex="0" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span data-i18n-key="image.hide" data-show-key="image.hide" data-hide-key="image.show" data-show-text="隐藏图片" data-hide-text="展示图片">隐藏图片</span>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky" id="right-sidebar">
+        <button class="sidebar-fold-toggle sidebar-fold-toggle--right" type="button" data-sidebar-toggle="right" data-i18n-title="sidebar.collapseRight" aria-label="收起右侧栏" aria-expanded="true">
+            <span></span>
+        </button>
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title" data-i18n-key="article.tableOfContents">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-环境与-docker">〇 环境与 Docker</a></li>
+    <li><a href="#dvwadamn-vulnerable-web-app">DVWA（Damn Vulnerable Web App）</a></li>
+    <li><a href="#pikachu皮卡丘">Pikachu（皮卡丘）</a></li>
+    <li><a href="#webgoatowasp-官方靶场">WebGoat（OWASP 官方靶场）</a></li>
+    <li><a href="#vulhub真实-cve-漏洞复现">Vulhub（真实 CVE 漏洞复现）</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+
+            
+        
+    </aside>
+
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/" class="taxonomy-chip category-chip" data-taxonomy-term="网络空间安全" data-taxonomy-kind="categories" data-i18n-term="网络空间安全">
+                网络空间安全
+            </a>
+        
+            <a href="/categories/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5/" class="taxonomy-chip category-chip" data-taxonomy-term="攻防实践" data-taxonomy-kind="categories" data-i18n-term="攻防实践">
+                攻防实践
+            </a>
+        
+    </header>
+    
+
+    
+        
+    <section class="article-keywords">
+        
+            <a href="/keywords/docker/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Docker" data-taxonomy-kind="keywords">Docker</a>
+        
+            <a href="/keywords/%E9%9D%B6%E5%9C%BA/" class="taxonomy-chip keyword-chip" data-taxonomy-term="靶场" data-taxonomy-kind="keywords">靶场</a>
+        
+            <a href="/keywords/dvwa/" class="taxonomy-chip keyword-chip" data-taxonomy-term="DVWA" data-taxonomy-kind="keywords">DVWA</a>
+        
+            <a href="/keywords/pikachu/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Pikachu" data-taxonomy-kind="keywords">Pikachu</a>
+        
+            <a href="/keywords/webgoat/" class="taxonomy-chip keyword-chip" data-taxonomy-term="WebGoat" data-taxonomy-kind="keywords">WebGoat</a>
+        
+            <a href="/keywords/vulhub/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Vulhub" data-taxonomy-kind="keywords">Vulhub</a>
+        
+    </section>
+
+
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/">
+                
+                    <span class="article-series-prefix" data-i18n-term="网络安全实践">网络安全实践</span>
+                【攻防实践】靶场搭建</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle" >
+            常见的靶场搭建
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-01-03T12:33:34&#43;08:00'>Jan 03, 2026</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+
+    
+<div class="article-local-search" role="search">
+    <label class="article-local-search__label" for="article-local-search-input" data-i18n-key="article.localSearch">正文搜索</label>
+    <input id="article-local-search-input" type="search" autocomplete="off" spellcheck="false" placeholder="文本或 /正则/gi" data-i18n-placeholder="article.localSearchPlaceholder" />
+    <button type="button" class="article-local-search__button" data-article-search-prev data-i18n-title="article.localSearchPrev" aria-label="上一处">‹</button>
+    <button type="button" class="article-local-search__button" data-article-search-next data-i18n-title="article.localSearchNext" aria-label="下一处">›</button>
+    <button type="button" class="article-local-search__button" data-article-search-clear data-i18n-title="article.localSearchClear" aria-label="清除">×</button>
+    <span class="article-local-search__count" data-article-search-count>0/0</span>
+</div>
+
+
+<section class="article-content">
+    
+    
+    <h1 id="基础靶场搭建">基础靶场搭建
+</h1><div class="custom-toc">
+  <h3>目录</h3>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-环境与-docker">〇 环境与 Docker</a></li>
+    <li><a href="#dvwadamn-vulnerable-web-app">DVWA（Damn Vulnerable Web App）</a></li>
+    <li><a href="#pikachu皮卡丘">Pikachu（皮卡丘）</a></li>
+    <li><a href="#webgoatowasp-官方靶场">WebGoat（OWASP 官方靶场）</a></li>
+    <li><a href="#vulhub真实-cve-漏洞复现">Vulhub（真实 CVE 漏洞复现）</a></li>
+  </ul>
+</nav>
+</div>
+<h2 id="-环境与-docker">〇 环境与 Docker
+</h2><ul>
+<li>
+<p><strong>系统环境</strong>：Kali</p>
+</li>
+<li>
+<p><strong>Docker 部署</strong>：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 更新并安装 Docker 和 Docker-Compose</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install -y docker.io docker-compose
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动 Docker 服务，设置为开机自启动</span>
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> docker --now
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将当前用户加入用户组，免 Docker 执行</span>
+</span></span><span class="line"><span class="cl">sudo username -aG docker <span class="nv">$USER</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检查服务状态</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># sudo systemctl status docker</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 免重启刷新当前终端用户组权限</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># newgrp docker</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="dvwadamn-vulnerable-web-app">DVWA（Damn Vulnerable Web App）
+</h2><ul>
+<li><strong>简介</strong>：DVWA是最经典的 PHP/MySQL 漏洞演示平台，包含了 SQL 注入、XSS、CSRF、文件包含等最核心的 Web 漏洞，并且可以直接在界面上调整安全级别（Low/Medium/High/Impossible），适合用来观察底层防御代码的逻辑变化。</li>
+<li><strong>初始化部署</strong>：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name dvwa_range <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 8001:80 
+</span></span><span class="line"><span class="cl">  --restart<span class="o">=</span>unless-stopped 
+</span></span><span class="line"><span class="cl">  vulnerables/web-dvwa	
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>参数说明</strong>：</p>
+<ul>
+<li><code>-d</code>：后台静默运行</li>
+<li><code>--name dvwa_range</code>：靶场命名</li>
+<li><code>-p 8001:80</code>：将 Kali 宿主机的端口（8001）映射到容器内部网页端口（DVWA固定为80）</li>
+<li><code>--restart=unless-stopped</code>：崩溃重启机制</li>
+</ul>
+</li>
+<li>
+<p><strong>靶场管理</strong>：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker stop dvwa_range   <span class="c1"># 暂停靶场</span>
+</span></span><span class="line"><span class="cl">docker start dvwa_range  <span class="c1"># 重启靶场（不会删除数据）</span>
+</span></span><span class="line"><span class="cl">docker -rm -f dvwa_range <span class="c1"># 彻底销毁靶场</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>初始化</strong>：
+<ul>
+<li>浏览器访问 <code>http://localhost:8001</code></li>
+<li>默认账号密码：<code>admin / password</code></li>
+<li>登录后点击左侧 <code>Setup / Resart DB</code> -&gt; <code>Create / Reset Database</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="pikachu皮卡丘">Pikachu（皮卡丘）
+</h2><ul>
+<li><strong>简介</strong>：相比于 DVWA，Pikachu 的漏洞类型更贴近国内的安全测试习惯，涵盖了 DVWA 没有的 SSRF、XXE、反序列化、越权漏洞等。带有非常详尽的中文漏洞说明和通关提示。</li>
+<li><strong>初始化部署</strong>：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name pikachu_range <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 8002:80 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --restart<span class="o">=</span>unless-stopped <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  area39/pikachu
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>参数说明</strong>：同上</li>
+<li><strong>初始化数据库</strong>：
+<ul>
+<li>浏览器访问 <code>http://127.0.0.1:8002</code></li>
+<li>按提示完成初始化部署</li>
+</ul>
+</li>
+<li><strong>靶场管理</strong>：同上</li>
+</ul>
+<h2 id="webgoatowasp-官方靶场">WebGoat（OWASP 官方靶场）
+</h2><ul>
+<li><strong>简介</strong>：企业级应用大量基于 Java (Spring Boot) 开发。WebGoat 是 OWASP 维护的项目，专注于现代 Web 应用的安全风险（如 JWT 漏洞、XXE、身份认证缺陷）。其形式像闯关教程，每一步都有理论解析。</li>
+<li><strong>初始化部署</strong>：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name webgoat_range <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 8003:8080 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 8004:9090 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">TZ</span><span class="o">=</span>Asia/Shanghai <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --restart<span class="o">=</span>unless-stopped <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  webgoat/webgoat
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>参数说明</strong>
+<ul>
+<li><code>-p 8003:8080</code>: Kali 的 8003 端口映射到 WebGoat 本身的 8080 端口。</li>
+<li><code>-p 8004:9090</code>: Kali 的 8004 端口映射到 WebWolf 的辅助测试端口（9090）。</li>
+<li><code>-e TZ=Asia/Shanghai</code>: 环境变量注入。Java 程序的日志和某些时间相关的漏洞（比如 JWT 令牌过期测试）非常依赖系统时间，强制容器使用北京时间。</li>
+</ul>
+</li>
+<li><strong>账号注册与访问机制</strong>：
+<ul>
+<li>浏览器必须精确访问 <code>http://127.0.0.1:8003/WebGoat</code>。</li>
+<li>页面打开后没有默认账号密码，需要通过 <strong>“Register new user”</strong> 注册。</li>
+<li>WebGoat 支持多用户隔离。</li>
+<li>如需使用 WebWolf，访问 <code>http://127.0.0.1:8004/WebWolf</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="vulhub真实-cve-漏洞复现">Vulhub（真实 CVE 漏洞复现）
+</h2><ul>
+<li><strong>简介</strong>：Vulhub 是一个基于 Docker-Compose 的漏洞环境集合。在研究某个具体的组件（比如 Nginx 解析漏洞、Redis 未授权访问、WebLogic 反序列化）或是复现某个真实世界的 CVE 时，Vulhub 是无可替代的。</li>
+<li><strong>初始化部署</strong>：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 克隆 Vulhub 仓库到本地</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/vulhub/vulhub.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> vulhub
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 假设复现 Struts2 的 s2-052 漏洞</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> struts2/s2-052
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动该漏洞容器环境</span>
+</span></span><span class="line"><span class="cl">sudo docker-compose up -d
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取访问端口</span>
+</span></span><span class="line"><span class="cl">doker-compse ps
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试完毕后，销毁环境</span>
+</span></span><span class="line"><span class="cl">sudo docker-compose down
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-keywords">
+        
+            <a href="/keywords/docker/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Docker" data-taxonomy-kind="keywords">Docker</a>
+        
+            <a href="/keywords/%E9%9D%B6%E5%9C%BA/" class="taxonomy-chip keyword-chip" data-taxonomy-term="靶场" data-taxonomy-kind="keywords">靶场</a>
+        
+            <a href="/keywords/dvwa/" class="taxonomy-chip keyword-chip" data-taxonomy-term="DVWA" data-taxonomy-kind="keywords">DVWA</a>
+        
+            <a href="/keywords/pikachu/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Pikachu" data-taxonomy-kind="keywords">Pikachu</a>
+        
+            <a href="/keywords/webgoat/" class="taxonomy-chip keyword-chip" data-taxonomy-term="WebGoat" data-taxonomy-kind="keywords">WebGoat</a>
+        
+            <a href="/keywords/vulhub/" class="taxonomy-chip keyword-chip" data-taxonomy-term="Vulhub" data-taxonomy-kind="keywords">Vulhub</a>
+        
+    </section>
+
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            <span data-i18n-key="article.lastUpdatedOn">最后更新于</span> Feb 13, 2026 12:33 CST
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+    
+</article>
+
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title" data-i18n-key="article.relatedContent">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/cover.d152216b03afd1d4ba29cd5994c33571_hu_b6c3aaaa86fdfb50.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【攻防实践】基础环境搭建"
+                        
+                        data-hash="md5-0VIhawOv0dS6Kc1ZlMM1cQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【攻防实践】基础环境搭建</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/CS.33e635531a05e71782117358a85aea03_hu_de3c00236819fd37.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【攻防实践】MSF恶意程序利用与CS钓鱼网站制作"
+                        
+                        data-hash="md5-M&#43;Y1UxoF5xeCEXNYqFrqAw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【攻防实践】MSF恶意程序利用与CS钓鱼网站制作</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/ms17-010.992c28af9d4dc6152f59316c33d36a29_hu_74f7647d7167291d.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【攻防实践】MS17-010漏洞利用"
+                        
+                        data-hash="md5-mSwor51NxhUvWTFsM9NqKQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【攻防实践】MS17-010漏洞利用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Web安全基础</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%A0%BC%E5%9F%BA%E5%8A%A0%E5%AF%86sl3pake%E5%8D%8F%E8%AE%AE/cover.e5a9a8588c5efdb3863784d243c8f49c_hu_eb5d8ce2be08dd9.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【格基加密】SL3PAKE协议"
+                        
+                        data-hash="md5-5amoWIxe/bOGN4TSQ8j0nA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【格基加密】SL3PAKE协议</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="leuco-yuu/blog-comments"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy;
+        
+            2025 -
+        
+        2026 Leuco · leucoyuu@163.com
+    </section>
+    
+    <section class="powerby">
+        <span data-i18n-key="footer.motto">持续记录技术、实验与复盘。</span><br/>
+        <span data-i18n-key="footer.engine">由 Hugo 驱动</span> · <span data-i18n-key="footer.theme">主题 Stack</span>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.87e2592de8536ee90b02b1e2668bf69406dde2f7d8601d810f820b85bc270b0c.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<button id="back-to-top" data-i18n-title="backToTop" aria-label="返回顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
 </button>
-<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单 data-i18n-title=toggleMenu>
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_8cf2f27a1af30ef.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Leuco's Blog</a></h1><h2 class=site-description></h2></div></header><ol class=menu-social><li><a href=https://github.com/leuco-yuu/ target=_blank title=GitHub rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></li><li><a href='https://mail.google.com/mail/u/0/?tf=cm&amp;to=leucoyuu@gmail.com&amp;fs=1' target=_blank title=Gmail rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="3,5 12,14 21,5"/></svg></a></li><li><a href='https://wpa.qq.com/msgrd?v=3&amp;uin=1286938728&amp;site=qq&amp;menu=yes/' target=_blank title=QQ rel=me><svg height="32" viewBox="0 0 32 32" width="32"><g fill="none" fill-rule="evenodd"><path d="m15.9998867.0-.3175962.00373031C8.84822.16478688 5.08430177 5.52571032 5.05900841 13.1032973L5.06 13.376l-.86256398 2.1053645c-.34339269.8459887-.59479858 1.4918602-.8236549 2.1249911-.16246446.4494579-.31092035.8862129-.4515632 1.3302912-1.41043336 4.4529342-1.46997142 7.7313526 1.14979123 8.0424546l.19586827.0182568c.69853306.0462522 1.18775172-.1357889 1.69345756-.5695745L6.008 26.385l.10703497.1859114.16295747.2641667L6.368 26.972l-.10203891.0725127c-1.18457469.8599516-1.78515849 2.0422997-.8749963 3.5478041.72014893 1.1919865 1.68579016 1.3851809 4.67654251 1.4059241h1.2781117l.7210113-.0101194c1.4578857-.0287327 2.9764342-.1065736 3.9343697-.2001215l.2555297.0243167c1.1291243.09698 2.8606159.1735357 4.3993902.1859242h1.2781118c2.9907546-.0207471 3.95642-.2139816 4.6768437-1.4064227l.0983227-.1723424c.764361-1.4241985.1648309-2.548721-.9747412-3.3755348L25.631 26.971l.0912293-.1362605.1629318-.2641511L25.992 26.385l.0466679.0427821c.5516504.4732059 1.0836451.6468525 1.8890001.5513616 2.6200145-.3116105 2.5604594-3.5895097 1.1502083-8.0424822-.136678-.4315245-.2810058-.8567817-.4385987-1.2939849l-.1781698-.4846461c-.0923296-.2464665-.1903348-.5013359-.2976536-.7744519l-.3954267-.9868956L26.939 13.376l9399e-7-.279262c-.038761-7.60576089-3.8169423-12.93053326-10.6187985-13.09291824zm1023e-7 2c6.339972 32813e-8 9.0947051 5.25726658 8.9334981 11.7557738l.8516442 2.0748544c.5606846 1.3708665.9939584 2.4718584 1.3860782 3.7098724 1.2134003 3.8314013.8203049 5.4169539.5209683 5.4525554-.6424867.0761796-2.5006035-2.8842697-2.5006035-2.8842697.0 1.7141775-.8994592 3.9510027-2.8457046 5.5664147l.3377045.1073023c1.0249215.341207 2.6653848 1.0302704 2.2154641 1.7750936-.4078113.675007-6.9962271.4309917-8.8982689.2207732l-.4753503.0452169c-2.33636.195172-8.04423656.3608021-8.42291849-.2659901-.50418989-.8339832 1.61195836-1.5976385 2.55205373-1.8820678-1.94652419-1.615412-2.84615056-3.852456-2.84615056-5.5667428l-.32111727.4924567c-.56063792.838483-1.70355568 2.4482423-2.17943051 2.391813-.29933663-.0355468-.69254342-1.6211541.52102408-5.4525554l.21887662-.6654718c.52220361-1.5311231 1.13363576-2.9515889 2.01884579-5.1193097C6.8963095 7.36281332 9.58861109 2.00032813 15.999989 2z" fill="currentColor" fill-rule="nonzero"/></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
-<span data-i18n-key=nav.home>主页</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
-<span data-i18n-key=nav.about>关于</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-<span data-i18n-key=nav.archives>博文</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
-<span data-i18n-key=nav.search>搜索</span></a></li><li class=menu-bottom-section><ol class=menu><li id=language-mode-toggle><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
-<label for=language-mode-select data-i18n-key=language.label>语言</label>
-<select id=language-mode-select name=language-mode title=语言 data-i18n-title=language.label aria-label=语言><option value=cn>简体中文</option><option value=tw>繁體中文</option><option value=en>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span data-i18n-key=darkMode>暗色模式</span></li><li id=article-list-image-toggle role=button tabindex=0 aria-pressed=false><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span data-i18n-key=image.hide data-show-key=image.hide data-hide-key=image.show data-show-text=隐藏图片 data-hide-text=展示图片>隐藏图片</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky" id=right-sidebar><button class="sidebar-fold-toggle sidebar-fold-toggle--right" type=button data-sidebar-toggle=right data-i18n-title=sidebar.collapseRight aria-label=收起右侧栏 aria-expanded=true>
-<span></span></button><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title" data-i18n-key=article.tableOfContents>目录</h2><div class=widget--toc><nav id=TableOfContents><ul><li><a href=#-环境与-docker>〇 环境与 Docker</a></li><li><a href=#dvwadamn-vulnerable-web-app>DVWA（Damn Vulnerable Web App）</a></li><li><a href=#pikachu皮卡丘>Pikachu（皮卡丘）</a></li><li><a href=#webgoatowasp-官方靶场>WebGoat（OWASP 官方靶场）</a></li><li><a href=#vulhub真实-cve-漏洞复现>Vulhub（真实 CVE 漏洞复现）</a></li></ul></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/ class="taxonomy-chip category-chip" data-taxonomy-term=网络空间安全 data-taxonomy-kind=categories data-i18n-term=网络空间安全>网络空间安全
-</a><a href=/categories/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5/ class="taxonomy-chip category-chip" data-taxonomy-term=攻防实践 data-taxonomy-kind=categories data-i18n-term=攻防实践>攻防实践</a></header><section class=article-keywords><a href=/keywords/docker/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Docker data-taxonomy-kind=keywords>Docker</a>
-<a href=/keywords/%E9%9D%B6%E5%9C%BA/ class="taxonomy-chip keyword-chip" data-taxonomy-term=靶场 data-taxonomy-kind=keywords>靶场</a>
-<a href=/keywords/dvwa/ class="taxonomy-chip keyword-chip" data-taxonomy-term=DVWA data-taxonomy-kind=keywords>DVWA</a>
-<a href=/keywords/pikachu/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Pikachu data-taxonomy-kind=keywords>Pikachu</a>
-<a href=/keywords/webgoat/ class="taxonomy-chip keyword-chip" data-taxonomy-term=WebGoat data-taxonomy-kind=keywords>WebGoat</a>
-<a href=/keywords/vulhub/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Vulhub data-taxonomy-kind=keywords>Vulhub</a></section><div class=article-title-wrapper><h2 class=article-title><a href=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/><span class=article-series-prefix data-i18n-term=网络安全实践>网络安全实践</span>
-【攻防实践】靶场搭建</a></h2><h3 class=article-subtitle>常见的靶场搭建</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published datetime=2026-01-03T12:33:34+08:00>Jan 03, 2026</time></div></footer></div></header><div class=article-local-search role=search><label class=article-local-search__label for=article-local-search-input data-i18n-key=article.localSearch>正文搜索</label>
-<input id=article-local-search-input type=search autocomplete=off spellcheck=false placeholder="文本或 /正则/gi" data-i18n-placeholder=article.localSearchPlaceholder>
-<button type=button class=article-local-search__button data-article-search-prev data-i18n-title=article.localSearchPrev aria-label=上一处>‹</button>
-<button type=button class=article-local-search__button data-article-search-next data-i18n-title=article.localSearchNext aria-label=下一处>›</button>
-<button type=button class=article-local-search__button data-article-search-clear data-i18n-title=article.localSearchClear aria-label=清除>×</button>
-<span class=article-local-search__count data-article-search-count>0/0</span></div><section class=article-content><h1 id=基础靶场搭建>基础靶场搭建</h1><div class=custom-toc><h3>目录</h3><nav id=TableOfContents><ul><li><a href=#-环境与-docker>〇 环境与 Docker</a></li><li><a href=#dvwadamn-vulnerable-web-app>DVWA（Damn Vulnerable Web App）</a></li><li><a href=#pikachu皮卡丘>Pikachu（皮卡丘）</a></li><li><a href=#webgoatowasp-官方靶场>WebGoat（OWASP 官方靶场）</a></li><li><a href=#vulhub真实-cve-漏洞复现>Vulhub（真实 CVE 漏洞复现）</a></li></ul></nav></div><h2 id=-环境与-docker>〇 环境与 Docker</h2><ul><li><p><strong>系统环境</strong>：Kali</p></li><li><p><strong>Docker 部署</strong>：</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 更新并安装 Docker 和 Docker-Compose</span>
-</span></span><span class=line><span class=cl>sudo apt update
-</span></span><span class=line><span class=cl>sudo apt install -y docker.io docker-compose
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 启动 Docker 服务，设置为开机自启动</span>
-</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> docker --now
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 将当前用户加入用户组，免 Docker 执行</span>
-</span></span><span class=line><span class=cl>sudo username -aG docker <span class=nv>$USER</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 检查服务状态</span>
-</span></span><span class=line><span class=cl><span class=c1># sudo systemctl status docker</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 免重启刷新当前终端用户组权限</span>
-</span></span><span class=line><span class=cl><span class=c1># newgrp docker</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=dvwadamn-vulnerable-web-app>DVWA（Damn Vulnerable Web App）</h2><ul><li><strong>简介</strong>：DVWA是最经典的 PHP/MySQL 漏洞演示平台，包含了 SQL 注入、XSS、CSRF、文件包含等最核心的 Web 漏洞，并且可以直接在界面上调整安全级别（Low/Medium/High/Impossible），适合用来观察底层防御代码的逻辑变化。</li><li><strong>初始化部署</strong>：</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -d <span class=se>\
-</span></span></span><span class=line><span class=cl>  --name dvwa_range <span class=se>\
-</span></span></span><span class=line><span class=cl>  -p 8001:80 
-</span></span><span class=line><span class=cl>  --restart<span class=o>=</span>unless-stopped 
-</span></span><span class=line><span class=cl>  vulnerables/web-dvwa	
-</span></span></code></pre></td></tr></table></div></div><ul><li><p><strong>参数说明</strong>：</p><ul><li><code>-d</code>：后台静默运行</li><li><code>--name dvwa_range</code>：靶场命名</li><li><code>-p 8001:80</code>：将 Kali 宿主机的端口（8001）映射到容器内部网页端口（DVWA固定为80）</li><li><code>--restart=unless-stopped</code>：崩溃重启机制</li></ul></li><li><p><strong>靶场管理</strong>：</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker stop dvwa_range   <span class=c1># 暂停靶场</span>
-</span></span><span class=line><span class=cl>docker start dvwa_range  <span class=c1># 重启靶场（不会删除数据）</span>
-</span></span><span class=line><span class=cl>docker -rm -f dvwa_range <span class=c1># 彻底销毁靶场</span>
-</span></span></code></pre></td></tr></table></div></div><ul><li><strong>初始化</strong>：<ul><li>浏览器访问 <code>http://localhost:8001</code></li><li>默认账号密码：<code>admin / password</code></li><li>登录后点击左侧 <code>Setup / Resart DB</code> -> <code>Create / Reset Database</code></li></ul></li></ul><h2 id=pikachu皮卡丘>Pikachu（皮卡丘）</h2><ul><li><strong>简介</strong>：相比于 DVWA，Pikachu 的漏洞类型更贴近国内的安全测试习惯，涵盖了 DVWA 没有的 SSRF、XXE、反序列化、越权漏洞等。带有非常详尽的中文漏洞说明和通关提示。</li><li><strong>初始化部署</strong>：</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -d <span class=se>\
-</span></span></span><span class=line><span class=cl>  --name pikachu_range <span class=se>\
-</span></span></span><span class=line><span class=cl>  -p 8002:80 <span class=se>\
-</span></span></span><span class=line><span class=cl>  --restart<span class=o>=</span>unless-stopped <span class=se>\
-</span></span></span><span class=line><span class=cl>  area39/pikachu
-</span></span></code></pre></td></tr></table></div></div><ul><li><strong>参数说明</strong>：同上</li><li><strong>初始化数据库</strong>：<ul><li>浏览器访问 <code>http://127.0.0.1:8002</code></li><li>按提示完成初始化部署</li></ul></li><li><strong>靶场管理</strong>：同上</li></ul><h2 id=webgoatowasp-官方靶场>WebGoat（OWASP 官方靶场）</h2><ul><li><strong>简介</strong>：企业级应用大量基于 Java (Spring Boot) 开发。WebGoat 是 OWASP 维护的项目，专注于现代 Web 应用的安全风险（如 JWT 漏洞、XXE、身份认证缺陷）。其形式像闯关教程，每一步都有理论解析。</li><li><strong>初始化部署</strong>：</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -d <span class=se>\
-</span></span></span><span class=line><span class=cl>  --name webgoat_range <span class=se>\
-</span></span></span><span class=line><span class=cl>  -p 8003:8080 <span class=se>\
-</span></span></span><span class=line><span class=cl>  -p 8004:9090 <span class=se>\
-</span></span></span><span class=line><span class=cl>  -e <span class=nv>TZ</span><span class=o>=</span>Asia/Shanghai <span class=se>\
-</span></span></span><span class=line><span class=cl>  --restart<span class=o>=</span>unless-stopped <span class=se>\
-</span></span></span><span class=line><span class=cl>  webgoat/webgoat
-</span></span></code></pre></td></tr></table></div></div><ul><li><strong>参数说明</strong><ul><li><code>-p 8003:8080</code>: Kali 的 8003 端口映射到 WebGoat 本身的 8080 端口。</li><li><code>-p 8004:9090</code>: Kali 的 8004 端口映射到 WebWolf 的辅助测试端口（9090）。</li><li><code>-e TZ=Asia/Shanghai</code>: 环境变量注入。Java 程序的日志和某些时间相关的漏洞（比如 JWT 令牌过期测试）非常依赖系统时间，强制容器使用北京时间。</li></ul></li><li><strong>账号注册与访问机制</strong>：<ul><li>浏览器必须精确访问 <code>http://127.0.0.1:8003/WebGoat</code>。</li><li>页面打开后没有默认账号密码，需要通过 <strong>“Register new user”</strong> 注册。</li><li>WebGoat 支持多用户隔离。</li><li>如需使用 WebWolf，访问 <code>http://127.0.0.1:8004/WebWolf</code></li></ul></li></ul><h2 id=vulhub真实-cve-漏洞复现>Vulhub（真实 CVE 漏洞复现）</h2><ul><li><strong>简介</strong>：Vulhub 是一个基于 Docker-Compose 的漏洞环境集合。在研究某个具体的组件（比如 Nginx 解析漏洞、Redis 未授权访问、WebLogic 反序列化）或是复现某个真实世界的 CVE 时，Vulhub 是无可替代的。</li><li><strong>初始化部署</strong>：</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 克隆 Vulhub 仓库到本地</span>
-</span></span><span class=line><span class=cl>git clone https://github.com/vulhub/vulhub.git
-</span></span><span class=line><span class=cl><span class=nb>cd</span> vulhub
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 假设复现 Struts2 的 s2-052 漏洞</span>
-</span></span><span class=line><span class=cl><span class=nb>cd</span> struts2/s2-052
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 启动该漏洞容器环境</span>
-</span></span><span class=line><span class=cl>sudo docker-compose up -d
-</span></span><span class=line><span class=cl><span class=c1># 获取访问端口</span>
-</span></span><span class=line><span class=cl>doker-compse ps
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 测试完毕后，销毁环境</span>
-</span></span><span class=line><span class=cl>sudo docker-compose down
-</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-keywords><a href=/keywords/docker/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Docker data-taxonomy-kind=keywords>Docker</a>
-<a href=/keywords/%E9%9D%B6%E5%9C%BA/ class="taxonomy-chip keyword-chip" data-taxonomy-term=靶场 data-taxonomy-kind=keywords>靶场</a>
-<a href=/keywords/dvwa/ class="taxonomy-chip keyword-chip" data-taxonomy-term=DVWA data-taxonomy-kind=keywords>DVWA</a>
-<a href=/keywords/pikachu/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Pikachu data-taxonomy-kind=keywords>Pikachu</a>
-<a href=/keywords/webgoat/ class="taxonomy-chip keyword-chip" data-taxonomy-term=WebGoat data-taxonomy-kind=keywords>WebGoat</a>
-<a href=/keywords/vulhub/ class="taxonomy-chip keyword-chip" data-taxonomy-term=Vulhub data-taxonomy-kind=keywords>Vulhub</a></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<span><span data-i18n-key=article.lastUpdatedOn>最后更新于</span> Feb 13, 2026 12:33 +0800</span></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title data-i18n-key=article.relatedContent>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/><div class=article-image><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/cover.d152216b03afd1d4ba29cd5994c33571_hu_8b8c078a95d6631f.png width=250 height=150 loading=lazy alt="Featured image of post 【攻防实践】基础环境搭建" data-hash="md5-0VIhawOv0dS6Kc1ZlMM1cQ=="></div><div class=article-details><h2 class=article-title>【攻防实践】基础环境搭建</h2></div></a></article><article class=has-image><a href=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/><div class=article-image><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/CS.33e635531a05e71782117358a85aea03_hu_5c8a1bd4695e7539.png width=250 height=150 loading=lazy alt="Featured image of post 【攻防实践】MSF恶意程序利用与CS钓鱼网站制作" data-hash="md5-M+Y1UxoF5xeCEXNYqFrqAw=="></div><div class=article-details><h2 class=article-title>【攻防实践】MSF恶意程序利用与CS钓鱼网站制作</h2></div></a></article><article class=has-image><a href=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/><div class=article-image><img src=/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/ms17-010.992c28af9d4dc6152f59316c33d36a29_hu_28cc4a6d866ee498.png width=250 height=150 loading=lazy alt="Featured image of post 【攻防实践】MS17-010漏洞利用" data-hash="md5-mSwor51NxhUvWTFsM9NqKQ=="></div><div class=article-details><h2 class=article-title>【攻防实践】MS17-010漏洞利用</h2></div></a></article><article><a href=/p/web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/><div class=article-details><h2 class=article-title>Web安全基础</h2></div></a></article><article><a href=/p/kali-toolkitnmapnetwork-mapper/><div class=article-details><h2 class=article-title>【Kali Toolkit】Nmap（Network Mapper）</h2></div></a></article></div></div></aside><script src=https://utteranc.es/client.js repo=leuco-yuu/blog-comments issue-term=pathname crossorigin=anonymous async></script><style>.utterances{max-width:unset}</style><script>let utterancesLoaded=!1;function setUtterancesTheme(e){let t=document.querySelector(".utterances iframe");t&&t.contentWindow.postMessage({type:"set-theme",theme:`github-${e}`},"https://utteranc.es")}addEventListener("message",e=>{if(e.origin!=="https://utteranc.es")return;utterancesLoaded=!0,setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener("onColorSchemeChange",e=>{if(!utterancesLoaded)return;setUtterancesTheme(e.detail)})</script><footer class=site-footer><section class=copyright>&copy;
-2025 -
-2026 Leuco · leucoyuu@163.com</section><section class=powerby><span data-i18n-key=footer.motto>持续记录技术、实验与复盘。</span><br><span data-i18n-key=footer.engine>由 Hugo 驱动</span> · <span data-i18n-key=footer.theme>主题 Stack</span></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-<button class="pswp__button pswp__button--share" title=Share></button>
-<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-</button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.29c987cab5419174d4dc85c2a56544a08027cc7f77efb5749447a3e80f85a03d.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script><button id=back-to-top data-i18n-title=backToTop aria-label=返回顶部>
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-</button>
-<script>document.addEventListener("DOMContentLoaded",async function(){const o="LeucoUILanguage";let n={},t=localStorage.getItem(o)||"cn";const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",function(){s.style.display=window.scrollY>300?"flex":"none"}),s.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})}));function p(e){return Array.from(e.trim().toLowerCase()).reduce((e,t)=>Math.imul(31,e)+t.charCodeAt(0)|0,0)}function e(e){return n[e]?.[t]||n[e]?.cn||""}function u(t){return e("term."+t)}async function l(){try{const e=await fetch("/language.json",{cache:"no-store"});e.ok&&(n=await e.json())}catch{n={}}}function c(){document.querySelectorAll(".taxonomy-chip").forEach(e=>{const a=e.dataset.taxonomyTerm||e.textContent||"",i=e.dataset.taxonomyKind||(e.classList.contains("keyword-chip")?"keywords":"categories"),t=Math.abs(p(a)),o=Math.round(t*137.508%360);let n=30+t%8,s=74+t%6;i==="keywords"?(n=22+t%7,s=84+t%5):i==="series"&&(n=28+t%7,s=78+t%5),e.style.setProperty("--chip-bg",`hsl(${o}, ${n}%, ${s}%)`),e.style.setProperty("--chip-color",`hsl(${o}, ${Math.max(26,n+6)}%, 28%)`),e.style.setProperty("--chip-border",`hsl(${o}, ${Math.max(18,n-4)}%, ${Math.max(64,s-10)}%)`)})}function r(){document.documentElement.dataset.uiLanguage=t,document.querySelectorAll("[data-i18n-key]").forEach(t=>{const n=e(t.dataset.i18nKey);n&&(t.textContent=n)}),document.querySelectorAll("[data-i18n-count-key]").forEach(t=>{const n=e(t.dataset.i18nCountKey);n&&(t.textContent=n.replace("#COUNT",t.dataset.i18nCount||"0"))}),document.querySelectorAll("[data-i18n-placeholder]").forEach(t=>{const n=e(t.dataset.i18nPlaceholder);n&&t.setAttribute("placeholder",n)}),document.querySelectorAll("[data-i18n-title]").forEach(t=>{const n=e(t.dataset.i18nTitle);n&&(t.setAttribute("title",n),t.setAttribute("aria-label",n))}),document.querySelectorAll("[data-i18n-term]").forEach(e=>{const t=u(e.dataset.i18nTerm);t&&(e.textContent=t)}),e("search.resultTitle")&&(window.searchResultTitleTemplate=e("search.resultTitle"))}function d(){const e=document.getElementById("language-mode-select");if(!e)return;e.value=t,e.addEventListener("change",()=>{t=e.value,localStorage.setItem(o,t),r(),i()})}function a(t){const s="LeucoSidebarCollapsed:"+t,o=t+"-sidebar-collapsed",n=document.querySelector(`[data-sidebar-toggle="${t}"]`);if(!n)return;const i=(i,a=!0)=>{document.body.classList.toggle(o,i),n.setAttribute("aria-expanded",String(!i));const c=t==="left"?i?"sidebar.expandLeft":"sidebar.collapseLeft":i?"sidebar.expandRight":"sidebar.collapseRight",r=e(c)||(i?"展开侧栏":"收起侧栏");n.setAttribute("aria-label",r),n.setAttribute("title",r),a&&localStorage.setItem(s,i?"1":"0")},a=localStorage.getItem(s),r=a===null&&t==="right"&&window.matchMedia("(max-width: 767px)").matches;i(a==="1"||r,!1),n.addEventListener("click",()=>i(!document.body.classList.contains(o)))}function h(){const t=document.getElementById("article-list-image-toggle"),n="LeucoHideArticleListImages";function s(s){if(document.body.classList.toggle("article-list-images-hidden",s),!t)return;const o=t.querySelector("span");if(o){const t=s?o.dataset.hideKey:o.dataset.showKey;o.textContent=e(t)||(s?o.dataset.hideText:o.dataset.showText)}t.setAttribute("aria-pressed",String(s)),localStorage.setItem(n,s?"1":"0")}s(localStorage.getItem(n)==="1"),t&&(t.addEventListener("click",()=>s(!document.body.classList.contains("article-list-images-hidden"))),t.addEventListener("keydown",e=>{(e.key==="Enter"||e.key===" ")&&(e.preventDefault(),t.click())}))}function m(){function n(e,t){t?(e.style.maxHeight=e.scrollHeight+"px",requestAnimationFrame(()=>{e.classList.add("is-collapsed"),e.style.maxHeight="0px"})):(e.classList.remove("is-collapsed"),e.style.maxHeight=e.scrollHeight+"px",window.setTimeout(()=>{e.classList.contains("is-collapsed")||(e.style.maxHeight="")},260))}const t=document.querySelector(".article-content");if(!t)return;const s=Array.from(t.querySelectorAll("h2, h3, h4, h5, h6")).filter(e=>!e.closest(".custom-toc")&&!e.closest("#TableOfContents"));s.forEach((t,s)=>{if(t.dataset.foldReady==="1")return;t.dataset.foldReady="1",t.classList.add("collapsible-heading"),t.setAttribute("tabindex","0");const c=Number(t.tagName.slice(1)),o=document.createElement("div");o.className="heading-section-body",o.dataset.headingLevel=String(c),o.id=`heading-section-${s}`,t.after(o);let a=o.nextSibling;for(;a;){if(a.nodeType===Node.ELEMENT_NODE){const e=a;if(/^H[2-6]$/.test(e.tagName)&&Number(e.tagName.slice(1))<=c)break}const e=a.nextSibling;o.appendChild(a),a=e}if(!o.childNodes.length)return;const i=document.createElement("button");i.className="heading-fold-toggle",i.type="button",i.setAttribute("aria-expanded","true"),i.setAttribute("aria-controls",o.id),i.setAttribute("aria-label",e("heading.collapse")||"收起本节"),t.prepend(i);const r=()=>{const s=!o.classList.contains("is-collapsed");t.classList.toggle("is-collapsed",s),i.setAttribute("aria-expanded",String(!s)),i.setAttribute("aria-label",e(s?"heading.expand":"heading.collapse")||(s?"展开本节":"收起本节")),n(o,s)};i.addEventListener("click",e=>{e.stopPropagation(),r()}),t.addEventListener("click",e=>{if(e.target.closest("a"))return;r()}),t.addEventListener("keydown",e=>{(e.key==="Enter"||e.key===" ")&&(e.preventDefault(),r())})})}function f(){const n=document.querySelector(".article-local-search"),r=document.querySelector(".article-content");if(!n||!r)return;const s=n.querySelector("#article-local-search-input"),l=n.querySelector("[data-article-search-prev]"),m=n.querySelector("[data-article-search-next]"),h=n.querySelector("[data-article-search-clear]"),c=n.querySelector("[data-article-search-count]");let e=[],t=-1;function u(e){return e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}function d(e){if(!e.trim())return null;const t=e.match(/^\/(.+)\/([dgimsuvy]*)$/);if(t){const e=t[2].includes("g")?t[2]:t[2]+"g";return new RegExp(t[1],e)}return new RegExp(u(e),"gi")}function a(){e.forEach(e=>{const t=e.parentNode;if(!t)return;t.replaceChild(document.createTextNode(e.textContent),e),t.normalize()}),e=[],t=-1,n.classList.remove("has-error"),o()}function o(){if(!c)return;c.textContent=e.length?`${t+1}/${e.length}`:"0/0"}function i(n){if(!e.length){t=-1,o();return}e.forEach(e=>e.classList.remove("is-active")),t=(n+e.length)%e.length,e[t].classList.add("is-active"),e[t].scrollIntoView({behavior:"smooth",block:"center"}),o()}function f(){a();const c=s.value.trim();if(!c)return;let t;try{t=d(c)}catch{n.classList.add("has-error");return}if(!t)return;const l=document.createTreeWalker(r,NodeFilter.SHOW_TEXT,{acceptNode(e){if(!e.nodeValue.trim())return NodeFilter.FILTER_REJECT;const t=e.parentElement;return t?t.closest("script, style, .article-local-search, .heading-fold-toggle")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}}),u=[];for(;l.nextNode();)u.push(l.currentNode);u.forEach(n=>{const s=n.nodeValue,r=[];t.lastIndex=0;let o;for(;(o=t.exec(s))!==null;){if(o[0]===""){t.lastIndex++;continue}r.push({start:o.index,end:o.index+o[0].length})}if(!r.length)return;const a=document.createDocumentFragment();let i=0;r.forEach(({start:t,end:n})=>{t>i&&a.appendChild(document.createTextNode(s.slice(i,t)));const o=document.createElement("mark");o.className="article-search-mark",o.textContent=s.slice(t,n),a.appendChild(o),e.push(o),i=n}),i<s.length&&a.appendChild(document.createTextNode(s.slice(i))),n.parentNode.replaceChild(a,n)}),e.length&&i(0),o()}s.addEventListener("input",f),s.addEventListener("keydown",e=>{e.key==="Enter"&&(e.preventDefault(),i(t+1))}),l?.addEventListener("click",()=>i(t-1)),m?.addEventListener("click",()=>i(t+1)),h?.addEventListener("click",()=>{s.value="",a(),s.focus()}),o()}function i(){["left","right"].forEach(t=>{const n=document.querySelector(`[data-sidebar-toggle="${t}"]`);if(!n)return;const o=document.body.classList.contains(t+"-sidebar-collapsed"),i=t==="left"?o?"sidebar.expandLeft":"sidebar.collapseLeft":o?"sidebar.expandRight":"sidebar.collapseRight",s=e(i);s&&(n.setAttribute("aria-label",s),n.setAttribute("title",s))}),document.querySelectorAll(".heading-fold-toggle").forEach(t=>{const s=t.getAttribute("aria-expanded")==="false",n=e(s?"heading.expand":"heading.collapse");n&&t.setAttribute("aria-label",n)})}await l(),a("left"),a("right"),h(),d(),m(),f(),c(),r(),i()})</script><script type=module>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async function() {
+        const uiLanguageKey = "LeucoUILanguage";
+        let languageDictionary = {};
+        let currentLanguage = localStorage.getItem(uiLanguageKey) || "cn";
+
+        const backToTopBtn = document.getElementById("back-to-top");
+        if (backToTopBtn) {
+            window.addEventListener("scroll", function() {
+                backToTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+            });
+            backToTopBtn.addEventListener("click", function() {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+
+        function hashText(text) {
+            return Array.from(text.trim().toLowerCase()).reduce((hash, char) => {
+                return Math.imul(31, hash) + char.charCodeAt(0) | 0;
+            }, 0);
+        }
+
+        function text(key) {
+            return languageDictionary[key]?.[currentLanguage] || languageDictionary[key]?.cn || "";
+        }
+
+        function termText(term) {
+            return text("term." + term);
+        }
+
+        async function loadLanguageDictionary() {
+            try {
+                const response = await fetch("/language.json", { cache: "no-store" });
+                if (response.ok) languageDictionary = await response.json();
+            } catch (error) {
+                languageDictionary = {};
+            }
+        }
+
+        function assignTaxonomyColors() {
+            document.querySelectorAll(".taxonomy-chip").forEach((chip) => {
+                const term = chip.dataset.taxonomyTerm || chip.textContent || "";
+                const kind = chip.dataset.taxonomyKind || (chip.classList.contains("keyword-chip") ? "keywords" : "categories");
+                const seed = Math.abs(hashText(term));
+                const hue = Math.round((seed * 137.508) % 360);
+
+                let saturation = 30 + (seed % 8);
+                let lightness = 74 + (seed % 6);
+                if (kind === "keywords") {
+                    saturation = 22 + (seed % 7);
+                    lightness = 84 + (seed % 5);
+                } else if (kind === "series") {
+                    saturation = 28 + (seed % 7);
+                    lightness = 78 + (seed % 5);
+                }
+
+                chip.style.setProperty("--chip-bg", `hsl(${hue}, ${saturation}%, ${lightness}%)`);
+                chip.style.setProperty("--chip-color", `hsl(${hue}, ${Math.max(26, saturation + 6)}%, 28%)`);
+                chip.style.setProperty("--chip-border", `hsl(${hue}, ${Math.max(18, saturation - 4)}%, ${Math.max(64, lightness - 10)}%)`);
+            });
+        }
+
+        function applyTextTranslations() {
+            document.documentElement.dataset.uiLanguage = currentLanguage;
+            document.querySelectorAll("[data-i18n-key]").forEach((element) => {
+                const translated = text(element.dataset.i18nKey);
+                if (translated) element.textContent = translated;
+            });
+            document.querySelectorAll("[data-i18n-count-key]").forEach((element) => {
+                const translated = text(element.dataset.i18nCountKey);
+                if (translated) element.textContent = translated.replace("#COUNT", element.dataset.i18nCount || "0");
+            });
+            document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+                const translated = text(element.dataset.i18nPlaceholder);
+                if (translated) element.setAttribute("placeholder", translated);
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+                const translated = text(element.dataset.i18nTitle);
+                if (translated) {
+                    element.setAttribute("title", translated);
+                    element.setAttribute("aria-label", translated);
+                }
+            });
+            document.querySelectorAll("[data-i18n-term]").forEach((element) => {
+                const translated = termText(element.dataset.i18nTerm);
+                if (translated) element.textContent = translated;
+            });
+            if (text("search.resultTitle")) {
+                window.searchResultTitleTemplate = text("search.resultTitle");
+            }
+        }
+
+        function bindLanguageSwitch() {
+            const languageSelect = document.getElementById("language-mode-select");
+            if (!languageSelect) return;
+            languageSelect.value = currentLanguage;
+            languageSelect.addEventListener("change", () => {
+                currentLanguage = languageSelect.value;
+                localStorage.setItem(uiLanguageKey, currentLanguage);
+                applyTextTranslations();
+                refreshDynamicLabels();
+            });
+        }
+
+        function bindSidebarToggle(side) {
+            const key = "LeucoSidebarCollapsed:" + side;
+            const className = side + "-sidebar-collapsed";
+            const button = document.querySelector(`[data-sidebar-toggle="${side}"]`);
+            if (!button) return;
+
+            const apply = (collapsed, persist = true) => {
+                document.body.classList.toggle(className, collapsed);
+                button.setAttribute("aria-expanded", String(!collapsed));
+                const labelKey = side === "left"
+                    ? (collapsed ? "sidebar.expandLeft" : "sidebar.collapseLeft")
+                    : (collapsed ? "sidebar.expandRight" : "sidebar.collapseRight");
+                const label = text(labelKey) || (collapsed ? "展开侧栏" : "收起侧栏");
+                button.setAttribute("aria-label", label);
+                button.setAttribute("title", label);
+                if (persist) localStorage.setItem(key, collapsed ? "1" : "0");
+            };
+
+            const storedValue = localStorage.getItem(key);
+            const collapseByDefault = storedValue === null && side === "right" && window.matchMedia("(max-width: 767px)").matches;
+            apply(storedValue === "1" || collapseByDefault, false);
+            button.addEventListener("click", () => apply(!document.body.classList.contains(className)));
+        }
+
+        function bindImageToggle() {
+            const imageToggle = document.getElementById("article-list-image-toggle");
+            const imageKey = "LeucoHideArticleListImages";
+
+            function applyImagePreference(hidden) {
+                document.body.classList.toggle("article-list-images-hidden", hidden);
+                if (!imageToggle) return;
+                const label = imageToggle.querySelector("span");
+                if (label) {
+                    const labelKey = hidden ? label.dataset.hideKey : label.dataset.showKey;
+                    label.textContent = text(labelKey) || (hidden ? label.dataset.hideText : label.dataset.showText);
+                }
+                imageToggle.setAttribute("aria-pressed", String(hidden));
+                localStorage.setItem(imageKey, hidden ? "1" : "0");
+            }
+
+            applyImagePreference(localStorage.getItem(imageKey) === "1");
+            if (imageToggle) {
+                imageToggle.addEventListener("click", () => applyImagePreference(!document.body.classList.contains("article-list-images-hidden")));
+                imageToggle.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        imageToggle.click();
+                    }
+                });
+            }
+        }
+
+        function bindHeadingFold() {
+            function setSectionCollapsed(section, collapsed) {
+                if (collapsed) {
+                    section.style.maxHeight = section.scrollHeight + "px";
+                    requestAnimationFrame(() => {
+                        section.classList.add("is-collapsed");
+                        section.style.maxHeight = "0px";
+                    });
+                } else {
+                    section.classList.remove("is-collapsed");
+                    section.style.maxHeight = section.scrollHeight + "px";
+                    window.setTimeout(() => {
+                        if (!section.classList.contains("is-collapsed")) section.style.maxHeight = "";
+                    }, 260);
+                }
+            }
+
+            const articleContent = document.querySelector(".article-content");
+            if (!articleContent) return;
+
+            const headings = Array.from(articleContent.querySelectorAll("h2, h3, h4, h5, h6"))
+                .filter((heading) => !heading.closest(".custom-toc") && !heading.closest("#TableOfContents"));
+
+            headings.forEach((heading, index) => {
+                if (heading.dataset.foldReady === "1") return;
+                heading.dataset.foldReady = "1";
+                heading.classList.add("collapsible-heading");
+                heading.setAttribute("tabindex", "0");
+
+                const level = Number(heading.tagName.slice(1));
+                const body = document.createElement("div");
+                body.className = "heading-section-body";
+                body.dataset.headingLevel = String(level);
+                body.id = `heading-section-${index}`;
+                heading.after(body);
+
+                let node = body.nextSibling;
+                while (node) {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        const element = node;
+                        if (/^H[2-6]$/.test(element.tagName) && Number(element.tagName.slice(1)) <= level) break;
+                    }
+                    const next = node.nextSibling;
+                    body.appendChild(node);
+                    node = next;
+                }
+
+                if (!body.childNodes.length) return;
+
+                const toggle = document.createElement("button");
+                toggle.className = "heading-fold-toggle";
+                toggle.type = "button";
+                toggle.setAttribute("aria-expanded", "true");
+                toggle.setAttribute("aria-controls", body.id);
+                toggle.setAttribute("aria-label", text("heading.collapse") || "收起本节");
+                heading.prepend(toggle);
+
+                const flip = () => {
+                    const collapsed = !body.classList.contains("is-collapsed");
+                    heading.classList.toggle("is-collapsed", collapsed);
+                    toggle.setAttribute("aria-expanded", String(!collapsed));
+                    toggle.setAttribute("aria-label", text(collapsed ? "heading.expand" : "heading.collapse") || (collapsed ? "展开本节" : "收起本节"));
+                    setSectionCollapsed(body, collapsed);
+                };
+
+                toggle.addEventListener("click", (event) => {
+                    event.stopPropagation();
+                    flip();
+                });
+                heading.addEventListener("click", (event) => {
+                    if (event.target.closest("a")) return;
+                    flip();
+                });
+                heading.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        flip();
+                    }
+                });
+            });
+        }
+
+        function bindArticleLocalSearch() {
+            const searchBox = document.querySelector(".article-local-search");
+            const articleContent = document.querySelector(".article-content");
+            if (!searchBox || !articleContent) return;
+
+            const input = searchBox.querySelector("#article-local-search-input");
+            const prevButton = searchBox.querySelector("[data-article-search-prev]");
+            const nextButton = searchBox.querySelector("[data-article-search-next]");
+            const clearButton = searchBox.querySelector("[data-article-search-clear]");
+            const count = searchBox.querySelector("[data-article-search-count]");
+            let marks = [];
+            let activeIndex = -1;
+
+            function escapeRegExp(value) {
+                return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            }
+
+            function buildRegex(query) {
+                if (!query.trim()) return null;
+                const regexMatch = query.match(/^\/(.+)\/([dgimsuvy]*)$/);
+                if (regexMatch) {
+                    const flags = regexMatch[2].includes("g") ? regexMatch[2] : regexMatch[2] + "g";
+                    return new RegExp(regexMatch[1], flags);
+                }
+                return new RegExp(escapeRegExp(query), "gi");
+            }
+
+            function clearHighlights() {
+                marks.forEach((mark) => {
+                    const parent = mark.parentNode;
+                    if (!parent) return;
+                    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                    parent.normalize();
+                });
+                marks = [];
+                activeIndex = -1;
+                searchBox.classList.remove("has-error");
+                updateCount();
+            }
+
+            function updateCount() {
+                if (!count) return;
+                count.textContent = marks.length ? `${activeIndex + 1}/${marks.length}` : "0/0";
+            }
+
+            function activate(index) {
+                if (!marks.length) {
+                    activeIndex = -1;
+                    updateCount();
+                    return;
+                }
+                marks.forEach((mark) => mark.classList.remove("is-active"));
+                activeIndex = (index + marks.length) % marks.length;
+                marks[activeIndex].classList.add("is-active");
+                marks[activeIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+                updateCount();
+            }
+
+            function runSearch() {
+                clearHighlights();
+                const query = input.value.trim();
+                if (!query) return;
+
+                let regex;
+                try {
+                    regex = buildRegex(query);
+                } catch (error) {
+                    searchBox.classList.add("has-error");
+                    return;
+                }
+                if (!regex) return;
+
+                const walker = document.createTreeWalker(articleContent, NodeFilter.SHOW_TEXT, {
+                    acceptNode(node) {
+                        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                        const parent = node.parentElement;
+                        if (!parent) return NodeFilter.FILTER_REJECT;
+                        if (parent.closest("script, style, .article-local-search, .heading-fold-toggle")) return NodeFilter.FILTER_REJECT;
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                });
+
+                const textNodes = [];
+                while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+                textNodes.forEach((node) => {
+                    const value = node.nodeValue;
+                    const localMatches = [];
+                    regex.lastIndex = 0;
+                    let match;
+                    while ((match = regex.exec(value)) !== null) {
+                        if (match[0] === "") {
+                            regex.lastIndex++;
+                            continue;
+                        }
+                        localMatches.push({ start: match.index, end: match.index + match[0].length });
+                    }
+                    if (!localMatches.length) return;
+
+                    const fragment = document.createDocumentFragment();
+                    let cursor = 0;
+                    localMatches.forEach(({ start, end }) => {
+                        if (start > cursor) fragment.appendChild(document.createTextNode(value.slice(cursor, start)));
+                        const mark = document.createElement("mark");
+                        mark.className = "article-search-mark";
+                        mark.textContent = value.slice(start, end);
+                        fragment.appendChild(mark);
+                        marks.push(mark);
+                        cursor = end;
+                    });
+                    if (cursor < value.length) fragment.appendChild(document.createTextNode(value.slice(cursor)));
+                    node.parentNode.replaceChild(fragment, node);
+                });
+
+                if (marks.length) activate(0);
+                updateCount();
+            }
+
+            input.addEventListener("input", runSearch);
+            input.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    activate(activeIndex + 1);
+                }
+            });
+            prevButton?.addEventListener("click", () => activate(activeIndex - 1));
+            nextButton?.addEventListener("click", () => activate(activeIndex + 1));
+            clearButton?.addEventListener("click", () => {
+                input.value = "";
+                clearHighlights();
+                input.focus();
+            });
+            updateCount();
+        }
+
+        function refreshDynamicLabels() {
+            ["left", "right"].forEach((side) => {
+                const button = document.querySelector(`[data-sidebar-toggle="${side}"]`);
+                if (!button) return;
+                const collapsed = document.body.classList.contains(side + "-sidebar-collapsed");
+                const labelKey = side === "left"
+                    ? (collapsed ? "sidebar.expandLeft" : "sidebar.collapseLeft")
+                    : (collapsed ? "sidebar.expandRight" : "sidebar.collapseRight");
+                const label = text(labelKey);
+                if (label) {
+                    button.setAttribute("aria-label", label);
+                    button.setAttribute("title", label);
+                }
+            });
+            document.querySelectorAll(".heading-fold-toggle").forEach((toggle) => {
+                const collapsed = toggle.getAttribute("aria-expanded") === "false";
+                const label = text(collapsed ? "heading.expand" : "heading.collapse");
+                if (label) toggle.setAttribute("aria-label", label);
+            });
+        }
+
+        await loadLanguageDictionary();
+        bindSidebarToggle("left");
+        bindSidebarToggle("right");
+        bindImageToggle();
+        bindLanguageSwitch();
+        bindHeadingFold();
+        bindArticleLocalSearch();
+        assignTaxonomyColors();
+        applyTextTranslations();
+        refreshDynamicLabels();
+    });
+</script>
+
+<script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.13.0/dist/mermaid.esm.min.mjs';
     document.addEventListener('DOMContentLoaded', () => {
         mermaid.initialize({
@@ -149,4 +1444,7 @@
             securityLevel: 'loose'
         });
     });
-</script></body></html>
+</script>
+
+    </body>
+</html>
