@@ -154,6 +154,41 @@
     "tw": "顯示圖片",
     "en": "Show images"
   },
+  "artView.enable": {
+    "cn": "艺术化视图",
+    "tw": "藝術化視圖",
+    "en": "Art view"
+  },
+  "artView.disable": {
+    "cn": "标准视图",
+    "tw": "標準視圖",
+    "en": "Standard view"
+  },
+  "keywords.more": {
+    "cn": "展开更多",
+    "tw": "展開更多",
+    "en": "Show more"
+  },
+  "filter.search": {
+    "cn": "搜索",
+    "tw": "搜尋",
+    "en": "Search"
+  },
+  "filter.all": {
+    "cn": "全部",
+    "tw": "全部",
+    "en": "All"
+  },
+  "filter.date": {
+    "cn": "日期",
+    "tw": "日期",
+    "en": "Date"
+  },
+  "filter.empty": {
+    "cn": "没有符合条件的博文",
+    "tw": "沒有符合條件的文章",
+    "en": "No posts match the filters"
+  },
   "sidebar.collapseLeft": {
     "cn": "收起左侧栏",
     "tw": "收起左側欄",
