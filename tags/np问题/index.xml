@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NP问题 on Leuco's Blog</title><link>http://localhost:1313/tags/np%E9%97%AE%E9%A2%98/</link><description>Recent content in NP问题 on Leuco's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh_CN</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Sun, 31 May 2026 21:35:59 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/np%E9%97%AE%E9%A2%98/index.xml" rel="self" type="application/rss+xml"/><item><title>NP问题与归约</title><link>http://localhost:1313/p/np%E9%97%AE%E9%A2%98%E4%B8%8E%E5%BD%92%E7%BA%A6/</link><pubDate>Sat, 06 Dec 2025 15:19:03 +0800</pubDate><guid>http://localhost:1313/p/np%E9%97%AE%E9%A2%98%E4%B8%8E%E5%BD%92%E7%BA%A6/</guid><description>&lt;div class="custom-toc"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NP问题 on Leuco's Blog</title><link>http://localhost:1313/tags/np%E9%97%AE%E9%A2%98/</link><description>Recent content in NP问题 on Leuco's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh_CN</language><copyright>Leuco(leucoyuu@163.com)</copyright><lastBuildDate>Sat, 06 Dec 2025 15:19:03 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/np%E9%97%AE%E9%A2%98/index.xml" rel="self" type="application/rss+xml"/><item><title>NP问题与归约</title><link>http://localhost:1313/p/np%E9%97%AE%E9%A2%98%E4%B8%8E%E5%BD%92%E7%BA%A6/</link><pubDate>Sat, 06 Dec 2025 15:19:03 +0800</pubDate><guid>http://localhost:1313/p/np%E9%97%AE%E9%A2%98%E4%B8%8E%E5%BD%92%E7%BA%A6/</guid><description>&lt;div class="custom-toc"&gt;
 &lt;h3&gt;目录&lt;/h3&gt;
 &lt;nav id="TableOfContents"&gt;
 &lt;ul&gt;
@@ -91,20 +91,35 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;div class="mermaid"&gt;
-graph TB
-subgraph NP-Hard
-direction TB
-subgraph NP
-direction TB
-subgraph NPC
-end
-subgraph P
-end
-end
-end
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;graph TB
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph NP-Hard
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; direction TB
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph NP
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; direction TB
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph NPC
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph P
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;h2 id="归约性"&gt;归约性
+&lt;/div&gt;&lt;h2 id="归约性"&gt;归约性
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;一个问题（ $ Q_1 $ ）可以归约为另外一个问题（ $ Q_2 $ ）： $ Q_1 $ 可以转换为 $ Q_2 $ ，之后可以通过求解 $ Q_2 $ 的方法来求解 $ Q_1 $&lt;/li&gt;
 &lt;li&gt;简单的比喻：求解一元一次方程可归约为求解一元二次方程（二次项系数为0）&lt;/li&gt;
