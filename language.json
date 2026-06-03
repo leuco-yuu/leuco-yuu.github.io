@@ -32,6 +32,7 @@
   "image.show": { "cn": "展示图片", "tw": "顯示圖片", "en": "Show images" },
   "artView.enable": { "cn": "艺术化视图", "tw": "藝術化視圖", "en": "Art view" },
   "artView.disable": { "cn": "列表模式", "tw": "列表模式", "en": "List view" },
+  "artView.timeOrder": { "cn": "时间顺序", "tw": "時間順序", "en": "Time order" },
   "keywords.more": { "cn": "展开更多", "tw": "展開更多", "en": "Show more" },
   "keywords.less": { "cn": "收起", "tw": "收起", "en": "Collapse" },
   "filter.search": { "cn": "搜索", "tw": "搜尋", "en": "Search" },
