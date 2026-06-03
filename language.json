@@ -30,7 +30,7 @@
   "article.localSearchClear": { "cn": "清除搜索", "tw": "清除搜尋", "en": "Clear search" },
   "image.hide": { "cn": "隐藏图片", "tw": "隱藏圖片", "en": "Hide images" },
   "image.show": { "cn": "展示图片", "tw": "顯示圖片", "en": "Show images" },
-  "artView.enable": { "cn": "艺术化视图", "tw": "藝術化視圖", "en": "Art view" },
+  "artView.enable": { "cn": "平铺视图", "tw": "平鋪視圖", "en": "Tile view" },
   "artView.disable": { "cn": "列表模式", "tw": "列表模式", "en": "List view" },
   "artView.timeOrder": { "cn": "时间顺序", "tw": "時間順序", "en": "Time order" },
   "keywords.more": { "cn": "展开更多", "tw": "展開更多", "en": "Show more" },
