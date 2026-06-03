@@ -399,6 +399,15 @@ App --&gt;|"仅限容器内部调用"| LO
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;错误（根据构建机制，三个&lt;code&gt;RUN&lt;/code&gt;会产生三个冗余镜像层）：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;dockerfile&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="dockerfile" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -408,12 +417,23 @@ App --&gt;|"仅限容器内部调用"| LO
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; apt-get update&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; apt-get install -y python3&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; apt-get clean&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; apt-get clean&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;正确：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;dockerfile&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="dockerfile" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -425,10 +445,12 @@ App --&gt;|"仅限容器内部调用"| LO
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; apt-get update &lt;span class="se"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get install -y python3 &lt;span class="se"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get clean &lt;span class="se"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -rf /var/lib/apt/lists/*&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -rf /var/lib/apt/lists/*&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -482,6 +504,15 @@ App --&gt;|"仅限容器内部调用"| LO
 &lt;h3 id="dockerignore"&gt;.dockerignore
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;docker build -t myapp .&lt;/code&gt; 最后的 &lt;code&gt;.&lt;/code&gt; 代表当前目录。 Docker 在构建前，&lt;strong&gt;会把这个目录下的所有文件打包发送给 Docker Daemon (守护进程)&lt;/strong&gt;。如果目录下有 &lt;code&gt;venv/&lt;/code&gt; 虚拟环境、&lt;code&gt;.git/&lt;/code&gt; 隐藏文件夹、几 GB 的测试数据、或是 &lt;code&gt;__pycache__/&lt;/code&gt;，它们全都会被发送，导致构建过程十分缓慢，甚至将敏感配置打包进镜像。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;解决方案：&lt;/strong&gt; 在 Dockerfile 同级目录下创建一个 &lt;code&gt;.dockerignore&lt;/code&gt; 文件（语法和 &lt;code&gt;.gitignore&lt;/code&gt; 完全一样）。示例：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;text&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="text" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -496,7 +527,7 @@ App --&gt;|"仅限容器内部调用"| LO
 &lt;/span&gt;&lt;span class="lnt"&gt;10
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.git
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.git
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.gitignore
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;__pycache__/
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;*.pyc
@@ -505,12 +536,23 @@ App --&gt;|"仅限容器内部调用"| LO
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;env/
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.env
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Dockerfile
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.dockerignore
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.dockerignore&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;h3 id="一个示例"&gt;一个示例
-&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/h3&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;dockerfile&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="dockerfile" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
 &lt;/span&gt;&lt;span class="lnt"&gt; 2
@@ -561,10 +603,12 @@ App --&gt;|"仅限容器内部调用"| LO
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;EXPOSE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;8000&lt;/span&gt;&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 7. 指定启动命令&lt;/span&gt;&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;python&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;app.py&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;python&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;app.py&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;h2 id="docker-命令清单"&gt;Docker 命令清单
 &lt;/h2&gt;&lt;h3 id="全局参数"&gt;全局参数
 &lt;/h3&gt;&lt;p&gt;通常直接跟在 &lt;code&gt;docker&lt;/code&gt; 关键字后面，用于控制 Docker 客户端与服务端（Daemon）的连接和行为级别：&lt;code&gt;docker [OPTIONS] COMMAND&lt;/code&gt;。&lt;/p&gt;
@@ -834,6 +878,15 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/div&gt;
 &lt;h3 id="step1-初始配置"&gt;Step1 初始配置
 &lt;/h3&gt;&lt;p&gt;每个 Dockerfile 都应该有一个独立的文件夹，因为 Docker 在构建时会将整个文件夹的内容作为“上下文”发送给 Docker 引擎。&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -841,13 +894,24 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mkdir docker-demo
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; docker-demo
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; docker-demo&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;在 &lt;code&gt;docker-demo&lt;/code&gt; 下构建两个文件：&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;在 &lt;code&gt;docker-demo&lt;/code&gt; 下构建两个文件：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;app.py&lt;/code&gt;：一个简单的HTTP服务，返回一段信息&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;py&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="py" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -883,12 +947,23 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;服务已启动，监听端口 8000...&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;HTTPServer&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0.0.0.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8888&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;SimpleHandler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serve_forever&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serve_forever&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;Dockerfile&lt;/code&gt;&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;dockerfile&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="dockerfile" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -914,22 +989,35 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;EXPOSE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;8888&lt;/span&gt;&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 默认执行&lt;/span&gt;&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;python&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;app.py&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;python&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;app.py&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="step2-构建镜像"&gt;Step2 构建镜像
 &lt;/h3&gt;&lt;p&gt;在 &lt;code&gt;docker-demo&lt;/code&gt; 下执行&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker build -t my-python-service:v1 .
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker build -t my-python-service:v1 .&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;build&lt;/code&gt;: 告诉 Docker 开始构建。&lt;/p&gt;
 &lt;/li&gt;
@@ -943,15 +1031,26 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;p&gt;Docker 会下载 &lt;code&gt;python:3.10-slim&lt;/code&gt; 基础层，然后创建工作目录层，复制文件层，最后生成最终镜像。可以用 &lt;code&gt;docker images&lt;/code&gt; 查看刚刚生成的镜像。&lt;/p&gt;
 &lt;h3 id="step3-实例化与运行"&gt;Step3 实例化与运行
 &lt;/h3&gt;&lt;p&gt;在任意终端执行：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run -d --name my-running-app -p 8080:8000 my-python-service:v1
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run -d --name my-running-app -p 8080:8000 my-python-service:v1&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;run&lt;/code&gt;: 创建并启动容器。&lt;/p&gt;
 &lt;/li&gt;
@@ -973,77 +1072,143 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;查看运行状态&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker ps
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker ps&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;会看到 &lt;code&gt;my-running-app&lt;/code&gt; 正在运行，并且显示了端口映射关系。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;会看到 &lt;code&gt;my-running-app&lt;/code&gt; 正在运行，并且显示了端口映射关系。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;查看容器日志&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker logs my-running-app
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker logs my-running-app&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;进入容器内部执行命令&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; -it my-running-app /bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; -it my-running-app /bin/bash&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;此时终端前缀会改变，说明已经在容器内部了！可以输入 &lt;code&gt;ls&lt;/code&gt; 看看 &lt;code&gt;/usr/src/app&lt;/code&gt; 目录下的文件。输入 &lt;code&gt;exit&lt;/code&gt; 即可退出容器，但这不会停止容器运行。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;此时终端前缀会改变，说明已经在容器内部了！可以输入 &lt;code&gt;ls&lt;/code&gt; 看看 &lt;code&gt;/usr/src/app&lt;/code&gt; 目录下的文件。输入 &lt;code&gt;exit&lt;/code&gt; 即可退出容器，但这不会停止容器运行。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="step5-停止与清理"&gt;Step5 停止与清理
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;停止运行中的容器&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker stop my-running-app
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker stop my-running-app&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;此时再执行 &lt;code&gt;docker ps&lt;/code&gt; 就看不到它了。但如果执行 &lt;code&gt;docker ps -a&lt;/code&gt;（显示所有容器），会发现它变成了 &lt;code&gt;Exited&lt;/code&gt; 状态。&lt;strong&gt;停止并不等于删除&lt;/strong&gt;，它的读写层（UpperDir）数据还在。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;此时再执行 &lt;code&gt;docker ps&lt;/code&gt; 就看不到它了。但如果执行 &lt;code&gt;docker ps -a&lt;/code&gt;（显示所有容器），会发现它变成了 &lt;code&gt;Exited&lt;/code&gt; 状态。&lt;strong&gt;停止并不等于删除&lt;/strong&gt;，它的读写层（UpperDir）数据还在。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;删除容器&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rm my-running-app
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rm my-running-app&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;如果容器还在运行中，可以加 &lt;code&gt;-f&lt;/code&gt; 强制删除：&lt;code&gt;docker rm -f my-running-app&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;如果容器还在运行中，可以加 &lt;code&gt;-f&lt;/code&gt; 强制删除：&lt;code&gt;docker rm -f my-running-app&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;删除镜像&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rmi my-python-service:v1
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rmi my-python-service:v1&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id="开发环境-docker-化"&gt;开发环境 Docker 化
@@ -1054,15 +1219,26 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;li&gt;
 &lt;p&gt;运行python脚本&lt;/p&gt;
 &lt;p&gt;不需要在宿主机上安装python环境，直接使用一行命令：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/app -w /app python:3.10-slim python main.py
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/app -w /app python:3.10-slim python main.py&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;--rm&lt;/code&gt;：运行完毕后立刻销毁容器&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-v $(pwd):/app &lt;/code&gt;：把当前目录挂载到容器内的&lt;code&gt;/app&lt;/code&gt;目录&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-w /app&lt;/code&gt;：设置工作目录&lt;/li&gt;
@@ -1071,27 +1247,49 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;li&gt;
 &lt;p&gt;编译和运行C++程序&lt;/p&gt;
 &lt;p&gt;C++程序需要编译+运行两步&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/src -w /src gcc:latest bash -c &lt;span class="s2"&gt;&amp;#34;g++ main.cpp -o main_app &amp;amp;&amp;amp; ./main_app&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/src -w /src gcc:latest bash -c &lt;span class="s2"&gt;&amp;#34;g++ main.cpp -o main_app &amp;amp;&amp;amp; ./main_app&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;执行完毕后，宿主机的目录下多了一个编译好的 &lt;code&gt;main_app&lt;/code&gt; 可执行文件。这是通过 &lt;code&gt;-v&lt;/code&gt; 挂载的优点：容器内生成的文件会直接保留在宿主机上。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;执行完毕后，宿主机的目录下多了一个编译好的 &lt;code&gt;main_app&lt;/code&gt; 可执行文件。这是通过 &lt;code&gt;-v&lt;/code&gt; 挂载的优点：容器内生成的文件会直接保留在宿主机上。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;编译并运行Java&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/src -w /src openjdk:17-jdk bash -c &lt;span class="s2"&gt;&amp;#34;javac Main.java &amp;amp;&amp;amp; java Main&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/src -w /src openjdk:17-jdk bash -c &lt;span class="s2"&gt;&amp;#34;javac Main.java &amp;amp;&amp;amp; java Main&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="vs-code-现代工程选择dev-containers-插件"&gt;VS Code 现代工程选择：Dev Containers 插件
@@ -1105,15 +1303,26 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;在终端已经启动一个长期运行的容器：&lt;/strong&gt; 为了开发，通常启动一个带交互终端并在后台运行的系统镜像：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run -itd --name my-cpp-dev gcc:latest /bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run -itd --name my-cpp-dev gcc:latest /bin/bash&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;在 VS Code 中连接：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -1139,6 +1348,15 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/h4&gt;&lt;p&gt;现代化开发选择将&lt;strong&gt;开发环境本身作为代码（Infrastructure as Code）&lt;/strong&gt;。假设要开发一个需要 &lt;code&gt;boost&lt;/code&gt; 和 &lt;code&gt;cmake&lt;/code&gt; 的 C++ 网络编程项目：&lt;/p&gt;
 &lt;h5 id="创建项目结构"&gt;&lt;strong&gt;创建项目结构&lt;/strong&gt;
 &lt;/h5&gt;&lt;p&gt;在空项目文件夹下，创建一个特殊的文件夹 &lt;code&gt;.devcontainer&lt;/code&gt;，并在里面放两个文件：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -1152,11 +1370,22 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── .devcontainer/
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ├── devcontainer.json &lt;span class="c1"&gt;# 定义 VS Code 行为&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── Dockerfile &lt;span class="c1"&gt;# 与之前的 Dockerfile 一致&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── main.cpp
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── main.cpp&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h5 id="编写-dockerfile"&gt;编写 Dockerfile
-&lt;/h5&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h5 id="编写-dockerfile"&gt;编写 Dockerfile
+&lt;/h5&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;dockerfile&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="dockerfile" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
@@ -1177,11 +1406,22 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; cmake &lt;span class="se"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; gdb &lt;span class="se"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; libboost-all-dev &lt;span class="se"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get clean &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -rf /var/lib/apt/lists/*&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get clean &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -rf /var/lib/apt/lists/*&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h5 id="devcontainerjson-与参数介绍"&gt;devcontainer.json 与参数介绍
-&lt;/h5&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h5 id="devcontainerjson-与参数介绍"&gt;devcontainer.json 与参数介绍
+&lt;/h5&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;json&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="json" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
 &lt;/span&gt;&lt;span class="lnt"&gt; 2
@@ -1218,10 +1458,12 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 将容器内的用户设置为 vscode (基础镜像自带的普通用户，避免用 root 引起权限混乱)
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;remoteUser&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;vscode&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;核心构建参数 (Build &amp;amp; Image)&lt;/p&gt;
 &lt;p&gt;这部分决定了容器基于什么“底座”运行。&lt;/p&gt;
@@ -1305,6 +1547,15 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;li&gt;
 &lt;p&gt;编辑器与插件定制（Editor Customization）&lt;/p&gt;
 &lt;p&gt;这部分是决定了的 VS Code 长有什么功能。&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;json&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="json" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1340,10 +1591,12 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;github.copilot&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;// AI 辅助
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;生命周期钩子脚本 (Lifecycle Hooks)&lt;/p&gt;
 &lt;table&gt;
@@ -1386,6 +1639,15 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;li&gt;
 &lt;p&gt;特性模块 (Features)&lt;/p&gt;
 &lt;p&gt;这是微软后来推出的“积木式”环境搭建方案。以前你想在环境里加个 Go、加个 Rust、加个 Docker-in-Docker，你需要自己写很长的 Dockerfile。现在只需要在 &lt;code&gt;devcontainer.json&lt;/code&gt; 里加几行配置，它会自动帮你装好。&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;json&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="json" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1411,10 +1673,12 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;version&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;latest&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;moby&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;端口转发 (Port Forwarding)&lt;/p&gt;
 &lt;p&gt;当容器里跑了一个 Web 服务（比如监听了 8000 端口），通过以下配置可以在宿主机的浏览器里访问：&lt;/p&gt;
@@ -1422,6 +1686,15 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;forwardPorts&lt;/code&gt;&lt;/strong&gt;: &lt;code&gt;[8000, 3306]&lt;/code&gt; (自动将容器的 8000 和 3306 转发到宿主机)。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;portsAttributes&lt;/code&gt;&lt;/strong&gt;: 可以进一步定义端口的行为。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;json&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="json" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -1437,12 +1710,23 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;label&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;My Web App&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// 给端口起个别名
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;onAutoForward&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;openBrowser&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;// 容器启动时自动在宿主机打开浏览器
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;一个示例&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;json&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="json" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1506,10 +1790,12 @@ Image --&gt; [*] : docker rmi (删除镜像)
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id="自动化容器环境构建"&gt;&lt;strong&gt;自动化容器环境构建&lt;/strong&gt;
 &lt;/h5&gt;&lt;ul&gt;

