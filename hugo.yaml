@@ -196,7 +196,7 @@ params:
     enabled: true
     default: false
     idleDelay: 2000
-  contentWidth: 59rem
+  contentWidth: 56rem
   toc:
     enabled: true
     position: center
