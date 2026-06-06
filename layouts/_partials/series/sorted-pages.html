@@ -1,0 +1,42 @@
+{{- $pages := .pages -}}
+{{- $claimed := dict -}}
+{{- $numbered := slice -}}
+{{- $unnumbered := slice -}}
+
+{{- range $defaultIndex, $page := $pages -}}
+  {{- $hasOrder := isset $page.Params "series_order" -}}
+  {{- $order := 0 -}}
+  {{- if $hasOrder -}}
+    {{- $order = int $page.Params.series_order -}}
+    {{- if le $order 0 -}}
+      {{- $hasOrder = false -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $hasOrder -}}
+    {{- $key := printf "%d" $order -}}
+    {{- if isset $claimed $key -}}
+      {{- $unnumbered = $unnumbered | append $page -}}
+    {{- else -}}
+      {{- $claimed = merge $claimed (dict $key true) -}}
+      {{- $numbered = $numbered | append (dict
+        "page" $page
+        "order" $order
+        "defaultIndex" $defaultIndex
+        )
+      -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $unnumbered = $unnumbered | append $page -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $result := slice -}}
+{{- range sort $numbered "order" "asc" -}}
+  {{- $result = $result | append .page -}}
+{{- end -}}
+{{- range $unnumbered -}}
+  {{- $result = $result | append . -}}
+{{- end -}}
+
+{{- return $result -}}

@@ -1,0 +1,43 @@
+.collapse-overlay-btn,
+.code-block-bottom-collapse,
+.mermaid-code-bottom-collapse {
+  position: absolute;
+  transform: scale(1);
+  transform-origin: center;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.collapse-overlay-btn,
+.code-block-bottom-collapse,
+.mermaid-code-bottom-collapse {
+  translate: -50% 0;
+}
+
+.collapse-overlay-btn::before,
+.code-block-bottom-collapse::before,
+.mermaid-code-bottom-collapse::before {
+  content: "";
+  inset: -0.65rem;
+  position: absolute;
+}
+
+.collapse-overlay-btn:hover,
+.collapse-overlay-btn:focus-visible,
+.code-block-bottom-collapse:hover,
+.code-block-bottom-collapse:focus-visible,
+.mermaid-code-bottom-collapse:hover,
+.mermaid-code-bottom-collapse:focus-visible {
+  transform: scale(1.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collapse-overlay-btn,
+  .code-block-bottom-collapse,
+  .mermaid-code-bottom-collapse {
+    transition: none !important;
+  }
+}
