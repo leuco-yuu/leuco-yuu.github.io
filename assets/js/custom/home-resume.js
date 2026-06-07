@@ -9,32 +9,8 @@
         const target = card.dataset.resumeLink;
         if (!target || navigating) return;
 
-        const resumePage = card.closest("[data-resume-page]");
-        const reveal = resumePage?.querySelector("[data-resume-reveal]");
-        if (!resumePage || !reveal) {
-          window.location.assign(target);
-          return;
-        }
-
         navigating = true;
-        reveal.classList.remove("is-visible");
-        resumePage.classList.add("is-closing");
-
-        let completed = false;
-        const finish = () => {
-          if (completed) return;
-          completed = true;
-          window.location.assign(target);
-        };
-
-        reveal.addEventListener(
-          "transitionend",
-          (event) => {
-            if (event.propertyName === "grid-template-rows") finish();
-          },
-          { once: true },
-        );
-        window.setTimeout(finish, 760);
+        window.location.assign(target);
       };
 
       card.addEventListener("click", (event) => {

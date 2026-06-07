@@ -171,6 +171,14 @@
     right: calc(100% + 2.25rem);
   }
 
+  .site-header.is-search-open .mobile-header-row .header-search-clear {
+    right: 3.75rem;
+  }
+
+  .site-header.is-search-open .mobile-header-row .inline-search-match-nav {
+    right: 5.35rem;
+  }
+
   .site-header .inline-search-match-button {
     font-size: 0.72rem;
     height: 1.1rem;

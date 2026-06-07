@@ -56,7 +56,7 @@ $$
 - 参数解析解： $\hat{\theta} = (X^TX)^{-1}X^Ty$
 - 可能存在的问题：$(X^TX)^{-1}$的求解可能比较困难
 
-### 1、一维线性回归（代码实现）
+### 一维线性回归（代码实现）
 
 ```python
 import numpy as np
@@ -90,7 +90,7 @@ plt.show()
 
 ![png](output_3_0.png)
 
-### 2、高维线性回归（代码实现）
+### 高维线性回归（代码实现）
 
 ```python
 import numpy as np
@@ -143,7 +143,7 @@ Y_pre:
 
 
 
-### 3、高维线性回归（sklearn库）
+### 高维线性回归（sklearn库）
 
 ```python
 import numpy as np
@@ -191,12 +191,12 @@ print(y_pre)
      [68.2285754 ]
      [75.97196488]]
 
-## 二、梯度下降（Gradient Descent）
+## 梯度下降（Gradient Descent）
 
 - 梯度下降法迭代公式：$\hat\theta_{k+1} = \hat\theta_k - \alpha \nabla_{\theta}J(\hat\theta)$, $\alpha$为学习率
 - 学习率 $\alpha$ ：$\alpha$ 设置过大容易造成震荡，$\alpha$ 设置太小容易造成迭代次数增加，也可能落到局部最优解。一般设置为0.1、0.01、0.001、0.0001
 
-### 1、批量梯度下降（GD）
+### 批量梯度下降（GD）
 
 - 批量梯度下降的梯度：
 
@@ -266,7 +266,7 @@ print(y_pre)
      [68.23011847]
      [75.97363505]]
 
-### 2、随机梯度下降（SGD）
+### 随机梯度下降（SGD）
 
 - 随机梯度下降每次使用一条样本计算梯度：
 
@@ -280,7 +280,7 @@ $$
 \end{aligned}
 $$
 
-#### (1)、代码实现
+#### 代码实现
 
 ```python
 import numpy as np
@@ -342,7 +342,7 @@ print(y_pre)
      [68.08959999]
      [75.78462184]]
 
-#### (2)、小幅优化：打乱数据索引，顺序选取向量
+#### 小幅优化：打乱数据索引，顺序选取向量
 
 ```python
 import numpy as np
@@ -408,7 +408,7 @@ print(y_pre)
      [68.23968977]
      [75.98378179]]
 
-### 3、小批量梯度下降（Mini-batch SGD）
+### 小批量梯度下降（Mini-batch SGD）
 
 - 小批量梯度下降使用样本子集 $S$ 计算梯度：
 
@@ -422,7 +422,7 @@ $$
 $$
 
 其中 $|S|=\operatorname{batch\_size}<m$，且 $S\subseteq\{1,2,\dots,m\}$，由样本集合中均匀随机选取。
-#### (1)、代码实现
+#### 代码实现
 
 ```python
 import numpy as np
@@ -486,7 +486,7 @@ print(y_pre)
      [68.13517282]
      [75.83694482]]
 
-#### (2)、小幅优化：打乱数据索引，顺序批量选取向量
+#### 小幅优化：打乱数据索引，顺序批量选取向量
 
 ```python
 import numpy as np
@@ -554,7 +554,7 @@ print(y_pre)
      [68.23964038]
      [75.98376306]]
 
-### 4、SGD的sklearn库实现
+### SGD的sklearn库实现
 
 ```python
 import numpy as np
@@ -616,13 +616,13 @@ print(y_pre)
      [69.21400854]
      [77.04212681]]
 
-### 5、梯度下降法的问题与解决思路
+### 梯度下降法的问题与解决思路
 
 - 学习速率调整（学习速率调度，Learning rate schedules）：该方法试图在每次更新参数的过程中，改变学习速率。一般使用某种事先设定的策略或者在每次迭代中衰减一个较小的阈值
 - 在稀疏特征数据中：很少出现的特征应该使用一个相对较大的学习速率
 - 对于非凸目标函数：可能落入鞍点或平滑点
 
-#### （1）、确定速率调整函数
+#### 确定速率调整函数
 
 ```python
 import numpy as np
@@ -641,7 +641,7 @@ plt.plot(x_show,y_show)
 
 ![png](output_26_1.png)
 
-#### （2）、更改学习速率
+#### 更改学习速率
 
 ```python
 import numpy as np
@@ -700,7 +700,7 @@ print(y_pre)
      [68.4494602 ]
      [76.21792798]]
 
-## 三、坐标下降（Coordinate Descent）
+## 坐标下降（Coordinate Descent）
 
 - 坐标下降：一次走一步，每次只动一个变量。将高维问题拆成一系列一维问题，逐个坐标迭代更新，直到收敛
 - 核心思想：固定其他所有变量，只沿第i个坐标方向做一维最优化，循环往复
@@ -793,7 +793,7 @@ print(y_pre)
      [68.2285754 ]
      [75.97196488]]
 
-## 四、归一化（Normalization）
+## 归一化（Normalization）
 
 - 归一化是将不同尺度、纲量和分布的数据缩放到同一标准区间的预处理技术
 - 核心目的：消除纲量影响、加速模型收敛、提升数值稳定性，同时保留原始信息的相对关系
@@ -860,7 +860,7 @@ plt.show()
 
 ![png](output_34_1.png)
 
-## 五、正则化（Regularization）
+## 正则化（Regularization）
 
 - 过拟合与欠拟合
   * 欠拟合（underfit）：未拟合到位，训练集和测试集准确率未达到最高
@@ -939,7 +939,7 @@ $$
     $$
 - 注：Lasso 回归与 Ridge 回归只定义了 Loss 函数模型，可以用梯度下降法、坐标下降法、最小角回归（LARS）、正规方程等方法进行求解。在 sklearn 库中 Lasso 和 ElasticNet 使用坐标下降；Ridge 使用正规方程；SVGRegressor 使用随机梯度下降，可自定义正则化类型、正则化强度、学习率、阈值、迭代次数等等
 
-### 1、Lasso回归（sklearn库）
+### Lasso回归（sklearn库）
 
 ```python
 import numpy as np
@@ -991,7 +991,7 @@ Y_pre:
  [75.88324745]]
 ```
 
-### 2、Ridge回归（sklearn库）
+### Ridge回归（sklearn库）
 
 ```python
 import numpy as np
@@ -1040,7 +1040,7 @@ print(y_pre.reshape(-1,1))
      [68.16319935]
      [75.89870099]]
 
-### 3、ElasticNet回归（sklearn库）
+### ElasticNet回归（sklearn库）
 
 ```python
 import numpy as np
@@ -1089,7 +1089,7 @@ print(y_pre.reshape(-1,1))
      [66.82977581]
      [74.39992651]]
 
-### 4、随机梯度下降实现elasticnet正则化（sklearn库）
+### 随机梯度下降实现elasticnet正则化（sklearn库）
 
 ```python
 import numpy as np
@@ -1146,7 +1146,7 @@ print(y_pre.reshape(-1,1))
      [67.77050846]
      [75.42653888]]
 
-## 六、升维方法 — 多项式回归（Polynomial Regression）
+## 升维方法 — 多项式回归（Polynomial Regression）
 
 - 目的：解决欠拟合问题
 - 常见手段：将已知维度进行相乘来构建新的维度，将非线性Data转换为线性Data
@@ -1233,11 +1233,11 @@ plt.legend(
 
 ![png](output_45_1.png)
 
-## 七、实践 — 保险花销预测
+## 实践 — 保险花销预测
 
 - 数据集路径： ".\Dataset\1_Insurance_Expense_Forecast\insurance.csv"
 
-### 1、数据提取
+### 数据提取
 
 ```python
 import pandas as pd
@@ -1343,7 +1343,7 @@ data.head(6)
 </table>
 </div>
 
-### 2、EDA（Exploratory Data Analysis，探索性数据分析）
+### EDA（Exploratory Data Analysis，探索性数据分析）
 
 - 本质：在把数据喂给算法之前，先用人眼和统计工具观察和清洗数据
 - 目的：发现数据长什么样、哪里脏、哪里怪、哪里藏着有用的信号，从而为后续的特征工程、模型选择、甚至业务决策提供直觉和依据
@@ -1565,7 +1565,7 @@ data.head(6)
 </table>
 </div>
 
-### 3、特征工程
+### 特征工程
 
 - 类别：缺失值处理/数值变换/类别编码/高维稀疏/非线性交叉/时序&序列/业务先验
 - 类别编码 — One-Hot编码：对某个特征从“分类”到“向量”的变化过程，例如：
@@ -1871,7 +1871,7 @@ x_train_scaled = poly_features.fit_transform(x_train_scaled)
 x_test_scaled = poly_features.fit_transform(x_test_scaled)
 ```
 
-### 4、模型训练
+### 模型训练
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -1897,7 +1897,7 @@ y_train_predict_sgd = sgd_reg.predict(x_train_scaled)
 y_test_predict_sgd = sgd_reg.predict(x_test_scaled)
 ```
 
-### 5、模型评估
+### 模型评估
 
 ```python
 from sklearn.metrics import mean_squared_error
@@ -1925,7 +1925,7 @@ print(
     RidgeRegression(Train / Test):  0.44905315842354915 0.4321996372029468
     SGDRegression(Train / Test):  0.449286159412961 0.43308751362633735
 
-### 6、进阶
+### 进阶
 
 ```python
 import numpy as np

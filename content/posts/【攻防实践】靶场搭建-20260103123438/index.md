@@ -21,8 +21,7 @@ series:
   - "网络安全实践"
 ---
 
-# 基础靶场搭建
-## 〇 环境与 Docker
+#  环境与 Docker
 
 - **系统环境**：Kali
 
@@ -46,7 +45,7 @@ sudo username -aG docker $USER
 # newgrp docker
 ```
 
-## DVWA（Damn Vulnerable Web App）
+# DVWA（Damn Vulnerable Web App）
 
 - **简介**：DVWA是最经典的 PHP/MySQL 漏洞演示平台，包含了 SQL 注入、XSS、CSRF、文件包含等最核心的 Web 漏洞，并且可以直接在界面上调整安全级别（Low/Medium/High/Impossible），适合用来观察底层防御代码的逻辑变化。
 - **初始化部署**：
@@ -76,7 +75,7 @@ docker -rm -f dvwa_range # 彻底销毁靶场
   - 默认账号密码：`admin / password`
   - 登录后点击左侧 `Setup / Resart DB` -> `Create / Reset Database`
 
-## Pikachu（皮卡丘）
+# Pikachu（皮卡丘）
 
 - **简介**：相比于 DVWA，Pikachu 的漏洞类型更贴近国内的安全测试习惯，涵盖了 DVWA 没有的 SSRF、XXE、反序列化、越权漏洞等。带有非常详尽的中文漏洞说明和通关提示。
 - **初始化部署**：
@@ -95,7 +94,7 @@ docker run -d \
   - 按提示完成初始化部署
 - **靶场管理**：同上
 
-## WebGoat（OWASP 官方靶场）
+# WebGoat（OWASP 官方靶场）
 
 - **简介**：企业级应用大量基于 Java (Spring Boot) 开发。WebGoat 是 OWASP 维护的项目，专注于现代 Web 应用的安全风险（如 JWT 漏洞、XXE、身份认证缺陷）。其形式像闯关教程，每一步都有理论解析。
 - **初始化部署**：
@@ -120,7 +119,7 @@ docker run -d \
   - WebGoat 支持多用户隔离。
   - 如需使用 WebWolf，访问 `http://127.0.0.1:8004/WebWolf`
 
-## Vulhub（真实 CVE 漏洞复现）
+# Vulhub（真实 CVE 漏洞复现）
 
 - **简介**：Vulhub 是一个基于 Docker-Compose 的漏洞环境集合。在研究某个具体的组件（比如 Nginx 解析漏洞、Redis 未授权访问、WebLogic 反序列化）或是复现某个真实世界的 CVE 时，Vulhub 是无可替代的。
 - **初始化部署**：

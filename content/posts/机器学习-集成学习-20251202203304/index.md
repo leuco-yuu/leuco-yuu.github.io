@@ -24,8 +24,7 @@ series:
 cover: "output_3_1.png"
 ---
 
-# 集成学习（Ensemble Learning）
-## 决策树（Decision-Making Tree）
+# 决策树（Decision-Making Tree）
 - 决策树是有监督机器学习的一种
 - 模型生成：通过大量数据生成一棵非常好的树（寻找最优的分裂条件）
 - 预测：按照生成好的树的标准落到某一个叶子节点上
@@ -234,23 +233,23 @@ print(depth,scores[str(depth)])
     
 
 
-## 集成学习（Ensemble Learning）
+# 集成学习（Ensemble Learning）
 - Advance-Organizer：假设有10个决策树
   - 单决策树算法：找到10个决策树中最可靠的决策树树进行预测
   - 随机森林算法：所有决策树进行投票，少数服从多数
   - Adaboost：更可靠的决策树分到更多的票数
 - 集成学习的单个弱学习器可以基于不同的学习策略构建
 - ### 分类
-#### Bagging
+### Bagging
 - 训练：有放回地对原始训练集进行均匀抽样（Bootstrap抽样），将抽样结果用于并行独立训练 $g(x)$ 
 - 模型：同权重投票，对于分类任务少数服从多数；对于回归任务取平均
 - 例如：random forest
-#### Boosting
+### Boosting
 - 训练：通过训练集训练 $g_i$ ，再通过 $ g_k(k\in\{1,2\dots i\}) $ 的预测结果调整训练集，训练得到 $ g_{i+1} $ 
 - 模型：按照某个权重序列进行投票，对于回归任务求加权平均
 - 例如：Adaboost，GBDT，Xgboost
 
-### 随机森林（Random Forest）
+## 随机森林（Random Forest）
 - Bagging思想 + 决策树基学习器 + 同权投票
 - 模型训练：
   - 采样：有放回的从原始数据中随机抽取部分样本或特征
@@ -326,7 +325,7 @@ print(f"Voting Accuracy: {bgc.score(X_test,y_test)}")
     Voting Accuracy: 0.9666666666666667
 
 
-#### 袋外数据（OOB，Out of bag data）
+### 袋外数据（OOB，Out of bag data）
 - 一条数据N轮都没有被抽到的概率为 $\displaystyle{\underset{N\rightarrow\infty}{limit}\ (1-\frac{1}{N})^N = \frac{1}{e} \approx 36.79\%}$
 - 整个训练过程中有大约 36.79% 的数据未被使用（这部分数据称为OOB），OOB为天然验证集
 - 思想：无需像交叉验证一样显式地将数据集划分为训练集和验证集，就可以在训练过程中天然、无偏地评估模型地泛化能力，解决了验证集需要额外数据或减少训练数据量的问题。OOB判断仅基于样本是否被包含在Bootstrap训练集中，而与特征使用无关
@@ -356,7 +355,7 @@ print(f"Voting Accuracy: {bgc.score(X_test,y_test)}")
        - 对于特征 $ j $ ，它在所有树上的重要性得分可以计算为： $$ \displaystyle{Importance_j = \frac{1}{T}\sum_{i=1}^T(Err_{perm_i}-Err_{OOB_i}) }$$ ，该值衡量了由于特征j被打乱导致的模型性能下降程度。下降得越多，该特征越重要
        - 将所有特征得重要性得分进行归一化，以便比较
 
-### AdaBoost（Adaptive Boosting，自适应增强）
+## AdaBoost（Adaptive Boosting，自适应增强）
 - 思想：
   - 弱分类器：AdaBoost通过将多个比较简单的、性能较弱的基学习器（“弱分类器”）组合起来，构建出强大的、性能优异的“强分类器”。通常一个弱分类器为深度为 1 的二分决策树（决策树桩）。
   - “自适应”：在每一轮训练中，它都会根据前一轮的分类结果、自动调整训练数据的权重分布，使得算法在后续轮次中更加关注那些被前一个弱分类器分错的样本（提高分错样本在损失函数中的权重）。这样，每个新生成的弱分类器都是在“弥补”前一个分类器的不足。
@@ -421,7 +420,7 @@ print(abc.score(X_test,y_test))
     1.0
 
 
-### GBDT（梯度提升决策树）
+## GBDT（梯度提升决策树）
 - Boosting思想 + 决策树 + 梯度下降思想
 - 思想：
   - Gradient：通过梯度下降来最小化损失函数。每一棵树的新建都是为了学习之前所有树组合的预测结果的残差

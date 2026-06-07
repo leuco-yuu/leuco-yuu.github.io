@@ -375,7 +375,7 @@ plt.show()
     
 
 
-### 0、初始化
+### 初始化
 
 
 ```python
@@ -400,7 +400,7 @@ max_len = 660000
 labels = dict([(label_name,label_num) for label_num,label_name in enumerate(os.listdir(path))])
 ```
 
-### 1、数据处理与特征存储
+### 数据处理与特征存储
 
 
 ```python
@@ -434,7 +434,7 @@ np.save(model_path+"test_label",y_test)
 
 ```
 
-### 2、模型训练与存储
+### 模型训练与存储
 
 
 ```python
@@ -456,7 +456,7 @@ with open(model_path+"model_object","wb") as file:
     pickle.dump(log_reg,file)
 ```
 
-### 3、测试与评估
+### 测试与评估
 
 
 ```python

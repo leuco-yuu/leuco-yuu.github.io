@@ -26,10 +26,9 @@ series:
 cover: "cover.png"
 ---
 
-# 无监督学习（Unsupervised Learning）
 - 聚类是一种无监督的机器学习任务，它可以自动将数据划分成类（Cluster）
 
-## K均值聚类（K-Means Clustering）
+# K均值聚类（K-Means Clustering）
 - 对于没有标签的数据样本 $X$ ，根据 $X$ 的相似度划分为 $k$ 类
 - K-Means一般过程：
   - 初始化：指定中心数（簇数） $k$ 以及 $k$ 个簇中心（ $ \mu_1,\mu_2\dots \mu_k $ ，经典K-Means中随机选择中心）
@@ -57,13 +56,13 @@ cover: "cover.png"
   - K-Means++：使初始化簇中心稍微远一点。随机选择第一个中心点，计算MSE，将MSE转化为概率进行概率化选择初始簇中心点
 - Canopy聚类： 一次迭代，给出k的值以及k个初始中心点（然后进行K-Means算法）
 
-## 层次聚类（Hierarchical Clustering）
+# 层次聚类（Hierarchical Clustering）
 - 分裂法
   - 思想：将所有样本归为一个簇。每次迭代在一个簇中找到距离最远的两个样本点，将该簇划分为两个子簇。依次类推直到划分为k个簇
 - 凝聚法
   - 思想：将所有样本点看作一个独立的簇。每次迭代找到距离最小的两个簇进行合并。
 
-## 密度聚类
+# 密度聚类
 - DB-SCAN聚类（Density_Based Spatial Clustering of Applications with Noise）
   - 与层次聚类不同，它将簇定义为密度相连的点的最大集合，能够把具有高密度的区域划分为簇，并可有效地对抗噪声
   - 密度相连
@@ -278,20 +277,20 @@ data_visualization_all(labels,times)
     
 
 
-## 高斯混合模型（GMM模型）
-### 单个高斯分布（GM）
+# 高斯混合模型（GMM模型）
+## 单个高斯分布（GM）
 - 高斯分布：$N(\mu,\sigma)$
 - 通过MLE思想估计 $\mu$ 和 $\sigma$ :
   - $$\displaystyle{\hat \mu=\frac{1}{n}\sum_{i \in \{1,2 \dots n\}} x_i=\bar x}$$
   - $$\displaystyle{\hat \sigma^2=\frac{1}{n}\sum_{i \in \{1,2 \dots n\}}(x_i-\hat\mu)^2$$
-### 混合高斯模型（GMM）
+## 混合高斯模型（GMM）
 - GMM：假设随机变量 $X$ 是由 $k$ 个高斯分布混合而来，取到各个高斯分布的概率为 $\pi_1,\pi_2 \dots \pi_k$ ，第 $i$ 个高斯分布的均值为 $\mu_i$ ，标准差为 $\sigma_i$ 。当前观测到一系列样本 $X_1,X_2\dots X_n$ ，估计参数向量： $\pi，\mu，\sigma$
   - $$\displaystyle{L_{\pi,\mu,\sigma}(X) = \sum^N_{i=1}\log P(X_i)\overset{\text{全概率公式}}{=}\sum^N_{i=1}\log(\sum^K_{k=1}\pi_kN(x_i|\mu_k,\sigma_k))}$$
   - EM算法求解估计 $\pi，\mu，\sigma$
-### EM算法
+## EM算法
 - Jensen不等式：若f是凸函数，x是随机变量。有： $$f(\mathcal{E}x) \le \mathcal{E}f(x),\displaystyle{\sum_i \mathcal{E}_i=1}$$
 - E-Step（求责任度）与M-Step（更新参数）
-### GMM流程
+## GMM流程
 - 变量介绍：
   - $ N $ 为数据集中样本总数量
   - $ N_k $ 为第 $ k $ 个高斯分布的有效数据点数量
@@ -369,8 +368,8 @@ data_visualization_only(X,y_pred)
     
 
 
-## 降维
-### 降维方法：
+# 降维
+## 降维方法：
 - 特征提取：特征映射。把高维空间的数据映射到低维空间。比如PCA和基于神经网络的降维等
 - 特征选择：
   - 过滤式（打分机制）：通过某个阈值进行过滤。比如根据方差、信息增益、互信息过滤经常会看到但可能不会去用的信息
@@ -386,7 +385,7 @@ data_visualization_only(X,y_pred)
     - 特征选择的过程嵌入在模型训练过程之中。模型在训练的同时会自动进行特征选择。
     - 优点：平衡了效率和效果，比过滤式更针对模型，比包裹式快很多。
     - 缺点：依赖于具有内置特征选择机制的模型。
-### PCA降维
+## PCA降维
 - 算法过程（对于样本矩阵 $X_{m×n}$，从 $n$ 维到 $k$ 维）
   - 1、数据标准化（中心化）：计算每个特征的均值 $ X_{mean} $ ，另 $ X_c=X-X_{mean} $
   - 2、计算协方差矩阵：$$\displaystyle{\Sigma = \frac{1}{m-1}X_c^TX_c}$$

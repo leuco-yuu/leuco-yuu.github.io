@@ -20,10 +20,9 @@ series:
 cover: "cover.png"
 ---
 
-# 基础环境搭建
-## kali linux内网文件共享系统搭建
+# kali linux内网文件共享系统搭建
 
-### 项目结构
+## 项目结构
 
 ```text
 FileShare/
@@ -36,14 +35,14 @@ FileShare/
 └── stop.sh  # 结束脚本
 ```
 
-### 安装Flask
+## 安装Flask
 
 ```bash
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ sudo apt install python3-flask
 ```
 
-### app.py
+## app.py
 
 ```python
 #!/usr/bin/env python3
@@ -471,7 +470,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000, debug=True, threaded=True)
 ```
 
-### index.html
+## index.html
 
 ``` html
 <!DOCTYPE html>
@@ -1085,7 +1084,7 @@ if __name__ == '__main__':
 </html>
 ```
 
-### start.sh
+## start.sh
 
 ```bash
 #!/bin/bash
@@ -1423,7 +1422,7 @@ fi
 exit 0
 ```
 
-### stop.sh
+## stop.sh
 
 ```bash
 #!/bin/bash

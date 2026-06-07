@@ -1,22 +1,4 @@
 function initHeaderSearch() {
-  const SEARCH_OPEN_KEY = "leuco:inline-search-open";
-
-  const readSearchOpenState = () => {
-    try {
-      return window.sessionStorage.getItem(SEARCH_OPEN_KEY) === "true";
-    } catch (_) {
-      return false;
-    }
-  };
-
-  const writeSearchOpenState = (open) => {
-    try {
-      window.sessionStorage.setItem(SEARCH_OPEN_KEY, open ? "true" : "false");
-    } catch (_) {
-      /* Ignore storage failures in private or restricted contexts. */
-    }
-  };
-
   const normalizePath = (href) => {
     try {
       const path = new URL(href, window.location.origin).pathname;
@@ -126,7 +108,7 @@ function initHeaderSearch() {
       }
     };
 
-    const setOpen = (open, { focus = true, persist = true } = {}) => {
+    const setOpen = (open, { focus = true } = {}) => {
       const desktopMoreToggle = header.querySelector(".desktop-main-nav .nav-submenu-toggle");
       const desktopMorePanel = getPanelForToggle(desktopMoreToggle);
       const searchMoreToggle = header.querySelector(".desktop-search-menu .nav-submenu-toggle");
@@ -135,9 +117,6 @@ function initHeaderSearch() {
       const searchMoreWasOpen = Boolean(searchMorePanel && !searchMorePanel.classList.contains("hidden"));
 
       header.classList.toggle("is-search-open", open);
-      if (persist) {
-        writeSearchOpenState(open);
-      }
       toggles.forEach((toggle) => toggle.setAttribute("aria-pressed", String(open)));
       mobileSearchItems.forEach((item) => {
         item.classList.toggle("hidden", !open);
@@ -188,7 +167,7 @@ function initHeaderSearch() {
       const fieldButtonGap = rootFontSize * 0.5;
       const safeGap = isDesktop ? rootFontSize * 1.125 : 10;
       const maxWidth = isDesktop ? 320 : 288;
-      const minWidth = isDesktop ? 0 : 56;
+      const minWidth = 0;
       const fieldRight = controlRect.left - fieldButtonGap;
       const available = Math.floor(fieldRight - leftBoundary - safeGap);
       const width = Math.max(minWidth, Math.min(maxWidth, available));
@@ -274,14 +253,20 @@ function initHeaderSearch() {
     });
 
     window.addEventListener("resize", scheduleSearchGeometryUpdate, { passive: true });
+    window.addEventListener("pagehide", () => {
+      if (header.classList.contains("is-search-open")) {
+        setOpen(false, { focus: false });
+      }
+    });
+    window.addEventListener("pageshow", () => {
+      if (header.classList.contains("is-search-open")) {
+        setOpen(false, { focus: false });
+      }
+    });
 
     syncClearButtons();
     updateSearchGeometry();
-    if (!isHome && readSearchOpenState()) {
-      setOpen(true, { focus: false, persist: false });
-    } else {
-      updateActiveNavState();
-    }
+    updateActiveNavState();
   });
 }
 

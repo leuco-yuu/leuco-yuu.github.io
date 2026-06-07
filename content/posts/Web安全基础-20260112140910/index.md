@@ -17,8 +17,7 @@ series:
   - "网络安全实践"
 ---
 
-# Web安全基础
-## Web发展史
+# Web发展史
 
 - **Web1.0**：个人网站，门户网络等（www.163.com、www.souhu.com）。Web 1.0时代开始于1994年，其主要特征是大量使用静态的 HTML 网页来发布信息，并开始使用浏览器来获取信息，这个时候主要是单向的信息传递
   - 常见攻击手段：SQL注入；文件包含；命令执行；上传漏洞；WebShell
@@ -28,7 +27,7 @@ series:
 
 - **两者的本质区别在于**：Web1.0 的主要是在于用户通过浏览器获取信息。Web2.0 则更注重用户的交互作用。
 
-## 静态页面与动态页面
+# 静态页面与动态页面
 
 - **静态页面**  
   - 在静态html页面中，用户通过Web浏览器HTTP协议向web服务器发送一个响应请求，告诉web服务器要浏览这个网站的哪个页面，接着根据用户的响应请求返回一个html页面给用户，经过浏览器渲染解析呈现在用户眼前。
@@ -44,7 +43,7 @@ series:
   - 用户的响应请求是一个静态的html页面，只需要响应请求web服务器从系统中调出用户响应的内容，将内容返回给客户端浏览器进行处理，再返回给用户
   - 如果用户响应请求的是动态页面资源，例如.jsp/.asp/.aspx/.php等，响应步骤是先将用户请求发送给web服务器，web服务器再从数据库调出有户请求的数据，调出数据后将所需要展示给用户的内容发送给服务器，最后通过web服务器将需要展示给用户的内容返回给用户浏览器解析执行，展示给用户。
 
-## URL（URL Uniform Resource Locator）
+# URL（URL Uniform Resource Locator）
 
 - **统一资源定位符（Uniform Resource Locator，URL；俗称网页地址或简称网址）**是因特网上标准的资源的地址（Address），如同在网络上的门牌。它最初是由蒂姆·伯纳斯-李发明用来作为万维网的地址，现在它已经被万维网联盟编制为因特网标准 [RFC 1738](https://www.rfc-editor.org/info/rfc1738)。
 - **格式**：**[protocol]://[hostname]:[port]/[path]/[parameters]?[query]**
@@ -56,9 +55,9 @@ series:
   - **query**：查询字符串，如果需要从服务器那里查询内容，在这里编辑，可有多个参数，用“&”符号隔开，每个参数的名和值用“=”符号隔开。
 - **例如**：https://www.baidu.com/s?ie=UTF-8&wd=kali
 
-## HTML基础
+# HTML基础
 
-### HTML简介
+## HTML简介
 
 - HTML 是用来描述网页的一种语言
 - HTML 指的是超文本标记语言: HyperText Markup Language
@@ -67,7 +66,7 @@ series:
 - HTML 文档包含了HTML 标签及文本内容
 - HTML文档也叫做 web 页面
 
-### HTML标签/元素
+## HTML标签/元素
 
 - HTML 标记标签通常被称为 HTML 标签 (HTML tag)
 - HTML 标签是由尖括号包围的关键词，比如\<html> 
@@ -111,9 +110,9 @@ series:
   - \<meta>
   - \<img>：图片
 
-## HTTP与HTTPS
+# HTTP与HTTPS
 
-### HTTP
+## HTTP
 
 - **HTTP简介**：超文本传输协议（Hyper Text Transfer Protocol，HTTP）是一个简单的请求-响应协议，它通常运行在TCP/IP协议之上。它指定了客户端可能发送给服务器什么样的消息以及得到什么样的响应。当时选择使用HTTP协议，是因为它使开发和部署非常地直截了当。
 - **如何访问Web应用**
@@ -239,7 +238,7 @@ series:
     - 无法证明报文的完整性，所以有可能已遭篡改。
 
 
-#### HTTPS
+### HTTPS
 
 - **HTTPS简介**：HTTPS是在HTTP上建立SSL加密层，并对传输数据进行加密，是HTTP协议的安全版。默认HTTP的端口号为80，HTTPS的端口号为443。
 - **主要作用**：

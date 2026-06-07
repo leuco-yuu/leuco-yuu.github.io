@@ -23,8 +23,7 @@ series:
 cover: "cover.png"
 ---
 
-# SL3PAKE协议
-## 参考文献
+# 参考文献
 
 - 引用格式（IEEE）：
 
@@ -34,19 +33,19 @@ cover: "cover.png"
 
 - 附件：[SL3PAKE: Simple Lattice-based Three-party Password Authenticated Key Exchange for post-quantum world](Full-Text.pdf)
 
-## 基础信息
+# 基础信息
 
-### 困难性基础
+## 困难性基础
 
 ​	SL3PAKE的困难性建立在 RLW 问题的计算困难性上，RLWE问题可以归约到格中的最短向量问题（SVP）或最近向量问题（CVP）
 
-### 三方参与
+## 三方参与
 
 - **Server(S)**：SL3PAKE服务器
 - **ClientA(A)**：密钥交换客户端A
 - **ClientB(B)**：密钥交换客户端B
 
-### 符号表
+## 符号表
 
 - $n$：满足 $n=2k$ 的正整数（安全参数），其中 $k$ 为任意正数
 
@@ -92,9 +91,9 @@ cover: "cover.png"
 - $pw_A,pw_B$：A和B的口令密码
 - $ID_S,ID_A,ID_B$：S、A和B的唯一身份标识
 
-## 协议流程
+# 协议流程
 
-### Server S：初始化设置
+## Server S：初始化设置
 
 - S选择安全参数 $n$ 与奇素数 $q$
 - S选择离散高斯分布 $\chi_\beta$ 以及 $a\in_{ru}R_q$
@@ -105,47 +104,47 @@ cover: "cover.png"
 - S保存参数：$\lbrace s_S,\operatorname{h_0}(pw_A),\operatorname{h_0}(pw_B) \rbrace$
 - S公开参数：$\lbrace n,q,\chi_\beta,a,x_S,ID_A,ID_B,ID_S,\operatorname{h_0}(\cdot),\operatorname{h_1}(\cdot),\operatorname{h_2}(\cdot) \rbrace$
 
-### Client A：实例化会话
+## Client A：实例化会话
 
 - **Input**：$ID_A$ ， $pw_A$
 - $x_A = a\cdot s_A + 2e_A$，其中 $s_A,e_A\leftarrow \chi_\beta$
 - $x_A^* = x_A + \operatorname{h_0}(pw_A)$
 - $h_{AS} = \operatorname{h_1}(ID_A,ID_S,x_A,x^*_A)$
 
-### Client A => Client B
+## Client A => Client B
 
 - $ A \Rightarrow B: \lbrace ID_A,x_A^\*,h_{AS} \rbrace $
 
-### Client B：实例化会话
+## Client B：实例化会话
 
 - **Input**：$ID_B$ ， $pw_B$
 - $x_B = a\cdot s_B + 2e_B$，其中 $s_B,e_B\leftarrow \chi_\beta$
 - $x^*_B = x_B + \operatorname{h_0}(pw_B)$
 - $h_{BS} = \operatorname{h_1}(ID_B,ID_S,x_B,x^\*_B)$
 
-### Client B => Server S
+## Client B => Server S
 
 - $ B \Rightarrow S: \lbrace ID_A,ID_B,x_A^\*,x_B^\*,h_{AS},h_{BS} \rbrace $
 
-### Server S：客户端身份认证
+## Server S：客户端身份认证
 
-#### 对 Client A 的身份认证
+### 对 Client A 的身份认证
 
 - $x_A\' = x^*_A - \operatorname{h_0}(pw_A)$，这里有 $x_A == x_A\'$
 - **Check if** $h_{AS} \overset{?}{==} \operatorname{h_1}(ID_A,ID_S,x_A\',x^\*_A)$
 - **If not, then abort.**
 
-#### 对 Client B 的身份认证
+### 对 Client B 的身份认证
 
 - $x_B\' = x^*_B - \operatorname{h_0}(pw_B)$，这里有 $x_B == x_B\'$
 - **Check if** $h_{BS} \overset{?}{==} \operatorname{h_1}(ID_B,ID_S,x_B\',x^*_B)$
 - **If not, then abort.**
 
-### Server S：协助 Client A 和 Client B 建立协商密钥
+## Server S：协助 Client A 和 Client B 建立协商密钥
 
 - $x_S = a\cdot s_S +2e_S $，其中 $ s_S,e_S\leftarrow \chi_\beta$
 
-#### 对于 Client A ：
+### 对于 Client A ：
 
 - $c_A = x_B\' \cdot s_S + 2f_{S_4}$，其中 $f_{S_4} \leftarrow \chi_\beta$
 - $m = \operatorname{h_2}(ID_S,ID_A,x_S,x_A\')$
@@ -154,7 +153,7 @@ cover: "cover.png"
 - $\sigma_{SA} = \operatorname{Mod_2}(k_{SA},\omega_{SA})$
 - $\alpha_{SA}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_A,x_A\',\sigma_{SA})$
 
-#### 对于 Client B：
+### 对于 Client B：
 
 - $c_B = x_A\'\cdot s_S + 2f_{S_5}$，其中 $f_{S_5} \leftarrow \chi_\beta$
 - $n = \operatorname{h_2}(ID_S,ID_B,x_S,x_B\')$
@@ -163,13 +162,13 @@ cover: "cover.png"
 - $\sigma_{SB} = \operatorname{Mod_2}(k_{SB},\omega_{SB})$
 - $\alpha_{SB}=\operatorname{h_1}(ID_A,ID_B,ID_S,c_B,x_B\',\sigma_{SB})$
 
-### Server S => Client B
+## Server S => Client B
 
 - $S\Rightarrow B: \lbrace c_A,c_B,x_S,\omega_{SA},\omega_{SB},\alpha_{SA},\alpha_{SB}\rbrace$
 
-### Client B：验证 S 身份并与 A 协商密钥
+## Client B：验证 S 身份并与 A 协商密钥
 
-#### 验证 Server S 的身份
+### 验证 Server S 的身份
 
 - $n = \operatorname{h_2}(ID_S,ID_B,x_S,x_B)$
 - $k_{BS}=(x_S\cdot s_B+2n)\cdot n+2f_{B_1}$，其中 $f_{B_1} \leftarrow \chi_\beta$
@@ -178,20 +177,20 @@ cover: "cover.png"
 - **Check if** $\alpha_{BS} \overset{?}{==} \alpha_{SB}$
 - **If not, then abort.**
 
-#### 与 Client A 完成协商
+### 与 Client A 完成协商
 
 - $\nu_{BA} = c_B\cdot s_B +2f_{B_2}$，其中 $f_{B_2} \leftarrow \chi_\beta$
 - $\omega_{BA}=\operatorname{Cha}(\nu_{BA})$
 - $\sigma_{BA}=\operatorname{Mod_2}(\nu_{BA},\omega_{BA})$
 - $ sk_{BA} = \operatorname{h_1}(ID_A,ID_B,ID_S,x_A^\*,x_B^\*,\sigma_{BA})$
 
-### Client B => Client A
+## Client B => Client A
 
 - $B\Rightarrow A: \lbrace ID_B,x_B^\*,c_A,x_S,\omega_{BA},\omega_{SA},\alpha_{SA}\rbrace$
 
-### Client A：验证 S 身份并与 B 协商密钥
+## Client A：验证 S 身份并与 B 协商密钥
 
-#### 验证 Server S 的身份
+### 验证 Server S 的身份
 
 - $m = \operatorname{h_2}(ID_S,ID_A,x_S,x_A)$
 - $k_{AS}=(x_S\cdot s_A+2m)\cdot m+2f_{A_1}$，其中 $f_{A_1} \leftarrow \chi_\beta$
@@ -200,12 +199,12 @@ cover: "cover.png"
 - **Check if** $\alpha_{AS} \overset{?}{==} \alpha_{SA}$
 - **If not, then abort.**
 
-#### 与 Client B 完成协商
+### 与 Client B 完成协商
 
 - $\nu_{AB} = c_A\cdot s_A +2f_{A_2}$，其中 $f_{A_2} \leftarrow \chi_\beta$
 - $\sigma_{AB}=\operatorname{Mod_2}(\nu_{AB},\omega_{BA})$
 - $sk_{AB} = \operatorname{h_1}(ID_A,ID_B,ID_S,x_A^\*,x_B^\*,\sigma_{AB})$
 
-### 完成密钥协商
+## 完成密钥协商
 
 - 协商密钥：$sk_{BA} == sk_{AB}$
