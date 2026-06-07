@@ -1,22 +1,25 @@
-﻿---
-title: "线性回归"
+---
+title: "机器学习-线性回归"
 date: 2025-12-02T13:16:53+08:00
 lastmod: 2025-12-08T19:20:47+08:00
 draft: false
 slug: linear-regression
 series_order: 1
-description: "整理一套适合实验环境的 Nmap 扫描基线，强调授权、记录和验证。"
-summary: "从主机发现、端口探测、服务识别到结果复核，形成一套可重复的扫描记录流程。"
+description: "【1】机器学习 第一部分 线性回归"
+summary: "机器学习第一部分：从正规方程、梯度下降到数据预处理，梳理线性回归的基本模型与实现。"
 tags:
-  - Nmap
-  - 信息收集
-  - 网络安全
-  - 渗透测试
+  - "梯度下降"
+  - "SGD"
+  - "sk-learn"
+  - "归一化"
+  - "正则化"
+  - "多项式升维"
+  - "EDA"
 categories:
-  - 学习笔记
-  - 人工智能
+  - "机器学习"
+  - "学习笔记"
 series:
-  - 机器学习
+  - "人工智能"
 cover: cover.png
 ---
 
