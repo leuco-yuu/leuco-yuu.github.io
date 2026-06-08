@@ -34,6 +34,204 @@
   transform: scale(1.12);
 }
 
+.code-block-output {
+  --output-accent: color-mix(in oklab, var(--color-primary) 78%, var(--color-foreground));
+  --output-accent-soft: color-mix(
+    in oklab,
+    var(--color-primary) 16%,
+    var(--color-card)
+  );
+  --output-surface: color-mix(in oklab, var(--color-muted) 62%, var(--color-card));
+  --output-surface-deep: color-mix(in oklab, var(--color-muted) 82%, var(--color-card));
+  --output-border: color-mix(in oklab, var(--color-primary) 18%, var(--color-border));
+  --output-text: color-mix(in oklab, var(--color-foreground) 78%, var(--color-muted-foreground));
+  --output-subtle: color-mix(in oklab, var(--color-muted-foreground) 72%, var(--color-card));
+  border-color: var(--output-border);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 4%),
+    0 16px 36px color-mix(in oklab, var(--color-primary) 8%, transparent);
+}
+
+.dark .code-block-output {
+  --output-accent-soft: color-mix(
+    in oklab,
+    var(--color-primary) 14%,
+    var(--color-background)
+  );
+  --output-surface: color-mix(in oklab, var(--color-muted) 56%, var(--color-background));
+  --output-surface-deep: color-mix(
+    in oklab,
+    var(--color-muted) 72%,
+    var(--color-background)
+  );
+  --output-border: color-mix(in oklab, var(--color-primary) 24%, var(--color-border));
+  --output-text: color-mix(in oklab, var(--color-foreground) 84%, var(--color-muted-foreground));
+  --output-subtle: color-mix(in oklab, var(--color-muted-foreground) 64%, var(--color-background));
+}
+
+.code-block-output .code-block-header {
+  position: relative;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-primary) 12%, transparent),
+      transparent 72%
+    ),
+    linear-gradient(180deg, var(--output-accent-soft), transparent 140%);
+}
+
+.code-block-output .code-block-header::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--color-primary) 40%, transparent),
+    transparent 78%
+  );
+  pointer-events: none;
+}
+
+.code-block-output .code-block-header > div:first-child {
+  min-width: 0;
+}
+
+.code-block-output .code-block-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+  background: color-mix(in oklab, var(--color-primary) 14%, transparent);
+  color: var(--output-accent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-primary) 22%, transparent);
+}
+
+.code-block-output .code-block-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.code-block-output .code-block-title {
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--output-subtle);
+}
+
+.code-block-output .copy-code-btn,
+.code-block-output .collapse-code-btn {
+  background: color-mix(in oklab, var(--color-card) 82%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-primary) 16%, var(--color-border));
+  backdrop-filter: blur(10px);
+}
+
+.code-block-output .code-block-content {
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-primary) 24%, transparent) 0,
+      color-mix(in oklab, var(--color-primary) 24%, transparent) 0.25rem,
+      transparent 0.25rem
+    ),
+    linear-gradient(180deg, var(--output-surface), var(--output-surface-deep));
+}
+
+.code-block-output .code-block-content::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0.25rem;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--color-primary) 88%, var(--color-foreground)),
+    color-mix(in oklab, var(--color-primary) 30%, var(--color-border))
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.code-block-output .code-output-pre {
+  margin: 0;
+  padding: 1rem 1.25rem 1rem 1.5rem;
+  overflow-x: auto;
+  color: var(--output-text);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+  position: relative;
+  z-index: 0;
+}
+
+.code-block-output .code-output-code {
+  display: block;
+  min-width: max-content;
+  padding: 0;
+  color: inherit;
+  background: transparent !important;
+  font: inherit;
+  font-weight: 500;
+  white-space: inherit;
+}
+
+.code-block-output .code-output-pre:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--color-primary) 45%, transparent);
+  outline-offset: -2px;
+}
+
+.code-block-output .chroma,
+.code-block-output .chroma pre,
+.code-block-output .chroma code,
+.code-block-output .chroma * {
+  background: transparent !important;
+  color: var(--output-text) !important;
+  text-shadow: none !important;
+}
+
+.code-block-output .chroma .ln,
+.code-block-output .chroma .lnt,
+.code-block-output .chroma .line,
+.code-block-output .chroma .cl {
+  color: inherit !important;
+}
+
+.code-block-output .collapse-overlay {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in oklab, var(--color-card) 70%, transparent)
+  );
+}
+
+.code-block-output .collapse-overlay-btn,
+.code-block-output .code-block-bottom-collapse {
+  background: color-mix(in oklab, var(--color-card) 88%, var(--color-muted));
+  border-color: color-mix(in oklab, var(--color-primary) 20%, var(--color-border));
+}
+
+.code-block-output .collapse-overlay:hover .collapse-overlay-btn,
+.code-block-output .collapse-overlay-btn:hover,
+.code-block-output .code-block-bottom-collapse:hover {
+  transform: scale(1.08);
+}
+
+@media (max-width: 640px) {
+  .code-block-output .code-block-header {
+    padding-inline: 0.875rem;
+  }
+
+  .code-block-output .code-output-pre {
+    padding: 0.875rem 1rem 0.875rem 1.25rem;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .collapse-overlay-btn,
   .code-block-bottom-collapse,

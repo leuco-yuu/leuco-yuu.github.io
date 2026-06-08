@@ -1,7 +1,16 @@
 {{/* Site override: keep the original hugo-narrow code block structure and add a bottom collapse button. */}}
 {{- $lang := .Type | default "plaintext" -}}
+{{- $normalizedLang := $lang | lower -}}
+{{- $isOutput := eq $normalizedLang "output" -}}
 {{- $filename := .Attributes.filename | default "" -}}
 {{- $displayLang := $filename | default ($lang | upper) -}}
+{{- if $isOutput -}}
+  {{- $displayLang = "OUTPUT" -}}
+{{- end -}}
+{{- $iconName := "code" -}}
+{{- if $isOutput -}}
+  {{- $iconName = "output" -}}
+{{- end -}}
 {{- $codeId := printf "code-%d" .Ordinal -}}
 
 {{- $collapsed := .Attributes.collapsed | default false -}}
@@ -10,12 +19,12 @@
 {{- $autoCollapseHeight := site.Params.codeblock.collapse.autoCollapseHeight | default 400 -}}
 {{- $collapsedHeight := site.Params.codeblock.collapse.collapsedHeight | default 120 -}}
 {{- $collapseEnabled := site.Params.codeblock.collapse.enabled | default true -}}
-{{- $highlighted := transform.HighlightCodeBlock . -}}
 
 <div
-  class="code-block-container border-border bg-card my-6 overflow-hidden rounded-xl border shadow-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md"
+  class="code-block-container border-border bg-card my-6 overflow-hidden rounded-xl border shadow-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md{{ if $isOutput }} code-block-output{{ end }}"
   data-code-block
   data-code-id="{{ $codeId }}"
+  {{ if $isOutput }}data-code-kind="output"{{ end }}
   data-collapsible="{{ $collapseEnabled }}"
   data-default-state="{{ $defaultState }}"
   data-collapsed="{{ $collapsed }}"
@@ -25,10 +34,10 @@
 >
   <div class="code-block-header bg-muted/30 border-border flex items-center justify-between border-b px-4 py-3">
     <div class="flex items-center gap-2">
-      <div class="text-muted-foreground shrink-0">
-        {{ partial "features/icon.html" (dict "name" "code" "size" "sm" "ariaLabel" "") }}
+      <div class="code-block-icon text-muted-foreground shrink-0">
+        {{ partial "features/icon.html" (dict "name" $iconName "size" "sm" "ariaLabel" "") }}
       </div>
-      <span class="text-muted-foreground text-sm font-medium">
+      <span class="code-block-title text-muted-foreground text-sm font-medium">
         {{ $displayLang }}
       </span>
     </div>
@@ -72,7 +81,12 @@
   </div>
 
   <div class="code-block-content relative" id="{{ $codeId }}">
-    {{ $highlighted.Wrapped }}
+    {{- if $isOutput -}}
+      <pre class="code-output-pre" tabindex="0"><code class="code-output-code" data-lang="output">{{ .Inner | htmlEscape }}</code></pre>
+    {{- else -}}
+      {{- $highlighted := transform.HighlightCodeBlock . -}}
+      {{ $highlighted.Wrapped }}
+    {{- end -}}
     <div hidden data-code-source>{{ .Inner }}</div>
     <div
       class="collapse-overlay to-card/90 pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-transparent opacity-0 transition-opacity duration-300"
