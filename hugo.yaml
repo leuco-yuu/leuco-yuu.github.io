@@ -157,8 +157,10 @@ params:
   images:
     - /images/avatar.jpg
   favicon:
+    version: avatar-round-20260608
     png: /favicon.png
     ico: /favicon.ico
+    svg: /favicon.svg
     appleTouchIcon: /apple-touch-icon.png
     manifest192: /icon-192.png
     manifest512: /icon-512.png

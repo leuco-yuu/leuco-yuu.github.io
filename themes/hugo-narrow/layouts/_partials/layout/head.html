@@ -71,20 +71,25 @@
 <link rel="canonical" href="{{ .Permalink }}" />
 
 {{- $favicon := site.Params.favicon | default dict -}}
+{{- $faviconVersion := $favicon.version | default "" -}}
+{{- $faviconQuery := "" -}}
+{{- with $faviconVersion }}
+  {{- $faviconQuery = printf "?v=%s" . -}}
+{{- end -}}
 {{- with $favicon.ico }}
-  <link rel="shortcut icon" href="{{ strings.TrimPrefix `/` . | relURL }}" />
+  <link rel="shortcut icon" href="{{ strings.TrimPrefix `/` . | relURL }}{{ $faviconQuery }}" />
 {{- end }}
 {{- with $favicon.png }}
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ strings.TrimPrefix `/` . | relURL }}" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ strings.TrimPrefix `/` . | relURL }}{{ $faviconQuery }}" />
 {{- else }}
   {{- with $favicon.svg }}
-    <link rel="icon" type="image/svg+xml" href="{{ strings.TrimPrefix `/` . | relURL }}" />
+    <link rel="icon" type="image/svg+xml" href="{{ strings.TrimPrefix `/` . | relURL }}{{ $faviconQuery }}" />
   {{- else }}
-    <link rel="icon" type="image/svg+xml" href="{{ `favicon.svg` | relURL }}" />
+    <link rel="icon" type="image/svg+xml" href="{{ `favicon.svg` | relURL }}{{ $faviconQuery }}" />
   {{- end }}
 {{- end }}
 {{- with $favicon.appleTouchIcon }}
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ strings.TrimPrefix `/` . | relURL }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ strings.TrimPrefix `/` . | relURL }}{{ $faviconQuery }}" />
 {{- end }}
 
 {{- if or .IsPage .IsHome .IsSection .IsNode -}}
@@ -98,7 +103,7 @@
 {{- .Scratch.Set "galleryConfig" $galleryConfig.galleryOptions -}}
 
 
-<link rel="manifest" href="{{ `site.webmanifest` | relURL }}" />
+<link rel="manifest" href="{{ `site.webmanifest` | relURL }}{{ $faviconQuery }}" />
 {{ partial "layout/head/seo.html" . }}
 
 {{ partial "config/script.html" (dict "id" "search-config" "value" $searchConfig) }}
