@@ -51,8 +51,28 @@
   class="site-header{{ if site.Params.header.sticky }} sticky top-0 z-50{{ end }} px-4 py-6"
   data-page-home="{{ if .IsHome }}true{{ else }}false{{ end }}"
 >
+  <script>
+    (() => {
+      const key = "leuco:header-search-state";
+      const header = document.currentScript?.closest(".site-header");
+      if (!header) return;
+
+      try {
+        if (header.dataset.pageHome === "true") {
+          window.sessionStorage.removeItem(key);
+          return;
+        }
+
+        const state = JSON.parse(window.sessionStorage.getItem(key) || "null");
+        if (state?.open) header.classList.add("is-search-open");
+      } catch (_) {
+        // Keep the header usable when session storage is unavailable.
+      }
+    })();
+  </script>
+
   <div
-    class="site-header-shell border-border bg-card/80 flex items-center rounded-xl border px-6 py-4 shadow-sm backdrop-blur-sm"
+    class="site-header-shell border-border flex items-center rounded-xl border px-6 py-4 shadow-sm backdrop-blur-sm" style="background-color:color-mix(in oklab, var(--color-card) 95%, transparent)"
   >
     <!-- 桌面端布局 -->
     <div class="desktop-header-row hidden w-full items-center md:flex md:min-w-0">
@@ -336,6 +356,7 @@
             type="button"
             class="header-search-toggle border-border bg-background text-muted-foreground hover:text-primary hover:bg-primary/10 focus:ring-primary/20 flex h-10 w-10 items-center justify-center rounded-lg border transition-all duration-300 ease-out hover:scale-105 focus:ring-2 focus:outline-none active:scale-95"
             aria-label="{{ $searchLabel }}"
+            title="{{ $searchLabel }}"
             aria-pressed="false"
           >
             {{ partial "features/icon.html" (dict "name" "search" "size" "md" "ariaLabel" $searchLabel) }}
@@ -355,17 +376,34 @@
     <div class="mobile-header-row flex w-full items-center justify-between md:hidden">
       <!-- 左侧：移动端快捷入口与菜单按钮 -->
       <div class="flex shrink-0 items-center gap-2">
-        {{ partial "navigation/mobile-menu-toggle.html" . }}
-
         {{ $isHomeQuickActive := .IsHome }}
-        <a
-          href="{{ site.Home.RelPermalink }}"
-          class="mobile-quick-link border-border {{ if $isHomeQuickActive }}bg-accent text-accent-foreground{{ else }}bg-background text-muted-foreground hover:bg-accent hover:text-foreground{{ end }} flex h-10 w-10 items-center justify-center rounded-lg border transition-colors duration-200"
-          aria-label="主页"
-          {{ if $isHomeQuickActive }}aria-current="page"{{ end }}
-        >
-          {{ partial "features/icon.html" (dict "name" "home" "size" "md" "ariaLabel" "主页") }}
-        </a>
+        {{ if ne site.Params.header.logo.image "" }}
+          <a
+            href="{{ site.Home.RelPermalink | relLangURL }}"
+            class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full transition-transform duration-200 hover:scale-105"
+            aria-label="{{ site.Title }}"
+            title="{{ site.Title }}"
+            {{ if $isHomeQuickActive }}aria-current="page"{{ end }}
+          >
+            <img
+              src="{{ $logoSrc | relURL }}"
+              alt="{{ site.Title }}"
+              class="h-full w-full object-cover"
+            />
+          </a>
+        {{ else }}
+          <a
+            href="{{ site.Home.RelPermalink }}"
+            class="bg-primary text-primary-foreground hover:bg-primary/90 flex h-10 w-10 items-center justify-center rounded-full text-lg font-bold transition-transform duration-200 hover:scale-105"
+            aria-label="{{ site.Title }}"
+            title="{{ site.Title }}"
+            {{ if $isHomeQuickActive }}aria-current="page"{{ end }}
+          >
+            {{ substr site.Title 0 1 | upper }}
+          </a>
+        {{ end }}
+
+        {{ partial "navigation/mobile-menu-toggle.html" . }}
 
         {{ with site.GetPage "/posts" }}
           {{ $isPostsQuickActive := eq $currentPage.Section "posts" }}
@@ -373,6 +411,7 @@
             href="{{ .RelPermalink }}"
             class="mobile-quick-link border-border {{ if $isPostsQuickActive }}bg-accent text-accent-foreground{{ else }}bg-background text-muted-foreground hover:bg-accent hover:text-foreground{{ end }} flex h-10 w-10 items-center justify-center rounded-lg border transition-colors duration-200"
             aria-label="文章"
+            title="文章"
           >
             {{ partial "features/icon.html" (dict "name" "posts" "size" "md" "ariaLabel" "文章") }}
           </a>
@@ -384,6 +423,7 @@
             href="{{ .RelPermalink }}"
             class="mobile-quick-link border-border {{ if $isProjectsQuickActive }}bg-accent text-accent-foreground{{ else }}bg-background text-muted-foreground hover:bg-accent hover:text-foreground{{ end }} flex h-10 w-10 items-center justify-center rounded-lg border transition-colors duration-200"
             aria-label="项目"
+            title="项目"
           >
             {{ partial "features/icon.html" (dict "name" "projects" "size" "md" "ariaLabel" "项目") }}
           </a>
@@ -408,6 +448,7 @@
             type="button"
             class="header-search-toggle border-border bg-background text-muted-foreground hover:text-primary hover:bg-primary/10 focus:ring-primary/20 flex h-10 w-10 items-center justify-center rounded-lg border transition-all duration-300 ease-out hover:scale-105 focus:ring-2 focus:outline-none active:scale-95"
             aria-label="{{ $searchLabel }}"
+            title="{{ $searchLabel }}"
             aria-pressed="false"
           >
             {{ partial "features/icon.html" (dict "name" "search" "size" "md" "ariaLabel" $searchLabel) }}

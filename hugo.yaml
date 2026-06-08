@@ -1,5 +1,5 @@
 baseURL: https://leuco.github.io/
-title: Leuco Blog
+title: Leuco's Monologu
 theme: hugo-narrow
 defaultContentLanguage: zh-hans
 locale: zh-Hans
@@ -153,11 +153,15 @@ params:
     - Leuco
   defaultAuthor: leuco
   language: zh-CN
-  shortName: Leuco Blog
+  shortName: Leuco's Monologu
   images:
     - /images/avatar.jpg
   favicon:
-    svg: /favicon.svg
+    png: /favicon.png
+    ico: /favicon.ico
+    appleTouchIcon: /apple-touch-icon.png
+    manifest192: /icon-192.png
+    manifest512: /icon-512.png
   author:
     name: leuco
     title: 写作、技术与项目记录

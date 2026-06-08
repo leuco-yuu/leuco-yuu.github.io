@@ -1,4 +1,6 @@
 function initHeaderSearch() {
+  const SEARCH_STATE_KEY = "leuco:header-search-state";
+
   const normalizePath = (href) => {
     try {
       const path = new URL(href, window.location.origin).pathname;
@@ -45,6 +47,119 @@ function initHeaderSearch() {
     const mobileSearchItems = Array.from(document.querySelectorAll(".mobile-search-only"));
     const isHome = header.dataset.pageHome === "true";
     let geometryFrame = 0;
+
+    const getVisibleField = () => fields.find((field) => field.offsetParent !== null) || fields[0] || null;
+    const getHomePath = () => normalizePath(header.querySelector(".desktop-logo-zone a[href]")?.href || "/");
+    const isHomeHref = (href) => {
+      const targetPath = normalizePath(href);
+      const homePath = getHomePath() || "/";
+      return targetPath === homePath;
+    };
+
+    const readSearchState = () => {
+      try {
+        const state = JSON.parse(window.sessionStorage.getItem(SEARCH_STATE_KEY) || "null");
+        return state && typeof state === "object" ? state : null;
+      } catch (_) {
+        return null;
+      }
+    };
+
+    const clearSearchState = () => {
+      try {
+        window.sessionStorage.removeItem(SEARCH_STATE_KEY);
+      } catch (_) {
+        // Session storage can be unavailable in strict privacy contexts.
+      }
+    };
+
+    const persistSearchState = (open, queryOverride = null) => {
+      if (isHome) return;
+
+      if (!open) {
+        clearSearchState();
+        return;
+      }
+
+      const visibleField = getVisibleField();
+      const query =
+        typeof queryOverride === "string" ? queryOverride : visibleField?.value || "";
+
+      try {
+        window.sessionStorage.setItem(
+          SEARCH_STATE_KEY,
+          JSON.stringify({
+            open: true,
+            query,
+            createdAt: Date.now(),
+          }),
+        );
+      } catch (_) {
+        // Session storage can be unavailable in strict privacy contexts.
+      }
+    };
+
+    const resetHomeSearchState = () => {
+      clearSearchState();
+
+      if (header.classList.contains("is-search-open")) {
+        setOpen(false, { focus: false });
+      }
+    };
+
+    const restoreSearchState = () => {
+      if (isHome) {
+        resetHomeSearchState();
+        return;
+      }
+
+      const state = readSearchState();
+      if (!state?.open) return;
+
+      setOpen(true, { focus: true });
+
+      const query = typeof state.query === "string" ? state.query : "";
+      const visibleField = getVisibleField();
+      if (visibleField) {
+        visibleField.value = query;
+        visibleField.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+    };
+
+    const scheduleRestoreSearchState = () => {
+      window.requestAnimationFrame(() => {
+        window.setTimeout(restoreSearchState, 0);
+      });
+    };
+
+    const rememberSearchBeforeNavigation = (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+        return;
+      }
+      if (!(event.target instanceof Element)) return;
+
+      const link = event.target.closest("a[href]");
+      if (!link || (link.target && link.target !== "_self")) return;
+
+      let url = null;
+      try {
+        url = new URL(link.href, window.location.origin);
+      } catch (_) {
+        return;
+      }
+
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) return;
+
+      if (isHomeHref(url.href)) {
+        clearSearchState();
+        return;
+      }
+
+      if (header.classList.contains("is-search-open")) {
+        persistSearchState(true);
+      }
+    };
 
     const getPanelForToggle = (toggle) => {
       const id = toggle?.getAttribute("data-submenu-id");
@@ -138,6 +253,8 @@ function initHeaderSearch() {
         setSubmenuOpen(desktopMoreToggle, desktopMorePanel, true);
       }
 
+      persistSearchState(open);
+
       if (open && focus) {
         window.setTimeout(() => {
           const visibleField = fields.find((field) => field.offsetParent !== null);
@@ -217,6 +334,12 @@ function initHeaderSearch() {
     fields.forEach((field) => {
       field.addEventListener("input", syncClearButtons);
       field.addEventListener("search", syncClearButtons);
+      field.addEventListener("input", () =>
+        persistSearchState(header.classList.contains("is-search-open"), field.value),
+      );
+      field.addEventListener("search", () =>
+        persistSearchState(header.classList.contains("is-search-open"), field.value),
+      );
     });
 
     toggles.forEach((toggle) => {
@@ -253,20 +376,18 @@ function initHeaderSearch() {
     });
 
     window.addEventListener("resize", scheduleSearchGeometryUpdate, { passive: true });
-    window.addEventListener("pagehide", () => {
-      if (header.classList.contains("is-search-open")) {
-        setOpen(false, { focus: false });
-      }
-    });
-    window.addEventListener("pageshow", () => {
-      if (header.classList.contains("is-search-open")) {
-        setOpen(false, { focus: false });
-      }
-    });
+    document.addEventListener("click", rememberSearchBeforeNavigation, true);
+    if (isHome) {
+      window.addEventListener("pageshow", resetHomeSearchState);
+    } else {
+      window.addEventListener("pageshow", scheduleRestoreSearchState);
+    }
 
     syncClearButtons();
     updateSearchGeometry();
     updateActiveNavState();
+
+    scheduleRestoreSearchState();
   });
 }
 

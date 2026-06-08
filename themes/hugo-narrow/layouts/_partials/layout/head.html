@@ -70,11 +70,22 @@
 />
 <link rel="canonical" href="{{ .Permalink }}" />
 
-{{ with site.Params.favicon.svg }}
-  <link rel="icon" type="image/svg+xml" href="{{ strings.TrimPrefix `/` . | relURL }}" />
-{{ else }}
-  <link rel="icon" type="image/svg+xml" href="{{ `favicon.svg` | relURL }}" />
-{{ end }}
+{{- $favicon := site.Params.favicon | default dict -}}
+{{- with $favicon.ico }}
+  <link rel="shortcut icon" href="{{ strings.TrimPrefix `/` . | relURL }}" />
+{{- end }}
+{{- with $favicon.png }}
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ strings.TrimPrefix `/` . | relURL }}" />
+{{- else }}
+  {{- with $favicon.svg }}
+    <link rel="icon" type="image/svg+xml" href="{{ strings.TrimPrefix `/` . | relURL }}" />
+  {{- else }}
+    <link rel="icon" type="image/svg+xml" href="{{ `favicon.svg` | relURL }}" />
+  {{- end }}
+{{- end }}
+{{- with $favicon.appleTouchIcon }}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ strings.TrimPrefix `/` . | relURL }}" />
+{{- end }}
 
 {{- if or .IsPage .IsHome .IsSection .IsNode -}}
   {{- $_ := .Content -}}

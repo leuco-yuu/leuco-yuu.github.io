@@ -16,12 +16,40 @@
   "categories" (slice "blog" "technology" "education")
 -}}
 
-{{- if site.Params.favicon.svg -}}
-  {{- $icons := slice (dict
-    "src" (strings.TrimPrefix "/" site.Params.favicon.svg | relURL)
-    "sizes" "any"
-    "type" "image/svg+xml"
+{{- $favicon := site.Params.favicon | default dict -}}
+{{- $icons := slice -}}
+{{- with $favicon.manifest192 }}
+  {{- $icons = $icons | append (dict
+    "src" (strings.TrimPrefix "/" . | relURL)
+    "sizes" "192x192"
+    "type" "image/png"
   ) -}}
+{{- end -}}
+{{- with $favicon.manifest512 }}
+  {{- $icons = $icons | append (dict
+    "src" (strings.TrimPrefix "/" . | relURL)
+    "sizes" "512x512"
+    "type" "image/png"
+  ) -}}
+{{- end -}}
+{{- if eq (len $icons) 0 }}
+  {{- with $favicon.png }}
+    {{- $icons = $icons | append (dict
+      "src" (strings.TrimPrefix "/" . | relURL)
+      "sizes" "32x32"
+      "type" "image/png"
+    ) -}}
+  {{- else }}
+    {{- with $favicon.svg }}
+      {{- $icons = $icons | append (dict
+        "src" (strings.TrimPrefix "/" . | relURL)
+        "sizes" "any"
+        "type" "image/svg+xml"
+      ) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if gt (len $icons) 0 -}}
   {{- $manifest = merge $manifest (dict "icons" $icons) -}}
 {{- end -}}
 

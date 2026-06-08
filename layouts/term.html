@@ -7,7 +7,12 @@
   <header class="mb-8">
     <div class="mb-4 flex items-center gap-3">
       {{ if eq .Data.Singular "tag" }}
-        {{ partial "features/icon.html" (dict "name" "tag" "size" "lg" "ariaLabel" "") }}
+        {{ $avatarSrc := site.Params.author.avatar | default "" }}
+        {{ if ne $avatarSrc "" }}
+          <img src="{{ $avatarSrc | relURL }}" alt="{{ site.Title }}" class="h-8 w-8 rounded-full object-cover" />
+        {{ else }}
+          {{ partial "features/icon.html" (dict "name" "tag" "size" "lg" "ariaLabel" "") }}
+        {{ end }}
       {{ else if eq .Data.Singular "category" }}
         {{ partial "features/icon.html" (dict "name" "folder" "size" "lg" "ariaLabel" "") }}
       {{ else }}

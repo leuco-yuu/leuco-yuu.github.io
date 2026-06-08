@@ -702,7 +702,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 ```
 
-####  devcontainer.json 与参数介绍
+#### devcontainer.json 与参数介绍
 
 ```json
 {

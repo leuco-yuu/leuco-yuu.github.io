@@ -13,6 +13,21 @@
         {{ partial "features/icon.html" (dict "name" "categories" "size" "sm" "ariaLabel" "") }}
         <span>{{ T "list.pages" (dict "count" (len .Data.Terms)) }}</span>
       </div>
+
+      <div class="ml-auto flex items-center gap-0.5">
+        <button class="sort-tax-btn text-muted-foreground hover:text-foreground hover:bg-accent inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors" data-sort="title" aria-label="按名称排序" title="按名称排序">
+          {{ partial "features/icon.html" (dict "name" "list" "size" "sm" "ariaLabel" "") }}
+        </button>
+        <button class="sort-tax-btn text-muted-foreground hover:text-foreground hover:bg-accent inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors" data-sort="date" aria-label="按创建时间排序" title="按创建时间排序">
+          {{ partial "features/icon.html" (dict "name" "clock" "size" "sm" "ariaLabel" "") }}
+        </button>
+        <button class="sort-tax-btn text-muted-foreground hover:text-foreground hover:bg-accent inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors" data-sort="lastmod" aria-label="按最近修改排序" title="按最近修改排序">
+          {{ partial "features/icon.html" (dict "name" "edit" "size" "sm" "ariaLabel" "") }}
+        </button>
+        <button class="sort-tax-btn text-muted-foreground hover:text-foreground hover:bg-accent inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors" data-sort="size" aria-label="按分类规模排序" title="按分类规模排序">
+          {{ partial "features/icon.html" (dict "name" "text" "size" "sm" "ariaLabel" "") }}
+        </button>
+      </div>
     </div>
   </header>
 
@@ -29,10 +44,20 @@
     {{ end }}
   {{ end }}
   {{ if $terms }}
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" id="taxonomy-cards">
       {{ range $orderedTerms }}
         {{ $termPage := .Page }}
         {{ $count := .Count }}
+        {{ $termPages := .Pages }}
+        {{ $earliestDate := "" }}
+        {{ $latestLastmod := "" }}
+        {{ range $termPages }}
+          {{ if eq $earliestDate "" }}{{ $earliestDate = .Date.Format "2006-01-02" }}{{ end }}
+          {{ if lt .Date (time $earliestDate) }}{{ $earliestDate = .Date.Format "2006-01-02" }}{{ end }}
+          {{ $thisLastmod := .Lastmod.Format "2006-01-02" }}
+          {{ if eq $latestLastmod "" }}{{ $latestLastmod = $thisLastmod }}{{ end }}
+          {{ if gt .Lastmod (time $latestLastmod) }}{{ $latestLastmod = $thisLastmod }}{{ end }}
+        {{ end }}
 
         {{- $coverImage := "" -}}
         {{- if $termPage.Params.cover -}}
@@ -53,7 +78,7 @@
           {{- $description = $termPage.Summary | plainify | truncate 140 -}}
         {{- end -}}
 
-        <article class="group h-full">
+        <article class="group h-full" data-title="{{ $termPage.LinkTitle }}" data-date="{{ $earliestDate }}" data-lastmod="{{ $latestLastmod }}" data-size="{{ $count }}">
           <a href="{{ $termPage.RelPermalink }}" class="block h-full">
             <div
               class="bg-card border-border hover:bg-primary/5 hover:border-primary/20 focus:ring-primary/20 relative flex h-full flex-col overflow-hidden rounded-xl border transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lg focus:ring-2 focus:outline-none"
@@ -104,4 +129,44 @@
       <h2 class="text-foreground mb-3 text-xl font-medium">{{ T "article.empty" }}</h2>
     </div>
   {{ end }}
+
+  <script>
+    (function () {
+      var container = document.getElementById('taxonomy-cards');
+      if (!container) return;
+
+      var state = { field: 'title', dirs: { title: 'asc', date: 'desc', lastmod: 'desc', size: 'desc' } };
+      var activeCls = 'text-primary';
+      var btns = document.querySelectorAll('.sort-tax-btn');
+
+      function updateBtns(field) {
+        btns.forEach(function (b) { b.classList.toggle(activeCls, b.dataset.sort === field); });
+      }
+
+      function sortCards(field) {
+        if (state.field === field) state.dirs[field] = state.dirs[field] === 'asc' ? 'desc' : 'asc';
+        state.field = field;
+        updateBtns(field);
+
+        var cards = Array.prototype.slice.call(container.querySelectorAll('article[data-title]'));
+        var dir = state.dirs[field];
+        var mul = dir === 'asc' ? 1 : -1;
+
+        cards.sort(function (a, b) {
+          var va = a.dataset[field], vb = b.dataset[field];
+          if (field === 'size') return (parseInt(va) - parseInt(vb)) * mul;
+          if (va < vb) return -1 * mul;
+          if (va > vb) return 1 * mul;
+          return 0;
+        });
+
+        cards.forEach(function (card) { container.appendChild(card); });
+      }
+
+      updateBtns('title');
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () { sortCards(btn.dataset.sort); });
+      });
+    })();
+  </script>
 {{ end }}

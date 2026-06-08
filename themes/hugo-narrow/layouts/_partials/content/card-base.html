@@ -27,7 +27,7 @@
 {{- end -}}
 
 {{/* 文章卡片 */}}
-<article class="group">
+<article class="group" data-date="{{ $page.Date.Format `2006-01-02` }}" data-title="{{ $page.Title }}" data-lastmod="{{ $page.Lastmod.Format `2006-01-02` }}" data-wordcount="{{ $page.WordCount }}">
   <a href="{{ $page.RelPermalink }}" class="block">
     <div
       class="bg-card border-border hover:bg-primary/5 hover:border-primary/20 focus:ring-primary/20 relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lg focus:ring-2 focus:outline-none md:flex-row"

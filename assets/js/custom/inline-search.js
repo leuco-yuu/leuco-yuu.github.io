@@ -7,8 +7,7 @@
   const RESULT_CONTAINER_ID = "inline-search-results";
   const HIT_CLASS = "inline-search-hit";
   const ACTIVE_HIT_CLASS = "inline-search-hit-current";
-  const QUERY_PARAM = "inlineSearch";
-  const AUTO_PARAM = "inlineSearchAuto";
+  const INLINE_SEARCH_STATE_KEY = "leuco:inline-search-navigation";
 
   const FIELD_MAP = {
     post: ["title", "summary", "content"],
@@ -64,7 +63,7 @@
     if (context.mode === "single") {
       document.body.classList.add("inline-search-page-mode");
       setupSingleNavigationControls();
-      restoreSearchFromURL();
+      restoreSearchFromNavigationState();
     }
   }
 
@@ -344,9 +343,30 @@
     if (record.kind !== "post" && record.kind !== "project") return record.permalink;
 
     const url = new URL(record.permalink, window.location.origin);
-    url.searchParams.set(QUERY_PARAM, parsed.query);
-    url.searchParams.set(AUTO_PARAM, "1");
     return `${url.pathname}${url.search}${url.hash}`;
+  }
+
+  function rememberInlineSearchNavigation(record, parsed) {
+    if (!record?.permalink || !parsed?.query) return;
+    if (record.kind !== "post" && record.kind !== "project") return;
+
+    try {
+      const url = new URL(record.permalink, window.location.origin);
+      window.sessionStorage.setItem(
+        INLINE_SEARCH_STATE_KEY,
+        JSON.stringify({
+          query: parsed.query,
+          targetPath: url.pathname,
+          createdAt: Date.now(),
+        }),
+      );
+    } catch (_) {
+      // Keep navigation usable when sessionStorage is blocked.
+    }
+  }
+
+  function attachInlineSearchNavigation(link, record, parsed) {
+    link.addEventListener("click", () => rememberInlineSearchNavigation(record, parsed));
   }
 
   function textMatches(text, parsed) {
@@ -505,6 +525,7 @@
     const link = document.createElement("a");
     link.href = createSearchTarget(record, parsed);
     link.className = "block";
+    attachInlineSearchNavigation(link, record, parsed);
 
     const card = document.createElement("div");
     card.className =
@@ -622,6 +643,7 @@
     const link = document.createElement("a");
     link.href = createSearchTarget(record, parsed);
     link.className = "block h-full";
+    attachInlineSearchNavigation(link, record, parsed);
 
     const card = document.createElement("div");
     card.className =
@@ -690,6 +712,7 @@
     const link = document.createElement("a");
     link.href = createSearchTarget(record, parsed);
     link.className = "block";
+    attachInlineSearchNavigation(link, record, parsed);
 
     const card = document.createElement("div");
     card.className =
@@ -852,6 +875,7 @@
     const link = document.createElement("a");
     link.href = createSearchTarget(record, parsed);
     link.className = "block";
+    attachInlineSearchNavigation(link, record, parsed);
     link.appendChild(createHighlightedFragment(record.title || "", parsed));
     title.appendChild(link);
 
@@ -1014,15 +1038,26 @@
     });
   }
 
-  function restoreSearchFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    const query = params.get(QUERY_PARAM);
-    if (params.get(AUTO_PARAM) !== "1" || !query) return;
+  function restoreSearchFromNavigationState() {
+    let state = null;
+    try {
+      state = JSON.parse(window.sessionStorage.getItem(INLINE_SEARCH_STATE_KEY) || "null");
+      window.sessionStorage.removeItem(INLINE_SEARCH_STATE_KEY);
+    } catch (_) {
+      return;
+    }
+
+    const query = typeof state?.query === "string" ? state.query : "";
+    const targetPath = typeof state?.targetPath === "string" ? state.targetPath : "";
+    const createdAt = Number(state?.createdAt || 0);
+    const isFresh = !createdAt || Date.now() - createdAt < 10 * 60 * 1000;
+    if (!query || !isFresh) return;
+    if (targetPath && new URL(targetPath, window.location.origin).pathname !== window.location.pathname) return;
 
     window.requestAnimationFrame(() => {
       document.dispatchEvent(
         new CustomEvent("inline-search:open", {
-          detail: { origin: "inline-search-url", focus: true },
+          detail: { origin: "inline-search-navigation", focus: true },
         }),
       );
 

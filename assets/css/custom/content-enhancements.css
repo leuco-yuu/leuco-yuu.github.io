@@ -20,6 +20,11 @@ article.prose [data-content-heading="true"] .heading-anchor {
   white-space: pre;
 }
 
+article.prose h1[data-content-heading="true"] {
+  font-size: 2rem !important;
+  line-height: 2.25rem !important;
+}
+
 .content-section-folded {
   display: none !important;
 }

@@ -20,8 +20,7 @@
   let selectedIndex = -1;
   let searchTimeout = null;
   let lastFocusedElement = null;
-  const QUERY_PARAM = "inlineSearch";
-  const AUTO_PARAM = "inlineSearchAuto";
+  const INLINE_SEARCH_STATE_KEY = "leuco:inline-search-navigation";
 
   function readJSONConfig(id) {
     const configElement = document.getElementById(id);
@@ -556,9 +555,26 @@
     if (result.kind !== "post" && result.kind !== "project") return result.permalink;
 
     const url = new URL(result.permalink, window.location.origin);
-    url.searchParams.set(QUERY_PARAM, query);
-    url.searchParams.set(AUTO_PARAM, "1");
     return `${url.pathname}${url.search}${url.hash}`;
+  }
+
+  function rememberInlineSearchNavigation(result, query) {
+    if (!result?.permalink || !query) return;
+    if (result.kind !== "post" && result.kind !== "project") return;
+
+    try {
+      const url = new URL(result.permalink, window.location.origin);
+      window.sessionStorage.setItem(
+        INLINE_SEARCH_STATE_KEY,
+        JSON.stringify({
+          query,
+          targetPath: url.pathname,
+          createdAt: Date.now(),
+        }),
+      );
+    } catch (_) {
+      // sessionStorage can be unavailable in strict privacy contexts; clean links still work.
+    }
   }
 
   function renderResults(results, query) {
@@ -590,6 +606,7 @@
     link.className =
       "search-result-item block rounded-lg p-4 transition-colors duration-200 hover:bg-primary/10";
     link.setAttribute("role", "listitem");
+    link.addEventListener("click", () => rememberInlineSearchNavigation(result, query));
 
     const container = document.createElement("div");
     container.className = "flex flex-col gap-2";

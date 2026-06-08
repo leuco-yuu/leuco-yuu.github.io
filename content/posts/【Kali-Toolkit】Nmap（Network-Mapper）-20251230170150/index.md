@@ -405,5 +405,3 @@ series:
 
   - **功能**：当以非root用户运行时模拟原始套接字。
   - **示例**：`nmap --unprivileged 192.168.1.100 # 非特权模式`
-
-# 附件  [nmap.pdf](nmap.pdf)
