@@ -104,6 +104,9 @@
 
 
 <link rel="manifest" href="{{ `site.webmanifest` | relURL }}{{ $faviconQuery }}" />
+{{ with site.Home.OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="{{ .MediaType.String }}" href="{{ .RelPermalink }}" title="{{ site.Title }}" />
+{{ end }}
 {{ partial "layout/head/seo.html" . }}
 
 {{ partial "config/script.html" (dict "id" "search-config" "value" $searchConfig) }}

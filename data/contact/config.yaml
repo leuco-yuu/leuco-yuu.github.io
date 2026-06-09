@@ -79,29 +79,29 @@ contacts:
     name: Twitter
     type: profile
     icon: Twitter
-    profileName: "jkh"
-    profileLink: "twitter.com/jebdessau73597"
+    profileName: "Leuco Yuu"
+    profileLink: "https://x.com/LeucoY42379"
     buttons:
       - text: "复制地址"
         icon: copy
-        copy: "https://twitter.com/jebdessau73597"
+        copy: "https://x.com/LeucoY42379"
       - text: "访问Twitter"
         icon: external
-        url: "https://twitter.com/jebdessau73597"
+        url: "https://x.com/LeucoY42379"
 
   - id: rss
     name: RSS 订阅
     type: profile
     icon: rss
     profileName: "RSS Feed"
-    profileLink: "example.com/index.xml"
+    profileLink: "leuco.github.io/index.xml"
     buttons:
       - text: "复制地址"
         icon: copy
-        copy: "https://example.com/index.xml"
-      - text: "访问RSS"
+        copy: "https://leuco.github.io/index.xml"
+      - text: "打开RSS"
         icon: external
-        url: "https://example.com/index.xml"
+        url: "https://leuco.github.io/index.xml"
 
   - id: whatsapp
     name: WhatsApp
