@@ -1,7 +1,7 @@
 ---
 title: 集成学习（Ensemble Learning）
 date: 2025-12-02T20:30:43+08:00
-lastmod: 2026-06-09T12:44:12+08:00
+lastmod: 2026-06-09T17:55:36+08:00
 draft: false
 slug: ensemble-learning
 series_order: 4
@@ -12,16 +12,15 @@ tags:
 - Bagging
 - Boosting
 - 随机森林
-- OOB
-- 袋外数据
 - AdaBoost
 - GBDT
+- 剪枝
 categories:
-- 机器学习
+- 人工智能
 - 学习笔记
 series:
-- 人工智能
-cover: output_3_1.png
+- 机器学习
+cover: cover.png
 ---
 
 # 决策树（Decision-Making Tree）

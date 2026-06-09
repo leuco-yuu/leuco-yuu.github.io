@@ -1,20 +1,18 @@
 ---
-title: "渗透测试基础"
+title: 渗透测试基础
 date: 2025-12-30T14:51:56+08:00
-lastmod: 2026-06-02T12:32:48+08:00
+lastmod: 2026-06-09T17:42:28+08:00
 draft: false
 slug: penetration-testing-basics
 series_order: 2
-description: "【网络空间安全】网络安全入门-渗透测试基础"
-summary: "整理渗透测试的基本概念、测试分类、流程方法与常见安全测试视角。"
+description: 【网络空间安全】网络安全入门-渗透测试基础
+summary: 整理渗透测试的基本概念、测试分类、流程方法与常见安全测试视角。
 tags:
-  - "网络空间安全"
-  - "渗透测试"
-categories:
-  - "网络空间安全"
-  - "学习笔记"
-series:
-  - "网络安全实践"
+- 网络空间安全
+- 渗透测试
+categories: []
+series: []
+cover: ''
 ---
 
 - **概述**：通过各种手段对目标进行渗透攻击，通过渗透来测试目标的安全防护能力

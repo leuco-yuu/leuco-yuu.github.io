@@ -1,5 +1,5 @@
 ---
-title: 学习笔记
+title: 多项式分布
 description: ''
 ---
 

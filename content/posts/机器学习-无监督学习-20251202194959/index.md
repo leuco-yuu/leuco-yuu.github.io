@@ -1,7 +1,7 @@
 ---
 title: 无监督学习（Unsupervised Learning）
 date: 2025-12-02T19:45:17+08:00
-lastmod: 2026-06-09T12:43:49+08:00
+lastmod: 2026-06-09T17:54:28+08:00
 draft: false
 slug: unsupervised-learning
 series_order: 3
@@ -10,19 +10,15 @@ summary: 机器学习第三部分：梳理聚类、降维、K-Means、GMM 与 PC
 tags:
 - 聚类
 - K-Means
-- 层次聚类
-- 密度聚类
-- 高斯混合模型
 - GMM
-- GM
 - EM
 - PCA
 - 降维
 categories:
-- 机器学习
+- 人工智能
 - 学习笔记
 series:
-- 人工智能
+- 机器学习
 cover: cover.png
 ---
 

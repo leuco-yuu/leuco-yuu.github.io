@@ -1,5 +1,5 @@
 ---
-title: 学习笔记
+title: 多层感知机
 description: ''
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 学习笔记
+title: 人工智能
 description: ''
 ---
 

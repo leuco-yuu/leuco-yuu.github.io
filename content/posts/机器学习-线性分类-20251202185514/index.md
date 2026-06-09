@@ -1,26 +1,26 @@
 ---
 title: 线性分类（Linear Classification）
-date: 2025-12-02T18:51:05+08:00
-lastmod: 2026-06-09T13:29:17+08:00
+date: 2025-11-19T18:51:05+08:00
+lastmod: 2026-06-09T17:53:30+08:00
 draft: false
 slug: linear-classification
 series_order: 2
 description: 【2】机器学习 第二部分 通过线性模型实现有监督的分类任务
 summary: 机器学习第二部分：整理逻辑回归、Softmax、SVM 与感知机等线性分类方法。
 tags:
-- 逻辑回归
 - Logistic
 - Softmax
 - SVM
 - SMO
 - 感知机
-- 支持向量机
+- 伯努利分布
+- 多项式分布
 categories:
-- 机器学习
+- 人工智能
 - 学习笔记
 series:
-- 人工智能
-cover: SVM.jpg
+- 机器学习
+cover: cover.png
 ---
 
 # 线性分类（Linear Classification）
@@ -772,17 +772,17 @@ print(classification_report(y_test, y_pred, target_names=names))
 ​    详细分类报告：
 ​                       precision    recall  f1-score   support
 ​    
-         Ariel Sharon       1.00      0.47      0.64        19
-         Colin Powell       0.84      0.90      0.87        59
-      Donald Rumsfeld       0.95      0.70      0.81        30
-        George W Bush       0.80      0.98      0.88       133
-    Gerhard Schroeder       0.95      0.78      0.86        27
-          Hugo Chavez       1.00      0.56      0.71        18
-           Tony Blair       0.91      0.83      0.87        36
-    
-             accuracy                           0.85       322
-            macro avg       0.92      0.75      0.81       322
-         weighted avg       0.87      0.85      0.84       322
+​         Ariel Sharon       1.00      0.47      0.64        19
+​         Colin Powell       0.84      0.90      0.87        59
+​      Donald Rumsfeld       0.95      0.70      0.81        30
+​        George W Bush       0.80      0.98      0.88       133
+​    Gerhard Schroeder       0.95      0.78      0.86        27
+​          Hugo Chavez       1.00      0.56      0.71        18
+​           Tony Blair       0.91      0.83      0.87        36
+​    
+​             accuracy                           0.85       322
+​            macro avg       0.92      0.75      0.81       322
+​         weighted avg       0.87      0.85      0.84       322
 
 
 ​    

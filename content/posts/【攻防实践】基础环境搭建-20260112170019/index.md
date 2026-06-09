@@ -1,7 +1,7 @@
 ---
 title: 基础环境搭建
 date: 2026-01-12T16:58:42+08:00
-lastmod: 2026-06-09T12:42:02+08:00
+lastmod: 2026-06-09T17:42:28+08:00
 draft: false
 slug: basic-environment-setup
 series_order: 1
@@ -12,11 +12,8 @@ tags:
 - 文件共享系统
 - Flask
 - Python
-categories:
-- 网络空间安全
-- 攻防实践
-series:
-- 网络安全实践
+categories: []
+series: []
 cover: cover.png
 ---
 

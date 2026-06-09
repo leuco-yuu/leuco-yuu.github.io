@@ -1,22 +1,20 @@
 ---
-title: "Notes Knowledge Base"
+title: Notes Knowledge Base
 date: 2026-05-12T11:00:00+08:00
-lastmod: 2026-05-12T11:00:00+08:00
+lastmod: 2026-06-09T17:41:32+08:00
 draft: false
 slug: notes-knowledge-base
-description: "把学习笔记整理成可检索、可引用、可发布的知识库。"
-summary: "围绕 Markdown、标签、系列和归档构建的知识库项目，用来沉淀技术笔记与实践记录。"
+description: 把学习笔记整理成可检索、可引用、可发布的知识库。
+summary: 围绕 Markdown、标签、系列和归档构建的知识库项目，用来沉淀技术笔记与实践记录。
 featured: false
 tags:
-  - Knowledge Base
-  - Markdown
-  - Notes
-  - Workflow
-categories:
-  - projects
-  - 写作系统
+- Knowledge Base
+- Markdown
+- Notes
+- Workflow
+categories: []
 cover: cover.jpg
-link:
+link: null
 status: planning
 ---
 

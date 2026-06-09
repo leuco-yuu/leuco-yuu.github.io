@@ -1,5 +1,5 @@
 ---
-title: 学习笔记
+title: 伯努利分布
 description: ''
 ---
 

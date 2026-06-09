@@ -1,5 +1,5 @@
 ---
-title: 学习笔记
+title: 梯度爆炸
 description: ''
 ---
 

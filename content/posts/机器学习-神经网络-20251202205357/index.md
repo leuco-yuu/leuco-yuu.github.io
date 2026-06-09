@@ -1,32 +1,30 @@
 ---
 title: 神经网络（Neural Network）
 date: 2025-12-02T20:51:17+08:00
-lastmod: 2026-06-09T12:44:50+08:00
+lastmod: 2026-06-09T17:57:19+08:00
 draft: false
 slug: neural-network
 series_order: 5
 description: 【5】机器学习第五部分 神经网络是深度学习的开端
 summary: 机器学习第五部分：整理前馈网络、反向传播、正则化、CNN 与 RNN 等神经网络基础。
 tags:
-- 交叉熵损失
 - 反向传播
-- BP
 - 梯度下降
 - Dropout
 - BN
 - CNN
-- 卷积神经网络
 - RNN
-- 循环神经网络
-- 卷积层
-- 池化层
-- 词嵌入层
+- 梯度消失
+- 梯度爆炸
+- 参数初始化
+- 多层感知机
+- 激活函数
 categories:
-- 机器学习
+- 人工智能
 - 学习笔记
 series:
-- 人工智能
-cover: 60aa0004-c259-49eb-b742-6515691c6d92.png
+- 深度学习
+cover: cover.png
 ---
 
 # 神经网络（Neural Network，NN）

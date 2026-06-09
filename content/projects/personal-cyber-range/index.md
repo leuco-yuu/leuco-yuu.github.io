@@ -1,23 +1,21 @@
 ---
-title: "Personal Cyber Range"
+title: Personal Cyber Range
 date: 2026-05-30T14:00:00+08:00
-lastmod: 2026-05-30T14:00:00+08:00
+lastmod: 2026-06-09T17:41:54+08:00
 draft: false
 slug: personal-cyber-range
 homepage: true
-description: "用于授权安全实验的个人靶场环境。"
-summary: "基于虚拟机和容器组合的安全实验环境，用于复现漏洞、记录攻击链和验证防护思路。"
+description: 用于授权安全实验的个人靶场环境。
+summary: 基于虚拟机和容器组合的安全实验环境，用于复现漏洞、记录攻击链和验证防护思路。
 featured: true
 tags:
-  - Cyber Range
-  - Docker
-  - Nmap
-  - Lab
-categories:
-  - projects
-  - 网络空间安全
+- Cyber Range
+- Docker
+- Nmap
+- Lab
+categories: []
 cover: cover.jpg
-link:
+link: null
 status: in_progress
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 线性回归（Linear Regression）
 date: 2025-11-12T13:16:53+08:00
-lastmod: 2026-06-09T13:29:47+08:00
+lastmod: 2026-06-09T17:51:28+08:00
 draft: false
 slug: linear-regression
 series_order: 1
@@ -16,10 +16,10 @@ tags:
 - Lasso回归
 - SK-Learn
 categories:
-- 机器学习
+- 人工智能
 - 学习笔记
 series:
-- 人工智能
+- 机器学习
 cover: cover.png
 ---
 

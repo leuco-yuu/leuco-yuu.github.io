@@ -1,23 +1,21 @@
 ---
-title: "Leuco Blog on Hugo Narrow"
+title: Leuco Blog on Hugo Narrow
 date: 2026-06-05T09:30:00+08:00
-lastmod: 2026-06-05T09:30:00+08:00
+lastmod: 2026-06-09T17:41:32+08:00
 draft: false
 slug: hugo-narrow-blog
 homepage: true
-description: "基于 Hugo Narrow 的个人博客与项目展示站。"
-summary: "一个用 Hugo Narrow 搭建的静态博客，支持文章、归档、分类、标签、系列、项目和 GitHub Pages 自动部署。"
+description: 基于 Hugo Narrow 的个人博客与项目展示站。
+summary: 一个用 Hugo Narrow 搭建的静态博客，支持文章、归档、分类、标签、系列、项目和 GitHub Pages 自动部署。
 featured: true
 tags:
-  - Hugo
-  - GitHub Pages
-  - Blog
-  - Static Site
-categories:
-  - projects
-  - 写作系统
+- Hugo
+- GitHub Pages
+- Blog
+- Static Site
+categories: []
 cover: cover.jpg
-link:
+link: null
 status: in_progress
 ---
 

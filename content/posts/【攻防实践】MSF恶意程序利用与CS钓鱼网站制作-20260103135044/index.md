@@ -1,23 +1,20 @@
 ---
-title: "【攻防实践】MSF恶意程序利用与CS钓鱼网站制作"
+title: 【攻防实践】MSF恶意程序利用与CS钓鱼网站制作
 date: 2026-01-03T13:48:09+08:00
-lastmod: 2026-06-02T12:32:46+08:00
+lastmod: 2026-06-09T17:42:28+08:00
 draft: false
 slug: msf-cs-phishing-lab
 series_order: 5
-description: "【2】制作WIndows恶意软件获取Shell"
-summary: "在隔离授权环境中记录 MSFVenom 与 Cobalt Strike 相关实验流程和风险边界。"
+description: 【2】制作WIndows恶意软件获取Shell
+summary: 在隔离授权环境中记录 MSFVenom 与 Cobalt Strike 相关实验流程和风险边界。
 tags:
-  - "msfvenom"
-  - "shell"
-  - "Windowsl"
-  - "CS"
-categories:
-  - "网络空间安全"
-  - "攻防实践"
-series:
-  - "网络安全实践"
-cover: "CS.png"
+- msfvenom
+- shell
+- Windowsl
+- CS
+categories: []
+series: []
+cover: CS.png
 ---
 
 # 实践概览
