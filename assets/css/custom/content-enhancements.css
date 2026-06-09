@@ -3,6 +3,19 @@ article.prose [data-content-heading="true"] {
   scroll-margin-top: 5rem;
 }
 
+/* 批注块样式 */
+.annot-badge .annot-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.annot-badge .annot-icon svg path,
+.annot-badge .annot-icon svg [fill] {
+  fill: currentColor !important;
+}
+.annot-body p:first-child { margin-top: 0; }
+.annot-body p:last-child  { margin-bottom: 0; }
+
 article.prose [data-content-heading="true"]:focus-visible {
   border-radius: 0.35rem;
   outline: 2px solid color-mix(in oklab, var(--color-primary) 35%, transparent);

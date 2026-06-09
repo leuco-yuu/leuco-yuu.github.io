@@ -1,6 +1,5 @@
 .collapse-overlay-btn,
-.code-block-bottom-collapse,
-.mermaid-code-bottom-collapse {
+.code-block-bottom-collapse {
   position: absolute;
   transform: scale(1);
   transform-origin: center;
@@ -12,14 +11,12 @@
 }
 
 .collapse-overlay-btn,
-.code-block-bottom-collapse,
-.mermaid-code-bottom-collapse {
+.code-block-bottom-collapse {
   translate: -50% 0;
 }
 
 .collapse-overlay-btn::before,
-.code-block-bottom-collapse::before,
-.mermaid-code-bottom-collapse::before {
+.code-block-bottom-collapse::before {
   content: "";
   inset: -0.65rem;
   position: absolute;
@@ -28,29 +25,27 @@
 .collapse-overlay-btn:hover,
 .collapse-overlay-btn:focus-visible,
 .code-block-bottom-collapse:hover,
-.code-block-bottom-collapse:focus-visible,
-.mermaid-code-bottom-collapse:hover,
-.mermaid-code-bottom-collapse:focus-visible {
+.code-block-bottom-collapse:focus-visible {
   transform: scale(1.12);
 }
 
 .code-block-output {
-  --output-surface: color-mix(in oklab, var(--color-muted) 54%, var(--color-card));
-  --output-surface-deep: color-mix(in oklab, var(--color-muted) 70%, var(--color-card));
-  --output-border: color-mix(in oklab, var(--color-muted-foreground) 14%, var(--color-border));
-  --output-text: color-mix(in oklab, var(--color-foreground) 65%, var(--color-muted-foreground));
-  --output-subtle: color-mix(in oklab, var(--color-muted-foreground) 62%, var(--color-card));
-  --output-icon-bg: color-mix(in oklab, var(--color-muted-foreground) 12%, transparent);
-  --output-icon-color: color-mix(in oklab, var(--color-muted-foreground) 80%, var(--color-foreground));
+  --output-surface: color-mix(in oklab, var(--color-muted) 30%, var(--color-card));
+  --output-surface-deep: color-mix(in oklab, var(--color-muted) 44%, var(--color-card));
+  --output-border: color-mix(in oklab, var(--color-muted-foreground) 10%, var(--color-border));
+  --output-text: color-mix(in oklab, var(--color-foreground) 58%, var(--color-muted-foreground));
+  --output-subtle: color-mix(in oklab, var(--color-muted-foreground) 50%, var(--color-card));
+  --output-icon-bg: color-mix(in oklab, var(--color-muted-foreground) 8%, transparent);
+  --output-icon-color: color-mix(in oklab, var(--color-muted-foreground) 65%, var(--color-foreground));
   border-color: var(--output-border);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 5%);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 3%);
 }
 
 .dark .code-block-output {
-  --output-surface: color-mix(in oklab, var(--color-muted) 46%, var(--color-background));
-  --output-surface-deep: color-mix(in oklab, var(--color-muted) 58%, var(--color-background));
-  --output-border: color-mix(in oklab, var(--color-muted-foreground) 18%, var(--color-border));
-  --output-subtle: color-mix(in oklab, var(--color-muted-foreground) 54%, var(--color-background));
+  --output-surface: color-mix(in oklab, var(--color-muted) 26%, var(--color-background));
+  --output-surface-deep: color-mix(in oklab, var(--color-muted) 38%, var(--color-background));
+  --output-border: color-mix(in oklab, var(--color-muted-foreground) 12%, var(--color-border));
+  --output-subtle: color-mix(in oklab, var(--color-muted-foreground) 42%, var(--color-background));
 }
 
 .code-block-output .code-block-header {
@@ -63,21 +58,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.375rem;
   background: var(--output-icon-bg);
   color: var(--output-icon-color);
 }
 
 .code-block-output .code-block-icon svg {
-  width: 1rem;
-  height: 1rem;
+  width: 0.875rem;
+  height: 0.875rem;
 }
 
 .code-block-output .code-block-title {
   font-family: var(--font-mono);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--output-subtle);
 }
@@ -140,42 +135,52 @@
   color: inherit !important;
 }
 
-.code-block-output .collapse-overlay {
-  background: linear-gradient(
-    180deg,
-    transparent,
-    color-mix(in oklab, var(--color-muted) 55%, transparent)
-  );
+/* 紧跟前一个代码框时：融为一体 */
+.code-block-container:not(.code-block-output):has(+ .code-block-output) {
+  margin-bottom: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+.code-block-container:not(.code-block-output) + .code-block-output {
+  margin-top: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-top: 0 !important;
 }
 
-.code-block-output .collapse-overlay-btn,
+.code-block-output .code-block-content {
+  transition: max-height 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+/* Header hover + chevron arrow (now inline via <span>) */
+.code-block-output .code-block-header[role="button"]:hover {
+  background: color-mix(in oklab, var(--color-muted) 44%, transparent) !important;
+}
+
+/* Output 块底部收起按钮 */
 .code-block-output .code-block-bottom-collapse {
-  background: color-mix(in oklab, var(--color-card) 88%, var(--color-muted));
+  background: var(--color-card);
   border-color: var(--output-border);
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
 }
-
-.code-block-output .collapse-overlay:hover .collapse-overlay-btn,
-.code-block-output .collapse-overlay-btn:hover,
 .code-block-output .code-block-bottom-collapse:hover {
-  transform: scale(1.08);
+  color: var(--color-foreground);
+  background: var(--color-muted);
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+.code-block-output .code-block-bottom-collapse svg {
+  width: 16px;
+  height: 16px;
 }
 
 @media (max-width: 640px) {
   .code-block-output .code-block-header {
-    padding-inline: 0.875rem;
+    padding-inline: 0.75rem;
   }
 
   .code-block-output .code-output-pre {
     padding: 0.875rem 1rem;
     font-size: 0.8125rem;
     line-height: 1.7;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .collapse-overlay-btn,
-  .code-block-bottom-collapse,
-  .mermaid-code-bottom-collapse {
-    transition: none !important;
   }
 }

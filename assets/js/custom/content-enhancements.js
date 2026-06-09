@@ -421,7 +421,7 @@
     const bottomCollapse = document.createElement("button");
     bottomCollapse.type = "button";
     bottomCollapse.className =
-      "mermaid-code-bottom-collapse text-muted-foreground bg-card/80 border-border/50 hover:bg-primary/10 hover:text-primary hover:border-primary/30 absolute bottom-4 left-1/2 z-10 hidden items-center justify-center rounded-full border p-2 backdrop-blur-sm transition-all duration-200";
+      "code-block-bottom-collapse text-muted-foreground bg-card/80 border-border/50 hover:bg-primary/10 hover:text-primary hover:border-primary/30 absolute bottom-4 left-1/2 z-10 items-center justify-center rounded-full border p-2 backdrop-blur-sm transition-all duration-200";
     bottomCollapse.dataset.mermaidAction = "toggle-code-collapse";
     bottomCollapse.hidden = true;
     bottomCollapse.setAttribute("aria-label", getUIText("code.collapse", "收起"));
@@ -494,7 +494,7 @@
     const text = button?.querySelector(".mermaid-code-collapse-text");
     const chevron = button?.querySelector(".mermaid-code-collapse-chevron");
     const overlay = pane?.querySelector(".mermaid-code-collapse-overlay");
-    const bottomCollapse = pane?.querySelector(".mermaid-code-bottom-collapse");
+    const bottomCollapse = pane?.querySelector(".code-block-bottom-collapse");
     if (!pane) return;
 
     const foldable = tool.dataset.mermaidFoldable === "true";
@@ -534,8 +534,7 @@
     if (bottomCollapse) {
       const showBottomCollapse = foldable && !nextCollapsed;
       bottomCollapse.hidden = !showBottomCollapse;
-      bottomCollapse.classList.toggle("hidden", !showBottomCollapse);
-      bottomCollapse.classList.toggle("flex", showBottomCollapse);
+      bottomCollapse.style.display = showBottomCollapse ? "flex" : "none";
     }
 
     if (animate) {

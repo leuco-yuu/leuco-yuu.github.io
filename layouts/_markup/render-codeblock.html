@@ -15,6 +15,9 @@
 
 {{- $collapsed := .Attributes.collapsed | default false -}}
 {{- $defaultState := .Attributes.defaultState | default (site.Params.codeblock.collapse.defaultState | default "expanded") -}}
+{{- if $isOutput -}}
+  {{- $defaultState = "collapsed" -}}
+{{- end -}}
 {{- $autoCollapseLines := site.Params.codeblock.collapse.autoCollapseLines | default 30 -}}
 {{- $autoCollapseHeight := site.Params.codeblock.collapse.autoCollapseHeight | default 400 -}}
 {{- $collapsedHeight := site.Params.codeblock.collapse.collapsedHeight | default 120 -}}
@@ -30,8 +33,30 @@
   data-collapsed="{{ $collapsed }}"
   data-auto-collapse-lines="{{ $autoCollapseLines }}"
   data-auto-collapse-height="{{ $autoCollapseHeight }}"
-  data-collapsed-height="{{ $collapsedHeight }}"
+  data-collapsed-height="{{ if $isOutput }}0{{ else }}{{ $collapsedHeight }}{{ end }}"
 >
+  {{- if $isOutput -}}
+  <div
+    class="code-block-header border-border flex items-center justify-between border-b px-3 py-2 cursor-pointer hover:bg-muted/50 transition-colors duration-200 select-none"
+    data-code-action="toggle-collapse"
+    role="button"
+    tabindex="0"
+    aria-expanded="false"
+  >
+    <div class="flex items-center gap-2">
+      <div class="code-block-icon text-muted-foreground shrink-0">
+        {{ partial "features/icon.html" (dict "name" $iconName "size" "sm" "ariaLabel" "") }}
+      </div>
+      <span class="code-block-title text-muted-foreground text-xs font-medium tracking-wider">
+        {{ $displayLang }}
+      </span>
+      <span class="output-chevron text-muted-foreground/50 inline-flex items-center transition-transform duration-300 ease-out" aria-hidden="true">
+        {{ partial "features/icon.html" (dict "name" "chevron-down" "size" "xs" "ariaLabel" "") }}
+      </span>
+    </div>
+    {{/* output 块没有右上角按钮 */}}
+  </div>
+  {{- else -}}
   <div class="code-block-header bg-muted/30 border-border flex items-center justify-between border-b px-4 py-3">
     <div class="flex items-center gap-2">
       <div class="code-block-icon text-muted-foreground shrink-0">
@@ -54,7 +79,6 @@
           aria-label="{{ T `code.collapse` }}"
           aria-controls="{{ $codeId }}"
           aria-expanded="true"
-          hidden
         >
           <span class="collapse-chevron transition-transform duration-200 ease-out">
             {{ partial "features/icon.html" (dict "name" "chevron-down" "size" "xs" "ariaLabel" "") }}
@@ -79,6 +103,7 @@
       </button>
     </div>
   </div>
+  {{- end -}}
 
   <div class="code-block-content relative" id="{{ $codeId }}">
     {{- if $isOutput -}}
@@ -88,6 +113,7 @@
       {{ $highlighted.Wrapped }}
     {{- end -}}
     <div hidden data-code-source>{{ .Inner }}</div>
+    {{- if not $isOutput -}}
     <div
       class="collapse-overlay to-card/90 pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-transparent opacity-0 transition-opacity duration-300"
       hidden
@@ -102,9 +128,10 @@
         {{ partial "features/icon.html" (dict "name" "chevron-down" "size" "sm" "ariaLabel" "") }}
       </button>
     </div>
+    {{- end -}}
     {{- if $collapseEnabled -}}
       <button
-        class="collapse-code-btn code-block-bottom-collapse text-muted-foreground bg-card/80 border-border/50 hover:bg-primary/10 hover:text-primary hover:border-primary/30 absolute bottom-4 left-1/2 z-10 hidden items-center justify-center rounded-full border p-2 backdrop-blur-sm transition-all duration-200"
+        class="code-block-bottom-collapse text-muted-foreground bg-card/80 border-border/50 hover:bg-primary/10 hover:text-primary hover:border-primary/30 absolute bottom-4 left-1/2 z-10 hidden items-center justify-center rounded-full border p-2 backdrop-blur-sm transition-all duration-200"
         type="button"
         data-code-action="toggle-collapse"
         data-label-expand="{{ T `code.expand` }}"
@@ -115,7 +142,9 @@
         aria-expanded="true"
         hidden
       >
-        {{ partial "features/icon.html" (dict "name" "chevron-up" "size" "sm" "ariaLabel" "") }}
+        <span class="bottom-collapse-icon">
+          {{ partial "features/icon.html" (dict "name" "chevron-up" "size" "sm" "ariaLabel" "") }}
+        </span>
       </button>
     {{- end -}}
   </div>

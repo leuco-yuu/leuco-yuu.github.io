@@ -18,20 +18,19 @@
 
   <!-- 文章摘要 -->
   {{ if .Params.summary }}
-  <div class="text-muted-foreground mb-6 text-lg leading-relaxed">
+  <div class="text-muted-foreground mb-6 border-l-2 border-primary/30 leading-relaxed" style="font-size: 1.05rem; padding-left: 1.25rem;">
     {{ .Params.summary | plainify }}
   </div>
   {{ end }}
 
   <!-- 元信息区域 -->
-  <div class="bg-card border-border rounded-xl border">
+  <div class="bg-card border-border rounded-xl border{{ if $currentSeries }} series-card{{ end }}">
 
-    {{/* 如果有 Series，使用 flex 左右分栏布局 */}}
+    {{/* 如果有 Series，使用 series-left / series-sidebar 分栏 */}}
     {{- if $currentSeries }}
-    <div class="flex flex-col lg:flex-row">
 
       {{/* 左侧：文章元信息 */}}
-      <div class="shrink-0 lg:w-3/5 p-6 border-b lg:border-b-0 lg:border-r border-border">
+      <div class="series-left p-6 border-b lg:border-b-0 border-border">
         {{- else }}
         {{/* 没有 Series 时，单栏显示 */}}
         <div class="p-6">
@@ -86,7 +85,7 @@
               <div class="flex min-w-0 flex-1 flex-wrap items-center gap-1.5">
                 {{- $taxonomyLabel := $taxonomyName | humanize }}
                 {{- with $.Site.GetPage (printf "/%s" $taxonomyName) }}
-                  {{- $taxonomyLabel = .LinkTitle | default .Title }}
+                  {{- $taxonomyLabel = .Params.label | default .LinkTitle | default .Title }}
                 {{- end }}
                 <span class="text-muted-foreground text-sm font-medium">
                   {{ $taxonomyLabel }}:
@@ -107,8 +106,8 @@
           {{- if $currentSeries }}
         </div>
 
-        {{/* 右侧：Series 文章列表 */}}
-        <div class="flex-1 lg:w-2/5 flex flex-col" id="series-container">
+        {{/* 右侧：Series 文章列表 — 桌面端绝对定位填满卡片高度，移动端自然流 */}}
+        <div class="series-sidebar flex flex-col min-h-0 border-t lg:border-t-0" id="series-container">
           <!-- Series 标题栏 (Tabs) -->
           <div class="shrink-0 p-4 border-b border-border">
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth" id="series-tabs">
@@ -144,12 +143,11 @@
           </div>
 
           <!-- Series 内容列表区域 -->
-          <div class="flex-1">
             {{- range $dataIndex, $seriesPage := $currentSeries }}
             {{- $seriesPages := partial "series/sorted-pages.html" (dict "pages" $seriesPage.Pages) }}
 
             <nav id="series-content-{{ $dataIndex }}"
-              class="series-content overflow-y-auto max-h-32 p-4 transition-opacity duration-300 {{ if eq $dataIndex 0 }}opacity-100 z-10 block{{ else }}opacity-0 z-0 hidden{{ end }}"
+              class="series-content flex-1 min-h-0 overflow-y-auto p-4 transition-opacity duration-300 {{ if eq $dataIndex 0 }}opacity-100 z-10{{ else }}opacity-0 z-0 hidden{{ end }}"
               data-link="{{ $seriesPage.RelPermalink }}">
               <ol class="space-y-1.5">
                 {{- range $index, $page := $seriesPages }}
@@ -176,7 +174,6 @@
               </ol>
             </nav>
             {{- end }}
-          </div>
 
           <script>
             function switchSeries(index) {
@@ -221,7 +218,6 @@
             });
           </script>
         </div>
-      </div>
       {{- else }}
     </div>
     {{- end }}
