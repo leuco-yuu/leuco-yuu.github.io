@@ -1,5 +1,5 @@
 baseURL: https://leuco.github.io/
-title: Leuco's Monologu
+title: Leuco's Monologue
 theme: hugo-narrow
 defaultContentLanguage: zh-hans
 locale: zh-Hans
@@ -153,7 +153,7 @@ params:
     - Leuco
   defaultAuthor: leuco
   language: zh-CN
-  shortName: Leuco's Monologu
+  shortName: Leuco's Monologue
   images:
     - /images/avatar.jpg
   favicon:

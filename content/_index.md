@@ -28,4 +28,4 @@ author:
       icon: rss
 ---
 
-欢迎来到 Leuco's Monologu。这里会放近期文章、项目精选，以及一些长期整理的主题。
+欢迎来到 Leuco's Monologue。这里会放近期文章、项目精选，以及一些长期整理的主题。

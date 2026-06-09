@@ -44,7 +44,7 @@ auto_install = true   # fetch the runtime when CodeGraph is enabled but missing
 # Rules are "ToolName" or "ToolName(glob)"; '*' matches any run, '?' one char.
 mode  = "ask"
 # deny = ["bash(rm -rf*)", "bash(git push*)"]   # hard-blocked in every mode
-allow = ["explore", "multi_edit=layouts/_partials/content/post-meta.html", "edit_file=layouts/_partials/content/post-meta.html", "edit_file=themes/hugo-narrow/assets/css/prose.typography.css", "edit_file=layouts/_partials/navigation/header.html", "edit_file=themes/hugo-narrow/layouts/_partials/content/card-base.html", "multi_edit=layouts/posts/list.html", "edit_file=layouts/posts/list.html", "bash=cd \"D:\\Blog\\leuco blog\" && hugo --quiet 2>&1", "edit_file=layouts/_partials/ui/dock.html"]
+allow = ["explore", "multi_edit=layouts/_partials/content/post-meta.html", "edit_file=layouts/_partials/content/post-meta.html", "edit_file=themes/hugo-narrow/assets/css/prose.typography.css", "edit_file=layouts/_partials/navigation/header.html", "edit_file=themes/hugo-narrow/layouts/_partials/content/card-base.html", "multi_edit=layouts/posts/list.html", "edit_file=layouts/posts/list.html", "bash=cd \"D:\\Blog\\leuco blog\" && hugo --quiet 2>&1", "edit_file=layouts/_partials/ui/dock.html", "multi_edit=hugo.yaml", "edit_file=content/_index.md", "edit_file=content/tags/_index.md"]
 # ask = ["write_file"]   # force a prompt even if otherwise allowed
 
 [sandbox]

@@ -35,66 +35,28 @@
 }
 
 .code-block-output {
-  --output-accent: color-mix(in oklab, var(--color-primary) 78%, var(--color-foreground));
-  --output-accent-soft: color-mix(
-    in oklab,
-    var(--color-primary) 16%,
-    var(--color-card)
-  );
-  --output-surface: color-mix(in oklab, var(--color-muted) 62%, var(--color-card));
-  --output-surface-deep: color-mix(in oklab, var(--color-muted) 82%, var(--color-card));
-  --output-border: color-mix(in oklab, var(--color-primary) 18%, var(--color-border));
-  --output-text: color-mix(in oklab, var(--color-foreground) 78%, var(--color-muted-foreground));
-  --output-subtle: color-mix(in oklab, var(--color-muted-foreground) 72%, var(--color-card));
+  --output-surface: color-mix(in oklab, var(--color-muted) 54%, var(--color-card));
+  --output-surface-deep: color-mix(in oklab, var(--color-muted) 70%, var(--color-card));
+  --output-border: color-mix(in oklab, var(--color-muted-foreground) 14%, var(--color-border));
+  --output-text: color-mix(in oklab, var(--color-foreground) 65%, var(--color-muted-foreground));
+  --output-subtle: color-mix(in oklab, var(--color-muted-foreground) 62%, var(--color-card));
+  --output-icon-bg: color-mix(in oklab, var(--color-muted-foreground) 12%, transparent);
+  --output-icon-color: color-mix(in oklab, var(--color-muted-foreground) 80%, var(--color-foreground));
   border-color: var(--output-border);
-  box-shadow:
-    0 1px 2px rgb(0 0 0 / 4%),
-    0 16px 36px color-mix(in oklab, var(--color-primary) 8%, transparent);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 5%);
 }
 
 .dark .code-block-output {
-  --output-accent-soft: color-mix(
-    in oklab,
-    var(--color-primary) 14%,
-    var(--color-background)
-  );
-  --output-surface: color-mix(in oklab, var(--color-muted) 56%, var(--color-background));
-  --output-surface-deep: color-mix(
-    in oklab,
-    var(--color-muted) 72%,
-    var(--color-background)
-  );
-  --output-border: color-mix(in oklab, var(--color-primary) 24%, var(--color-border));
-  --output-text: color-mix(in oklab, var(--color-foreground) 84%, var(--color-muted-foreground));
-  --output-subtle: color-mix(in oklab, var(--color-muted-foreground) 64%, var(--color-background));
+  --output-surface: color-mix(in oklab, var(--color-muted) 46%, var(--color-background));
+  --output-surface-deep: color-mix(in oklab, var(--color-muted) 58%, var(--color-background));
+  --output-border: color-mix(in oklab, var(--color-muted-foreground) 18%, var(--color-border));
+  --output-subtle: color-mix(in oklab, var(--color-muted-foreground) 54%, var(--color-background));
 }
 
 .code-block-output .code-block-header {
   position: relative;
-  background:
-    linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--color-primary) 12%, transparent),
-      transparent 72%
-    ),
-    linear-gradient(180deg, var(--output-accent-soft), transparent 140%);
-}
-
-.code-block-output .code-block-header::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    color-mix(in oklab, var(--color-primary) 40%, transparent),
-    transparent 78%
-  );
-  pointer-events: none;
-}
-
-.code-block-output .code-block-header > div:first-child {
-  min-width: 0;
+  background: var(--output-surface);
+  border-bottom: 1px solid var(--output-border);
 }
 
 .code-block-output .code-block-icon {
@@ -104,9 +66,8 @@
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 0.5rem;
-  background: color-mix(in oklab, var(--color-primary) 14%, transparent);
-  color: var(--output-accent);
-  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-primary) 22%, transparent);
+  background: var(--output-icon-bg);
+  color: var(--output-icon-color);
 }
 
 .code-block-output .code-block-icon svg {
@@ -124,38 +85,17 @@
 .code-block-output .copy-code-btn,
 .code-block-output .collapse-code-btn {
   background: color-mix(in oklab, var(--color-card) 82%, transparent);
-  border: 1px solid color-mix(in oklab, var(--color-primary) 16%, var(--color-border));
+  border: 1px solid var(--output-border);
   backdrop-filter: blur(10px);
 }
 
 .code-block-output .code-block-content {
-  background:
-    linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--color-primary) 24%, transparent) 0,
-      color-mix(in oklab, var(--color-primary) 24%, transparent) 0.25rem,
-      transparent 0.25rem
-    ),
-    linear-gradient(180deg, var(--output-surface), var(--output-surface-deep));
-}
-
-.code-block-output .code-block-content::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 0.25rem;
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--color-primary) 88%, var(--color-foreground)),
-    color-mix(in oklab, var(--color-primary) 30%, var(--color-border))
-  );
-  pointer-events: none;
-  z-index: 1;
+  background: linear-gradient(180deg, var(--output-surface), var(--output-surface-deep));
 }
 
 .code-block-output .code-output-pre {
   margin: 0;
-  padding: 1rem 1.25rem 1rem 1.5rem;
+  padding: 1rem 1.25rem;
   overflow-x: auto;
   color: var(--output-text);
   font-family: var(--font-mono);
@@ -180,7 +120,7 @@
 }
 
 .code-block-output .code-output-pre:focus-visible {
-  outline: 2px solid color-mix(in oklab, var(--color-primary) 45%, transparent);
+  outline: 2px solid var(--output-border);
   outline-offset: -2px;
 }
 
@@ -204,14 +144,14 @@
   background: linear-gradient(
     180deg,
     transparent,
-    color-mix(in oklab, var(--color-card) 70%, transparent)
+    color-mix(in oklab, var(--color-muted) 55%, transparent)
   );
 }
 
 .code-block-output .collapse-overlay-btn,
 .code-block-output .code-block-bottom-collapse {
   background: color-mix(in oklab, var(--color-card) 88%, var(--color-muted));
-  border-color: color-mix(in oklab, var(--color-primary) 20%, var(--color-border));
+  border-color: var(--output-border);
 }
 
 .code-block-output .collapse-overlay:hover .collapse-overlay-btn,
@@ -226,7 +166,7 @@
   }
 
   .code-block-output .code-output-pre {
-    padding: 0.875rem 1rem 0.875rem 1.25rem;
+    padding: 0.875rem 1rem;
     font-size: 0.8125rem;
     line-height: 1.7;
   }

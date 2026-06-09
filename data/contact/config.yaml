@@ -1,0 +1,120 @@
+# 联系方式配置文件
+# 每个联系方式的卡片信息，后续替换为真实数据即可
+# 头像统一使用站点头像；二维码图片放在 qr/ 子目录下
+
+contacts:
+  - id: github
+    name: GitHub
+    type: profile
+    icon: github
+    profileName: "leuco-yuu"
+    profileLink: "https://github.com/leuco-yuu"
+    buttons:
+      - text: "复制地址"
+        icon: copy
+        copy: "https://github.com/leuco-yuu"
+      - text: "访问GitHub"
+        icon: external
+        url: "https://github.com/leuco-yuu"
+
+  - id: gmail
+    name: Gmail
+    type: email
+    icon: gmail
+    email: "leucoyuu@gmail.com"
+    buttons:
+      - text: "复制邮箱"
+        icon: copy
+        copy: "leucoyuu@gmail.com"
+      - text: "发送邮件"
+        icon: send
+        url: "mailto:leucoyuu@gmail.com"
+
+  - id: 163mail
+    name: 163 邮箱
+    type: email
+    icon: 163mail
+    email: "leucoyuu@163.com"
+    buttons:
+      - text: "复制邮箱"
+        icon: copy
+        copy: "leucoyuu@163.com"
+      - text: "发送邮件"
+        icon: send
+        url: "mailto:leucoyuu@163.com"
+
+  - id: qq
+    name: QQ
+    type: qr
+    icon: QQ
+    qrImage: ""          # 留空则用 JS 生成占位二维码，替换为 "qr/qq-qrcode.svg"
+    qrSeed: "qq-123456789"
+    profileName: "jkh"
+    profileId: "123456789"
+    buttons:
+      - text: "复制QQ号"
+        icon: copy
+        copy: "123456789"
+      - text: "打开QQ"
+        icon: chat
+        url: "tencent://message/?uin=123456789"
+
+  - id: facebook
+    name: Facebook
+    type: qr
+    icon: FaceBook
+    qrImage: ""
+    qrSeed: "facebook-jebdessau73597"
+    profileName: "jkh"
+    profileId: "10001234567890"
+    buttons:
+      - text: "复制ID"
+        icon: copy
+        copy: "10001234567890"
+      - text: "打开Facebook"
+        icon: external
+        url: "https://facebook.com/jebdessau73597"
+
+  - id: twitter
+    name: Twitter
+    type: profile
+    icon: Twitter
+    profileName: "jkh"
+    profileLink: "twitter.com/jebdessau73597"
+    buttons:
+      - text: "复制地址"
+        icon: copy
+        copy: "https://twitter.com/jebdessau73597"
+      - text: "访问Twitter"
+        icon: external
+        url: "https://twitter.com/jebdessau73597"
+
+  - id: rss
+    name: RSS 订阅
+    type: profile
+    icon: rss
+    profileName: "RSS Feed"
+    profileLink: "example.com/index.xml"
+    buttons:
+      - text: "复制地址"
+        icon: copy
+        copy: "https://example.com/index.xml"
+      - text: "访问RSS"
+        icon: external
+        url: "https://example.com/index.xml"
+
+  - id: whatsapp
+    name: WhatsApp
+    type: qr
+    icon: WhatsApp
+    qrImage: ""
+    qrSeed: "whatsapp-jebdessau73597"
+    profileName: "jkh"
+    profileId: "+86 138-0000-0000"
+    buttons:
+      - text: "复制号码"
+        icon: copy
+        copy: "+8613800000000"
+      - text: "打开WhatsApp"
+        icon: chat
+        url: "https://wa.me/8613800000000"

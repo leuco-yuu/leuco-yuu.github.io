@@ -47,18 +47,17 @@
         {{ if $author.social }}
           <div class="flex flex-wrap justify-center gap-3 md:justify-start">
             {{ range $author.social }}
-              <a
-                href="{{ .url }}"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
                 class="bg-muted text-muted-foreground hover:text-primary hover:bg-primary/10 focus:ring-primary/20 inline-flex items-center gap-2 rounded-lg px-3 py-2 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-105 focus:ring-2 focus:outline-none"
                 title="{{ .name }}"
+                data-contact-modal="{{ .icon | lower }}"
+                type="button"
               >
                 {{ if .icon }}
                   {{ partial "features/icon.html" (dict "name" .icon "size" "sm" "ariaLabel" .name) }}
                 {{ end }}
                 <span class="text-sm font-medium">{{ .name }}</span>
-              </a>
+              </button>
             {{ end }}
           </div>
         {{ end }}
