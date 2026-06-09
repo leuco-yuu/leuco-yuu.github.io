@@ -11,12 +11,12 @@ author:
     - name: GitHub
       url: https://github.com/leuco
       icon: github
+    - name: QQ
+      url: tencent://message/?uin=123456789
+      icon: QQ
     - name: FaceBook
       url: https://www.facebook.com/leuco
       icon: facebook
-    - name: Twitter
-      url: https://twitter.com/leuco
-      icon: twitter
     - name: Gmail
       url: mailto:leuco@gmail.com
       icon: gmail

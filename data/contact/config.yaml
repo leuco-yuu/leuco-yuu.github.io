@@ -47,33 +47,31 @@ contacts:
     name: QQ
     type: qr
     icon: QQ
-    qrImage: ""          # 留空则用 JS 生成占位二维码，替换为 "qr/qq-qrcode.svg"
+    qrImage: "qr/qq-qr.png"          # 留空则用 JS 生成占位二维码，替换为 "qr/qq-qrcode.svg"
     qrSeed: "qq-123456789"
-    profileName: "jkh"
-    profileId: "123456789"
+    profileName: "像雨 又不像"
+    profileId: "QQ: 1286938728"
     buttons:
       - text: "复制QQ号"
         icon: copy
-        copy: "123456789"
+        copy: "1286938728"
       - text: "打开QQ"
         icon: chat
-        url: "tencent://message/?uin=123456789"
+        url: "tencent://message/?uin=1286938728"
 
   - id: facebook
     name: Facebook
-    type: qr
+    type: profile
     icon: FaceBook
-    qrImage: ""
-    qrSeed: "facebook-jebdessau73597"
-    profileName: "jkh"
-    profileId: "10001234567890"
+    profileName: "Leuco Yuu"
+    profileLink: "facebook.com/profile.php?id=61557848796462"
     buttons:
       - text: "复制ID"
         icon: copy
-        copy: "10001234567890"
+        copy: "61557848796462"
       - text: "打开Facebook"
         icon: external
-        url: "https://facebook.com/jebdessau73597"
+        url: "https://www.facebook.com/profile.php?id=61557848796462"
 
   - id: twitter
     name: Twitter
@@ -94,14 +92,14 @@ contacts:
     type: profile
     icon: rss
     profileName: "RSS Feed"
-    profileLink: "leuco.github.io/index.xml"
+    profileLink: "leuco-yuu.github.io/index.xml"
     buttons:
       - text: "复制地址"
         icon: copy
-        copy: "https://leuco.github.io/index.xml"
+        copy: "https://leuco-yuu.github.io/index.xml"
       - text: "打开RSS"
         icon: external
-        url: "https://leuco.github.io/index.xml"
+        url: "https://leuco-yuu.github.io/index.xml"
 
   - id: whatsapp
     name: WhatsApp

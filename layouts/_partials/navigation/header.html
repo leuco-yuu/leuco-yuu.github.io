@@ -85,7 +85,7 @@
             {{ else }}
               {{ site.Home.RelPermalink | relLangURL }}
             {{ end }}"
-            class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full transition-transform duration-200 hover:scale-105"
+            class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-primary/30 transition-transform duration-200 hover:scale-105"
             aria-label="{{ site.Title }}"
           >
             <img
@@ -98,7 +98,7 @@
           <!-- 默认 Logo：使用站点标题首字母 -->
           <a
             href="{{ site.Home.RelPermalink }}"
-            class="bg-primary text-primary-foreground hover:bg-primary/90 flex h-10 w-10 items-center justify-center rounded-full text-lg font-bold transition-transform duration-200 hover:scale-105"
+            class="bg-primary text-primary-foreground hover:bg-primary/90 flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary/30 text-lg font-bold transition-transform duration-200 hover:scale-105"
             aria-label="{{ site.Title }}"
           >
             {{ substr site.Title 0 1 | upper }}
@@ -380,7 +380,7 @@
         {{ if ne site.Params.header.logo.image "" }}
           <a
             href="{{ site.Home.RelPermalink | relLangURL }}"
-            class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full transition-transform duration-200 hover:scale-105"
+            class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-primary/30 transition-transform duration-200 hover:scale-105"
             aria-label="{{ site.Title }}"
             title="{{ site.Title }}"
             {{ if $isHomeQuickActive }}aria-current="page"{{ end }}
@@ -394,7 +394,7 @@
         {{ else }}
           <a
             href="{{ site.Home.RelPermalink }}"
-            class="bg-primary text-primary-foreground hover:bg-primary/90 flex h-10 w-10 items-center justify-center rounded-full text-lg font-bold transition-transform duration-200 hover:scale-105"
+            class="bg-primary text-primary-foreground hover:bg-primary/90 flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary/30 text-lg font-bold transition-transform duration-200 hover:scale-105"
             aria-label="{{ site.Title }}"
             title="{{ site.Title }}"
             {{ if $isHomeQuickActive }}aria-current="page"{{ end }}

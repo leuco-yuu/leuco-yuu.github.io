@@ -39,8 +39,8 @@
   {{- $content = replaceRE `^(\s*<svg\b[^>]*)\s+width="[^"]*"` `$1` $content 1 -}}
   {{- $content = replaceRE `^(\s*<svg\b[^>]*)\s+height="[^"]*"` `$1` $content 1 -}}
   {{- $content = replaceRE `^(\s*<svg\b[^>]*)\s+class="[^"]*"` `$1` $content 1 -}}
-  {{- $content = replaceRE `fill="#(?:2c2c2c|707070)"` `fill="currentColor"` $content -}}
-  {{- $content = replaceRE `fill='(?:#2c2c2c|#707070)'` `fill="currentColor"` $content -}}
+  {{- $content = replaceRE `fill="#(?:2c2c2c|515151|707070)"` `fill="currentColor"` $content -}}
+  {{- $content = replaceRE `fill='(?:#2c2c2c|#515151|#707070)'` `fill="currentColor"` $content -}}
 
   {{- $attrs := "" -}}
   {{- with ($finalClass | strings.TrimSpace) -}}

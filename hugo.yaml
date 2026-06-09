@@ -119,16 +119,16 @@ menus:
       weight: 10
       params:
         icon: github
-    - name: FaceBook
-      url: https://www.facebook.com/leuco
+    - name: QQ
+      url: tencent://message/?uin=123456789
       weight: 20
       params:
-        icon: facebook
-    - name: Twitter
-      url: https://twitter.com/leuco
+        icon: QQ
+    - name: FaceBook
+      url: https://www.facebook.com/leuco
       weight: 30
       params:
-        icon: twitter
+        icon: facebook
     - name: Gmail
       url: mailto:leuco@gmail.com
       weight: 40
@@ -173,12 +173,12 @@ params:
       - name: GitHub
         url: https://github.com/leuco
         icon: github
+      - name: QQ
+        url: tencent://message/?uin=123456789
+        icon: QQ
       - name: FaceBook
         url: https://www.facebook.com/leuco
         icon: facebook
-      - name: Twitter
-        url: https://twitter.com/leuco
-        icon: twitter
       - name: Gmail
         url: mailto:leuco@gmail.com
         icon: gmail
