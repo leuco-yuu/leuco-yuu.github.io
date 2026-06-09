@@ -1,5 +1,5 @@
 ---
-title: SK-Learn
+title: 正规方程
 description: ''
 ---
 

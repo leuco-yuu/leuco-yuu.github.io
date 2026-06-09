@@ -1,25 +1,24 @@
 ---
-title: "基础环境搭建"
+title: 基础环境搭建
 date: 2026-01-12T16:58:42+08:00
-lastmod: 2026-06-02T12:32:42+08:00
+lastmod: 2026-06-09T12:42:02+08:00
 draft: false
-slug: security-lab-basic-environment
+slug: basic-environment-setup
 series_order: 1
-description: "【0】一些基础的应用服务环境搭建"
-summary: "整理内网文件共享、Flask 服务等安全实验基础环境的搭建过程。"
+description: 【0】一些基础的应用服务环境搭建
+summary: 整理内网文件共享、Flask 服务等安全实验基础环境的搭建过程。
 tags:
-  - "内网"
-  - "文件共享系统"
-  - "Flask"
-  - "Python"
+- 内网
+- 文件共享系统
+- Flask
+- Python
 categories:
-  - "网络空间安全"
-  - "攻防实践"
+- 网络空间安全
+- 攻防实践
 series:
-  - "网络安全实践"
-cover: "cover.png"
+- 网络安全实践
+cover: cover.png
 ---
-
 
 # 项目结构
 

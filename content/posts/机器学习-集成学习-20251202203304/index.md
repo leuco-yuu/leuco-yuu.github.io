@@ -1,27 +1,27 @@
 ---
-title: "机器学习-集成学习"
+title: 集成学习（Ensemble Learning）
 date: 2025-12-02T20:30:43+08:00
-lastmod: 2025-12-02T20:30:43+08:00
+lastmod: 2026-06-09T12:44:12+08:00
 draft: false
 slug: ensemble-learning
 series_order: 4
-description: "【4】机器学习第四部分 从决策树到集成学习"
-summary: "机器学习第四部分：从决策树出发，整理 Bagging、Boosting、随机森林与 AdaBoost 等集成方法。"
+description: 【4】机器学习第四部分 从决策树到集成学习
+summary: 机器学习第四部分：从决策树出发，整理 Bagging、Boosting、随机森林与 AdaBoost 等集成方法。
 tags:
-  - "决策树"
-  - "Bagging"
-  - "Boosting"
-  - "随机森林"
-  - "OOB"
-  - "袋外数据"
-  - "AdaBoost"
-  - "GBDT"
+- 决策树
+- Bagging
+- Boosting
+- 随机森林
+- OOB
+- 袋外数据
+- AdaBoost
+- GBDT
 categories:
-  - "机器学习"
-  - "学习笔记"
+- 机器学习
+- 学习笔记
 series:
-  - "人工智能"
-cover: "output_3_1.png"
+- 人工智能
+cover: output_3_1.png
 ---
 
 # 决策树（Decision-Making Tree）

@@ -1,55 +1,43 @@
 ---
-title: "机器学习-线性回归"
-date: 2025-12-02T13:16:53+08:00
-lastmod: 2025-12-08T19:20:47+08:00
+title: 线性回归（Linear Regression）
+date: 2025-11-12T13:16:53+08:00
+lastmod: 2026-06-09T13:29:47+08:00
 draft: false
 slug: linear-regression
 series_order: 1
-description: "【1】机器学习 第一部分 线性回归"
-summary: "机器学习第一部分：从正规方程、梯度下降到数据预处理，梳理线性回归的基本模型与实现。"
+description: 系统梳理线性回归的有监督学习原理，涵盖正规方程、批量/随机/小批量梯度下降与坐标下降等优化方法，并深入理解L1/L2正则化、多项式升维及归一化技巧，通过具体案例演示完整建模流程。
+summary: 系统梳理线性回归有监督学习原理，涵盖正规方程、批量/随机/小批量梯度下降与坐标下降等优化方法，深入理解L1/L2正则化、多项式升维及归一化技巧。通过保险花销预测案例演示完整建模流程，包括探索性数据分析、特征工程、模型训练与评估，对比线性回归、岭回归及梯度提升回归器的性能。
 tags:
-  - "梯度下降"
-  - "SGD"
-  - "sk-learn"
-  - "归一化"
-  - "正则化"
-  - "多项式升维"
-  - "EDA"
+- 线性回归
+- 有监督学习
+- 随机梯度下降
+- 坐标下降
+- 岭回归
+- Lasso回归
+- SK-Learn
 categories:
-  - "机器学习"
-  - "学习笔记"
+- 机器学习
+- 学习笔记
 series:
-  - "人工智能"
+- 人工智能
 cover: cover.png
 ---
 
 - 任务类型分类：有监督学习
-- 定义：拟合因变量(向量) **y** 与 **x** 之间呈线性关系，即 $\mathbf{y} = \mathbf{w}^T\mathbf{x} + \mathbf{b}$，其中 $\mathbf{x},\mathbf{y},\mathbf{w},\mathbf{b} \in \mathbb{R}^n$
+- 定义：拟合因变量(向量) **y** 与 **x** 之间呈线性关系，即 $\mathbf{y} = \mathbf{w}^T\mathbf{x} + \mathbf{b}$，其中 $\mathbf{x,y,w,b \in \mathbb{R}^n}$
 - 目标：寻找参数最优解使得$\operatorname{Loss}$函数最小。$(\hat{\mathbf{w}}, \hat{\mathbf{b}}) = \operatorname{Loss}(\mathbf{y}, \hat{\mathbf{y}}) \Leftrightarrow\operatorname{Argmin}(\operatorname{Loss}(\mathbf{w}, \mathbf{b}))$
-
-  - 多元线性回归常用损失函数 —— MSE(均方误差，由似然函数推导而来): 
-
-  $$
-  \begin{aligned}
-  J(\theta)
-    &= \frac{1}{2}\sum_{i=1}^{m}\left(h_\theta\left(x^{(i)}\right) - y^{(i)}\right)^2 \\
-    &= \frac{1}{2}(X\theta - y)^T(X\theta - y) \\
-    &= \frac{1}{2}\left(\theta^T X^T X\theta - \theta^T X^T y - y^T X\theta + y^T y\right)
-  \end{aligned}
-  $$
-
-  系数也可写作 $\frac{1}{2}$、$\frac{1}{n}$ 或 $\frac{1}{2n}$。
-
+  * 多元线性回归常用损失函数 —— MSE(均方误差，由似然函数推导而来): 
+    $$
+    \displaystyle{\operatorname{\mathit{J}(\theta)} = \frac{1}{2} \displaystyle \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 = \frac{1}{2}(X\theta - y)^T(X\theta - y) = \frac{1}{2}(\theta^TX^TX\theta - \theta^TX^Ty - y^TX\theta + y^Ty)}
+    $$
+    
   
-
+    系数可为$\displaystyle{\frac{1}{2}、\frac{1}{n}、\frac{1}{2n}}$
+  
   * MSE对 $\theta$ 的梯度: 
-$$
-\frac{\partial J(\theta)}{\partial\theta}
-= X^TX\theta - X^Ty
-= 0
-\Rightarrow
-\theta = (X^TX)^{-1}X^Ty
-$$
+    $$
+    \displaystyle{\frac{\partial{J}(\theta)}{\partial\theta} = X^TX\theta - X^Ty = 0 \Rightarrow \theta = (X^TX)^{-1}X^Ty}
+    $$
 
 # 正规方程（Normal Equation）
 
@@ -62,9 +50,7 @@ $$
 import numpy as np
 import matplotlib.pyplot as plt
 np.random.seed(20030428)
-
-# 数据量
-m = 100
+m = 100 # 数据量
 
 # 随机生成 x 序列
 x = np.random.rand(m,1) * 2
@@ -180,21 +166,23 @@ print('Y_pre: ')
 print(y_pre)
 ```
 
-    W_hat:
-    [[5.02671056 3.98404888 4.00452019 4.9783491  1.02490084]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.23707594]
-     [68.2285754 ]
-     [75.97196488]]
+```output
+W_hat:
+[[5.02671056 3.98404888 4.00452019 4.9783491  1.02490084]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.23707594]
+ [68.2285754 ]
+ [75.97196488]]
+```
 
 # 梯度下降（Gradient Descent）
 
-- 梯度下降法迭代公式：$\hat\theta_{k+1} = \hat\theta_k - \alpha \nabla_{\theta}J(\hat\theta)$, $\alpha$为学习率
-- 学习率 $\alpha$ ：$\alpha$ 设置过大容易造成震荡，$\alpha$ 设置太小容易造成迭代次数增加，也可能落到局部最优解。一般设置为0.1、0.01、0.001、0.0001
+- 梯度下降法迭代公式：$\hat\theta_{k+1} = \hat\theta_k - \alpha \nabla_{\theta}J(\hat\theta)$, $\alpha$为学习率。
+- 学习率 $\alpha$ ：$\alpha$ 设置过大容易造成震荡，$\alpha$ 设置太小容易造成迭代次数增加，也可能落到局部最优解。一般设置为0.1、0.01、0.001、0.0001。
 
 ## 批量梯度下降（GD）
 
@@ -255,16 +243,18 @@ print('Y_pre: ')
 print(y_pre)
 ```
 
-    W_hat:
-    [[5.02631227 3.98414324 4.00461388 4.97843832 1.02499615]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.23804251]
-     [68.23011847]
-     [75.97363505]]
+```output
+W_hat:
+[[5.02631227 3.98414324 4.00461388 4.97843832 1.02499615]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.23804251]
+ [68.23011847]
+ [75.97363505]]
+```
 
 ## 随机梯度下降（SGD）
 
@@ -272,11 +262,8 @@ print(y_pre)
 
 $$
 \begin{aligned}
-\nabla_{\theta}J(\theta)
-  &= \frac{\partial}{\partial\theta}J(\theta) \\
-  &= \left(h_\theta\left(x^{(i)}\right)-y^{(i)}\right)x^{(i)} \\
-  &= \left(x^{(i)}\right)^T\left(x^{(i)}\theta-y^{(i)}\right),
-  \qquad i \sim \operatorname{Uniform}\left(\{1,2,\dots,m\}\right)
+&\displaystyle {\nabla_{\theta}J(\theta) = \frac{\partial}{\partial\theta}J(\theta) = (h_\theta(x^{(i)})-y^{(i)})x^{(i)} = ({x^{(i)}})^T(x^{(i)}\theta-y^{(i)}) } \\
+&\text{where }i \sim \text{Uniform}\bigl(\{1,2,\dots,m\}\bigr)
 \end{aligned}
 $$
 
@@ -331,16 +318,18 @@ print('Y_pre: ')
 print(y_pre)
 ```
 
-    W_hat:
-    [[5.01922912 3.97831998 4.00264292 4.96386168 1.01662312]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.1024122 ]
-     [68.08959999]
-     [75.78462184]]
+```output
+W_hat:
+[[5.01922912 3.97831998 4.00264292 4.96386168 1.01662312]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.1024122 ]
+ [68.08959999]
+ [75.78462184]]
+```
 
 ### 小幅优化：打乱数据索引，顺序选取向量
 
@@ -397,31 +386,29 @@ print('Y_pre: ')
 print(y_pre)
 ```
 
-    W_hat:
-    [[5.02675441 3.98450041 4.00505391 4.9789357  1.02541193]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.24520848]
-     [68.23968977]
-     [75.98378179]]
+```output
+W_hat:
+[[5.02675441 3.98450041 4.00505391 4.9789357  1.02541193]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.24520848]
+ [68.23968977]
+ [75.98378179]]
+```
 
 ## 小批量梯度下降（Mini-batch SGD）
 
 - 小批量梯度下降使用样本子集 $S$ 计算梯度：
 
 $$
-\begin{aligned}
-\nabla_{\theta}J(\theta)
-  &= \frac{\partial}{\partial\theta}J(\theta) \\
-  &= \sum_{i\in S}\left(h_\theta\left(x^{(i)}\right)-y^{(i)}\right)x^{(i)} \\
-  &= \left(x^{(S)}\right)^T\left(x^{(S)}\theta-y^{(S)}\right)
-\end{aligned}
+\displaystyle{\nabla_{\theta}J(\theta) = \frac{\partial}{\partial{\theta}}J(\theta) = \displaystyle \sum_{i\in S}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)} = ({x^{(S)}})^T(x^{(S)}\theta-y^{(S)}) }
 $$
 
-其中 $|S|=\operatorname{batch\_size}<m$，且 $S\subseteq\{1,2,\dots,m\}$，由样本集合中均匀随机选取。
+​		其中 $|S|=\operatorname{batch\_size}\lt m$，且 $S\subseteq\{1,2,\dots,m\}$，由样本集合中均匀随机选取。
+
 ### 代码实现
 
 ```python
@@ -475,16 +462,18 @@ print('Y_pre: ')
 print(y_pre)
 ```
 
-    W_hat:
-    [[5.04016211 3.9927612  4.01168955 4.96684374 1.00728303]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.14498768]
-     [68.13517282]
-     [75.83694482]]
+```output
+W_hat:
+[[5.04016211 3.9927612  4.01168955 4.96684374 1.00728303]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.14498768]
+ [68.13517282]
+ [75.83694482]]
+```
 
 ### 小幅优化：打乱数据索引，顺序批量选取向量
 
@@ -493,7 +482,6 @@ import numpy as np
 
 np.random.seed(20030428)
 x_pre = np.random.random(size = (3,n))*10
-
 
 # 维度
 n = 4
@@ -543,16 +531,18 @@ print('Y_pre: ')
 print(y_pre)
 ```
 
-    W_hat:
-    [[5.0267601  3.98450244 4.00504673 4.978934   1.02541437]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.24518034]
-     [68.23964038]
-     [75.98376306]]
+```output
+W_hat:
+[[5.0267601  3.98450244 4.00504673 4.978934   1.02541437]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.24518034]
+ [68.23964038]
+ [75.98376306]]
+```
 
 ## SGD的sklearn库实现
 
@@ -563,12 +553,10 @@ from sklearn.linear_model import SGDRegressor
 np.random.seed(20030428)
 x_pre = np.random.random(size = (3,n))*10
 
-
 # 维度
 n = 4
 # 数据量
 m = 1000
-
 
 # 超参数
 learning_rate = 0.001 # 学习率 α
@@ -605,22 +593,24 @@ print('Y_pre: ')
 print(y_pre)
 ```
 
-    W_hat:
-    [[4.78413833 4.04362443 4.06423645 5.03733553 1.08352435]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.86766804]
-     [69.21400854]
-     [77.04212681]]
+```output
+W_hat:
+[[4.78413833 4.04362443 4.06423645 5.03733553 1.08352435]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.86766804]
+ [69.21400854]
+ [77.04212681]]
+```
 
 ## 梯度下降法的问题与解决思路
 
-- 学习速率调整（学习速率调度，Learning rate schedules）：该方法试图在每次更新参数的过程中，改变学习速率。一般使用某种事先设定的策略或者在每次迭代中衰减一个较小的阈值
-- 在稀疏特征数据中：很少出现的特征应该使用一个相对较大的学习速率
-- 对于非凸目标函数：可能落入鞍点或平滑点
+- **学习速率调整**（学习速率调度，Learning rate schedules）：该方法试图在每次更新参数的过程中，改变学习速率。一般使用某种事先设定的策略或者在每次迭代中衰减一个较小的阈值
+- 在**稀疏特征数据**中：很少出现的特征应该使用一个相对较大的学习速率
+- 对于**非凸目标函数**：可能落入鞍点或平滑点
 
 ### 确定速率调整函数
 
@@ -637,7 +627,9 @@ y_show = np.array([learning_rate_schedule(x_show[i]) for i in range(len(x_show))
 plt.plot(x_show,y_show)
 ```
 
-    [<matplotlib.lines.Line2D at 0x1a768afe390>]
+```output
+[<matplotlib.lines.Line2D at 0x1a768afe390>]
+```
 
 ![png](output_26_1.png)
 
@@ -689,34 +681,37 @@ print('Y_pre: ')
 print(y_pre)
 ```
 
-    W_hat:
-    [[4.97242598 3.99644548 4.01333635 4.98719143 1.04554164]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.36296538]
-     [68.4494602 ]
-     [76.21792798]]
+```output
+W_hat:
+[[4.97242598 3.99644548 4.01333635 4.98719143 1.04554164]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.36296538]
+ [68.4494602 ]
+ [76.21792798]]
+```
 
 # 坐标下降（Coordinate Descent）
 
-- 坐标下降：一次走一步，每次只动一个变量。将高维问题拆成一系列一维问题，逐个坐标迭代更新，直到收敛
-- 核心思想：固定其他所有变量，只沿第i个坐标方向做一维最优化，循环往复
-- 迭代公式：
+- **坐标下降**：一次走一步，每次只动一个变量。将高维问题拆成一系列一维问题，逐个坐标迭代更新，直到收敛。
+- **核心思想**：固定其他所有变量，只沿第i个坐标方向做一维最优化，循环往复。
+- **迭代公式**：
 
 $$
-\theta_i^{(k+1)}
-= \operatorname*{arg\,min}_{\theta_i}
+\displaystyle{\theta_i^{(k+1)}
+= \operatorname*{argmin}_{\theta_i}
 \operatorname{Loss}\left(
 \theta_1^{(k+1)}, \dots, \theta_{i-1}^{(k+1)},
 \theta_i,
 \theta_{i+1}^{(k)}, \dots, \theta_n^{(k)}
-\right)
+\right)}
 $$
 
-其中 $\operatorname{Loss}$ 为目标损失函数，$\theta^{(k)}$ 为第 $k$ 次迭代时的完整参数向量，$\theta_i^{(k)}$ 为第 $k$ 次迭代时向量 $\theta$ 的第 $i$ 个分量。
+​	其中 $\operatorname{Loss}$ 为目标损失函数，$\theta^{(k)}$ 为第 $k$ 次迭代时的完整参数向量，$\theta_i^{(k)}$ 为第 $k$ 次迭代时向量 $\theta$ 的第 $i$ 个分量。
+
 - 对于MES的参数迭代公式（由MSE推导而来）：
 
 $$
@@ -730,7 +725,7 @@ $$
 \end{aligned}
 $$
 
-其中 $m$ 为样本数量，$\theta_j$ 为 $\theta$ 的第 $j$ 个分量，$x_j^{(i)}$ 为第 $i$ 条样本的第 $j$ 个分量。
+​	其中 $m$ 为样本数量，$\theta_j$ 为 $\theta$ 的第 $j$ 个分量，$x_j^{(i)}$ 为第 $i$ 条样本的第 $j$ 个分量。
 
 ## 代码实现
 
@@ -778,20 +773,22 @@ print('Y_pre: ')
 print(y_pre)
 ```
 
-    W_hat:
-    [[5.02671056]
-     [3.98404888]
-     [4.00452019]
-     [4.9783491 ]
-     [1.02490084]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.23707594]
-     [68.2285754 ]
-     [75.97196488]]
+```output
+W_hat:
+[[5.02671056]
+ [3.98404888]
+ [4.00452019]
+ [4.9783491 ]
+ [1.02490084]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.23707594]
+ [68.2285754 ]
+ [75.97196488]]
+```
 
 # 归一化（Normalization）
 
@@ -802,17 +799,17 @@ print(y_pre)
     + 对第j个特征值做归一化：
 
     $$
-    x^{*}_{i,j} = \frac{x_{i,j}-x_j^{\min}}{x_j^{\max}-x_j^{\min}}
+    \displaystyle{x^{*}_{i,j} = \frac{x_{i,j}-x_j^{\min}}{x_j^{\max}-x_j^{\min}}}
     $$
 
-    + 对整个数据集做归一化：$x^* = \frac{x-\min(x)}{\max(x)-\min(x)}$
+    + 对整个数据集做归一化：$\displaystyle{x^* = \frac{x-\min(x)}{\max(x)-\min(x)}}$
   * 标准归一化（Z-score）：
     + 对第j个特征值做归一化：
     $$
-    x^*_{i,j} = \frac{x_{i,j} - \mu_j}{\sigma_j}
+    \displaystyle{x^*_{i,j} = \frac{x_{i,j} - \mu_j}{\sigma_j}}
     $$
 
-    其中
+    ​       其中：
 
     $$
     \mu_j=\frac{1}{n}\sum_{i=1}^n x_{i,j},
@@ -855,89 +852,99 @@ plt.legend()
 plt.show()
 ```
 
-    μ = [1.07725633 2.44897092]
-    σ² = [3.86482916 7.93336293]
+```output
+μ = [1.07725633 2.44897092]
+σ² = [3.86482916 7.93336293]
+```
 
 ![png](output_34_1.png)
 
 # 正则化（Regularization）
 
 - 过拟合与欠拟合
-  * 欠拟合（underfit）：未拟合到位，训练集和测试集准确率未达到最高
-  * 过拟合（overfit）：拟合过度，训练集准确率升高的同时，测试集的准确率反而降低
-  * 适度拟合（just right）：过拟合前，训练集和测试集准确率都达到最高时刻
+  * **欠拟合（underfit）**：未拟合到位，训练集和测试集准确率未达到最高
+  * **过拟合（overfit）**：拟合过度，训练集准确率升高的同时，测试集的准确率反而降低
+  * **适度拟合（just right）**：过拟合前，训练集和测试集准确率都达到最高时刻
+  
 - 正则化：防止过拟合，增加模型鲁棒性（Robust）
-  * 鲁棒性调优：使模型具有更好的鲁棒性，让模型的的泛化能力和推广能力更加强大
+  * **鲁棒性调优**：使模型具有更好的鲁棒性，让模型的的泛化能力和推广能力更加强大
   * 正则化本质：牺牲模型在训练集上的正确率以提高模型的推广能力，参数 **w** 在数值上越小越好，进而抵抗数值扰动。但 **w** 的数值不能极小，故而将原来的损失函数加上一个惩罚项
+  
 - 惩罚项（正则项）：
-  * L1 正则项：
+  * L1 正则项（即曼哈顿距离）：
+    $$
+    \begin{aligned}
+    L_1(w) &= \displaystyle{\sum^m_{i=0}|w_i|}\\
+    
+    \displaystyle{\frac{\partial}{\partial w_i}L_1(w_i)} &= sign(w_i) = \pm 1
+    \end{aligned}
+    $$
+  
+  * L2 正则项（即欧式距离的平方）：
+$$
+\begin{aligned}
+L_2(w) &= \sum_{i=0}^{m}|w_i|^2 \\ 
+\frac{\partial}{\partial w_i}L_2(w_i) &= 2w_i
+\end{aligned}
+$$
 
-$$
-L_1(w) = \sum_{i=0}^{m}|w_i|
-$$
 
-即曼哈顿距离。
 
-$$
-\frac{\partial}{\partial w_i}L_1(w_i) = \operatorname{sign}(w_i) = \pm 1
-$$
-
-  * L2 正则项：
-
-$$
-L_2(w) = \sum_{i=0}^{m}|w_i|^2
-$$
-
-即欧式距离的平方。
-
-$$
-\frac{\partial}{\partial w_i}L_2(w_i) = 2w_i
-$$
 - 正则化后的多元线性回归的损失函数
-  * Lasso 回归（套索回归，稀疏性）：
+  * **Lasso 回归**（套索回归，稀疏性）：
+    
     + 损失函数 
     $$
     J_{lasso}(\theta)=MSE(\theta)+L_1(\theta)
     $$
     + 梯度 
-
+    
     $$
     \nabla_{\theta}J_{Lasso}(\theta)
       = \frac{\partial}{\partial \theta}J(\theta)
         + \frac{\partial}{\partial \theta}L_1(\theta)
       = X^T(X\theta-y)+\lambda\operatorname{sign}(\theta)
     $$
-  * Ridge 回归（岭回归，平滑性）：
+    
+  * **Ridge 回归**（岭回归，平滑性）：
+    
     + 损失函数 
     $$
     J_{ridge}(\theta)=MSE(\theta)+L_2(\theta)
     $$
     + 梯度 
-
+    
     $$
     \nabla_{\theta}J_{Ridge}(\theta)
       = \frac{\partial}{\partial \theta}J(\theta)
         + \frac{\partial}{\partial \theta}L_2(\theta)
       = X^T(X\theta-y)+2\lambda \theta
     $$
-  * ElasticNet回归（弹性网络回归）：
+    
+  * **ElasticNet回归**（弹性网络回归）：
+    
     + 损失函数 
     $$
     J_{\mathrm{ElasticNet}}(\theta)=MSE(\theta)+L_1(\theta)+L_2(\theta)
     $$
     + 梯度 
+      $$
+      \begin{aligned}
+      \displaystyle{
+      \nabla_{\theta}J_{\mathrm{ElasticNet}}(\theta)
+        = \frac{\partial}{\partial \theta}J(\theta)
+          + \frac{\partial}{\partial \theta}L_1(\theta)
+          + \frac{\partial}{\partial \theta}L_2(\theta) 
+        = X^T(X\theta-y)
+          + \lambda\left[(1-r)\operatorname{sign}(\theta)+2r\theta\right]
+      }
+      \end{aligned}
+      $$
+    
 
-    $$
-    \begin{aligned}
-    \nabla_{\theta}J_{\mathrm{ElasticNet}}(\theta)
-      &= \frac{\partial}{\partial \theta}J(\theta)
-        + \frac{\partial}{\partial \theta}L_1(\theta)
-        + \frac{\partial}{\partial \theta}L_2(\theta) \\
-      &= X^T(X\theta-y)
-        + \lambda\left[(1-r)\operatorname{sign}(\theta)+2r\theta\right]
-    \end{aligned}
-    $$
-- 注：Lasso 回归与 Ridge 回归只定义了 Loss 函数模型，可以用梯度下降法、坐标下降法、最小角回归（LARS）、正规方程等方法进行求解。在 sklearn 库中 Lasso 和 ElasticNet 使用坐标下降；Ridge 使用正规方程；SVGRegressor 使用随机梯度下降，可自定义正则化类型、正则化强度、学习率、阈值、迭代次数等等
+> [!ANNOT]
+>
+> Lasso 回归与 Ridge 回归只定义了 Loss 函数模型，可以用梯度下降法、坐标下降法、最小角回归（LARS）、正规方程等方法进行求解。在 sklearn 库中 Lasso 和 ElasticNet 使用坐标下降；Ridge 使用正规方程；SVGRegressor 使用随机梯度下降，可自定义正则化类型、正则化强度、学习率、阈值、迭代次数等等
 
 ## Lasso回归（sklearn库）
 
@@ -1029,16 +1036,18 @@ print('Y_pre: ')
 print(y_pre.reshape(-1,1))
 ```
 
-    W_hat:
-    [[5.04469365 3.97896047 3.99922338 4.97248436 1.02326193]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[57.18895127]
-     [68.16319935]
-     [75.89870099]]
+```output
+W_hat:
+[[5.04469365 3.97896047 3.99922338 4.97248436 1.02326193]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[57.18895127]
+ [68.16319935]
+ [75.89870099]]
+```
 
 ## ElasticNet回归（sklearn库）
 
@@ -1078,16 +1087,18 @@ print('Y_pre: ')
 print(y_pre.reshape(-1,1))
 ```
 
-    W_hat:
-    [[5.40784751 3.87770911 3.89554975 4.85588961 0.98362001]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[56.21597338]
-     [66.82977581]
-     [74.39992651]]
+```output
+W_hat:
+[[5.40784751 3.87770911 3.89554975 4.85588961 0.98362001]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[56.21597338]
+ [66.82977581]
+ [74.39992651]]
+```
 
 ## 随机梯度下降实现elasticnet正则化（sklearn库）
 
@@ -1135,20 +1146,22 @@ print('Y_pre: ')
 print(y_pre.reshape(-1,1))
 ```
 
-    W_hat:
-    [[5.1320958  3.93664843 3.95394899 4.913876   1.04281603]]
-    X_pre: 
-    [[0.03016482 4.79096225 5.74410225 4.2038564 ]
-     [0.0650456  9.53496505 3.37288732 7.77475153]
-     [2.68648726 5.44484467 6.07293252 8.00564199]]
-    Y_pre: 
-    [[56.80371943]
-     [67.77050846]
-     [75.42653888]]
+```output
+W_hat:
+[[5.1320958  3.93664843 3.95394899 4.913876   1.04281603]]
+X_pre: 
+[[0.03016482 4.79096225 5.74410225 4.2038564 ]
+ [0.0650456  9.53496505 3.37288732 7.77475153]
+ [2.68648726 5.44484467 6.07293252 8.00564199]]
+Y_pre: 
+[[56.80371943]
+ [67.77050846]
+ [75.42653888]]
+```
 
 # 升维方法 — 多项式回归（Polynomial Regression）
 
-- 目的：解决欠拟合问题
+- 目的：解决**欠拟合**问题
 - 常见手段：将已知维度进行相乘来构建新的维度，将非线性Data转换为线性Data
 - 以二阶多项式升维为例：
 
@@ -1229,7 +1242,9 @@ plt.legend(
 )
 ```
 
-    <matplotlib.legend.Legend at 0x1a768d8d150>
+```output
+<matplotlib.legend.Legend at 0x1a768d8d150>
+```
 
 ![png](output_45_1.png)
 
@@ -1249,99 +1264,6 @@ data = pd.read_csv(
 data.head(6)
 ```
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>sex</th>
-      <th>bmi</th>
-      <th>children</th>
-      <th>smoker</th>
-      <th>region</th>
-      <th>charges</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>19</td>
-      <td>female</td>
-      <td>27.900</td>
-      <td>0</td>
-      <td>yes</td>
-      <td>southwest</td>
-      <td>16884.92400</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>18</td>
-      <td>male</td>
-      <td>33.770</td>
-      <td>1</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>1725.55230</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>28</td>
-      <td>male</td>
-      <td>33.000</td>
-      <td>3</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>4449.46200</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>33</td>
-      <td>male</td>
-      <td>22.705</td>
-      <td>0</td>
-      <td>no</td>
-      <td>northwest</td>
-      <td>21984.47061</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>32</td>
-      <td>male</td>
-      <td>28.880</td>
-      <td>0</td>
-      <td>no</td>
-      <td>northwest</td>
-      <td>3866.85520</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>31</td>
-      <td>female</td>
-      <td>25.740</td>
-      <td>0</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>3756.62160</td>
-    </tr>
-  </tbody>
-</table>
-</div>
 
 ## EDA（Exploratory Data Analysis，探索性数据分析）
 
@@ -1356,30 +1278,32 @@ print(data.info()) # 结果显示数据质量较好，无缺失值
 print(data.describe())
 ```
 
-    <class 'pandas.core.frame.DataFrame'>
-    RangeIndex: 1338 entries, 0 to 1337
-    Data columns (total 7 columns):
-     #   Column    Non-Null Count  Dtype  
-    ---  ------    --------------  -----  
-     0   age       1338 non-null   int64  
-     1   sex       1338 non-null   object 
-     2   bmi       1338 non-null   float64
-     3   children  1338 non-null   int64  
-     4   smoker    1338 non-null   object 
-     5   region    1338 non-null   object 
-     6   charges   1338 non-null   float64
-    dtypes: float64(2), int64(2), object(3)
-    memory usage: 73.3+ KB
-    None
-                   age          bmi     children       charges
-    count  1338.000000  1338.000000  1338.000000   1338.000000
-    mean     39.207025    30.663397     1.094918  13270.422265
-    std      14.049960     6.098187     1.205493  12110.011237
-    min      18.000000    15.960000     0.000000   1121.873900
-    25%      27.000000    26.296250     0.000000   4740.287150
-    50%      39.000000    30.400000     1.000000   9382.033000
-    75%      51.000000    34.693750     2.000000  16639.912515
-    max      64.000000    53.130000     5.000000  63770.428010
+```output
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1338 entries, 0 to 1337
+Data columns (total 7 columns):
+ #   Column    Non-Null Count  Dtype  
+---  ------    --------------  -----  
+ 0   age       1338 non-null   int64  
+ 1   sex       1338 non-null   object 
+ 2   bmi       1338 non-null   float64
+ 3   children  1338 non-null   int64  
+ 4   smoker    1338 non-null   object 
+ 5   region    1338 non-null   object 
+ 6   charges   1338 non-null   float64
+dtypes: float64(2), int64(2), object(3)
+memory usage: 73.3+ KB
+None
+               age          bmi     children       charges
+count  1338.000000  1338.000000  1338.000000   1338.000000
+mean     39.207025    30.663397     1.094918  13270.422265
+std      14.049960     6.098187     1.205493  12110.011237
+min      18.000000    15.960000     0.000000   1121.873900
+25%      27.000000    26.296250     0.000000   4740.287150
+50%      39.000000    30.400000     1.000000   9382.033000
+75%      51.000000    34.693750     2.000000  16639.912515
+max      64.000000    53.130000     5.000000  63770.428010
+```
 
 ```python
 # 观察数据分布
@@ -1464,106 +1388,14 @@ data.head(6)
 
 ![png](output_52_0.png)
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>sex</th>
-      <th>bmi</th>
-      <th>children</th>
-      <th>smoker</th>
-      <th>region</th>
-      <th>charges</th>
-      <th>log_charges</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>19</td>
-      <td>female</td>
-      <td>27.900</td>
-      <td>0</td>
-      <td>yes</td>
-      <td>southwest</td>
-      <td>16884.92400</td>
-      <td>9.734236</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>18</td>
-      <td>male</td>
-      <td>33.770</td>
-      <td>1</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>1725.55230</td>
-      <td>7.453882</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>28</td>
-      <td>male</td>
-      <td>33.000</td>
-      <td>3</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>4449.46200</td>
-      <td>8.400763</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>33</td>
-      <td>male</td>
-      <td>22.705</td>
-      <td>0</td>
-      <td>no</td>
-      <td>northwest</td>
-      <td>21984.47061</td>
-      <td>9.998137</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>32</td>
-      <td>male</td>
-      <td>28.880</td>
-      <td>0</td>
-      <td>no</td>
-      <td>northwest</td>
-      <td>3866.85520</td>
-      <td>8.260455</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>31</td>
-      <td>female</td>
-      <td>25.740</td>
-      <td>0</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>3756.62160</td>
-      <td>8.231541</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+|       | age  | sex    | bmi    | children | smoker | region    | charges     | log_charges |
+| ----- | ---- | ------ | ------ | -------- | ------ | --------- | ----------- | ----------- |
+| **0** | 19   | female | 27.900 | 0        | yes    | southwest | 16884.92400 | 9.734236    |
+| **1** | 18   | male   | 33.770 | 1        | no     | southeast | 1725.55230  | 7.453882    |
+| **2** | 28   | male   | 33.000 | 3        | no     | southeast | 4449.46200  | 8.400763    |
+| **3** | 33   | male   | 22.705 | 0        | no     | northwest | 21984.47061 | 9.998137    |
+| **4** | 32   | male   | 28.880 | 0        | no     | northwest | 3866.85520  | 8.260455    |
+| **5** | 31   | female | 25.740 | 0        | no     | southeast | 3756.62160  | 8.231541    |
 
 ## 特征工程
 
@@ -1579,141 +1411,14 @@ data = pd.get_dummies(data,dtype=int)
 data.head(6)
 ```
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>bmi</th>
-      <th>children</th>
-      <th>charges</th>
-      <th>log_charges</th>
-      <th>sex_female</th>
-      <th>sex_male</th>
-      <th>smoker_no</th>
-      <th>smoker_yes</th>
-      <th>region_northeast</th>
-      <th>region_northwest</th>
-      <th>region_southeast</th>
-      <th>region_southwest</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>19</td>
-      <td>27.900</td>
-      <td>0</td>
-      <td>16884.92400</td>
-      <td>9.734236</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>18</td>
-      <td>33.770</td>
-      <td>1</td>
-      <td>1725.55230</td>
-      <td>7.453882</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>28</td>
-      <td>33.000</td>
-      <td>3</td>
-      <td>4449.46200</td>
-      <td>8.400763</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>33</td>
-      <td>22.705</td>
-      <td>0</td>
-      <td>21984.47061</td>
-      <td>9.998137</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>32</td>
-      <td>28.880</td>
-      <td>0</td>
-      <td>3866.85520</td>
-      <td>8.260455</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>31</td>
-      <td>25.740</td>
-      <td>0</td>
-      <td>3756.62160</td>
-      <td>8.231541</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+| | age | bmi | children | charges | log_charges | sex_female | sex_male | smoker_no | smoker_yes | region_northeast | region_northwest | region_southeast | region_southwest |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **0** | 19 | 27.900 | 0 | 16884.92400 | 9.734236 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 1 |
+| **1** | 18 | 33.770 | 1 | 1725.55230 | 7.453882 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| **2** | 28 | 33.000 | 3 | 4449.46200 | 8.400763 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| **3** | 33 | 22.705 | 0 | 21984.47061 | 9.998137 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 |
+| **4** | 32 | 28.880 | 0 | 3866.85520 | 8.260455 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 |
+| **5** | 31 | 25.740 | 0 | 3756.62160 | 8.231541 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 0 |
 
 ```python
 # 取出样本及标签值
@@ -1727,113 +1432,13 @@ y.fillna(0,inplace=True)
 x.head()
 ```
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>bmi</th>
-      <th>children</th>
-      <th>sex_female</th>
-      <th>sex_male</th>
-      <th>smoker_no</th>
-      <th>smoker_yes</th>
-      <th>region_northeast</th>
-      <th>region_northwest</th>
-      <th>region_southeast</th>
-      <th>region_southwest</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>19</td>
-      <td>27.900</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>18</td>
-      <td>33.770</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>28</td>
-      <td>33.000</td>
-      <td>3</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>33</td>
-      <td>22.705</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>32</td>
-      <td>28.880</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+| | age | bmi | children | sex_female | sex_male | smoker_no | smoker_yes | region_northeast | region_northwest | region_southeast | region_southwest |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| **0** | 19 | 27.900 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 1 |
+| **1** | 18 | 33.770 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| **2** | 28 | 33.000 | 3 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 |
+| **3** | 33 | 22.705 | 0 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 |
+| **4** | 32 | 28.880 | 0 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 |
 
 ```python
 # 划分训练集与测试集
@@ -1844,9 +1449,11 @@ print(x_train.shape,y_train.shape)
 print(x_test.shape,y_test.shape)
 ```
 
-    (1338, 11) (1338,)
-    (936, 11) (936,)
-    (402, 11) (402,)
+```output
+(1338, 11) (1338,)
+(936, 11) (936,)
+(402, 11) (402,)
+```
 
 ```python
 # 归一化
@@ -1921,9 +1528,11 @@ print(
 )
 ```
 
-    LinearRegression(Train / Test):  0.44905273756975034 0.43211955383967054
-    RidgeRegression(Train / Test):  0.44905315842354915 0.4321996372029468
-    SGDRegression(Train / Test):  0.449286159412961 0.43308751362633735
+```output
+LinearRegression(Train / Test):  0.44905273756975034 0.43211955383967054
+RidgeRegression(Train / Test):  0.44905315842354915 0.4321996372029468
+SGDRegression(Train / Test):  0.449286159412961 0.43308751362633735
+```
 
 ## 进阶
 
@@ -2075,70 +1684,74 @@ print(
 )
 ```
 
-       age     sex     bmi  children smoker     region   charges
-    0   19  female  27.900         0    yes  southwest  9.734236
-    1   18    male  33.770         1     no  southeast  7.453882
-    2   28    male  33.000         3     no  southeast  8.400763
-    3   33    male  22.705         0     no  northwest  9.998137
-    4   32    male  28.880         0     no  northwest  8.260455
-    <class 'pandas.core.frame.DataFrame'>
-    RangeIndex: 1338 entries, 0 to 1337
-    Data columns (total 7 columns):
-     #   Column    Non-Null Count  Dtype  
-    ---  ------    --------------  -----  
-     0   age       1338 non-null   int64  
-     1   sex       1338 non-null   object 
-     2   bmi       1338 non-null   float64
-     3   children  1338 non-null   int64  
-     4   smoker    1338 non-null   object 
-     5   region    1338 non-null   object 
-     6   charges   1338 non-null   float64
-    dtypes: float64(2), int64(2), object(3)
-    memory usage: 73.3+ KB
-    None
-                   age          bmi     children      charges
-    count  1338.000000  1338.000000  1338.000000  1338.000000
-    mean     39.207025    30.663397     1.094918     9.098828
-    std      14.049960     6.098187     1.205493     0.919379
-    min      18.000000    15.960000     0.000000     7.023647
-    25%      27.000000    26.296250     0.000000     8.464064
-    50%      39.000000    30.400000     1.000000     9.146658
-    75%      51.000000    34.693750     2.000000     9.719618
-    max      64.000000    53.130000     5.000000    11.063061
+```output
+   age     sex     bmi  children smoker     region   charges
+0   19  female  27.900         0    yes  southwest  9.734236
+1   18    male  33.770         1     no  southeast  7.453882
+2   28    male  33.000         3     no  southeast  8.400763
+3   33    male  22.705         0     no  northwest  9.998137
+4   32    male  28.880         0     no  northwest  8.260455
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1338 entries, 0 to 1337
+Data columns (total 7 columns):
+ #   Column    Non-Null Count  Dtype  
+---  ------    --------------  -----  
+ 0   age       1338 non-null   int64  
+ 1   sex       1338 non-null   object 
+ 2   bmi       1338 non-null   float64
+ 3   children  1338 non-null   int64  
+ 4   smoker    1338 non-null   object 
+ 5   region    1338 non-null   object 
+ 6   charges   1338 non-null   float64
+dtypes: float64(2), int64(2), object(3)
+memory usage: 73.3+ KB
+None
+               age          bmi     children      charges
+count  1338.000000  1338.000000  1338.000000  1338.000000
+mean     39.207025    30.663397     1.094918     9.098828
+std      14.049960     6.098187     1.205493     0.919379
+min      18.000000    15.960000     0.000000     7.023647
+25%      27.000000    26.296250     0.000000     8.464064
+50%      39.000000    30.400000     1.000000     9.146658
+75%      51.000000    34.693750     2.000000     9.719618
+max      64.000000    53.130000     5.000000    11.063061
+```
 
 ![png](output_64_1.png)
 
-       age    bmi children smoker   charges
-    0   19  under       no    yes  9.734236
-    1   18   over      yes     no  7.453882
-    2   28   over      yes     no  8.400763
-    3   33  under       no     no  9.998137
-    4   32  under       no     no  8.260455
-       age   charges  bmi_over  bmi_under  children_no  children_yes  smoker_no  \
-    0   19  9.734236     False       True         True         False      False   
-    1   18  7.453882      True      False        False          True       True   
-    2   28  8.400763      True      False        False          True       True   
-    3   33  9.998137     False       True         True         False       True   
-    4   32  8.260455     False       True         True         False       True   
-    
-       smoker_yes  
-    0        True  
-    1       False  
-    2       False  
-    3       False  
-    4       False  
-       age  bmi_over  bmi_under  children_no  children_yes  smoker_no  smoker_yes
-    0   19     False       True         True         False      False        True
-    1   18      True      False        False          True       True       False
-    2   28      True      False        False          True       True       False
-    3   33     False       True         True         False       True       False
-    4   32     False       True         True         False       True       False
-    0    9.734236
-    1    7.453882
-    2    8.400763
-    3    9.998137
-    4    8.260455
-    Name: charges, dtype: float64
-    LinearRegression:  0.41171540130927264
-    RidgeRegression:  0.4119283802418486
-    GradientBoostingRegressor:  0.3163566171772987
+```output
+   age    bmi children smoker   charges
+0   19  under       no    yes  9.734236
+1   18   over      yes     no  7.453882
+2   28   over      yes     no  8.400763
+3   33  under       no     no  9.998137
+4   32  under       no     no  8.260455
+   age   charges  bmi_over  bmi_under  children_no  children_yes  smoker_no  \
+0   19  9.734236     False       True         True         False      False   
+1   18  7.453882      True      False        False          True       True   
+2   28  8.400763      True      False        False          True       True   
+3   33  9.998137     False       True         True         False       True   
+4   32  8.260455     False       True         True         False       True   
+
+   smoker_yes  
+0        True  
+1       False  
+2       False  
+3       False  
+4       False  
+   age  bmi_over  bmi_under  children_no  children_yes  smoker_no  smoker_yes
+0   19     False       True         True         False      False        True
+1   18      True      False        False          True       True       False
+2   28      True      False        False          True       True       False
+3   33     False       True         True         False       True       False
+4   32     False       True         True         False       True       False
+0    9.734236
+1    7.453882
+2    8.400763
+3    9.998137
+4    8.260455
+Name: charges, dtype: float64
+LinearRegression:  0.41171540130927264
+RidgeRegression:  0.4119283802418486
+GradientBoostingRegressor:  0.3163566171772987
+```
