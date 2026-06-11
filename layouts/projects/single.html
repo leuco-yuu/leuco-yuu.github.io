@@ -60,14 +60,6 @@
               </time>
             </div>
 
-            <span class="text-muted-foreground/60">•</span>
-            <div class="text-muted-foreground flex items-center gap-1.5">
-              {{ partial "features/icon.html" (dict "name" "edit" "size" "sm" "ariaLabel" "") }}
-              <time datetime="{{ .Lastmod.Format `2006-01-02` }}">
-                最近修改 {{ partial "helpers/date.html" (dict "date" .Lastmod "variant" "long") }}
-              </time>
-            </div>
-
             {{ if .Params.status }}
               <span class="text-muted-foreground/60">•</span>
               <div class="text-foreground flex items-center gap-2">
@@ -130,10 +122,10 @@
     </div>
   </div>
 
-  <!-- 正文区域 (垂直布局最底部) -->
+  <!-- 正文区域 (垂直布局最底部) — supports multi-file page bundles -->
   <div class="bg-card border-border rounded-xl border p-6 shadow-sm md:p-8 md:px-10">
     <article class="prose prose-neutral dark:prose-invert max-w-none">
-      {{ .Content }}
+      {{ partial "content/multi-file-content.html" . }}
     </article>
   </div>
 

@@ -1,18 +1,28 @@
 ---
 title: Web安全基础
-date: 2026-01-12T14:08:04+08:00
-lastmod: 2026-06-09T17:42:28+08:00
+date: 2026-03-31T19:26:17+08:00
+lastmod: 2026-08-18T16:32:26+08:00
 draft: false
 slug: web-security-basics
-series_order: 6
+series_order: 1
 description: 网络空间安全】网络安全入门-Web安全基础
 summary: 整理 Web 发展、静态与动态页面、常见攻击面和 Web 安全入门知识。
 tags:
-- 网络空间安全
+- Web发展史
+- 静态页面
+- 动态页面
+- URL
+- HTML
+- Web基础
+- HTTP
+- HTTPS
+categories:
+- 学习笔记
+- 网络安全
+- 安全攻防
+series:
 - Web安全
-categories: []
-series: []
-cover: ''
+cover: /covers/Web安全基础-20260112140910.png
 ---
 
 # Web发展史

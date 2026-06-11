@@ -2,8 +2,17 @@
   "use strict";
 
   const ARTICLE_SELECTOR = "article.prose";
+  const RESIZE_DEBOUNCE_MS = 120;
   let lightboxDoubleClickBound = false;
   let allowNextImageClick = false;
+
+  function debounce(fn, delay) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
 
   function initMediaEnhancements() {
     wrapWideTables();
@@ -23,7 +32,46 @@
       wrapper.setAttribute("aria-label", "Scrollable table");
       table.parentNode?.insertBefore(wrapper, table);
       wrapper.appendChild(table);
+
+      // Initial classification & re-classify on resize
+      const classify = debounce(() => classifyTable(wrapper, table), RESIZE_DEBOUNCE_MS);
+      requestAnimationFrame(classify);
+
+      const ro = new ResizeObserver(classify);
+      ro.observe(wrapper);
+      wrapper._resizeObserver = ro;
     });
+  }
+
+  function classifyTable(wrapper, table) {
+    // Check for forced display mode via data-table-mode attribute
+    var forcedMode = table.dataset.tableMode;
+    if (forcedMode === "scroll") {
+      wrapper.classList.add("prose-table-wide");
+      wrapper.classList.remove("prose-table-fit");
+      return;
+    }
+    if (forcedMode === "stretch") {
+      wrapper.classList.add("prose-table-fit");
+      wrapper.classList.remove("prose-table-wide");
+      return;
+    }
+
+    // Auto-detect: reset any inherited sizing so we measure natural table width
+    table.style.width = "";
+    table.style.minWidth = "";
+    table.style.maxWidth = "";
+
+    var wrapperWidth = wrapper.clientWidth;
+    var tableWidth = table.scrollWidth;
+
+    if (tableWidth > wrapperWidth) {
+      wrapper.classList.add("prose-table-wide");
+      wrapper.classList.remove("prose-table-fit");
+    } else {
+      wrapper.classList.add("prose-table-fit");
+      wrapper.classList.remove("prose-table-wide");
+    }
   }
 
   function bindImageTools() {

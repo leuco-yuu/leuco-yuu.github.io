@@ -137,7 +137,7 @@
   }
 
   function isContentHeading(heading) {
-    return !heading.closest(".not-prose, .code-block-container, .mermaid-tool, .katex-display");
+    return !heading.closest(".not-prose, .code-block-container, .mermaid-tool, .katex-display, .alert, .annot-block");
   }
 
   function getHeadingLevel(heading) {

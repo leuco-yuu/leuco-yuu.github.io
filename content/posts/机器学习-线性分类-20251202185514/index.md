@@ -1,12 +1,12 @@
 ---
 title: 线性分类（Linear Classification）
-date: 2025-11-19T18:51:05+08:00
-lastmod: 2026-06-09T17:53:30+08:00
+date: 2025-07-25T17:00:45+08:00
+lastmod: 2025-10-29T20:34:15+08:00
 draft: false
 slug: linear-classification
 series_order: 2
 description: 【2】机器学习 第二部分 通过线性模型实现有监督的分类任务
-summary: 机器学习第二部分：整理逻辑回归、Softmax、SVM 与感知机等线性分类方法。
+summary: 线性分类方法综述，涵盖逻辑回归、Softmax回归、支持向量机（SVM）与感知机等模型，从广义线性模型（GLM）视角推导伯努利与多项式分布下的损失函数，介绍SMO算法求解二次规划、核函数升维及概率化输出，并包含音乐分类、人脸识别等实践案例。
 tags:
 - Logistic
 - Softmax
@@ -20,7 +20,7 @@ categories:
 - 学习笔记
 series:
 - 机器学习
-cover: cover.png
+cover: /covers/机器学习-线性分类-20251202185514.png
 ---
 
 # 线性分类（Linear Classification）

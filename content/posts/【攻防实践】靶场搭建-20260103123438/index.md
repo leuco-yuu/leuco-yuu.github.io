@@ -1,22 +1,28 @@
 ---
-title: 靶场搭建
-date: 2026-01-03T12:33:34+08:00
-lastmod: 2026-06-09T17:42:28+08:00
+title: 常用靶场搭建
+date: 2026-01-17T11:14:44+08:00
+lastmod: 2026-06-08T16:56:00+08:00
 draft: false
-slug: cyber-range-setup
-series_order: 4
+slug: common-range-setup
+series_order:
+- 2
+- 2
 description: 常见的靶场搭建
 summary: 整理 DVWA、Pikachu、WebGoat、Vulhub 等常见靶场环境的搭建方式。
 tags:
 - Docker
-- 靶场
 - DVWA
 - Pikachu
 - WebGoat
 - Vulhub
-categories: []
-series: []
-cover: ''
+categories:
+- 网络安全
+- 安全攻防
+- 实践笔记
+series:
+- Web安全
+- 渗透测试
+cover: /covers/【攻防实践】靶场搭建-20260103123438.png
 ---
 
 # 环境与 Docker

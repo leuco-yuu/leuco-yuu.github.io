@@ -1,7 +1,6 @@
 .prose-table-scroll {
   -webkit-overflow-scrolling: touch;
   max-width: 100%;
-  overflow-x: auto;
   overscroll-behavior-inline: contain;
   scrollbar-color: var(--color-border) transparent;
   width: 100%;
@@ -13,10 +12,26 @@
   outline-offset: 0.2rem;
 }
 
-.prose-table-scroll > table {
+/* Wide table — exceeds container width, needs horizontal scroll */
+.prose-table-wide {
+  overflow-x: auto;
+}
+
+.prose-table-wide > table {
   margin-block: 0;
   min-width: max-content;
   width: max-content;
+}
+
+/* Narrow table — fits within container, stretch to full width (Typora style) */
+.prose-table-fit {
+  overflow-x: visible;
+}
+
+.prose-table-fit > table {
+  margin-block: 0;
+  width: 100%;
+  table-layout: auto;
 }
 
 .prose-image-container,

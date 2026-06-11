@@ -1,20 +1,26 @@
 ---
-title: 【攻防实践】MSF恶意程序利用与CS钓鱼网站制作
-date: 2026-01-03T13:48:09+08:00
-lastmod: 2026-06-09T17:42:28+08:00
+title: MSF恶意程序利用与CS钓鱼网站制作
+date: 2026-02-07T12:00:03+08:00
+lastmod: 2026-05-30T19:38:26+08:00
 draft: false
-slug: msf-cs-phishing-lab
-series_order: 5
+slug: msf-malware-cs-phishing
+series_order: 4
 description: 【2】制作WIndows恶意软件获取Shell
 summary: 在隔离授权环境中记录 MSFVenom 与 Cobalt Strike 相关实验流程和风险边界。
 tags:
-- msfvenom
-- shell
-- Windowsl
-- CS
-categories: []
-series: []
-cover: CS.png
+- Cobalt Strike
+- Beacon
+- 恶意软件
+- 钓鱼攻击
+- 键盘记录
+- 反向连接
+categories:
+- 网络安全
+- 安全攻防
+- 实践笔记
+series:
+- 渗透测试
+cover: /covers/【攻防实践】MSF恶意程序利用与CS钓鱼网站制作-20260103135044.png
 ---
 
 # 实践概览

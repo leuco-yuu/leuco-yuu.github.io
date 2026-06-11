@@ -29,6 +29,9 @@ markup:
     endLevel: 4
     ordered: false
   goldmark:
+    parser:
+      attribute:
+        block: true
     renderer:
       unsafe: true
     extensions:

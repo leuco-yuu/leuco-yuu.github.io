@@ -1,29 +1,27 @@
 ---
-title: Docker 容器化技术
-date: 2026-05-05T16:26:19+08:00
-lastmod: 2026-06-09T17:42:25+08:00
+title: Docker容器化技术
+date: 2026-04-14T11:52:14+08:00
+lastmod: 2026-05-23T13:43:15+08:00
 draft: false
-slug: docker-containerization-technology
+slug: docker-containerization
 series_order: 1
 description: 系统梳理了 Docker  容器化技术的底层原理，详解了持久化存储、网络驱动、Dockerfile  编写与命令清单，给出开发环境全面容器化的实践方案与
   Dev Containers 配置。
 summary: 系统梳理 Docker 容器化技术的底层原理、存储、网络、Dockerfile 与开发环境容器化实践。
 tags:
+- 容器化
+- Namespaces
+- cGroups
+- 持久化存储
+- Volumes
 - Docker
-- 容器
 - Dockerfile
-- Namespace
-- cGroup
-- UnionFS
-- OverlayFS
-- Bridge
-- Overlay
-- Dev Containers
-- Bind Mount
-- tmpfs
-categories: []
-series: []
-cover: docker.png
+categories:
+- 系统工具集
+- 学习笔记
+series:
+- 工程技术
+cover: /covers/Docker-容器化技术-20260505163006.png
 ---
 
 # 容器技术

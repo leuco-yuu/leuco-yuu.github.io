@@ -1,12 +1,13 @@
 ---
 title: 无监督学习（Unsupervised Learning）
-date: 2025-12-02T19:45:17+08:00
-lastmod: 2026-06-09T17:54:28+08:00
+date: 2025-09-01T19:54:59+08:00
+lastmod: 2026-02-07T21:18:58+08:00
 draft: false
 slug: unsupervised-learning
 series_order: 3
 description: 【3】聚类是一种无监督的机器学习任务，它可以自动将数据划分成类（Cluster）
-summary: 机器学习第三部分：梳理聚类、降维、K-Means、GMM 与 PCA 等无监督学习方法。
+summary: 梳理无监督学习的聚类与降维方法：K-Means（含K-Means++、Canopy）、层次聚类、DBSCAN、高斯混合模型（GMM）及EM算法求解、PCA与Kernel
+  PCA。给出各算法原理、公式及Python实现，通过模拟数据评估性能，展示聚类效果与时间、ARI、轮廓系数等指标。
 tags:
 - 聚类
 - K-Means
@@ -19,7 +20,7 @@ categories:
 - 学习笔记
 series:
 - 机器学习
-cover: cover.png
+cover: /covers/机器学习-无监督学习-20251202194959.png
 ---
 
 - 聚类是一种无监督的机器学习任务，它可以自动将数据划分成类（Cluster）

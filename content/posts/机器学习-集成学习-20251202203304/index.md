@@ -1,12 +1,12 @@
 ---
 title: 集成学习（Ensemble Learning）
-date: 2025-12-02T20:30:43+08:00
-lastmod: 2026-06-09T17:55:36+08:00
+date: 2025-09-15T10:53:42+08:00
+lastmod: 2026-02-04T19:37:57+08:00
 draft: false
 slug: ensemble-learning
 series_order: 4
 description: 【4】机器学习第四部分 从决策树到集成学习
-summary: 机器学习第四部分：从决策树出发，整理 Bagging、Boosting、随机森林与 AdaBoost 等集成方法。
+summary: 从决策树分裂指标与剪枝出发，系统梳理Bagging、Boosting两类集成策略，详述随机森林的Bootstrap采样与袋外误差估计、AdaBoost的自适应权重调整、GBDT的梯度提升流程及GBDT+LR架构，涵盖基学习器组合与特征重要性评估。
 tags:
 - 决策树
 - Bagging
@@ -20,7 +20,7 @@ categories:
 - 学习笔记
 series:
 - 机器学习
-cover: cover.png
+cover: /covers/机器学习-集成学习-20251202203304.png
 ---
 
 # 决策树（Decision-Making Tree）

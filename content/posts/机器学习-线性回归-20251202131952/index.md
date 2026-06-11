@@ -1,7 +1,7 @@
 ---
 title: 线性回归（Linear Regression）
-date: 2025-11-12T13:16:53+08:00
-lastmod: 2026-06-09T17:51:28+08:00
+date: 2025-07-12T09:38:51+08:00
+lastmod: 2025-08-11T09:29:03+08:00
 draft: false
 slug: linear-regression
 series_order: 1
@@ -20,7 +20,7 @@ categories:
 - 学习笔记
 series:
 - 机器学习
-cover: cover.png
+cover: /covers/机器学习-线性回归-20251202131952.png
 ---
 
 - 任务类型分类：有监督学习

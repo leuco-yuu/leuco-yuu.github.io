@@ -1,12 +1,14 @@
 ---
 title: 神经网络（Neural Network）
-date: 2025-12-02T20:51:17+08:00
-lastmod: 2026-06-09T17:57:19+08:00
+date: 2025-09-29T13:46:37+08:00
+lastmod: 2026-01-21T10:38:56+08:00
 draft: false
 slug: neural-network
-series_order: 5
+series_order:
+- 5
+- 1
 description: 【5】机器学习第五部分 神经网络是深度学习的开端
-summary: 机器学习第五部分：整理前馈网络、反向传播、正则化、CNN 与 RNN 等神经网络基础。
+summary: 整理神经网络基础知识，包括前馈网络结构、激活函数、参数初始化、损失函数、反向传播与梯度下降优化算法、正则化方法（Dropout、BN）；通过手机价格分类案例实践MLP；介绍卷积神经网络的卷积层与池化层，并实现CIFAR-10图像分类；介绍循环神经网络及其词嵌入与RNN结构，并实现简答的歌词生成。
 tags:
 - 反向传播
 - 梯度下降
@@ -16,15 +18,15 @@ tags:
 - RNN
 - 梯度消失
 - 梯度爆炸
-- 参数初始化
 - 多层感知机
 - 激活函数
 categories:
 - 人工智能
 - 学习笔记
 series:
+- 机器学习
 - 深度学习
-cover: cover.png
+cover: /covers/机器学习-神经网络-20251202205357.png
 ---
 
 # 神经网络（Neural Network，NN）

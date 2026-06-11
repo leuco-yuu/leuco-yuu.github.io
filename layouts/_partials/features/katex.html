@@ -26,6 +26,21 @@
 
 {{- $featureEnabled := or $globalEnabled $pageEnabled -}}
 {{- $contentToScan := .Content -}}
+{{- /* 也扫描分页博文的子 .md 文件，使 KaTeX 检测能覆盖多文件文章 */ -}}
+{{- $sections := .Params.sections -}}
+{{- if $sections -}}
+  {{- range $sections -}}
+    {{- $filePath := path.Join "content" $.File.Dir . -}}
+    {{- $contentToScan = printf "%s\n%s" $contentToScan (os.ReadFile $filePath) -}}
+  {{- end -}}
+{{- else -}}
+  {{- range .Resources.Match "*.md" -}}
+    {{- if ne .Name "index.md" -}}
+      {{- $filePath := path.Join "content" $.File.Dir .Name -}}
+      {{- $contentToScan = printf "%s\n%s" $contentToScan (os.ReadFile $filePath) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- $hasBlockMath := gt (len (findRE `\$\$` $contentToScan)) 0 -}}
 {{- $hasParenMath := gt (len (findRE `\\\(` $contentToScan)) 0 -}}
 {{- $hasBracketMath := gt (len (findRE `\\\[` $contentToScan)) 0 -}}
