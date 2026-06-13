@@ -44,10 +44,11 @@
   {{- end -}}
 {{- else -}}
   {{- $fl := slice -}}
-  {{- range $page.Resources.Match "*.md" -}}
-    {{- if ne .Name "index.md" -}}
+  {{- $dir := path.Join "content" $page.File.Dir -}}
+  {{- range (os.ReadDir $dir) -}}
+    {{- if and (not .IsDir) (strings.HasSuffix .Name ".md") (ne .Name "index.md") -}}
       {{- $pr := index (findRE `^\d+` .Name) 0 | default "999" -}}
-      {{- $fl = $fl | append (dict "o" (int $pr) "p" (path.Join "content" $page.File.Dir .Name)) -}}
+      {{- $fl = $fl | append (dict "o" (int $pr) "p" (path.Join $dir .Name)) -}}
     {{- end -}}
   {{- end -}}
   {{- range sort $fl "o" "asc" -}}
@@ -64,7 +65,8 @@
   {{- $first := true -}}{{- $prevLevel := 1 -}}
   {{- range $allHeadings -}}
     {{- $level := .level -}}{{- $title := .title -}}
-    {{- $baseAnchor := anchorize $title -}}
+    {{- $cleanTitle := $title | replaceRE `\$[^$]+\$` "" | replaceRE `\$\$[^$]+\$\$` "" | replaceRE `\\\([^)]+\\\)` "" -}}
+    {{- $baseAnchor := anchorize $cleanTitle -}}
     {{- $suffix := index $seenAnchors $baseAnchor | default 0 -}}
     {{- $anchor := $baseAnchor -}}
     {{- if gt $suffix 0 -}}
@@ -107,14 +109,15 @@
     {{- $allMarkdown = printf "%s\n\n%s" $allMarkdown $sliceRaw -}}
   {{- end -}}
 {{- else -}}
-  {{- $fl := slice -}}
-  {{- range $page.Resources.Match "*.md" -}}
-    {{- if ne .Name "index.md" -}}
+  {{- $rl := slice -}}
+  {{- $dir := path.Join "content" $page.File.Dir -}}
+  {{- range (os.ReadDir $dir) -}}
+    {{- if and (not .IsDir) (strings.HasSuffix .Name ".md") (ne .Name "index.md") -}}
       {{- $pr := index (findRE `^\d+` .Name) 0 | default "999" -}}
-      {{- $fl = $fl | append (dict "o" (int $pr) "p" (path.Join "content" $page.File.Dir .Name)) -}}
+      {{- $rl = $rl | append (dict "o" (int $pr) "p" (path.Join $dir .Name)) -}}
     {{- end -}}
   {{- end -}}
-  {{- range sort $fl "o" "asc" -}}
+  {{- range sort $rl "o" "asc" -}}
     {{- $sliceRaw := os.ReadFile .p | replaceRE `(?s)^---\n[\s\S]*?\n---\n` "" -}}
     {{- $allMarkdown = printf "%s\n\n%s" $allMarkdown $sliceRaw -}}
   {{- end -}}
