@@ -6,7 +6,7 @@ draft: false
 slug: probability-lattice-crypto-randomness-analysis-basics
 sections:
 - 10-随机对象的统一语言.md
-- 11-尾界工具与失败概率.md
+- 11-尾界工具与失败概率_三级标题详写版.md
 - 12-分布距离与安全可区分性.md
 - 13-熵与随机提取.md
 - 14-高维随机性.md
@@ -36,6 +36,4 @@ series:
 - 基于格的密码学理论
 cover: ''
 ---
-
-
 

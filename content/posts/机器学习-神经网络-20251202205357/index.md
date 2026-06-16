@@ -1,9 +1,10 @@
 ---
 title: 神经网络（Neural Network）
 date: 2025-09-29T13:46:37+08:00
-lastmod: 2026-01-21T10:38:56+08:00
+lastmod: 2026-06-16T17:02:25+08:00
 draft: false
 slug: neural-network
+homepage: true
 series_order:
 - 5
 - 1
