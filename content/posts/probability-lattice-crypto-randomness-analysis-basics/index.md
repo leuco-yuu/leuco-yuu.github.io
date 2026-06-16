@@ -1,7 +1,7 @@
 ---
 title: 概率与格基加密随机性分析基础
 date: 2026-06-16T12:21:29+08:00
-lastmod: 2026-06-16T14:52:50+08:00
+lastmod: 2026-06-16T14:53:45+08:00
 draft: false
 slug: probability-lattice-crypto-randomness-analysis-basics
 sections:
@@ -25,7 +25,6 @@ tags:
 - 随机性分析
 - LWE
 - 安全证明
-- 随机变量
 - 分布
 - 安全实验
 - 安全参数
@@ -38,5 +37,5 @@ series:
 cover: ''
 ---
 
-# 概率与格基加密随机性分析基础
+
 
