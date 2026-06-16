@@ -1,14 +1,13 @@
 ---
 title: 内网通信系统
 date: 2026-04-10T18:08:53+08:00
-lastmod: 2026-06-14T15:54:04+08:00
+lastmod: 2026-06-16T19:25:31+08:00
 draft: false
 slug: intranet-communication-system
 series_order: 1
 description: 【0】一些基础的应用服务环境搭建
 summary: 整理内网文件共享、Flask 服务等安全实验基础环境的搭建过程。
 tags:
-- 内网共享
 - 内网文件共享
 - Web应用
 - 文件管理

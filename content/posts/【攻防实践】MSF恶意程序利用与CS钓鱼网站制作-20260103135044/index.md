@@ -1,9 +1,9 @@
 ---
 title: MSF恶意程序利用与CS钓鱼网站制作
 date: 2026-02-07T12:00:03+08:00
-lastmod: 2026-05-30T19:38:26+08:00
+lastmod: 2026-06-16T17:52:27+08:00
 draft: false
-slug: msf-malware-cs-phishing
+slug: msf-malware-exploit-cs-phishing
 series_order: 4
 description: 【2】制作WIndows恶意软件获取Shell
 summary: 在隔离授权环境中记录 MSFVenom 与 Cobalt Strike 相关实验流程和风险边界。

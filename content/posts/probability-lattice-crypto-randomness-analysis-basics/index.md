@@ -1,9 +1,9 @@
 ---
-title: 概率与格基加密随机性分析基础
+title: 第二卷 概率与格基加密随机性分析基础
 date: 2026-06-16T12:21:29+08:00
-lastmod: 2026-06-16T14:53:45+08:00
+lastmod: 2026-06-16T19:26:47+08:00
 draft: false
-slug: probability-lattice-crypto-randomness-analysis-basics
+slug: vol-2-probability-lattice-crypto-randomness-foundations
 sections:
 - 10-随机对象的统一语言.md
 - 11-尾界工具与失败概率_三级标题详写版.md
@@ -20,11 +20,10 @@ tags:
 - 后量子密码
 - 格基密码学
 - 数学基础
-- 密码学证明
+- 安全性证明
 - 概率论
 - 随机性分析
 - LWE
-- 安全证明
 - 分布
 - 安全实验
 - 安全参数

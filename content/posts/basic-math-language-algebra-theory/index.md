@@ -1,9 +1,9 @@
 ---
-title: 基础数学语言与代数理论
+title: 第一卷 基础数学语言与代数理论
 date: 2026-06-14T16:37:16+08:00
-lastmod: 2026-06-16T12:25:39+08:00
+lastmod: 2026-06-16T19:25:31+08:00
 draft: false
-slug: basic-math-language-algebra-theory
+slug: vol-1-basic-mathematical-language-algebra-theory
 sections:
 - 01-形式化语言.md
 - 02-证明范式与渐近记号.md
@@ -28,7 +28,7 @@ tags:
 - 线性代数
 - 高维几何
 - 模算术
-- 密码学证明
+- 安全性证明
 - 安全参数
 - 后量子密码
 - 密码学符号

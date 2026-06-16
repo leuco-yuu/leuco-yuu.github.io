@@ -1,5 +1,5 @@
 ---
-title: 安全证明
+title: 噪声分析
 description: ''
 ---
 

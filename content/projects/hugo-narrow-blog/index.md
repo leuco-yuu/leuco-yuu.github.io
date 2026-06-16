@@ -1,7 +1,7 @@
 ---
 title: Leuco Blog on Hugo Narrow
 date: 2026-06-05T09:30:00+08:00
-lastmod: 2026-06-09T17:41:32+08:00
+lastmod: 2026-06-16T19:25:31+08:00
 draft: false
 slug: hugo-narrow-blog
 homepage: true
@@ -12,7 +12,7 @@ tags:
 - Hugo
 - GitHub Pages
 - Blog
-- Static Site
+- 静态页面
 categories: []
 cover: cover.jpg
 link: null

@@ -1,9 +1,9 @@
 ---
 title: 附录Ⅰ - 后量子密码体系全局符号统一表
 date: 2026-05-23T09:09:55+08:00
-lastmod: 2026-06-16T12:24:46+08:00
+lastmod: 2026-06-16T19:27:00+08:00
 draft: false
-slug: post-quantum-global-symbol-table
+slug: appendix-1-pqc-symbol-table
 sections:
 - 0-总体排版与命名约定.md
 - 1-基础参数与索引.md

@@ -1,5 +1,5 @@
 ---
-title: 密码学证明
+title: 安全性证明
 description: ''
 ---
 

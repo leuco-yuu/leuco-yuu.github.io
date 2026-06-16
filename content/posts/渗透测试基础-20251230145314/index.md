@@ -1,7 +1,7 @@
 ---
 title: 渗透测试基础
 date: 2025-12-02T14:09:56+08:00
-lastmod: 2026-01-27T15:30:37+08:00
+lastmod: 2026-06-16T17:52:27+08:00
 draft: false
 slug: penetration-testing-basics
 series_order: 1

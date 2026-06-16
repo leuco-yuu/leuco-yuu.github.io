@@ -1,9 +1,9 @@
 ---
 title: 博客功能测试用例
 date: 2026-06-09T21:25:36+08:00
-lastmod: 2026-06-16T12:23:41+08:00
+lastmod: 2026-06-16T17:52:27+08:00
 draft: false
-slug: blog-feature-test-case
+slug: blog-functional-test-cases
 homepage: true
 sections:
 - 0-代码块.md
