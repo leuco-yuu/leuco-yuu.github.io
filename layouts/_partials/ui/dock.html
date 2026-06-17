@@ -1,7 +1,7 @@
 {{ $dockMode := .Site.Params.dock | default "scroll" }}
 {{ $tocConfig := partial "config/toc.html" . }}
 {{ $customTOC := .Store.Get "customTOC" }}
-{{ $hasToc := and .IsPage $tocConfig.enabled (or (ne .TableOfContents `<nav id="TableOfContents"></nav>`) $customTOC) }}
+{{ $hasToc := and $tocConfig.enabled (or (ne .TableOfContents `<nav id="TableOfContents"></nav>`) $customTOC) }}
 
 <div
   id="dock"

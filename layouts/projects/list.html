@@ -148,6 +148,7 @@
         currentPage = p;
         showPage(p);
         window.scrollTo({ top: container.offsetTop - 80, behavior: 'smooth' });
+        if (window.syncTocOrder) window.syncTocOrder();
       }
 
       function renderPageNumbers(p) {

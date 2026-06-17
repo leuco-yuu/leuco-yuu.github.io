@@ -166,6 +166,7 @@
         allCards.forEach(function (card) { container.appendChild(card); });
 
         goToPage(1);
+        if (window.syncTocOrder) window.syncTocOrder();
       }
 
       function showPage(p) {
@@ -201,6 +202,7 @@
         currentPage = p;
         showPage(p);
         window.scrollTo({ top: container.offsetTop - 80, behavior: 'smooth' });
+        if (window.syncTocOrder) window.syncTocOrder();
       }
 
       function renderPageNumbers(p) {
