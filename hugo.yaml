@@ -307,7 +307,8 @@ params:
     collapse:
       enabled: true
       defaultState: expanded
-      autoCollapseLines: 30
+      autoCollapseLines: 8
+      minCollapseLines: 6
       autoCollapseHeight: 400
       collapsedHeight: 120
   readingProgress:

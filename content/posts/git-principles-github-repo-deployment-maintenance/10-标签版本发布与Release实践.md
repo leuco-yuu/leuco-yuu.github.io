@@ -187,7 +187,7 @@ jobs:
 
 ### Release 说明模板
 
-```markdown
+````markdown
 ### Overview
 
 Summarize the purpose of this release.
@@ -217,7 +217,7 @@ example upgrade command
 ### Checksums
 
 - demo-service-linux-amd64.tar.gz: SHA256...
-```
+````
 
 Release 说明应面向使用者，而不是只复制提交日志。提交日志适合开发者追踪，Release 说明应强调行为变化、升级方式和风险。
 

@@ -15,7 +15,7 @@ function countSourceLines(block) {
 }
 
 function shouldAutoCollapse(block) {
-  const autoCollapseLines = Number.parseInt(block.dataset.autoCollapseLines || "30", 10);
+  const autoCollapseLines = Number.parseInt(block.dataset.autoCollapseLines || "8", 10);
   const autoCollapseHeight = Number.parseInt(block.dataset.autoCollapseHeight || "400", 10);
   const renderedCode = block.querySelector(
     ".code-block-content pre.chroma, .code-block-content pre"
@@ -45,7 +45,8 @@ function updateCollapseButton(block, collapsed) {
 function updateCollapseOverlay(block, collapsed) {
   const isOutput = block.matches(".code-block-output");
   const overlay = block.querySelector(".collapse-overlay");
-  const bottomBtn = block.querySelector(".code-block-bottom-collapse");
+  const bottomBar = block.querySelector(".code-block-bottom-bar[data-code-action='toggle-collapse']");
+  const bottomIcon = block.querySelector(".code-block-bottom-bar[data-code-action='toggle-collapse'] .code-block-bottom-collapse");
   const chevron = block.querySelector(".output-chevron");
 
   if (overlay) {
@@ -61,28 +62,32 @@ function updateCollapseOverlay(block, collapsed) {
     }
   }
 
-  // Output blocks: bottom button visible when EXPANDED *only if* block was auto-collapsed on init
-  // (i.e. long enough output — short outputs don't need the button)
-  if (bottomBtn) {
+  // Bottom bar: only visible if block exceeds autoCollapseLines AND is expanded.
+  // Bug fix: never show based on _userToggled — short blocks should never get bottom button.
+  if (bottomBar) {
     if (isOutput) {
       var canShowO = !collapsed && block.dataset._isCollapsible === "true";
-      bottomBtn.hidden = !canShowO;
-      bottomBtn.classList.toggle("hidden", !canShowO);
+      bottomBar.hidden = !canShowO;
+      bottomBar.classList.toggle("hidden", !canShowO);
+      bottomBar.classList.toggle("flex", canShowO);
     } else {
-      var canShowN = !collapsed && (block.dataset._isCollapsible === "true" || block.dataset._userToggled === "true");
-      bottomBtn.hidden = !canShowN;
-      bottomBtn.classList.toggle("hidden", !canShowN);
+      var canShowN = !collapsed && block.dataset._isCollapsible === "true";
+      bottomBar.hidden = !canShowN;
+      bottomBar.classList.toggle("hidden", !canShowN);
+      bottomBar.classList.toggle("flex", canShowN);
     }
 
-    var iconSpan = bottomBtn.querySelector(".bottom-collapse-icon");
-    if (iconSpan) {
-      iconSpan.innerHTML = collapsed
-        ? '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>'
-        : '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>';
-    }
-    var label = collapsed ? bottomBtn.dataset.labelExpand : bottomBtn.dataset.labelCollapse;
-    bottomBtn.title = label || "";
-    bottomBtn.setAttribute("aria-label", label || "");
+    var label = collapsed ? bottomBar.dataset.labelExpand : bottomBar.dataset.labelCollapse;
+    bottomBar.title = label || "";
+    bottomBar.setAttribute("aria-label", label || "");
+    bottomBar.setAttribute("aria-expanded", String(!collapsed));
+  }
+
+  // Update icon inside bottom bar
+  if (bottomIcon) {
+    bottomIcon.innerHTML = collapsed
+      ? '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>'
+      : '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>';
   }
 
   // Rotate output header chevron
@@ -91,11 +96,23 @@ function updateCollapseOverlay(block, collapsed) {
   }
 }
 
-function setCollapsed(block, collapsed, { animate = true } = {}) {
+function setCollapsed(block, collapsed, { animate = true, anchor = "top" } = {}) {
   const content = block.querySelector(".code-block-content");
   if (!content) return;
 
   const collapsedHeight = Number.parseInt(block.dataset.collapsedHeight || "120", 10);
+
+  // Suppress native scroll anchoring during height change
+  content.style.overflowAnchor = "none";
+
+  // Scroll anchoring: when collapsing, preserve the specified edge position
+  var anchorDelta = 0;
+  if (collapsed && block.dataset.collapsed !== "true") {
+    var rectBefore = block.getBoundingClientRect();
+    if (anchor === "bottom") {
+      anchorDelta = rectBefore.bottom;
+    }
+  }
 
   block.dataset.collapsed = String(collapsed);
   content.style.transition = animate ? "max-height 0.35s cubic-bezier(.4,0,.2,1)" : "";
@@ -104,6 +121,23 @@ function setCollapsed(block, collapsed, { animate = true } = {}) {
 
   updateCollapseButton(block, collapsed);
   updateCollapseOverlay(block, collapsed);
+
+  // Apply scroll anchor for bottom-anchored collapses
+  if (anchorDelta > 0) {
+    var rectAfter = block.getBoundingClientRect();
+    var delta = rectAfter.bottom - anchorDelta;
+    if (delta < 0) {
+      window.scrollBy({ top: delta, behavior: "instant" });
+    }
+  }
+
+  // Restore native scroll anchoring after layout settles
+  var restoreAnchor = function () { content.style.overflowAnchor = ""; };
+  if (animate) {
+    window.setTimeout(restoreAnchor, 400);
+  } else {
+    restoreAnchor();
+  }
 
   if (animate) {
     window.setTimeout(() => {
@@ -121,10 +155,26 @@ function initCollapsibleBlocks(root = document) {
     const autoCollapses = shouldAutoCollapse(block);
     const startCollapsed =
       collapsedAttr || defaultState === "collapsed" || autoCollapses;
-    
-    // Mark if block actually needs collapse UI (exceeds thresholds), regardless of forced state
+
+    // Mark if block exceeds autoCollapseLines (for bottom button visibility)
     if (autoCollapses) block.dataset._isCollapsible = "true";
-    
+
+    // Hide top-right collapse button for blocks below minCollapseLines
+    const minCollapseLines = Number.parseInt(block.dataset.minCollapseLines || "6", 10);
+    const sourceLines = countSourceLines(block);
+    if (sourceLines < minCollapseLines) {
+      const topBtn = block.querySelector(".collapse-code-btn");
+      if (topBtn) {
+        topBtn.hidden = true;
+        topBtn.style.display = "none";
+      }
+      const overlay = block.querySelector(".collapse-overlay");
+      if (overlay) {
+        overlay.hidden = true;
+        overlay.style.display = "none";
+      }
+    }
+
     setCollapsed(block, startCollapsed, { animate: false });
   });
 }
@@ -184,17 +234,18 @@ function handleCodeBlockClick(event) {
     if (!block) return;
     block.dataset._userToggled = "true";
     const isCollapsed = block.dataset.collapsed === "true";
-    setCollapsed(block, !isCollapsed);
+    // Bottom bar → preserve bottom edge; top button / output header → preserve top
+    var anchor = event.target.closest(".code-block-bottom-bar") ? "bottom" : "top";
+    setCollapsed(block, !isCollapsed, { anchor: anchor });
     return;
   }
 
-  const expandButton = event.target.closest("[data-code-action='expand']");
-  if (expandButton) {
+  // Click anywhere on a collapsed code block → expand (not just the button)
+  const collapsedBlock = event.target.closest("[data-code-block]");
+  if (collapsedBlock && collapsedBlock.dataset.collapsed === "true") {
     event.preventDefault();
-    const block = expandButton.closest("[data-code-block]");
-    if (!block) return;
-    block.dataset._userToggled = "true";
-    setCollapsed(block, false);
+    collapsedBlock.dataset._userToggled = "true";
+    setCollapsed(collapsedBlock, false, { anchor: "top" });
     return;
   }
 }

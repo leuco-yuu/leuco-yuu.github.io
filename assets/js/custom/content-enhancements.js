@@ -328,6 +328,14 @@
     mermaidToolsBound = true;
 
     document.addEventListener("click", (event) => {
+      // Click anywhere on collapsed mermaid code pane → expand
+      const collapsedMermaid = event.target.closest("[data-mermaid-tool].is-mermaid-code-collapsed");
+      if (collapsedMermaid && collapsedMermaid.dataset.mermaidFoldable === "true") {
+        event.preventDefault();
+        setMermaidCodeCollapsed(collapsedMermaid, false);
+        return;
+      }
+
       const button = event.target.closest("[data-mermaid-action]");
       if (!button) return;
 
@@ -386,9 +394,10 @@
     tool.classList.remove("mermaid-render-mode");
     pane.replaceChildren(createMermaidCodeView(source));
 
-    const foldable = shouldFoldMermaidCode(tool, source, pane);
+    const foldable = sourceLines > minCollapseLines;
+    const autoCollapse = sourceLines > autoCollapseLines;
     tool.dataset.mermaidFoldable = String(foldable);
-    setMermaidCodeCollapsed(tool, foldable, { animate: false });
+    setMermaidCodeCollapsed(tool, autoCollapse, { animate: false });
   }
 
   function createMermaidCodeView(source) {
@@ -418,18 +427,24 @@
       '<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"/></svg>';
     overlay.appendChild(expandButton);
 
-    const bottomCollapse = document.createElement("button");
-    bottomCollapse.type = "button";
-    bottomCollapse.className =
-      "code-block-bottom-collapse text-muted-foreground bg-card/80 border-border/50 hover:bg-primary/10 hover:text-primary hover:border-primary/30 absolute bottom-4 left-1/2 z-10 items-center justify-center rounded-full border p-2 backdrop-blur-sm transition-all duration-200";
-    bottomCollapse.dataset.mermaidAction = "toggle-code-collapse";
-    bottomCollapse.hidden = true;
-    bottomCollapse.setAttribute("aria-label", getUIText("code.collapse", "收起"));
-    bottomCollapse.title = getUIText("code.collapse", "收起");
-    bottomCollapse.innerHTML =
-      '<svg class="h-4 w-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"/></svg>';
+    const bottomBar = document.createElement("div");
+    bottomBar.className =
+      "code-block-bottom-bar absolute bottom-0 left-0 right-0 z-10 hidden items-center justify-center";
+    bottomBar.style.height = "3.25rem";
+    bottomBar.style.cursor = "pointer";
+    bottomBar.dataset.mermaidAction = "toggle-code-collapse";
+    bottomBar.hidden = true;
+    bottomBar.setAttribute("aria-label", getUIText("code.collapse", "收起"));
+    bottomBar.title = getUIText("code.collapse", "收起");
 
-    shell.append(pre, overlay, bottomCollapse);
+    const bottomIcon = document.createElement("span");
+    bottomIcon.className =
+      "code-block-bottom-collapse inline-flex items-center justify-center text-muted-foreground bg-card/80 border-border/50 hover:bg-primary/10 hover:text-primary hover:border-primary/30 rounded-full border p-2 backdrop-blur-sm transition-all duration-200 pointer-events-none";
+    bottomIcon.innerHTML =
+      '<svg class="h-4 w-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"/></svg>';
+    bottomBar.appendChild(bottomIcon);
+
+    shell.append(pre, overlay, bottomBar);
     return shell;
   }
 
@@ -479,9 +494,13 @@
   }
 
   function shouldFoldMermaidCode(tool, source, pane) {
-    const autoCollapseLines = Number.parseInt(tool.dataset.autoCollapseLines || "30", 10);
+    const autoCollapseLines = Number.parseInt(tool.dataset.autoCollapseLines || "8", 10);
     const autoCollapseHeight = Number.parseInt(tool.dataset.autoCollapseHeight || "400", 10);
     const sourceLines = source.split(/\r\n|\r|\n/).length;
+    const minCollapseLines = Number.parseInt(tool.dataset.minCollapseLines || "6", 10);
+
+    if (sourceLines < minCollapseLines) return false;
+
     const renderedCode = pane.querySelector(".mermaid-source-view");
     const renderedHeight = renderedCode?.offsetHeight || 0;
 
@@ -494,7 +513,8 @@
     const text = button?.querySelector(".mermaid-code-collapse-text");
     const chevron = button?.querySelector(".mermaid-code-collapse-chevron");
     const overlay = pane?.querySelector(".mermaid-code-collapse-overlay");
-    const bottomCollapse = pane?.querySelector(".code-block-bottom-collapse");
+    const bottomBar = pane?.querySelector(".code-block-bottom-bar");
+    const bottomIcon = pane?.querySelector(".code-block-bottom-collapse");
     if (!pane) return;
 
     const foldable = tool.dataset.mermaidFoldable === "true";
@@ -503,6 +523,13 @@
     const expandLabel = button?.dataset.labelExpand || getUIText("code.expand", "展开");
     const collapseLabel = button?.dataset.labelCollapse || getUIText("code.collapse", "收起");
     const label = nextCollapsed ? expandLabel : collapseLabel;
+
+    // Scroll anchoring: keep content below at same screen position
+    var anchorDelta = 0;
+    if (nextCollapsed && tool.dataset.mermaidCollapsed !== "true") {
+      var rectBefore = tool.getBoundingClientRect();
+      anchorDelta = rectBefore.bottom;
+    }
 
     tool.dataset.mermaidCollapsed = String(nextCollapsed);
     tool.classList.toggle("is-mermaid-code-collapsed", nextCollapsed);
@@ -531,10 +558,25 @@
       overlay.classList.toggle("opacity-100", showOverlay);
     }
 
-    if (bottomCollapse) {
-      const showBottomCollapse = foldable && !nextCollapsed;
-      bottomCollapse.hidden = !showBottomCollapse;
-      bottomCollapse.style.display = showBottomCollapse ? "flex" : "none";
+    if (bottomBar) {
+      const showBottomBar = foldable && !nextCollapsed;
+      bottomBar.hidden = !showBottomBar;
+      bottomBar.classList.toggle("hidden", !showBottomBar);
+      bottomBar.classList.toggle("flex", showBottomBar);
+    }
+    if (bottomIcon) {
+      bottomIcon.innerHTML = nextCollapsed
+        ? '<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"/></svg>'
+        : '<svg class="h-4 w-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"/></svg>';
+    }
+
+    // Apply scroll anchor
+    if (anchorDelta > 0) {
+      var rectAfter = tool.getBoundingClientRect();
+      var delta = rectAfter.bottom - anchorDelta;
+      if (delta < 0) {
+        window.scrollBy({ top: delta, behavior: "instant" });
+      }
     }
 
     if (animate) {

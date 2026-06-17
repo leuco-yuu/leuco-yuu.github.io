@@ -62,7 +62,7 @@
                 <div class="ml-12">
                   {{ $date := time (printf "%s-01" .Key) }}
                   <h3 class="text-foreground text-lg font-semibold">
-                    {{ $date | time.Format "January 2006" }}
+                    {{ $date | time.Format "2006年1月" }}
                   </h3>
                   <p class="text-muted-foreground text-xs">
                     {{ T "list.pages" (dict "count" (len .Pages)) }}

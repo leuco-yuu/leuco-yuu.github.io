@@ -9,7 +9,8 @@
 {{- $expandLabel := T `code.expand` -}}
 {{- $collapseLabel := T `code.collapse` -}}
 {{- $collapsedHeight := site.Params.codeblock.collapse.collapsedHeight | default 120 -}}
-{{- $autoCollapseLines := site.Params.codeblock.collapse.autoCollapseLines | default 30 -}}
+{{- $autoCollapseLines := site.Params.codeblock.collapse.autoCollapseLines | default 8 -}}
+{{- $minCollapseLines := site.Params.codeblock.collapse.minCollapseLines | default 6 -}}
 {{- $autoCollapseHeight := site.Params.codeblock.collapse.autoCollapseHeight | default 400 -}}
 
 <div
@@ -20,6 +21,7 @@
   data-mermaid-foldable="false"
   data-collapsed-height="{{ $collapsedHeight }}"
   data-auto-collapse-lines="{{ $autoCollapseLines }}"
+  data-min-collapse-lines="{{ $minCollapseLines }}"
   data-auto-collapse-height="{{ $autoCollapseHeight }}"
 >
   <div class="mermaid-tool-header code-block-header bg-muted/30 border-border flex items-center justify-between border-b px-4 py-3">
