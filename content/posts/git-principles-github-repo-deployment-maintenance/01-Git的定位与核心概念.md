@@ -1,6 +1,6 @@
 # Git 的定位与核心概念
 
-## Git 与 Git 管理区域
+## Git 与管理区域
 
 Git 是一个**分布式版本控制系统**。
 
@@ -41,7 +41,7 @@ git commit -m "feat(auth): add login token refresh"
 >
 > 工作区指当前正在编辑的项目文件夹，暂存区指提交前的”待提交清单“，版本库指Git真正保存历史记录的地方。这三步都是在本地进行的，不会推送到远程仓库。
 
-### Git 的状态语言
+## Git 的状态语言与命令层次
 
 Git 使用**状态**描述文件是否被跟踪，以及改动处在哪个区域。
 
@@ -56,7 +56,7 @@ Git 使用**状态**描述文件是否被跟踪，以及改动处在哪个区域
 git status -sb
 ```
 
-常见状态码含义如下：
+常见状态码：
 
 | 状态 | 含义 |
 | --- | --- |
@@ -67,11 +67,12 @@ git status -sb
 | `R` | 重命名文件 |
 | `UU` | 合并冲突未解决 |
 
-### Git 命令的设计层次
+**Git 命令可以分为高层命令和底层命令。**
 
-Git 命令可以分为高层命令和底层命令。日常开发主要使用高层命令，例如 `add`、`commit`、`branch`、`switch`、`merge`、`rebase`、`fetch`、`pull`、`push`。底层命令用于直接操作对象、引用或索引，例如 `hash-object`、`cat-file`、`update-index`、`write-tree`、`commit-tree`、`update-ref`。
+- 日常开发主要使用高层命令，例如 `add`、`commit`、`branch`、`switch`、`merge`、`rebase`、`fetch`、`pull`、`push`。
+- 底层命令用于直接操作对象、引用或索引，例如 `hash-object`、`cat-file`、`update-index`、`write-tree`、`commit-tree`、`update-ref`。
 
-理解底层命令不是为了在日常工作中频繁使用它们，而是为了建立正确心智模型。例如：
+理解底层命令不是为了在日常工作中频繁使用它们。
 
 ```bash
 git cat-file -t HEAD
@@ -79,13 +80,14 @@ git cat-file -p HEAD
 git cat-file -p HEAD^{tree}
 ```
 
-第一条命令查看 `HEAD` 指向对象的类型，第二条命令打印提交对象内容，第三条命令查看提交所指向的目录树。通过这些命令可以看到，提交对象保存了树对象、父提交、作者、提交者和提交说明。
+第一条命令查看 `HEAD` 指向对象的类型；第二条命令打印提交对象内容；第三条命令查看提交所指向的目录树。通过这些命令可以看到，提交对象保存了树对象、父提交、作者、提交者和提交说明。
 
-### Git 与代码托管平台的关系
+## Git 与代码托管平台
 
-GitHub、Gitee、GitLab、Bitbucket 等平台不是 Git 本身，而是围绕 Git 仓库提供远程托管、权限控制、代码审查、Issue、Wiki、CI/CD、Release、Pages、组织管理、安全扫描等协作能力的平台。Git 解决的是版本历史与对象交换问题；平台解决的是多人协作、权限治理、项目管理和交付发布问题。
+GitHub、Gitee、GitLab、Bitbucket 等平台不是 Git 本身，而是围绕 Git 仓库提供远程托管、权限控制、代码审查、Issue、Wiki、CI/CD、Release、Pages、组织管理、安全扫描等协作能力的平台。
 
-因此，学习 Git 时应区分三类能力：
+- Git 解决的是版本历史与对象交换问题；
+- 平台解决的是多人协作、权限治理、项目管理和交付发布问题。
 
 | 层次 | 典型内容 | 是否依赖平台 |
 | --- | --- | --- |
@@ -93,24 +95,6 @@ GitHub、Gitee、GitLab、Bitbucket 等平台不是 Git 本身，而是围绕 Gi
 | 远程同步 | `remote`、`fetch`、`pull`、`push` | 需要远程仓库，但不限平台 |
 | 平台协作 | Pull Request、Issue、Release、保护分支、Actions、Pages | 是 |
 
-这一区分非常重要。很多看似 Git 的问题，例如“为什么不能直接推送到 main”“为什么合并需要审批”“为什么 Release 页面没有构建产物”，实际是平台策略、权限规则或 CI/CD 配置问题，而不是 Git 命令本身的问题。
-
-### Git 学习主线
-
-建议按照以下主线学习 Git：
-
-先理解对象模型。提交不是简单文本日志，而是带父子关系的对象图；分支不是副本，而是一个可移动引用；标签不是分支，而是一个通常不移动的版本标记。
-
-再掌握本地提交。包括工作区、暂存区、提交、撤销、比较、历史查看、忽略文件和配置。
-
-随后学习分支协作。重点是 `merge` 与 `rebase` 的差异、冲突解决、远程跟踪分支、分支命名与生命周期管理。
-
-最后把 Git 放到平台中使用。重点是 GitHub/Gitee 仓库创建、权限配置、保护分支、Pull Request、镜像同步、Release、标签、制品上传和长期维护。
-
-### 参考资料
-
-- Git 官方文档：https://git-scm.com/docs
-- Git 命令总览：https://git-scm.com/docs/git
-- Git Book：https://git-scm.com/book/en/v2
-- GitHub Docs：https://docs.github.com
-- Gitee 帮助中心：https://help.gitee.com
+> [!ANNOT]
+>
+> 很多看似 Git 的问题，例如“为什么不能直接推送到 main”“为什么合并需要审批”“为什么 Release 页面没有构建产物”，实际是平台策略、权限规则或 CI/CD 配置问题，而不是 Git 命令本身的问题。
