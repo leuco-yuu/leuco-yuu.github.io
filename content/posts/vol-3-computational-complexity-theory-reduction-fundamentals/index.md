@@ -1,9 +1,9 @@
 ---
 title: 第三卷 计算复杂性理论与归约基础
 date: 2026-06-16T19:36:35+08:00
-lastmod: 2026-06-16T19:36:54+08:00
+lastmod: 2026-06-18T12:35:19+08:00
 draft: false
-slug: vol-3-computational-complexity-theory-reduction-fundamentals
+slug: computational-complexity-reduction-basics
 sections:
 - 18-计算问题的形式化基础.md
 - 19-随机算法与交互对手.md

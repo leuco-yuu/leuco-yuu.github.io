@@ -1,9 +1,9 @@
 ---
 title: 格基加密正确性分析案例
 date: 2026-06-16T16:13:54+08:00
-lastmod: 2026-06-16T17:48:46+08:00
+lastmod: 2026-06-18T12:35:19+08:00
 draft: false
-slug: lattice-encryption-correctness-case
+slug: lattice-encryption-correctness-analysis-case
 sections:
 - 00-格基加密正确性分析总览.md
 - 01-Regev型LWE公钥加密正确性分析.md
@@ -13,7 +13,7 @@ sections:
 - 05-MLKEM型模块LWE正确性分析.md
 series_order:
 - 1
-- 4
+- 7
 description: ''
 summary: 本文系统分析Regev型、LPR型、Frodo型、环LWE及ML-KEM型模块LWE加密的正确性，通过代入解密公式消去主项得到总解密噪声表达式，定义基于编码间隔的正确性条件，并采用范围界、Chebyshev、Bernstein及精确卷积方法估计失败概率，揭示各类方案噪声结构的共同模板与参数依赖关系。
 tags:

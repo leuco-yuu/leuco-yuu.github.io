@@ -58,13 +58,14 @@
     {{- $isExpanded := eq .AlertSign "+" -}}
     {{- $alertId := printf "alert-%s-%d" .AlertType .Ordinal -}}
     {{- $title := .AlertTitle | default $config.defaultTitle -}}
+    {{- $iconPath := printf "assets/icons/%s.svg" .AlertType -}}
 
     <div
       id="{{ $alertId }}"
-      class="alert alert-{{ .AlertType }} my-6 overflow-hidden rounded-lg transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md"
+      class="alert alert-{{ .AlertType }} my-6 rounded-lg transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md"
       data-alert-type="{{ .AlertType }}"
       style="background-color: color-mix(in srgb, var(--color-{{ $config.colorVar }}) 10%, transparent);
-                border-left-color: var(--color-{{ $config.colorVar }});
+                border-left: 4px solid var(--color-{{ $config.colorVar }});
                 --hover-bg: color-mix(in srgb, var(--color-{{ $config.colorVar }}) 15%, transparent);"
       onmouseover="this.style.backgroundColor = this.style.getPropertyValue('--hover-bg')"
       onmouseout="this.style.backgroundColor = 'color-mix(in srgb, var(--color-{{ $config.colorVar }}) 10%, transparent)'"
@@ -72,16 +73,20 @@
       aria-labelledby="{{ $alertId }}-title"
     >
       <div
-        class="{{ if $isCollapsible }}cursor-pointer{{ end }} flex items-center justify-between px-6 py-5"
+        class="{{ if $isCollapsible }}cursor-pointer{{ end }} flex items-center justify-between"
+        style="padding: 1.5rem 1.75rem;"
         {{ if $isCollapsible }}
           onclick="toggleAlert('{{ $alertId }}')" role="button" tabindex="0"
           aria-expanded="{{ $isExpanded }}" aria-controls="{{ $alertId }}-content"
           onkeydown="if(event.key==='Enter'||event.code==='Space'){toggleAlert('{{ $alertId }}');event.preventDefault();}"
         {{ end }}
       >
-        <div class="flex items-center gap-3">
-          <h4 id="{{ $alertId }}-title" class="text-foreground/90 m-0 font-semibold">
-            {{ $title }}
+        <div class="flex items-center gap-2.5">
+          <span class="alert-icon shrink-0 inline-flex" style="width: 1.25rem; height: 1.25rem; color: color-mix(in oklab, var(--color-{{ $config.colorVar }}), transparent);">
+            {{ readFile $iconPath | safeHTML }}
+          </span>
+          <h4 id="{{ $alertId }}-title" class="text-foreground/90 m-0 font-semibold" style="font-size: 0.95rem;">
+            {{ $title }}&nbsp;<span class="alert-counter" data-alert-counter="{{ .AlertType }}"></span>
           </h4>
         </div>
         <div class="flex items-center gap-2">
@@ -104,9 +109,10 @@
       </div>
       <div
         id="{{ $alertId }}-content"
-        class="alert-content {{ if and $isCollapsible (not $isExpanded) }}hidden{{ end }} px-6 pb-5"
+        class="alert-content {{ if and $isCollapsible (not $isExpanded) }}hidden{{ end }}"
+        style="padding: 0 1.75rem 1.5rem 1.75rem;"
       >
-        <div class="prose prose-sm text-foreground/90 max-w-none">
+        <div class="prose prose-sm text-foreground/85 max-w-none">
           {{ .Text }}
         </div>
       </div>
@@ -158,28 +164,45 @@
 
     // --- Number alerts per type per article, show/hide nav buttons ---
     var TYPES = ["annot", "note", "tip", "important", "warning", "caution"];
-    var TYPE_LABELS = {annot: "批注", note: "注意", tip: "提示", important: "重要", warning: "警告", caution: "注意"};
+    var TYPE_LABELS = {annot: "批注", note: "注意", tip: "提示", important: "重要", warning: "警告", caution: "小心"};
     var TYPE_COLORS = {note: "var(--color-note)", tip: "var(--color-tip)", important: "var(--color-important)", warning: "var(--color-warning)", caution: "var(--color-caution)"};
 
     var articles = document.querySelectorAll("article");
     for (var a = 0; a < articles.length; a++) {
+      // Count total alerts + annots in this article
+      var totalCount = 0;
+      var typeCounts = {};
       for (var t = 0; t < TYPES.length; t++) {
         var type = TYPES[t];
         var selector = type === "annot" ? ".annot-block" : '.alert[data-alert-type="' + type + '"]';
         var blocks = articles[a].querySelectorAll(selector);
-        // Number them
+        typeCounts[type] = blocks.length;
+        totalCount += blocks.length;
+      }
+      var showNumbers = {}; // per-type: show numbers only if ≥2 of that type
+      for (var t = 0; t < TYPES.length; t++) {
+        showNumbers[TYPES[t]] = typeCounts[TYPES[t]] >= 2;
+      }
+      var showNav = totalCount >= 2; // show three-dot if ≥2 total alerts
+
+      for (var t = 0; t < TYPES.length; t++) {
+        var type = TYPES[t];
+        var selector = type === "annot" ? ".annot-block" : '.alert[data-alert-type="' + type + '"]';
+        var blocks = articles[a].querySelectorAll(selector);
         for (var i = 0; i < blocks.length; i++) {
           blocks[i].setAttribute("data-alert-num", i + 1);
           if (type === "annot") {
             var c = blocks[i].querySelector(".annot-counter[data-annot-idx]");
-            if (c) c.textContent = (i + 1);
+            if (c) c.textContent = showNumbers[type] ? (i + 1) : "";
+          } else {
+            var c2 = blocks[i].querySelector(".alert-counter[data-alert-counter='" + type + "']");
+            if (c2) c2.textContent = showNumbers[type] ? (i + 1) : "";
           }
         }
-        // Show/hide nav buttons: only if ≥2 of this type
+        // Show/hide nav buttons based on TOTAL count
         var btns = articles[a].querySelectorAll(selector + " .annot-nav-btn");
-        var show = blocks.length >= 2;
         for (var j = 0; j < btns.length; j++) {
-          btns[j].style.display = show ? "flex" : "none";
+          btns[j].style.display = showNav ? "flex" : "none";
         }
       }
     }
@@ -205,7 +228,7 @@
         var selector = type === "annot" ? ".annot-block" : '.alert[data-alert-type="' + type + '"]';
         var blocks = article.querySelectorAll(selector);
         for (var i = 0; i < blocks.length; i++) {
-          allBlocks.push({el: blocks[i], type: type, num: blocks[i].getAttribute("data-alert-num") || (i + 1)});
+          allBlocks.push({el: blocks[i], type: type, num: blocks[i].getAttribute("data-alert-num") || (i + 1), count: blocks.length});
         }
       }
 
@@ -217,7 +240,8 @@
       var html = "";
       for (var k = 0; k < allBlocks.length; k++) {
         var item = allBlocks[k];
-        var label = (TYPE_LABELS[item.type] || item.type) + item.num;
+        var label = TYPE_LABELS[item.type] || item.type;
+        if (item.count >= 2) label += item.num;
         var bodyEl = item.el.querySelector(".annot-body, .alert-content, .prose");
         var text = bodyEl ? bodyEl.textContent.trim().replace(/\s+/g, " ").substring(0, 40) : "";
         var color = item.type === "annot" ? "var(--color-primary)" : (TYPE_COLORS[item.type] || "var(--color-primary)");

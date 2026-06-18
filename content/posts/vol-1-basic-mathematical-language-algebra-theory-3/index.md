@@ -1,16 +1,15 @@
 ---
-title: 第一卷 基础数学语言与代数理论（一）
-date: 2026-06-14T16:33:16+08:00
+title: 第一卷 基础数学语言与代数理论（三）
+date: 2026-06-14T16:37:16+08:00
 lastmod: 2026-06-18T12:35:19+08:00
 draft: false
-slug: basic-mathematical-language-algebra-theory-1
+slug: basic-math-language-algebra-theory-3
 sections:
-- 1-形式化语言.md
-- 2-证明范式与渐近记号.md
-- 3-线性结构.md
+- 1-环上代数结构.md
+- 2-组合计数与算法可靠性.md
 series_order:
-- 2
-- 1
+- 4
+- 3
 description: ''
 summary: 本文系统构建格基密码学所需的基础数学语言与代数理论，涵盖形式化符号规范、集合与映射结构、模算术与多项式商环、线性代数与高维几何，以及证明范式与渐近分析。旨在为后续格基加密、LWE/SIS问题及安全证明提供严谨的语法层与推理工具。
 tags:

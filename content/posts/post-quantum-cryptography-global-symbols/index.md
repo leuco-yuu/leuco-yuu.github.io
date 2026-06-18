@@ -1,9 +1,9 @@
 ---
 title: 附录Ⅰ - 后量子密码体系全局符号统一表
 date: 2026-05-23T09:09:55+08:00
-lastmod: 2026-06-16T20:10:31+08:00
+lastmod: 2026-06-18T12:35:19+08:00
 draft: false
-slug: appendix-1-pqc-symbol-table
+slug: appendix-post-quantum-cryptography-symbol-table
 sections:
 - 0-总体排版与命名约定.md
 - 1-基础参数与索引.md
@@ -27,7 +27,7 @@ sections:
 - 19-公式模板与 LaTeX 宏.md
 - 20-全局核心符号速查.md
 series_order:
-- 3
+- 6
 - 1
 description: 后量子密码体系全局符号统一表，统一格密码、LWE、KEM、签名等方案的数学符号与命名约定，涵盖字体、概率、格、算法等标准记号，该符号表将用于非强制性统一后续相关文章符号。
 summary: 本文统一定义后量子密码体系（涵盖格密码、LWE、KEM、签名等）所使用的全局数学符号与命名约定。明确了字体约定、赋值采样、概率分布、线性代数、格困难问题、密码学算法接口等标准记号，并规定了外部文献符号映射原则，旨在统一后续相关文章中的数学表示，减少符号冲突与歧义。

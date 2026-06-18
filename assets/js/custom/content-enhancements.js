@@ -283,7 +283,8 @@
       event.preventDefault();
 
       window.requestAnimationFrame(() => {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        var top = target.getBoundingClientRect().top + window.scrollY - 112;
+        window.scrollTo({ top: top, behavior: "smooth" });
         history.pushState(null, "", `#${target.id}`);
       });
     });

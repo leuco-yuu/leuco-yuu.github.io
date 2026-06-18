@@ -1,9 +1,9 @@
 ---
 title: NP问题与归约
 date: 2025-11-15T13:04:15+08:00
-lastmod: 2026-06-16T17:48:46+08:00
+lastmod: 2026-06-18T12:35:19+08:00
 draft: true
-slug: np-problem-reduction
+slug: np-problems-and-reductions
 description: 梳理 P、NP、NP 完全与 NP 困难问题的概念，以及归约在复杂性理论中的作用。
 summary: 梳理 P、NP、NP 完全与 NP 困难问题的概念，以及归约在复杂性理论中的作用。
 tags: []
