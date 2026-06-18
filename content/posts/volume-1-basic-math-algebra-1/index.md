@@ -4,6 +4,9 @@ date: 2025-12-25T10:35:43+08:00
 lastmod: 2026-06-18T17:00:25+08:00
 draft: false
 slug: volume-1-basic-math-algebra-1
+toc_group:
+  key: volume-1-basic-math-algebra
+  order: 1
 sections:
 - 1-形式化语言.md
 - 2-证明范式与渐近记号.md
@@ -27,4 +30,3 @@ series:
 - 格基密码理论基础
 cover: ''
 ---
-

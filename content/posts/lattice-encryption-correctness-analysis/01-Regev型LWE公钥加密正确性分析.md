@@ -366,9 +366,7 @@ $$
 失败概率为：
 
 $$
-\Pr[E_{\rm fail}\mid h]
-=
-\sum_{|z|\geq q/4}P_{N\mid h}(z).
+\Pr[E_{\rm fail}\mid h] = \sum_{|z|\geq q/4}P_{N\mid h}(z).
 $$
 
 如果 $\mathbf{r}$ 的 Hamming weight 也是随机的，还需要对 $h$ 的分布取平均：
@@ -382,9 +380,7 @@ $$
 Regev 型 LWE 加密的正确性结构非常清楚：
 
 $$
-\mathsf{Dec}(\mathsf{sk},\mathsf{ct})\text{ 的中间值}
-=
-\mathsf{Encode}(\mu)+\mathbf{e}^{\top}\mathbf{r}.
+\mathsf{Dec}(\mathsf{sk},\mathsf{ct})\text{ 的中间值} = \mathsf{Encode}(\mu)+\mathbf{e}^{\top}\mathbf{r}.
 $$
 
 因此总噪声为：

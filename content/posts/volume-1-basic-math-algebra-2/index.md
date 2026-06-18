@@ -4,6 +4,9 @@ date: 2026-01-23T10:17:31+08:00
 lastmod: 2026-06-18T17:01:30+08:00
 draft: false
 slug: volume-1-basic-math-algebra-2
+toc_group:
+  key: volume-1-basic-math-algebra
+  order: 2
 sections:
 - 1-高维几何.md
 - 2-模算术.md
@@ -27,4 +30,3 @@ series:
 - 格基密码理论基础
 cover: ''
 ---
-

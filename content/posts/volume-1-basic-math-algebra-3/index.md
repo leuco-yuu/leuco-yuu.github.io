@@ -4,6 +4,9 @@ date: 2026-01-28T19:46:18+08:00
 lastmod: 2026-06-18T17:02:06+08:00
 draft: false
 slug: volume-1-basic-math-algebra-3
+toc_group:
+  key: volume-1-basic-math-algebra
+  order: 3
 sections:
 - 1-环上代数结构.md
 - 2-组合计数与算法可靠性.md
@@ -27,4 +30,3 @@ series:
 - 格基密码理论基础
 cover: ''
 ---
-

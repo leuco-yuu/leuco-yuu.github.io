@@ -4,6 +4,9 @@ date: 2026-02-08T22:45:25+08:00
 lastmod: 2026-06-18T17:04:32+08:00
 draft: false
 slug: volume-2-probability-lattice-randomness-basis-1
+toc_group:
+  key: volume-2-probability-lattice-randomness-basis
+  order: 1
 sections:
 - 1-随机对象的统一语言.md
 - 2-尾界工具与失败概率.md
@@ -30,4 +33,3 @@ series:
 - 基于格的密码学理论
 cover: ''
 ---
-

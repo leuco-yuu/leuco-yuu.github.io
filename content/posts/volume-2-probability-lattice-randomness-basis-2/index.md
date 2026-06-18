@@ -4,6 +4,9 @@ date: 2026-03-09T14:08:58+08:00
 lastmod: 2026-06-18T17:03:50+08:00
 draft: false
 slug: volume-2-probability-lattice-randomness-basis-2
+toc_group:
+  key: volume-2-probability-lattice-randomness-basis
+  order: 2
 sections:
 - 1-熵与随机提取.md
 - 2-高维随机性.md
@@ -29,4 +32,3 @@ series:
 - 基于格的密码学理论
 cover: ''
 ---
-

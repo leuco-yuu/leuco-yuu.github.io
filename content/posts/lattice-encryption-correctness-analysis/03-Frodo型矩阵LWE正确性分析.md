@@ -235,12 +235,9 @@ $$
 因此：
 
 $$
-(\mathbf{N}_{\rm dec})_{a,b}
-=
-\sum_{i=1}^{n}\mathbf{S}'_{i,a}\mathbf{E}_{i,b}
-+
-\mathbf{E}''_{a,b}
--
+(\mathbf{N}_{\rm dec})_{a,b} =
+\sum_{i=1}^{n}\mathbf{S}'_{i,a}\mathbf{E}_{i,b} +
+\mathbf{E}''_{a,b} -
 \sum_{j=1}^{n}\mathbf{E}'_{a,j}\mathbf{S}_{j,b}.
 $$
 
@@ -529,12 +526,9 @@ $$
 单条目噪声为：
 
 $$
-(\mathbf{N}_{\rm dec})_{a,b}
-=
-\sum_{i=1}^{n}\mathbf{S}'_{i,a}\mathbf{E}_{i,b}
-+
-\mathbf{E}''_{a,b}
--
+(\mathbf{N}_{\rm dec})_{a,b} =
+\sum_{i=1}^{n}\mathbf{S}'_{i,a}\mathbf{E}_{i,b} +
+\mathbf{E}''_{a,b} -
 \sum_{j=1}^{n}\mathbf{E}'_{a,j}\mathbf{S}_{j,b}.
 $$
 
