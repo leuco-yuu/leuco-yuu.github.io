@@ -1,9 +1,10 @@
 ---
 title: Docker容器化技术
 date: 2025-11-03T13:14:50+08:00
-lastmod: 2026-02-05T18:44:06+08:00
+lastmod: 2026-06-18T13:54:11+08:00
 draft: false
 slug: docker-containerization
+homepage: true
 series_order: 1
 description: 系统梳理了 Docker  容器化技术的底层原理，详解了持久化存储、网络驱动、Dockerfile  编写与命令清单，给出开发环境全面容器化的实践方案与
   Dev Containers 配置。

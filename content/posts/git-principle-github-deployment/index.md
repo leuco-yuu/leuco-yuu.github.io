@@ -1,9 +1,10 @@
 ---
 title: Git原理以及Github仓库部署与维护
 date: 2026-06-17T17:11:08+08:00
-lastmod: 2026-10-03T20:17:58+08:00
+lastmod: 2026-06-18T13:53:56+08:00
 draft: false
 slug: git-principle-github-deployment
+homepage: true
 sections:
 - 01-Git的定位与核心概念.md
 - 02-Git对象模型与版本历史原理.md
