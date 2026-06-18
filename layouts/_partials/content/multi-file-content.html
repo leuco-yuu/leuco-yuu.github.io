@@ -22,11 +22,12 @@
 {{- $mid := `[^\n]*\n[\s\S]*?\n` -}}
 {{- $fence4 := printf "(?s)%s%s%s" $bt4 $mid $bt4 -}}
 {{- $fence3 := printf "(?s)%s%s%s" $bt3 $mid $bt3 -}}
+{{- $mathDisp := `(?s)\$\$[\s\S]*?\$\$` -}}
 
 {{- /* Helper: extract headings from raw markdown (after fences stripped) */ -}}
 
 {{- /* index.md */ -}}
-{{- $rawNoFences := $page.RawContent | replaceRE $fence4 "" | replaceRE $fence3 "" -}}
+{{- $rawNoFences := $page.RawContent | replaceRE $fence4 "" | replaceRE $fence3 "" | replaceRE $mathDisp "" -}}
 {{- $pageMatches := findRESubmatch `(?m)^(#{1,6})\s+(.+?)\s*$` $rawNoFences -}}
 {{- range $pageMatches -}}
   {{- $allHeadings = $allHeadings | append (dict "level" (len (index . 1)) "title" (index . 2)) -}}
@@ -36,7 +37,7 @@
 {{- if $sections -}}
   {{- range $sections -}}
     {{- $fp := path.Join "content" $page.File.Dir . -}}
-    {{- $fileRaw := os.ReadFile $fp | replaceRE $fence4 "" | replaceRE $fence3 "" -}}
+    {{- $fileRaw := os.ReadFile $fp | replaceRE $fence4 "" | replaceRE $fence3 "" | replaceRE $mathDisp "" -}}
     {{- $fm := findRESubmatch `(?m)^(#{1,6})\s+(.+?)\s*$` $fileRaw -}}
     {{- range $fm -}}
       {{- $allHeadings = $allHeadings | append (dict "level" (len (index . 1)) "title" (index . 2)) -}}
@@ -52,7 +53,7 @@
     {{- end -}}
   {{- end -}}
   {{- range sort $fl "o" "asc" -}}
-    {{- $fileRaw := os.ReadFile .p | replaceRE $fence4 "" | replaceRE $fence3 "" -}}
+    {{- $fileRaw := os.ReadFile .p | replaceRE $fence4 "" | replaceRE $fence3 "" | replaceRE $mathDisp "" -}}
     {{- $fm := findRESubmatch `(?m)^(#{1,6})\s+(.+?)\s*$` $fileRaw -}}
     {{- range $fm -}}
       {{- $allHeadings = $allHeadings | append (dict "level" (len (index . 1)) "title" (index . 2)) -}}
@@ -80,7 +81,8 @@
       {{- else -}}{{- $tocHtml = printf "%s</li>" $tocHtml -}}{{- end -}}
     {{- end -}}
     {{- $first = false -}}
-    {{- $tocHtml = printf "%s<li><a href=\"#%s\">%s</a>" $tocHtml $anchor ($title | htmlEscape) -}}
+    {{- $displayTitle := $title | replaceRE `\s*\$\$?\s*$` "" -}}
+    {{- $tocHtml = printf "%s<li><a href=\"#%s\">%s</a>" $tocHtml $anchor ($displayTitle | htmlEscape) -}}
     {{- $prevLevel = $level -}}
   {{- end -}}
   {{- range seq $prevLevel -}}{{- $tocHtml = printf "%s</li></ul>" $tocHtml -}}{{- end -}}

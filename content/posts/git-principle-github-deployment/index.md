@@ -1,7 +1,7 @@
 ---
-title: Git原理以及Github仓库部署与维护
+title: Git原理以及远程仓库部署与维护
 date: 2026-06-17T17:11:08+08:00
-lastmod: 2026-06-18T13:53:56+08:00
+lastmod: 2026-06-18T16:55:38+08:00
 draft: false
 slug: git-principle-github-deployment
 homepage: true
