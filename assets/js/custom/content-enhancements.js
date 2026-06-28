@@ -94,6 +94,7 @@
 
     const allHeadings = Array.from(article.querySelectorAll(HEADING_SELECTOR)).filter(isContentHeading);
     if (allHeadings.length === 0) return;
+    const tocNumberMap = buildTocNumberMap(config);
 
     const baseLevel =
       config.base === "first-content-heading"
@@ -107,19 +108,27 @@
       const depth = getHeadingLevel(heading) - baseLevel + 1;
       if (depth < 1 || depth > config.maxDepth) return;
 
+      const tocNumber = tocNumberMap.get(heading.id);
+      let number = tocNumber?.number;
+      const headingDepth = tocNumber?.depth || depth;
+
+      /* Always advance counters so headings missing from TOC still get correct numbers */
       counters[depth - 1] += 1;
       for (let index = depth; index < counters.length; index += 1) counters[index] = 0;
 
-      const number = formatHeadingNumber(counters, depth, config);
+      if (!number) {
+        number = formatHeadingNumber(counters, depth, config);
+      }
+
       insertHeadingNumber(heading, number, config.space);
 
       heading.dataset.contentHeading = "true";
-      heading.dataset.headingDepth = String(depth);
+      heading.dataset.headingDepth = String(headingDepth);
       heading.dataset.headingNumber = number;
       heading.setAttribute("aria-expanded", "true");
       if (!heading.hasAttribute("tabindex")) heading.tabIndex = 0;
 
-      numberedHeadings.push({ heading, depth, number });
+      numberedHeadings.push({ heading, depth: headingDepth, number });
       prefixTocLink(heading.id, number, config.space);
     });
 
@@ -134,6 +143,66 @@
     articleStates.set(article, state);
     enhancedArticles.push(article);
     bindArticleFolding(article, state);
+  }
+
+  function buildTocNumberMap(config) {
+    const toc = document.querySelector("#TableOfContents");
+    const map = new Map();
+    if (!toc) return map;
+
+    const root = toc.querySelector(":scope > ul");
+    if (!root) return map;
+
+    const counters = Array.from({ length: config.maxDepth }, () => 0);
+    const currentPath = normalizePath(window.location.pathname);
+
+    function walk(ul, depth) {
+      if (depth < 1 || depth > config.maxDepth) return;
+
+      Array.from(ul.children).forEach((li) => {
+        if (!(li instanceof HTMLElement) || li.tagName.toLowerCase() !== "li") return;
+
+        const link = li.querySelector(":scope > a[href]");
+        if (!link) return;
+
+        counters[depth - 1] += 1;
+        for (let index = depth; index < counters.length; index += 1) counters[index] = 0;
+
+        const number = formatHeadingNumber(counters, depth, config);
+        prefixTocElement(link, number, config.space);
+
+        const target = parseTocHref(link.getAttribute("href"), currentPath);
+        if (target?.id && target.path === currentPath) {
+          map.set(target.id, { number, depth });
+        }
+
+        const child = li.querySelector(":scope > ul");
+        if (child) walk(child, depth + 1);
+      });
+    }
+
+    walk(root, 1);
+    return map;
+  }
+
+  function parseTocHref(href, currentPath) {
+    if (!href) return null;
+
+    try {
+      const url = new URL(href, window.location.href);
+      return {
+        path: normalizePath(url.pathname),
+        id: decodeURIComponent(url.hash.replace(/^#/, "")),
+      };
+    } catch (_) {
+      if (!href.startsWith("#")) return null;
+      return { path: currentPath, id: decodeURIComponent(href.slice(1)) };
+    }
+  }
+
+  function normalizePath(path) {
+    const value = String(path || "/");
+    return value.endsWith("/") ? value : `${value}/`;
   }
 
   function isContentHeading(heading) {
@@ -183,14 +252,18 @@
     if (!id) return;
 
     document.querySelectorAll(`#TableOfContents a[href="#${cssEscape(id)}"]`).forEach((link) => {
-      let numberElement = link.querySelector(`:scope > .${TOC_NUMBER_CLASS}`);
-      if (!numberElement) {
-        numberElement = document.createElement("span");
-        numberElement.className = TOC_NUMBER_CLASS;
-        link.insertBefore(numberElement, link.firstChild);
-      }
-      numberElement.textContent = `${number}${space || " "}`;
+      prefixTocElement(link, number, space);
     });
+  }
+
+  function prefixTocElement(link, number, space) {
+    let numberElement = link.querySelector(`:scope > .${TOC_NUMBER_CLASS}`);
+    if (!numberElement) {
+      numberElement = document.createElement("span");
+      numberElement.className = TOC_NUMBER_CLASS;
+      link.insertBefore(numberElement, link.firstChild);
+    }
+    numberElement.textContent = `${number}${space || " "}`;
   }
 
   function cssEscape(value) {

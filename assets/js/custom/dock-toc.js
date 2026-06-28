@@ -13,16 +13,19 @@
   let scrollFrame = 0;
   let resizeFrame = 0;
   let closeTimer = 0;
+  let suppressScrollIntoView = false;
   const CLOSE_DURATION = 280;
 
   function init() {
     collectEntries();
+    initArchiveTocNumbers();
     initTocCollapse();
     updatePanelBounds();
     updateActiveHeading();
 
     toggle.addEventListener("click", handleToggle);
     panel.addEventListener("click", handlePanelClick);
+    panel.addEventListener("wheel", handlePanelWheel, { passive: false });
     document.addEventListener("click", handleOutsideClick);
     document.addEventListener("keydown", handleKeydown);
     window.addEventListener("scroll", scheduleActiveUpdate, { passive: true });
@@ -30,11 +33,12 @@
   }
 
   function collectEntries() {
-    links = Array.from(panel.querySelectorAll("#TableOfContents a[href^='#']"));
+    links = Array.from(panel.querySelectorAll("#TableOfContents a[href]"));
+    var currentPath = normalizePath(window.location.pathname);
     headings = links
       .map((link) => {
-        const id = decodeHash(link.getAttribute("href"));
-        const heading = id ? document.getElementById(id) : null;
+        const target = parseTocHref(link.getAttribute("href"), currentPath);
+        const heading = target?.path === currentPath && target.id ? document.getElementById(target.id) : null;
         return heading ? { link, heading } : null;
       })
       .filter(Boolean);
@@ -123,13 +127,45 @@
     }
   }
 
+  function initArchiveTocNumbers() {
+    var toc = panel.querySelector("#TableOfContents");
+    if (!toc) return;
+
+    toc.querySelectorAll("a[href^='#year-'], a[href^='#month-']").forEach(function (link) {
+      if (link.querySelector(":scope > .toc-heading-number")) return;
+
+      var id = decodeHash(link.getAttribute("href"));
+      var number = getArchiveNumberFromId(id);
+      if (!number) return;
+
+      var originalText = link.textContent || "";
+      var suffix = originalText.replace(/^\s*\d{1,4}(?:-\d{2})?\s*/u, "");
+      var numberElement = document.createElement("span");
+      numberElement.className = "toc-heading-number";
+      numberElement.textContent = number;
+
+      link.replaceChildren(numberElement, document.createTextNode(suffix ? " " + suffix : ""));
+    });
+  }
+
   function toggleTocItem(li) {
     var childUl = li.querySelector(":scope > ul");
     var btn = li.querySelector(":scope > .toc-toggle");
     if (!childUl || !btn) return;
+
+    // Record the li's viewport position before toggling
+    var liTop = li.getBoundingClientRect().top;
+
     var collapsed = childUl.classList.toggle("toc-collapsed");
     btn.setAttribute("aria-expanded", String(!collapsed));
     btn.classList.toggle("toc-collapsed", collapsed);
+
+    // Adjust scroll to keep the li at the same viewport position
+    var newLiTop = li.getBoundingClientRect().top;
+    panel.scrollTop += (newLiTop - liTop);
+
+    // Suppress auto-scroll-to-active during the toggle+resize cycle
+    suppressScrollIntoView = true;
   }
 
   function decodeHash(hash) {
@@ -141,6 +177,26 @@
     }
   }
 
+  function parseTocHref(href, currentPath) {
+    if (!href) return null;
+
+    try {
+      var url = new URL(href, window.location.href);
+      return {
+        path: normalizePath(url.pathname),
+        id: decodeURIComponent(url.hash.replace(/^#/, "")),
+      };
+    } catch (_) {
+      if (!href.startsWith("#")) return null;
+      return { path: currentPath, id: decodeHash(href) };
+    }
+  }
+
+  function normalizePath(path) {
+    var value = String(path || "/");
+    return value.endsWith("/") ? value : value + "/";
+  }
+
   function handleToggle(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -148,7 +204,21 @@
   }
 
   function handlePanelClick(event) {
-    const link = event.target.closest("a[href^='#']");
+    const number = event.target.closest(".toc-heading-number");
+    const numberLink = number?.closest("a[href]");
+    const numberLi = numberLink?.parentElement;
+    if (numberLi?.classList.contains("toc-parent")) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleTocItem(numberLi);
+      updateActiveHeading();
+      window.requestAnimationFrame(function () {
+        updatePanelBounds();
+      });
+      return;
+    }
+
+    const link = event.target.closest("a[href]");
     if (!link) return;
     setOpen(false);
   }
@@ -156,6 +226,25 @@
   function handleOutsideClick(event) {
     if (!open || dock.contains(event.target)) return;
     setOpen(false);
+  }
+
+  function handlePanelWheel(event) {
+    // Prevent scroll chaining: when at top/bottom of panel, don't let the event bubble to the page
+    var delta = event.deltaY;
+    if (delta === 0) return;
+
+    if (delta < 0) {
+      // Scrolling up: at the very top → block
+      if (panel.scrollTop <= 0) {
+        event.preventDefault();
+      }
+    } else {
+      // Scrolling down: at the very bottom → block
+      // Use a tiny epsilon to avoid floating-point edge cases
+      if (panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 0.5) {
+        event.preventDefault();
+      }
+    }
   }
 
   function handleKeydown(event) {
@@ -208,8 +297,10 @@
       }
     });
 
+    const activeLink = getVisibleActiveLink(active.link);
+
     links.forEach((link) => {
-      const isActive = link === active.link;
+      const isActive = link === activeLink;
       link.classList.toggle("active", isActive);
       if (isActive) link.setAttribute("aria-current", "location");
       else link.removeAttribute("aria-current");
@@ -221,7 +312,26 @@
     if (open) scrollActiveLinkIntoView();
   }
 
+  function getVisibleActiveLink(link) {
+    var activeLink = link;
+    var collapsedList = activeLink?.closest("ul.toc-collapsed");
+
+    while (collapsedList) {
+      var parentLi = collapsedList.parentElement;
+      var parentLink = parentLi?.querySelector(":scope > a[href]");
+      if (!parentLink) break;
+
+      activeLink = parentLink;
+      collapsedList = activeLink.closest("ul.toc-collapsed");
+    }
+
+    return activeLink;
+  }
+
   function getDisplayNumber(heading) {
+    const archiveNumber = getArchiveDisplayNumber(heading);
+    if (archiveNumber) return archiveNumber;
+
     const number = String(heading.dataset.headingNumber || "").trim();
     if (!number) return "目录";
 
@@ -234,7 +344,22 @@
     return trimmed.replace(/\s+$/u, "");
   }
 
+  function getArchiveDisplayNumber(heading) {
+    return getArchiveNumberFromId(heading?.id || "");
+  }
+
+  function getArchiveNumberFromId(id) {
+    const yearMatch = id.match(/^year-(\d{4})$/);
+    if (yearMatch) return yearMatch[1];
+
+    const monthMatch = id.match(/^month-(\d{4})-(\d{2})$/);
+    if (monthMatch) return monthMatch[1].slice(-2) + "-" + monthMatch[2];
+
+    return "";
+  }
+
   function scrollActiveLinkIntoView() {
+    if (suppressScrollIntoView) return;
     const activeLink = panel.querySelector("#TableOfContents a.active");
     activeLink?.scrollIntoView({ block: "nearest" });
   }
@@ -256,10 +381,27 @@
 
     panel.style.width = navRect.width + "px";
     panel.style.setProperty("--dock-toc-max-height", maxHeight + "px");
-    var toc = panel.querySelector("#TableOfContents");
-    var contentHeight = toc ? toc.offsetHeight : panel.scrollHeight;
+
+    // Measure the full panel so padding/borders are included and the last item is never clipped.
+    var prevTransition = panel.style.transition;
+    var prevHeight = panel.style.height;
+    var prevMaxHeight = panel.style.maxHeight;
+    var prevOverflow = panel.style.overflow;
+    panel.style.transition = "none";
+    panel.style.height = "auto";
+    panel.style.maxHeight = "none";
+    panel.style.overflow = "visible";
+    panel.offsetHeight; // force sync layout
+    var contentHeight = panel.scrollHeight;
+    panel.style.height = prevHeight;
+    panel.style.maxHeight = prevMaxHeight;
+    panel.style.overflow = prevOverflow;
+    panel.style.transition = prevTransition;
+
     var targetHeight = Math.min(contentHeight, maxHeight);
     panel.style.setProperty("--dock-toc-target-height", targetHeight + "px");
+    panel.classList.toggle("is-scrollable", contentHeight > maxHeight);
+    suppressScrollIntoView = false;
   }
 
   // Expose sync function for client-side sort/pagination
